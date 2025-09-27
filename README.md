@@ -2,7 +2,7 @@
 
 Interactive web-based visualizations and other materials used for teaching (mostly targeting students in the humanities).
 
-**Website: *: https://mcjkurz.github.io/teaching/
+**Website**: https://mcjkurz.github.io/teaching/
 
 ## Visualizations
 

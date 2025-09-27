@@ -531,10 +531,24 @@ section h2, section h3 {
     
     .treemap-wrapper {
         flex: none;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .chart-wrapper {
+        flex: none;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
     
     .chart-container {
         height: 280px;
+        width: 100%;
+        max-width: 400px;
         margin: 0.5rem auto 0 auto;
     }
     
