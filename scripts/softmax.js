@@ -24,6 +24,7 @@ let currentExample = 0;
 let temperature = 1.0;
 let chart = null;
 let treemapChart = null;
+let currentDot = null; // Track the blue dot element
 
 // Initialize the visualization
 document.addEventListener('DOMContentLoaded', function() {
@@ -83,6 +84,8 @@ function updateVisualization() {
     updateChart();
     updateTreemap();
     updateSamplingSentenceDisplay();
+    // Remove any existing blue dot when updating visualization
+    removeBlueDot();
 }
 
 function updateSentenceDisplay() {
@@ -467,6 +470,9 @@ function sampleWord() {
     const sampledWordElement = document.getElementById('sampledWord');
     sampledWordElement.textContent = ' ' + sampledWord;
     sampledWordElement.style.color = '#0066cc'; // Blue color
+    
+    // Add blue dot to treemap
+    addBlueDotToTreemap(sampledIndex);
 }
 
 function sampleFromDistribution(probabilities) {
@@ -484,4 +490,105 @@ function sampleFromDistribution(probabilities) {
     
     // Fallback to last index (should not happen with proper probabilities)
     return probabilities.length - 1;
+}
+
+// Blue dot functions
+function removeBlueDot() {
+    if (currentDot) {
+        currentDot.remove();
+        currentDot = null;
+    }
+}
+
+function createBlueDot(x, y) {
+    const dot = document.createElement('div');
+    dot.className = 'blue-sampling-dot';
+    dot.style.position = 'absolute';
+    dot.style.left = x + 'px';
+    dot.style.top = y + 'px';
+    dot.style.width = '8px';
+    dot.style.height = '8px';
+    dot.style.backgroundColor = '#0066ff';
+    dot.style.borderRadius = '50%';
+    dot.style.zIndex = '1000';
+    dot.style.pointerEvents = 'none';
+    dot.style.boxShadow = '0 0 6px rgba(0, 102, 255, 0.8)';
+    dot.style.animation = 'blueDotPulse 1.5s ease-in-out infinite';
+    
+    return dot;
+}
+
+function getTreemapRectForWord(wordIndex) {
+    if (!treemapChart) return null;
+    
+    const example = examples[currentExample];
+    const targetWord = example.words[wordIndex];
+    
+    // Get the treemap elements from the chart
+    const elements = treemapChart.getDatasetMeta(0).data;
+    if (!elements) return null;
+    
+    // Find the element that matches our target word
+    let targetElement = null;
+    for (let i = 0; i < elements.length; i++) {
+        const element = elements[i];
+        
+        // Try different ways to access the word data
+        let elementWord = null;
+        
+        // Method 1: Try accessing through _data
+        if (element._data && element._data.word) {
+            elementWord = element._data.word;
+        }
+        // Method 2: Try accessing through options or other properties
+        else if (element.options && element.options.word) {
+            elementWord = element.options.word;
+        }
+        // Method 3: Try accessing through $context
+        else if (element.$context && element.$context.raw && element.$context.raw._data) {
+            elementWord = element.$context.raw._data.word;
+        }
+        // Method 4: Direct raw access
+        else if (element.raw && element.raw.word) {
+            elementWord = element.raw.word;
+        }
+        
+        if (elementWord === targetWord) {
+            targetElement = element;
+            break;
+        }
+    }
+    
+    if (!targetElement) {
+        return null;
+    }
+    
+    // Get the rectangle bounds
+    const rect = targetElement.getProps(['x', 'y', 'width', 'height']);
+    return rect;
+}
+
+function addBlueDotToTreemap(wordIndex) {
+    // Remove existing dot
+    removeBlueDot();
+    
+    // Get the rectangle for this word in the treemap
+    const rect = getTreemapRectForWord(wordIndex);
+    if (!rect) return;
+    
+    // Get the treemap canvas container position
+    const treemapContainer = document.querySelector('.treemap-container');
+    const containerRect = treemapContainer.getBoundingClientRect();
+    
+    // Generate random position within the word's rectangle
+    const randomX = rect.x + Math.random() * rect.width;
+    const randomY = rect.y + Math.random() * rect.height;
+    
+    // Create and position the dot
+    const dot = createBlueDot(randomX, randomY);
+    treemapContainer.style.position = 'relative';
+    treemapContainer.appendChild(dot);
+    
+    // Store reference to current dot
+    currentDot = dot;
 }

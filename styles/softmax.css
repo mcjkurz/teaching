@@ -50,7 +50,7 @@ section h2, section h3 {
 /* Sentence + Words Layout */
 .sentence-completion {
     display: flex;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 2rem;
     margin-top: 0.75rem;
 }
@@ -59,6 +59,9 @@ section h2, section h3 {
     flex: 1;
     font-size: 1rem;
     line-height: 1.5;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .words-part {
@@ -556,5 +559,25 @@ section h2, section h3 {
     
     .sampled-sentence {
         font-size: 1rem;
+    }
+}
+
+/* Blue dot animation */
+.blue-sampling-dot {
+    transition: all 0.3s ease;
+}
+
+@keyframes blueDotPulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.3);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
     }
 }
