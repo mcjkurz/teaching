@@ -2,9 +2,12 @@
 
 Interactive web-based visualizations for teaching machine learning concepts.
 
+**Live Demo**: https://mcjkurz.github.io/teaching/
+
 ## Visualizations
 
 ### Softmax Temperature
+- **Live Demo**: https://mcjkurz.github.io/teaching/visualizations/softmax-temperature.html
 - Path: `/visualizations/softmax-temperature.html`
 - Shows how temperature affects probability distributions in language models
 - Interactive temperature slider with real-time updates
