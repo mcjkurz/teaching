@@ -1,0 +1,217 @@
+/* Softmax visualization specific styles */
+
+/* Sections */
+section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+section:last-child {
+    border-bottom: none;
+}
+
+section h2, section h3 {
+    color: #333;
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* Sentence Selection */
+.sentence-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.sentence-btn {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    padding: 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.sentence-btn:hover {
+    border-color: #0066cc;
+    background: #f0f8ff;
+}
+
+.sentence-btn.active {
+    border-color: #0066cc;
+    background: #e6f2ff;
+    color: #0066cc;
+}
+
+/* Sentence + Words Layout */
+.sentence-completion {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-top: 0.75rem;
+}
+
+.sentence-part {
+    flex: 1;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.words-part {
+    flex: 0 0 200px;
+}
+
+.words-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.word-item {
+    background: #f8f9fa;
+    padding: 0.5rem 0.75rem;
+    border-radius: 3px;
+    border-left: 3px solid #0066cc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.word-text {
+    font-weight: 500;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.word-logit {
+    color: #666;
+    font-size: 0.8rem;
+    font-family: 'Courier New', monospace;
+}
+
+/* Formula Section */
+.formula {
+    text-align: center;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 4px;
+    margin-bottom: 0.75rem;
+}
+
+.math-formula {
+    font-size: 1.1rem;
+    font-family: 'Times New Roman', serif;
+    color: #333;
+    font-style: italic;
+}
+
+.formula-explanation {
+    color: #666;
+    font-style: italic;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* Temperature Control */
+.temperature-control {
+    text-align: center;
+}
+
+.temperature-control label {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+#temperatureValue {
+    color: #0066cc;
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+}
+
+#temperatureSlider {
+    width: 100%;
+    max-width: 400px;
+    height: 6px;
+    border-radius: 3px;
+    background: #dee2e6;
+    outline: none;
+    margin-bottom: 0.75rem;
+    -webkit-appearance: none;
+}
+
+#temperatureSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #0066cc;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+#temperatureSlider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #0066cc;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.temperature-labels {
+    display: flex;
+    justify-content: space-between;
+    max-width: 400px;
+    margin: 0 auto;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+/* Chart Section */
+.chart-container {
+    position: relative;
+    height: 350px;
+    margin-top: 0.75rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .sentence-options {
+        gap: 0.4rem;
+    }
+    
+    .sentence-btn {
+        padding: 0.6rem;
+        font-size: 0.85rem;
+    }
+    
+    .sentence-completion {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .words-part {
+        flex: none;
+    }
+    
+    .word-item {
+        padding: 0.4rem 0.6rem;
+    }
+    
+    .math-formula {
+        font-size: 1rem;
+    }
+    
+    .chart-container {
+        height: 280px;
+    }
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Softmax Temperature Visualization</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/softmax.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Softmax Temperature</h1>
+            <p>How temperature affects probability distributions in language models</p>
+        </header>
+
+        <main>
+            <!-- Sentence Selection -->
+            <section class="sentence-section">
+                <h2>Choose a sentence context:</h2>
+                <div class="sentence-options">
+                    <button class="sentence-btn active" data-example="0">
+                        "I read it yesterday, it is a very interesting..."
+                    </button>
+                    <button class="sentence-btn" data-example="1">
+                        "The weather today is absolutely..."
+                    </button>
+                    <button class="sentence-btn" data-example="2">
+                        "My favorite programming language is..."
+                    </button>
+                </div>
+            </section>
+
+            <!-- Sentence + Words Layout -->
+            <section class="sentence-words-section">
+                <h3>Sentence completion with model logits:</h3>
+                <div class="sentence-completion">
+                    <div class="sentence-part">
+                        <span id="currentSentence">"I read it yesterday, it is a very interesting..."</span>
+                    </div>
+                    <div class="words-part">
+                        <div class="words-column" id="wordsColumn">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Softmax Formula -->
+            <section class="formula-section">
+                <h3>Softmax with Temperature Formula</h3>
+                <div class="formula">
+                    <span class="math-formula">
+                        $$P(\text{word}_i) = \frac{e^{\text{logit}_i / T}}{\sum_j e^{\text{logit}_j / T}}$$
+                    </span>
+                </div>
+                <p class="formula-explanation">
+                    Where T is the temperature parameter. Lower T makes the distribution sharper, higher T makes it more uniform.
+                </p>
+            </section>
+
+            <!-- Temperature Control -->
+            <section class="temperature-section">
+                <h3>Temperature Control</h3>
+                <div class="temperature-control">
+                    <label for="temperatureSlider">Temperature (T): <span id="temperatureValue">1.0</span></label>
+                    <input type="range" id="temperatureSlider" min="0.1" max="3.0" step="0.1" value="1.0">
+                    <div class="temperature-labels">
+                        <span>Sharp (0.1)</span>
+                        <span>Uniform (3.0)</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Probability Chart -->
+            <section class="chart-section">
+                <h3>Probability Distribution</h3>
+                <div class="chart-container">
+                    <canvas id="probabilityChart"></canvas>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../scripts/softmax.js"></script>
+</body>
+</html>
