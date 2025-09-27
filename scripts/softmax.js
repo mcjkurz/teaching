@@ -55,6 +55,22 @@ function setupEventListeners() {
         temperatureValue.textContent = temperature.toFixed(1);
         updateVisualization();
     });
+    
+    // Add word functionality
+    const addWordBtn = document.getElementById('addWordBtn');
+    const newWordInput = document.getElementById('newWordInput');
+    const newLogitInput = document.getElementById('newLogitInput');
+    
+    addWordBtn.addEventListener('click', addWord);
+    
+    // Allow Enter key to add word
+    newWordInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') addWord();
+    });
+    
+    newLogitInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') addWord();
+    });
 }
 
 function updateVisualization() {
@@ -82,9 +98,13 @@ function updateWordsDisplay() {
         wordItem.innerHTML = `
             <span class="word-text">${word}</span>
             <span class="word-logit">${example.logits[index].toFixed(1)}</span>
+            <button class="delete-btn" onclick="deleteWord(${index})" title="Delete word">×</button>
         `;
         wordsColumn.appendChild(wordItem);
     });
+    
+    // Update add button state
+    updateAddButtonState();
 }
 
 function calculateSoftmax(logits, temperature) {
@@ -298,4 +318,80 @@ function updateTreemap() {
             }
         }
     });
+}
+
+// Word management functions
+function addWord() {
+    const newWordInput = document.getElementById('newWordInput');
+    const newLogitInput = document.getElementById('newLogitInput');
+    const example = examples[currentExample];
+    
+    const word = newWordInput.value.trim();
+    const logit = parseFloat(newLogitInput.value);
+    
+    // Validation
+    if (!word) {
+        alert('Please enter a word.');
+        newWordInput.focus();
+        return;
+    }
+    
+    if (isNaN(logit)) {
+        alert('Please enter a valid logit value.');
+        newLogitInput.focus();
+        return;
+    }
+    
+    if (example.words.length >= 10) {
+        alert('Maximum of 10 words allowed.');
+        return;
+    }
+    
+    // Check for duplicate words
+    if (example.words.some(existingWord => existingWord.toLowerCase() === word.toLowerCase())) {
+        alert('This word already exists.');
+        newWordInput.focus();
+        return;
+    }
+    
+    // Add the word
+    example.words.push(word);
+    example.logits.push(logit);
+    
+    // Clear inputs
+    newWordInput.value = '';
+    newLogitInput.value = '';
+    
+    // Update visualization
+    updateVisualization();
+}
+
+function deleteWord(index) {
+    const example = examples[currentExample];
+    
+    // Prevent deleting if only one word remains
+    if (example.words.length <= 1) {
+        alert('At least one word must remain.');
+        return;
+    }
+    
+    // Remove the word and logit
+    example.words.splice(index, 1);
+    example.logits.splice(index, 1);
+    
+    // Update visualization
+    updateVisualization();
+}
+
+function updateAddButtonState() {
+    const addWordBtn = document.getElementById('addWordBtn');
+    const example = examples[currentExample];
+    
+    if (example.words.length >= 10) {
+        addWordBtn.disabled = true;
+        addWordBtn.title = 'Maximum 10 words allowed';
+    } else {
+        addWordBtn.disabled = false;
+        addWordBtn.title = 'Add word';
+    }
 }

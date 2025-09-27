@@ -79,6 +79,17 @@ section h2, section h3 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.word-item:hover {
+    background: #e9ecef;
+    transform: translateX(-2px);
+}
+
+.word-item:hover .delete-btn {
+    opacity: 1;
 }
 
 .word-text {
@@ -91,6 +102,128 @@ section h2, section h3 {
     color: #666;
     font-size: 0.8rem;
     font-family: 'Courier New', monospace;
+}
+
+.delete-btn {
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.delete-btn:hover {
+    background: #c82333;
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* Add Word Section - Styled like a word item */
+.add-word-section {
+    margin-top: 0.5rem;
+}
+
+.add-word-item {
+    background: #f8f9fa;
+    padding: 0.5rem 0.75rem;
+    border-radius: 3px;
+    border-left: 3px solid #0066cc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.add-word-item:hover {
+    background: #e9ecef;
+}
+
+.add-word-inputs {
+    display: flex;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.add-word-item input {
+    padding: 0.25rem 0.5rem;
+    border: 1px solid #dee2e6;
+    border-radius: 3px;
+    font-size: 0.85rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+    background: white;
+}
+
+.add-word-item input:focus {
+    border-color: #0066cc;
+    box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.1);
+}
+
+#newWordInput {
+    flex: 1;
+    min-width: 60px;
+    font-weight: 500;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+#newWordInput::placeholder {
+    color: #999;
+    font-weight: normal;
+}
+
+#newLogitInput {
+    width: 70px;
+    font-family: 'Courier New', monospace;
+    color: #666;
+    font-size: 0.8rem;
+    text-align: right;
+}
+
+#newLogitInput::placeholder {
+    color: #999;
+}
+
+#addWordBtn {
+    background: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    margin-left: 0.5rem;
+}
+
+#addWordBtn:hover {
+    background: #0052a3;
+    transform: scale(1.1);
+}
+
+#addWordBtn:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+    transform: none;
 }
 
 /* Formula Section */
@@ -239,6 +372,25 @@ section h2, section h3 {
     
     .word-item {
         padding: 0.4rem 0.6rem;
+    }
+    
+    .add-word-inputs {
+        gap: 0.4rem;
+    }
+    
+    .add-word-item input {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.8rem;
+    }
+    
+    #newWordInput {
+        min-width: 60px;
+        font-size: 0.8rem;
+    }
+    
+    #newLogitInput {
+        width: 60px;
+        font-size: 0.75rem;
     }
     
     .math-formula {
