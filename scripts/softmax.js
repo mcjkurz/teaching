@@ -71,6 +71,10 @@ function setupEventListeners() {
     newLogitInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') addWord();
     });
+    
+    // Sample word button
+    const sampleWordBtn = document.getElementById('sampleWordBtn');
+    sampleWordBtn.addEventListener('click', sampleWord);
 }
 
 function updateVisualization() {
@@ -78,6 +82,7 @@ function updateVisualization() {
     updateWordsDisplay();
     updateChart();
     updateTreemap();
+    updateSamplingSentenceDisplay();
 }
 
 function updateSentenceDisplay() {
@@ -433,4 +438,50 @@ function updateAddButtonState() {
         addWordBtn.disabled = false;
         addWordBtn.title = 'Add word';
     }
+}
+
+// Sampling functions
+function updateSamplingSentenceDisplay() {
+    const sentencePrefix = document.querySelector('.sentence-prefix');
+    const example = examples[currentExample];
+    
+    // Extract the sentence without the "..." at the end
+    const baseSentence = example.sentence.replace(/\.\.\.$/, '');
+    sentencePrefix.textContent = baseSentence;
+    
+    // Clear any previously sampled word
+    const sampledWordElement = document.getElementById('sampledWord');
+    sampledWordElement.textContent = '';
+    sampledWordElement.style.color = '';
+}
+
+function sampleWord() {
+    const example = examples[currentExample];
+    const probabilities = calculateSoftmax(example.logits, temperature);
+    
+    // Sample a word based on the probability distribution
+    const sampledIndex = sampleFromDistribution(probabilities);
+    const sampledWord = example.words[sampledIndex];
+    
+    // Update the display
+    const sampledWordElement = document.getElementById('sampledWord');
+    sampledWordElement.textContent = ' ' + sampledWord;
+    sampledWordElement.style.color = '#0066cc'; // Blue color
+}
+
+function sampleFromDistribution(probabilities) {
+    // Generate a random number between 0 and 1
+    const random = Math.random();
+    
+    // Find the index where the cumulative probability exceeds the random number
+    let cumulativeProb = 0;
+    for (let i = 0; i < probabilities.length; i++) {
+        cumulativeProb += probabilities[i];
+        if (random <= cumulativeProb) {
+            return i;
+        }
+    }
+    
+    // Fallback to last index (should not happen with proper probabilities)
+    return probabilities.length - 1;
 }
