@@ -580,9 +580,13 @@ function addBlueDotToTreemap(wordIndex) {
     const treemapContainer = document.querySelector('.treemap-container');
     const containerRect = treemapContainer.getBoundingClientRect();
     
-    // Generate random position within the word's rectangle
-    const randomX = rect.x + Math.random() * rect.width;
-    const randomY = rect.y + Math.random() * rect.height;
+    // Generate random position within the word's rectangle with padding to avoid borders
+    const padding = 4; // Pixels of padding from edges
+    const availableWidth = Math.max(0, rect.width - 2 * padding);
+    const availableHeight = Math.max(0, rect.height - 2 * padding);
+    
+    const randomX = rect.x + padding + Math.random() * availableWidth;
+    const randomY = rect.y + padding + Math.random() * availableHeight;
     
     // Create and position the dot
     const dot = createBlueDot(randomX, randomY);
