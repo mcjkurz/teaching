@@ -285,13 +285,11 @@ function updateTreemap() {
                             return '';
                         },
                         label: function(context) {
-                            // Access from dataset tree
-                            const dataIndex = context.dataIndex;
-                            if (context.dataset && context.dataset.tree && context.dataset.tree[dataIndex]) {
-                                const treeItem = context.dataset.tree[dataIndex];
-                                if (treeItem.percentage) {
-                                    return `Probability: ${treeItem.percentage}%`;
-                                }
+                            // Get the value directly from the context's raw data
+                            if (context.raw && context.raw.v !== undefined) {
+                                const probability = context.raw.v;
+                                const percentage = (probability * 100).toFixed(1);
+                                return `Probability: ${percentage}%`;
                             }
                             return 'Probability: 0%';
                         }
