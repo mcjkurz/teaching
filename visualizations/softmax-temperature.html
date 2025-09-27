@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/softmax.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-treemap@2.3.1/dist/chartjs-chart-treemap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@polyfill-io/polyfill@3.111.0/dist/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
         window.MathJax = {
@@ -83,11 +85,22 @@
                 </div>
             </section>
 
-            <!-- Probability Chart -->
-            <section class="chart-section">
-                <h3>Probability Distribution</h3>
-                <div class="chart-container">
-                    <canvas id="probabilityChart"></canvas>
+            <!-- Charts Side by Side -->
+            <section class="charts-section">
+                <h3>Probability Distributions</h3>
+                <div class="charts-container">
+                    <div class="chart-wrapper">
+                        <h4>Bar Chart</h4>
+                        <div class="chart-container">
+                            <canvas id="probabilityChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="treemap-wrapper">
+                        <h4>Treemap</h4>
+                        <div class="treemap-container">
+                            <canvas id="treemapChart"></canvas>
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>
