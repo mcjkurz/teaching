@@ -96,8 +96,10 @@ function updateWordsDisplay() {
         const wordItem = document.createElement('div');
         wordItem.className = 'word-item';
         wordItem.innerHTML = `
-            <span class="word-text">${word}</span>
-            <span class="word-logit">${example.logits[index].toFixed(1)}</span>
+            <div class="word-inputs">
+                <input type="text" class="word-input" value="${word}" onchange="updateWord(${index}, 'word', this.value)" maxlength="20">
+                <input type="number" class="logit-input" value="${example.logits[index].toFixed(1)}" onchange="updateWord(${index}, 'logit', this.value)" step="0.1" min="-10" max="10">
+            </div>
             <button class="delete-btn" onclick="deleteWord(${index})" title="Delete word">×</button>
         `;
         wordsColumn.appendChild(wordItem);
@@ -321,6 +323,43 @@ function updateTreemap() {
 }
 
 // Word management functions
+function updateWord(index, type, value) {
+    const example = examples[currentExample];
+    
+    if (type === 'word') {
+        const trimmedValue = value.trim();
+        if (!trimmedValue) {
+            // Reset to original value if empty
+            updateWordsDisplay();
+            return;
+        }
+        
+        // Check for duplicates (excluding current word)
+        const isDuplicate = example.words.some((word, i) => 
+            i !== index && word.toLowerCase() === trimmedValue.toLowerCase()
+        );
+        
+        if (isDuplicate) {
+            alert('This word already exists.');
+            updateWordsDisplay();
+            return;
+        }
+        
+        example.words[index] = trimmedValue;
+    } else if (type === 'logit') {
+        const numValue = parseFloat(value);
+        if (isNaN(numValue)) {
+            // Reset to original value if invalid
+            updateWordsDisplay();
+            return;
+        }
+        example.logits[index] = numValue;
+    }
+    
+    // Update visualization
+    updateVisualization();
+}
+
 function addWord() {
     const newWordInput = document.getElementById('newWordInput');
     const newLogitInput = document.getElementById('newLogitInput');

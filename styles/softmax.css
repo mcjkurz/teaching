@@ -104,6 +104,50 @@ section h2, section h3 {
     font-family: 'Courier New', monospace;
 }
 
+.word-inputs {
+    display: flex;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.word-input {
+    flex: 1;
+    min-width: 60px;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid #dee2e6;
+    border-radius: 3px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
+    outline: none;
+    transition: border-color 0.2s ease;
+    background: white;
+}
+
+.word-input:focus {
+    border-color: #0066cc;
+    box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.1);
+}
+
+.logit-input {
+    width: 70px;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid #dee2e6;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    font-family: 'Courier New', monospace;
+    color: #666;
+    text-align: right;
+    outline: none;
+    transition: border-color 0.2s ease;
+    background: white;
+}
+
+.logit-input:focus {
+    border-color: #0066cc;
+    box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.1);
+}
+
 .delete-btn {
     position: absolute;
     right: -8px;
@@ -372,6 +416,22 @@ section h2, section h3 {
     
     .word-item {
         padding: 0.4rem 0.6rem;
+    }
+    
+    .word-inputs {
+        gap: 0.4rem;
+    }
+    
+    .word-input {
+        min-width: 50px;
+        padding: 0.2rem 0.4rem;
+        font-size: 0.8rem;
+    }
+    
+    .logit-input {
+        width: 60px;
+        padding: 0.2rem 0.4rem;
+        font-size: 0.75rem;
     }
     
     .add-word-inputs {
