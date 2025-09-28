@@ -139,6 +139,7 @@ section h2, section h3 {
     border-radius: 3px;
     font-size: 0.8rem;
     font-family: 'Courier New', monospace;
+    font-weight: bold;
     color: #666;
     text-align: right;
     outline: none;
@@ -235,6 +236,7 @@ section h2, section h3 {
 #newLogitInput {
     width: 70px;
     font-family: 'Courier New', monospace;
+    font-weight: bold;
     color: #666;
     font-size: 0.8rem;
     text-align: right;

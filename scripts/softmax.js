@@ -126,7 +126,7 @@ function updateWordsDisplay() {
         wordItem.innerHTML = `
             <div class="word-inputs">
                 <input type="text" class="word-input" value="${word}" onchange="updateWord(${index}, 'word', this.value)" maxlength="20">
-                <input type="number" class="logit-input" value="${example.logits[index].toFixed(1)}" onchange="updateWord(${index}, 'logit', this.value)" step="0.1" min="-10" max="10">
+                <input type="number" class="logit-input" value="${example.logits[index].toFixed(2)}" onchange="updateWord(${index}, 'logit', this.value)" step="0.1" min="-10" max="10">
             </div>
             <button class="delete-btn" onclick="deleteWord(${index})" title="Delete word">×</button>
         `;
