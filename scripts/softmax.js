@@ -5,7 +5,7 @@ const examples = [
     {
         sentence: "I read it yesterday, it is a very interesting...",
         words: ["door", "book", "story", "pineapple", "paper"],
-        logits: [0.2, 2.1, 1.2, 0.05, 0.6]
+        logits: [0.07, 2.1, 1.2, 0.02, 0.6]
     },
     {
         sentence: "The weather today is absolutely...",
@@ -83,7 +83,12 @@ function setupEventListeners() {
     
     toggleEquationsBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        showEquations();
+        const detailedEquations = document.getElementById('detailedEquations');
+        if (detailedEquations.style.display === 'none' || detailedEquations.style.display === '') {
+            showEquations();
+        } else {
+            hideEquations();
+        }
     });
     
     hideEquationsBtn.addEventListener('click', (e) => {
@@ -615,13 +620,19 @@ function addBlueDotToTreemap(wordIndex) {
 // Equations functions
 function showEquations() {
     const detailedEquations = document.getElementById('detailedEquations');
+    const toggleEquationsBtn = document.getElementById('toggleEquations');
+    
     detailedEquations.style.display = 'block';
+    toggleEquationsBtn.textContent = 'Hide equations';
     updateEquations();
 }
 
 function hideEquations() {
     const detailedEquations = document.getElementById('detailedEquations');
+    const toggleEquationsBtn = document.getElementById('toggleEquations');
+    
     detailedEquations.style.display = 'none';
+    toggleEquationsBtn.textContent = 'Display equations';
 }
 
 function updateEquationsIfVisible() {
