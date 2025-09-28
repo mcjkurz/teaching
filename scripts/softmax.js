@@ -76,6 +76,20 @@ function setupEventListeners() {
     // Sample word button
     const sampleWordBtn = document.getElementById('sampleWordBtn');
     sampleWordBtn.addEventListener('click', sampleWord);
+    
+    // Equations toggle buttons
+    const toggleEquationsBtn = document.getElementById('toggleEquations');
+    const hideEquationsBtn = document.getElementById('hideEquations');
+    
+    toggleEquationsBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        showEquations();
+    });
+    
+    hideEquationsBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        hideEquations();
+    });
 }
 
 function updateVisualization() {
@@ -84,6 +98,7 @@ function updateVisualization() {
     updateChart();
     updateTreemap();
     updateSamplingSentenceDisplay();
+    updateEquationsIfVisible();
     // Remove any existing blue dot when updating visualization
     removeBlueDot();
 }
@@ -595,4 +610,75 @@ function addBlueDotToTreemap(wordIndex) {
     
     // Store reference to current dot
     currentDot = dot;
+}
+
+// Equations functions
+function showEquations() {
+    const detailedEquations = document.getElementById('detailedEquations');
+    detailedEquations.style.display = 'block';
+    updateEquations();
+}
+
+function hideEquations() {
+    const detailedEquations = document.getElementById('detailedEquations');
+    detailedEquations.style.display = 'none';
+}
+
+function updateEquationsIfVisible() {
+    const detailedEquations = document.getElementById('detailedEquations');
+    if (detailedEquations.style.display !== 'none') {
+        updateEquations();
+    }
+}
+
+function updateEquations() {
+    const example = examples[currentExample];
+    const equationsContainer = document.getElementById('equationsContainer');
+    
+    // Calculate softmax values
+    const scaledLogits = example.logits.map(logit => logit / temperature);
+    const exponentials = scaledLogits.map(logit => Math.exp(logit));
+    const sumExp = exponentials.reduce((sum, exp) => sum + exp, 0);
+    const probabilities = exponentials.map(exp => exp / sumExp);
+    
+    // Clear existing equations
+    equationsContainer.innerHTML = '';
+    
+    // Create equation for each word
+    example.words.forEach((word, index) => {
+        const logit = example.logits[index];
+        const scaledLogit = scaledLogits[index];
+        const exponential = exponentials[index];
+        const probability = probabilities[index];
+        
+        const equationItem = document.createElement('div');
+        equationItem.className = 'equation-item';
+        
+        // Build the denominator for the first equation
+        const denominatorOriginal = example.words.map((w, i) => `e^{${example.logits[i].toFixed(2)} / ${temperature.toFixed(1)}}`).join(' + ');
+        const denominatorScaled = scaledLogits.map(sl => `e^{${sl.toFixed(2)}}`).join(' + ');
+        const denominatorValues = exponentials.map(exp => exp.toFixed(4)).join(' + ');
+        
+        equationItem.innerHTML = `
+            <div class="equation-formula">
+                $$P(\\text{${word}}) = \\frac{e^{${logit.toFixed(2)} / ${temperature.toFixed(2)}}}{${denominatorOriginal}}$$
+            </div>
+            <div class="equation-formula">
+                $$= \\frac{e^{${scaledLogit.toFixed(2)}}}{${denominatorScaled}}$$
+            </div>
+            <div class="equation-formula">
+                $$= \\frac{${exponential.toFixed(4)}}{${denominatorValues}}$$
+            </div>
+            <div class="equation-formula">
+                $$= \\frac{${exponential.toFixed(4)}}{${sumExp.toFixed(4)}} = ${probability.toFixed(4)} \\text{ (${(probability * 100).toFixed(1)}\%)}$$
+            </div>
+        `;
+        
+        equationsContainer.appendChild(equationItem);
+    });
+    
+    // Re-render MathJax for the new equations
+    if (window.MathJax) {
+        MathJax.typesetPromise([equationsContainer]).catch((err) => console.log('MathJax error:', err));
+    }
 }
