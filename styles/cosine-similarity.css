@@ -103,6 +103,7 @@ section h4 {
     margin-top: 1rem;
     padding-top: 1rem;
     border-top: 1px solid #dee2e6;
+    text-align: center;
 }
 
 .vector-display {
@@ -138,11 +139,13 @@ section h4 {
 
 .vector-magnitude-row {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    gap: 0;
 }
 
 .magnitude-label {
+    font-family: 'Courier New', monospace;
     font-weight: 500;
     color: #666;
     font-size: 0.85rem;
@@ -152,7 +155,7 @@ section h4 {
     font-family: 'Courier New', monospace;
     font-weight: bold;
     color: #333;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 .angle-label, .dot-label {

@@ -213,7 +213,7 @@ class CosineSimilarityVisualization {
     }
     
     drawGrid() {
-        this.ctx.strokeStyle = '#f0f0f0';
+        this.ctx.strokeStyle = '#e0e0e0';
         this.ctx.lineWidth = 0.5;
         
         const gridSpacing = this.scale; // 1 unit spacing
