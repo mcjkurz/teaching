@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosine Similarity Visualization</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/cosine-similarity.css">
+    <script src="https://cdn.jsdelivr.net/npm/@polyfill-io/polyfill@3.111.0/dist/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Cosine Similarity</h1>
+            <p>Interactive visualization of cosine similarity between two vectors</p>
+        </header>
+
+        <main>
+            <!-- Interactive Canvas Section -->
+            <section class="canvas-section">
+                <h3>Interactive Vector Space</h3>
+                <p>Drag the red and blue vector endpoints to see how cosine similarity changes:</p>
+                <div class="canvas-and-results">
+                    <div class="canvas-container">
+                        <canvas id="vectorCanvas" width="400" height="400"></canvas>
+                    </div>
+                    <div class="live-results">
+                        <h4>Cosine Similarity</h4>
+                        <div class="similarity-display">
+                            <div id="cosineSimilarityLive" class="similarity-value">0.71</div>
+                        </div>
+                        <div class="angle-display">
+                            <span class="angle-label">Angle:</span>
+                            <span id="angleLive" class="angle-value">45.0°</span>
+                        </div>
+                        <div class="dot-product-display">
+                            <span class="dot-label">Dot Product:</span>
+                            <span id="dotProductLive" class="dot-value">0.71</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Cosine Similarity Formula -->
+            <section class="formula-section">
+                <h3>Cosine Similarity Formula</h3>
+                <div class="formula">
+                    <span class="math-formula">
+                        $$\cos(\theta) = \frac{\mathbf{A} \cdot \mathbf{B}}{|\mathbf{A}| |\mathbf{B}|} = \frac{A_x B_x + A_y B_y}{\sqrt{A_x^2 + A_y^2} \sqrt{B_x^2 + B_y^2}}$$
+                    </span>
+                </div>
+                <div class="calculation-display">
+                    <div class="calc-step">
+                        <span class="calc-label">Current calculation:</span>
+                        <div id="fullCalculation" class="calc-formula">
+                            $$\cos(\theta) = \frac{(0.71)(0.00) + (0.71)(1.00)}{\sqrt{0.71^2 + 0.71^2} \sqrt{0.00^2 + 1.00^2}} = \frac{0.71}{1.00 \times 1.00} = 0.71$$
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../scripts/cosine-similarity.js"></script>
+</body>
+</html>
