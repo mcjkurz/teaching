@@ -10,11 +10,12 @@ class CosineSimilarityVisualization {
         this.height = this.canvas.height;
         this.centerX = this.width / 2;
         this.centerY = this.height / 2;
-        this.radius = 150; // Radius of the unit circle
+        this.scale = 50; // Scale factor for coordinate system (pixels per unit)
+        this.maxCoord = 3; // Maximum coordinate value (-3 to 3)
         
-        // Vector endpoints (normalized to unit circle)
-        this.vectorA = { x: 0.71, y: 0.71 }; // 45 degrees
-        this.vectorB = { x: 0.0, y: 1.0 };   // 90 degrees
+        // Vector endpoints (can have any length within bounds)
+        this.vectorA = { x: 2.0, y: 1.5 }; // Example vector
+        this.vectorB = { x: -1.0, y: 2.5 }; // Example vector
         
         // Interaction state
         this.dragging = null;
@@ -61,22 +62,23 @@ class CosineSimilarityVisualization {
     
     screenToCanvas(screenX, screenY) {
         return {
-            x: (screenX - this.centerX) / this.radius,
-            y: -(screenY - this.centerY) / this.radius // Flip Y axis
+            x: (screenX - this.centerX) / this.scale,
+            y: -(screenY - this.centerY) / this.scale // Flip Y axis
         };
     }
     
     canvasToScreen(canvasX, canvasY) {
         return {
-            x: canvasX * this.radius + this.centerX,
-            y: -canvasY * this.radius + this.centerY // Flip Y axis
+            x: canvasX * this.scale + this.centerX,
+            y: -canvasY * this.scale + this.centerY // Flip Y axis
         };
     }
     
-    normalizeVector(x, y) {
-        const length = Math.sqrt(x * x + y * y);
-        if (length === 0) return { x: 0, y: 1 };
-        return { x: x / length, y: y / length };
+    constrainVector(x, y) {
+        // Constrain vector components to the valid range
+        const constrainedX = Math.max(-this.maxCoord, Math.min(this.maxCoord, x));
+        const constrainedY = Math.max(-this.maxCoord, Math.min(this.maxCoord, y));
+        return { x: constrainedX, y: constrainedY };
     }
     
     getVectorEndpoint(vector) {
@@ -121,12 +123,12 @@ class CosineSimilarityVisualization {
             };
             
             const canvasPos = this.screenToCanvas(adjustedPos.x, adjustedPos.y);
-            const normalized = this.normalizeVector(canvasPos.x, canvasPos.y);
+            const constrained = this.constrainVector(canvasPos.x, canvasPos.y);
             
             if (this.dragging === 'A') {
-                this.vectorA = normalized;
+                this.vectorA = constrained;
             } else if (this.dragging === 'B') {
-                this.vectorB = normalized;
+                this.vectorB = constrained;
             }
             
             this.update();
@@ -193,8 +195,8 @@ class CosineSimilarityVisualization {
         // Draw grid
         this.drawGrid();
         
-        // Draw unit circle
-        this.drawUnitCircle();
+        // Draw coordinate bounds
+        this.drawCoordinateBounds();
         
         // Draw axes
         this.drawAxes();
@@ -214,52 +216,67 @@ class CosineSimilarityVisualization {
         this.ctx.strokeStyle = '#f0f0f0';
         this.ctx.lineWidth = 0.5;
         
-        const gridSize = this.radius / 2;
+        const gridSpacing = this.scale; // 1 unit spacing
+        const maxPixels = this.maxCoord * this.scale;
         
         // Vertical lines
-        for (let x = this.centerX - this.radius; x <= this.centerX + this.radius; x += gridSize) {
+        for (let i = -this.maxCoord; i <= this.maxCoord; i++) {
+            const x = this.centerX + i * this.scale;
             this.ctx.beginPath();
-            this.ctx.moveTo(x, this.centerY - this.radius);
-            this.ctx.lineTo(x, this.centerY + this.radius);
+            this.ctx.moveTo(x, this.centerY - maxPixels);
+            this.ctx.lineTo(x, this.centerY + maxPixels);
             this.ctx.stroke();
         }
         
         // Horizontal lines
-        for (let y = this.centerY - this.radius; y <= this.centerY + this.radius; y += gridSize) {
+        for (let i = -this.maxCoord; i <= this.maxCoord; i++) {
+            const y = this.centerY + i * this.scale;
             this.ctx.beginPath();
-            this.ctx.moveTo(this.centerX - this.radius, y);
-            this.ctx.lineTo(this.centerX + this.radius, y);
+            this.ctx.moveTo(this.centerX - maxPixels, y);
+            this.ctx.lineTo(this.centerX + maxPixels, y);
             this.ctx.stroke();
         }
     }
     
-    drawUnitCircle() {
+    drawCoordinateBounds() {
+        // Draw a rectangle showing the coordinate bounds
         this.ctx.strokeStyle = '#666';
         this.ctx.lineWidth = 2;
+        this.ctx.setLineDash([5, 5]);
+        
+        const maxPixels = this.maxCoord * this.scale;
         this.ctx.beginPath();
-        this.ctx.arc(this.centerX, this.centerY, this.radius, 0, 2 * Math.PI);
+        this.ctx.rect(
+            this.centerX - maxPixels, 
+            this.centerY - maxPixels, 
+            2 * maxPixels, 
+            2 * maxPixels
+        );
         this.ctx.stroke();
+        this.ctx.setLineDash([]);
     }
     
     drawAxes() {
         this.ctx.strokeStyle = '#333';
         this.ctx.lineWidth = 2;
         
+        const maxPixels = this.maxCoord * this.scale;
+        
         // X axis
         this.ctx.beginPath();
-        this.ctx.moveTo(this.centerX - this.radius - 10, this.centerY);
-        this.ctx.lineTo(this.centerX + this.radius + 10, this.centerY);
+        this.ctx.moveTo(this.centerX - maxPixels - 10, this.centerY);
+        this.ctx.lineTo(this.centerX + maxPixels + 10, this.centerY);
         this.ctx.stroke();
         
         // Y axis
         this.ctx.beginPath();
-        this.ctx.moveTo(this.centerX, this.centerY - this.radius - 10);
-        this.ctx.lineTo(this.centerX, this.centerY + this.radius + 10);
+        this.ctx.moveTo(this.centerX, this.centerY - maxPixels - 10);
+        this.ctx.lineTo(this.centerX, this.centerY + maxPixels + 10);
         this.ctx.stroke();
         
         // Arrow heads
-        this.drawArrowHead(this.centerX + this.radius + 10, this.centerY, 0);
-        this.drawArrowHead(this.centerX, this.centerY - this.radius - 10, -Math.PI / 2);
+        this.drawArrowHead(this.centerX + maxPixels + 10, this.centerY, 0);
+        this.drawArrowHead(this.centerX, this.centerY - maxPixels - 10, -Math.PI / 2);
     }
     
     drawArrowHead(x, y, angle) {
@@ -367,12 +384,20 @@ class CosineSimilarityVisualization {
         this.ctx.textBaseline = 'middle';
         
         // X axis labels
-        this.ctx.fillText('1', this.centerX + this.radius, this.centerY + 20);
-        this.ctx.fillText('-1', this.centerX - this.radius, this.centerY + 20);
+        for (let i = -this.maxCoord; i <= this.maxCoord; i++) {
+            if (i !== 0) {
+                const x = this.centerX + i * this.scale;
+                this.ctx.fillText(i.toString(), x, this.centerY + 20);
+            }
+        }
         
         // Y axis labels
-        this.ctx.fillText('1', this.centerX - 20, this.centerY - this.radius);
-        this.ctx.fillText('-1', this.centerX - 20, this.centerY + this.radius);
+        for (let i = -this.maxCoord; i <= this.maxCoord; i++) {
+            if (i !== 0) {
+                const y = this.centerY - i * this.scale; // Flip Y for display
+                this.ctx.fillText(i.toString(), this.centerX - 20, y);
+            }
+        }
         
         // Origin
         this.ctx.fillText('0', this.centerX - 15, this.centerY + 15);
@@ -385,6 +410,12 @@ class CosineSimilarityVisualization {
         document.getElementById('cosineSimilarityLive').textContent = calculations.cosineSimilarity.toFixed(2);
         document.getElementById('angleLive').textContent = calculations.angleDeg.toFixed(1) + '°';
         document.getElementById('dotProductLive').textContent = calculations.dotProduct.toFixed(2);
+        
+        // Update vector components and magnitudes
+        document.getElementById('vectorAComponents').textContent = `(${this.vectorA.x.toFixed(1)}, ${this.vectorA.y.toFixed(1)})`;
+        document.getElementById('vectorBComponents').textContent = `(${this.vectorB.x.toFixed(1)}, ${this.vectorB.y.toFixed(1)})`;
+        document.getElementById('magnitudeA').textContent = calculations.magnitudeA.toFixed(2);
+        document.getElementById('magnitudeB').textContent = calculations.magnitudeB.toFixed(2);
         
         // Update the LaTeX calculation with current values
         const latexCalc = `$$\\cos(\\theta) = \\frac{(${this.vectorA.x.toFixed(2)})(${this.vectorB.x.toFixed(2)}) + (${this.vectorA.y.toFixed(2)})(${this.vectorB.y.toFixed(2)})}{\\sqrt{${this.vectorA.x.toFixed(2)}^2 + ${this.vectorA.y.toFixed(2)}^2} \\sqrt{${this.vectorB.x.toFixed(2)}^2 + ${this.vectorB.y.toFixed(2)}^2}} = \\frac{${calculations.dotProduct.toFixed(2)}}{${calculations.magnitudeA.toFixed(2)} \\times ${calculations.magnitudeB.toFixed(2)}} = ${calculations.cosineSimilarity.toFixed(2)}$$`;

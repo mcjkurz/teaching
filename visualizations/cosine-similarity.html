@@ -21,14 +21,14 @@
     <div class="container">
         <header>
             <h1>Cosine Similarity</h1>
-            <p>Interactive visualization of cosine similarity between two vectors</p>
+            <p>Interactive visualization of cosine similarity between two vectors of varying lengths</p>
         </header>
 
         <main>
             <!-- Interactive Canvas Section -->
             <section class="canvas-section">
                 <h3>Interactive Vector Space</h3>
-                <p>Drag the red and blue vector endpoints to see how cosine similarity changes:</p>
+                <p>Drag the red and blue vector endpoints to see how cosine similarity changes. Vectors can have any length within the coordinate bounds (-3 to 3):</p>
                 <div class="canvas-and-results">
                     <div class="canvas-container">
                         <canvas id="vectorCanvas" width="400" height="400"></canvas>
@@ -45,6 +45,24 @@
                         <div class="dot-product-display">
                             <span class="dot-label">Dot Product:</span>
                             <span id="dotProductLive" class="dot-value">0.71</span>
+                        </div>
+                        <div class="vector-info">
+                            <div class="vector-display">
+                                <span class="vector-label">Vector A:</span>
+                                <span id="vectorAComponents" class="vector-components">(2.0, 1.5)</span>
+                                <div class="vector-magnitude-row">
+                                    <span class="magnitude-label">|A| =</span>
+                                    <span id="magnitudeA" class="magnitude-value">2.50</span>
+                                </div>
+                            </div>
+                            <div class="vector-display">
+                                <span class="vector-label">Vector B:</span>
+                                <span id="vectorBComponents" class="vector-components">(-1.0, 2.5)</span>
+                                <div class="vector-magnitude-row">
+                                    <span class="magnitude-label">|B| =</span>
+                                    <span id="magnitudeB" class="magnitude-value">2.69</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
