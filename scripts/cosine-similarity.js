@@ -22,6 +22,7 @@ class CosineSimilarityVisualization {
         this.dragOffset = { x: 0, y: 0 };
         
         this.setupEventListeners();
+        this.setupResizeListener();
         this.update();
     }
     
@@ -36,6 +37,17 @@ class CosineSimilarityVisualization {
         this.canvas.addEventListener('touchstart', (e) => this.handleTouchStart(e));
         this.canvas.addEventListener('touchmove', (e) => this.handleTouchMove(e));
         this.canvas.addEventListener('touchend', () => this.handleMouseUp());
+    }
+    
+    setupResizeListener() {
+        // Listen for window resize to update formula layout
+        window.addEventListener('resize', () => {
+            // Debounce resize events
+            clearTimeout(this.resizeTimeout);
+            this.resizeTimeout = setTimeout(() => {
+                this.updateDisplay();
+            }, 250);
+        });
     }
     
     getMousePos(e) {
@@ -430,7 +442,18 @@ class CosineSimilarityVisualization {
         // Update the LaTeX calculation with current values
         const latexCalc = `$$\\cos(\\theta) = \\frac{(${this.vectorA.x.toFixed(2)})(${this.vectorB.x.toFixed(2)}) + (${this.vectorA.y.toFixed(2)})(${this.vectorB.y.toFixed(2)})}{\\sqrt{${this.vectorA.x.toFixed(2)}^2 + ${this.vectorA.y.toFixed(2)}^2} \\sqrt{${this.vectorB.x.toFixed(2)}^2 + ${this.vectorB.y.toFixed(2)}^2}} = \\frac{${calculations.dotProduct.toFixed(2)}}{${calculations.magnitudeA.toFixed(2)} \\times ${calculations.magnitudeB.toFixed(2)}} = ${calculations.cosineSimilarity.toFixed(2)}$$`;
         
-        document.getElementById('fullCalculation').innerHTML = latexCalc;
+        // Create mobile-friendly version with line breaks
+        const latexCalcMobile = `$$\\begin{align}
+\\cos(\\theta) &= \\frac{(${this.vectorA.x.toFixed(2)})(${this.vectorB.x.toFixed(2)}) + (${this.vectorA.y.toFixed(2)})(${this.vectorB.y.toFixed(2)})}{\\sqrt{${this.vectorA.x.toFixed(2)}^2 + ${this.vectorA.y.toFixed(2)}^2} \\sqrt{${this.vectorB.x.toFixed(2)}^2 + ${this.vectorB.y.toFixed(2)}^2}} \\\\
+&= \\frac{${calculations.dotProduct.toFixed(2)}}{${calculations.magnitudeA.toFixed(2)} \\times ${calculations.magnitudeB.toFixed(2)}} \\\\
+&= ${calculations.cosineSimilarity.toFixed(2)}
+\\end{align}$$`;
+        
+        // Use mobile formula on small screens
+        const isMobile = window.innerWidth <= 768;
+        const formulaToUse = isMobile ? latexCalcMobile : latexCalc;
+        
+        document.getElementById('fullCalculation').innerHTML = formulaToUse;
         
         // Re-render MathJax for the updated equation
         if (window.MathJax) {
