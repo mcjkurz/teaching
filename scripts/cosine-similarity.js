@@ -23,6 +23,7 @@ class CosineSimilarityVisualization {
         
         this.setupEventListeners();
         this.setupResizeListener();
+        this.setupMainFormula();
         this.update();
     }
     
@@ -45,9 +46,34 @@ class CosineSimilarityVisualization {
             // Debounce resize events
             clearTimeout(this.resizeTimeout);
             this.resizeTimeout = setTimeout(() => {
+                this.setupMainFormula();
                 this.updateDisplay();
             }, 250);
         });
+    }
+    
+    setupMainFormula() {
+        // Define desktop and mobile versions of the main formula
+        const desktopFormula = `$$\\cos(\\theta) = \\frac{\\mathbf{A} \\cdot \\mathbf{B}}{|\\mathbf{A}| |\\mathbf{B}|} = \\frac{A_x B_x + A_y B_y}{\\sqrt{A_x^2 + A_y^2} \\sqrt{B_x^2 + B_y^2}}$$`;
+        
+        const mobileFormula = `$$\\begin{align}
+\\cos(\\theta) &= \\frac{\\mathbf{A} \\cdot \\mathbf{B}}{|\\mathbf{A}| |\\mathbf{B}|} \\\\[0.5em]
+&= \\frac{A_x B_x + A_y B_y}{\\sqrt{A_x^2 + A_y^2} \\sqrt{B_x^2 + B_y^2}}
+\\end{align}$$`;
+        
+        // Use mobile formula on small screens
+        const isMobile = window.innerWidth <= 768;
+        const formulaToUse = isMobile ? mobileFormula : desktopFormula;
+        
+        const mainFormulaElement = document.getElementById('mainFormula');
+        if (mainFormulaElement) {
+            mainFormulaElement.innerHTML = formulaToUse;
+            
+            // Re-render MathJax for the updated equation
+            if (window.MathJax) {
+                window.MathJax.typesetPromise([mainFormulaElement]).catch((err) => console.log(err.message));
+            }
+        }
     }
     
     getMousePos(e) {
@@ -444,8 +470,8 @@ class CosineSimilarityVisualization {
         
         // Create mobile-friendly version with line breaks
         const latexCalcMobile = `$$\\begin{align}
-\\cos(\\theta) &= \\frac{(${this.vectorA.x.toFixed(2)})(${this.vectorB.x.toFixed(2)}) + (${this.vectorA.y.toFixed(2)})(${this.vectorB.y.toFixed(2)})}{\\sqrt{${this.vectorA.x.toFixed(2)}^2 + ${this.vectorA.y.toFixed(2)}^2} \\sqrt{${this.vectorB.x.toFixed(2)}^2 + ${this.vectorB.y.toFixed(2)}^2}} \\\\
-&= \\frac{${calculations.dotProduct.toFixed(2)}}{${calculations.magnitudeA.toFixed(2)} \\times ${calculations.magnitudeB.toFixed(2)}} \\\\
+\\cos(\\theta) &= \\frac{(${this.vectorA.x.toFixed(2)})(${this.vectorB.x.toFixed(2)}) + (${this.vectorA.y.toFixed(2)})(${this.vectorB.y.toFixed(2)})}{\\sqrt{${this.vectorA.x.toFixed(2)}^2 + ${this.vectorA.y.toFixed(2)}^2} \\sqrt{${this.vectorB.x.toFixed(2)}^2 + ${this.vectorB.y.toFixed(2)}^2}} \\\\[0.5em]
+&= \\frac{${calculations.dotProduct.toFixed(2)}}{${calculations.magnitudeA.toFixed(2)} \\times ${calculations.magnitudeB.toFixed(2)}} \\\\[0.5em]
 &= ${calculations.cosineSimilarity.toFixed(2)}
 \\end{align}$$`;
         
