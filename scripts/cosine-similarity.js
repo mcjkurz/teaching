@@ -154,13 +154,23 @@ class CosineSimilarityVisualization {
     handleTouchStart(e) {
         e.preventDefault();
         const touchPos = this.getTouchPos(e);
-        this.handleMouseDown({ clientX: touchPos.x, clientY: touchPos.y });
+        // Create a mock mouse event with the correct structure
+        const mockEvent = {
+            clientX: e.touches[0].clientX,
+            clientY: e.touches[0].clientY
+        };
+        this.handleMouseDown(mockEvent);
     }
     
     handleTouchMove(e) {
         e.preventDefault();
         const touchPos = this.getTouchPos(e);
-        this.handleMouseMove({ clientX: touchPos.x, clientY: touchPos.y });
+        // Create a mock mouse event with the correct structure
+        const mockEvent = {
+            clientX: e.touches[0].clientX,
+            clientY: e.touches[0].clientY
+        };
+        this.handleMouseMove(mockEvent);
     }
     
     calculateCosineSimilarity() {
