@@ -386,7 +386,7 @@ class CosineSimilarityVisualization {
         this.ctx.font = '12px Arial';
         this.ctx.textAlign = 'center';
         this.ctx.textBaseline = 'middle';
-        this.ctx.fillText(`θ = ${calculations.angleDeg.toFixed(1)}°`, labelX, labelY);
+        this.ctx.fillText(`θ = ${calculations.angleDeg.toFixed(2)}°`, labelX, labelY);
     }
     
     drawVector(vector, color, label) {
@@ -456,12 +456,12 @@ class CosineSimilarityVisualization {
         
         // Update live results panel (right side of canvas)
         document.getElementById('cosineSimilarityLive').textContent = calculations.cosineSimilarity.toFixed(2);
-        document.getElementById('angleLive').textContent = calculations.angleDeg.toFixed(1) + '°';
+        document.getElementById('angleLive').textContent = calculations.angleDeg.toFixed(2) + '°';
         document.getElementById('dotProductLive').textContent = calculations.dotProduct.toFixed(2);
         
         // Update vector components and magnitudes
-        document.getElementById('vectorAComponents').textContent = `(${this.vectorA.x.toFixed(1)}, ${this.vectorA.y.toFixed(1)})`;
-        document.getElementById('vectorBComponents').textContent = `(${this.vectorB.x.toFixed(1)}, ${this.vectorB.y.toFixed(1)})`;
+        document.getElementById('vectorAComponents').textContent = `(${this.vectorA.x.toFixed(2)}, ${this.vectorA.y.toFixed(2)})`;
+        document.getElementById('vectorBComponents').textContent = `(${this.vectorB.x.toFixed(2)}, ${this.vectorB.y.toFixed(2)})`;
         document.getElementById('magnitudeA').textContent = calculations.magnitudeA.toFixed(2);
         document.getElementById('magnitudeB').textContent = calculations.magnitudeB.toFixed(2);
         
@@ -495,6 +495,15 @@ class CosineSimilarityVisualization {
 }
 
 // Initialize the visualization when the page loads
-document.addEventListener('DOMContentLoaded', () => {
-    new CosineSimilarityVisualization();
-});
+function initVisualization() {
+    const canvas = document.getElementById('vectorCanvas');
+    if (canvas) {
+        new CosineSimilarityVisualization();
+    }
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initVisualization);
+} else {
+    initVisualization();
+}
