@@ -37,7 +37,7 @@ section h4 {
 .canvas-and-results {
     display: flex;
     gap: 2rem;
-    align-items: flex-start;
+    align-items: stretch;
     justify-content: center;
     margin: 0 auto;
     max-width: 800px;
@@ -49,6 +49,9 @@ section h4 {
     background: white;
     padding: 1rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #vectorCanvas {
@@ -444,6 +447,9 @@ section h4 {
         align-items: center;
     }
     
+    .canvas-container {
+        display: block;
+    }
     
     .live-results {
         min-width: auto;
