@@ -374,7 +374,9 @@ section h4 {
     
     .query-label {
         font-size: 0.85rem;
-        margin-bottom: 0.25rem;
+        display: inline;
+        margin-bottom: 0;
+        margin-right: 0.4rem;
     }
     
     .query-components {
