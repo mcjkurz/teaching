@@ -1,0 +1,300 @@
+/* Attention Keys and Queries visualization specific styles */
+
+/* Sections */
+section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+section:last-child {
+    border-bottom: none;
+}
+
+section h3, section h4 {
+    color: #333;
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+section h4 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Canvas Section */
+.canvas-section {
+    text-align: center;
+}
+
+.canvas-section p {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.canvas-and-results {
+    display: flex;
+    gap: 2rem;
+    align-items: stretch;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 900px;
+}
+
+.canvas-container {
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#vectorCanvas {
+    display: block;
+    cursor: pointer;
+    border-radius: 4px;
+    touch-action: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Live Results Panel */
+.live-results {
+    background: #f8f9fa;
+    border: 2px solid #CB0000;
+    border-radius: 8px;
+    padding: 1.5rem;
+    min-width: 320px;
+    box-shadow: 0 2px 8px rgba(203, 0, 0, 0.1);
+    text-align: left;
+}
+
+.live-results h4 {
+    color: #CB0000;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.query-display {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #dee2e6;
+    text-align: center;
+}
+
+.query-label {
+    font-weight: 600;
+    color: #CB0000;
+    font-size: 1rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.query-components {
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    color: #CB0000;
+    font-size: 1.1rem;
+}
+
+/* Attention weights display */
+.attention-item {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background: white;
+    border-radius: 6px;
+    border: 1px solid #dee2e6;
+}
+
+.attention-item:last-child {
+    margin-bottom: 0;
+}
+
+.key-label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.key-label {
+    font-weight: 600;
+    color: #2F4F4F;
+    font-size: 1rem;
+}
+
+.dot-product-value {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.attention-weight-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.attention-label {
+    font-size: 0.85rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.attention-value {
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    color: #CB0000;
+    font-size: 1rem;
+}
+
+.attention-bar {
+    width: 100%;
+    height: 20px;
+    background: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.attention-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #CB0000 0%, #ff6b6b 100%);
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+/* Formula Section */
+.formula {
+    text-align: center;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.math-formula {
+    font-size: 1.1rem;
+    font-family: 'Times New Roman', serif;
+    color: #333;
+    font-style: italic;
+}
+
+.calculation-display {
+    background: #ffe6e6;
+    border: 1px solid #CB0000;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.calc-step {
+    text-align: center;
+}
+
+.calc-label {
+    display: block;
+    font-weight: 500;
+    color: #CB0000;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.calc-formula {
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Explanation section */
+.explanation-section {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.explanation-section h3 {
+    color: #CB0000;
+    margin-bottom: 1rem;
+}
+
+.explanation-section p {
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+}
+
+.explanation-section ul {
+    padding-left: 1.5rem;
+    color: #333;
+}
+
+.explanation-section li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.explanation-section code {
+    background: #e0e0e0;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .canvas-and-results {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: center;
+    }
+    
+    .canvas-container {
+        display: block;
+        width: 100%;
+    }
+    
+    .live-results {
+        min-width: auto;
+        width: 100%;
+        max-width: 400px;
+    }
+    
+    .canvas-container {
+        padding: 0.5rem;
+    }
+    
+    #vectorCanvas {
+        width: 100%;
+        max-width: 350px;
+        height: auto;
+    }
+    
+    .math-formula {
+        font-size: 1rem;
+    }
+    
+    .attention-item {
+        padding: 0.5rem;
+    }
+    
+    .key-label {
+        font-size: 0.95rem;
+    }
+    
+    .attention-value {
+        font-size: 0.95rem;
+    }
+}
+

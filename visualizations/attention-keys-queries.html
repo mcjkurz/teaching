@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Attention: Keys and Queries</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/attention-keys-queries.css">
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@polyfill-io/polyfill@3.111.0/dist/polyfill.min.js?features=es6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Attention Mechanism: Keys and Queries</h1>
+            <p>Interactive visualization of the attention mechanism with fixed key vectors and a movable query</p>
+        </header>
+
+        <main>
+            <!-- Interactive Canvas Section -->
+            <section class="canvas-section">
+                <h3>Interactive Vector Space</h3>
+                <p>Drag the red query vector <strong style="color: #CB0000;">Q</strong> to see how attention scores change for each key vector:</p>
+                <div class="canvas-and-results">
+                    <div class="canvas-container">
+                        <canvas id="vectorCanvas" width="400" height="400"></canvas>
+                    </div>
+                    <div class="live-results">
+                        <h4>Attention Scores</h4>
+                        <div class="query-display">
+                            <span class="query-label">Query Q:</span>
+                            <span id="queryComponents" class="query-components">(0.62, 0.62)</span>
+                        </div>
+                        
+                        <!-- Attention for 水 -->
+                        <div class="attention-item">
+                            <div class="key-label-row">
+                                <span class="key-label">K(水)</span>
+                                <span class="dot-product-value">Q·K = <span id="dotProduct_水">0.000</span></span>
+                            </div>
+                            <div class="attention-weight-row">
+                                <span class="attention-label">Attention:</span>
+                                <span id="attention_水" class="attention-value">0.000</span>
+                            </div>
+                            <div class="attention-bar">
+                                <div id="progress_水" class="attention-progress" style="width: 33.3%;"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Attention for 風 -->
+                        <div class="attention-item">
+                            <div class="key-label-row">
+                                <span class="key-label">K(風)</span>
+                                <span class="dot-product-value">Q·K = <span id="dotProduct_風">0.000</span></span>
+                            </div>
+                            <div class="attention-weight-row">
+                                <span class="attention-label">Attention:</span>
+                                <span id="attention_風" class="attention-value">0.000</span>
+                            </div>
+                            <div class="attention-bar">
+                                <div id="progress_風" class="attention-progress" style="width: 33.3%;"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Attention for 有 -->
+                        <div class="attention-item">
+                            <div class="key-label-row">
+                                <span class="key-label">K(有)</span>
+                                <span class="dot-product-value">Q·K = <span id="dotProduct_有">0.000</span></span>
+                            </div>
+                            <div class="attention-weight-row">
+                                <span class="attention-label">Attention:</span>
+                                <span id="attention_有" class="attention-value">0.000</span>
+                            </div>
+                            <div class="attention-bar">
+                                <div id="progress_有" class="attention-progress" style="width: 33.3%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Attention Formula -->
+            <section class="formula-section">
+                <h3>Attention Mechanism Formula</h3>
+                <div class="formula">
+                    <span id="mainFormula" class="math-formula">
+                        $$\text{Attention}(Q, K) = \text{softmax}\left(\frac{Q \cdot K^T}{\sqrt{d_k}}\right) \approx \text{softmax}(Q \cdot K^T)$$
+                    </span>
+                </div>
+                <div class="calculation-display">
+                    <div class="calc-step">
+                        <span class="calc-label">Current calculation:</span>
+                        <div id="fullCalculation" class="calc-formula">
+                            $$\begin{align}
+&Q \cdot K_{\text{水}} = 0.000, \quad Q \cdot K_{\text{風}} = 0.000, \quad Q \cdot K_{\text{有}} = 0.000 \\[0.5em]
+&\text{Attention: } \alpha_{\text{水}} = 0.333, \quad \alpha_{\text{風}} = 0.333, \quad \alpha_{\text{有}} = 0.333
+\end{align}$$
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Explanation Section -->
+            <section class="explanation-section">
+                <h3>How It Works</h3>
+                <p>This visualization demonstrates the core attention mechanism used in transformer models:</p>
+                <ul>
+                    <li><strong>Key Vectors (K):</strong> Three fixed vectors labeled with Chinese characters 水 (water), 風 (wind), and 有 (have), shown in black.</li>
+                    <li><strong>Query Vector (Q):</strong> A movable red vector that you can drag around to explore different positions.</li>
+                    <li><strong>Dot Products:</strong> For each key vector, we compute the dot product with the query: <code>Q · K</code></li>
+                    <li><strong>Softmax:</strong> The dot products are passed through a softmax function to produce attention weights that sum to 1.</li>
+                    <li><strong>Interpretation:</strong> Higher attention weights indicate stronger relevance between the query and that particular key. When Q is close to a key vector (small angle), the attention weight for that key increases.</li>
+                </ul>
+                <p>Try moving the query vector closer to different keys and observe how the attention distribution changes!</p>
+            </section>
+        </main>
+    </div>
+
+    <script src="../scripts/attention-keys-queries.js"></script>
+</body>
+</html>
+
