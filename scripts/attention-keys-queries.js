@@ -10,7 +10,7 @@ class AttentionVisualization {
         this.height = this.canvas.height;
         this.centerX = this.width / 2;
         this.centerY = this.height / 2;
-        this.scale = 225; // Scale factor for coordinate system (pixels per unit)
+        this.scale = 150; // Scale factor for coordinate system (pixels per unit)
         this.maxCoord = 1; // Maximum coordinate value (-1 to 1)
         
         // Fixed key vectors (in black) - from Figure 1
@@ -348,7 +348,7 @@ class AttentionVisualization {
         
         // Vector label
         this.ctx.fillStyle = color;
-        this.ctx.font = isQuery ? 'bold 18px Arial' : 'bold 16px Arial';
+        this.ctx.font = isQuery ? 'bold 16px Arial' : 'bold 14px Arial';
         this.ctx.textAlign = 'center';
         this.ctx.textBaseline = 'middle';
         
