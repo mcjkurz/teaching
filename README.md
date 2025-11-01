@@ -17,3 +17,9 @@ Interactive web-based visualizations and other materials used for teaching (most
 - Path: `/visualizations/cosine-similarity.html`
 - Interactive visualization of cosine similarity between two vectors
 - Drag vectors around the unit circle to see real-time similarity calculations
+
+### Attention Mechanism: Keys and Queries
+- **Demo**: https://mcjkurz.github.io/teaching/visualizations/attention-keys-queries.html
+- Path: `/visualizations/attention-keys-queries.html`
+- Interactive visualization of the attention mechanism in transformer models
+- Drag the query vector to see how attention scores change for each key vector
