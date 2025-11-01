@@ -44,6 +44,26 @@ class AttentionVisualization {
         this.canvas.addEventListener('touchstart', (e) => this.handleTouchStart(e));
         this.canvas.addEventListener('touchmove', (e) => this.handleTouchMove(e));
         this.canvas.addEventListener('touchend', () => this.handleMouseUp());
+        
+        // Toggle detailed equations
+        const toggleBtn = document.getElementById('toggleEquations');
+        const hideBtn = document.getElementById('hideEquations');
+        const detailedSection = document.getElementById('detailedEquations');
+        
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                detailedSection.style.display = 'block';
+                this.updateDetailedCalculations();
+            });
+        }
+        
+        if (hideBtn) {
+            hideBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                detailedSection.style.display = 'none';
+            });
+        }
     }
     
     setupResizeListener() {
@@ -432,6 +452,147 @@ class AttentionVisualization {
         // Re-render MathJax for the updated equation
         if (window.MathJax) {
             window.MathJax.typesetPromise([document.getElementById('fullCalculation')]).catch((err) => console.log(err.message));
+        }
+        
+        // Update detailed calculations if visible
+        const detailedSection = document.getElementById('detailedEquations');
+        if (detailedSection && detailedSection.style.display !== 'none') {
+            this.updateDetailedCalculations();
+        }
+    }
+    
+    updateDetailedCalculations() {
+        const results = this.calculateAttention();
+        const keyLabels = Object.keys(this.keys);
+        const isMobile = window.innerWidth <= 768;
+        
+        // Build detailed calculation HTML
+        let html = '<div class="detailed-calc-step">';
+        html += '<h4>Step 1: Current Vector Values</h4>';
+        html += '<div class="calc-formula">';
+        
+        if (isMobile) {
+            html += '$$\\begin{align}';
+            html += `Q &= (${this.query.x.toFixed(2)}, ${this.query.y.toFixed(2)}) \\\\[0.3em]`;
+            keyLabels.forEach(label => {
+                const key = this.keys[label];
+                html += `K_{\\text{${label}}} &= (${key.x.toFixed(2)}, ${key.y.toFixed(2)}) \\\\[0.3em]`;
+            });
+            html += '\\end{align}$$';
+        } else {
+            html += `$$Q = (${this.query.x.toFixed(2)}, ${this.query.y.toFixed(2)})$$`;
+            html += '$$';
+            keyLabels.forEach((label, idx) => {
+                const key = this.keys[label];
+                html += `K_{\\text{${label}}} = (${key.x.toFixed(2)}, ${key.y.toFixed(2)})`;
+                if (idx < keyLabels.length - 1) html += ', \\quad ';
+            });
+            html += '$$';
+        }
+        
+        html += '</div></div>';
+        
+        // Step 2: Dot products
+        html += '<div class="detailed-calc-step">';
+        html += '<h4>Step 2: Calculate Dot Products</h4>';
+        html += '<div class="calc-formula">';
+        
+        keyLabels.forEach(label => {
+            const key = this.keys[label];
+            const dotProd = results.dotProducts[label];
+            
+            if (isMobile) {
+                html += `$$\\begin{align}`;
+                html += `Q \\cdot K_{\\text{${label}}} &= (${this.query.x.toFixed(2)})(${key.x.toFixed(2)}) \\\\`;
+                html += `&\\quad + (${this.query.y.toFixed(2)})(${key.y.toFixed(2)}) \\\\`;
+                html += `&= ${(this.query.x * key.x).toFixed(3)} + ${(this.query.y * key.y).toFixed(3)} \\\\`;
+                html += `&= ${dotProd.toFixed(3)}`;
+                html += `\\end{align}$$`;
+            } else {
+                html += `$$Q \\cdot K_{\\text{${label}}} = (${this.query.x.toFixed(2)})(${key.x.toFixed(2)}) + (${this.query.y.toFixed(2)})(${key.y.toFixed(2)}) = ${dotProd.toFixed(3)}$$`;
+            }
+        });
+        
+        html += '</div></div>';
+        
+        // Step 3: Softmax calculation
+        html += '<div class="detailed-calc-step">';
+        html += '<h4>Step 3: Apply Softmax</h4>';
+        html += '<div class="calc-formula">';
+        
+        // Get exponentials
+        const dotProductArray = keyLabels.map(label => results.dotProducts[label]);
+        const maxVal = Math.max(...dotProductArray);
+        const expValues = dotProductArray.map(v => Math.exp(v - maxVal));
+        const sumExp = expValues.reduce((a, b) => a + b, 0);
+        
+        // Show exponentials
+        html += '<p><strong>Calculate exponentials:</strong></p>';
+        keyLabels.forEach((label, idx) => {
+            const dotProd = results.dotProducts[label];
+            const expVal = expValues[idx];
+            
+            if (isMobile) {
+                html += `$$\\begin{align}`;
+                html += `e^{${dotProd.toFixed(3)}} &\\approx ${expVal.toFixed(4)}`;
+                html += `\\end{align}$$`;
+            } else {
+                html += `$$e^{${dotProd.toFixed(3)}} \\approx ${expVal.toFixed(4)}$$`;
+            }
+        });
+        
+        // Show sum
+        html += '<p><strong>Sum of exponentials:</strong></p>';
+        if (isMobile) {
+            html += `$$\\begin{align}`;
+            html += `\\sum_j e^{Q \\cdot K_j} &= ${expValues.map(v => v.toFixed(4)).join(' \\\\[0.2em] &\\quad + ')} \\\\[0.3em]`;
+            html += `&= ${sumExp.toFixed(4)}`;
+            html += `\\end{align}$$`;
+        } else {
+            html += `$$\\sum_j e^{Q \\cdot K_j} = ${expValues.map(v => v.toFixed(4)).join(' + ')} = ${sumExp.toFixed(4)}$$`;
+        }
+        
+        // Show final probabilities
+        html += '<p><strong>Normalize to get attention weights:</strong></p>';
+        keyLabels.forEach((label, idx) => {
+            const attention = results.attention[label];
+            const expVal = expValues[idx];
+            
+            if (isMobile) {
+                html += `$$\\begin{align}`;
+                html += `\\alpha_{\\text{${label}}} &= \\frac{${expVal.toFixed(4)}}{${sumExp.toFixed(4)}} \\\\`;
+                html += `&= ${attention.toFixed(3)}`;
+                html += `\\end{align}$$`;
+            } else {
+                html += `$$\\alpha_{\\text{${label}}} = \\frac{${expVal.toFixed(4)}}{${sumExp.toFixed(4)}} = ${attention.toFixed(3)}$$`;
+            }
+        });
+        
+        html += '</div></div>';
+        
+        // Verification
+        html += '<div class="detailed-calc-step">';
+        html += '<h4>Verification</h4>';
+        html += '<div class="calc-formula">';
+        const sumAttention = keyLabels.reduce((sum, label) => sum + results.attention[label], 0);
+        
+        if (isMobile) {
+            html += `$$\\begin{align}`;
+            html += `\\sum_j \\alpha_j &= ${keyLabels.map(label => results.attention[label].toFixed(3)).join(' \\\\[0.2em] &\\quad + ')} \\\\[0.3em]`;
+            html += `&= ${sumAttention.toFixed(3)}`;
+            html += `\\end{align}$$`;
+        } else {
+            html += `$$\\sum_j \\alpha_j = ${keyLabels.map(label => results.attention[label].toFixed(3)).join(' + ')} = ${sumAttention.toFixed(3)}$$`;
+        }
+        
+        html += '<p style="margin-top: 1em;"><em>The attention weights sum to 1, as expected.</em></p>';
+        html += '</div></div>';
+        
+        document.getElementById('equationsContainer').innerHTML = html;
+        
+        // Re-render MathJax for the new equations
+        if (window.MathJax) {
+            window.MathJax.typesetPromise([document.getElementById('equationsContainer')]).catch((err) => console.log(err.message));
         }
     }
     

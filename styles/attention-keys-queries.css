@@ -252,6 +252,78 @@ section h4 {
     font-size: 0.9em;
 }
 
+/* Equations Toggle */
+.equations-toggle {
+    text-align: center;
+    margin-top: 0.75rem;
+}
+
+.equations-link {
+    color: #CB0000;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border: 1px solid #CB0000;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+
+.equations-link:hover {
+    background: #CB0000;
+    color: white;
+    text-decoration: none;
+}
+
+/* Detailed Equations Section */
+.detailed-equations-section {
+    background: #ffe6e6;
+    border: 1px solid #CB0000;
+    border-radius: 4px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.detailed-equations-section h3 {
+    color: #CB0000;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.equations-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.detailed-calc-step {
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 1rem;
+    border-left: 4px solid #CB0000;
+}
+
+.detailed-calc-step h4 {
+    color: #CB0000;
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.detailed-calc-step p {
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.detailed-calc-step .calc-formula {
+    text-align: center;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     .canvas-and-results {
@@ -295,6 +367,22 @@ section h4 {
     
     .attention-value {
         font-size: 0.95rem;
+    }
+    
+    .detailed-equations-section {
+        padding: 1rem;
+    }
+    
+    .detailed-calc-step {
+        padding: 0.75rem;
+    }
+    
+    .detailed-calc-step h4 {
+        font-size: 0.95rem;
+    }
+    
+    .detailed-calc-step p {
+        font-size: 0.85rem;
     }
 }
 
