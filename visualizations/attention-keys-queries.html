@@ -120,6 +120,7 @@
                     <li><strong>Softmax:</strong> The dot products are passed through a softmax function to produce attention weights that sum to 1.</li>
                     <li><strong>Interpretation:</strong> Higher attention weights indicate stronger relevance between the query and that particular key. When Q is close to a key vector (small angle), the attention weight for that key increases.</li>
                 </ul>
+                <p><em>Note: In the full transformer attention formula, dot products are scaled by 1/√d<sub>k</sub> for numerical stability with high-dimensional vectors, but for this 2D visualization (d<sub>k</sub>=2), we omit this scaling factor as it has minimal impact on the observed behavior.</em></p>
                 <p>Try moving the query vector closer to different keys and observe how the attention distribution changes!</p>
             </section>
         </main>
