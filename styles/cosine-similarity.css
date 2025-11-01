@@ -441,24 +441,111 @@ section h4 {
 
 /* Responsive design */
 @media (max-width: 768px) {
+    /* Make header smaller and more compact */
+    header h1 {
+        font-size: 1.3rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    header p {
+        font-size: 0.8rem;
+        display: none; /* Hide subtitle on mobile to save space */
+    }
+    
+    /* Section headers smaller */
+    section h3 {
+        font-size: 0.95rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .canvas-section p {
+        font-size: 0.8rem;
+        margin-bottom: 0.75rem;
+    }
+    
     .canvas-and-results {
         flex-direction: column;
-        gap: 1.5rem;
+        gap: 1rem;
         align-items: center;
     }
     
-    .canvas-container {
-        display: block;
-    }
-    
+    /* Reorder: put live-results on top */
     .live-results {
+        order: 1;
         min-width: auto;
         width: 100%;
         max-width: 400px;
+        /* Make it more compact */
+        padding: 0.75rem;
+        border-width: 1.5px;
+    }
+    
+    .canvas-container {
+        order: 2;
+        display: block;
+        padding: 0.25rem;
+    }
+    
+    /* Compact similarity display */
+    .live-results h4 {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .similarity-display {
+        margin-bottom: 0.75rem;
     }
     
     .similarity-value {
-        font-size: 2.5rem;
+        font-size: 2rem;
+        margin-bottom: 0.25rem;
+    }
+    
+    .angle-display, .dot-product-display {
+        margin-bottom: 0.5rem;
+        padding: 0.4rem;
+    }
+    
+    .angle-label, .dot-label {
+        font-size: 0.8rem;
+    }
+    
+    .angle-value, .dot-value {
+        font-size: 0.9rem;
+    }
+    
+    /* Compact vector info */
+    .vector-info {
+        margin-top: 0.75rem;
+        padding-top: 0.75rem;
+    }
+    
+    .vector-display {
+        margin-bottom: 0.5rem;
+        padding: 0.5rem;
+        font-size: 0.75rem;
+    }
+    
+    .vector-label {
+        font-size: 0.8rem;
+        display: inline;
+        margin-bottom: 0;
+        margin-right: 0.3rem;
+    }
+    
+    .vector-components {
+        font-size: 0.85rem;
+        display: inline;
+        margin-bottom: 0;
+    }
+    
+    .vector-magnitude-row {
+        display: block;
+        margin-top: 0.25rem;
+    }
+    
+    .magnitude-label, .magnitude-value {
+        font-size: 0.75rem;
     }
     
     .vectors-display {
@@ -467,17 +554,9 @@ section h4 {
         align-items: center;
     }
     
-    .vector-info {
-        width: 100%;
-    }
-    
     .calculations-grid {
         grid-template-columns: 1fr;
         gap: 0.75rem;
-    }
-    
-    .canvas-container {
-        padding: 0.5rem;
     }
     
     #vectorCanvas {
@@ -502,6 +581,24 @@ section h4 {
     }
     
     .math-formula {
-        font-size: 1rem;
+        font-size: 0.95rem;
+    }
+    
+    .formula {
+        padding: 0.75rem;
+    }
+    
+    .calculation-display {
+        padding: 0.75rem;
+    }
+    
+    .calc-label {
+        font-size: 0.8rem;
+        margin-bottom: 0.25rem;
+    }
+    
+    section {
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
     }
 }
