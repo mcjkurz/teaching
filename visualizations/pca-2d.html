@@ -581,7 +581,6 @@
                         <div class="legend-item"><div class="legend-dot" style="background: #3498db;"></div> Centered Data</div>
                         <div class="legend-item"><div class="legend-line" style="background: rgba(231,76,60,0.5);"></div> Var(x)</div>
                         <div class="legend-item"><div class="legend-line" style="background: rgba(155,89,182,0.5);"></div> Var(y)</div>
-                        <div class="legend-item"><div class="legend-line" style="background: #f39c12;"></div> Cov slope</div>
                     </div>
                     <div class="canvas-controls">
                         <button class="btn toggle" id="btnToggleStep2">Show Variance</button>
@@ -1382,30 +1381,21 @@
                     ctx.fillText(`Var(y) = ${varY.toFixed(2)}`, 0, 0);
                     ctx.restore();
                     
-                    // Draw covariance slope line (shorter, within data range)
-                    if (Math.abs(covXY) > 0.01 && varX > 0.01) {
-                        // Slope = Cov(x,y) / Var(x) for regression line y = slope * x
-                        const slope = covXY / varX;
-                        // Keep line within reasonable bounds
-                        const xRange = Math.min(2.5, maxX * 1.2);
-                        drawLine(ctx, -xRange, -xRange * slope, xRange, xRange * slope, '#f39c12', 3);
-                        
-                        // Label positioned safely in a corner
-                        ctx.fillStyle = '#f39c12';
-                        ctx.font = 'bold 11px sans-serif';
-                        ctx.textAlign = 'right';
-                        const [lx, ly] = toCanvas(3.3, 3.5);
-                        const slopeSign = covXY > 0 ? '+' : '';
-                        ctx.fillText(`Cov = ${slopeSign}${covXY.toFixed(2)}`, lx, ly);
+                    // Draw covariance annotation (no line, just label with direction arrow)
+                    ctx.fillStyle = '#f39c12';
+                    ctx.font = 'bold 11px sans-serif';
+                    ctx.textAlign = 'right';
+                    const [lx, ly] = toCanvas(3.3, 3.5);
+                    
+                    let covLabel;
+                    if (covXY > 0.1) {
+                        covLabel = `Cov = +${covXY.toFixed(2)} ↗`;
+                    } else if (covXY < -0.1) {
+                        covLabel = `Cov = ${covXY.toFixed(2)} ↘`;
                     } else {
-                        // Near-zero covariance - draw horizontal dashed line at 0
-                        drawLine(ctx, -2.5, 0, 2.5, 0, '#f39c12', 2, true);
-                        ctx.fillStyle = '#f39c12';
-                        ctx.font = 'bold 11px sans-serif';
-                        ctx.textAlign = 'right';
-                        const [lx, ly] = toCanvas(3.3, 3.5);
-                        ctx.fillText(`Cov ≈ 0`, lx, ly);
+                        covLabel = `Cov ≈ 0`;
                     }
+                    ctx.fillText(covLabel, lx, ly);
                 }
             }
 
@@ -1490,12 +1480,9 @@
                     return;
                 }
                 let html = '';
-                originalPoints.slice(0, 15).forEach((p, i) => {
+                originalPoints.forEach((p, i) => {
                     html += `<tr><td>${i + 1}</td><td>${p[0].toFixed(2)}</td><td>${p[1].toFixed(2)}</td></tr>`;
                 });
-                if (originalPoints.length > 15) {
-                    html += `<tr><td colspan="3" style="text-align: center; color: #999;">... and ${originalPoints.length - 15} more</td></tr>`;
-                }
                 tbody.innerHTML = html;
             }
 
