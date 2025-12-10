@@ -713,7 +713,7 @@
                         <p>• <strong>Det = 0:</strong> The matrix squashes space onto a line — it loses a dimension entirely</p>
                         <p>• <strong>Det ≠ 0:</strong> The matrix is invertible — no dimension is completely lost</p>
                         <p style="margin-top: 0.5rem;"><strong>Why we need it:</strong> To find eigenvalues, we solve det(Σ - λI) = 0. We're looking for values of λ that make this matrix <em>singular</em> (det = 0), meaning it collapses some direction. Those λ values are the eigenvalues.</p>
-                        <p style="margin-top: 0.5rem;"><strong>Why not just drop the x or y axis?</strong> We could simply ignore one coordinate, but that would be wasteful. If your data spreads diagonally (i.e., if there is correlation), dropping x loses half the information and dropping y loses the other half, but we know we can learn something about x from y and vice versa (since they are correlated). So, can we do better? Yes, by first <em>rotating</em> our coordinate system to align with the directions where the data varies most, then dropping the direction with the least variance. The eigenvectors tell us exactly how to rotate: they point along the data's principal axes. This way, we keep the direction with maximum variance (PC1) and only discard the direction where the data barely varies anyway.</p>
+                        <p style="margin-top: 0.5rem;"><strong>Why not just drop the x or y axis?</strong> We could simply ignore one coordinate, but that would be wasteful. If your data spreads diagonally (i.e., if there is correlation), dropping x loses half the information and dropping y loses the other half, but we know we can learn something about x from y and vice versa (since they are correlated). So, can we do better and lose less information? Yes, by first <em>rotating</em> our coordinate system to align with the directions where the data varies most, then dropping the direction with the least variance. The eigenvectors tell us exactly how to rotate: they point along the data's principal axes. This way, we keep the direction with maximum variance (PC1) and only discard the direction where the data barely varies anyway.</p>
                     </div>
 
                     <div class="concept-box">
@@ -1188,8 +1188,11 @@
             // -----------------------------------------
             function generateRandom(n = 20) {
                 const pts = [];
+                // Random offset to make centering visually meaningful
+                const offsetX = (Math.random() - 0.5) * 2 + (Math.random() > 0.5 ? 0.8 : -0.8);
+                const offsetY = (Math.random() - 0.5) * 2 + (Math.random() > 0.5 ? 0.8 : -0.8);
                 for (let i = 0; i < n; i++) {
-                    pts.push([(Math.random() - 0.5) * 5, (Math.random() - 0.5) * 5]);
+                    pts.push([(Math.random() - 0.5) * 5 + offsetX, (Math.random() - 0.5) * 5 + offsetY]);
                 }
                 return pts;
             }
@@ -1202,10 +1205,13 @@
                 const sinA = Math.sin(angle);
                 // Random spread perpendicular to the line (0.3 to 0.8)
                 const spread = Math.random() * 0.5 + 0.3;
+                // Random offset to make centering visually meaningful
+                const offsetX = (Math.random() - 0.5) * 1.5 + (Math.random() > 0.5 ? 0.8 : -0.8);
+                const offsetY = (Math.random() - 0.5) * 1.5 + (Math.random() > 0.5 ? 0.8 : -0.8);
                 for (let i = 0; i < n; i++) {
                     const t = (Math.random() - 0.5) * 5; // Along the line
                     const noise = (Math.random() - 0.5) * 2 * spread; // Perpendicular noise
-                    pts.push([t * cosA - noise * sinA, t * sinA + noise * cosA]);
+                    pts.push([t * cosA - noise * sinA + offsetX, t * sinA + noise * cosA + offsetY]);
                 }
                 return pts;
             }
@@ -1218,20 +1224,26 @@
                 const sinA = Math.sin(angle);
                 // Random spread perpendicular to the line (0.3 to 0.8)
                 const spread = Math.random() * 0.5 + 0.3;
+                // Random offset to make centering visually meaningful
+                const offsetX = (Math.random() - 0.5) * 1.5 + (Math.random() > 0.5 ? 0.8 : -0.8);
+                const offsetY = (Math.random() - 0.5) * 1.5 + (Math.random() > 0.5 ? 0.8 : -0.8);
                 for (let i = 0; i < n; i++) {
                     const t = (Math.random() - 0.5) * 5; // Along the line
                     const noise = (Math.random() - 0.5) * 2 * spread; // Perpendicular noise
-                    pts.push([t * cosA - noise * sinA, t * sinA + noise * cosA]);
+                    pts.push([t * cosA - noise * sinA + offsetX, t * sinA + noise * cosA + offsetY]);
                 }
                 return pts;
             }
 
             function generateCircular(n = 22) {
                 const pts = [];
+                // Random offset to make centering visually meaningful
+                const offsetX = (Math.random() - 0.5) * 1.5 + (Math.random() > 0.5 ? 0.8 : -0.8);
+                const offsetY = (Math.random() - 0.5) * 1.5 + (Math.random() > 0.5 ? 0.8 : -0.8);
                 for (let i = 0; i < n; i++) {
                     const angle = Math.random() * Math.PI * 2;
                     const r = Math.random() * 1.8 + 0.3;
-                    pts.push([Math.cos(angle) * r, Math.sin(angle) * r]);
+                    pts.push([Math.cos(angle) * r + offsetX, Math.sin(angle) * r + offsetY]);
                 }
                 return pts;
             }
