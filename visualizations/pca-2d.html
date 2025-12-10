@@ -197,6 +197,9 @@
         .step-explanation {
             flex: 1;
             min-width: 320px;
+            overflow-x: hidden;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         /* Data controls */
@@ -248,6 +251,8 @@
             padding: 1rem;
             border-radius: 4px;
             margin-bottom: 1rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .explanation-box h4 {
@@ -268,6 +273,8 @@
             padding: 1rem;
             border-radius: 4px;
             margin-bottom: 1rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .insight-box h4 {
@@ -297,6 +304,8 @@
             padding: 1rem;
             border-radius: 4px;
             margin-bottom: 1rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .concept-box h4 {
@@ -309,6 +318,8 @@
             font-size: 0.85rem;
             color: #444;
             margin-bottom: 0.5rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .math-section {
@@ -317,6 +328,9 @@
             border-radius: 6px;
             padding: 1rem;
             margin-bottom: 1rem;
+            overflow-x: auto;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .math-section h4 {
@@ -330,6 +344,8 @@
         .math-content {
             font-size: 0.9rem;
             line-height: 1.8;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .math-formula {
@@ -344,7 +360,8 @@
             border-radius: 4px;
             padding: 0.5rem 0.75rem;
             margin: 0.5rem 0;
-            font-family: 'Courier New', monospace;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .highlight-pc1 {
@@ -441,6 +458,19 @@
 
             .step-explanation {
                 min-width: unset;
+                max-width: 100%;
+            }
+
+            .concept-box p,
+            .explanation-box p,
+            .insight-box p,
+            .math-content p {
+                word-break: break-word;
+                hyphens: auto;
+            }
+
+            .computed-value {
+                font-size: 0.85rem;
             }
         }
     </style>
@@ -683,7 +713,7 @@
                         <p>• <strong>Det = 0:</strong> The matrix squashes space onto a line — it loses a dimension entirely</p>
                         <p>• <strong>Det ≠ 0:</strong> The matrix is invertible — no dimension is completely lost</p>
                         <p style="margin-top: 0.5rem;"><strong>Why we need it:</strong> To find eigenvalues, we solve det(Σ - λI) = 0. We're looking for values of λ that make this matrix <em>singular</em> (det = 0), meaning it collapses some direction. Those λ values are the eigenvalues.</p>
-                        <p style="margin-top: 0.5rem;"><strong>Why not just drop the x or y axis?</strong> We could simply ignore one coordinate, but that would be arbitrary and wasteful. If your data spreads diagonally, dropping x loses half the information and dropping y loses the other half. Can we do better? Yes — by first <em>rotating</em> our coordinate system to align with the data's natural spread, then dropping the direction with the least variance. The eigenvectors tell us exactly how to rotate: they point along the data's principal axes. This way, we keep the direction with maximum variance (PC1) and only discard the direction where the data barely varies anyway.</p>
+                        <p style="margin-top: 0.5rem;"><strong>Why not just drop the x or y axis?</strong> We could simply ignore one coordinate, but that would be wasteful. If your data spreads diagonally (i.e., if there is correlation), dropping x loses half the information and dropping y loses the other half, but we know we can learn something about x from y and vice versa (since they are correlated). So, can we do better? Yes, by first <em>rotating</em> our coordinate system to align with the directions where the data varies most, then dropping the direction with the least variance. The eigenvectors tell us exactly how to rotate: they point along the data's principal axes. This way, we keep the direction with maximum variance (PC1) and only discard the direction where the data barely varies anyway.</p>
                     </div>
 
                     <div class="concept-box">
