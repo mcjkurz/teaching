@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>2D Principal Component Analysis (PCA)</title>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            startup: {
+                pageReady: () => {
+                    return MathJax.startup.defaultPageReady();
+                }
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        /* =========================================
+           BASE STYLES
+           ========================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f7fa;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        header {
+            margin-bottom: 2rem;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        header p {
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        /* =========================================
+           BUTTONS
+           ========================================= */
+        .btn {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: #fff;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background: #f8f9fa;
+            border-color: #aaa;
+        }
+
+        .btn.primary {
+            background: #3498db;
+            border-color: #3498db;
+            color: white;
+        }
+
+        .btn.primary:hover {
+            background: #2980b9;
+        }
+
+        .btn.success {
+            background: #27ae60;
+            border-color: #27ae60;
+            color: white;
+        }
+
+        .btn.success:hover {
+            background: #219a52;
+        }
+
+        .btn.danger {
+            background: #e74c3c;
+            border-color: #e74c3c;
+            color: white;
+        }
+
+        .btn.danger:hover {
+            background: #c0392b;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn.large {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .btn.toggle {
+            background: #8e44ad;
+            border-color: #8e44ad;
+            color: white;
+            min-width: 140px;
+        }
+
+        .btn.toggle:hover {
+            background: #732d91;
+        }
+
+        .btn.toggle.active {
+            background: #27ae60;
+            border-color: #27ae60;
+        }
+
+        .btn.toggle.active:hover {
+            background: #219a52;
+        }
+
+        /* =========================================
+           STEP SECTIONS
+           ========================================= */
+        .step-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        .step-section.hidden {
+            display: none;
+        }
+
+        .step-section h2 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .step-badge {
+            background: #27ae60;
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .step-content {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .step-canvas {
+            flex: 0 0 320px;
+        }
+
+        .step-canvas canvas {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: #fafafa;
+            display: block;
+        }
+
+        .step-explanation {
+            flex: 1;
+            min-width: 320px;
+        }
+
+        /* Data controls */
+        .data-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .point-counter {
+            font-size: 0.9rem;
+            color: #666;
+            margin-left: auto;
+        }
+
+        .data-table {
+            background: #f8f9fa;
+            border-radius: 4px;
+            padding: 1rem;
+            max-height: 250px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+        }
+
+        .data-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th, .data-table td {
+            padding: 0.3rem 0.5rem;
+            text-align: right;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .data-table th {
+            font-weight: 600;
+            color: #555;
+        }
+
+        /* Explanation boxes */
+        .explanation-box {
+            background: #f0f4f8;
+            border-left: 4px solid #3498db;
+            color: #2c3e50;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .explanation-box h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .explanation-box p {
+            font-size: 0.9rem;
+            color: #444;
+        }
+
+        .insight-box {
+            background: #fef9e7;
+            border-left: 4px solid #f39c12;
+            color: #2c3e50;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .insight-box h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            color: #d68910;
+        }
+
+        .insight-box p, .insight-box li {
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .insight-box ul {
+            margin-left: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        .insight-box li {
+            margin-bottom: 0.3rem;
+        }
+
+        .concept-box {
+            background: #eaf2f8;
+            border-left: 4px solid #2980b9;
+            color: #2c3e50;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .concept-box h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            color: #2980b9;
+        }
+
+        .concept-box p {
+            font-size: 0.85rem;
+            color: #444;
+            margin-bottom: 0.5rem;
+        }
+
+        .math-section {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .math-section h4 {
+            font-size: 0.95rem;
+            color: #2c3e50;
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 0.5rem;
+        }
+
+        .math-content {
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .math-formula {
+            text-align: center;
+            margin: 0.75rem 0;
+            overflow-x: auto;
+        }
+
+        .computed-value {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 0.5rem 0.75rem;
+            margin: 0.5rem 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .highlight-pc1 {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+
+        .highlight-pc2 {
+            color: #9b59b6;
+            font-weight: 600;
+        }
+
+        .highlight-result {
+            background: #e8f4fd;
+            border-color: #3498db;
+        }
+
+        /* Continue button container */
+        .continue-container {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e0e0e0;
+            text-align: center;
+        }
+
+        /* Canvas controls */
+        .canvas-controls {
+            margin-top: 0.75rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        /* Legend */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.75rem;
+            padding: 0.5rem;
+            background: #f8f9fa;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: #555;
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .legend-line {
+            width: 18px;
+            height: 3px;
+            border-radius: 2px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .step-canvas {
+                flex: 1 1 100%;
+            }
+
+            .step-explanation {
+                min-width: unset;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>2D Principal Component Analysis (PCA)</h1>
+            <p>A step-by-step interactive walkthrough of how PCA finds the directions of maximum variance</p>
+        </header>
+
+        <!-- STEP 0: Data Input -->
+        <section class="step-section" id="step0Section">
+            <h2><span class="step-badge">Step 0</span> Create Your Data</h2>
+            <div class="data-controls">
+                <button class="btn" id="btnRandom">Random</button>
+                <button class="btn" id="btnCorrelated">Correlated</button>
+                <button class="btn" id="btnNegCorrelated">Neg. Correlated</button>
+                <button class="btn" id="btnCircular">Circular</button>
+                <button class="btn danger" id="btnClear">Clear All</button>
+                <span class="point-counter">Points: <strong id="pointCount">0</strong> (min. 3 required)</span>
+            </div>
+            <div class="step-content">
+                <div class="step-canvas">
+                    <canvas id="canvas0" width="320" height="320"></canvas>
+                    <p style="font-size: 0.8rem; color: #666; margin-top: 0.5rem; text-align: center;">Click to add points</p>
+                </div>
+                <div class="step-explanation">
+                    <div class="explanation-box">
+                        <h4>Raw Data Points</h4>
+                        <p>Click on the canvas to add data points, or use the preset buttons. PCA will find the directions along which your data varies the most.</p>
+                    </div>
+                    <div class="data-table" id="dataTable">
+                        <table>
+                            <thead>
+                                <tr><th>Point</th><th>x</th><th>y</th></tr>
+                            </thead>
+                            <tbody id="dataTableBody">
+                                <tr><td colspan="3" style="text-align: center; color: #999;">No data yet</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="continue-container">
+                <button class="btn success large" id="btnStartStep1" disabled>
+                    Continue to Step 1: Center the Data →
+                </button>
+            </div>
+        </section>
+
+        <!-- STEP 1: Center Data -->
+        <section class="step-section hidden" id="step1Section">
+            <h2><span class="step-badge">Step 1</span> Center the Data</h2>
+            <div class="step-content">
+                <div class="step-canvas">
+                    <canvas id="canvas1" width="320" height="320"></canvas>
+                    <div class="legend">
+                        <div class="legend-item"><div class="legend-dot" style="background: #bbb;"></div> Original</div>
+                        <div class="legend-item"><div class="legend-dot" style="background: #3498db;"></div> Centered</div>
+                        <div class="legend-item"><div class="legend-dot" style="background: none; border: 2px solid #e74c3c; width: 8px; height: 8px;"></div> Mean</div>
+                    </div>
+                    <div class="canvas-controls">
+                        <button class="btn toggle" id="btnToggleStep1">Show Centering</button>
+                    </div>
+                </div>
+                <div class="step-explanation">
+                    <div class="explanation-box">
+                        <h4>Why Center?</h4>
+                        <p>We subtract the mean from each point so the data's centroid moves to the origin (0, 0). This ensures PCA finds directions of variance <em>from the center</em> of the data.</p>
+                    </div>
+                    <div class="math-section">
+                        <h4>Computing the Mean</h4>
+                        <div class="math-content">
+                            <div class="math-formula">
+                                $$\boldsymbol{\mu} = \frac{1}{n} \sum_{i=1}^{n} \mathbf{x}_i = \begin{pmatrix} \bar{x} \\ \bar{y} \end{pmatrix}$$
+                            </div>
+                            <div class="computed-value highlight-result" id="meanComputed">
+                                Computed mean: μ = (?, ?)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="math-section">
+                        <h4>Centering Each Point</h4>
+                        <div class="math-content">
+                            <div class="math-formula">
+                                $$\mathbf{x}_i^{\text{centered}} = \mathbf{x}_i - \boldsymbol{\mu}$$
+                            </div>
+                            <p style="font-size: 0.85rem; color: #666;">Each point is shifted so the new mean becomes (0, 0).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="continue-container">
+                <button class="btn success large" id="btnStartStep2">
+                    Continue to Step 2: Compute Covariance →
+                </button>
+            </div>
+        </section>
+
+        <!-- STEP 2: Covariance Matrix -->
+        <section class="step-section hidden" id="step2Section">
+            <h2><span class="step-badge">Step 2</span> Compute the Covariance Matrix</h2>
+            <div class="step-content">
+                <div class="step-canvas">
+                    <canvas id="canvas2" width="320" height="320"></canvas>
+                    <div class="legend">
+                        <div class="legend-item"><div class="legend-dot" style="background: #3498db;"></div> Centered Data</div>
+                        <div class="legend-item"><div class="legend-line" style="background: rgba(231,76,60,0.5);"></div> Var(x)</div>
+                        <div class="legend-item"><div class="legend-line" style="background: rgba(155,89,182,0.5);"></div> Var(y)</div>
+                        <div class="legend-item"><div class="legend-line" style="background: #f39c12;"></div> Cov slope</div>
+                    </div>
+                    <div class="canvas-controls">
+                        <button class="btn toggle" id="btnToggleStep2">Show Variance</button>
+                    </div>
+                </div>
+                <div class="step-explanation">
+                    <div class="math-section" style="border-color: #3498db;">
+                        <h4>The Covariance Matrix</h4>
+                        <div class="math-content">
+                            <!-- Visual matrix with color coding -->
+                            <div style="display: flex; justify-content: center; margin: 1rem 0;">
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="font-size: 1.5rem;">Σ =</span>
+                                    <div style="display: flex; align-items: center;">
+                                        <span style="font-size: 3rem; font-weight: 200;">(</span>
+                                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px;">
+                                            <div style="background: #ffe6e6; padding: 8px 12px; border-radius: 4px; text-align: center; font-weight: 500; color: #c0392b;">Var(x)</div>
+                                            <div style="background: #fff3e6; padding: 8px 12px; border-radius: 4px; text-align: center; font-weight: 500; color: #d68910;">Cov(x,y)</div>
+                                            <div style="background: #fff3e6; padding: 8px 12px; border-radius: 4px; text-align: center; font-weight: 500; color: #d68910;">Cov(x,y)</div>
+                                            <div style="background: #f3e6ff; padding: 8px 12px; border-radius: 4px; text-align: center; font-weight: 500; color: #8e44ad;">Var(y)</div>
+                                        </div>
+                                        <span style="font-size: 3rem; font-weight: 200;">)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
+                                <div style="flex: 1; min-width: 200px; padding: 0.75rem; background: #ffe6e6; border-radius: 6px; border-left: 4px solid #e74c3c;">
+                                    <strong style="color: #e74c3c;">Diagonal: Variance</strong><br>
+                                    <span style="font-size: 0.85rem;">How much each variable spreads on its own axis</span>
+                                    <ul style="font-size: 0.8rem; margin: 0.5rem 0 0 1rem; color: #555;">
+                                        <li>Large Var(x) → wide horizontal spread</li>
+                                        <li>Large Var(y) → wide vertical spread</li>
+                                    </ul>
+                                </div>
+                                <div style="flex: 1; min-width: 200px; padding: 0.75rem; background: #fff3e6; border-radius: 6px; border-left: 4px solid #f39c12;">
+                                    <strong style="color: #f39c12;">Off-diagonal: Covariance</strong><br>
+                                    <span style="font-size: 0.85rem;">How variables move together</span>
+                                    <ul style="font-size: 0.8rem; margin: 0.5rem 0 0 1rem; color: #555;">
+                                        <li>Cov > 0 → upward slope (↗)</li>
+                                        <li>Cov < 0 → downward slope (↘)</li>
+                                        <li>Cov ≈ 0 → no relationship</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #666; margin-top: 0.5rem;">The matrix is symmetric: Cov(x,y) = Cov(y,x). It encodes the "shape" of the data cloud.</p>
+                        </div>
+                    </div>
+                    <div class="math-section">
+                        <h4>Formula: How to Compute the Matrix</h4>
+                        <div class="math-content">
+                            <p style="font-size: 0.85rem; margin-bottom: 0.5rem;">The covariance matrix is built from <strong>outer products</strong> of centered vectors:</p>
+                            <div class="math-formula">
+                                $$\Sigma = \frac{1}{n-1} \sum_{i=1}^{n} (\mathbf{x}_i - \boldsymbol{\mu})(\mathbf{x}_i - \boldsymbol{\mu})^T$$
+                            </div>
+                            <p style="font-size: 0.85rem; color: #666; margin: 0.5rem 0;">For each point, we compute a 2×2 matrix (outer product), then average them:</p>
+                            <div class="math-formula">
+                                $$\begin{pmatrix} x_i \\ y_i \end{pmatrix} \begin{pmatrix} x_i & y_i \end{pmatrix} = \begin{pmatrix} x_i^2 & x_i y_i \\ y_i x_i & y_i^2 \end{pmatrix}$$
+                            </div>
+                            <p style="font-size: 0.85rem; color: #666;">Summing these matrices gives: diagonal = sum of squares (variance), off-diagonal = sum of products (covariance). Notice that $x_i y_i = y_i x_i$, so the covariance matrix is always <strong>symmetric</strong>.</p>
+                        </div>
+                    </div>
+                    <div class="math-section">
+                        <h4>Your Computed Covariance Matrix</h4>
+                        <div class="math-content">
+                            <div class="computed-value highlight-result" id="covMatrixComputed">
+                                Σ = [ [?, ?], [?, ?] ]
+                            </div>
+                            <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem;">
+                                <div class="computed-value" id="varXComputed" style="flex: 1;">Var(x) = ?</div>
+                                <div class="computed-value" id="varYComputed" style="flex: 1;">Var(y) = ?</div>
+                            </div>
+                            <div class="computed-value" id="covXYComputed">Cov(x,y) = ?</div>
+                            <div class="computed-value" id="covInterpretation" style="font-style: italic; background: #fffbe6; border-color: #ffe58f;">
+                                Interpretation: ...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="continue-container">
+                <button class="btn success large" id="btnStartStep3">
+                    Continue to Step 3: Find Principal Components →
+                </button>
+            </div>
+        </section>
+
+        <!-- STEP 3: Eigenvalues, Eigenvectors & Ellipse (Combined) -->
+        <section class="step-section hidden" id="step3Section">
+            <h2><span class="step-badge">Step 3</span> Find Principal Components (Eigenvalues & Eigenvectors)</h2>
+            <div class="step-content">
+                <div class="step-canvas">
+                    <canvas id="canvas3" width="320" height="320"></canvas>
+                    <div class="legend">
+                        <div class="legend-item"><div class="legend-dot" style="background: #3498db;"></div> Centered Data</div>
+                        <div class="legend-item"><div class="legend-line" style="background: #e74c3c;"></div> PC1 (λ₁)</div>
+                        <div class="legend-item"><div class="legend-line" style="background: #9b59b6;"></div> PC2 (λ₂)</div>
+                        <div class="legend-item"><div class="legend-line" style="background: rgba(155,89,182,0.5); border: 1px dashed #9b59b6;"></div> Ellipse</div>
+                    </div>
+                    <div class="canvas-controls">
+                        <button class="btn toggle" id="btnToggleStep3PC1">Show PC1</button>
+                        <button class="btn toggle" id="btnToggleStep3PC2">Show PC2</button>
+                        <button class="btn toggle" id="btnToggleStep3Ellipse">Show Ellipse</button>
+                    </div>
+                </div>
+                <div class="step-explanation">
+                    <div class="explanation-box">
+                        <h4>The Goal: Find the Principal Components</h4>
+                        <p>Principal components are the <strong>eigenvectors</strong> of the covariance matrix — they point in the directions of maximum variance. But to find eigenvectors, we first need to find the <strong>eigenvalues</strong> (λ). The eigenvalue tells us how much variance exists along its eigenvector. The largest eigenvalue's eigenvector becomes PC1.</p>
+                    </div>
+                    
+                    <div class="math-section">
+                        <h4>Step 3a: Set Up the Characteristic Equation</h4>
+                        <div class="math-content">
+                            <p style="font-size: 0.85rem; margin-bottom: 0.5rem;">An eigenvector v satisfies <strong>Σv = λv</strong>, which rearranges to <strong>(Σ - λI)v = 0</strong>. For non-zero v to exist, the matrix (Σ - λI) must be singular:</p>
+                            <div class="math-formula">
+                                $$\det(\Sigma - \lambda I) = 0$$
+                            </div>
+                            <p style="font-size: 0.85rem;">For our 2×2 covariance matrix:</p>
+                            <div class="math-formula">
+                                $$\det\begin{pmatrix} \text{Var}(x) - \lambda & \text{Cov}(x,y) \\ \text{Cov}(x,y) & \text{Var}(y) - \lambda \end{pmatrix} = 0$$
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-box">
+                        <h4>What is the Determinant?</h4>
+                        <p><strong>Det = Var(x)·Var(y) - Cov(x,y)²</strong></p>
+                        <p style="margin-top: 0.5rem;">For a 2×2 matrix $\begin{pmatrix} a & b \\ c & d \end{pmatrix}$, the determinant is $ad - bc$. Geometrically, the determinant measures how much a transformation "scales area":</p>
+                        <p>• <strong>Det = 0:</strong> The matrix squashes space onto a line — it loses a dimension entirely</p>
+                        <p>• <strong>Det ≠ 0:</strong> The matrix is invertible — no dimension is completely lost</p>
+                        <p style="margin-top: 0.5rem;"><strong>Why we need it:</strong> To find eigenvalues, we solve det(Σ - λI) = 0. We're looking for values of λ that make this matrix <em>singular</em> (det = 0), meaning it collapses some direction. Those λ values are the eigenvalues.</p>
+                        <p style="margin-top: 0.5rem;"><strong>Why not just drop the x or y axis?</strong> We could simply ignore one coordinate, but that would be arbitrary and wasteful. If your data spreads diagonally, dropping x loses half the information and dropping y loses the other half. Can we do better? Yes — by first <em>rotating</em> our coordinate system to align with the data's natural spread, then dropping the direction with the least variance. The eigenvectors tell us exactly how to rotate: they point along the data's principal axes. This way, we keep the direction with maximum variance (PC1) and only discard the direction where the data barely varies anyway.</p>
+                    </div>
+
+                    <div class="concept-box">
+                        <h4>What det(Σ) Tells Us About Our Data</h4>
+                        <p>Since <strong>det(Σ) = λ₁ × λ₂</strong> (product of eigenvalues):</p>
+                        <p>• <strong>det(Σ) near 0:</strong> One eigenvalue must be small → data is nearly 1D (highly correlated) → PCA projection loses little information</p>
+                        <p>• <strong>det(Σ) larger:</strong> Both eigenvalues are substantial → data genuinely spreads in 2D → PCA projection loses more information</p>
+                        <p style="margin-top: 0.5rem;">The key comparison is: <strong>how small is det relative to the total variance?</strong> A ratio λ₁/λ₂ tells us the elongation of the data ellipse.</p>
+                    </div>
+
+                    <div class="math-section">
+                        <h4>Step 3b: Expand to Get a Quadratic Equation</h4>
+                        <div class="math-content">
+                            <p style="font-size: 0.85rem; margin-bottom: 0.5rem;">Applying the determinant formula $ad - bc$ to our matrix:</p>
+                            <div class="math-formula">
+                                $$(\text{Var}(x) - \lambda)(\text{Var}(y) - \lambda) - \text{Cov}(x,y)^2 = 0$$
+                            </div>
+                            <p style="font-size: 0.85rem;">Expanding $(a-\lambda)(b-\lambda) = ab - a\lambda - b\lambda + \lambda^2$ gives us a <strong>quadratic equation in λ</strong>:</p>
+                            <div class="math-formula">
+                                $$\lambda^2 - \underbrace{(\text{Var}(x) + \text{Var}(y))}_{\text{trace}} \lambda + \underbrace{(\text{Var}(x) \cdot \text{Var}(y) - \text{Cov}(x,y)^2)}_{\text{determinant}} = 0$$
+                            </div>
+                            <p style="font-size: 0.85rem; color: #666; margin-top: 0.5rem;">This quadratic has two solutions — those are our two eigenvalues λ₁ and λ₂.</p>
+                            <div class="computed-value" id="charEqComputed" style="font-size: 0.8rem;">
+                                Substituting your values: ...
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="concept-box">
+                        <h4>What is the Trace?</h4>
+                        <p><strong>Trace = Var(x) + Var(y)</strong> — the sum of the diagonal elements.</p>
+                        <p>The trace represents the <em>total variance</em> in your data. Notice it appears as the coefficient of λ in the quadratic equation above. Importantly, <strong>trace = λ₁ + λ₂</strong> — the eigenvalues partition the total variance between the principal components.</p>
+                    </div>
+
+                    <div class="math-section">
+                        <h4>Step 3c: Solve Using the Quadratic Formula</h4>
+                        <div class="math-content">
+                            <p style="font-size: 0.85rem;">Our equation $\lambda^2 - \text{trace} \cdot \lambda + \text{det} = 0$ is a standard quadratic $ax^2 + bx + c = 0$.</p>
+                            <div class="computed-value" id="traceDetComputed">
+                                trace(Σ) = ?, &nbsp; det(Σ) = ?
+                            </div>
+                            <div class="computed-value" id="traceDetInterpret" style="font-style: italic; background: #fffbe6; border-color: #ffe58f;">
+                                What this means: ...
+                            </div>
+                            <p style="font-size: 0.85rem; margin-top: 0.5rem;">Using the quadratic formula $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$:</p>
+                            <div class="math-formula">
+                                $$\lambda = \frac{\text{trace} \pm \sqrt{\text{trace}^2 - 4 \cdot \text{det}}}{2}$$
+                            </div>
+                            <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem;">
+                                <div class="computed-value highlight-result" id="lambda1Computed" style="flex: 1;">
+                                    <span class="highlight-pc1">λ₁ = ?</span> (PC1 - larger)
+                                </div>
+                                <div class="computed-value highlight-result" id="lambda2Computed" style="flex: 1;">
+                                    <span class="highlight-pc2">λ₂ = ?</span> (PC2 - smaller)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="math-section">
+                        <h4>Step 3d: Find Eigenvectors</h4>
+                        <div class="math-content">
+                            <p style="font-size: 0.85rem; margin-bottom: 0.5rem;">For each λ, solve <strong>(Σ - λI)v = 0</strong>:</p>
+                            <div class="math-formula">
+                                $$\begin{pmatrix} \text{Var}(x) - \lambda & \text{Cov}(x,y) \\ \text{Cov}(x,y) & \text{Var}(y) - \lambda \end{pmatrix} \begin{pmatrix} v_x \\ v_y \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}$$
+                            </div>
+                            <p style="font-size: 0.85rem;">From the first row: $(\text{Var}(x) - \lambda)v_x + \text{Cov}(x,y) \cdot v_y = 0$</p>
+                            <p style="font-size: 0.85rem; margin-bottom: 0.5rem;">Solving and normalizing gives:</p>
+                            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                                <div class="computed-value highlight-result" id="v1Computed" style="flex: 1;">
+                                    <span class="highlight-pc1">v₁ = (?, ?)</span>
+                                </div>
+                                <div class="computed-value highlight-result" id="v2Computed" style="flex: 1;">
+                                    <span class="highlight-pc2">v₂ = (?, ?)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="insight-box">
+                        <h4>The Variance Ellipse</h4>
+                        <ul>
+                            <li>The ellipse axes align with the eigenvectors (PC1 and PC2)</li>
+                            <li>Axis lengths are proportional to √λ (standard deviation along each direction)</li>
+                            <li><strong>Elongated ellipse:</strong> PC1 captures most variance</li>
+                            <li><strong>Nearly circular:</strong> Both PCs are equally important</li>
+                        </ul>
+                    </div>
+
+                    <div class="math-section">
+                        <h4>Variance Explained</h4>
+                        <div class="math-content">
+                            <div class="math-formula">
+                                $$\text{Variance explained by PC}_i = \frac{\lambda_i}{\lambda_1 + \lambda_2} \times 100\%$$
+                            </div>
+                            <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem;">
+                                <div class="computed-value highlight-result" id="var1Explained" style="flex: 1;">
+                                    <span class="highlight-pc1">PC1: ?%</span>
+                                </div>
+                                <div class="computed-value highlight-result" id="var2Explained" style="flex: 1;">
+                                    <span class="highlight-pc2">PC2: ?%</span>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem;">
+                                <div class="computed-value" id="axis1Computed" style="flex: 1;">
+                                    <span class="highlight-pc1">√λ₁ = ?</span> (PC1 std dev)
+                                </div>
+                                <div class="computed-value" id="axis2Computed" style="flex: 1;">
+                                    <span class="highlight-pc2">√λ₂ = ?</span> (PC2 std dev)
+                                </div>
+                            </div>
+                            <div class="computed-value" id="angleComputed">
+                                Rotation angle θ = ?°
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="continue-container">
+                <button class="btn success large" id="btnStartStep4">
+                    Continue to Step 4: Project Data →
+                </button>
+            </div>
+        </section>
+
+        <!-- STEP 4: Project Data (was Step 5) -->
+        <section class="step-section hidden" id="step4Section">
+            <h2><span class="step-badge">Step 4</span> Project onto Principal Component</h2>
+            <div class="step-content">
+                <div class="step-canvas">
+                    <canvas id="canvas4" width="320" height="320"></canvas>
+                    <div class="legend">
+                        <div class="legend-item"><div class="legend-dot" style="background: #3498db;"></div> Original (2D)</div>
+                        <div class="legend-item"><div class="legend-dot" style="background: #27ae60;"></div> Projected (1D)</div>
+                        <div class="legend-item"><div class="legend-line" style="background: rgba(231,76,60,0.4);"></div> PC1 Line</div>
+                    </div>
+                    <div class="canvas-controls">
+                        <button class="btn toggle" id="btnToggleStep4">Show Projection</button>
+                    </div>
+                </div>
+                <div class="step-explanation">
+                    <div class="explanation-box">
+                        <h4>Dimensionality Reduction</h4>
+                        <p>By projecting each point onto PC1, we reduce 2D data to 1D while keeping the direction of maximum variance. The dashed lines show what information is "lost" (variance along PC2).</p>
+                    </div>
+                    <div class="insight-box">
+                        <h4>The Trade-off</h4>
+                        <ul>
+                            <li><strong>High PC1 variance:</strong> Little information lost in projection</li>
+                            <li><strong>Low PC2 variance:</strong> The "lost" dimension didn't carry much signal anyway</li>
+                            <li><strong>This is compression:</strong> We go from 2 numbers per point to 1 number.</li>
+                        </ul>
+                    </div>
+                    <div class="math-section">
+                        <h4>Projection Formula</h4>
+                        <div class="math-content">
+                            <p style="font-size: 0.85rem;">To project point <strong>x</strong> onto PC1 (eigenvector <strong>v₁</strong>):</p>
+                            <div class="math-formula">
+                                $$\mathbf{x}_{\text{proj}} = \underbrace{(\mathbf{x} \cdot \mathbf{v}_1)}_{\text{scalar score}} \cdot \underbrace{\mathbf{v}_1}_{\text{direction}}$$
+                            </div>
+                        </div>
+                    </div>
+                    <div class="insight-box">
+                        <h4>Why Multiply by v₁ Again?</h4>
+                        <p>The projection happens in <strong>two steps</strong> with different purposes:</p>
+                        <ul>
+                            <li><strong>Step 1: Dot product (x · v₁)</strong> → gives a <em>scalar</em> (single number). This is the "score" or coordinate in the new 1D space. If you only want dimensionality reduction, you can stop here.</li>
+                            <li><strong>Step 2: Multiply by v₁</strong> → converts the scalar back to a <em>2D point</em>. This tells us WHERE on the PC1 line the projection lands (for visualization or reconstruction).</li>
+                        </ul>
+                        <p style="margin-top: 0.5rem;"><strong>Example:</strong> If score = 2.5 and v₁ = (0.8, 0.6), then:</p>
+                        <p style="margin-left: 1rem;">• Score alone: just "2.5" (1D representation)</p>
+                        <p style="margin-left: 1rem;">• Projected point: 2.5 × (0.8, 0.6) = (2.0, 1.5) (location in 2D)</p>
+                    </div>
+                    <div class="math-section">
+                        <h4>Information Retained vs Lost</h4>
+                        <div class="math-content">
+                            <div class="computed-value highlight-result" id="infoRetained">
+                                <span class="highlight-pc1">Information retained (PC1): ?%</span>
+                            </div>
+                            <div class="computed-value" id="infoLost">
+                                <span class="highlight-pc2">Information lost (PC2): ?%</span>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #666; margin-top: 0.5rem;">
+                                This is the core tradeoff of PCA: we sacrifice some variance (information) for a lower-dimensional representation.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="continue-container">
+                <button class="btn primary large" id="btnRestart">
+                    ↺ Start Over with New Data
+                </button>
+            </div>
+        </section>
+
+        <footer>
+            <a href="../index.html">← Back to Home Page</a>
+        </footer>
+    </div>
+
+    <script>
+        // =========================================
+        // 2D PCA STEP-BY-STEP VISUALIZATION
+        // =========================================
+
+        (function() {
+            'use strict';
+
+            // -----------------------------------------
+            // CONFIGURATION & STATE
+            // -----------------------------------------
+            const CANVAS_SIZE = 320;
+            const LOGICAL_MIN = -4;
+            const LOGICAL_MAX = 4;
+            const LOGICAL_RANGE = LOGICAL_MAX - LOGICAL_MIN;
+
+            // Get all canvases
+            const canvases = {
+                c0: document.getElementById('canvas0'),
+                c1: document.getElementById('canvas1'),
+                c2: document.getElementById('canvas2'),
+                c3: document.getElementById('canvas3'),
+                c4: document.getElementById('canvas4')
+            };
+            const contexts = {};
+            for (let key in canvases) {
+                contexts[key] = canvases[key].getContext('2d');
+            }
+
+            // State
+            let originalPoints = [];
+            let centeredPoints = [];
+            let mean = [0, 0];
+            let covMatrix = [[1, 0], [0, 1]];
+            let eigenvalues = [1, 1];
+            let eigenvectors = [[1, 0], [0, 1]];
+
+            // Toggle states for each step
+            let step1Shown = false;
+            let step2Shown = false;
+            let step3PC1Shown = false;
+            let step3PC2Shown = false;
+            let step3EllipseShown = false;
+            let step4Shown = false;
+
+            // -----------------------------------------
+            // COORDINATE TRANSFORMATIONS
+            // -----------------------------------------
+            function toCanvas(x, y) {
+                const cx = ((x - LOGICAL_MIN) / LOGICAL_RANGE) * CANVAS_SIZE;
+                const cy = CANVAS_SIZE - ((y - LOGICAL_MIN) / LOGICAL_RANGE) * CANVAS_SIZE;
+                return [cx, cy];
+            }
+
+            function toLogical(canvasX, canvasY) {
+                const x = (canvasX / CANVAS_SIZE) * LOGICAL_RANGE + LOGICAL_MIN;
+                const y = ((CANVAS_SIZE - canvasY) / CANVAS_SIZE) * LOGICAL_RANGE + LOGICAL_MIN;
+                return [x, y];
+            }
+
+            function scaleLength(len) {
+                return (len / LOGICAL_RANGE) * CANVAS_SIZE;
+            }
+
+            // -----------------------------------------
+            // DRAWING UTILITIES
+            // -----------------------------------------
+            function drawGrid(ctx) {
+                ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+                ctx.fillStyle = '#fafafa';
+                ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+
+                // Grid lines
+                ctx.strokeStyle = '#e8e8e8';
+                ctx.lineWidth = 1;
+                for (let i = LOGICAL_MIN; i <= LOGICAL_MAX; i++) {
+                    const [vx] = toCanvas(i, 0);
+                    ctx.beginPath();
+                    ctx.moveTo(vx, 0);
+                    ctx.lineTo(vx, CANVAS_SIZE);
+                    ctx.stroke();
+
+                    const [, hy] = toCanvas(0, i);
+                    ctx.beginPath();
+                    ctx.moveTo(0, hy);
+                    ctx.lineTo(CANVAS_SIZE, hy);
+                    ctx.stroke();
+                }
+
+                // Axes
+                ctx.strokeStyle = '#aaa';
+                ctx.lineWidth = 1.5;
+                const [, yAxis] = toCanvas(0, 0);
+                ctx.beginPath();
+                ctx.moveTo(0, yAxis);
+                ctx.lineTo(CANVAS_SIZE, yAxis);
+                ctx.stroke();
+
+                const [xAxis] = toCanvas(0, 0);
+                ctx.beginPath();
+                ctx.moveTo(xAxis, 0);
+                ctx.lineTo(xAxis, CANVAS_SIZE);
+                ctx.stroke();
+
+                // Labels
+                ctx.fillStyle = '#888';
+                ctx.font = '10px sans-serif';
+                ctx.textAlign = 'center';
+                for (let i = LOGICAL_MIN; i <= LOGICAL_MAX; i++) {
+                    if (i === 0) continue;
+                    const [x, y] = toCanvas(i, 0);
+                    ctx.fillText(i.toString(), x, yAxis + 12);
+                }
+                ctx.textAlign = 'right';
+                ctx.textBaseline = 'middle';
+                for (let i = LOGICAL_MIN; i <= LOGICAL_MAX; i++) {
+                    if (i === 0) continue;
+                    const [x, y] = toCanvas(0, i);
+                    ctx.fillText(i.toString(), xAxis - 5, y);
+                }
+            }
+
+            function drawPoint(ctx, x, y, color = '#333', radius = 5, hollow = false) {
+                const [cx, cy] = toCanvas(x, y);
+                ctx.beginPath();
+                ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+                if (hollow) {
+                    ctx.strokeStyle = color;
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                } else {
+                    ctx.fillStyle = color;
+                    ctx.fill();
+                }
+            }
+
+            function drawVector(ctx, x1, y1, x2, y2, color, lineWidth = 2.5) {
+                const [cx1, cy1] = toCanvas(x1, y1);
+                const [cx2, cy2] = toCanvas(x2, y2);
+                
+                ctx.strokeStyle = color;
+                ctx.lineWidth = lineWidth;
+                ctx.beginPath();
+                ctx.moveTo(cx1, cy1);
+                ctx.lineTo(cx2, cy2);
+                ctx.stroke();
+
+                // Arrowhead
+                const angle = Math.atan2(cy2 - cy1, cx2 - cx1);
+                const headLen = 10;
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.moveTo(cx2, cy2);
+                ctx.lineTo(cx2 - headLen * Math.cos(angle - Math.PI / 6), cy2 - headLen * Math.sin(angle - Math.PI / 6));
+                ctx.lineTo(cx2 - headLen * Math.cos(angle + Math.PI / 6), cy2 - headLen * Math.sin(angle + Math.PI / 6));
+                ctx.closePath();
+                ctx.fill();
+            }
+
+            function drawEllipse(ctx, cx, cy, a, b, rotation, color) {
+                const [canvasCx, canvasCy] = toCanvas(cx, cy);
+                const canvasA = scaleLength(a);
+                const canvasB = scaleLength(b);
+
+                ctx.save();
+                ctx.translate(canvasCx, canvasCy);
+                ctx.rotate(-rotation);
+
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 2;
+                ctx.setLineDash([6, 4]);
+                ctx.beginPath();
+                ctx.ellipse(0, 0, canvasA, canvasB, 0, 0, Math.PI * 2);
+                ctx.stroke();
+
+                ctx.fillStyle = color.replace(')', ', 0.1)').replace('rgb', 'rgba');
+                ctx.beginPath();
+                ctx.ellipse(0, 0, canvasA, canvasB, 0, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.setLineDash([]);
+                ctx.restore();
+            }
+
+            function drawLine(ctx, x1, y1, x2, y2, color, lineWidth = 2, dashed = false) {
+                const [cx1, cy1] = toCanvas(x1, y1);
+                const [cx2, cy2] = toCanvas(x2, y2);
+                
+                ctx.strokeStyle = color;
+                ctx.lineWidth = lineWidth;
+                if (dashed) ctx.setLineDash([4, 4]);
+                ctx.beginPath();
+                ctx.moveTo(cx1, cy1);
+                ctx.lineTo(cx2, cy2);
+                ctx.stroke();
+                ctx.setLineDash([]);
+            }
+
+            // -----------------------------------------
+            // MATH FUNCTIONS
+            // -----------------------------------------
+            function computeMean(points) {
+                if (points.length === 0) return [0, 0];
+                let sx = 0, sy = 0;
+                points.forEach(([x, y]) => { sx += x; sy += y; });
+                return [sx / points.length, sy / points.length];
+            }
+
+            function centerPoints(points, m) {
+                return points.map(([x, y]) => [x - m[0], y - m[1]]);
+            }
+
+            function computeCovariance(points) {
+                const n = points.length;
+                if (n < 2) return [[1, 0], [0, 1]];
+
+                let sxx = 0, syy = 0, sxy = 0;
+                points.forEach(([x, y]) => {
+                    sxx += x * x;
+                    syy += y * y;
+                    sxy += x * y;
+                });
+
+                const factor = 1 / (n - 1);
+                return [
+                    [sxx * factor, sxy * factor],
+                    [sxy * factor, syy * factor]
+                ];
+            }
+
+            function computeEigen(cov) {
+                const a = cov[0][0], b = cov[0][1], c = cov[1][1];
+                const trace = a + c;
+                const det = a * c - b * b;
+                const disc = Math.sqrt(Math.max(0, trace * trace / 4 - det));
+
+                let l1 = trace / 2 + disc;
+                let l2 = trace / 2 - disc;
+
+                if (l1 < l2) [l1, l2] = [l2, l1];
+
+                // Eigenvectors
+                let v1, v2;
+                if (Math.abs(b) > 1e-10) {
+                    v1 = [l1 - c, b];
+                    v2 = [l2 - c, b];
+                } else if (a >= c) {
+                    v1 = [1, 0];
+                    v2 = [0, 1];
+                } else {
+                    v1 = [0, 1];
+                    v2 = [1, 0];
+                }
+
+                // Normalize
+                const norm1 = Math.sqrt(v1[0] * v1[0] + v1[1] * v1[1]);
+                const norm2 = Math.sqrt(v2[0] * v2[0] + v2[1] * v2[1]);
+                v1 = [v1[0] / norm1, v1[1] / norm1];
+                v2 = [v2[0] / norm2, v2[1] / norm2];
+
+                return {
+                    eigenvalues: [Math.max(0, l1), Math.max(0, l2)],
+                    eigenvectors: [v1, v2],
+                    trace: trace,
+                    det: det
+                };
+            }
+
+            // -----------------------------------------
+            // DATA GENERATION
+            // -----------------------------------------
+            function generateRandom(n = 20) {
+                const pts = [];
+                for (let i = 0; i < n; i++) {
+                    pts.push([(Math.random() - 0.5) * 5, (Math.random() - 0.5) * 5]);
+                }
+                return pts;
+            }
+
+            function generateCorrelated(n = 22) {
+                const pts = [];
+                // Random angle between 15° and 75° (positive slope)
+                const angle = (Math.random() * 60 + 15) * Math.PI / 180;
+                const cosA = Math.cos(angle);
+                const sinA = Math.sin(angle);
+                // Random spread perpendicular to the line (0.3 to 0.8)
+                const spread = Math.random() * 0.5 + 0.3;
+                for (let i = 0; i < n; i++) {
+                    const t = (Math.random() - 0.5) * 5; // Along the line
+                    const noise = (Math.random() - 0.5) * 2 * spread; // Perpendicular noise
+                    pts.push([t * cosA - noise * sinA, t * sinA + noise * cosA]);
+                }
+                return pts;
+            }
+
+            function generateNegCorrelated(n = 22) {
+                const pts = [];
+                // Random angle between 105° and 165° (negative slope)
+                const angle = (Math.random() * 60 + 105) * Math.PI / 180;
+                const cosA = Math.cos(angle);
+                const sinA = Math.sin(angle);
+                // Random spread perpendicular to the line (0.3 to 0.8)
+                const spread = Math.random() * 0.5 + 0.3;
+                for (let i = 0; i < n; i++) {
+                    const t = (Math.random() - 0.5) * 5; // Along the line
+                    const noise = (Math.random() - 0.5) * 2 * spread; // Perpendicular noise
+                    pts.push([t * cosA - noise * sinA, t * sinA + noise * cosA]);
+                }
+                return pts;
+            }
+
+            function generateCircular(n = 22) {
+                const pts = [];
+                for (let i = 0; i < n; i++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const r = Math.random() * 1.8 + 0.3;
+                    pts.push([Math.cos(angle) * r, Math.sin(angle) * r]);
+                }
+                return pts;
+            }
+
+            // -----------------------------------------
+            // RENDER FUNCTIONS
+            // -----------------------------------------
+            function renderCanvas0() {
+                const ctx = contexts.c0;
+                drawGrid(ctx);
+                originalPoints.forEach(([x, y]) => drawPoint(ctx, x, y, '#2c3e50', 5));
+            }
+
+            function renderCanvas1() {
+                const ctx = contexts.c1;
+                drawGrid(ctx);
+                
+                if (step1Shown) {
+                    // Show original points as ghosts
+                    originalPoints.forEach(([x, y]) => drawPoint(ctx, x, y, '#ccc', 4));
+                    // Show centered points
+                    centeredPoints.forEach(([x, y]) => drawPoint(ctx, x, y, '#3498db', 5));
+                    // Show mean at origin (where it moved to after centering)
+                    drawPoint(ctx, 0, 0, '#e74c3c', 6, true);
+                } else {
+                    // Show original points with mean marker at original position
+                    originalPoints.forEach(([x, y]) => drawPoint(ctx, x, y, '#3498db', 5));
+                    if (originalPoints.length >= 3) {
+                        drawPoint(ctx, mean[0], mean[1], '#e74c3c', 6, true);
+                        // Arrow from mean to origin showing where it will move
+                        drawLine(ctx, mean[0], mean[1], 0, 0, '#e74c3c', 1.5, true);
+                    }
+                }
+            }
+
+            function renderCanvas2() {
+                const ctx = contexts.c2;
+                drawGrid(ctx);
+                
+                centeredPoints.forEach(([x, y]) => drawPoint(ctx, x, y, '#3498db', 5));
+                
+                if (step2Shown) {
+                    const varX = covMatrix[0][0];
+                    const varY = covMatrix[1][1];
+                    const covXY = covMatrix[0][1];
+                    
+                    // Draw variance visualization - lines from each point to axes
+                    centeredPoints.forEach(([x, y]) => {
+                        // Horizontal line (contributes to Var(x))
+                        drawLine(ctx, 0, y, x, y, 'rgba(231, 76, 60, 0.3)', 1);
+                        // Vertical line (contributes to Var(y))
+                        drawLine(ctx, x, 0, x, y, 'rgba(155, 89, 182, 0.3)', 1);
+                    });
+                    
+                    // Draw spread indicators
+                    const maxX = Math.max(...centeredPoints.map(p => Math.abs(p[0])));
+                    const maxY = Math.max(...centeredPoints.map(p => Math.abs(p[1])));
+                    
+                    // Horizontal spread bar (Var(x)) with value
+                    drawLine(ctx, -maxX, -3.5, maxX, -3.5, '#e74c3c', 3);
+                    ctx.fillStyle = '#e74c3c';
+                    ctx.font = 'bold 11px sans-serif';
+                    ctx.textAlign = 'center';
+                    const [, barY] = toCanvas(0, -3.5);
+                    ctx.fillText(`Var(x) = ${varX.toFixed(2)}`, CANVAS_SIZE / 2, barY - 8);
+                    
+                    // Vertical spread bar (Var(y)) with value
+                    drawLine(ctx, -3.5, -maxY, -3.5, maxY, '#9b59b6', 3);
+                    ctx.save();
+                    ctx.fillStyle = '#9b59b6';
+                    const [barX] = toCanvas(-3.5, 0);
+                    ctx.translate(barX - 8, CANVAS_SIZE / 2);
+                    ctx.rotate(-Math.PI / 2);
+                    ctx.fillText(`Var(y) = ${varY.toFixed(2)}`, 0, 0);
+                    ctx.restore();
+                    
+                    // Draw covariance slope line (shorter, within data range)
+                    if (Math.abs(covXY) > 0.01 && varX > 0.01) {
+                        // Slope = Cov(x,y) / Var(x) for regression line y = slope * x
+                        const slope = covXY / varX;
+                        // Keep line within reasonable bounds
+                        const xRange = Math.min(2.5, maxX * 1.2);
+                        drawLine(ctx, -xRange, -xRange * slope, xRange, xRange * slope, '#f39c12', 3);
+                        
+                        // Label positioned safely in a corner
+                        ctx.fillStyle = '#f39c12';
+                        ctx.font = 'bold 11px sans-serif';
+                        ctx.textAlign = 'right';
+                        const [lx, ly] = toCanvas(3.3, 3.5);
+                        const slopeSign = covXY > 0 ? '+' : '';
+                        ctx.fillText(`Cov = ${slopeSign}${covXY.toFixed(2)}`, lx, ly);
+                    } else {
+                        // Near-zero covariance - draw horizontal dashed line at 0
+                        drawLine(ctx, -2.5, 0, 2.5, 0, '#f39c12', 2, true);
+                        ctx.fillStyle = '#f39c12';
+                        ctx.font = 'bold 11px sans-serif';
+                        ctx.textAlign = 'right';
+                        const [lx, ly] = toCanvas(3.3, 3.5);
+                        ctx.fillText(`Cov ≈ 0`, lx, ly);
+                    }
+                }
+            }
+
+            function renderCanvas3() {
+                const ctx = contexts.c3;
+                drawGrid(ctx);
+
+                // Draw ellipse first (behind everything)
+                if (step3EllipseShown) {
+                    const a = Math.sqrt(eigenvalues[0]) * 2;
+                    const b = Math.sqrt(eigenvalues[1]) * 2;
+                    const rotation = Math.atan2(eigenvectors[0][1], eigenvectors[0][0]);
+                    drawEllipse(ctx, 0, 0, a, b, rotation, 'rgb(155, 89, 182)');
+                }
+
+                // Data points
+                centeredPoints.forEach(([x, y]) => drawPoint(ctx, x, y, '#3498db', 5));
+
+                const scale1 = Math.sqrt(eigenvalues[0]) * 1.8;
+                const scale2 = Math.sqrt(eigenvalues[1]) * 1.8;
+                const v1 = eigenvectors[0], v2 = eigenvectors[1];
+
+                if (step3PC1Shown) {
+                    // PC1 (both directions)
+                    drawLine(ctx, -v1[0] * scale1, -v1[1] * scale1, v1[0] * scale1, v1[1] * scale1, '#e74c3c', 2.5);
+                    drawVector(ctx, 0, 0, v1[0] * scale1, v1[1] * scale1, '#e74c3c', 2.5);
+                    
+                    // Label
+                    const [lx1, ly1] = toCanvas(v1[0] * scale1 * 1.15, v1[1] * scale1 * 1.15);
+                    ctx.font = 'bold 11px sans-serif';
+                    ctx.fillStyle = '#e74c3c';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('PC1', lx1, ly1);
+                }
+                
+                if (step3PC2Shown) {
+                    // PC2 (both directions)
+                    drawLine(ctx, -v2[0] * scale2, -v2[1] * scale2, v2[0] * scale2, v2[1] * scale2, '#9b59b6', 2.5);
+                    drawVector(ctx, 0, 0, v2[0] * scale2, v2[1] * scale2, '#9b59b6', 2.5);
+                    
+                    // Label
+                    const [lx2, ly2] = toCanvas(v2[0] * scale2 * 1.15, v2[1] * scale2 * 1.15);
+                    ctx.font = 'bold 11px sans-serif';
+                    ctx.fillStyle = '#9b59b6';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('PC2', lx2, ly2);
+                }
+            }
+
+            function renderCanvas4() {
+                const ctx = contexts.c4;
+                drawGrid(ctx);
+
+                const v1 = eigenvectors[0];
+                
+                // Extended PC1 line
+                drawLine(ctx, -v1[0] * 5, -v1[1] * 5, v1[0] * 5, v1[1] * 5, 'rgba(231, 76, 60, 0.35)', 4);
+
+                // Draw points based on projection state
+                centeredPoints.forEach(([x, y]) => {
+                    const dot = x * v1[0] + y * v1[1];
+                    const px = dot * v1[0];
+                    const py = dot * v1[1];
+
+                    if (step4Shown) {
+                        // Only show projected points on the line (original points disappear)
+                        drawPoint(ctx, px, py, '#27ae60', 5);
+                    } else {
+                        // Show original 2D points
+                        drawPoint(ctx, x, y, '#3498db', 5);
+                    }
+                });
+            }
+
+            // -----------------------------------------
+            // UPDATE UI
+            // -----------------------------------------
+            function updateDataTable() {
+                const tbody = document.getElementById('dataTableBody');
+                if (originalPoints.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="3" style="text-align: center; color: #999;">No data yet</td></tr>';
+                    return;
+                }
+                let html = '';
+                originalPoints.slice(0, 15).forEach((p, i) => {
+                    html += `<tr><td>${i + 1}</td><td>${p[0].toFixed(2)}</td><td>${p[1].toFixed(2)}</td></tr>`;
+                });
+                if (originalPoints.length > 15) {
+                    html += `<tr><td colspan="3" style="text-align: center; color: #999;">... and ${originalPoints.length - 15} more</td></tr>`;
+                }
+                tbody.innerHTML = html;
+            }
+
+            function updatePointCount() {
+                document.getElementById('pointCount').textContent = originalPoints.length;
+                document.getElementById('btnStartStep1').disabled = originalPoints.length < 3;
+            }
+
+            function showStep(stepNum) {
+                for (let i = 1; i <= 4; i++) {
+                    const section = document.getElementById(`step${i}Section`);
+                    if (i <= stepNum) {
+                        section.classList.remove('hidden');
+                    } else {
+                        section.classList.add('hidden');
+                    }
+                }
+                
+                const targetSection = document.getElementById(`step${stepNum}Section`);
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+
+            function updateButtonState(btnId, isActive) {
+                const btn = document.getElementById(btnId);
+                if (isActive) {
+                    btn.classList.add('active');
+                    btn.textContent = btn.textContent.replace('Show', 'Hide');
+                } else {
+                    btn.classList.remove('active');
+                    btn.textContent = btn.textContent.replace('Hide', 'Show');
+                }
+            }
+
+            function updateMathDisplay() {
+                const varX = covMatrix[0][0];
+                const varY = covMatrix[1][1];
+                const covXY = covMatrix[0][1];
+                
+                // Step 1: Mean
+                document.getElementById('meanComputed').innerHTML = 
+                    `Computed mean: <strong>μ = (${mean[0].toFixed(3)}, ${mean[1].toFixed(3)})</strong>`;
+
+                // Step 2: Covariance
+                document.getElementById('covMatrixComputed').innerHTML = 
+                    `<strong>Σ = </strong>[ [${varX.toFixed(3)}, ${covXY.toFixed(3)}], [${covXY.toFixed(3)}, ${varY.toFixed(3)}] ]`;
+                document.getElementById('varXComputed').innerHTML = `Var(x) = <strong>${varX.toFixed(3)}</strong>`;
+                document.getElementById('varYComputed').innerHTML = `Var(y) = <strong>${varY.toFixed(3)}</strong>`;
+                document.getElementById('covXYComputed').innerHTML = `Cov(x,y) = <strong>${covXY.toFixed(3)}</strong>`;
+                
+                // Covariance interpretation
+                let covInterpret = '';
+                if (covXY > 0.3) {
+                    covInterpret = `Positive correlation: when x increases, y tends to increase (upward trend)`;
+                } else if (covXY < -0.3) {
+                    covInterpret = `Negative correlation: when x increases, y tends to decrease (downward trend)`;
+                } else {
+                    covInterpret = `Little correlation: x and y vary mostly independently`;
+                }
+                if (varX > varY * 1.5) {
+                    covInterpret += `. Data is more spread horizontally.`;
+                } else if (varY > varX * 1.5) {
+                    covInterpret += `. Data is more spread vertically.`;
+                }
+                document.getElementById('covInterpretation').innerHTML = covInterpret;
+
+                // Step 3: Eigenvalues
+                const trace = varX + varY;
+                const det = varX * varY - covXY * covXY;
+                document.getElementById('charEqComputed').innerHTML = 
+                    `(${varX.toFixed(2)} - λ)(${varY.toFixed(2)} - λ) - (${covXY.toFixed(2)})² = 0`;
+                document.getElementById('traceDetComputed').innerHTML = 
+                    `<strong>trace(Σ) = ${trace.toFixed(3)}</strong> (total variance), &nbsp; <strong>det(Σ) = ${det.toFixed(3)}</strong>`;
+                
+                const ratio = det > 0 ? Math.sqrt(eigenvalues[0] / eigenvalues[1]) : 1;
+                let traceDetInterpret = `Total variance = ${trace.toFixed(2)}. `;
+                if (ratio > 3) {
+                    traceDetInterpret += `Eigenvalue ratio ${ratio.toFixed(1)}:1 → highly correlated data (elongated ellipse). PCA compression will lose little info.`;
+                } else if (ratio > 1.5) {
+                    traceDetInterpret += `Eigenvalue ratio ${ratio.toFixed(1)}:1 → moderate correlation (somewhat elongated ellipse).`;
+                } else {
+                    traceDetInterpret += `Eigenvalue ratio ${ratio.toFixed(1)}:1 → data spreads in multiple directions (rounder ellipse). Both PCs carry information.`;
+                }
+                document.getElementById('traceDetInterpret').innerHTML = traceDetInterpret;
+                
+                document.getElementById('lambda1Computed').innerHTML = 
+                    `<span class="highlight-pc1">λ₁ = ${eigenvalues[0].toFixed(4)}</span> (PC1 - larger)`;
+                document.getElementById('lambda2Computed').innerHTML = 
+                    `<span class="highlight-pc2">λ₂ = ${eigenvalues[1].toFixed(4)}</span> (PC2 - smaller)`;
+                document.getElementById('v1Computed').innerHTML = 
+                    `<span class="highlight-pc1">v₁ = (${eigenvectors[0][0].toFixed(3)}, ${eigenvectors[0][1].toFixed(3)})</span>`;
+                document.getElementById('v2Computed').innerHTML = 
+                    `<span class="highlight-pc2">v₂ = (${eigenvectors[1][0].toFixed(3)}, ${eigenvectors[1][1].toFixed(3)})</span>`;
+
+                // Ellipse/variance explained
+                const std1 = Math.sqrt(eigenvalues[0]);
+                const std2 = Math.sqrt(eigenvalues[1]);
+                const angle = Math.atan2(eigenvectors[0][1], eigenvectors[0][0]) * 180 / Math.PI;
+                document.getElementById('axis1Computed').innerHTML = 
+                    `<span class="highlight-pc1">√λ₁ = ${std1.toFixed(3)}</span> (PC1 std dev)`;
+                document.getElementById('axis2Computed').innerHTML = 
+                    `<span class="highlight-pc2">√λ₂ = ${std2.toFixed(3)}</span> (PC2 std dev)`;
+                document.getElementById('angleComputed').innerHTML = 
+                    `Rotation angle θ = <strong>${angle.toFixed(1)}°</strong>`;
+
+                const totalVar = eigenvalues[0] + eigenvalues[1];
+                const pct1 = totalVar > 0 ? (eigenvalues[0] / totalVar * 100) : 50;
+                const pct2 = totalVar > 0 ? (eigenvalues[1] / totalVar * 100) : 50;
+                document.getElementById('var1Explained').innerHTML = 
+                    `<span class="highlight-pc1">PC1: ${pct1.toFixed(1)}%</span>`;
+                document.getElementById('var2Explained').innerHTML = 
+                    `<span class="highlight-pc2">PC2: ${pct2.toFixed(1)}%</span>`;
+
+                // Step 4: Projection info
+                document.getElementById('infoRetained').innerHTML = 
+                    `<span class="highlight-pc1">Information retained (PC1): ${pct1.toFixed(1)}%</span>`;
+                document.getElementById('infoLost').innerHTML = 
+                    `<span class="highlight-pc2">Information lost (PC2): ${pct2.toFixed(1)}%</span>`;
+            }
+
+            function computeAllValues() {
+                mean = computeMean(originalPoints);
+                centeredPoints = centerPoints(originalPoints, mean);
+                covMatrix = computeCovariance(centeredPoints);
+                const result = computeEigen(covMatrix);
+                eigenvalues = result.eigenvalues;
+                eigenvectors = result.eigenvectors;
+                updateMathDisplay();
+            }
+
+            function resetAll() {
+                originalPoints = [];
+                centeredPoints = [];
+                mean = [0, 0];
+                covMatrix = [[1, 0], [0, 1]];
+                eigenvalues = [1, 1];
+                eigenvectors = [[1, 0], [0, 1]];
+                
+                // Reset toggle states
+                step1Shown = false;
+                step2Shown = false;
+                step3PC1Shown = false;
+                step3PC2Shown = false;
+                step3EllipseShown = false;
+                step4Shown = false;
+
+                updatePointCount();
+                updateDataTable();
+                
+                // Reset button states
+                updateButtonState('btnToggleStep1', false);
+                updateButtonState('btnToggleStep2', false);
+                updateButtonState('btnToggleStep3PC1', false);
+                updateButtonState('btnToggleStep3PC2', false);
+                updateButtonState('btnToggleStep3Ellipse', false);
+                updateButtonState('btnToggleStep4', false);
+
+                // Hide all steps except step 0
+                for (let i = 1; i <= 4; i++) {
+                    document.getElementById(`step${i}Section`).classList.add('hidden');
+                }
+
+                // Clear all canvases
+                for (let key in contexts) {
+                    drawGrid(contexts[key]);
+                }
+
+                document.getElementById('step0Section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            // -----------------------------------------
+            // EVENT HANDLERS
+            // -----------------------------------------
+            canvases.c0.addEventListener('click', function(e) {
+                const rect = canvases.c0.getBoundingClientRect();
+                const scaleX = CANVAS_SIZE / rect.width;
+                const scaleY = CANVAS_SIZE / rect.height;
+                const cx = (e.clientX - rect.left) * scaleX;
+                const cy = (e.clientY - rect.top) * scaleY;
+                const [x, y] = toLogical(cx, cy);
+
+                if (x >= LOGICAL_MIN && x <= LOGICAL_MAX && y >= LOGICAL_MIN && y <= LOGICAL_MAX) {
+                    originalPoints.push([x, y]);
+                    updatePointCount();
+                    updateDataTable();
+                    renderCanvas0();
+                }
+            });
+
+            // Toggle button handlers
+            document.getElementById('btnToggleStep1').addEventListener('click', () => {
+                step1Shown = !step1Shown;
+                updateButtonState('btnToggleStep1', step1Shown);
+                renderCanvas1();
+            });
+
+            document.getElementById('btnToggleStep2').addEventListener('click', () => {
+                step2Shown = !step2Shown;
+                updateButtonState('btnToggleStep2', step2Shown);
+                renderCanvas2();
+            });
+
+            document.getElementById('btnToggleStep3PC1').addEventListener('click', () => {
+                step3PC1Shown = !step3PC1Shown;
+                updateButtonState('btnToggleStep3PC1', step3PC1Shown);
+                renderCanvas3();
+            });
+
+            document.getElementById('btnToggleStep3PC2').addEventListener('click', () => {
+                step3PC2Shown = !step3PC2Shown;
+                updateButtonState('btnToggleStep3PC2', step3PC2Shown);
+                renderCanvas3();
+            });
+
+            document.getElementById('btnToggleStep3Ellipse').addEventListener('click', () => {
+                step3EllipseShown = !step3EllipseShown;
+                updateButtonState('btnToggleStep3Ellipse', step3EllipseShown);
+                renderCanvas3();
+            });
+
+            document.getElementById('btnToggleStep4').addEventListener('click', () => {
+                step4Shown = !step4Shown;
+                updateButtonState('btnToggleStep4', step4Shown);
+                renderCanvas4();
+            });
+
+            document.getElementById('btnRandom').addEventListener('click', () => {
+                originalPoints = generateRandom();
+                updatePointCount();
+                updateDataTable();
+                renderCanvas0();
+            });
+
+            document.getElementById('btnCorrelated').addEventListener('click', () => {
+                originalPoints = generateCorrelated();
+                updatePointCount();
+                updateDataTable();
+                renderCanvas0();
+            });
+
+            document.getElementById('btnNegCorrelated').addEventListener('click', () => {
+                originalPoints = generateNegCorrelated();
+                updatePointCount();
+                updateDataTable();
+                renderCanvas0();
+            });
+
+            document.getElementById('btnCircular').addEventListener('click', () => {
+                originalPoints = generateCircular();
+                updatePointCount();
+                updateDataTable();
+                renderCanvas0();
+            });
+
+            document.getElementById('btnClear').addEventListener('click', resetAll);
+
+            // Step progression buttons
+            document.getElementById('btnStartStep1').addEventListener('click', () => {
+                computeAllValues();
+                step1Shown = false;
+                updateButtonState('btnToggleStep1', false);
+                renderCanvas1();
+                showStep(1);
+            });
+
+            document.getElementById('btnStartStep2').addEventListener('click', () => {
+                step2Shown = false;
+                updateButtonState('btnToggleStep2', false);
+                renderCanvas2();
+                showStep(2);
+            });
+
+            document.getElementById('btnStartStep3').addEventListener('click', () => {
+                step3PC1Shown = false;
+                step3PC2Shown = false;
+                step3EllipseShown = false;
+                updateButtonState('btnToggleStep3PC1', false);
+                updateButtonState('btnToggleStep3PC2', false);
+                updateButtonState('btnToggleStep3Ellipse', false);
+                renderCanvas3();
+                showStep(3);
+            });
+
+            document.getElementById('btnStartStep4').addEventListener('click', () => {
+                step4Shown = false;
+                updateButtonState('btnToggleStep4', false);
+                renderCanvas4();
+                showStep(4);
+            });
+
+            document.getElementById('btnRestart').addEventListener('click', resetAll);
+
+            // -----------------------------------------
+            // INITIALIZATION
+            // -----------------------------------------
+            function init() {
+                for (let key in contexts) {
+                    drawGrid(contexts[key]);
+                }
+            }
+
+            init();
+        })();
+    </script>
+</body>
+</html>
