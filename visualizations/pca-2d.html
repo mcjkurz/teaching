@@ -659,6 +659,68 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Interactive Covariance Explorer -->
+                    <div class="insight-box" style="background: #f0f7ff; border-left-color: #3498db; margin-top: 1.5rem;">
+                        <h4 style="color: #2980b9;">🎛️ Interactive: Explore the Covariance Matrix</h4>
+                        <p style="margin-bottom: 1rem;">Adjust the sliders to see how variance and covariance shape the data distribution:</p>
+                        
+                        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: flex-start;">
+                            <div style="flex: 0 0 200px;">
+                                <canvas id="covExplorerCanvas" width="200" height="200" style="border: 1px solid #ccc; border-radius: 6px; background: #fafafa;"></canvas>
+                                <div style="text-align: center; font-size: 0.75rem; color: #666; margin-top: 0.25rem;">Ellipse shows 2σ contour</div>
+                            </div>
+                            
+                            <div style="flex: 1; min-width: 220px;">
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.25rem;">
+                                        <span style="color: #e74c3c; font-weight: 600;">Var(x)</span>
+                                        <span id="varXSliderVal" style="font-family: monospace;">1.00</span>
+                                    </label>
+                                    <input type="range" id="varXSlider" min="0.1" max="3" step="0.05" value="1" 
+                                        style="width: 100%; accent-color: #e74c3c;">
+                                    <div style="font-size: 0.75rem; color: #888;">Horizontal spread</div>
+                                </div>
+                                
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.25rem;">
+                                        <span style="color: #9b59b6; font-weight: 600;">Var(y)</span>
+                                        <span id="varYSliderVal" style="font-family: monospace;">1.00</span>
+                                    </label>
+                                    <input type="range" id="varYSlider" min="0.1" max="3" step="0.05" value="1" 
+                                        style="width: 100%; accent-color: #9b59b6;">
+                                    <div style="font-size: 0.75rem; color: #888;">Vertical spread</div>
+                                </div>
+                                
+                                <div style="margin-bottom: 1rem;">
+                                    <label style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.25rem;">
+                                        <span style="color: #f39c12; font-weight: 600;">Cov(x,y)</span>
+                                        <span id="covXYSliderVal" style="font-family: monospace;">0.00</span>
+                                    </label>
+                                    <input type="range" id="covXYSlider" min="-3" max="3" step="0.05" value="0" 
+                                        style="width: 100%; accent-color: #f39c12;">
+                                    <div id="covRangeHint" style="font-size: 0.75rem; color: #888;">Valid range: [−1.00, 1.00] (must satisfy Cov² ≤ Var(x)·Var(y))</div>
+                                </div>
+                                
+                                <div style="background: #fff; border: 1px solid #ddd; border-radius: 4px; padding: 0.5rem; font-size: 0.8rem;">
+                                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                        <span style="font-size: 1.1rem;">Σ =</span>
+                                        <span style="font-size: 1.5rem; font-weight: 200;">(</span>
+                                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2px; font-family: monospace;">
+                                            <span id="covMatDisplay00" style="background: #ffe6e6; padding: 2px 6px; border-radius: 2px; text-align: center;">1.00</span>
+                                            <span id="covMatDisplay01" style="background: #fff3e6; padding: 2px 6px; border-radius: 2px; text-align: center;">0.00</span>
+                                            <span id="covMatDisplay10" style="background: #fff3e6; padding: 2px 6px; border-radius: 2px; text-align: center;">0.00</span>
+                                            <span id="covMatDisplay11" style="background: #f3e6ff; padding: 2px 6px; border-radius: 2px; text-align: center;">1.00</span>
+                                        </div>
+                                        <span style="font-size: 1.5rem; font-weight: 200;">)</span>
+                                    </div>
+                                    <div id="covExplorerInfo" style="margin-top: 0.5rem; color: #555; font-style: italic;">
+                                        Equal variances, no correlation → circular distribution
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="continue-container">
@@ -1728,12 +1790,237 @@
             document.getElementById('btnRestart').addEventListener('click', resetAll);
 
             // -----------------------------------------
+            // COVARIANCE EXPLORER (Interactive Mini-Demo)
+            // -----------------------------------------
+            const covExplorerCanvas = document.getElementById('covExplorerCanvas');
+            const covExplorerCtx = covExplorerCanvas.getContext('2d');
+            const COV_SIZE = 200;
+            const COV_RANGE = 6; // -3 to 3 logical range
+            
+            // Generate fixed sample points for the explorer (bivariate standard normal approximation)
+            const explorerSamplePoints = [];
+            for (let i = 0; i < 50; i++) {
+                // Box-Muller for standard normal
+                const u1 = Math.random(), u2 = Math.random();
+                const z0 = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+                const z1 = Math.sqrt(-2 * Math.log(u1)) * Math.sin(2 * Math.PI * u2);
+                explorerSamplePoints.push([z0, z1]);
+            }
+            
+            function covToCanvasExplorer(x, y) {
+                const cx = ((x + COV_RANGE/2) / COV_RANGE) * COV_SIZE;
+                const cy = COV_SIZE - ((y + COV_RANGE/2) / COV_RANGE) * COV_SIZE;
+                return [cx, cy];
+            }
+            
+            function scaleLengthExplorer(len) {
+                return (len / COV_RANGE) * COV_SIZE;
+            }
+            
+            function drawCovExplorer() {
+                const varX = parseFloat(document.getElementById('varXSlider').value);
+                const varY = parseFloat(document.getElementById('varYSlider').value);
+                
+                // Compute valid range for covariance (positive semi-definite constraint)
+                const maxCov = Math.sqrt(varX * varY);
+                const covSlider = document.getElementById('covXYSlider');
+                
+                // Keep slider range fixed, but clamp the effective value
+                // (Changing min/max dynamically causes browser step-snapping bugs)
+                const rawCovXY = parseFloat(covSlider.value);
+                const covXY = Math.max(-maxCov, Math.min(maxCov, rawCovXY));
+                
+                // Update display values
+                document.getElementById('varXSliderVal').textContent = varX.toFixed(2);
+                document.getElementById('varYSliderVal').textContent = varY.toFixed(2);
+                
+                // Show effective covariance (may be clamped)
+                const covLabel = document.getElementById('covXYSliderVal');
+                if (Math.abs(rawCovXY) > maxCov + 0.001) {
+                    // Value is being clamped - show both
+                    covLabel.innerHTML = `<span style="text-decoration: line-through; color: #999;">${rawCovXY.toFixed(2)}</span> → ${covXY.toFixed(2)}`;
+                } else {
+                    covLabel.textContent = covXY.toFixed(2);
+                }
+                
+                // Update the valid range hint
+                document.getElementById('covRangeHint').textContent = 
+                    `Valid range: [−${maxCov.toFixed(2)}, ${maxCov.toFixed(2)}] (must satisfy Cov² ≤ Var(x)·Var(y))`;
+                
+                // Update matrix display
+                document.getElementById('covMatDisplay00').textContent = varX.toFixed(2);
+                document.getElementById('covMatDisplay01').textContent = covXY.toFixed(2);
+                document.getElementById('covMatDisplay10').textContent = covXY.toFixed(2);
+                document.getElementById('covMatDisplay11').textContent = varY.toFixed(2);
+                
+                // Compute eigenvalues for this covariance matrix
+                const trace = varX + varY;
+                const det = varX * varY - covXY * covXY;
+                const disc = Math.sqrt(Math.max(0, trace * trace / 4 - det));
+                const lambda1 = trace / 2 + disc;
+                const lambda2 = trace / 2 - disc;
+                
+                // Compute eigenvector for lambda1
+                let v1x, v1y;
+                if (Math.abs(covXY) > 1e-10) {
+                    v1x = lambda1 - varY;
+                    v1y = covXY;
+                } else if (varX >= varY) {
+                    v1x = 1; v1y = 0;
+                } else {
+                    v1x = 0; v1y = 1;
+                }
+                const norm = Math.sqrt(v1x * v1x + v1y * v1y);
+                v1x /= norm; v1y /= norm;
+                
+                const rotation = Math.atan2(v1y, v1x);
+                const a = Math.sqrt(lambda1) * 2; // 2 sigma
+                const b = Math.sqrt(lambda2) * 2;
+                
+                // Clear and draw background
+                covExplorerCtx.clearRect(0, 0, COV_SIZE, COV_SIZE);
+                covExplorerCtx.fillStyle = '#fafafa';
+                covExplorerCtx.fillRect(0, 0, COV_SIZE, COV_SIZE);
+                
+                // Draw light grid
+                covExplorerCtx.strokeStyle = '#e8e8e8';
+                covExplorerCtx.lineWidth = 1;
+                for (let i = -2; i <= 2; i++) {
+                    const [vx] = covToCanvasExplorer(i, 0);
+                    covExplorerCtx.beginPath();
+                    covExplorerCtx.moveTo(vx, 0);
+                    covExplorerCtx.lineTo(vx, COV_SIZE);
+                    covExplorerCtx.stroke();
+                    
+                    const [, hy] = covToCanvasExplorer(0, i);
+                    covExplorerCtx.beginPath();
+                    covExplorerCtx.moveTo(0, hy);
+                    covExplorerCtx.lineTo(COV_SIZE, hy);
+                    covExplorerCtx.stroke();
+                }
+                
+                // Draw axes
+                covExplorerCtx.strokeStyle = '#bbb';
+                covExplorerCtx.lineWidth = 1;
+                const [cx, cy] = covToCanvasExplorer(0, 0);
+                covExplorerCtx.beginPath();
+                covExplorerCtx.moveTo(0, cy);
+                covExplorerCtx.lineTo(COV_SIZE, cy);
+                covExplorerCtx.stroke();
+                covExplorerCtx.beginPath();
+                covExplorerCtx.moveTo(cx, 0);
+                covExplorerCtx.lineTo(cx, COV_SIZE);
+                covExplorerCtx.stroke();
+                
+                // Transform and draw sample points
+                // For a covariance matrix Σ = [[varX, covXY], [covXY, varY]]
+                // We need to find L such that L*L^T = Σ (Cholesky decomposition)
+                // L = [[sqrt(varX), 0], [covXY/sqrt(varX), sqrt(varY - covXY^2/varX)]]
+                const L00 = Math.sqrt(varX);
+                const L10 = covXY / L00;
+                const L11Sq = varY - covXY * covXY / varX;
+                const L11 = Math.sqrt(Math.max(0, L11Sq));
+                
+                // Draw transformed points
+                covExplorerCtx.fillStyle = 'rgba(52, 152, 219, 0.6)';
+                explorerSamplePoints.forEach(([z0, z1]) => {
+                    // Transform: [x, y] = L * [z0, z1]
+                    const x = L00 * z0;
+                    const y = L10 * z0 + L11 * z1;
+                    const [px, py] = covToCanvasExplorer(x, y);
+                    if (px >= 0 && px <= COV_SIZE && py >= 0 && py <= COV_SIZE) {
+                        covExplorerCtx.beginPath();
+                        covExplorerCtx.arc(px, py, 3, 0, Math.PI * 2);
+                        covExplorerCtx.fill();
+                    }
+                });
+                
+                // Draw ellipse
+                const canvasA = scaleLengthExplorer(a);
+                const canvasB = scaleLengthExplorer(b);
+                
+                covExplorerCtx.save();
+                covExplorerCtx.translate(cx, cy);
+                covExplorerCtx.rotate(-rotation);
+                
+                covExplorerCtx.strokeStyle = '#9b59b6';
+                covExplorerCtx.lineWidth = 2;
+                covExplorerCtx.setLineDash([4, 3]);
+                covExplorerCtx.beginPath();
+                covExplorerCtx.ellipse(0, 0, canvasA, canvasB, 0, 0, Math.PI * 2);
+                covExplorerCtx.stroke();
+                
+                covExplorerCtx.fillStyle = 'rgba(155, 89, 182, 0.08)';
+                covExplorerCtx.beginPath();
+                covExplorerCtx.ellipse(0, 0, canvasA, canvasB, 0, 0, Math.PI * 2);
+                covExplorerCtx.fill();
+                
+                covExplorerCtx.setLineDash([]);
+                covExplorerCtx.restore();
+                
+                // Draw PC axes (short vectors from center)
+                const pcScale = 1.5;
+                const pc1Len = Math.sqrt(lambda1) * pcScale;
+                const pc2Len = Math.sqrt(lambda2) * pcScale;
+                
+                // PC1 (red)
+                const [pc1x, pc1y] = covToCanvasExplorer(v1x * pc1Len, v1y * pc1Len);
+                covExplorerCtx.strokeStyle = '#e74c3c';
+                covExplorerCtx.lineWidth = 2;
+                covExplorerCtx.beginPath();
+                covExplorerCtx.moveTo(cx, cy);
+                covExplorerCtx.lineTo(pc1x, pc1y);
+                covExplorerCtx.stroke();
+                
+                // PC2 (purple) - perpendicular to PC1
+                const v2x = -v1y, v2y = v1x;
+                const [pc2x, pc2y] = covToCanvasExplorer(v2x * pc2Len, v2y * pc2Len);
+                covExplorerCtx.strokeStyle = '#9b59b6';
+                covExplorerCtx.lineWidth = 2;
+                covExplorerCtx.beginPath();
+                covExplorerCtx.moveTo(cx, cy);
+                covExplorerCtx.lineTo(pc2x, pc2y);
+                covExplorerCtx.stroke();
+                
+                // Update info text
+                const infoEl = document.getElementById('covExplorerInfo');
+                const correlation = covXY / Math.sqrt(varX * varY);
+                let info = '';
+                
+                if (Math.abs(correlation) < 0.1) {
+                    if (Math.abs(varX - varY) < 0.2) {
+                        info = 'Equal variances, no correlation → circular distribution';
+                    } else if (varX > varY) {
+                        info = 'No correlation, but wider horizontally → axis-aligned ellipse';
+                    } else {
+                        info = 'No correlation, but wider vertically → axis-aligned ellipse';
+                    }
+                } else if (correlation > 0) {
+                    info = `Positive correlation (r=${correlation.toFixed(2)}) → tilted upward ↗`;
+                } else {
+                    info = `Negative correlation (r=${correlation.toFixed(2)}) → tilted downward ↘`;
+                }
+                
+                const varExplained = (lambda1 / (lambda1 + lambda2) * 100).toFixed(0);
+                info += ` | PC1 explains ${varExplained}%`;
+                
+                infoEl.textContent = info;
+            }
+            
+            // Event listeners for sliders
+            document.getElementById('varXSlider').addEventListener('input', drawCovExplorer);
+            document.getElementById('varYSlider').addEventListener('input', drawCovExplorer);
+            document.getElementById('covXYSlider').addEventListener('input', drawCovExplorer);
+
+            // -----------------------------------------
             // INITIALIZATION
             // -----------------------------------------
             function init() {
                 for (let key in contexts) {
                     drawGrid(contexts[key]);
                 }
+                // Initialize covariance explorer
+                drawCovExplorer();
             }
 
             init();
