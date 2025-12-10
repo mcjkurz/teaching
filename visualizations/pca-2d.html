@@ -663,7 +663,8 @@
                     <!-- Interactive Covariance Explorer -->
                     <div class="insight-box" style="background: #f0f7ff; border-left-color: #3498db; margin-top: 1.5rem;">
                         <h4 style="color: #2980b9;">🎛️ Interactive: Explore the Covariance Matrix</h4>
-                        <p style="margin-bottom: 1rem;">We can think of the covariance matrix as a <strong>transformation</strong> that shapes data. Starting from a circular cloud of points, the matrix stretches, squashes, and rotates it into an ellipse. Adjust the sliders to see how each parameter transforms the distribution:</p>
+                        <p style="margin-bottom: 0.5rem;">We can think of the covariance matrix as a <strong>transformation</strong> that shapes data. Starting from a circular cloud of points (Var(x)=Var(y)=1, Cov=0), the matrix stretches, squashes, and rotates it into an ellipse.</p>
+                        <p id="covExplorerDataHint" style="margin-bottom: 1rem; padding: 0.5rem; background: #e8f4fc; border-radius: 4px; font-size: 0.85rem;"><strong>Your data:</strong> Var(x)=?, Var(y)=?, Cov=? — try these values to see the transformation that produces your data's shape!</p>
                         
                         <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: flex-start;">
                             <div style="flex: 0 0 200px;">
@@ -1562,6 +1563,10 @@
                     covInterpret += `. Data is more spread vertically.`;
                 }
                 document.getElementById('covInterpretation').innerHTML = covInterpret;
+                
+                // Update the interactive explorer hint with computed values
+                document.getElementById('covExplorerDataHint').innerHTML = 
+                    `<strong>Your data:</strong> Var(x)=${varX.toFixed(2)}, Var(y)=${varY.toFixed(2)}, Cov=${covXY.toFixed(2)} — try these values to see the transformation that produces your data's shape!`;
 
                 // Step 3: Eigenvalues
                 const trace = varX + varY;
