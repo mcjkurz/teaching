@@ -699,7 +699,7 @@
                                     </label>
                                     <input type="range" id="covXYSlider" min="-3" max="3" step="0.05" value="0" 
                                         style="width: 100%; accent-color: #f39c12;">
-                                    <div id="covRangeHint" style="font-size: 0.75rem; color: #888;">Valid range: [−1.00, 1.00] (variables can't co-vary more than they each vary on their own)</div>
+                                    <div id="covRangeHint" style="font-size: 0.75rem; color: #888;">Valid range: [−1.00, 1.00] — variables can't co-vary more than they each vary on their own (Cov² ≤ Var(x)·Var(y))</div>
                                 </div>
                                 
                                 <div style="background: #fff; border: 1px solid #ddd; border-radius: 4px; padding: 0.5rem; font-size: 0.8rem;">
@@ -1845,7 +1845,7 @@
                 
                 // Update the valid range hint
                 document.getElementById('covRangeHint').textContent = 
-                    `Valid range: [−${maxCov.toFixed(2)}, ${maxCov.toFixed(2)}] (variables can't co-vary more than they each vary)`;
+                    `Valid range: [−${maxCov.toFixed(2)}, ${maxCov.toFixed(2)}] — variables can't co-vary more than they each vary on their own (Cov² ≤ Var(x)·Var(y))`;
                 
                 // Update matrix display
                 document.getElementById('covMatDisplay00').textContent = varX.toFixed(2);
