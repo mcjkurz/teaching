@@ -548,34 +548,11 @@
         document.getElementById('meanComputed').innerHTML = 
             `Computed mean: <strong>μ = (${mean[0].toFixed(3)}, ${mean[1].toFixed(3)})</strong>`;
 
-        // Step 2: Covariance
-        document.getElementById('covMatrixComputed').innerHTML = 
-            `<strong>Σ = </strong>[ [${varX.toFixed(3)}, ${covXY.toFixed(3)}], [${covXY.toFixed(3)}, ${varY.toFixed(3)}] ]`;
-        document.getElementById('varXComputed').innerHTML = `Var(x) = <strong>${varX.toFixed(3)}</strong>`;
-        document.getElementById('varYComputed').innerHTML = `Var(y) = <strong>${varY.toFixed(3)}</strong>`;
-        document.getElementById('covXYComputed').innerHTML = `Cov(x,y) = <strong>${covXY.toFixed(3)}</strong>`;
-        
-        // Update the visual matrix with computed values
+        // Step 2: Covariance - update the visual matrix with computed values
         document.getElementById('covMatVarX').textContent = varX.toFixed(2);
         document.getElementById('covMatCovXY1').textContent = covXY.toFixed(2);
         document.getElementById('covMatCovXY2').textContent = covXY.toFixed(2);
         document.getElementById('covMatVarY').textContent = varY.toFixed(2);
-        
-        // Covariance interpretation
-        let covInterpret = '';
-        if (covXY > 0.3) {
-            covInterpret = `Positive correlation: when x increases, y tends to increase (upward trend)`;
-        } else if (covXY < -0.3) {
-            covInterpret = `Negative correlation: when x increases, y tends to decrease (downward trend)`;
-        } else {
-            covInterpret = `Little correlation: x and y vary mostly independently`;
-        }
-        if (varX > varY * 1.5) {
-            covInterpret += `. Data is more spread horizontally.`;
-        } else if (varY > varX * 1.5) {
-            covInterpret += `. Data is more spread vertically.`;
-        }
-        document.getElementById('covInterpretation').innerHTML = covInterpret;
         
         // Update the interactive explorer hint with computed values
         document.getElementById('covExplorerDataHint').innerHTML = 

@@ -645,34 +645,17 @@
                     <div class="math-section">
                         <h4>Formula: How to Compute the Matrix</h4>
                         <div class="math-content">
-                            <p style="font-size: 0.85rem; margin-bottom: 0.5rem;">The covariance matrix is built from <strong>outer products</strong> of centered vectors:</p>
+                            <p style="font-size: 0.85rem; margin-bottom: 0.5rem;">The covariance matrix is built from <strong>outer products</strong> of centered vectors. Let $\mathbf{p}_i$ denote the i-th point (a 2D vector):</p>
                             <div class="math-formula">
-                                $$\Sigma = \frac{1}{n-1} \sum_{i=1}^{n} (\mathbf{x}_i - \boldsymbol{\mu})(\mathbf{x}_i - \boldsymbol{\mu})^T$$
+                                $$\Sigma = \frac{1}{n-1} \sum_{i=1}^{n} (\mathbf{p}_i - \boldsymbol{\mu})(\mathbf{p}_i - \boldsymbol{\mu})^T$$
                             </div>
-                            <p style="font-size: 0.85rem; color: #666; margin: 0.5rem 0;">For each point, we compute a 2×2 matrix (outer product), then average them:</p>
+                            <p style="font-size: 0.85rem; color: #666; margin: 0.5rem 0;">If a centered point has coordinates $(x, y)$, its outer product with itself is a 2×2 matrix:</p>
                             <div class="math-formula">
-                                $$\begin{pmatrix} x_i \\ y_i \end{pmatrix} \begin{pmatrix} x_i & y_i \end{pmatrix} = \begin{pmatrix} x_i^2 & x_i y_i \\ y_i x_i & y_i^2 \end{pmatrix}$$
+                                $$\begin{pmatrix} x \\ y \end{pmatrix} \begin{pmatrix} x & y \end{pmatrix} = \begin{pmatrix} x^2 & xy \\ yx & y^2 \end{pmatrix}$$
                             </div>
-                            <p style="font-size: 0.85rem; color: #666;">Summing these matrices gives: diagonal = sum of squares (variance), off-diagonal = sum of products (covariance). Notice that $x_i y_i = y_i x_i$, so the covariance matrix is always <strong>symmetric</strong>.</p>
+                            <p style="font-size: 0.85rem; color: #666;">Summing these matrices over all points gives: diagonal = sum of squares (variance), off-diagonal = sum of products (covariance). Notice that $xy = yx$, so the covariance matrix is always <strong>symmetric</strong>.</p>
                         </div>
                     </div>
-                    <div class="math-section">
-                        <h4>Your Computed Covariance Matrix</h4>
-                        <div class="math-content">
-                            <div class="computed-value highlight-result" id="covMatrixComputed">
-                                Σ = [ [?, ?], [?, ?] ]
-                            </div>
-                            <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem;">
-                                <div class="computed-value" id="varXComputed" style="flex: 1;">Var(x) = ?</div>
-                                <div class="computed-value" id="varYComputed" style="flex: 1;">Var(y) = ?</div>
-                            </div>
-                            <div class="computed-value" id="covXYComputed">Cov(x,y) = ?</div>
-                            <div class="computed-value" id="covInterpretation" style="font-style: italic; background: #fffbe6; border-color: #ffe58f;">
-                                Interpretation: ...
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Interactive Covariance Explorer -->
                     <div class="insight-box" style="background: #f0f7ff; border-left-color: #3498db; margin-top: 1.5rem;">
                         <h4 style="color: #2980b9;">🎛️ Interactive: Explore the Covariance Matrix</h4>
@@ -765,50 +748,58 @@
                 <div class="step-explanation">
                     <div class="explanation-box">
                         <h4>The Goal: Find the Principal Components</h4>
-                        <p>Principal components are the <strong>eigenvectors</strong> of the covariance matrix — they point in the directions of maximum variance. But to find eigenvectors, we first need to find the <strong>eigenvalues</strong> (λ). The eigenvalue tells us how much variance exists along its eigenvector. The largest eigenvalue's eigenvector becomes PC1.</p>
+                        <p>We want to find the directions along which our data varies the most. These are called <strong>principal components</strong>. Mathematically, they turn out to be the <strong>eigenvectors</strong> of the covariance matrix. But before we can find them, we need to understand a few concepts.</p>
                     </div>
                     
+                    <!-- PART 1: Determinant (no λ yet) -->
+                    <div class="concept-box">
+                        <h4>Background: What is a Determinant?</h4>
+                        <p>Geometrically, a determinant measures how much a transformation "scales area":</p>
+                        <p>• <strong>Det = 0:</strong> The matrix squashes 2D space onto a line — it loses a dimension</p>
+                        <p>• <strong>Det ≠ 0:</strong> The matrix is invertible — no dimension is completely lost</p>
+                        <p>For a 2×2 matrix $\begin{pmatrix} a & b \\ c & d \end{pmatrix}$, the <strong>determinant</strong> is $ad - bc$. For our covariance matrix Σ:</p>
+                        <div class="math-formula">
+                            $$\det(\Sigma) = \text{Var}(x) \cdot \text{Var}(y) - \text{Cov}(x,y)^2$$
+                        </div>
+                        <p style="margin-top: 0.5rem;"><strong>When det(Σ) = 0:</strong> This means Var(x)·Var(y) = Cov(x,y)². The covariance "maxes out" — the variables co-vary as much as they possibly can. This is <em>perfect correlation</em>: all points lie exactly on a line. The data is truly 1-dimensional, just embedded in 2D.</p>
+                        <p style="margin-top: 0.5rem;"><strong>When det(Σ) > 0:</strong> The data genuinely spreads in multiple directions. The larger the determinant, the more "2D" the data is.</p>
+                    </div>
+
+                    <!-- PART 2: Eigenvectors (introduces λ) -->
+                    <div class="concept-box" style="border-color: #e74c3c;">
+                        <h4>What is an Eigenvector?</h4>
+                        <p>An <strong>eigenvector</strong> of a matrix is a special direction: when you apply the matrix transformation, the vector only gets <em>stretched or shrunk</em>, not rotated. The stretching factor is called the <strong>eigenvalue</strong> (λ, "lambda").</p>
+                        <div class="math-formula">
+                            $$\Sigma \mathbf{v} = \lambda \mathbf{v}$$
+                        </div>
+                        <p>This says: "Applying Σ to vector <strong>v</strong> just scales it by λ."</p>
+                        <p style="margin-top: 0.5rem;"><strong>For PCA:</strong> The eigenvectors of the covariance matrix point along the principal axes of the data ellipse. The eigenvalue λ tells us the variance along that direction. The eigenvector with the <em>largest</em> λ is PC1 (the direction of maximum variance).</p>
+                        <p style="margin-top: 0.5rem;"><strong>Why not just drop x or y?</strong> If your data spreads diagonally, dropping x loses half the information and dropping y loses the other half. Instead, we <em>rotate</em> to align with the principal axes first, then drop the direction with the least variance. The eigenvectors tell us exactly how to rotate.</p>
+                    </div>
+
+                    <!-- PART 3: Characteristic equation (now λ makes sense) -->
                     <div class="math-section">
-                        <h4>Step 3a: Set Up the Characteristic Equation</h4>
+                        <h4>Step 3a: Find Eigenvalues via the Characteristic Equation</h4>
                         <div class="math-content">
-                            <p style="font-size: 0.85rem; margin-bottom: 0.5rem;">An eigenvector v satisfies <strong>Σv = λv</strong>, which rearranges to <strong>(Σ - λI)v = 0</strong>. For non-zero v to exist, the matrix (Σ - λI) must be singular:</p>
+                            <p style="font-size: 0.85rem; margin-bottom: 0.5rem;">To find λ, we rearrange <strong>Σv = λv</strong> into <strong>(Σ − λI)v = 0</strong>. For a non-zero solution v to exist, the matrix (Σ − λI) must be singular (determinant = 0):</p>
                             <div class="math-formula">
                                 $$\det(\Sigma - \lambda I) = 0$$
                             </div>
-                            <p style="font-size: 0.85rem;">For our 2×2 covariance matrix:</p>
+                            <p style="font-size: 0.85rem;">Subtracting λ from the diagonal gives:</p>
                             <div class="math-formula">
                                 $$\det\begin{pmatrix} \text{Var}(x) - \lambda & \text{Cov}(x,y) \\ \text{Cov}(x,y) & \text{Var}(y) - \lambda \end{pmatrix} = 0$$
                             </div>
                         </div>
                     </div>
 
-                    <div class="concept-box">
-                        <h4>What is the Determinant?</h4>
-                        <p>For a 2×2 matrix $\begin{pmatrix} a & b \\ c & d \end{pmatrix}$, the determinant is $ad - bc$. Geometrically, the determinant measures how much a transformation "scales area":</p>
-                        <p>• <strong>Det = 0:</strong> The matrix squashes space onto a line — it loses a dimension entirely</p>
-                        <p>• <strong>Det ≠ 0:</strong> The matrix is invertible — no dimension is completely lost</p>
-                        <p style="margin-top: 0.5rem;"><strong>Why we need it:</strong> To find eigenvalues, we solve det(Σ - λI) = 0. We're looking for values of λ that make this matrix <em>singular</em> (det = 0), meaning it collapses some direction. Those λ values are the eigenvalues.</p>
-                        <p style="margin-top: 0.5rem;"><strong>Why not just drop the x or y axis?</strong> We could simply ignore one coordinate, but that would be wasteful. If your data spreads diagonally (i.e., if there is correlation), dropping x loses half the information and dropping y loses the other half. Can we do better and lose less information? Yes, by first <em>rotating</em> our coordinate system to align with the directions where the data varies most, then dropping the direction with the least variance. The eigenvectors tell us exactly how to rotate: they point along the data's principal axes. This way, we keep the direction with maximum variance (PC1) and only discard the direction (PC2) where the data barely varies anyway.</p>
-                    </div>
-
-                    <div class="concept-box">
-                        <h4>What det(Σ) Tells Us About Our Data</h4>
-                        <p>For our covariance matrix, <strong>det(Σ) = Var(x)·Var(y) − Cov(x,y)²</strong>.</p>
-                        <p style="margin-top: 0.5rem;"><strong>When det(Σ) = 0:</strong> This means Var(x)·Var(y) = Cov(x,y)². Intuitively, the covariance "maxes out" — the variables co-vary as much as they possibly can given their individual spreads. This is <em>perfect correlation</em>: all points lie exactly on a line. Knowing x tells you y exactly (or vice versa), so the data is truly 1-dimensional, just embedded in 2D.</p>
-                        <p style="margin-top: 0.5rem;">Since <strong>det(Σ) = λ₁ × λ₂</strong> (product of eigenvalues):</p>
-                        <p>• <strong>det(Σ) near 0:</strong> One eigenvalue must be small → data is nearly 1D (highly correlated) → PCA projection loses little information</p>
-                        <p>• <strong>det(Σ) larger:</strong> Both eigenvalues are substantial → data genuinely spreads in 2D → PCA projection loses more information</p>
-                        <p style="margin-top: 0.5rem;">The key comparison is: <strong>how small is det relative to the total variance?</strong> A ratio λ₁/λ₂ tells us the elongation of the data ellipse.</p>
-                    </div>
-
                     <div class="math-section">
                         <h4>Step 3b: Expand to Get a Quadratic Equation</h4>
                         <div class="math-content">
-                            <p style="font-size: 0.85rem; margin-bottom: 0.5rem;">Applying the determinant formula $ad - bc$ to our matrix:</p>
+                            <p style="font-size: 0.85rem; margin-bottom: 0.5rem;">Applying the determinant formula $ad - bc$:</p>
                             <div class="math-formula">
                                 $$(\text{Var}(x) - \lambda)(\text{Var}(y) - \lambda) - \text{Cov}(x,y)^2 = 0$$
                             </div>
-                            <p style="font-size: 0.85rem;">Expanding $(a-\lambda)(b-\lambda) = ab - a\lambda - b\lambda + \lambda^2$ gives us a <strong>quadratic equation in λ</strong>:</p>
+                            <p style="font-size: 0.85rem;">Expanding gives a <strong>quadratic equation in λ</strong>:</p>
                             <div class="math-formula">
                                 $$\lambda^2 - \underbrace{(\text{Var}(x) + \text{Var}(y))}_{\text{trace}} \lambda + \underbrace{(\text{Var}(x) \cdot \text{Var}(y) - \text{Cov}(x,y)^2)}_{\text{determinant}} = 0$$
                             </div>
@@ -820,24 +811,24 @@
                     </div>
                     
                     <div class="concept-box">
-                        <h4>What is the Trace?</h4>
-                        <p><strong>Trace = Var(x) + Var(y)</strong> — the sum of the diagonal elements.</p>
-                        <p>The trace represents the <em>total variance</em> in your data. Notice it appears as the coefficient of λ in the quadratic equation above. Importantly, <strong>trace = λ₁ + λ₂</strong> — the eigenvalues partition the total variance between the principal components.</p>
+                        <h4>The Trace and Determinant in Terms of Eigenvalues</h4>
+                        <p><strong>Trace = Var(x) + Var(y) = λ₁ + λ₂</strong> — the total variance is split between the two principal components.</p>
+                        <p style="margin-top: 0.5rem;"><strong>Det = Var(x)·Var(y) − Cov(x,y)² = λ₁ × λ₂</strong> — the product of eigenvalues.</p>
+                        <p style="margin-top: 0.5rem;">This is why det ≈ 0 means one eigenvalue is tiny: if λ₁ × λ₂ ≈ 0 but λ₁ + λ₂ is substantial, then one λ must be near zero. That direction has almost no variance — perfect for discarding!</p>
                     </div>
 
                     <div class="math-section">
                         <h4>Step 3c: Solve Using the Quadratic Formula</h4>
                         <div class="math-content">
-                            <p style="font-size: 0.85rem;">Our equation $\lambda^2 - \text{trace} \cdot \lambda + \text{det} = 0$ is a standard quadratic $ax^2 + bx + c = 0$.</p>
+                            <p style="font-size: 0.85rem;">Our equation $\lambda^2 - \text{trace} \cdot \lambda + \text{det} = 0$ is solved by:</p>
+                            <div class="math-formula">
+                                $$\lambda = \frac{\text{trace} \pm \sqrt{\text{trace}^2 - 4 \cdot \text{det}}}{2}$$
+                            </div>
                             <div class="computed-value" id="traceDetComputed">
                                 trace(Σ) = ?, &nbsp; det(Σ) = ?
                             </div>
                             <div class="computed-value" id="traceDetInterpret" style="font-style: italic; background: #fffbe6; border-color: #ffe58f;">
                                 What this means: ...
-                            </div>
-                            <p style="font-size: 0.85rem; margin-top: 0.5rem;">Using the quadratic formula $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$:</p>
-                            <div class="math-formula">
-                                $$\lambda = \frac{\text{trace} \pm \sqrt{\text{trace}^2 - 4 \cdot \text{det}}}{2}$$
                             </div>
                             <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem;">
                                 <div class="computed-value highlight-result" id="lambda1Computed" style="flex: 1;">
@@ -853,12 +844,12 @@
                     <div class="math-section">
                         <h4>Step 3d: Find Eigenvectors</h4>
                         <div class="math-content">
-                            <p style="font-size: 0.85rem; margin-bottom: 0.5rem;">For each λ, solve <strong>(Σ - λI)v = 0</strong>:</p>
+                            <p style="font-size: 0.85rem; margin-bottom: 0.5rem;">Now that we have λ₁ and λ₂, we find each eigenvector by solving <strong>(Σ − λI)v = 0</strong>:</p>
                             <div class="math-formula">
                                 $$\begin{pmatrix} \text{Var}(x) - \lambda & \text{Cov}(x,y) \\ \text{Cov}(x,y) & \text{Var}(y) - \lambda \end{pmatrix} \begin{pmatrix} v_x \\ v_y \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}$$
                             </div>
                             <p style="font-size: 0.85rem;">From the first row: $(\text{Var}(x) - \lambda)v_x + \text{Cov}(x,y) \cdot v_y = 0$</p>
-                            <p style="font-size: 0.85rem; margin-bottom: 0.5rem;">Solving and normalizing gives:</p>
+                            <p style="font-size: 0.85rem; margin-bottom: 0.5rem;">Solving and normalizing gives the principal component directions:</p>
                             <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
                                 <div class="computed-value highlight-result" id="v1Computed" style="flex: 1;">
                                     <span class="highlight-pc1">v₁ = (?, ?)</span>
