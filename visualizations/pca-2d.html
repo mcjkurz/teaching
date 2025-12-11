@@ -793,7 +793,9 @@
 
                     <div class="concept-box">
                         <h4>What det(Σ) Tells Us About Our Data</h4>
-                        <p>Since <strong>det(Σ) = λ₁ × λ₂</strong> (product of eigenvalues):</p>
+                        <p>For our covariance matrix, <strong>det(Σ) = Var(x)·Var(y) − Cov(x,y)²</strong>.</p>
+                        <p style="margin-top: 0.5rem;"><strong>When det(Σ) = 0:</strong> This means Var(x)·Var(y) = Cov(x,y)². Intuitively, the covariance "maxes out" — the variables co-vary as much as they possibly can given their individual spreads. This is <em>perfect correlation</em>: all points lie exactly on a line. Knowing x tells you y exactly (or vice versa), so the data is truly 1-dimensional, just embedded in 2D.</p>
+                        <p style="margin-top: 0.5rem;">Since <strong>det(Σ) = λ₁ × λ₂</strong> (product of eigenvalues):</p>
                         <p>• <strong>det(Σ) near 0:</strong> One eigenvalue must be small → data is nearly 1D (highly correlated) → PCA projection loses little information</p>
                         <p>• <strong>det(Σ) larger:</strong> Both eigenvalues are substantial → data genuinely spreads in 2D → PCA projection loses more information</p>
                         <p style="margin-top: 0.5rem;">The key comparison is: <strong>how small is det relative to the total variance?</strong> A ratio λ₁/λ₂ tells us the elongation of the data ellipse.</p>
