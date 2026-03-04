@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Z-Scores for Stylometry</title>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            startup: {
+                pageReady: () => {
+                    return MathJax.startup.defaultPageReady();
+                }
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="../styles/z-scores-for-stylometry.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Z-Scores for Stylometry</h1>
+            <p>A step-by-step walkthrough: raw counts &rarr; relative frequencies &rarr; z-scores &rarr; document similarity</p>
+        </header>
+
+        <!-- ═══ STEP 1: Raw Data ═══ -->
+        <section class="step-section" id="step1Section">
+            <h2><span class="step-badge">Step 1</span> The Raw Data: Word Counts</h2>
+
+            <div class="explanation-box">
+                <h4>Counting Function Words</h4>
+                <p>Stylometrists typically analyse the most frequent <strong>function words</strong> &mdash; grammatical words like <strong>的</strong>, <strong>了</strong>, <strong>是</strong>, <strong>他</strong>, <strong>有</strong>. Unlike content words, function words are used unconsciously and are hard for an author to deliberately control, making them strong markers of individual style. The table below shows raw counts of five such words across several documents, along with each document&rsquo;s total word count.</p>
+            </div>
+
+            <div style="margin-bottom: 0.75rem;">
+                <button class="btn" id="btnResetData">Reset to Defaults</button>
+            </div>
+
+            <div class="data-table-wrapper" id="rawDataTableWrapper">
+                <table class="feature-table" id="rawDataTable">
+                    <!-- Populated by JS -->
+                </table>
+            </div>
+
+            <div class="insight-box">
+                <h4>The Problem with Raw Counts</h4>
+                <p>Documents have different lengths. A 10,000-word novel will naturally have more occurrences of <strong>的</strong> than a 2,000-word essay, even if both authors use the word at the same rate. We cannot compare raw counts directly &mdash; we first need to <em>normalize</em> them.</p>
+            </div>
+
+            <div class="continue-container" id="step2Trigger">
+                <button class="btn success large" id="btnToStep2">
+                    Continue to Step 2: Normalize &amp; Summarize &rarr;
+                </button>
+            </div>
+        </section>
+
+        <!-- ═══ STEP 2: Normalize + Mean & Std Dev ═══ -->
+        <section class="step-section hidden" id="step2Section">
+            <h2><span class="step-badge">Step 2</span> Normalize to Relative Frequencies</h2>
+
+            <div class="explanation-box">
+                <h4>Removing the Effect of Document Length</h4>
+                <p>We divide each raw count by the document&rsquo;s total word count. The result is a <strong>relative frequency</strong> (a proportion between 0 and 1), which makes documents of different lengths comparable. Below the data rows, the <strong style="color:#1e8449;">mean</strong> and <strong style="color:#922b21;">standard deviation</strong> of each column are shown &mdash; these are the key ingredients for z-score standardization.</p>
+            </div>
+
+            <div class="formula-example-row" id="step2FormulaExample">
+                <!-- Left: formulas. Right: example. Populated by JS. -->
+            </div>
+
+            <div class="data-table-wrapper">
+                <table class="feature-table norm-table" id="normTable">
+                    <!-- Populated by JS: normalized data + mean/std rows -->
+                </table>
+            </div>
+
+            <button class="calc-toggle-btn" id="btnToggleCalcMeanStd">Show detailed calculations ▸</button>
+            <div class="calc-details-collapsible" id="calcDetailsMeanStd">
+                <!-- Populated by JS -->
+            </div>
+
+            <div class="continue-container">
+                <button class="btn success large" id="btnToStep3">
+                    Continue to Step 3: Compute Z-Scores &rarr;
+                </button>
+            </div>
+        </section>
+
+        <!-- ═══ STEP 3: Z-Scores ═══ -->
+        <section class="step-section hidden" id="step3Section">
+            <h2><span class="step-badge">Step 3</span> Z-Score Standardization</h2>
+
+            <div class="explanation-box">
+                <h4>Putting Everything on the Same Scale</h4>
+                <p>The z-score tells us <strong>how many standard deviations a value is above or below the mean</strong>. After standardization, every column has mean&nbsp;=&nbsp;0 and standard deviation&nbsp;=&nbsp;1, regardless of the original scale.</p>
+            </div>
+
+            <div class="formula-example-row" id="step3FormulaExample">
+                <!-- Left: formula. Right: example. Populated by JS. -->
+            </div>
+
+            <div style="margin-bottom: 0.75rem;">
+                <button class="btn" id="btnToggleOriginal">Show normalized values</button>
+            </div>
+
+            <div class="data-table-wrapper">
+                <table class="feature-table z-score-table" id="zScoreTable">
+                    <!-- Populated by JS -->
+                </table>
+            </div>
+
+            <div class="concept-box">
+                <h4>Reading Z-Scores</h4>
+                <p><strong style="color: #27ae60;">Positive z-score:</strong> the value is <em>above</em> the mean for that word. The document uses this word more than average.</p>
+                <p><strong style="color: #c0392b;">Negative z-score:</strong> the value is <em>below</em> the mean. The document uses this word less than average.</p>
+                <p><strong style="color: #888;">z = 0:</strong> exactly at the mean.</p>
+                <p style="margin-top: 0.5rem;">Now all features are comparable: a z-score of +2 for <strong>的</strong> and +2 for <strong>有</strong> both mean &ldquo;2 standard deviations above average&rdquo; &mdash; even though the underlying frequencies were very different.</p>
+            </div>
+
+            <div class="insight-box">
+                <h4>Why This Matters for Stylometry</h4>
+                <ul>
+                    <li>After z-scoring, each word contributes equally to distance measures and downstream analysis (like PCA or clustering).</li>
+                    <li>A word that an author uses at an unusual rate can now &ldquo;stand out&rdquo; just as much as any other word&rsquo;s pattern.</li>
+                    <li>Try editing the raw data in Step 1 and watch how everything updates!</li>
+                </ul>
+            </div>
+
+            <div class="continue-container">
+                <button class="btn success large" id="btnToStep4">
+                    Continue to Step 4: Document Distances &rarr;
+                </button>
+            </div>
+        </section>
+
+        <!-- ═══ STEP 4: Distance / Similarity Heatmap ═══ -->
+        <section class="step-section hidden" id="step4Section">
+            <h2><span class="step-badge">Step 4</span> Document Distances</h2>
+
+            <div class="explanation-box">
+                <h4>Comparing Documents</h4>
+                <p>Now that every feature is on the same scale, we can compare documents using a <strong>distance</strong> or <strong>similarity</strong> metric. Choose a metric below to see its formula and how it changes the heatmap.</p>
+            </div>
+
+            <div class="metric-selector">
+                <label for="metricSelect">Metric:</label>
+                <select id="metricSelect">
+                    <option value="manhattan">Manhattan Distance (Classic Delta)</option>
+                    <option value="euclidean">Euclidean Distance</option>
+                    <option value="cosine">Cosine Similarity (Cosine Delta)</option>
+                    <option value="burrows">Burrows&rsquo; Delta</option>
+                </select>
+                <div class="metric-description" id="metricDescription"></div>
+            </div>
+
+            <div class="math-section" id="metricFormula">
+                <!-- Populated by JS -->
+            </div>
+
+            <div id="heatmapContainer">
+                <!-- Populated by JS -->
+            </div>
+
+            <div class="insight-box">
+                <h4>Reading the Heatmap</h4>
+                <ul>
+                    <li id="heatmapHintDiag">The diagonal is always 0 (zero distance to itself).</li>
+                    <li id="heatmapHintColor">Lower values (cooler colors) mean more similar documents.</li>
+                    <li>Try switching metrics to see how the ranking of document pairs changes.</li>
+                </ul>
+            </div>
+
+            <div class="continue-container">
+                <button class="btn primary large" id="btnRestart">
+                    &circlearrowleft; Start Over
+                </button>
+            </div>
+        </section>
+
+        <footer>
+            <a href="../index.html">&larr; Back to Home Page</a>
+        </footer>
+    </div>
+
+    <script src="../scripts/z-scores-for-stylometry.js"></script>
+</body>
+</html>

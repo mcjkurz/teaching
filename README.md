@@ -6,8 +6,8 @@ Interactive web-based visualizations for teaching machine learning concepts (mos
 
 ## Visualizations
 
-### Z-Score Standardization
-- **Demo**: https://mcjkurz.github.io/teaching/visualizations/z-score.html
+### Z-Scores for Stylometry
+- **Demo**: https://mcjkurz.github.io/teaching/visualizations/z-scores-for-stylometry.html
 - Step-by-step walkthrough of z-score feature scaling for stylometry
 - Covers: raw word frequencies, mean & standard deviation, z-score standardization, and cosine similarity heatmap
 - Editable data: add/remove/rename columns (words) and rows (documents)
