@@ -182,35 +182,6 @@
             </div>
         </section>
 
-        <!-- ═══ Check Your Own Document ═══ -->
-        <section class="step-section" id="checkYourOwnSection">
-            <h2>Check your own document!</h2>
-            <div class="explanation-box">
-                <p>Enter your document&rsquo;s raw word counts for the same function words used above. We&rsquo;ll compute its z-scores using the corpus statistics and add it to the heatmap so you can see how similar your document is to each corpus document.</p>
-            </div>
-            <div class="check-your-own-form" id="checkYourOwnForm">
-                <div class="check-your-own-row">
-                    <label for="userDocName">Document name:</label>
-                    <input type="text" id="userDocName" placeholder="My Document" class="user-doc-name">
-                </div>
-                <div class="check-your-own-row check-your-own-counts" id="userDocCountsRow">
-                    <!-- Populated by JS: one input per column -->
-                </div>
-                <div class="check-your-own-row">
-                    <label for="userDocTotal">Total words:</label>
-                    <input type="number" id="userDocTotal" value="1000" min="1" max="999999" placeholder="e.g. 3000">
-                </div>
-                <div class="check-your-own-actions">
-                    <button class="btn success" id="btnAddToHeatmap">Calculate &amp; add to heatmap</button>
-                    <button class="btn" id="btnRemoveFromHeatmap" style="display:none">Remove from heatmap</button>
-                </div>
-            </div>
-            <div class="check-your-own-results hidden" id="userDocResults">
-                <h4>Your document&rsquo;s z-scores</h4>
-                <div id="userDocZScoresDisplay"></div>
-            </div>
-        </section>
-
         <footer>
             <a href="../index.html">&larr; Back to Home Page</a>
         </footer>

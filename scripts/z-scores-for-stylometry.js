@@ -42,14 +42,11 @@
 
     var columns, data, totalWords, docNames;
     var ghostColActive, ghostRowActive, showingOriginal, currentMetric;
-    var userDoc; // { name, rawCounts, totalWords, normalized, zScores } or null
 
     function init() {
         currentMetric = 'manhattan';
-        userDoc = null;
         resetToDefaults();
         bindEvents();
-        renderCheckYourOwnForm();
     }
 
     function resetToDefaults() {
@@ -60,15 +57,7 @@
         ghostColActive = false;
         ghostRowActive = false;
         showingOriginal = false;
-        userDoc = null;
         renderRawTable();
-        renderCheckYourOwnForm();
-        var btnAdd = document.getElementById('btnAddToHeatmap');
-        var btnRemove = document.getElementById('btnRemoveFromHeatmap');
-        var results = document.getElementById('userDocResults');
-        if (btnAdd) btnAdd.style.display = 'inline-block';
-        if (btnRemove) btnRemove.style.display = 'none';
-        if (results) results.classList.add('hidden');
     }
 
     function hideAllDownstream() {
@@ -97,8 +86,6 @@
             currentMetric = this.value;
             renderStep4(true);
         });
-        document.getElementById('btnAddToHeatmap').addEventListener('click', addUserDocToHeatmap);
-        document.getElementById('btnRemoveFromHeatmap').addEventListener('click', removeUserDocFromHeatmap);
     }
 
     // ── Toggle helpers ───────────────────────────────────────────────
@@ -207,73 +194,6 @@
         if (!document.getElementById('step2Section').classList.contains('hidden')) showStep2(true);
         if (!document.getElementById('step3Section').classList.contains('hidden')) showStep3(true);
         if (!document.getElementById('step4Section').classList.contains('hidden')) showStep4(true);
-        renderCheckYourOwnForm();
-    }
-
-    // ── Check your own document ───────────────────────────────────────
-    function renderCheckYourOwnForm() {
-        var row = document.getElementById('userDocCountsRow');
-        if (!row) return;
-        var saved = {};
-        row.querySelectorAll('input[data-col]').forEach(function (inp) {
-            var col = columns[parseInt(inp.dataset.col)];
-            if (col) saved[col] = inp.value;
-        });
-        var html = '<label>Word counts:</label><div class="check-your-own-inputs">';
-        columns.forEach(function (col, cIdx) {
-            var val = saved[col] !== undefined ? saved[col] : '';
-            html += '<div class="check-your-own-input-group"><label for="userCount_' + cIdx + '">' + escHtml(col) + '</label>';
-            html += '<input type="number" id="userCount_' + cIdx + '" data-col="' + cIdx + '" value="' + escAttr(val) + '" min="0" max="99999" placeholder="0"></div>';
-        });
-        html += '</div>';
-        row.innerHTML = html;
-    }
-
-    function addUserDocToHeatmap() {
-        readDataFromInputs();
-        var name = document.getElementById('userDocName').value.trim() || 'My Document';
-        var total = parseFloat(document.getElementById('userDocTotal').value);
-        if (isNaN(total) || total <= 0) total = 1000;
-        var rawCounts = [];
-        for (var c = 0; c < columns.length; c++) {
-            var inp = document.getElementById('userCount_' + c);
-            var v = inp ? parseFloat(inp.value) : 0;
-            rawCounts.push(isNaN(v) ? 0 : v);
-        }
-        var nd = computeNormalized();
-        var means = computeMeans(nd), stdDevs = computeStdDevs(nd, means);
-        var normalized = rawCounts.map(function (val, c) { return total === 0 ? 0 : val / total; });
-        var zScores = normalized.map(function (val, c) {
-            return stdDevs[c] === 0 ? 0 : (val - means[c]) / stdDevs[c];
-        });
-        userDoc = { name: name, rawCounts: rawCounts, totalWords: total, normalized: normalized, zScores: zScores };
-        document.getElementById('btnAddToHeatmap').style.display = 'none';
-        document.getElementById('btnRemoveFromHeatmap').style.display = 'inline-block';
-        document.getElementById('userDocResults').classList.remove('hidden');
-        renderUserDocZScores();
-        document.getElementById('step4Section').classList.remove('hidden');
-        renderStep4(true);
-        document.getElementById('step4Section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    function removeUserDocFromHeatmap() {
-        userDoc = null;
-        document.getElementById('btnAddToHeatmap').style.display = 'inline-block';
-        document.getElementById('btnRemoveFromHeatmap').style.display = 'none';
-        document.getElementById('userDocResults').classList.add('hidden');
-        if (!document.getElementById('step4Section').classList.contains('hidden')) renderStep4(true);
-    }
-
-    function renderUserDocZScores() {
-        if (!userDoc) return;
-        var container = document.getElementById('userDocZScoresDisplay');
-        var html = '<div class="user-doc-zscores">';
-        userDoc.zScores.forEach(function (z, c) {
-            var cls = z > 0.005 ? 'positive' : z < -0.005 ? 'negative' : 'zero';
-            html += '<span class="z-badge ' + cls + '" title="' + escAttr(columns[c]) + '">' + escHtml(columns[c]) + ': ' + fmtNum(z, 2) + '</span>';
-        });
-        html += '</div>';
-        container.innerHTML = html;
     }
 
     // ── Read data from table inputs ──────────────────────────────────
@@ -667,26 +587,7 @@
         var zScores = computeZScores(nd, means, stdDevs);
         var n = data.length;
         var info = METRIC_INFO[currentMetric];
-        var fn = currentMetric === 'manhattan' ? manhattanDist
-               : currentMetric === 'euclidean' ? euclideanDist
-               : currentMetric === 'cosine' ? cosineDist
-               : burrowsDelta;
-
-        var labels = docNames.slice();
         var mat = computeMatrix(zScores, currentMetric);
-
-        if (userDoc) {
-            labels.push(userDoc.name);
-            for (var i = 0; i < n; i++) {
-                var d = fn(zScores[i], userDoc.zScores);
-                mat[i].push(d);
-            }
-            var userRow = [];
-            for (var j = 0; j < n; j++) userRow.push(mat[j][n]);
-            userRow.push(0);
-            mat.push(userRow);
-            n = mat.length;
-        }
 
         // Find min/max excluding diagonal
         var minV = Infinity, maxV = -Infinity;
@@ -701,19 +602,15 @@
         var html = '<div class="heatmap-wrapper">';
         html += '<div class="heatmap-grid" style="grid-template-columns: repeat(' + cols + ', auto);">';
         html += '<div class="heatmap-cell hm-corner"></div>';
-        for (var j = 0; j < n; j++) {
-            var labelClass = (userDoc && j === n - 1) ? 'hm-label hm-user-doc' : 'hm-label';
-            html += '<div class="heatmap-cell ' + labelClass + '">' + escHtml(labels[j]) + '</div>';
-        }
+        for (var j = 0; j < n; j++) html += '<div class="heatmap-cell hm-label">' + escHtml(docNames[j]) + '</div>';
 
         for (var i = 0; i < n; i++) {
-            var labelClass = (userDoc && i === n - 1) ? 'hm-label hm-user-doc' : 'hm-label';
-            html += '<div class="heatmap-cell ' + labelClass + '">' + escHtml(labels[i]) + '</div>';
+            html += '<div class="heatmap-cell hm-label">' + escHtml(docNames[i]) + '</div>';
             for (var j = 0; j < n; j++) {
                 var v = mat[i][j];
                 var bg = heatColor(v, minV, maxV, i === j, info.isSimilarity);
                 var fg = heatTextColor(v, minV, maxV, i === j, info.isSimilarity);
-                html += '<div class="heatmap-cell" style="background:' + bg + ';color:' + fg + ';" title="' + escAttr(labels[i]) + ' vs ' + escAttr(labels[j]) + '">' + fmtNum(v, 2) + '</div>';
+                html += '<div class="heatmap-cell" style="background:' + bg + ';color:' + fg + ';" title="' + escAttr(docNames[i]) + ' vs ' + escAttr(docNames[j]) + '">' + fmtNum(v, 2) + '</div>';
             }
         }
         html += '</div>';
