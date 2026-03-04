@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Z-Score Standardization (Feature Scaling)</title>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            startup: {
+                pageReady: () => {
+                    return MathJax.startup.defaultPageReady();
+                }
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f7fa;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        header {
+            margin-bottom: 2rem;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        header p {
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: #fff;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background: #f8f9fa;
+            border-color: #aaa;
+        }
+
+        .btn.primary {
+            background: #3498db;
+            border-color: #3498db;
+            color: white;
+        }
+
+        .btn.primary:hover {
+            background: #2980b9;
+        }
+
+        .btn.success {
+            background: #27ae60;
+            border-color: #27ae60;
+            color: white;
+        }
+
+        .btn.success:hover {
+            background: #219a52;
+        }
+
+        .btn.danger {
+            background: #e74c3c;
+            border-color: #e74c3c;
+            color: white;
+        }
+
+        .btn.danger:hover {
+            background: #c0392b;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn.large {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .step-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        .step-section.hidden {
+            display: none;
+        }
+
+        .step-section h2 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .step-badge {
+            background: #27ae60;
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .explanation-box {
+            background: #f0f4f8;
+            border-left: 4px solid #3498db;
+            color: #2c3e50;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .explanation-box h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .explanation-box p {
+            font-size: 0.9rem;
+            color: #444;
+        }
+
+        .insight-box {
+            background: #fef9e7;
+            border-left: 4px solid #f39c12;
+            color: #2c3e50;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .insight-box h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            color: #d68910;
+        }
+
+        .insight-box p, .insight-box li {
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .insight-box ul {
+            margin-left: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        .insight-box li {
+            margin-bottom: 0.3rem;
+        }
+
+        .concept-box {
+            background: #eaf2f8;
+            border-left: 4px solid #2980b9;
+            color: #2c3e50;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .concept-box h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            color: #2980b9;
+        }
+
+        .concept-box p {
+            font-size: 0.85rem;
+            color: #444;
+            margin-bottom: 0.5rem;
+        }
+
+        .math-section {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .math-section h4 {
+            font-size: 0.95rem;
+            color: #2c3e50;
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 0.5rem;
+        }
+
+        .math-content {
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .math-formula {
+            text-align: center;
+            margin: 0.75rem 0;
+        }
+
+        .continue-container {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e0e0e0;
+            text-align: center;
+        }
+
+        /* Data table styling */
+        .data-table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 1rem;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+        }
+
+        table.feature-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            min-width: 500px;
+            table-layout: fixed;
+        }
+
+        table.feature-table th:first-child,
+        table.feature-table td:first-child {
+            width: 120px;
+        }
+
+        table.feature-table th,
+        table.feature-table td {
+            padding: 0.6rem 0.8rem;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+
+        table.feature-table thead th {
+            background: #eaf0f6;
+            color: #2c3e50;
+            font-weight: 600;
+            position: relative;
+            border-bottom: 2px solid #b0bec5;
+        }
+
+        table.feature-table thead th input.col-name-input {
+            border: none;
+            background: transparent;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #2c3e50;
+            width: 60px;
+            outline: none;
+            padding: 0;
+        }
+
+        table.feature-table thead th input.col-name-input:focus {
+            border-bottom: 1px solid #3498db;
+        }
+
+        table.feature-table thead th .remove-col-btn {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background: rgba(0,0,0,0.08);
+            border: none;
+            color: #999;
+            cursor: pointer;
+            font-size: 0.7rem;
+            border-radius: 2px;
+            padding: 0 4px;
+            line-height: 1.4;
+        }
+
+        table.feature-table thead th .remove-col-btn:hover {
+            background: rgba(231,76,60,0.2);
+            color: #c0392b;
+        }
+
+        /* Ghost column — same look as real columns, just muted text */
+        table.feature-table .ghost-col {
+            cursor: pointer;
+            min-width: 60px;
+        }
+
+        table.feature-table thead th.ghost-col {
+            color: #aaa;
+            font-weight: 400;
+        }
+
+        table.feature-table td.ghost-col {
+            color: #ccc;
+        }
+
+        table.feature-table .ghost-col input {
+            border: none;
+            background: transparent;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #333;
+            width: 70px;
+            outline: none;
+        }
+
+        table.feature-table .ghost-col input::placeholder {
+            color: #bbb;
+        }
+
+        table.feature-table .ghost-col.active {
+            cursor: default;
+        }
+
+        /* Toggle details */
+        .calc-toggle-btn {
+            background: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.85rem;
+            color: #555;
+            cursor: pointer;
+            margin-bottom: 0.75rem;
+            transition: all 0.2s ease;
+        }
+
+        .calc-toggle-btn:hover {
+            background: #f0f4f8;
+            border-color: #3498db;
+            color: #2980b9;
+        }
+
+        .calc-details-collapsible {
+            display: none;
+        }
+
+        .calc-details-collapsible.open {
+            display: block;
+        }
+
+        table.feature-table tbody tr:nth-child(even):not(.mean-row):not(.std-row) {
+            background: #f8f9fa;
+        }
+
+        table.feature-table tbody tr:not(.mean-row):not(.std-row):hover {
+            background: #eef2f7;
+        }
+
+        table.feature-table td.doc-label {
+            font-weight: 600;
+            background: #ecf0f1;
+            color: #2c3e50;
+            text-align: left;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        table.feature-table td.doc-label input.doc-name-input {
+            border: none;
+            background: transparent;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #2c3e50;
+            width: 65px;
+            outline: none;
+            padding: 0;
+        }
+
+        table.feature-table td.doc-label input.doc-name-input:focus {
+            border-bottom: 1px solid #3498db;
+        }
+
+        table.feature-table td.doc-label .remove-row-btn {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background: rgba(0,0,0,0.08);
+            border: none;
+            color: #999;
+            cursor: pointer;
+            font-size: 0.65rem;
+            border-radius: 2px;
+            padding: 0 3px;
+            line-height: 1.4;
+        }
+
+        table.feature-table td.doc-label .remove-row-btn:hover {
+            background: rgba(231,76,60,0.2);
+            color: #c0392b;
+        }
+
+        table.feature-table tr.ghost-row-trigger td {
+            cursor: pointer;
+            color: #aaa;
+            font-weight: 400;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        table.feature-table tr.ghost-row-trigger td:hover {
+            color: #666;
+            background: #f0f4f8;
+        }
+
+        table.feature-table td input {
+            width: 60px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            padding: 0.25rem;
+            font-size: 0.85rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        table.feature-table td input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 3px rgba(52,152,219,0.3);
+        }
+
+        /* Mean row */
+        table.feature-table tr.mean-row td {
+            background: #d5f5e3;
+            font-weight: 600;
+            color: #1e8449;
+            border-top: 3px solid #27ae60;
+        }
+
+        table.feature-table tr.mean-row td.stat-label {
+            background: #27ae60;
+            color: white;
+        }
+
+        /* Std dev row */
+        table.feature-table tr.std-row td {
+            background: #fadbd8;
+            font-weight: 600;
+            color: #922b21;
+            border-top: 2px solid #e74c3c;
+        }
+
+        table.feature-table tr.std-row td.stat-label {
+            background: #e74c3c;
+            color: white;
+        }
+
+        /* Z-score table */
+        table.feature-table.z-score-table td {
+            font-family: 'Courier New', monospace;
+        }
+
+        table.feature-table.z-score-table td.positive {
+            background: #d4efdf;
+            color: #1e8449;
+        }
+
+        table.feature-table.z-score-table td.negative {
+            background: #fadbd8;
+            color: #922b21;
+        }
+
+        table.feature-table.z-score-table td.zero {
+            background: #f9f9f9;
+            color: #888;
+        }
+
+        table.feature-table.z-score-table tr.step3-stat-row td {
+            border-top: 2px solid #999;
+            font-weight: 600;
+            color: #555;
+            background: #f8f8f8;
+        }
+
+        table.feature-table.z-score-table tr.step3-stat-row td.step3-stat-label {
+            text-align: left;
+            color: #333;
+        }
+
+        /* Heatmap */
+        #heatmapContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .heatmap-grid {
+            display: inline-grid;
+            gap: 2px;
+            margin: 1rem 0;
+        }
+
+        .heatmap-cell {
+            width: 64px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            border-radius: 3px;
+            transition: transform 0.1s;
+        }
+
+        .heatmap-cell:not(.hm-label):hover {
+            transform: scale(1.1);
+            z-index: 1;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .heatmap-cell.hm-label {
+            background: transparent;
+            font-weight: 600;
+            color: #2c3e50;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 0.8rem;
+        }
+
+        .heatmap-cell.hm-corner {
+            background: transparent;
+        }
+
+        .heatmap-legend {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .heatmap-legend-bar {
+            width: 200px;
+            height: 14px;
+            border-radius: 3px;
+            border: 1px solid #ddd;
+        }
+
+        /* Calculation detail (LaTeX blocks) */
+        .calc-detail {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .calc-detail .col-name {
+            font-weight: 700;
+            color: #2980b9;
+        }
+
+        /* Highlight animation */
+        @keyframes highlightFade {
+            0% { background-color: #fff3cd; }
+            100% { background-color: transparent; }
+        }
+
+        .highlight-flash {
+            animation: highlightFade 1.5s ease-out;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            table.feature-table td input {
+                width: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Z-Score Standardization</h1>
+            <p>A step-by-step walkthrough of how z-scores put different features on the same scale</p>
+        </header>
+
+        <!-- STEP 1 & 2: Raw Data → Mean & Std Dev (progressive) -->
+        <section class="step-section" id="step1Section">
+            <h2><span class="step-badge">Step 1</span> The Raw Data: Word Frequencies</h2>
+
+            <div class="explanation-box">
+                <h4>Stylometry: Identifying Authors by Word Usage</h4>
+                <p>In stylometry, we count how often each word appears in a document. Different words have very different frequencies &mdash; common words like <strong>的</strong> appear hundreds of times, while rarer words like <strong>面包</strong> might appear just a handful of times. This difference in scale makes it hard to compare features directly.</p>
+            </div>
+
+            <div style="margin-bottom: 0.75rem;">
+                <button class="btn" id="btnResetData">Reset to Defaults</button>
+            </div>
+
+            <div class="data-table-wrapper" id="rawDataTableWrapper">
+                <table class="feature-table" id="rawDataTable">
+                    <!-- Populated by JS -->
+                </table>
+            </div>
+
+            <div class="insight-box">
+                <h4>Notice the Scale Problem</h4>
+                <p>Look at the values: <strong>的</strong> ranges from roughly 40&ndash;90, while <strong>面包</strong> ranges from 0&ndash;5. If we tried to compare documents directly, the high-frequency word <strong>的</strong> would dominate and drown out the signal from rarer words. We need a way to put all features on the same scale.</p>
+            </div>
+
+            <div class="continue-container" id="step2Trigger">
+                <button class="btn success large" id="btnToStep2">
+                    Show Mean &amp; Standard Deviation →
+                </button>
+            </div>
+
+            <!-- Step 2 content (revealed in place) -->
+            <div id="step2Content" class="hidden">
+                <h2 style="margin-top: 1.5rem;"><span class="step-badge">Step 2</span> Column Mean &amp; Standard Deviation</h2>
+
+                <div class="explanation-box">
+                    <h4>Summarizing Each Feature</h4>
+                    <p>For each word (column), we computed two statistics &mdash; now visible as the two colored rows at the bottom of the table: the <strong style="color:#1e8449;">mean</strong> (average count across all documents) and the <strong style="color:#922b21;">standard deviation</strong> (how spread out the counts are). These two numbers are the key ingredients for z-score standardization.</p>
+                </div>
+
+                <div class="math-section">
+                    <h4>The Formulas</h4>
+                    <div class="math-content">
+                        <p style="font-size: 0.85rem; margin-bottom: 0.5rem;"><strong>Mean</strong> (average value in a column):</p>
+                        <div class="math-formula">
+                            $$\mu_j = \frac{1}{n}\sum_{i=1}^{n} x_{ij}$$
+                        </div>
+                        <p style="font-size: 0.85rem; margin-bottom: 0.5rem; margin-top: 1rem;"><strong>Standard Deviation</strong> (spread around the mean):</p>
+                        <div class="math-formula">
+                            $$\sigma_j = \sqrt{\frac{1}{n}\sum_{i=1}^{n} (x_{ij} - \mu_j)^2}$$
+                        </div>
+                        <p style="font-size: 0.8rem; color: #666; margin-top: 0.5rem;">Here $j$ is the column (word) and $i$ is the row (document). We use the population standard deviation (dividing by $n$) for simplicity.</p>
+                    </div>
+                </div>
+
+                <button class="calc-toggle-btn" id="btnToggleCalcMeanStd">Show detailed calculations ▸</button>
+                <div class="calc-details-collapsible" id="calcDetailsMeanStd">
+                    <!-- Populated by JS -->
+                </div>
+
+                <div class="continue-container">
+                    <button class="btn success large" id="btnToStep3">
+                        Continue to Step 3: Compute Z-Scores →
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- STEP 3: Z-Scores -->
+        <section class="step-section hidden" id="step3Section">
+            <h2><span class="step-badge">Step 3</span> Z-Score Standardization</h2>
+
+            <div class="explanation-box">
+                <h4>Putting Everything on the Same Scale</h4>
+                <p>The z-score tells us <strong>how many standard deviations a value is above or below the mean</strong>. After standardization, every column has mean = 0 and standard deviation = 1, regardless of the original scale.</p>
+            </div>
+
+            <div class="math-section">
+                <h4>The Z-Score Formula</h4>
+                <div class="math-content">
+                    <div class="math-formula">
+                        $$z_{ij} = \frac{x_{ij} - \mu_j}{\sigma_j}$$
+                    </div>
+                    <p style="font-size: 0.85rem; color: #555;">Subtract the column mean, then divide by the column standard deviation. This <strong>centers</strong> the data (mean → 0) and <strong>rescales</strong> it (std dev → 1).</p>
+                </div>
+            </div>
+
+            <div id="calcDetailsZScore">
+                <!-- Populated by JS: example z-score calculation -->
+            </div>
+
+            <div style="margin-bottom: 0.75rem;">
+                <button class="btn" id="btnToggleOriginal">Show original values</button>
+            </div>
+
+            <div class="data-table-wrapper">
+                <table class="feature-table z-score-table" id="zScoreTable">
+                    <!-- Populated by JS -->
+                </table>
+            </div>
+
+            <div class="concept-box">
+                <h4>Reading Z-Scores</h4>
+                <p><strong style="color: #27ae60;">Positive z-score:</strong> the value is <em>above</em> the mean for that word. The document uses this word more than average.</p>
+                <p><strong style="color: #c0392b;">Negative z-score:</strong> the value is <em>below</em> the mean. The document uses this word less than average.</p>
+                <p><strong style="color: #888;">z = 0:</strong> exactly at the mean.</p>
+                <p style="margin-top: 0.5rem;">Now all features are comparable: a z-score of +2 for <strong>的</strong> and a z-score of +2 for <strong>面包</strong> both mean "2 standard deviations above average" &mdash; even though the raw counts were vastly different.</p>
+            </div>
+
+            <div class="insight-box">
+                <h4>Why This Matters for Stylometry</h4>
+                <ul>
+                    <li>After z-scoring, each word contributes equally to distance measures and downstream analysis (like PCA or clustering).</li>
+                    <li>A rare word that an author uses unusually often can now "stand out" just as much as a common word pattern.</li>
+                    <li>Try editing the raw data in Step 1 and watch how the z-scores change!</li>
+                </ul>
+            </div>
+
+            <div class="continue-container">
+                <button class="btn success large" id="btnToStep4">
+                    Continue to Step 4: Document Distances →
+                </button>
+            </div>
+        </section>
+
+        <!-- STEP 4: Cosine Similarity Heatmap -->
+        <section class="step-section hidden" id="step4Section">
+            <h2><span class="step-badge">Step 4</span> Document Similarity</h2>
+
+            <div class="explanation-box">
+                <h4>Comparing Documents with Cosine Similarity</h4>
+                <p>Now that every feature is on the same scale, we can meaningfully compare documents. <strong>Cosine similarity</strong> measures how similar the <em>direction</em> of two vectors is, ignoring their magnitude. A value of 1 means identical direction (very similar), 0 means unrelated, and &minus;1 means opposite.</p>
+            </div>
+
+            <div class="math-section">
+                <h4>Cosine Similarity Formula</h4>
+                <div class="math-content">
+                    <div class="math-formula">
+                        $$\text{sim}(\mathbf{a}, \mathbf{b}) = \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{a}\| \, \|\mathbf{b}\|} = \frac{\sum_j a_j b_j}{\sqrt{\sum_j a_j^2} \;\sqrt{\sum_j b_j^2}}$$
+                    </div>
+                    <p style="font-size: 0.85rem; color: #555;">We compute this for every pair of documents using their z-score vectors. The heatmap below shows the result: <strong>brighter/warmer colors</strong> mean the documents are more similar.</p>
+                </div>
+            </div>
+
+            <div id="heatmapContainer">
+                <!-- Populated by JS -->
+            </div>
+
+            <div class="insight-box">
+                <h4>Reading the Heatmap</h4>
+                <ul>
+                    <li>The diagonal is always 1.00 (each document is perfectly similar to itself).</li>
+                    <li>Look for the brightest off-diagonal cells &mdash; those are the most similar document pairs.</li>
+                    <li>Low or negative similarity means the documents have very different word-usage patterns.</li>
+                </ul>
+            </div>
+
+            <div class="continue-container">
+                <button class="btn primary large" id="btnRestart">
+                    ↺ Start Over
+                </button>
+            </div>
+        </section>
+
+        <footer>
+            <a href="../index.html">← Back to Home Page</a>
+        </footer>
+    </div>
+
+    <script src="../scripts/z-score.js"></script>
+</body>
+</html>
