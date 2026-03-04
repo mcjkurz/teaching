@@ -599,7 +599,8 @@
         }
 
         var cols = n + 1;
-        var html = '<div class="heatmap-grid" style="grid-template-columns: repeat(' + cols + ', auto);">';
+        var html = '<div class="heatmap-wrapper">';
+        html += '<div class="heatmap-grid" style="grid-template-columns: repeat(' + cols + ', auto);">';
         html += '<div class="heatmap-cell hm-corner"></div>';
         for (var j = 0; j < n; j++) html += '<div class="heatmap-cell hm-label">' + escHtml(docNames[j]) + '</div>';
 
@@ -614,7 +615,7 @@
         }
         html += '</div>';
 
-        // Legend: blue → white → red
+        // Legend: blue → white → red (separate div, centered under heatmap)
         html += '<div class="heatmap-legend">';
         if (info.isSimilarity) {
             html += '<span>' + fmtNum(minV, 2) + ' (least similar)</span>';
@@ -625,6 +626,7 @@
             html += '<div class="heatmap-legend-bar" style="background: linear-gradient(to right, rgb(255,0,0), rgb(255,255,255), rgb(0,0,255));"></div>';
             html += '<span>' + fmtNum(maxV, 2) + ' (least similar)</span>';
         }
+        html += '</div>';
         html += '</div>';
 
         document.getElementById('heatmapContainer').innerHTML = html;
