@@ -64,6 +64,7 @@
         document.getElementById('step2Section').classList.add('hidden');
         document.getElementById('step3Section').classList.add('hidden');
         document.getElementById('step4Section').classList.add('hidden');
+        document.getElementById('step5Section').classList.add('hidden');
         closeMeanStdCalc();
     }
 
@@ -194,6 +195,10 @@
         if (!document.getElementById('step2Section').classList.contains('hidden')) showStep2(true);
         if (!document.getElementById('step3Section').classList.contains('hidden')) showStep3(true);
         if (!document.getElementById('step4Section').classList.contains('hidden')) showStep4(true);
+        if (!document.getElementById('step5Section').classList.contains('hidden')) {
+            renderStep5InputTable();
+            clearStep5Results();
+        }
     }
 
     // ── Read data from table inputs ──────────────────────────────────
@@ -535,7 +540,7 @@
                 html += '<tr><td class="doc-label">' + escHtml(docNames[rIdx]) + '</td>';
                 row.forEach(function (z) {
                     var cls = z > 0.005 ? 'positive' : z < -0.005 ? 'negative' : 'zero';
-                    html += '<td class="' + cls + '">' + fmtNum(z, 2) + '</td>';
+                    html += '<td class="' + cls + '">' + fmtNum(z, 2, true) + '</td>';
                 });
                 html += '</tr>';
             });
@@ -559,6 +564,7 @@
             section.scrollIntoView({ behavior: 'smooth', block: 'start' });
             section.dataset.seen = 'true';
         }
+        showStep5(true);
     }
 
     function renderStep4(metricOnly) {
@@ -632,6 +638,115 @@
         document.getElementById('heatmapContainer').innerHTML = html;
     }
 
+    // ── Step 5: Add your own document ─────────────────────────────────
+    function showStep5(skipScroll) {
+        var section = document.getElementById('step5Section');
+        section.classList.remove('hidden');
+        renderStep5InputTable();
+        clearStep5Results();
+        if (!skipScroll && section.dataset.seen !== 'true') {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            section.dataset.seen = 'true';
+        }
+    }
+
+    function renderStep5InputTable() {
+        var container = document.getElementById('customDocInputs');
+        var html = '<table class="data-table custom-doc-table"><thead><tr>';
+        html += '<th>Your Document</th>';
+        columns.forEach(function (col) { html += '<th>' + escHtml(col) + '</th>'; });
+        html += '<th class="total-col">Total Words</th>';
+        html += '</tr></thead><tbody><tr>';
+        html += '<td class="doc-label"><input type="text" id="customDocName" value="My Doc" placeholder="Name..."></td>';
+        columns.forEach(function (col, cIdx) {
+            html += '<td><input type="number" class="custom-doc-count" data-col="' + cIdx + '" value="0" min="0" max="99999"></td>';
+        });
+        html += '<td class="total-col"><input type="number" id="customDocTotal" value="1000" min="1" max="999999"></td>';
+        html += '</tr></tbody></table>';
+        html += '<button id="btnAnalyzeCustom" class="btn primary" style="margin-top:1rem;">Analyze Document</button>';
+        container.innerHTML = html;
+
+        document.getElementById('btnAnalyzeCustom').addEventListener('click', analyzeCustomDocument);
+    }
+
+    function clearStep5Results() {
+        document.getElementById('customDocResults').innerHTML = '';
+    }
+
+    function analyzeCustomDocument() {
+        var customName = document.getElementById('customDocName').value.trim() || 'My Doc';
+        var customTotal = parseFloat(document.getElementById('customDocTotal').value) || 1000;
+        if (customTotal <= 0) customTotal = 1000;
+
+        var customCounts = [];
+        document.querySelectorAll('.custom-doc-count').forEach(function (inp) {
+            var v = parseFloat(inp.value) || 0;
+            customCounts.push(v);
+        });
+
+        var nd = computeNormalized();
+        var means = computeMeans(nd), stdDevs = computeStdDevs(nd, means);
+        var zScores = computeZScores(nd, means, stdDevs);
+
+        var customNorm = customCounts.map(function (c) { return c / customTotal; });
+        var customZ = customNorm.map(function (val, cIdx) {
+            return stdDevs[cIdx] === 0 ? 0 : (val - means[cIdx]) / stdDevs[cIdx];
+        });
+
+        var info = METRIC_INFO[currentMetric];
+        var fn = currentMetric === 'manhattan' ? manhattanDist
+               : currentMetric === 'euclidean' ? euclideanDist
+               : currentMetric === 'cosine'    ? cosineDist
+               : burrowsDelta;
+
+        var distances = zScores.map(function (docZ) { return fn(customZ, docZ); });
+        var minDist = Math.min.apply(null, distances);
+        var nearestIdx = distances.indexOf(minDist);
+
+        var html = '<div class="custom-doc-results-content">';
+
+        html += '<h4>Step-by-Step Calculation</h4>';
+        html += '<table class="data-table step5-calc-table"><thead><tr>';
+        html += '<th>Word</th><th>Raw Count</th><th>Normalized</th><th>\u03BC (corpus)</th><th>\u03C3 (corpus)</th><th>Z-Score</th>';
+        html += '</tr></thead><tbody>';
+        columns.forEach(function (col, cIdx) {
+            var z = customZ[cIdx];
+            var cls = z > 0.005 ? 'positive' : z < -0.005 ? 'negative' : 'zero';
+            html += '<tr>';
+            html += '<td class="col-name">' + escHtml(col) + '</td>';
+            html += '<td>' + fmtNum(customCounts[cIdx]) + '</td>';
+            html += '<td>' + fmtNum(customNorm[cIdx], 4) + '</td>';
+            html += '<td>' + fmtNum(means[cIdx], 4) + '</td>';
+            html += '<td>' + fmtNum(stdDevs[cIdx], 4) + '</td>';
+            html += '<td class="' + cls + '">' + fmtNum(z, 2, true) + '</td>';
+            html += '</tr>';
+        });
+        html += '</tbody></table>';
+
+        html += '<h4>Distance to Each Document (' + escHtml(info.label) + ')</h4>';
+        html += '<table class="data-table step5-dist-table"><thead><tr>';
+        html += '<th>Document</th><th>Distance</th>';
+        html += '</tr></thead><tbody>';
+        distances.forEach(function (d, rIdx) {
+            var highlight = rIdx === nearestIdx ? ' class="nearest-doc"' : '';
+            html += '<tr' + highlight + '>';
+            html += '<td class="doc-label">' + escHtml(docNames[rIdx]) + '</td>';
+            html += '<td>' + fmtNum(d, 2) + '</td>';
+            html += '</tr>';
+        });
+        html += '</tbody></table>';
+
+        html += '<div class="nearest-result">';
+        html += '<strong>Nearest match:</strong> <span class="nearest-doc-name">' + escHtml(docNames[nearestIdx]) + '</span>';
+        html += ' (distance: ' + fmtNum(minDist, 2) + ')';
+        html += '</div>';
+
+        html += '</div>';
+
+        document.getElementById('customDocResults').innerHTML = html;
+        document.getElementById('customDocResults').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
     function heatColor(val, minV, maxV, isDiag, isSim) {
         if (isDiag) return '#e8e8e8';
         var range = maxV - minV;
@@ -667,9 +782,12 @@
     }
 
     // ── Utilities ────────────────────────────────────────────────────
-    function fmtNum(n, decimals) {
-        if (typeof decimals === 'undefined') return Number.isInteger(n) ? String(n) : n.toFixed(2);
-        return n.toFixed(decimals);
+    function fmtNum(n, decimals, showSign) {
+        var result;
+        if (typeof decimals === 'undefined') result = Number.isInteger(n) ? String(n) : n.toFixed(2);
+        else result = n.toFixed(decimals);
+        if (showSign && n > 0.00001) result = '+' + result;
+        return result;
     }
 
     function escHtml(str) {
