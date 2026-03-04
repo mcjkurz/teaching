@@ -4,7 +4,7 @@
     var DEFAULT_COLUMNS = ['的', '了', '是', '他', '有'];
     var DEFAULT_DATA = [
         [320, 110, 45, 55, 70],
-        [85,  30,  28, 18, 22],
+        [85,  60,  28, 18, 22],
         [250, 150,  35, 48, 60],
         [140, 52,  44, 28, 35],
         [410, 145, 35, 72, 88],
@@ -27,10 +27,10 @@
             isSimilarity: false
         },
         cosine: {
-            label: 'Cosine Similarity (Cosine Delta)',
-            desc: 'Measures the angle between two z-score vectors rather than the distance between points. Focuses on proportional word-usage patterns, and research (Evert et al., 2017) shows it often outperforms Manhattan Delta on longer feature lists.',
-            formula: '$$\\text{sim}(\\mathbf{a},\\mathbf{b}) = \\frac{\\sum_j a_j b_j}{\\sqrt{\\sum_j a_j^2}\\;\\sqrt{\\sum_j b_j^2}}$$',
-            isSimilarity: true
+            label: 'Cosine Distance (Cosine Delta)',
+            desc: 'One minus the cosine similarity — measures how different the directions of two z-score vectors are. Focuses on proportional word-usage patterns, and research (Evert et al., 2017) shows it often outperforms Manhattan Delta on longer feature lists.',
+            formula: '$$d(\\mathbf{a},\\mathbf{b}) = 1 - \\frac{\\sum_j a_j b_j}{\\sqrt{\\sum_j a_j^2}\\;\\sqrt{\\sum_j b_j^2}}$$',
+            isSimilarity: false
         },
         burrows: {
             label: "Burrows' Delta",
@@ -257,11 +257,11 @@
         return Math.sqrt(s);
     }
 
-    function cosineSim(a, b) {
+    function cosineDist(a, b) {
         var dot = 0, na = 0, nb = 0;
         for (var i = 0; i < a.length; i++) { dot += a[i] * b[i]; na += a[i] * a[i]; nb += b[i] * b[i]; }
         var den = Math.sqrt(na) * Math.sqrt(nb);
-        return den === 0 ? 0 : dot / den;
+        return den === 0 ? 1 : 1 - dot / den;
     }
 
     function burrowsDelta(a, b) {
@@ -273,7 +273,7 @@
         var n = zScores.length, mat = [];
         var fn = metric === 'manhattan' ? manhattanDist
                : metric === 'euclidean' ? euclideanDist
-               : metric === 'cosine'    ? cosineSim
+               : metric === 'cosine'    ? cosineDist
                : burrowsDelta;
         for (var i = 0; i < n; i++) {
             mat[i] = [];
