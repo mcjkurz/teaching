@@ -27,7 +27,7 @@
             isSimilarity: false
         },
         cosine: {
-            label: 'Cosine Distance (Cosine Delta)',
+            label: 'Cosine Distance',
             desc: 'One minus the cosine similarity — measures how different the directions of two z-score vectors are. Focuses on proportional word-usage patterns, and research (Evert et al., 2017) shows it often outperforms Manhattan Delta on longer feature lists.',
             formula: '$$d(\\mathbf{a},\\mathbf{b}) = 1 - \\frac{\\sum_j a_j b_j}{\\sqrt{\\sum_j a_j^2}\\;\\sqrt{\\sum_j b_j^2}}$$',
             isSimilarity: false
