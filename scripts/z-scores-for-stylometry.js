@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var DEFAULT_COLUMNS = ['的', '了', '是', '他', '有'];
+    var DEFAULT_COLUMNS = ['the', 'a', 'of', 'at', 'to'];
     var DEFAULT_DATA = [
         [320, 110, 45, 55, 70],
         [85,  60,  28, 18, 22],
