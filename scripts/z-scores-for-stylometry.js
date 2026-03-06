@@ -43,6 +43,7 @@
     var columns, data, totalWords, docNames;
     var ghostColActive, ghostRowActive, showingOriginal, currentMetric;
     var cachedPCA = null;
+    var customDocAnalyzed = false;
 
     function init() {
         currentMetric = 'manhattan';
@@ -87,6 +88,9 @@
         document.getElementById('metricSelect').addEventListener('change', function () {
             currentMetric = this.value;
             renderStep4(true);
+            if (customDocAnalyzed) {
+                analyzeCustomDocument();
+            }
         });
     }
 
@@ -863,6 +867,7 @@
 
     function clearStep5Results() {
         document.getElementById('customDocResults').innerHTML = '';
+        customDocAnalyzed = false;
     }
 
     function analyzeCustomDocument() {
@@ -951,6 +956,7 @@
         html += '</div>';
 
         document.getElementById('customDocResults').innerHTML = html;
+        customDocAnalyzed = true;
         document.getElementById('customDocResults').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
