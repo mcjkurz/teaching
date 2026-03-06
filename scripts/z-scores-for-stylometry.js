@@ -585,7 +585,9 @@
         }
 
         renderHeatmap();
-        renderPCAPlot();
+        if (!metricOnly) {
+            renderPCAPlot();
+        }
         typesetElement(document.getElementById('step4Section'));
     }
 
