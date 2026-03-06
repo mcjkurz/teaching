@@ -89,7 +89,7 @@
             currentMetric = this.value;
             renderStep4(true);
             if (customDocAnalyzed) {
-                analyzeCustomDocument();
+                analyzeCustomDocument(true);
             }
         });
     }
@@ -870,7 +870,7 @@
         customDocAnalyzed = false;
     }
 
-    function analyzeCustomDocument() {
+    function analyzeCustomDocument(skipScroll) {
         var customName = document.getElementById('customDocName').value.trim() || 'My Doc';
         var customTotal = parseFloat(document.getElementById('customDocTotal').value) || 1000;
         if (customTotal <= 0) customTotal = 1000;
@@ -957,7 +957,9 @@
 
         document.getElementById('customDocResults').innerHTML = html;
         customDocAnalyzed = true;
-        document.getElementById('customDocResults').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (!skipScroll) {
+            document.getElementById('customDocResults').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
     }
 
     function renderCustomDocPCA(customZ, customName) {
