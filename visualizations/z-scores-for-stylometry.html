@@ -162,16 +162,28 @@
                 <!-- Populated by JS -->
             </div>
 
-            <div id="heatmapContainer">
-                <!-- Populated by JS -->
+            <div class="visualizations-row">
+                <div class="viz-panel">
+                    <h4>Distance Heatmap</h4>
+                    <div id="heatmapContainer">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+                <div class="viz-panel">
+                    <h4>PCA Plot (2D Projection)</h4>
+                    <div id="pcaContainer">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
             </div>
 
             <div class="insight-box">
-                <h4>Reading the Heatmap</h4>
+                <h4>Reading the Visualizations</h4>
                 <ul>
-                    <li id="heatmapHintDiag">The diagonal is always 0 (zero distance to itself).</li>
-                    <li id="heatmapHintColor">Lower values (cooler colors) mean more similar documents.</li>
-                    <li>Try switching metrics to see how the ranking of document pairs changes.</li>
+                    <li id="heatmapHintDiag"><strong>Heatmap:</strong> The diagonal is always 0 (zero distance to itself).</li>
+                    <li id="heatmapHintColor"><strong>Heatmap:</strong> Lower values (cooler colors) mean more similar documents.</li>
+                    <li><strong>PCA:</strong> Points closer together in the plot are more similar in their z-score profiles. The axes show the percentage of variance explained by each principal component.</li>
+                    <li>Try switching metrics to see how the heatmap ranking changes.</li>
                 </ul>
             </div>
 

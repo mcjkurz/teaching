@@ -209,11 +209,38 @@ table.feature-table.z-score-table tr.stat-row td.stat-row-label { text-align: le
 /* Normalized table */
 table.feature-table.norm-table td:not(.doc-label):not(.stat-label) { font-family: 'Courier New', monospace; }
 
+/* Visualizations row (heatmap + PCA side by side) */
+.visualizations-row {
+    display: flex; gap: 2rem; margin-bottom: 1rem; flex-wrap: wrap;
+    justify-content: center; align-items: stretch;
+}
+.viz-panel {
+    flex: 1; min-width: 300px; max-width: 500px;
+    display: flex; flex-direction: column;
+}
+.viz-panel > div {
+    flex: 1; display: flex; flex-direction: column; justify-content: center;
+}
+.viz-panel h4 {
+    font-size: 0.95rem; color: #2c3e50; margin-bottom: 0.75rem;
+    text-align: center; border-bottom: 1px solid #e0e0e0; padding-bottom: 0.5rem;
+}
+
 /* Heatmap */
 #heatmapContainer { display: flex; flex-direction: column; align-items: center; }
 .heatmap-wrapper {
     display: flex; flex-direction: column; align-items: center;
 }
+
+/* PCA Plot */
+#pcaContainer { display: flex; flex-direction: column; align-items: center; }
+.pca-svg { background: #fafafa; border: 1px solid #e0e0e0; border-radius: 6px; }
+.pca-grid line { stroke: #e8e8e8; stroke-width: 1; }
+.pca-axes line { stroke: #999; stroke-width: 1.5; }
+.pca-axis-label { font-size: 11px; fill: #555; font-weight: 600; }
+.pca-points circle { fill: #3498db; stroke: #2980b9; stroke-width: 1.5; }
+.pca-points circle:hover { fill: #2980b9; r: 8; }
+.pca-labels text { font-size: 10px; fill: #333; font-weight: 500; }
 .heatmap-grid { display: inline-grid; gap: 2px; margin: 1rem 0; }
 .heatmap-cell {
     width: 64px; height: 44px; display: flex; align-items: center; justify-content: center;
@@ -269,7 +296,11 @@ table.data-table {
 }
 .custom-doc-table thead th {
     background: #eaf0f6; color: #2c3e50; font-weight: 600;
-    border-bottom: 2px solid #b0bec5;
+    border-bottom: 2px solid #b0bec5; vertical-align: middle;
+}
+.custom-doc-table thead th .col-stats {
+    font-size: 0.7rem; font-weight: 400; color: #777;
+    margin-top: 0.25rem; line-height: 1.3;
 }
 .custom-doc-table td.doc-label { background: #ecf0f1; font-weight: 600; text-align: left; }
 .custom-doc-table td input {
@@ -284,6 +315,10 @@ table.data-table {
     background: #f0e6f6; border-left: 2px solid #8e44ad;
 }
 .custom-doc-table th.total-col { color: #6c3483; font-size: 0.8rem; }
+
+.analyze-btn-container {
+    text-align: center; margin-top: 1.25rem;
+}
 
 .custom-doc-results-content { margin-top: 1.5rem; }
 .custom-doc-results-content h4 {
@@ -313,13 +348,43 @@ table.data-table {
 .step5-dist-table tr.nearest-doc { background: #d4efdf; }
 .step5-dist-table tr.nearest-doc td { font-weight: 700; color: #1e8449; }
 
+/* Step 5 results row (distance table + PCA side by side) */
+.step5-results-row {
+    display: flex; gap: 2rem; margin-bottom: 1rem; flex-wrap: wrap;
+    justify-content: center; align-items: flex-start;
+}
+.step5-results-panel {
+    flex: 1; min-width: 280px; max-width: 450px;
+}
+.step5-results-panel h4 {
+    font-size: 0.95rem; color: #2c3e50; margin-bottom: 0.75rem;
+    text-align: center; border-bottom: 1px solid #e0e0e0; padding-bottom: 0.5rem;
+}
+.step5-results-panel .step5-dist-table { margin-bottom: 1rem; }
+
 .nearest-result {
     background: #d4efdf; border: 2px solid #27ae60; border-radius: 6px;
-    padding: 1rem; text-align: center; font-size: 1rem;
+    padding: 0.75rem; text-align: center; font-size: 0.95rem;
 }
 .nearest-result .nearest-doc-name {
-    font-weight: 700; color: #1e8449; font-size: 1.1rem;
+    font-weight: 700; color: #1e8449; font-size: 1rem;
 }
+
+/* Custom doc PCA plot */
+.custom-pca-container {
+    display: flex; flex-direction: column; align-items: center; margin-top: 1rem;
+}
+.pca-custom-point circle { fill: #e74c3c; stroke: #c0392b; stroke-width: 2; }
+.pca-custom-label text { font-size: 11px; fill: #c0392b; font-weight: 700; }
+.pca-legend {
+    display: flex; gap: 1.5rem; margin-top: 0.75rem; font-size: 0.85rem; color: #555;
+}
+.pca-legend-item { display: flex; align-items: center; gap: 0.4rem; }
+.pca-legend-dot {
+    width: 12px; height: 12px; border-radius: 50%; display: inline-block;
+}
+.pca-legend-dot.corpus { background: #3498db; border: 1.5px solid #2980b9; }
+.pca-legend-dot.custom { background: #e74c3c; border: 1.5px solid #c0392b; }
 
 footer {
     text-align: center; margin-top: 2rem; padding: 1.5rem;

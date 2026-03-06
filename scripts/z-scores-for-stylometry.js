@@ -8,14 +8,14 @@
         [250, 150,  35, 48, 60],
         [140, 52,  44, 28, 35],
         [410, 145, 35, 72, 88],
-        [180, 65,  55, 34, 42],
+        [180, 65,  55, 34, 44],
     ];
     var DEFAULT_TOTAL_WORDS = [4800, 1500, 4000, 2200, 6200, 2800];
     var DEFAULT_DOC_NAMES = ['Doc A', 'Doc B', 'Doc C', 'Doc D', 'Doc E', 'Doc F'];
 
     var METRIC_INFO = {
         manhattan: {
-            label: 'Manhattan Distance (Classic Delta)',
+            label: 'Manhattan Distance',
             desc: 'Sum of absolute z-score differences. Treats every deviation linearly, so a single outlier word cannot dominate the result — the aggregate signal of many words "outvotes" noise.',
             formula: '$$d(\\mathbf{a},\\mathbf{b}) = \\sum_{j=1}^{p} |a_j - b_j|$$',
             isSimilarity: false
@@ -42,6 +42,7 @@
 
     var columns, data, totalWords, docNames;
     var ghostColActive, ghostRowActive, showingOriginal, currentMetric;
+    var cachedPCA = null;
 
     function init() {
         currentMetric = 'manhattan';
@@ -576,15 +577,199 @@
         var hintDiag = document.getElementById('heatmapHintDiag');
         var hintColor = document.getElementById('heatmapHintColor');
         if (info.isSimilarity) {
-            hintDiag.textContent = 'The diagonal is always 1.00 (each document is perfectly similar to itself).';
-            hintColor.textContent = 'Higher values (warmer colors) mean more similar documents.';
+            hintDiag.innerHTML = '<strong>Heatmap:</strong> The diagonal is always 1.00 (each document is perfectly similar to itself).';
+            hintColor.innerHTML = '<strong>Heatmap:</strong> Higher values (warmer colors) mean more similar documents.';
         } else {
-            hintDiag.textContent = 'The diagonal is always 0.00 (zero distance to itself).';
-            hintColor.textContent = 'Lower values (cooler colors) mean more similar documents.';
+            hintDiag.innerHTML = '<strong>Heatmap:</strong> The diagonal is always 0.00 (zero distance to itself).';
+            hintColor.innerHTML = '<strong>Heatmap:</strong> Lower values (cooler colors) mean more similar documents.';
         }
 
         renderHeatmap();
+        renderPCAPlot();
         typesetElement(document.getElementById('step4Section'));
+    }
+
+    // ── PCA computation ───────────────────────────────────────────────
+    function computePCA(zScores) {
+        var n = zScores.length;
+        var p = zScores[0].length;
+
+        // Center the data (should already be centered, but ensure it)
+        var means = [];
+        for (var j = 0; j < p; j++) {
+            var s = 0;
+            for (var i = 0; i < n; i++) s += zScores[i][j];
+            means.push(s / n);
+        }
+        var centered = zScores.map(function (row) {
+            return row.map(function (val, j) { return val - means[j]; });
+        });
+
+        // Compute covariance matrix (p x p)
+        var cov = [];
+        for (var j1 = 0; j1 < p; j1++) {
+            cov[j1] = [];
+            for (var j2 = 0; j2 < p; j2++) {
+                var s = 0;
+                for (var i = 0; i < n; i++) s += centered[i][j1] * centered[i][j2];
+                cov[j1][j2] = s / n;
+            }
+        }
+
+        // Power iteration to find top 2 eigenvectors
+        var eigenvectors = [];
+        var eigenvalues = [];
+        var covCopy = cov.map(function (row) { return row.slice(); });
+
+        for (var k = 0; k < 2; k++) {
+            var v = [];
+            for (var j = 0; j < p; j++) v.push(Math.random() - 0.5);
+            v = normalizeVec(v);
+
+            // Power iteration
+            for (var iter = 0; iter < 100; iter++) {
+                var vNew = matVecMult(covCopy, v);
+                vNew = normalizeVec(vNew);
+                v = vNew;
+            }
+
+            // Compute eigenvalue (Rayleigh quotient)
+            var Av = matVecMult(covCopy, v);
+            var lambda = dotProd(v, Av);
+            eigenvalues.push(lambda);
+            eigenvectors.push(v);
+
+            // Deflate: subtract outer product
+            for (var j1 = 0; j1 < p; j1++) {
+                for (var j2 = 0; j2 < p; j2++) {
+                    covCopy[j1][j2] -= lambda * v[j1] * v[j2];
+                }
+            }
+        }
+
+        // Project data onto first 2 PCs
+        var projected = centered.map(function (row) {
+            return [dotProd(row, eigenvectors[0]), dotProd(row, eigenvectors[1])];
+        });
+
+        // Compute variance explained
+        var totalVar = 0;
+        for (var j = 0; j < p; j++) totalVar += cov[j][j];
+        var varExplained = eigenvalues.map(function (ev) {
+            return totalVar > 0 ? (ev / totalVar) * 100 : 0;
+        });
+
+        return {
+            projected: projected,
+            varExplained: varExplained,
+            eigenvectors: eigenvectors,
+            means: means
+        };
+    }
+
+    function normalizeVec(v) {
+        var norm = Math.sqrt(v.reduce(function (s, x) { return s + x * x; }, 0));
+        if (norm === 0) return v;
+        return v.map(function (x) { return x / norm; });
+    }
+
+    function matVecMult(mat, v) {
+        return mat.map(function (row) {
+            return row.reduce(function (s, val, j) { return s + val * v[j]; }, 0);
+        });
+    }
+
+    function dotProd(a, b) {
+        return a.reduce(function (s, val, i) { return s + val * b[i]; }, 0);
+    }
+
+    function renderPCAPlot() {
+        var nd = computeNormalized();
+        var means = computeMeans(nd), stdDevs = computeStdDevs(nd, means);
+        var zScores = computeZScores(nd, means, stdDevs);
+
+        if (zScores.length < 2 || zScores[0].length < 2) {
+            document.getElementById('pcaContainer').innerHTML = '<p style="color:#999;text-align:center;">Need at least 2 documents and 2 features for PCA.</p>';
+            cachedPCA = null;
+            return;
+        }
+
+        var pca = computePCA(zScores);
+        cachedPCA = pca;
+        var pts = pca.projected;
+        var varExp = pca.varExplained;
+
+        // Find bounds
+        var minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+        for (var i = 0; i < pts.length; i++) {
+            if (pts[i][0] < minX) minX = pts[i][0];
+            if (pts[i][0] > maxX) maxX = pts[i][0];
+            if (pts[i][1] < minY) minY = pts[i][1];
+            if (pts[i][1] > maxY) maxY = pts[i][1];
+        }
+
+        // Add padding
+        var rangeX = maxX - minX || 1;
+        var rangeY = maxY - minY || 1;
+        var pad = 0.15;
+        minX -= rangeX * pad; maxX += rangeX * pad;
+        minY -= rangeY * pad; maxY += rangeY * pad;
+
+        // SVG dimensions
+        var svgW = 320, svgH = 280;
+        var margin = { top: 20, right: 20, bottom: 40, left: 50 };
+        var plotW = svgW - margin.left - margin.right;
+        var plotH = svgH - margin.top - margin.bottom;
+
+        function scaleX(v) { return margin.left + (v - minX) / (maxX - minX) * plotW; }
+        function scaleY(v) { return margin.top + plotH - (v - minY) / (maxY - minY) * plotH; }
+
+        var html = '<svg width="' + svgW + '" height="' + svgH + '" class="pca-svg">';
+
+        // Grid lines
+        var numGridLines = 5;
+        html += '<g class="pca-grid">';
+        for (var i = 0; i <= numGridLines; i++) {
+            var xVal = minX + (maxX - minX) * i / numGridLines;
+            var yVal = minY + (maxY - minY) * i / numGridLines;
+            var x = scaleX(xVal);
+            var y = scaleY(yVal);
+            html += '<line x1="' + x + '" y1="' + margin.top + '" x2="' + x + '" y2="' + (margin.top + plotH) + '"/>';
+            html += '<line x1="' + margin.left + '" y1="' + y + '" x2="' + (margin.left + plotW) + '" y2="' + y + '"/>';
+        }
+        html += '</g>';
+
+        // Axes
+        html += '<g class="pca-axes">';
+        html += '<line x1="' + margin.left + '" y1="' + (margin.top + plotH) + '" x2="' + (margin.left + plotW) + '" y2="' + (margin.top + plotH) + '"/>';
+        html += '<line x1="' + margin.left + '" y1="' + margin.top + '" x2="' + margin.left + '" y2="' + (margin.top + plotH) + '"/>';
+        html += '</g>';
+
+        // Axis labels
+        html += '<text class="pca-axis-label" x="' + (margin.left + plotW / 2) + '" y="' + (svgH - 5) + '" text-anchor="middle">PC1 (' + fmtNum(varExp[0], 1) + '%)</text>';
+        html += '<text class="pca-axis-label" x="15" y="' + (margin.top + plotH / 2) + '" text-anchor="middle" transform="rotate(-90,15,' + (margin.top + plotH / 2) + ')">PC2 (' + fmtNum(varExp[1], 1) + '%)</text>';
+
+        // Points (rendered first, so they appear below labels)
+        html += '<g class="pca-points">';
+        for (var i = 0; i < pts.length; i++) {
+            var cx = scaleX(pts[i][0]);
+            var cy = scaleY(pts[i][1]);
+            html += '<circle cx="' + cx + '" cy="' + cy + '" r="6"/>';
+        }
+        html += '</g>';
+
+        // Labels (rendered last, so they appear on top)
+        html += '<g class="pca-labels">';
+        for (var i = 0; i < pts.length; i++) {
+            var cx = scaleX(pts[i][0]);
+            var cy = scaleY(pts[i][1]);
+            html += '<text x="' + (cx + 8) + '" y="' + (cy + 4) + '">' + escHtml(docNames[i]) + '</text>';
+        }
+        html += '</g>';
+
+        html += '</svg>';
+
+        document.getElementById('pcaContainer').innerHTML = html;
     }
 
     function renderHeatmap() {
@@ -651,10 +836,15 @@
     }
 
     function renderStep5InputTable() {
+        var nd = computeNormalized();
+        var means = computeMeans(nd), stdDevs = computeStdDevs(nd, means);
+
         var container = document.getElementById('customDocInputs');
         var html = '<table class="data-table custom-doc-table"><thead><tr>';
         html += '<th>Your Document</th>';
-        columns.forEach(function (col) { html += '<th>' + escHtml(col) + '</th>'; });
+        columns.forEach(function (col, cIdx) {
+            html += '<th>' + escHtml(col) + '<div class="col-stats">\u03BC=' + fmtNum(means[cIdx], 4) + '<br>\u03C3=' + fmtNum(stdDevs[cIdx], 4) + '</div></th>';
+        });
         html += '<th class="total-col">Total Words</th>';
         html += '</tr></thead><tbody><tr>';
         html += '<td class="doc-label"><input type="text" id="customDocName" value="My Doc" placeholder="Name..."></td>';
@@ -663,7 +853,7 @@
         });
         html += '<td class="total-col"><input type="number" id="customDocTotal" value="1000" min="1" max="999999"></td>';
         html += '</tr></tbody></table>';
-        html += '<button id="btnAnalyzeCustom" class="btn primary" style="margin-top:1rem;">Analyze Document</button>';
+        html += '<div class="analyze-btn-container"><button id="btnAnalyzeCustom" class="btn success large">Analyze Document &rarr;</button></div>';
         container.innerHTML = html;
 
         document.getElementById('btnAnalyzeCustom').addEventListener('click', analyzeCustomDocument);
@@ -723,6 +913,11 @@
         });
         html += '</tbody></table>';
 
+        // Distance table and PCA side by side
+        html += '<div class="step5-results-row">';
+
+        // Left: Distance table
+        html += '<div class="step5-results-panel">';
         html += '<h4>Distance to Each Document (' + escHtml(info.label) + ')</h4>';
         html += '<table class="data-table step5-dist-table"><thead><tr>';
         html += '<th>Document</th><th>Distance</th>';
@@ -735,16 +930,134 @@
             html += '</tr>';
         });
         html += '</tbody></table>';
-
         html += '<div class="nearest-result">';
         html += '<strong>Nearest match:</strong> <span class="nearest-doc-name">' + escHtml(docNames[nearestIdx]) + '</span>';
         html += ' (distance: ' + fmtNum(minDist, 2) + ')';
+        html += '</div>';
+        html += '</div>';
+
+        // Right: PCA plot (uses cached PCA from Step 4)
+        if (cachedPCA) {
+            html += '<div class="step5-results-panel">';
+            html += '<h4>PCA Plot with Your Document</h4>';
+            html += renderCustomDocPCA(customZ, customName);
+            html += '</div>';
+        }
+
         html += '</div>';
 
         html += '</div>';
 
         document.getElementById('customDocResults').innerHTML = html;
         document.getElementById('customDocResults').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function renderCustomDocPCA(customZ, customName) {
+        if (!cachedPCA) return '<p style="color:#999;text-align:center;">PCA not available.</p>';
+
+        var pts = cachedPCA.projected;
+        var varExp = cachedPCA.varExplained;
+        var eigenvectors = cachedPCA.eigenvectors;
+        var pcaMeans = cachedPCA.means;
+
+        // Center the custom document's z-scores using the same means from cached PCA
+        var customCentered = customZ.map(function (val, j) { return val - pcaMeans[j]; });
+        // Project onto the same principal components
+        var customProjected = [dotProd(customCentered, eigenvectors[0]), dotProd(customCentered, eigenvectors[1])];
+
+        // Find bounds including custom point
+        var allPts = pts.concat([customProjected]);
+        var minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+        for (var i = 0; i < allPts.length; i++) {
+            if (allPts[i][0] < minX) minX = allPts[i][0];
+            if (allPts[i][0] > maxX) maxX = allPts[i][0];
+            if (allPts[i][1] < minY) minY = allPts[i][1];
+            if (allPts[i][1] > maxY) maxY = allPts[i][1];
+        }
+
+        // Add padding
+        var rangeX = maxX - minX || 1;
+        var rangeY = maxY - minY || 1;
+        var pad = 0.15;
+        minX -= rangeX * pad; maxX += rangeX * pad;
+        minY -= rangeY * pad; maxY += rangeY * pad;
+
+        // SVG dimensions
+        var svgW = 400, svgH = 320;
+        var margin = { top: 20, right: 20, bottom: 40, left: 50 };
+        var plotW = svgW - margin.left - margin.right;
+        var plotH = svgH - margin.top - margin.bottom;
+
+        function scaleX(v) { return margin.left + (v - minX) / (maxX - minX) * plotW; }
+        function scaleY(v) { return margin.top + plotH - (v - minY) / (maxY - minY) * plotH; }
+
+        var html = '<div class="custom-pca-container">';
+        html += '<svg width="' + svgW + '" height="' + svgH + '" class="pca-svg">';
+
+        // Grid lines
+        var numGridLines = 5;
+        html += '<g class="pca-grid">';
+        for (var i = 0; i <= numGridLines; i++) {
+            var xVal = minX + (maxX - minX) * i / numGridLines;
+            var yVal = minY + (maxY - minY) * i / numGridLines;
+            var x = scaleX(xVal);
+            var y = scaleY(yVal);
+            html += '<line x1="' + x + '" y1="' + margin.top + '" x2="' + x + '" y2="' + (margin.top + plotH) + '"/>';
+            html += '<line x1="' + margin.left + '" y1="' + y + '" x2="' + (margin.left + plotW) + '" y2="' + y + '"/>';
+        }
+        html += '</g>';
+
+        // Axes
+        html += '<g class="pca-axes">';
+        html += '<line x1="' + margin.left + '" y1="' + (margin.top + plotH) + '" x2="' + (margin.left + plotW) + '" y2="' + (margin.top + plotH) + '"/>';
+        html += '<line x1="' + margin.left + '" y1="' + margin.top + '" x2="' + margin.left + '" y2="' + (margin.top + plotH) + '"/>';
+        html += '</g>';
+
+        // Axis labels
+        html += '<text class="pca-axis-label" x="' + (margin.left + plotW / 2) + '" y="' + (svgH - 5) + '" text-anchor="middle">PC1 (' + fmtNum(varExp[0], 1) + '%)</text>';
+        html += '<text class="pca-axis-label" x="15" y="' + (margin.top + plotH / 2) + '" text-anchor="middle" transform="rotate(-90,15,' + (margin.top + plotH / 2) + ')">PC2 (' + fmtNum(varExp[1], 1) + '%)</text>';
+
+        // Corpus points
+        html += '<g class="pca-points">';
+        for (var i = 0; i < pts.length; i++) {
+            var cx = scaleX(pts[i][0]);
+            var cy = scaleY(pts[i][1]);
+            html += '<circle cx="' + cx + '" cy="' + cy + '" r="6"/>';
+        }
+        html += '</g>';
+
+        // Custom document point (different color)
+        var customCx = scaleX(customProjected[0]);
+        var customCy = scaleY(customProjected[1]);
+        html += '<g class="pca-custom-point">';
+        html += '<circle cx="' + customCx + '" cy="' + customCy + '" r="8"/>';
+        html += '</g>';
+
+        // Labels (corpus)
+        html += '<g class="pca-labels">';
+        for (var i = 0; i < pts.length; i++) {
+            var cx = scaleX(pts[i][0]);
+            var cy = scaleY(pts[i][1]);
+            html += '<text x="' + (cx + 8) + '" y="' + (cy + 4) + '">' + escHtml(docNames[i]) + '</text>';
+        }
+        html += '</g>';
+
+        // Custom document label
+        html += '<g class="pca-custom-label">';
+        html += '<text x="' + (customCx + 10) + '" y="' + (customCy + 4) + '">' + escHtml(customName) + '</text>';
+        html += '</g>';
+
+        html += '</svg>';
+
+        // Legend
+        html += '<div class="pca-legend">';
+        html += '<span class="pca-legend-item"><span class="pca-legend-dot corpus"></span> Corpus documents</span>';
+        html += '<span class="pca-legend-item"><span class="pca-legend-dot custom"></span> Your document</span>';
+        html += '</div>';
+
+        html += '</div>';
+
+        return html;
     }
 
     function heatColor(val, minV, maxV, isDiag, isSim) {
