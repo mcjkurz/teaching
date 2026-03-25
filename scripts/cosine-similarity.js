@@ -10,16 +10,17 @@ class CosineSimilarityVisualization {
         this.height = this.canvas.height;
         this.centerX = this.width / 2;
         this.centerY = this.height / 2;
-        this.scale = 50; // Scale factor for coordinate system (pixels per unit)
-        this.maxCoord = 3; // Maximum coordinate value (-3 to 3)
+        this.scale = 150; // Pixels per unit — unit circle fills most of the canvas
+        this.maxCoord = 1.25; // Visible coordinate range
         
-        // Vector endpoints (can have any length within bounds)
-        this.vectorA = { x: 2.0, y: 1.5 }; // Example vector
-        this.vectorB = { x: -1.0, y: 2.5 }; // Example vector
+        // Unit vectors (normalized, living on the unit circle)
+        const angleA = Math.PI / 6;  // 30°
+        const angleB = Math.PI / 2.5; // 72°
+        this.vectorA = { x: Math.cos(angleA), y: Math.sin(angleA) };
+        this.vectorB = { x: Math.cos(angleB), y: Math.sin(angleB) };
         
         // Interaction state
         this.dragging = null;
-        this.dragOffset = { x: 0, y: 0 };
         
         this.setupEventListeners();
         this.setupResizeListener();
@@ -53,23 +54,19 @@ class CosineSimilarityVisualization {
     }
     
     setupMainFormula() {
-        // Define desktop and mobile versions of the main formula
-        const desktopFormula = `$$\\cos(\\theta) = \\frac{\\mathbf{A} \\cdot \\mathbf{B}}{|\\mathbf{A}| |\\mathbf{B}|} = \\frac{A_x B_x + A_y B_y}{\\sqrt{A_x^2 + A_y^2} \\sqrt{B_x^2 + B_y^2}}$$`;
+        const desktopFormula = `$$\\cos(\\theta) = \\hat{\\mathbf{A}} \\cdot \\hat{\\mathbf{B}} = A_x B_x + A_y B_y \\qquad \\text{(for unit vectors } |\\hat{\\mathbf{A}}| = |\\hat{\\mathbf{B}}| = 1\\text{)}$$`;
         
         const mobileFormula = `$$\\begin{align}
-\\cos(\\theta) &= \\frac{\\mathbf{A} \\cdot \\mathbf{B}}{|\\mathbf{A}| |\\mathbf{B}|} \\\\[0.5em]
-&= \\frac{A_x B_x + A_y B_y}{\\sqrt{A_x^2 + A_y^2} \\sqrt{B_x^2 + B_y^2}}
+\\cos(\\theta) &= \\hat{\\mathbf{A}} \\cdot \\hat{\\mathbf{B}} \\\\[0.5em]
+&= A_x B_x + A_y B_y
 \\end{align}$$`;
         
-        // Use mobile formula on small screens
         const isMobile = window.innerWidth <= 768;
         const formulaToUse = isMobile ? mobileFormula : desktopFormula;
         
         const mainFormulaElement = document.getElementById('mainFormula');
         if (mainFormulaElement) {
             mainFormulaElement.innerHTML = formulaToUse;
-            
-            // Re-render MathJax for the updated equation
             if (window.MathJax) {
                 window.MathJax.typesetPromise([mainFormulaElement]).catch((err) => console.log(err.message));
             }
@@ -112,11 +109,10 @@ class CosineSimilarityVisualization {
         };
     }
     
-    constrainVector(x, y) {
-        // Constrain vector components to the valid range
-        const constrainedX = Math.max(-this.maxCoord, Math.min(this.maxCoord, x));
-        const constrainedY = Math.max(-this.maxCoord, Math.min(this.maxCoord, y));
-        return { x: constrainedX, y: constrainedY };
+    normalizeVector(x, y) {
+        const mag = Math.sqrt(x * x + y * y);
+        if (mag === 0) return { x: 1, y: 0 };
+        return { x: x / mag, y: y / mag };
     }
     
     getVectorEndpoint(vector) {
@@ -137,41 +133,25 @@ class CosineSimilarityVisualization {
         
         if (this.isPointNearEndpoint(mousePos.x, mousePos.y, this.vectorA)) {
             this.dragging = 'A';
-            const endpoint = this.getVectorEndpoint(this.vectorA);
-            this.dragOffset = {
-                x: mousePos.x - endpoint.x,
-                y: mousePos.y - endpoint.y
-            };
         } else if (this.isPointNearEndpoint(mousePos.x, mousePos.y, this.vectorB)) {
             this.dragging = 'B';
-            const endpoint = this.getVectorEndpoint(this.vectorB);
-            this.dragOffset = {
-                x: mousePos.x - endpoint.x,
-                y: mousePos.y - endpoint.y
-            };
         }
     }
     
     handleMouseMove(e) {
         if (this.dragging) {
             const mousePos = this.getMousePos(e);
-            const adjustedPos = {
-                x: mousePos.x - this.dragOffset.x,
-                y: mousePos.y - this.dragOffset.y
-            };
-            
-            const canvasPos = this.screenToCanvas(adjustedPos.x, adjustedPos.y);
-            const constrained = this.constrainVector(canvasPos.x, canvasPos.y);
+            const canvasPos = this.screenToCanvas(mousePos.x, mousePos.y);
+            const normalized = this.normalizeVector(canvasPos.x, canvasPos.y);
             
             if (this.dragging === 'A') {
-                this.vectorA = constrained;
+                this.vectorA = normalized;
             } else if (this.dragging === 'B') {
-                this.vectorB = constrained;
+                this.vectorB = normalized;
             }
             
             this.update();
         } else {
-            // Update cursor
             const mousePos = this.getMousePos(e);
             if (this.isPointNearEndpoint(mousePos.x, mousePos.y, this.vectorA) ||
                 this.isPointNearEndpoint(mousePos.x, mousePos.y, this.vectorB)) {
@@ -237,94 +217,137 @@ class CosineSimilarityVisualization {
     }
     
     draw() {
-        // Clear canvas
         this.ctx.clearRect(0, 0, this.width, this.height);
         
-        // Draw grid
         this.drawGrid();
-        
-        // Draw coordinate bounds
-        this.drawCoordinateBounds();
-        
-        // Draw axes
         this.drawAxes();
-        
-        // Draw angle arc
-        this.drawAngleArc();
-        
-        // Draw vectors
-        this.drawVector(this.vectorA, '#dc3545', 'A'); // Red
-        this.drawVector(this.vectorB, '#007bff', 'B'); // Blue
-        
-        // Draw coordinate labels
+        this.drawUnitCircle();
         this.drawCoordinateLabels();
+        this.drawAngleArc();
+        this.drawVector(this.vectorA, '#dc3545', 'A');
+        this.drawVector(this.vectorB, '#007bff', 'B');
+        this.drawProjection();
+        this.drawCornerInfo();
     }
     
     drawGrid() {
-        this.ctx.strokeStyle = '#e0e0e0';
+        this.ctx.strokeStyle = '#e8e8e8';
         this.ctx.lineWidth = 0.5;
         
-        const gridSpacing = this.scale; // 1 unit spacing
-        const maxPixels = this.maxCoord * this.scale;
-        
-        // Vertical lines
-        for (let i = -this.maxCoord; i <= this.maxCoord; i++) {
+        const steps = [-1, 1];
+        for (const i of steps) {
             const x = this.centerX + i * this.scale;
             this.ctx.beginPath();
-            this.ctx.moveTo(x, this.centerY - maxPixels);
-            this.ctx.lineTo(x, this.centerY + maxPixels);
+            this.ctx.moveTo(x, 0);
+            this.ctx.lineTo(x, this.height);
             this.ctx.stroke();
-        }
-        
-        // Horizontal lines
-        for (let i = -this.maxCoord; i <= this.maxCoord; i++) {
+            
             const y = this.centerY + i * this.scale;
             this.ctx.beginPath();
-            this.ctx.moveTo(this.centerX - maxPixels, y);
-            this.ctx.lineTo(this.centerX + maxPixels, y);
+            this.ctx.moveTo(0, y);
+            this.ctx.lineTo(this.width, y);
             this.ctx.stroke();
         }
     }
     
-    drawCoordinateBounds() {
-        // Draw a rectangle showing the coordinate bounds
-        this.ctx.strokeStyle = '#666';
-        this.ctx.lineWidth = 2;
-        this.ctx.setLineDash([5, 5]);
-        
-        const maxPixels = this.maxCoord * this.scale;
+    drawUnitCircle() {
+        this.ctx.strokeStyle = '#bbb';
+        this.ctx.lineWidth = 1.5;
+        this.ctx.setLineDash([6, 4]);
         this.ctx.beginPath();
-        this.ctx.rect(
-            this.centerX - maxPixels, 
-            this.centerY - maxPixels, 
-            2 * maxPixels, 
-            2 * maxPixels
-        );
+        this.ctx.arc(this.centerX, this.centerY, this.scale, 0, 2 * Math.PI);
         this.ctx.stroke();
         this.ctx.setLineDash([]);
     }
     
+    drawProjection() {
+        const cos = this.vectorA.x * this.vectorB.x + this.vectorA.y * this.vectorB.y;
+        
+        // Projection of B onto A: proj = cos(alpha) * Â  (since |A|=1)
+        const projX = cos * this.vectorA.x;
+        const projY = cos * this.vectorA.y;
+        
+        const projScreen = this.canvasToScreen(projX, projY);
+        const bScreen = this.getVectorEndpoint(this.vectorB);
+        
+        // Dashed line from B endpoint down to the projection point on A
+        this.ctx.strokeStyle = '#888';
+        this.ctx.lineWidth = 1.5;
+        this.ctx.setLineDash([4, 4]);
+        this.ctx.beginPath();
+        this.ctx.moveTo(bScreen.x, bScreen.y);
+        this.ctx.lineTo(projScreen.x, projScreen.y);
+        this.ctx.stroke();
+        this.ctx.setLineDash([]);
+        
+        // Right-angle marker at the projection point
+        const markerSize = 8;
+        // Direction along A (unit vector in screen space)
+        const aLen = Math.sqrt(
+            (this.getVectorEndpoint(this.vectorA).x - this.centerX) ** 2 +
+            (this.getVectorEndpoint(this.vectorA).y - this.centerY) ** 2
+        );
+        const aScreenEnd = this.getVectorEndpoint(this.vectorA);
+        const aDirX = (aScreenEnd.x - this.centerX) / aLen;
+        const aDirY = (aScreenEnd.y - this.centerY) / aLen;
+        // Perpendicular direction (towards B side)
+        const perpX = -(aDirY);
+        const perpY = aDirX;
+        // Determine which side B is on so the marker points towards B
+        const toBx = bScreen.x - projScreen.x;
+        const toBy = bScreen.y - projScreen.y;
+        const sign = (perpX * toBx + perpY * toBy) >= 0 ? 1 : -1;
+        
+        this.ctx.strokeStyle = '#888';
+        this.ctx.lineWidth = 1.2;
+        this.ctx.beginPath();
+        this.ctx.moveTo(
+            projScreen.x + sign * perpX * markerSize,
+            projScreen.y + sign * perpY * markerSize
+        );
+        this.ctx.lineTo(
+            projScreen.x + sign * perpX * markerSize - aDirX * markerSize * (cos >= 0 ? 1 : -1),
+            projScreen.y + sign * perpY * markerSize - aDirY * markerSize * (cos >= 0 ? 1 : -1)
+        );
+        this.ctx.lineTo(
+            projScreen.x - aDirX * markerSize * (cos >= 0 ? 1 : -1),
+            projScreen.y - aDirY * markerSize * (cos >= 0 ? 1 : -1)
+        );
+        this.ctx.stroke();
+        
+        // Thick colored segment from origin to projection point (the "shadow")
+        this.ctx.strokeStyle = '#e8960e';
+        this.ctx.lineWidth = 4;
+        this.ctx.beginPath();
+        this.ctx.moveTo(this.centerX, this.centerY);
+        this.ctx.lineTo(projScreen.x, projScreen.y);
+        this.ctx.stroke();
+        
+        // Small filled circle at projection point
+        this.ctx.fillStyle = '#e8960e';
+        this.ctx.beginPath();
+        this.ctx.arc(projScreen.x, projScreen.y, 4, 0, 2 * Math.PI);
+        this.ctx.fill();
+    }
+    
     drawAxes() {
         this.ctx.strokeStyle = '#333';
-        this.ctx.lineWidth = 2;
-        
-        const maxPixels = this.maxCoord * this.scale;
+        this.ctx.lineWidth = 1.5;
         
         // X axis
         this.ctx.beginPath();
-        this.ctx.moveTo(this.centerX - maxPixels - 10, this.centerY);
-        this.ctx.lineTo(this.centerX + maxPixels + 10, this.centerY);
+        this.ctx.moveTo(0, this.centerY);
+        this.ctx.lineTo(this.width, this.centerY);
         this.ctx.stroke();
         
         // Y axis
         this.ctx.beginPath();
-        this.ctx.moveTo(this.centerX, this.centerY - maxPixels - 10);
-        this.ctx.lineTo(this.centerX, this.centerY + maxPixels + 10);
+        this.ctx.moveTo(this.centerX, 0);
+        this.ctx.lineTo(this.centerX, this.height);
         this.ctx.stroke();
         
-        // Arrow heads
-        this.drawArrowHead(this.centerX + maxPixels + 10, this.centerY, 0);
-        this.drawArrowHead(this.centerX, this.centerY - maxPixels - 10, -Math.PI / 2);
+        this.drawArrowHead(this.width - 4, this.centerY, 0);
+        this.drawArrowHead(this.centerX, 4, -Math.PI / 2);
     }
     
     drawArrowHead(x, y, angle) {
@@ -376,17 +399,16 @@ class CosineSimilarityVisualization {
         this.ctx.stroke();
         this.ctx.setLineDash([]);
         
-        // Angle label positioned at the middle of the arc
         let midAngle = (startAngle + endAngle) / 2;
         
-        const labelX = this.centerX + Math.cos(midAngle) * (arcRadius + 20);
-        const labelY = this.centerY + Math.sin(midAngle) * (arcRadius + 20); // Use + since we already flipped Y in angle calculation
+        const labelX = this.centerX + Math.cos(midAngle) * (arcRadius + 16);
+        const labelY = this.centerY + Math.sin(midAngle) * (arcRadius + 16);
         
-        this.ctx.fillStyle = '#666';
-        this.ctx.font = '12px Arial';
+        this.ctx.fillStyle = '#555';
+        this.ctx.font = 'italic 14px Arial';
         this.ctx.textAlign = 'center';
         this.ctx.textBaseline = 'middle';
-        this.ctx.fillText(`θ = ${calculations.angleDeg.toFixed(2)}°`, labelX, labelY);
+        this.ctx.fillText('θ', labelX, labelY);
     }
     
     drawVector(vector, color, label) {
@@ -431,66 +453,229 @@ class CosineSimilarityVisualization {
         this.ctx.textAlign = 'center';
         this.ctx.textBaseline = 'middle';
         
-        // X axis labels
-        for (let i = -this.maxCoord; i <= this.maxCoord; i++) {
-            if (i !== 0) {
-                const x = this.centerX + i * this.scale;
-                this.ctx.fillText(i.toString(), x, this.centerY + 20);
-            }
+        for (const i of [-1, 1]) {
+            const x = this.centerX + i * this.scale;
+            this.ctx.fillText(i.toString(), x, this.centerY + 16);
+            const y = this.centerY - i * this.scale;
+            this.ctx.fillText(i.toString(), this.centerX - 16, y);
         }
         
-        // Y axis labels
-        for (let i = -this.maxCoord; i <= this.maxCoord; i++) {
-            if (i !== 0) {
-                const y = this.centerY - i * this.scale; // Flip Y for display
-                this.ctx.fillText(i.toString(), this.centerX - 20, y);
-            }
-        }
+        this.ctx.fillText('0', this.centerX - 12, this.centerY + 14);
+    }
+    
+    drawCornerInfo() {
+        const cos = this.vectorA.x * this.vectorB.x + this.vectorA.y * this.vectorB.y;
+        const angleDeg = Math.acos(Math.max(-1, Math.min(1, cos))) * (180 / Math.PI);
         
-        // Origin
-        this.ctx.fillText('0', this.centerX - 15, this.centerY + 15);
+        const x = 12;
+        const y = 18;
+        
+        this.ctx.fillStyle = 'rgba(255,255,255,0.85)';
+        this.ctx.fillRect(x - 4, y - 14, 130, 40);
+        
+        this.ctx.font = 'bold 13px Arial';
+        this.ctx.textAlign = 'left';
+        this.ctx.textBaseline = 'middle';
+        
+        this.ctx.fillStyle = '#555';
+        this.ctx.fillText(`θ = ${angleDeg.toFixed(1)}°`, x, y);
+        
+        this.ctx.fillStyle = '#b37400';
+        this.ctx.fillText(`cos θ = ${cos.toFixed(2)}`, x, y + 20);
     }
     
     updateDisplay() {
         const calculations = this.calculateCosineSimilarity();
+        const cos = calculations.cosineSimilarity;
         
-        // Update live results panel (right side of canvas)
-        document.getElementById('cosineSimilarityLive').textContent = calculations.cosineSimilarity.toFixed(2);
+        document.getElementById('cosineSimilarityLive').textContent = cos.toFixed(2);
         document.getElementById('angleLive').textContent = calculations.angleDeg.toFixed(2) + '°';
-        document.getElementById('dotProductLive').textContent = calculations.dotProduct.toFixed(2);
+        document.getElementById('projectionLive').textContent = cos.toFixed(2);
         
-        // Update vector components and magnitudes
-        document.getElementById('vectorAComponents').textContent = `(${this.vectorA.x.toFixed(2)}, ${this.vectorA.y.toFixed(2)})`;
-        document.getElementById('vectorBComponents').textContent = `(${this.vectorB.x.toFixed(2)}, ${this.vectorB.y.toFixed(2)})`;
-        document.getElementById('magnitudeA').textContent = calculations.magnitudeA.toFixed(2);
-        document.getElementById('magnitudeB').textContent = calculations.magnitudeB.toFixed(2);
+        document.getElementById('vectorAComponents').textContent =
+            `(${this.vectorA.x.toFixed(2)}, ${this.vectorA.y.toFixed(2)})`;
+        document.getElementById('vectorBComponents').textContent =
+            `(${this.vectorB.x.toFixed(2)}, ${this.vectorB.y.toFixed(2)})`;
         
-        // Update the LaTeX calculation with current values
-        const latexCalc = `$$\\cos(\\theta) = \\frac{(${this.vectorA.x.toFixed(2)})(${this.vectorB.x.toFixed(2)}) + (${this.vectorA.y.toFixed(2)})(${this.vectorB.y.toFixed(2)})}{\\sqrt{${this.vectorA.x.toFixed(2)}^2 + ${this.vectorA.y.toFixed(2)}^2} \\sqrt{${this.vectorB.x.toFixed(2)}^2 + ${this.vectorB.y.toFixed(2)}^2}} = \\frac{${calculations.dotProduct.toFixed(2)}}{${calculations.magnitudeA.toFixed(2)} \\times ${calculations.magnitudeB.toFixed(2)}} = ${calculations.cosineSimilarity.toFixed(2)}$$`;
+        const ax = this.vectorA.x.toFixed(2);
+        const ay = this.vectorA.y.toFixed(2);
+        const bx = this.vectorB.x.toFixed(2);
+        const by = this.vectorB.y.toFixed(2);
         
-        // Create mobile-friendly version with line breaks
+        const latexCalc = `$$\\cos(\\theta) = \\hat{\\mathbf{A}} \\cdot \\hat{\\mathbf{B}} = (${ax})(${bx}) + (${ay})(${by}) = ${cos.toFixed(2)}$$`;
+        
         const latexCalcMobile = `$$\\begin{align}
-\\cos(\\theta) &= \\frac{(${this.vectorA.x.toFixed(2)})(${this.vectorB.x.toFixed(2)}) + (${this.vectorA.y.toFixed(2)})(${this.vectorB.y.toFixed(2)})}{\\sqrt{${this.vectorA.x.toFixed(2)}^2 + ${this.vectorA.y.toFixed(2)}^2} \\sqrt{${this.vectorB.x.toFixed(2)}^2 + ${this.vectorB.y.toFixed(2)}^2}} \\\\[0.5em]
-&= \\frac{${calculations.dotProduct.toFixed(2)}}{${calculations.magnitudeA.toFixed(2)} \\times ${calculations.magnitudeB.toFixed(2)}} \\\\[0.5em]
-&= ${calculations.cosineSimilarity.toFixed(2)}
+\\cos(\\theta) &= \\hat{\\mathbf{A}} \\cdot \\hat{\\mathbf{B}} \\\\[0.5em]
+&= (${ax})(${bx}) + (${ay})(${by}) \\\\[0.5em]
+&= ${cos.toFixed(2)}
 \\end{align}$$`;
         
-        // Use mobile formula on small screens
         const isMobile = window.innerWidth <= 768;
         const formulaToUse = isMobile ? latexCalcMobile : latexCalc;
         
         document.getElementById('fullCalculation').innerHTML = formulaToUse;
         
-        // Re-render MathJax for the updated equation
         if (window.MathJax) {
             window.MathJax.typesetPromise([document.getElementById('fullCalculation')]).catch((err) => console.log(err.message));
         }
     }
     
     
+    drawCosineGraph() {
+        const canvas = document.getElementById('cosineGraphCanvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const W = canvas.width;
+        const H = canvas.height;
+        
+        ctx.clearRect(0, 0, W, H);
+        
+        const padL = 45, padR = 20, padT = 25, padB = 40;
+        const plotW = W - padL - padR;
+        const plotH = H - padT - padB;
+        const midY = padT + plotH / 2;
+        
+        const degToX = (deg) => padL + (deg / 360) * plotW;
+        const valToY = (v) => midY - v * (plotH / 2);
+        
+        // Grid lines for key values
+        ctx.strokeStyle = '#eee';
+        ctx.lineWidth = 1;
+        for (const v of [1, 0.5, -0.5, -1]) {
+            const y = valToY(v);
+            ctx.beginPath();
+            ctx.moveTo(padL, y);
+            ctx.lineTo(padL + plotW, y);
+            ctx.stroke();
+        }
+        for (const deg of [90, 180, 270, 360]) {
+            const x = degToX(deg);
+            ctx.beginPath();
+            ctx.moveTo(x, padT);
+            ctx.lineTo(x, padT + plotH);
+            ctx.stroke();
+        }
+        
+        // Axes
+        ctx.strokeStyle = '#333';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(padL, midY);
+        ctx.lineTo(padL + plotW + 8, midY);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(padL, padT - 5);
+        ctx.lineTo(padL, padT + plotH + 5);
+        ctx.stroke();
+        
+        // Y-axis labels
+        ctx.fillStyle = '#555';
+        ctx.font = '12px Arial';
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'middle';
+        for (const v of [1, 0.5, 0, -0.5, -1]) {
+            ctx.fillText(v.toFixed(1), padL - 6, valToY(v));
+        }
+        
+        // X-axis labels
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'top';
+        for (const deg of [0, 90, 180, 270, 360]) {
+            ctx.fillText(deg + '°', degToX(deg), padT + plotH + 8);
+        }
+        
+        // Y-axis title
+        ctx.save();
+        ctx.translate(12, midY);
+        ctx.rotate(-Math.PI / 2);
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.font = 'italic 13px Arial';
+        ctx.fillStyle = '#555';
+        ctx.fillText('cos θ', 0, 0);
+        ctx.restore();
+        
+        // Cosine curve
+        ctx.strokeStyle = '#0066cc';
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        for (let deg = 0; deg <= 360; deg += 1) {
+            const x = degToX(deg);
+            const y = valToY(Math.cos(deg * Math.PI / 180));
+            if (deg === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+        
+        // Key-point dots and value labels
+        ctx.font = 'bold 11px Arial';
+        ctx.textAlign = 'center';
+        const keyPoints = [
+            { deg: 0, label: '1' },
+            { deg: 90, label: '0' },
+            { deg: 180, label: '−1' },
+            { deg: 270, label: '0' },
+            { deg: 360, label: '1' }
+        ];
+        for (const pt of keyPoints) {
+            const x = degToX(pt.deg);
+            const cosVal = Math.cos(pt.deg * Math.PI / 180);
+            const y = valToY(cosVal);
+            ctx.fillStyle = '#0066cc';
+            ctx.beginPath();
+            ctx.arc(x, y, 4, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.fillStyle = '#0066cc';
+            ctx.textBaseline = cosVal >= 0 ? 'bottom' : 'top';
+            ctx.fillText(pt.label, x, y + (cosVal >= 0 ? -8 : 8));
+        }
+        
+        // Current angle marker
+        const calc = this.calculateCosineSimilarity();
+        const curDeg = calc.angleDeg;
+        const curCos = calc.cosineSimilarity;
+        const mx = degToX(curDeg);
+        const my = valToY(curCos);
+        
+        // Vertical dashed line
+        ctx.strokeStyle = 'rgba(232, 150, 14, 0.5)';
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([4, 3]);
+        ctx.beginPath();
+        ctx.moveTo(mx, padT);
+        ctx.lineTo(mx, padT + plotH);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        
+        // Horizontal dashed line to y-axis
+        ctx.beginPath();
+        ctx.setLineDash([4, 3]);
+        ctx.moveTo(padL, my);
+        ctx.lineTo(mx, my);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        
+        // Dot at current position
+        ctx.fillStyle = '#e8960e';
+        ctx.beginPath();
+        ctx.arc(mx, my, 6, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        
+        // Label
+        ctx.fillStyle = '#b37400';
+        ctx.font = 'bold 12px Arial';
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'bottom';
+        ctx.fillText(`θ = ${curDeg.toFixed(1)}°`, mx + 10, my - 4);
+        ctx.fillText(`cos θ = ${curCos.toFixed(2)}`, mx + 10, my + 12);
+    }
+    
     update() {
         this.draw();
         this.updateDisplay();
+        this.drawCosineGraph();
     }
 }
 

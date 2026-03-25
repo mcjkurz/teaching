@@ -23,13 +23,12 @@
     <div class="container">
         <header>
             <h1>Cosine Similarity</h1>
-            <p>Interactive visualization of cosine similarity between two vectors of varying lengths</p>
+            <p>Drag the red and blue vectors around the unit circle. The <span style="color:#e8960e;font-weight:600;">orange segment</span> shows the projection of B onto A, whose length equals cos&thinsp;&theta;.</p>
         </header>
 
         <main>
             <!-- Interactive Canvas Section -->
             <section class="canvas-section">
-                <p>Drag the red and blue vector endpoints to see how cosine similarity changes.</p>
                 <div class="canvas-and-results">
                     <div class="canvas-container">
                         <canvas id="vectorCanvas" width="400" height="400"></canvas>
@@ -43,27 +42,30 @@
                             <span class="angle-label">Angle:</span>
                             <span id="angleLive" class="angle-value">45.0°</span>
                         </div>
-                        <div class="dot-product-display">
-                            <span class="dot-label">Dot Product:</span>
-                            <span id="dotProductLive" class="dot-value">0.71</span>
+                        <div class="projection-display">
+                            <span class="projection-label">Projection of B on A:</span>
+                            <span id="projectionLive" class="projection-value">0.71</span>
                         </div>
                         <div class="vector-info">
                             <div class="vector-display">
-                                <span class="vector-label">Vector A:</span>
-                                <span id="vectorAComponents" class="vector-components">(2.0, 1.5)</span>
-                                <div class="vector-magnitude-row">
-                                    <span class="magnitude-label">|A| = </span><span id="magnitudeA" class="magnitude-value">2.50</span>
-                                </div>
+                                <span class="vector-label" style="color:#dc3545;">Vector A (unit):</span>
+                                <span id="vectorAComponents" class="vector-components">(0.87, 0.50)</span>
                             </div>
                             <div class="vector-display">
-                                <span class="vector-label">Vector B:</span>
-                                <span id="vectorBComponents" class="vector-components">(-1.0, 2.5)</span>
-                                <div class="vector-magnitude-row">
-                                    <span class="magnitude-label">|B| = </span><span id="magnitudeB" class="magnitude-value">2.69</span>
-                                </div>
+                                <span class="vector-label" style="color:#007bff;">Vector B (unit):</span>
+                                <span id="vectorBComponents" class="vector-components">(0.31, 0.95)</span>
                             </div>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            <!-- Cosine Function Graph -->
+            <section class="cosine-graph-section">
+                <h3>The Cosine Function</h3>
+                <p>The current angle θ between the two vectors is marked on the cosine curve below.</p>
+                <div class="cosine-graph-container">
+                    <canvas id="cosineGraphCanvas" width="700" height="260"></canvas>
                 </div>
             </section>
 
@@ -72,14 +74,14 @@
                 <h3>Cosine Similarity Formula</h3>
                 <div class="formula">
                     <span id="mainFormula" class="math-formula">
-                        $$\cos(\theta) = \frac{\mathbf{A} \cdot \mathbf{B}}{|\mathbf{A}| |\mathbf{B}|} = \frac{A_x B_x + A_y B_y}{\sqrt{A_x^2 + A_y^2} \sqrt{B_x^2 + B_y^2}}$$
+                        $$\cos(\theta) = \hat{\mathbf{A}} \cdot \hat{\mathbf{B}} = A_x B_x + A_y B_y \qquad \text{(for unit vectors } |\hat{\mathbf{A}}| = |\hat{\mathbf{B}}| = 1\text{)}$$
                     </span>
                 </div>
                 <div class="calculation-display">
                     <div class="calc-step">
                         <span class="calc-label">Current calculation:</span>
                         <div id="fullCalculation" class="calc-formula">
-                            $$\cos(\theta) = \frac{(0.71)(0.00) + (0.71)(1.00)}{\sqrt{0.71^2 + 0.71^2} \sqrt{0.00^2 + 1.00^2}} = \frac{0.71}{1.00 \times 1.00} = 0.71$$
+                            $$\cos(\theta) = \hat{\mathbf{A}} \cdot \hat{\mathbf{B}} = (0.87)(0.31) + (0.50)(0.95) = 0.74$$
                         </div>
                     </div>
                 </div>
