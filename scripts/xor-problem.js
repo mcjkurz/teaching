@@ -532,7 +532,12 @@ class XORVisualization {
         // Update message box
         const msgBox = document.getElementById('messageBox');
         if (correct === 4) {
-            msgBox.textContent = 'Perfect! You found a valid decision boundary (4/4 correct).';
+            const nextGate = this.getNextGateSuggestion();
+            if (nextGate) {
+                msgBox.innerHTML = `Perfect! You found a valid decision boundary. Now try <a href="#" class="gate-link" data-gate="${nextGate}">${nextGate.toUpperCase()}</a>`;
+            } else {
+                msgBox.textContent = 'Perfect! You solved all linearly separable gates!';
+            }
             msgBox.className = 'message-box success';
         } else if (this.currentGate === 'xor') {
             msgBox.textContent = `XOR is not linearly separable! No single line can work (${correct}/4). Try the neural network below.`;
@@ -542,6 +547,32 @@ class XORVisualization {
             msgBox.className = 'message-box';
         }
         
+        // Add click handler for gate links
+        const gateLink = msgBox.querySelector('.gate-link');
+        if (gateLink) {
+            gateLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                const gate = e.target.dataset.gate;
+                this.switchToGate(gate);
+            });
+        }
+    }
+    
+    getNextGateSuggestion() {
+        const gateOrder = ['or', 'and', 'nand', 'xor'];
+        const currentIndex = gateOrder.indexOf(this.currentGate);
+        if (currentIndex < gateOrder.length - 1) {
+            return gateOrder[currentIndex + 1];
+        }
+        return null;
+    }
+    
+    switchToGate(gate) {
+        document.querySelectorAll('.gate-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector(`[data-gate="${gate}"]`).classList.add('active');
+        this.currentGate = gate;
+        this.updateTruthTable();
+        this.update();
     }
     
     update() {
@@ -1142,7 +1173,9 @@ class XORVisualization {
             y: 1.2 - (py - padding) / (H - 2 * padding) * 1.4
         });
         
-        // Background shading based on full network output (hidden + output layer)
+        // Background shading: use full network forward pass (hidden layer + output layer)
+        // For OR+NAND decomposition: output layer does AND (both h1 and h2 must fire)
+        // For exclusive decomposition: output layer does OR (either h1 or h2 must fire)
         for (let px = 0; px < W; px += 4) {
             for (let py = 0; py < H; py += 4) {
                 const coord = toCoord(px, py);
