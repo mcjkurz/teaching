@@ -255,20 +255,20 @@ class XORVisualization {
         ctx.stroke();
         
         // Draw points at the jump
-        // Open circle at (0, 0)
+        // Filled circle at (0, 0) - x=0 outputs 0
         ctx.beginPath();
         ctx.arc(centerX, centerY, 4, 0, 2 * Math.PI);
+        ctx.fillStyle = '#4A90E2';
+        ctx.fill();
+        
+        // Open circle at (0, 1) - x=0 does NOT output 1
+        ctx.beginPath();
+        ctx.arc(centerX, padding + 5, 4, 0, 2 * Math.PI);
         ctx.fillStyle = 'white';
         ctx.fill();
         ctx.strokeStyle = '#4A90E2';
         ctx.lineWidth = 2;
         ctx.stroke();
-        
-        // Filled circle at (0, 1)
-        ctx.beginPath();
-        ctx.arc(centerX, padding + 5, 4, 0, 2 * Math.PI);
-        ctx.fillStyle = '#4A90E2';
-        ctx.fill();
         
         // Labels for 0 and 1 on y-axis
         ctx.fillStyle = '#666';
@@ -673,7 +673,7 @@ class XORVisualization {
     }
     
     step(x) {
-        return x >= 0 ? 1 : 0;
+        return x > 0 ? 1 : 0;
     }
     
     detectGatePattern(w1, w2, b) {
