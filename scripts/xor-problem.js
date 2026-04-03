@@ -24,7 +24,7 @@ class XORVisualization {
         this.weights = {
             w11: 0.2, w12: 1, b1: -0.5,    // h1: not quite OR yet
             w21: -0.2, w22: -1, b2: 1.5,   // h2: not quite NAND yet
-            v1: 1, v2: 1, c: -1.5          // output weights
+            v1: 0.3, v2: 1, c: -0.5        // output: not quite AND yet
         };
         
         // XOR solution weights
@@ -32,9 +32,9 @@ class XORVisualization {
         // h2: NAND gate - fires when x1+x2 < 1.5 (NOT AND) → uses negative weights
         // output: h1 AND h2 → XOR (both must fire)
         this.xorSolution = {
-            w11: 10, w12: 10, b1: -5,     // h1 (OR): boundary at x1+x2 = 0.5, fires above
-            w21: -10, w22: -10, b2: 15,   // h2 (NAND): boundary at x1+x2 = 1.5, fires below
-            v1: 10, v2: 10, c: -15        // output: high when both h1≈1 AND h2≈1
+            w11: 1, w12: 1, b1: -0.5,     // h1 (OR): fires when x1+x2 >= 0.5
+            w21: -1, w22: -1, b2: 1.5,    // h2 (NAND): fires when x1+x2 <= 1.5
+            v1: 1, v2: 1, c: -1.5         // output (AND): fires when h1+h2 >= 1.5
         };
         
         this.setupCanvases();
@@ -1245,9 +1245,9 @@ class XORVisualization {
     
     resetWeights() {
         this.weights = {
-            w11: 1, w12: 1, b1: -0.5,      // h1 (OR-like): fires when x1+x2 > 0.5
-            w21: -1, w22: -1, b2: 1.5,     // h2 (NAND-like): fires when x1+x2 < 1.5
-            v1: 1, v2: 1, c: -1.5          // output: fires when both h1 and h2 fire
+            w11: 0.2, w12: 1, b1: -0.5,    // h1: non-solution starting weights
+            w21: -0.2, w22: -1, b2: 1.5,   // h2: non-solution starting weights
+            v1: 0.3, v2: 1, c: -0.5        // output: non-solution starting weights
         };
         this.updateSliders();
         this.updateNetwork();
