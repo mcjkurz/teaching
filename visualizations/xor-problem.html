@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>The XOR Problem - Why Neural Networks Need Hidden Layers</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/xor-problem.css">
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>The XOR Problem</h1>
+            <p>Why neural networks need hidden layers: some problems aren't linearly separable.</p>
+        </header>
+
+        <main>
+            <!-- Part 1: Linear Separability -->
+            <section class="gate-section">
+                <h2>Part 1: Can a Single Line Separate the Classes?</h2>
+                <p class="section-intro">Select a logic gate and try to draw a line that separates the <span class="output-1">green (output=1)</span> points from the <span class="output-0">red (output=0)</span> points.</p>
+                
+                <div class="gate-selector">
+                    <button class="gate-btn active" data-gate="or">OR</button>
+                    <button class="gate-btn" data-gate="and">AND</button>
+                    <button class="gate-btn" data-gate="nand">NAND</button>
+                    <button class="gate-btn" data-gate="xor">XOR</button>
+                </div>
+                
+                <!-- Truth table + Perceptron + Activation function row -->
+                <div class="model-row">
+                    <div class="truth-table-mini">
+                        <table>
+                            <thead>
+                                <tr><th>x₁</th><th>x₂</th><th>Output</th></tr>
+                            </thead>
+                            <tbody id="truthTableBody">
+                                <tr><td>0</td><td>0</td><td id="out00">0</td></tr>
+                                <tr><td>0</td><td>1</td><td id="out01">1</td></tr>
+                                <tr><td>1</td><td>0</td><td id="out10">1</td></tr>
+                                <tr><td>1</td><td>1</td><td id="out11">1</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="perceptron-diagram">
+                        <h4>Perceptron (Single Neuron)</h4>
+                        <canvas id="perceptronDiagramCanvas" width="240" height="120"></canvas>
+                        <div class="hover-hint">Hover over output neuron to see computation</div>
+                    </div>
+                    <div class="activation-section-part1">
+                        <h4>Activation Function</h4>
+                        <div class="activation-canvas-wrapper">
+                            <canvas id="stepFunctionCanvasPart1" width="120" height="100"></canvas>
+                        </div>
+                        <div class="activation-label">Step: σ(x) = 1 if x ≥ 0, else 0</div>
+                    </div>
+                </div>
+
+                <div class="canvas-row">
+                    <div class="canvas-wrapper">
+                        <canvas id="inputSpaceCanvas" width="350" height="350"></canvas>
+                        <div class="canvas-label">Input Space</div>
+                    </div>
+                    <div class="status-panel">
+                        <div class="perceptron-weights">
+                            <h4>Perceptron Weights</h4>
+                            <p class="weight-hint">Adjust weights to find a separating line</p>
+                            <div class="weight-row">
+                                <label>w₁: <span id="pw1Val">0.2</span></label>
+                                <input type="range" id="pw1" min="-3" max="3" step="0.1" value="0.2">
+                            </div>
+                            <div class="weight-row">
+                                <label>w₂: <span id="pw2Val">1.0</span></label>
+                                <input type="range" id="pw2" min="-3" max="3" step="0.1" value="1">
+                            </div>
+                            <div class="weight-row">
+                                <label>b: <span id="pbVal">-0.5</span></label>
+                                <input type="range" id="pb" min="-3" max="3" step="0.1" value="-0.5">
+                            </div>
+                            <button class="preset-btn" id="resetPerceptron">Reset Weights</button>
+                        </div>
+                        <div class="boundary-equation">
+                            <h4>Decision Rule</h4>
+                            <div id="boundaryEquation" class="equation">w₁x₁ + w₂x₂ + b ≥ 0 → output 1</div>
+                        </div>
+                        <div class="message-box" id="messageBox">
+                            Adjust the weights to separate the classes!
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Part 2: Neural Network Solution -->
+            <section class="network-section">
+                <h2>Part 2: Solving XOR with a Hidden Layer</h2>
+                <p class="section-intro">A hidden layer transforms the input space, making the problem linearly separable. Adjust the weights to see how the transformation works.</p>
+
+                <div class="network-controls">
+                    <button class="preset-btn" id="loadSolution">Load XOR Solution</button>
+                    <button class="preset-btn" id="resetWeights">Reset Weights</button>
+                </div>
+
+                <div class="network-diagram">
+                    <div class="network-diagram-row">
+                        <div class="architecture-section">
+                            <h4>Network Architecture</h4>
+                            <div class="architecture-canvas-wrapper">
+                                <canvas id="networkDiagramCanvas" width="500" height="150"></canvas>
+                            </div>
+                        </div>
+                        <div class="activation-section">
+                            <h4>Activation Function</h4>
+                            <div class="activation-canvas-wrapper">
+                                <canvas id="stepFunctionCanvas" width="120" height="100"></canvas>
+                            </div>
+                            <div class="activation-label">Step: σ(x) = 1 if x ≥ 0, else 0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hidden Neuron 1: OR Gate -->
+                <div class="space-row">
+                    <div class="canvas-wrapper">
+                        <canvas id="orGateCanvas" width="280" height="280"></canvas>
+                        <div class="canvas-label">h₁: OR Gate</div>
+                        <div class="canvas-sublabel">Green = h₁ fires (at least one input is 1)</div>
+                    </div>
+                    <div class="weight-section">
+                        <h4>h₁ Weights (OR-like)</h4>
+                        <div class="weight-row">
+                            <label>w₁₁: <span id="w11Val">0.2</span></label>
+                            <input type="range" id="w11" min="-10" max="10" step="0.1" value="0.2">
+                        </div>
+                        <div class="weight-row">
+                            <label>w₁₂: <span id="w12Val">1.0</span></label>
+                            <input type="range" id="w12" min="-10" max="10" step="0.1" value="1">
+                        </div>
+                        <div class="weight-row">
+                            <label>b₁: <span id="b1Val">-0.5</span></label>
+                            <input type="range" id="b1" min="-20" max="20" step="0.1" value="-0.5">
+                        </div>
+                        <p class="gate-explanation">h₁ = σ(w₁₁·x₁ + w₁₂·x₂ + b₁)<br>Boundary: w₁₁·x₁ + w₁₂·x₂ + b₁ = 0</p>
+                    </div>
+                </div>
+
+                <!-- Hidden Neuron 2: NAND Gate -->
+                <div class="space-row">
+                    <div class="canvas-wrapper">
+                        <canvas id="nandGateCanvas" width="280" height="280"></canvas>
+                        <div class="canvas-label">h₂: NAND Gate</div>
+                        <div class="canvas-sublabel">Green = h₂ fires (not both inputs are 1)</div>
+                    </div>
+                    <div class="weight-section">
+                        <h4>h₂ Weights (NAND-like)</h4>
+                        <div class="weight-row">
+                            <label>w₂₁: <span id="w21Val">-0.2</span></label>
+                            <input type="range" id="w21" min="-10" max="10" step="0.1" value="-0.2">
+                        </div>
+                        <div class="weight-row">
+                            <label>w₂₂: <span id="w22Val">-1.0</span></label>
+                            <input type="range" id="w22" min="-10" max="10" step="0.1" value="-1">
+                        </div>
+                        <div class="weight-row">
+                            <label>b₂: <span id="b2Val">1.5</span></label>
+                            <input type="range" id="b2" min="-20" max="20" step="0.1" value="1.5">
+                        </div>
+                        <p class="gate-explanation">h₂ = σ(w₂₁·x₁ + w₂₂·x₂ + b₂)<br>Boundary: w₂₁·x₁ + w₂₂·x₂ + b₂ = 0</p>
+                    </div>
+                </div>
+
+                <!-- Combined: Input Space with both boundaries -->
+                <div class="space-row">
+                    <div class="canvas-wrapper">
+                        <canvas id="inputSpaceCanvas2" width="280" height="280"></canvas>
+                        <div class="canvas-label">Combined: Network Output (XOR)</div>
+                        <div class="canvas-legend">
+                            <span class="legend-item"><span class="legend-line or-line"></span> h₁ (OR)</span>
+                            <span class="legend-item"><span class="legend-line nand-line"></span> h₂ (NAND)</span>
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <h4>Why This Works</h4>
+                        <p>XOR = OR AND NAND = h₁ AND h₂</p>
+                        <p>The output is 1 (green) only where <strong>both</strong> h₁ fires (OR: at least one input is 1) <strong>and</strong> h₂ fires (NAND: not both inputs are 1).</p>
+                    </div>
+                </div>
+
+                <!-- Hidden Space Row -->
+                <div class="space-row">
+                    <div class="canvas-wrapper">
+                        <canvas id="hiddenSpaceCanvas" width="300" height="300"></canvas>
+                        <div class="canvas-label">Hidden Space (h₁, h₂)</div>
+                        <div class="canvas-legend">
+                            <span class="legend-item"><span class="legend-line output-line"></span> output boundary</span>
+                        </div>
+                    </div>
+                    <div class="weight-section">
+                        <h4>Output Layer Weights</h4>
+                        <div class="weight-row">
+                            <label>v₁: <span id="v1Val">1.0</span></label>
+                            <input type="range" id="v1" min="-10" max="10" step="0.1" value="1">
+                        </div>
+                        <div class="weight-row">
+                            <label>v₂: <span id="v2Val">1.0</span></label>
+                            <input type="range" id="v2" min="-10" max="10" step="0.1" value="1">
+                        </div>
+                        <div class="weight-row">
+                            <label>c: <span id="cVal">-1.5</span></label>
+                            <input type="range" id="c" min="-20" max="20" step="0.1" value="-1.5">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="computation-table">
+                    <h4>Forward Pass Computation</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Input (x₁,x₂)</th>
+                                <th>Hidden (h₁,h₂)</th>
+                                <th>Output (ŷ)</th>
+                                <th>Target</th>
+                                <th>Correct?</th>
+                            </tr>
+                        </thead>
+                        <tbody id="computationBody">
+                            <tr><td>(0, 0)</td><td id="h00">-</td><td id="y00">-</td><td id="t00">0</td><td id="c00">-</td></tr>
+                            <tr><td>(0, 1)</td><td id="h01">-</td><td id="y01">-</td><td id="t01">1</td><td id="c01">-</td></tr>
+                            <tr><td>(1, 0)</td><td id="h10">-</td><td id="y10">-</td><td id="t10">1</td><td id="c10">-</td></tr>
+                            <tr><td>(1, 1)</td><td id="h11">-</td><td id="y11">-</td><td id="t11">0</td><td id="c11">-</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="network-accuracy" id="networkAccuracy">Network Accuracy: 0/4</div>
+                </div>
+            </section>
+
+            <!-- Explanation -->
+            <section class="explanation-section">
+                <h3>The Key Insight</h3>
+                <div class="insight-box">
+                    <p>The XOR function outputs 1 when <em>exactly one</em> input is 1. In the input space, the two classes (0 and 1) are arranged diagonally — no single line can separate them.</p>
+                    <p>The hidden layer acts as a <strong>feature transformation</strong>. Each hidden neuron computes:</p>
+                    <div class="formula">$$h_i = \sigma(w_{i1}x_1 + w_{i2}x_2 + b_i)$$</div>
+                    <p>where σ is the step function. This transforms the 4 input points into a new 2D space where they <em>can</em> be linearly separated.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer style="text-align: center; margin-top: 3em; padding: 2em 0; border-top: 1px solid #ddd;">
+            <a href="../index.html" style="color: #4A90E2; text-decoration: none; font-size: 1em;">← Back to Home Page</a>
+        </footer>
+    </div>
+
+    <script src="../scripts/xor-problem.js"></script>
+</body>
+</html>

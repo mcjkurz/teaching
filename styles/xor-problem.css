@@ -1,0 +1,631 @@
+/* XOR Problem Visualization Styles */
+
+.container {
+    max-width: 900px;
+}
+
+h2 {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 0.5rem;
+    margin-top: 2rem;
+}
+
+h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #444;
+    margin-bottom: 0.5rem;
+}
+
+h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+.section-intro {
+    color: #666;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.output-1 {
+    color: #2e7d32;
+    font-weight: 600;
+}
+
+.output-0 {
+    color: #c62828;
+    font-weight: 600;
+}
+
+/* Gate selector */
+.gate-selector {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.gate-btn {
+    padding: 0.5rem 1.5rem;
+    border: 2px solid #ddd;
+    background: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.gate-btn:hover {
+    border-color: #4A90E2;
+    background: #f8fafc;
+}
+
+.gate-btn.active {
+    border-color: #4A90E2;
+    background: #4A90E2;
+    color: white;
+}
+
+/* Model row - truth table, perceptron, activation */
+.model-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+/* Truth table mini */
+.truth-table-mini {
+    flex-shrink: 0;
+}
+
+.truth-table-mini table {
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.truth-table-mini th,
+.truth-table-mini td {
+    padding: 0.3rem 0.8rem;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.truth-table-mini th {
+    background: #f5f5f5;
+    font-weight: 600;
+}
+
+/* Canvas row */
+.canvas-row {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.canvas-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.canvas-wrapper canvas {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fafafa;
+}
+
+.canvas-label {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.canvas-legend {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    color: #888;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.legend-line {
+    display: inline-block;
+    width: 20px;
+    height: 2px;
+    border-top: 2px dashed;
+}
+
+.legend-line.h1-line {
+    border-color: #f57c00;
+}
+
+.legend-line.h2-line {
+    border-color: #ff9800;
+}
+
+.legend-line.or-line {
+    border-color: #1976d2;
+}
+
+.legend-line.nand-line {
+    border-color: #ff9800;
+}
+
+.legend-line.output-line {
+    border-color: #9c27b0;
+}
+
+.canvas-sublabel {
+    font-size: 0.75rem;
+    color: #888;
+    margin-top: 0.25rem;
+}
+
+.gate-explanation {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 1rem;
+    font-family: monospace;
+    line-height: 1.5;
+}
+
+.legend-color {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    margin-right: 4px;
+    vertical-align: middle;
+}
+
+.legend-color.or-color {
+    background: rgba(100, 200, 100, 0.5);
+}
+
+.legend-color.nand-color {
+    background: rgba(200, 230, 200, 0.5);
+}
+
+.legend-color.both-color {
+    background: rgba(156, 39, 176, 0.6);
+}
+
+.info-box {
+    flex: 1;
+    min-width: 200px;
+    max-width: 300px;
+    padding: 1rem;
+    background: linear-gradient(135deg, #f3e5f5 0%, #e8f5e9 100%);
+    border-radius: 8px;
+    border-left: 4px solid #9c27b0;
+}
+
+.info-box h4 {
+    margin-bottom: 0.5rem;
+    color: #7b1fa2;
+}
+
+.info-box p {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+.info-box p:last-child {
+    margin-bottom: 0;
+}
+
+.xor-highlight {
+    color: #9c27b0;
+    font-weight: 600;
+}
+
+/* Status panel */
+.status-panel {
+    flex: 1;
+    min-width: 220px;
+}
+
+.perceptron-diagram {
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.perceptron-diagram h4 {
+    margin-bottom: 0.5rem;
+}
+
+.perceptron-diagram canvas {
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.hover-hint {
+    font-size: 0.75rem;
+    color: #888;
+    margin-top: 0.25rem;
+}
+
+.activation-section-part1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.activation-section-part1 h4 {
+    margin-bottom: 0.5rem;
+}
+
+/* Tooltip for neuron hover */
+.neuron-tooltip {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-family: monospace;
+    pointer-events: none;
+    z-index: 1000;
+    line-height: 1.4;
+}
+
+.perceptron-weights {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: #f0f7ff;
+    border-radius: 8px;
+}
+
+.weight-hint {
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 0.75rem;
+}
+
+.perceptron-weights .weight-row {
+    margin-bottom: 0.4rem;
+}
+
+.perceptron-weights .weight-row label {
+    min-width: 80px;
+}
+
+.classification-status {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.point-status {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+}
+
+.point-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+.point-label {
+    color: #666;
+}
+
+.status-icon {
+    font-weight: bold;
+}
+
+.status-icon.correct {
+    color: #2e7d32;
+}
+
+.status-icon.wrong {
+    color: #c62828;
+}
+
+.accuracy-display {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #ddd;
+    font-weight: 600;
+    color: #333;
+}
+
+.boundary-equation {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: #f0f7ff;
+    border-radius: 8px;
+}
+
+.equation {
+    font-family: monospace;
+    font-size: 0.9rem;
+    color: #0066cc;
+    line-height: 1.6;
+}
+
+.equation-algebra {
+    color: #666;
+}
+
+.equation-values {
+    color: #0066cc;
+    font-weight: 500;
+}
+
+.message-box {
+    padding: 1rem;
+    background: #fff3cd;
+    border-radius: 8px;
+    color: #856404;
+    font-size: 0.9rem;
+}
+
+.message-box.success {
+    background: #d4edda;
+    color: #155724;
+}
+
+.message-box.impossible {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+/* Network section */
+.network-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid #eee;
+}
+
+.network-controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.preset-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid #4A90E2;
+    background: white;
+    color: #4A90E2;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+}
+
+.preset-btn:hover {
+    background: #4A90E2;
+    color: white;
+}
+
+/* Space rows for Part 2 */
+.space-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.space-row .weight-section {
+    flex: 1;
+    min-width: 200px;
+    max-width: 280px;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.space-row .canvas-wrapper {
+    flex-shrink: 0;
+}
+
+/* Network diagram */
+.network-diagram {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.network-diagram-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.architecture-section {
+    flex: 1;
+}
+
+.architecture-section h4 {
+    margin-bottom: 0.5rem;
+}
+
+.architecture-canvas-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+#networkDiagramCanvas {
+    max-width: 100%;
+    cursor: pointer;
+}
+
+.activation-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.activation-section h4 {
+    margin-bottom: 0.5rem;
+}
+
+.activation-canvas-wrapper {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 5px;
+}
+
+.activation-label {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: #666;
+    font-family: monospace;
+}
+
+/* Weight controls */
+.weight-section {
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.weight-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.weight-row label {
+    min-width: 90px;
+    font-size: 0.85rem;
+    font-family: monospace;
+}
+
+.weight-row label span {
+    font-weight: 600;
+    color: #333;
+}
+
+.weight-row input[type="range"] {
+    flex: 1;
+    height: 6px;
+    -webkit-appearance: none;
+    background: #ddd;
+    border-radius: 3px;
+    outline: none;
+}
+
+.weight-row input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #4A90E2;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Computation table */
+.computation-table {
+    margin: 1.5rem 0;
+}
+
+.computation-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.computation-table th,
+.computation-table td {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.computation-table th {
+    background: #f5f5f5;
+    font-weight: 600;
+}
+
+.computation-table td {
+    font-family: monospace;
+}
+
+.network-accuracy {
+    margin-top: 1rem;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Explanation section */
+.explanation-section {
+    margin-top: 2rem;
+}
+
+.insight-box {
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f0f7ff 0%, #e8f4f8 100%);
+    border-radius: 8px;
+    border-left: 4px solid #4A90E2;
+}
+
+.insight-box p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.insight-box p:last-child {
+    margin-bottom: 0;
+}
+
+.formula {
+    text-align: center;
+    margin: 1rem 0;
+    font-size: 1.1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .canvas-row {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .space-row {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .space-row .weight-section {
+        max-width: 100%;
+        width: 100%;
+    }
+}
