@@ -43,42 +43,49 @@ class XORVisualization {
         this.updateNetwork();
     }
     
+    scaleForDPI(canvas) {
+        const dpr = window.devicePixelRatio || 1;
+        const logW = parseInt(canvas.getAttribute('width'), 10);
+        const logH = parseInt(canvas.getAttribute('height'), 10);
+        canvas.logicalWidth = logW;
+        canvas.logicalHeight = logH;
+        canvas.style.width = logW + 'px';
+        canvas.style.height = logH + 'px';
+        canvas.setAttribute('width', logW * dpr);
+        canvas.setAttribute('height', logH * dpr);
+        const ctx = canvas.getContext('2d');
+        ctx.scale(dpr, dpr);
+        return ctx;
+    }
+
     setupCanvases() {
-        // Part 1 canvas
         this.canvas1 = document.getElementById('inputSpaceCanvas');
-        this.ctx1 = this.canvas1.getContext('2d');
-        
-        // Part 1 perceptron diagram
+        this.ctx1 = this.scaleForDPI(this.canvas1);
+
         this.canvasPerceptron = document.getElementById('perceptronDiagramCanvas');
-        this.ctxPerceptron = this.canvasPerceptron.getContext('2d');
-        
-        // Part 2 canvases - separate gate canvases
+        this.ctxPerceptron = this.scaleForDPI(this.canvasPerceptron);
+
         this.canvasOR = document.getElementById('orGateCanvas');
-        this.ctxOR = this.canvasOR.getContext('2d');
+        this.ctxOR = this.scaleForDPI(this.canvasOR);
         this.canvasNAND = document.getElementById('nandGateCanvas');
-        this.ctxNAND = this.canvasNAND.getContext('2d');
-        
-        // Combined input space
+        this.ctxNAND = this.scaleForDPI(this.canvasNAND);
+
         this.canvas2 = document.getElementById('inputSpaceCanvas2');
-        this.ctx2 = this.canvas2.getContext('2d');
-        
-        // Hidden space
+        this.ctx2 = this.scaleForDPI(this.canvas2);
+
         this.canvasH = document.getElementById('hiddenSpaceCanvas');
-        this.ctxH = this.canvasH.getContext('2d');
-        
-        // Network diagram canvas
+        this.ctxH = this.scaleForDPI(this.canvasH);
+
         this.canvasNet = document.getElementById('networkDiagramCanvas');
-        this.ctxNet = this.canvasNet.getContext('2d');
-        
-        // Step function canvases (Part 1 and Part 2)
+        this.ctxNet = this.scaleForDPI(this.canvasNet);
+
         this.canvasStepPart1 = document.getElementById('stepFunctionCanvasPart1');
-        this.ctxStepPart1 = this.canvasStepPart1.getContext('2d');
+        this.ctxStepPart1 = this.scaleForDPI(this.canvasStepPart1);
         this.canvasStep = document.getElementById('stepFunctionCanvas');
-        this.ctxStep = this.canvasStep.getContext('2d');
+        this.ctxStep = this.scaleForDPI(this.canvasStep);
         this.drawStepFunction(this.canvasStepPart1, this.ctxStepPart1);
         this.drawStepFunction(this.canvasStep, this.ctxStep);
-        
-        // Setup hover for perceptron diagram
+
         this.setupPerceptronHover();
     }
     
@@ -91,8 +98,8 @@ class XORVisualization {
         this.perceptronTooltip = tooltip;
         
         // Output neuron position (must match drawPerceptronDiagram)
-        const outputX = canvas.width - 50;
-        const outputY = canvas.height / 2;
+        const outputX = canvas.logicalWidth - 50;
+        const outputY = canvas.logicalHeight / 2;
         const radius = 18;
         
         canvas.addEventListener('mousemove', (e) => {
@@ -129,8 +136,8 @@ class XORVisualization {
         this.networkTooltip = tooltip;
         
         // Neuron positions (must match drawNetworkDiagram)
-        const W = canvas.width;
-        const H = canvas.height;
+        const W = canvas.logicalWidth;
+        const H = canvas.logicalHeight;
         const layerX = [80, W/2, W - 80];
         const inputY = [H/2 - 35, H/2 + 35];
         const hiddenY = [H/2 - 35, H/2 + 35];
@@ -173,8 +180,8 @@ class XORVisualization {
     
     drawStepFunction(canvas, ctx) {
         if (!canvas || !ctx) return;
-        const W = canvas.width;
-        const H = canvas.height;
+        const W = canvas.logicalWidth;
+        const H = canvas.logicalHeight;
         
         ctx.clearRect(0, 0, W, H);
         
@@ -309,8 +316,8 @@ class XORVisualization {
     
     coordToCanvas(canvas, x, y) {
         const padding = 50;
-        const w = canvas.width - 2 * padding;
-        const h = canvas.height - 2 * padding;
+        const w = canvas.logicalWidth - 2 * padding;
+        const h = canvas.logicalHeight - 2 * padding;
         return {
             x: padding + (x + 0.2) / 1.4 * w,
             y: padding + (1.2 - y) / 1.4 * h
@@ -338,8 +345,8 @@ class XORVisualization {
     }
     
     drawInputSpace(canvas, ctx, showBoundary = true) {
-        const W = canvas.width;
-        const H = canvas.height;
+        const W = canvas.logicalWidth;
+        const H = canvas.logicalHeight;
         ctx.clearRect(0, 0, W, H);
         
         const padding = 50;
@@ -533,8 +540,8 @@ class XORVisualization {
     drawPerceptronDiagram() {
         const canvas = this.canvasPerceptron;
         const ctx = this.ctxPerceptron;
-        const W = canvas.width;
-        const H = canvas.height;
+        const W = canvas.logicalWidth;
+        const H = canvas.logicalHeight;
         
         ctx.clearRect(0, 0, W, H);
         
@@ -649,8 +656,8 @@ class XORVisualization {
     drawORGate() {
         const canvas = this.canvasOR;
         const ctx = this.ctxOR;
-        const W = canvas.width;
-        const H = canvas.height;
+        const W = canvas.logicalWidth;
+        const H = canvas.logicalHeight;
         
         ctx.clearRect(0, 0, W, H);
         
@@ -697,8 +704,8 @@ class XORVisualization {
     drawNANDGate() {
         const canvas = this.canvasNAND;
         const ctx = this.ctxNAND;
-        const W = canvas.width;
-        const H = canvas.height;
+        const W = canvas.logicalWidth;
+        const H = canvas.logicalHeight;
         
         ctx.clearRect(0, 0, W, H);
         
@@ -945,8 +952,8 @@ class XORVisualization {
     drawHiddenSpace() {
         const canvas = this.canvasH;
         const ctx = this.ctxH;
-        const W = canvas.width;
-        const H = canvas.height;
+        const W = canvas.logicalWidth;
+        const H = canvas.logicalHeight;
         
         ctx.clearRect(0, 0, W, H);
         
@@ -977,7 +984,20 @@ class XORVisualization {
         
         // Draw grid and axes with extended arrows
         this.drawAxesAndGridExtended(ctx, W, H, padding, toScreen, 'h₁', 'h₂');
-        
+
+        // Add sublabels for axis annotations
+        const xEnd = toScreen(1.25, 0);
+        const yEnd = toScreen(0, 1.25);
+        const origin = toScreen(0, 0);
+        ctx.fillStyle = '#888';
+        ctx.font = '10px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'top';
+        ctx.fillText('(OR)', xEnd.x, xEnd.y + 24);
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('(NAND)', yEnd.x - 12, yEnd.y + 14);
+
         // Output decision boundary line in hidden space: v1*h1 + v2*h2 + c = 0
         if (Math.abs(v1) > 0.001 || Math.abs(v2) > 0.001) {
             ctx.strokeStyle = '#9c27b0';
@@ -1052,8 +1072,8 @@ class XORVisualization {
     drawInputSpace2() {
         const canvas = this.canvas2;
         const ctx = this.ctx2;
-        const W = canvas.width;
-        const H = canvas.height;
+        const W = canvas.logicalWidth;
+        const H = canvas.logicalHeight;
         
         ctx.clearRect(0, 0, W, H);
         
@@ -1143,8 +1163,8 @@ class XORVisualization {
     drawNetworkDiagram() {
         const canvas = this.canvasNet;
         const ctx = this.ctxNet;
-        const W = canvas.width;
-        const H = canvas.height;
+        const W = canvas.logicalWidth;
+        const H = canvas.logicalHeight;
         
         ctx.clearRect(0, 0, W, H);
         
