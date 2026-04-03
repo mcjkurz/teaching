@@ -595,11 +595,25 @@ class CosineSimilarityVisualization {
         ctx.fillText('cos θ', 0, 0);
         ctx.restore();
         
-        // Cosine curve
+        // Cosine curve: 0°-180° (relevant range) as solid, 180°-360° as dotted/faded
+        // First draw the faded 180°-360° portion (behind)
+        ctx.strokeStyle = 'rgba(0, 102, 204, 0.3)';
+        ctx.lineWidth = 2;
+        ctx.setLineDash([6, 4]);
+        ctx.beginPath();
+        for (let deg = 180; deg <= 360; deg += 1) {
+            const x = degToX(deg);
+            const y = valToY(Math.cos(deg * Math.PI / 180));
+            if (deg === 180) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+        ctx.setLineDash([]);
+        
+        // Then draw the solid 0°-180° portion (in front)
         ctx.strokeStyle = '#0066cc';
         ctx.lineWidth = 2.5;
         ctx.beginPath();
-        for (let deg = 0; deg <= 360; deg += 1) {
+        for (let deg = 0; deg <= 180; deg += 1) {
             const x = degToX(deg);
             const y = valToY(Math.cos(deg * Math.PI / 180));
             if (deg === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
@@ -610,21 +624,21 @@ class CosineSimilarityVisualization {
         ctx.font = 'bold 11px Arial';
         ctx.textAlign = 'center';
         const keyPoints = [
-            { deg: 0, label: '1' },
-            { deg: 90, label: '0' },
-            { deg: 180, label: '−1' },
-            { deg: 270, label: '0' },
-            { deg: 360, label: '1' }
+            { deg: 0, label: '1', faded: false },
+            { deg: 90, label: '0', faded: false },
+            { deg: 180, label: '−1', faded: false },
+            { deg: 270, label: '0', faded: true },
+            { deg: 360, label: '1', faded: true }
         ];
         for (const pt of keyPoints) {
             const x = degToX(pt.deg);
             const cosVal = Math.cos(pt.deg * Math.PI / 180);
             const y = valToY(cosVal);
-            ctx.fillStyle = '#0066cc';
+            ctx.fillStyle = pt.faded ? 'rgba(0, 102, 204, 0.3)' : '#0066cc';
             ctx.beginPath();
             ctx.arc(x, y, 4, 0, 2 * Math.PI);
             ctx.fill();
-            ctx.fillStyle = '#0066cc';
+            ctx.fillStyle = pt.faded ? 'rgba(0, 102, 204, 0.3)' : '#0066cc';
             ctx.textBaseline = cosVal >= 0 ? 'bottom' : 'top';
             ctx.fillText(pt.label, x, y + (cosVal >= 0 ? -8 : 8));
         }
