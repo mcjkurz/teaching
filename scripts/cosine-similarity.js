@@ -639,8 +639,16 @@ class CosineSimilarityVisualization {
             ctx.arc(x, y, 4, 0, 2 * Math.PI);
             ctx.fill();
             ctx.fillStyle = pt.faded ? 'rgba(0, 102, 204, 0.3)' : '#0066cc';
-            ctx.textBaseline = cosVal >= 0 ? 'bottom' : 'top';
-            ctx.fillText(pt.label, x, y + (cosVal >= 0 ? -8 : 8));
+            // For cos=1, place label above; for cos=-1, place label below (outside graph area)
+            // For cos=0, place label to the side to avoid axis
+            if (cosVal === 1) {
+                ctx.textBaseline = 'bottom';
+                ctx.fillText(pt.label, x, y - 8);
+            } else if (cosVal === -1) {
+                ctx.textBaseline = 'top';
+                ctx.fillText(pt.label, x, y + 8);
+            }
+            // Skip labels for cos=0 points as they clutter the axis
         }
         
         // Current angle marker
