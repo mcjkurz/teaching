@@ -1518,14 +1518,26 @@ class XORVisualization {
         const h2Color = { bg: '#fff3e0', border: '#f57c00', text: '#e65100' };
         const outputColor = { bg: '#e8f5e9', border: '#388e3c', text: '#2e7d32' };
         
-        // Draw connections
-        const drawConnection = (from, to, isHighlighted) => {
+        // Draw connections with optional weight label
+        const drawConnection = (from, to, isHighlighted, label = null, customOffsetY = null) => {
             ctx.strokeStyle = isHighlighted ? '#666' : greyColor;
             ctx.lineWidth = isHighlighted ? 1.5 : 1;
             ctx.beginPath();
             ctx.moveTo(from.x + radius, from.y);
             ctx.lineTo(to.x - radius, to.y);
             ctx.stroke();
+            
+            // Draw weight label if highlighted
+            if (isHighlighted && label) {
+                const midX = (from.x + to.x) / 2;
+                const midY = (from.y + to.y) / 2;
+                const offsetY = customOffsetY !== null ? customOffsetY : (from.y < to.y ? 6 : -6);
+                ctx.fillStyle = '#666';
+                ctx.font = '7px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(label, midX, midY + offsetY);
+            }
         };
         
         // Determine which connections to highlight
@@ -1533,18 +1545,18 @@ class XORVisualization {
         const h2Connections = highlight === 'h2';
         const outputConnections = highlight === 'output';
         
-        // Hidden layer connections
-        drawConnection(neurons.x1, neurons.h1, h1Connections);
-        drawConnection(neurons.x2, neurons.h1, h1Connections);
-        drawConnection(neurons.x1, neurons.h2, h2Connections);
-        drawConnection(neurons.x2, neurons.h2, h2Connections);
+        // Hidden layer connections with weight labels
+        drawConnection(neurons.x1, neurons.h1, h1Connections, h1Connections ? 'w₁₁' : null);
+        drawConnection(neurons.x2, neurons.h1, h1Connections, h1Connections ? 'w₁₂' : null, -10);
+        drawConnection(neurons.x1, neurons.h2, h2Connections, h2Connections ? 'w₂₁' : null);
+        drawConnection(neurons.x2, neurons.h2, h2Connections, h2Connections ? 'w₂₂' : null);
         
-        // Output layer connections
-        drawConnection(neurons.h1, neurons.y, outputConnections);
-        drawConnection(neurons.h2, neurons.y, outputConnections);
+        // Output layer connections with weight labels
+        drawConnection(neurons.h1, neurons.y, outputConnections, outputConnections ? 'v₁' : null);
+        drawConnection(neurons.h2, neurons.y, outputConnections, outputConnections ? 'v₂' : null);
         
         // Draw neurons
-        const drawNeuron = (n, label, colors, isHighlighted) => {
+        const drawNeuron = (n, label, colors, isHighlighted, biasLabel = null) => {
             if (isHighlighted) {
                 ctx.fillStyle = colors.bg;
                 ctx.strokeStyle = colors.border;
@@ -1565,6 +1577,14 @@ class XORVisualization {
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.fillText(label, n.x, n.y);
+            
+            // Draw bias label if provided
+            if (biasLabel) {
+                ctx.fillStyle = '#888';
+                ctx.font = '7px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(biasLabel, n.x, n.y + radius + 8);
+            }
         };
         
         // Input neurons - highlighted for h1 and h2
@@ -1572,12 +1592,15 @@ class XORVisualization {
         drawNeuron(neurons.x1, 'x₁', inputColor, inputHighlight);
         drawNeuron(neurons.x2, 'x₂', inputColor, inputHighlight);
         
-        // Hidden neurons
-        drawNeuron(neurons.h1, 'h₁', h1Color, highlight === 'h1' || highlight === 'output');
-        drawNeuron(neurons.h2, 'h₂', h2Color, highlight === 'h2' || highlight === 'output');
+        // Hidden neurons with bias labels when highlighted
+        const h1Bias = highlight === 'h1' ? '+b₁' : null;
+        const h2Bias = highlight === 'h2' ? '+b₂' : null;
+        drawNeuron(neurons.h1, 'h₁', h1Color, highlight === 'h1' || highlight === 'output', h1Bias);
+        drawNeuron(neurons.h2, 'h₂', h2Color, highlight === 'h2' || highlight === 'output', h2Bias);
         
-        // Output neuron
-        drawNeuron(neurons.y, 'y', outputColor, highlight === 'output');
+        // Output neuron with bias label when highlighted
+        const outputBias = highlight === 'output' ? '+c' : null;
+        drawNeuron(neurons.y, 'y', outputColor, highlight === 'output', outputBias);
     }
     
     fmtSigned(n) {
