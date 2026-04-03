@@ -32,3 +32,9 @@ Interactive web-based visualizations for teaching machine learning concepts (mos
 - **Demo**: https://mcjkurz.github.io/teaching/visualizations/softmax-temperature.html
 - Shows how temperature affects probability distributions in language models
 - Interactive temperature slider with real-time updates
+
+### The XOR Problem
+- **Demo**: https://mcjkurz.github.io/teaching/visualizations/xor-problem.html
+- Demonstrates why neural networks need hidden layers
+- Part 1: Try to separate logic gates (OR, AND, NAND, XOR) with a single line
+- Part 2: See how a hidden layer transforms the input space to make XOR linearly separable
