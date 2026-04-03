@@ -1075,14 +1075,16 @@ class XORVisualization {
             y: 1.2 - (py - padding) / (H - 2 * padding) * 1.4
         });
         
-        // Background shading based on network output (XOR = OR AND NAND)
-        // Both h1 and h2 must fire for XOR=1
+        // Background shading based on hidden layer only (XOR = OR AND NAND = h₁ AND h₂)
         for (let px = 0; px < W; px += 4) {
             for (let py = 0; py < H; py += 4) {
                 const coord = toCoord(px, py);
-                const { yBinary } = this.forwardPassStep(coord.x, coord.y);  // Use step function
-                // Green for XOR=1, red for XOR=0
-                ctx.fillStyle = yBinary === 1 ? 'rgba(200, 230, 200, 0.3)' : 'rgba(230, 200, 200, 0.3)';
+                const z1 = w11 * coord.x + w12 * coord.y + b1;
+                const z2 = w21 * coord.x + w22 * coord.y + b2;
+                const h1 = this.step(z1);
+                const h2 = this.step(z2);
+                const xorOutput = (h1 === 1 && h2 === 1) ? 1 : 0;
+                ctx.fillStyle = xorOutput === 1 ? 'rgba(200, 230, 200, 0.3)' : 'rgba(230, 200, 200, 0.3)';
                 ctx.fillRect(px, py, 4, 4);
             }
         }
