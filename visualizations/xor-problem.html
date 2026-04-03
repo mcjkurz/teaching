@@ -105,7 +105,8 @@
                 <p class="section-intro">A hidden layer transforms the input space, making the problem linearly separable. Adjust the weights to see how the transformation works.</p>
 
                 <div class="network-controls">
-                    <button class="preset-btn" id="loadSolution">Load XOR Solution</button>
+                    <button class="preset-btn" id="loadSolutionOrNand">Load OR + NAND Solution</button>
+                    <button class="preset-btn" id="loadSolutionExclusive">Load Exclusive Solution</button>
                     <button class="preset-btn" id="resetWeights">Reset Weights</button>
                 </div>
 
@@ -127,15 +128,15 @@
                     </div>
                 </div>
 
-                <!-- Hidden Neuron 1: OR Gate -->
+                <!-- Hidden Neuron 1 -->
                 <div class="space-row">
                     <div class="canvas-wrapper">
                         <canvas id="orGateCanvas" width="350" height="350"></canvas>
-                        <div class="canvas-label">h<sub>1</sub>: OR Gate</div>
-                        <div class="canvas-sublabel">Green = h<sub>1</sub> fires (at least one input is 1)</div>
+                        <div class="canvas-label">h<sub>1</sub>: <span id="h1GateLabel">—</span></div>
+                        <div class="canvas-sublabel" id="h1Sublabel">Green region = h<sub>1</sub> fires</div>
                     </div>
                     <div class="weight-section">
-                        <h4>h<sub>1</sub> Weights (OR-like)</h4>
+                        <h4>h<sub>1</sub> Weights</h4>
                         <div class="weight-row">
                             <label>w<sub>11</sub>: <span id="w11Val">0.2</span></label>
                             <input type="range" id="w11" min="-10" max="10" step="0.1" value="0.2">
@@ -154,15 +155,15 @@
                     </div>
                 </div>
 
-                <!-- Hidden Neuron 2: NAND Gate -->
+                <!-- Hidden Neuron 2 -->
                 <div class="space-row">
                     <div class="canvas-wrapper">
                         <canvas id="nandGateCanvas" width="350" height="350"></canvas>
-                        <div class="canvas-label">h<sub>2</sub>: NAND Gate</div>
-                        <div class="canvas-sublabel">Green = h<sub>2</sub> fires (not both inputs are 1)</div>
+                        <div class="canvas-label">h<sub>2</sub>: <span id="h2GateLabel">—</span></div>
+                        <div class="canvas-sublabel" id="h2Sublabel">Green region = h<sub>2</sub> fires</div>
                     </div>
                     <div class="weight-section">
-                        <h4>h<sub>2</sub> Weights (NAND-like)</h4>
+                        <h4>h<sub>2</sub> Weights</h4>
                         <div class="weight-row">
                             <label>w<sub>21</sub>: <span id="w21Val">-0.2</span></label>
                             <input type="range" id="w21" min="-10" max="10" step="0.1" value="-0.2">
@@ -187,14 +188,14 @@
                         <canvas id="inputSpaceCanvas2" width="350" height="350"></canvas>
                         <div class="canvas-label">Combined: Network Output (XOR)</div>
                         <div class="canvas-legend">
-                            <span class="legend-item"><span class="legend-line or-line"></span> h<sub>1</sub> (OR)</span>
-                            <span class="legend-item"><span class="legend-line nand-line"></span> h<sub>2</sub> (NAND)</span>
+                            <span class="legend-item"><span class="legend-line or-line"></span> h<sub>1</sub> (<span id="h1LegendLabel">—</span>)</span>
+                            <span class="legend-item"><span class="legend-line nand-line"></span> h<sub>2</sub> (<span id="h2LegendLabel">—</span>)</span>
                         </div>
                     </div>
-                    <div class="info-box">
-                        <h4>Why This Works</h4>
-                        <p>XOR = OR AND NAND = h<sub>1</sub> AND h<sub>2</sub></p>
-                        <p>The output is 1 (green) only where <strong>both</strong> h<sub>1</sub> fires (OR: at least one input is 1) <strong>and</strong> h<sub>2</sub> fires (NAND: not both inputs are 1).</p>
+                    <div class="info-box" id="infoBox">
+                        <h4>How XOR Works</h4>
+                        <p id="xorFormula">XOR = h<sub>1</sub> <span id="outputOp">AND</span> h<sub>2</sub></p>
+                        <p id="xorExplanation">Adjust the weights to find a valid XOR solution.</p>
                     </div>
                 </div>
 
@@ -204,7 +205,7 @@
                         <canvas id="hiddenSpaceCanvas" width="350" height="350"></canvas>
                         <div class="canvas-label">Hidden Space (h<sub>1</sub>, h<sub>2</sub>)</div>
                         <div class="canvas-legend">
-                            <span class="legend-item"><span class="legend-line output-line"></span> output boundary</span>
+                            <span class="legend-item"><span class="legend-line output-line"></span> output boundary (<span id="outputGateLabel">—</span>)</span>
                         </div>
                     </div>
                     <div class="weight-section">

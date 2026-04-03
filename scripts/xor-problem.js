@@ -27,15 +27,28 @@ class XORVisualization {
             v1: 0.3, v2: 1, c: -0.5        // output: not quite AND yet
         };
         
-        // XOR solution weights
+        // XOR solution weights - OR + NAND decomposition
         // h1: OR gate - fires when x1+x2 > 0.5 → boundary at x1+x2=0.5
         // h2: NAND gate - fires when x1+x2 < 1.5 (NOT AND) → uses negative weights
         // output: h1 AND h2 → XOR (both must fire)
-        this.xorSolution = {
+        this.xorSolutionOrNand = {
             w11: 1, w12: 1, b1: -0.5,     // h1 (OR): fires when x1+x2 >= 0.5
             w21: -1, w22: -1, b2: 1.5,    // h2 (NAND): fires when x1+x2 <= 1.5
             v1: 1, v2: 1, c: -1.5         // output (AND): fires when h1+h2 >= 1.5
         };
+        
+        // XOR solution weights - Exclusive decomposition
+        // h1: x1 AND NOT x2 - fires only when (1,0)
+        // h2: NOT x1 AND x2 - fires only when (0,1)
+        // output: h1 OR h2 → XOR (either must fire)
+        this.xorSolutionExclusive = {
+            w11: 1, w12: -1, b1: -0.5,    // h1 (x₁∧¬x₂): fires when x1-x2 >= 0.5
+            w21: -1, w22: 1, b2: -0.5,    // h2 (¬x₁∧x₂): fires when x2-x1 >= 0.5
+            v1: 1, v2: 1, c: -0.5         // output (OR): fires when h1+h2 >= 0.5
+        };
+        
+        // Keep backward compatibility
+        this.xorSolution = this.xorSolutionOrNand;
         
         this.setupCanvases();
         this.setupEventListeners();
@@ -298,7 +311,8 @@ class XORVisualization {
         });
         
         // Preset buttons
-        document.getElementById('loadSolution').addEventListener('click', () => this.loadXORSolution());
+        document.getElementById('loadSolutionOrNand')?.addEventListener('click', () => this.loadXORSolutionOrNand());
+        document.getElementById('loadSolutionExclusive')?.addEventListener('click', () => this.loadXORSolutionExclusive());
         document.getElementById('resetWeights').addEventListener('click', () => this.resetWeights());
         document.getElementById('resetPerceptron').addEventListener('click', () => this.resetPerceptron());
     }
@@ -621,6 +635,42 @@ class XORVisualization {
         return x >= 0 ? 1 : 0;
     }
     
+    detectGatePattern(w1, w2, b) {
+        const outputs = {};
+        for (const pt of this.points) {
+            const z = w1 * pt.x + w2 * pt.y + b;
+            outputs[pt.key] = this.step(z);
+        }
+        
+        const patterns = {
+            'OR':        { '00': 0, '01': 1, '10': 1, '11': 1 },
+            'AND':       { '00': 0, '01': 0, '10': 0, '11': 1 },
+            'NAND':      { '00': 1, '01': 1, '10': 1, '11': 0 },
+            'NOR':       { '00': 1, '01': 0, '10': 0, '11': 0 },
+            'x₁∧¬x₂':    { '00': 0, '01': 0, '10': 1, '11': 0 },
+            '¬x₁∧x₂':    { '00': 0, '01': 1, '10': 0, '11': 0 },
+            'x₁':        { '00': 0, '01': 0, '10': 1, '11': 1 },
+            'x₂':        { '00': 0, '01': 1, '10': 0, '11': 1 },
+            '¬x₁':       { '00': 1, '01': 1, '10': 0, '11': 0 },
+            '¬x₂':       { '00': 1, '01': 0, '10': 1, '11': 0 },
+            'TRUE':      { '00': 1, '01': 1, '10': 1, '11': 1 },
+            'FALSE':     { '00': 0, '01': 0, '10': 0, '11': 0 },
+            'XOR':       { '00': 0, '01': 1, '10': 1, '11': 0 },
+            'XNOR':      { '00': 1, '01': 0, '10': 0, '11': 1 }
+        };
+        
+        for (const [name, pattern] of Object.entries(patterns)) {
+            if (outputs['00'] === pattern['00'] &&
+                outputs['01'] === pattern['01'] &&
+                outputs['10'] === pattern['10'] &&
+                outputs['11'] === pattern['11']) {
+                return { name, outputs };
+            }
+        }
+        
+        return { name: 'Custom', outputs };
+    }
+    
     forwardPass(x1, x2) {
         const { w11, w12, b1, w21, w22, b2, v1, v2, c } = this.weights;
         
@@ -696,9 +746,9 @@ class XORVisualization {
         ctx.setLineDash([]);
         this.drawBoundaryLine(ctx, w11, w12, b1, toScreen);
         
-        // Draw points with OR gate outputs (for reference)
-        const orOutputs = { '00': 0, '01': 1, '10': 1, '11': 1 };
-        this.drawPointsExtended(ctx, toScreen, orOutputs);
+        // Draw points with XOR target outputs (what we're trying to achieve)
+        const xorOutputs = this.gateOutputs['xor'];
+        this.drawPointsExtended(ctx, toScreen, xorOutputs);
     }
     
     drawNANDGate() {
@@ -745,9 +795,9 @@ class XORVisualization {
         ctx.setLineDash([]);
         this.drawBoundaryLine(ctx, w21, w22, b2, toScreen);
         
-        // Draw points with NAND gate outputs (for reference)
-        const nandOutputs = { '00': 1, '01': 1, '10': 1, '11': 0 };
-        this.drawPointsExtended(ctx, toScreen, nandOutputs);
+        // Draw points with XOR target outputs (what we're trying to achieve)
+        const xorOutputs = this.gateOutputs['xor'];
+        this.drawPointsExtended(ctx, toScreen, xorOutputs);
     }
     
     drawAxesAndGrid(ctx, W, H, padding, toScreen, xLabel, yLabel) {
@@ -985,18 +1035,19 @@ class XORVisualization {
         // Draw grid and axes with extended arrows
         this.drawAxesAndGridExtended(ctx, W, H, padding, toScreen, 'h₁', 'h₂');
 
-        // Add sublabels for axis annotations
+        // Add sublabels for axis annotations (dynamic based on detected patterns)
         const xEnd = toScreen(1.25, 0);
         const yEnd = toScreen(0, 1.25);
-        const origin = toScreen(0, 0);
+        const h1Pattern = this.detectGatePattern(this.weights.w11, this.weights.w12, this.weights.b1);
+        const h2Pattern = this.detectGatePattern(this.weights.w21, this.weights.w22, this.weights.b2);
         ctx.fillStyle = '#888';
         ctx.font = '10px Arial';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'top';
-        ctx.fillText('(OR)', xEnd.x, xEnd.y + 24);
+        ctx.fillText(`(${h1Pattern.name})`, xEnd.x, xEnd.y + 24);
         ctx.textAlign = 'right';
         ctx.textBaseline = 'middle';
-        ctx.fillText('(NAND)', yEnd.x - 12, yEnd.y + 14);
+        ctx.fillText(`(${h2Pattern.name})`, yEnd.x - 12, yEnd.y + 14);
 
         // Output decision boundary line in hidden space: v1*h1 + v2*h2 + c = 0
         if (Math.abs(v1) > 0.001 || Math.abs(v2) > 0.001) {
@@ -1078,7 +1129,7 @@ class XORVisualization {
         ctx.clearRect(0, 0, W, H);
         
         const padding = 50;
-        const { w11, w12, b1, w21, w22, b2 } = this.weights;
+        const { w11, w12, b1, w21, w22, b2, v1, v2, c } = this.weights;
         
         // Use same coordinate system as Part 1
         const toScreen = (x, y) => ({
@@ -1091,7 +1142,7 @@ class XORVisualization {
             y: 1.2 - (py - padding) / (H - 2 * padding) * 1.4
         });
         
-        // Background shading based on hidden layer only (XOR = OR AND NAND = h₁ AND h₂)
+        // Background shading based on full network output (hidden + output layer)
         for (let px = 0; px < W; px += 4) {
             for (let py = 0; py < H; py += 4) {
                 const coord = toCoord(px, py);
@@ -1099,8 +1150,9 @@ class XORVisualization {
                 const z2 = w21 * coord.x + w22 * coord.y + b2;
                 const h1 = this.step(z1);
                 const h2 = this.step(z2);
-                const xorOutput = (h1 === 1 && h2 === 1) ? 1 : 0;
-                ctx.fillStyle = xorOutput === 1 ? 'rgba(200, 230, 200, 0.3)' : 'rgba(230, 200, 200, 0.3)';
+                const zOut = v1 * h1 + v2 * h2 + c;
+                const networkOutput = this.step(zOut);
+                ctx.fillStyle = networkOutput === 1 ? 'rgba(200, 230, 200, 0.3)' : 'rgba(230, 200, 200, 0.3)';
                 ctx.fillRect(px, py, 4, 4);
             }
         }
@@ -1158,6 +1210,135 @@ class XORVisualization {
         this.updateH1Evals();
         this.updateH2Evals();
         this.updateOutputEvals();
+        this.updateGateLabels();
+    }
+    
+    updateGateLabels() {
+        const { w11, w12, b1, w21, w22, b2, v1, v2, c } = this.weights;
+        
+        const h1Pattern = this.detectGatePattern(w11, w12, b1);
+        const h2Pattern = this.detectGatePattern(w21, w22, b2);
+        
+        const h1Label = document.getElementById('h1GateLabel');
+        const h2Label = document.getElementById('h2GateLabel');
+        const h1Legend = document.getElementById('h1LegendLabel');
+        const h2Legend = document.getElementById('h2LegendLabel');
+        const h1Sublabel = document.getElementById('h1Sublabel');
+        const h2Sublabel = document.getElementById('h2Sublabel');
+        
+        if (h1Label) h1Label.textContent = h1Pattern.name;
+        if (h2Label) h2Label.textContent = h2Pattern.name;
+        if (h1Legend) h1Legend.textContent = h1Pattern.name;
+        if (h2Legend) h2Legend.textContent = h2Pattern.name;
+        
+        const getSublabel = (pattern) => {
+            const descriptions = {
+                'OR': 'at least one input is 1',
+                'AND': 'both inputs are 1',
+                'NAND': 'not both inputs are 1',
+                'NOR': 'neither input is 1',
+                'x₁∧¬x₂': 'x₁ is 1 but x₂ is 0',
+                '¬x₁∧x₂': 'x₂ is 1 but x₁ is 0',
+                'x₁': 'x₁ is 1',
+                'x₂': 'x₂ is 1',
+                '¬x₁': 'x₁ is 0',
+                '¬x₂': 'x₂ is 0',
+                'TRUE': 'always fires',
+                'FALSE': 'never fires',
+                'XOR': 'exactly one input is 1',
+                'XNOR': 'inputs are the same'
+            };
+            return descriptions[pattern.name] || 'custom pattern';
+        };
+        
+        if (h1Sublabel) h1Sublabel.textContent = `Green region = h₁ fires (${getSublabel(h1Pattern)})`;
+        if (h2Sublabel) h2Sublabel.textContent = `Green region = h₂ fires (${getSublabel(h2Pattern)})`;
+        
+        // Detect output layer pattern (operates on h1, h2 outputs)
+        const outputPattern = this.detectOutputGatePattern();
+        const outputGateLabel = document.getElementById('outputGateLabel');
+        if (outputGateLabel) outputGateLabel.textContent = outputPattern.name;
+        
+        // Update info box
+        this.updateInfoBox(h1Pattern, h2Pattern, outputPattern);
+    }
+    
+    detectOutputGatePattern() {
+        const { v1, v2, c } = this.weights;
+        
+        const outputs = {};
+        const hiddenInputs = [
+            { h1: 0, h2: 0, key: '00' },
+            { h1: 0, h2: 1, key: '01' },
+            { h1: 1, h2: 0, key: '10' },
+            { h1: 1, h2: 1, key: '11' }
+        ];
+        
+        for (const pt of hiddenInputs) {
+            const z = v1 * pt.h1 + v2 * pt.h2 + c;
+            outputs[pt.key] = this.step(z);
+        }
+        
+        const patterns = {
+            'OR':   { '00': 0, '01': 1, '10': 1, '11': 1 },
+            'AND':  { '00': 0, '01': 0, '10': 0, '11': 1 },
+            'NAND': { '00': 1, '01': 1, '10': 1, '11': 0 },
+            'NOR':  { '00': 1, '01': 0, '10': 0, '11': 0 },
+            'h₁':   { '00': 0, '01': 0, '10': 1, '11': 1 },
+            'h₂':   { '00': 0, '01': 1, '10': 0, '11': 1 },
+            '¬h₁':  { '00': 1, '01': 1, '10': 0, '11': 0 },
+            '¬h₂':  { '00': 1, '01': 0, '10': 1, '11': 0 },
+            'h₁∧¬h₂': { '00': 0, '01': 0, '10': 1, '11': 0 },
+            '¬h₁∧h₂': { '00': 0, '01': 1, '10': 0, '11': 0 },
+            'TRUE':  { '00': 1, '01': 1, '10': 1, '11': 1 },
+            'FALSE': { '00': 0, '01': 0, '10': 0, '11': 0 },
+            'XOR':   { '00': 0, '01': 1, '10': 1, '11': 0 },
+            'XNOR':  { '00': 1, '01': 0, '10': 0, '11': 1 }
+        };
+        
+        for (const [name, pattern] of Object.entries(patterns)) {
+            if (outputs['00'] === pattern['00'] &&
+                outputs['01'] === pattern['01'] &&
+                outputs['10'] === pattern['10'] &&
+                outputs['11'] === pattern['11']) {
+                return { name, outputs };
+            }
+        }
+        
+        return { name: 'Custom', outputs };
+    }
+    
+    updateInfoBox(h1Pattern, h2Pattern, outputPattern) {
+        const outputOp = document.getElementById('outputOp');
+        const xorExplanation = document.getElementById('xorExplanation');
+        
+        if (!outputOp || !xorExplanation) return;
+        
+        // Determine what operator the output layer implements
+        if (outputPattern.name === 'AND') {
+            outputOp.textContent = 'AND';
+        } else if (outputPattern.name === 'OR') {
+            outputOp.textContent = 'OR';
+        } else {
+            outputOp.textContent = outputPattern.name;
+        }
+        
+        // Check if we have a valid XOR solution
+        const networkAccuracy = document.getElementById('networkAccuracy');
+        const isCorrect = networkAccuracy && networkAccuracy.textContent.includes('4/4');
+        
+        if (isCorrect) {
+            // Explain the current solution
+            if (h1Pattern.name === 'OR' && h2Pattern.name === 'NAND' && outputPattern.name === 'AND') {
+                xorExplanation.innerHTML = `<strong>OR + NAND decomposition:</strong> Output is 1 where h₁ fires (${h1Pattern.name}: at least one input) <strong>AND</strong> h₂ fires (${h2Pattern.name}: not both inputs).`;
+            } else if (h1Pattern.name === 'x₁∧¬x₂' && h2Pattern.name === '¬x₁∧x₂' && outputPattern.name === 'OR') {
+                xorExplanation.innerHTML = `<strong>Exclusive decomposition:</strong> Output is 1 where h₁ fires (${h1Pattern.name}: only x₁) <strong>OR</strong> h₂ fires (${h2Pattern.name}: only x₂).`;
+            } else {
+                xorExplanation.innerHTML = `The network correctly computes XOR using h₁ (${h1Pattern.name}) ${outputPattern.name} h₂ (${h2Pattern.name}).`;
+            }
+        } else {
+            xorExplanation.innerHTML = `Adjust the weights to make the green regions cover the green (1) points and red regions cover the red (0) points.`;
+        }
     }
     
     drawNetworkDiagram() {
@@ -1336,8 +1517,8 @@ class XORVisualization {
         el.innerHTML = html;
     }
 
-    loadXORSolution() {
-        this.weights = { ...this.xorSolution };
+    loadXORSolutionOrNand() {
+        this.weights = { ...this.xorSolutionOrNand };
         this.updateSliders();
         this.updateNetwork();
         
@@ -1347,6 +1528,24 @@ class XORVisualization {
         this.currentGate = 'xor';
         this.updateTruthTable();
         this.update();
+    }
+    
+    loadXORSolutionExclusive() {
+        this.weights = { ...this.xorSolutionExclusive };
+        this.updateSliders();
+        this.updateNetwork();
+        
+        // Switch to XOR mode
+        document.querySelectorAll('.gate-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector('[data-gate="xor"]').classList.add('active');
+        this.currentGate = 'xor';
+        this.updateTruthTable();
+        this.update();
+    }
+    
+    // Keep backward compatibility
+    loadXORSolution() {
+        this.loadXORSolutionOrNand();
     }
     
     resetWeights() {
