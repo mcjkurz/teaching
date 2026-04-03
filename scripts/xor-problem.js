@@ -22,8 +22,8 @@ class XORVisualization {
         
         // Network weights for Part 2 (start with non-solution so user needs to adjust)
         this.weights = {
-            w11: 0.2, w12: 1, b1: -0.5,    // h1: not quite OR yet
-            w21: -0.2, w22: -1, b2: 1.5,   // h2: not quite NAND yet
+            w11: 0.2, w12: 1, b1: -0.5,    
+            w21: 0.5, w22: -1.5, b2: 0.7,   
             v1: 0.3, v2: 1, c: -0.5        // output: not quite AND yet
         };
         
@@ -1584,7 +1584,7 @@ class XORVisualization {
     resetWeights() {
         this.weights = {
             w11: 0.2, w12: 1, b1: -0.5,    // h1: non-solution starting weights
-            w21: -0.5, w22: -1.7, b2: 1.5,   // h2: non-solution starting weights
+            w21: 0.5, w22: -1.5, b2: 0.7,   // h2: non-solution starting weights
             v1: 0.3, v2: 1, c: -0.5        // output: non-solution starting weights
         };
         this.updateSliders();
