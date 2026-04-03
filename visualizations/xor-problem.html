@@ -6,9 +6,6 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>The XOR Problem - Why Neural Networks Need Hidden Layers</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/xor-problem.css">
     <script>
@@ -46,7 +43,7 @@
                     <div class="truth-table-mini">
                         <table>
                             <thead>
-                                <tr><th>x₁</th><th>x₂</th><th>Output</th></tr>
+                                <tr><th>x<sub>1</sub></th><th>x<sub>2</sub></th><th>Output</th></tr>
                             </thead>
                             <tbody id="truthTableBody">
                                 <tr><td>0</td><td>0</td><td id="out00">0</td></tr>
@@ -80,11 +77,11 @@
                             <h4>Perceptron Weights</h4>
                             <p class="weight-hint">Adjust weights to find a separating line</p>
                             <div class="weight-row">
-                                <label>w₁: <span id="pw1Val">0.2</span></label>
+                                <label>w<sub>1</sub>: <span id="pw1Val">0.2</span></label>
                                 <input type="range" id="pw1" min="-3" max="3" step="0.1" value="0.2">
                             </div>
                             <div class="weight-row">
-                                <label>w₂: <span id="pw2Val">1.0</span></label>
+                                <label>w<sub>2</sub>: <span id="pw2Val">1.0</span></label>
                                 <input type="range" id="pw2" min="-3" max="3" step="0.1" value="1">
                             </div>
                             <div class="weight-row">
@@ -134,24 +131,24 @@
                 <div class="space-row">
                     <div class="canvas-wrapper">
                         <canvas id="orGateCanvas" width="350" height="350"></canvas>
-                        <div class="canvas-label">h₁: OR Gate</div>
-                        <div class="canvas-sublabel">Green = h₁ fires (at least one input is 1)</div>
+                        <div class="canvas-label">h<sub>1</sub>: OR Gate</div>
+                        <div class="canvas-sublabel">Green = h<sub>1</sub> fires (at least one input is 1)</div>
                     </div>
                     <div class="weight-section">
-                        <h4>h₁ Weights (OR-like)</h4>
+                        <h4>h<sub>1</sub> Weights (OR-like)</h4>
                         <div class="weight-row">
-                            <label>w₁₁: <span id="w11Val">0.2</span></label>
+                            <label>w<sub>11</sub>: <span id="w11Val">0.2</span></label>
                             <input type="range" id="w11" min="-10" max="10" step="0.1" value="0.2">
                         </div>
                         <div class="weight-row">
-                            <label>w₁₂: <span id="w12Val">1.0</span></label>
+                            <label>w<sub>12</sub>: <span id="w12Val">1.0</span></label>
                             <input type="range" id="w12" min="-10" max="10" step="0.1" value="1">
                         </div>
                         <div class="weight-row">
-                            <label>b₁: <span id="b1Val">-0.5</span></label>
+                            <label>b<sub>1</sub>: <span id="b1Val">-0.5</span></label>
                             <input type="range" id="b1" min="-20" max="20" step="0.1" value="-0.5">
                         </div>
-                        <p class="gate-explanation">h₁ = σ(w₁₁·x₁ + w₁₂·x₂ + b₁)<br>Boundary: w₁₁·x₁ + w₁₂·x₂ + b₁ = 0</p>
+                        <p class="gate-explanation">h<sub>1</sub> = σ(w<sub>11</sub>·x<sub>1</sub> + w<sub>12</sub>·x<sub>2</sub> + b<sub>1</sub>)<br>Boundary: w<sub>11</sub>·x<sub>1</sub> + w<sub>12</sub>·x<sub>2</sub> + b<sub>1</sub> = 0</p>
                         <div class="eval-equations" id="h1Evals">
                         </div>
                     </div>
@@ -161,24 +158,24 @@
                 <div class="space-row">
                     <div class="canvas-wrapper">
                         <canvas id="nandGateCanvas" width="350" height="350"></canvas>
-                        <div class="canvas-label">h₂: NAND Gate</div>
-                        <div class="canvas-sublabel">Green = h₂ fires (not both inputs are 1)</div>
+                        <div class="canvas-label">h<sub>2</sub>: NAND Gate</div>
+                        <div class="canvas-sublabel">Green = h<sub>2</sub> fires (not both inputs are 1)</div>
                     </div>
                     <div class="weight-section">
-                        <h4>h₂ Weights (NAND-like)</h4>
+                        <h4>h<sub>2</sub> Weights (NAND-like)</h4>
                         <div class="weight-row">
-                            <label>w₂₁: <span id="w21Val">-0.2</span></label>
+                            <label>w<sub>21</sub>: <span id="w21Val">-0.2</span></label>
                             <input type="range" id="w21" min="-10" max="10" step="0.1" value="-0.2">
                         </div>
                         <div class="weight-row">
-                            <label>w₂₂: <span id="w22Val">-1.0</span></label>
+                            <label>w<sub>22</sub>: <span id="w22Val">-1.0</span></label>
                             <input type="range" id="w22" min="-10" max="10" step="0.1" value="-1">
                         </div>
                         <div class="weight-row">
-                            <label>b₂: <span id="b2Val">1.5</span></label>
+                            <label>b<sub>2</sub>: <span id="b2Val">1.5</span></label>
                             <input type="range" id="b2" min="-20" max="20" step="0.1" value="1.5">
                         </div>
-                        <p class="gate-explanation">h₂ = σ(w₂₁·x₁ + w₂₂·x₂ + b₂)<br>Boundary: w₂₁·x₁ + w₂₂·x₂ + b₂ = 0</p>
+                        <p class="gate-explanation">h<sub>2</sub> = σ(w<sub>21</sub>·x<sub>1</sub> + w<sub>22</sub>·x<sub>2</sub> + b<sub>2</sub>)<br>Boundary: w<sub>21</sub>·x<sub>1</sub> + w<sub>22</sub>·x<sub>2</sub> + b<sub>2</sub> = 0</p>
                         <div class="eval-equations" id="h2Evals">
                         </div>
                     </div>
@@ -190,14 +187,14 @@
                         <canvas id="inputSpaceCanvas2" width="350" height="350"></canvas>
                         <div class="canvas-label">Combined: Network Output (XOR)</div>
                         <div class="canvas-legend">
-                            <span class="legend-item"><span class="legend-line or-line"></span> h₁ (OR)</span>
-                            <span class="legend-item"><span class="legend-line nand-line"></span> h₂ (NAND)</span>
+                            <span class="legend-item"><span class="legend-line or-line"></span> h<sub>1</sub> (OR)</span>
+                            <span class="legend-item"><span class="legend-line nand-line"></span> h<sub>2</sub> (NAND)</span>
                         </div>
                     </div>
                     <div class="info-box">
                         <h4>Why This Works</h4>
-                        <p>XOR = OR AND NAND = h₁ AND h₂</p>
-                        <p>The output is 1 (green) only where <strong>both</strong> h₁ fires (OR: at least one input is 1) <strong>and</strong> h₂ fires (NAND: not both inputs are 1).</p>
+                        <p>XOR = OR AND NAND = h<sub>1</sub> AND h<sub>2</sub></p>
+                        <p>The output is 1 (green) only where <strong>both</strong> h<sub>1</sub> fires (OR: at least one input is 1) <strong>and</strong> h<sub>2</sub> fires (NAND: not both inputs are 1).</p>
                     </div>
                 </div>
 
@@ -205,7 +202,7 @@
                 <div class="space-row">
                     <div class="canvas-wrapper">
                         <canvas id="hiddenSpaceCanvas" width="350" height="350"></canvas>
-                        <div class="canvas-label">Hidden Space (h₁, h₂)</div>
+                        <div class="canvas-label">Hidden Space (h<sub>1</sub>, h<sub>2</sub>)</div>
                         <div class="canvas-legend">
                             <span class="legend-item"><span class="legend-line output-line"></span> output boundary</span>
                         </div>
@@ -213,11 +210,11 @@
                     <div class="weight-section">
                         <h4>Output Layer Weights (AND-like)</h4>
                         <div class="weight-row">
-                            <label>v₁: <span id="v1Val">0.3</span></label>
+                            <label>v<sub>1</sub>: <span id="v1Val">0.3</span></label>
                             <input type="range" id="v1" min="-10" max="10" step="0.1" value="0.3">
                         </div>
                         <div class="weight-row">
-                            <label>v₂: <span id="v2Val">1.0</span></label>
+                            <label>v<sub>2</sub>: <span id="v2Val">1.0</span></label>
                             <input type="range" id="v2" min="-10" max="10" step="0.1" value="1">
                         </div>
                         <div class="weight-row">
@@ -234,8 +231,8 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Input (x₁,x₂)</th>
-                                <th>Hidden (h₁,h₂)</th>
+                                <th>Input (x<sub>1</sub>,x<sub>2</sub>)</th>
+                                <th>Hidden (h<sub>1</sub>,h<sub>2</sub>)</th>
                                 <th>Output (ŷ)</th>
                                 <th>Target</th>
                                 <th>Correct?</th>

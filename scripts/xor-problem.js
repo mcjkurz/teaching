@@ -110,7 +110,7 @@ class XORVisualization {
             // Check if mouse is over output neuron
             const dist = Math.sqrt((x - outputX) ** 2 + (y - outputY) ** 2);
             if (dist <= radius) {
-                tooltip.textContent = 'y = σ(w₁·x₁ + w₂·x₂ + b)';
+                tooltip.innerHTML = 'y = σ(w<sub>1</sub>·x<sub>1</sub> + w<sub>2</sub>·x<sub>2</sub> + b)';
                 tooltip.style.display = 'block';
                 tooltip.style.left = (e.clientX + 10) + 'px';
                 tooltip.style.top = (e.clientY + 10) + 'px';
@@ -145,9 +145,9 @@ class XORVisualization {
         const radius = 22;
         
         const neurons = {
-            h1: { x: layerX[1], y: hiddenY[0], tooltip: 'h₁ = σ(w₁₁·x₁ + w₁₂·x₂ + b₁)' },
-            h2: { x: layerX[1], y: hiddenY[1], tooltip: 'h₂ = σ(w₂₁·x₁ + w₂₂·x₂ + b₂)' },
-            y: { x: layerX[2], y: outputY, tooltip: 'y = σ(v₁·h₁ + v₂·h₂ + c)' }
+            h1: { x: layerX[1], y: hiddenY[0], tooltip: 'h<sub>1</sub> = σ(w<sub>11</sub>·x<sub>1</sub> + w<sub>12</sub>·x<sub>2</sub> + b<sub>1</sub>)' },
+            h2: { x: layerX[1], y: hiddenY[1], tooltip: 'h<sub>2</sub> = σ(w<sub>21</sub>·x<sub>1</sub> + w<sub>22</sub>·x<sub>2</sub> + b<sub>2</sub>)' },
+            y: { x: layerX[2], y: outputY, tooltip: 'y = σ(v<sub>1</sub>·h<sub>1</sub> + v<sub>2</sub>·h<sub>2</sub> + c)' }
         };
         
         canvas.addEventListener('mousemove', (e) => {
@@ -160,7 +160,7 @@ class XORVisualization {
                 const n = neurons[key];
                 const dist = Math.sqrt((x - n.x) ** 2 + (y - n.y) ** 2);
                 if (dist <= radius) {
-                    tooltip.textContent = n.tooltip;
+                    tooltip.innerHTML = n.tooltip;
                     tooltip.style.display = 'block';
                     tooltip.style.left = (e.clientX + 10) + 'px';
                     tooltip.style.top = (e.clientY + 10) + 'px';
@@ -209,7 +209,7 @@ class XORVisualization {
         
         // Axis labels
         ctx.fillStyle = '#666';
-        ctx.font = '10px Noto Sans, Arial';
+        ctx.font = '10px Arial';
         ctx.textAlign = 'center';
         ctx.fillText('x', W - padding + 8, centerY + 4);
         ctx.fillText('σ(x)', centerX, padding - 6);
@@ -249,7 +249,7 @@ class XORVisualization {
         
         // Labels for 0 and 1 on y-axis
         ctx.fillStyle = '#666';
-        ctx.font = '9px Noto Sans, Arial';
+        ctx.font = '9px Arial';
         ctx.textAlign = 'right';
         ctx.fillText('1', centerX - 6, padding + 8);
         ctx.fillText('0', centerX - 6, centerY + 3);
@@ -425,7 +425,7 @@ class XORVisualization {
         
         // Axis labels
         ctx.fillStyle = '#333';
-        ctx.font = '14px Noto Sans, Arial';
+        ctx.font = '14px Arial';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'top';
         ctx.fillText('x₁', xEnd.x, xEnd.y + 10);
@@ -434,7 +434,7 @@ class XORVisualization {
         ctx.fillText('x₂', yEnd.x - 12, yEnd.y);
         
         // Tick labels
-        ctx.font = '12px Noto Sans, Arial';
+        ctx.font = '12px Arial';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'top';
         for (let i = 0; i <= 1; i++) {
@@ -497,7 +497,7 @@ class XORVisualization {
             ctx.fill();
             
             ctx.fillStyle = 'white';
-            ctx.font = 'bold 11px Noto Sans, Arial';
+            ctx.font = 'bold 11px Arial';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.fillText(output.toString(), screen.x, screen.y);
@@ -571,7 +571,7 @@ class XORVisualization {
             const midX = (from.x + to.x) / 2;
             const midY = (from.y + to.y) / 2;
             ctx.fillStyle = '#666';
-            ctx.font = '11px Noto Sans, Arial';
+            ctx.font = '11px Arial';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.fillText(label, midX, midY - 8);
@@ -592,7 +592,7 @@ class XORVisualization {
             ctx.stroke();
             
             ctx.fillStyle = textColor;
-            ctx.font = 'bold 13px Noto Sans, Arial';
+            ctx.font = 'bold 13px Arial';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.fillText(label, n.x, n.y);
@@ -607,7 +607,7 @@ class XORVisualization {
         
         // Bias label
         ctx.fillStyle = '#999';
-        ctx.font = '10px Noto Sans, Arial';
+        ctx.font = '10px Arial';
         ctx.textAlign = 'center';
         ctx.fillText('+b', neurons.y.x, neurons.y.y + radius + 10);
     }
@@ -783,7 +783,7 @@ class XORVisualization {
         
         // Axis labels
         ctx.fillStyle = '#333';
-        ctx.font = '13px Noto Sans, Arial';
+        ctx.font = '13px Arial';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'top';
         ctx.fillText(xLabel, toScreen(1.05, 0).x, origin.y + 5);
@@ -792,7 +792,7 @@ class XORVisualization {
         ctx.fillText(yLabel, origin.x - 8, toScreen(0, 1.05).y);
         
         // Tick labels
-        ctx.font = '11px Noto Sans, Arial';
+        ctx.font = '11px Arial';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'top';
         for (let i = 0; i <= 1; i++) {
@@ -864,7 +864,7 @@ class XORVisualization {
         
         // Axis labels
         ctx.fillStyle = '#333';
-        ctx.font = '14px Noto Sans, Arial';
+        ctx.font = '14px Arial';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'top';
         ctx.fillText(xLabel, xEnd.x, xEnd.y + 10);
@@ -873,7 +873,7 @@ class XORVisualization {
         ctx.fillText(yLabel, yEnd.x - 12, yEnd.y);
         
         // Tick labels
-        ctx.font = '12px Noto Sans, Arial';
+        ctx.font = '12px Arial';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'top';
         for (let i = 0; i <= 1; i++) {
@@ -900,7 +900,7 @@ class XORVisualization {
             ctx.fill();
             
             ctx.fillStyle = 'white';
-            ctx.font = 'bold 11px Noto Sans, Arial';
+            ctx.font = 'bold 11px Arial';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.fillText(output.toString(), screen.x, screen.y);
@@ -942,7 +942,7 @@ class XORVisualization {
             ctx.fill();
             
             ctx.fillStyle = 'white';
-            ctx.font = 'bold 10px Noto Sans, Arial';
+            ctx.font = 'bold 10px Arial';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.fillText(output.toString(), screen.x, screen.y);
@@ -990,7 +990,7 @@ class XORVisualization {
         const yEnd = toScreen(0, 1.25);
         const origin = toScreen(0, 0);
         ctx.fillStyle = '#888';
-        ctx.font = '10px Noto Sans, Arial';
+        ctx.font = '10px Arial';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'top';
         ctx.fillText('(OR)', xEnd.x, xEnd.y + 24);
@@ -1037,7 +1037,7 @@ class XORVisualization {
                 ctx.fill();
                 
                 ctx.fillStyle = 'white';
-                ctx.font = 'bold 9px Noto Sans, Arial';
+                ctx.font = 'bold 9px Arial';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
                 ctx.fillText(`${pt.x},${pt.y}`, screen.x, screen.y);
@@ -1061,7 +1061,7 @@ class XORVisualization {
                 // Label with all coordinates
                 const labels = pts.map(p => `${p.x},${p.y}`).join(' & ');
                 ctx.fillStyle = 'white';
-                ctx.font = 'bold 8px Noto Sans, Arial';
+                ctx.font = 'bold 8px Arial';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
                 ctx.fillText(labels, screen.x, screen.y);
@@ -1198,7 +1198,7 @@ class XORVisualization {
             const labelX = from.x + (to.x - from.x) * t;
             const labelY = from.y + (to.y - from.y) * t + offsetY;
             ctx.fillStyle = '#666';
-            ctx.font = '11px Noto Sans, Arial';
+            ctx.font = '11px Arial';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.fillText(label, labelX, labelY);
@@ -1225,7 +1225,7 @@ class XORVisualization {
             ctx.stroke();
             
             ctx.fillStyle = textColor;
-            ctx.font = 'bold 14px Noto Sans, Arial';
+            ctx.font = 'bold 14px Arial';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.fillText(label, n.x, n.y);
@@ -1244,7 +1244,7 @@ class XORVisualization {
         
         // Bias labels
         ctx.fillStyle = '#999';
-        ctx.font = '10px Noto Sans, Arial';
+        ctx.font = '10px Arial';
         ctx.textAlign = 'center';
         ctx.fillText('+b₁', neurons.h1.x, neurons.h1.y + radius + 12);
         ctx.fillText('+b₂', neurons.h2.x, neurons.h2.y + radius + 12);
@@ -1298,7 +1298,7 @@ class XORVisualization {
             const sum = w11 * pt.x + w12 * pt.y + b1;
             const result = this.step(sum);
             const terms = this.fmtTerms([w11, w12], [pt.x, pt.y], b1);
-            html += this.buildEvalRow(`h₁(${pt.x}, ${pt.y})`, terms, sum, result);
+            html += this.buildEvalRow(`h<sub>1</sub>(${pt.x}, ${pt.y})`, terms, sum, result);
         }
         el.innerHTML = html;
     }
@@ -1312,7 +1312,7 @@ class XORVisualization {
             const sum = w21 * pt.x + w22 * pt.y + b2;
             const result = this.step(sum);
             const terms = this.fmtTerms([w21, w22], [pt.x, pt.y], b2);
-            html += this.buildEvalRow(`h₂(${pt.x}, ${pt.y})`, terms, sum, result);
+            html += this.buildEvalRow(`h<sub>2</sub>(${pt.x}, ${pt.y})`, terms, sum, result);
         }
         el.innerHTML = html;
     }

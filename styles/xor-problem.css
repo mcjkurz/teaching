@@ -1,9 +1,5 @@
 /* XOR Problem Visualization Styles */
 
-body {
-    font-family: 'Noto Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
 .container {
     max-width: 900px;
 }
@@ -184,7 +180,7 @@ h4 {
     font-size: 0.8rem;
     color: #666;
     margin-top: 1rem;
-    font-family: 'Noto Sans', monospace;
+    font-family: monospace;
     line-height: 1.5;
 }
 
@@ -290,7 +286,7 @@ h4 {
     padding: 8px 12px;
     border-radius: 6px;
     font-size: 0.85rem;
-    font-family: 'Noto Sans', monospace;
+    font-family: monospace;
     pointer-events: none;
     z-index: 1000;
     line-height: 1.4;
@@ -335,7 +331,7 @@ h4 {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-family: 'Noto Sans', monospace;
+    font-family: monospace;
     font-size: 0.9rem;
 }
 
@@ -371,7 +367,7 @@ h4 {
 }
 
 .equation {
-    font-family: 'Noto Sans', monospace;
+    font-family: monospace;
     font-size: 0.9rem;
     color: #0066cc;
     line-height: 1.6;
@@ -509,7 +505,7 @@ h4 {
     margin-top: 0.5rem;
     font-size: 0.8rem;
     color: #666;
-    font-family: 'Noto Sans', monospace;
+    font-family: monospace;
 }
 
 /* Weight controls */
@@ -529,7 +525,7 @@ h4 {
 .weight-row label {
     min-width: 90px;
     font-size: 0.85rem;
-    font-family: 'Noto Sans', monospace;
+    font-family: monospace;
 }
 
 .weight-row label span {
@@ -579,7 +575,7 @@ h4 {
 }
 
 .computation-table td {
-    font-family: 'Noto Sans', monospace;
+    font-family: monospace;
 }
 
 .network-accuracy {
@@ -623,13 +619,13 @@ h4 {
     background: white;
     border-radius: 6px;
     border: 1px solid #e0e0e0;
-    font-family: 'Noto Sans', monospace;
+    font-family: monospace;
     font-size: 0.78rem;
     line-height: 1.4;
 }
 
 .eval-equations .eval-title {
-    font-family: 'Noto Sans', Arial, sans-serif;
+    font-family: Arial, sans-serif;
     font-weight: 600;
     font-size: 0.8rem;
     color: #555;
