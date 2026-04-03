@@ -620,15 +620,13 @@ class CosineSimilarityVisualization {
         }
         ctx.stroke();
         
-        // Key-point dots and value labels
-        ctx.font = 'bold 11px Arial';
-        ctx.textAlign = 'center';
+        // Key-point dots (no labels - values readable from y-axis)
         const keyPoints = [
-            { deg: 0, label: '1', faded: false },
-            { deg: 90, label: '0', faded: false },
-            { deg: 180, label: '−1', faded: false },
-            { deg: 270, label: '0', faded: true },
-            { deg: 360, label: '1', faded: true }
+            { deg: 0, faded: false },
+            { deg: 90, faded: false },
+            { deg: 180, faded: false },
+            { deg: 270, faded: true },
+            { deg: 360, faded: true }
         ];
         for (const pt of keyPoints) {
             const x = degToX(pt.deg);
@@ -638,17 +636,6 @@ class CosineSimilarityVisualization {
             ctx.beginPath();
             ctx.arc(x, y, 4, 0, 2 * Math.PI);
             ctx.fill();
-            ctx.fillStyle = pt.faded ? 'rgba(0, 102, 204, 0.3)' : '#0066cc';
-            // For cos=1, place label above; for cos=-1, place label below (outside graph area)
-            // For cos=0, place label to the side to avoid axis
-            if (cosVal === 1) {
-                ctx.textBaseline = 'bottom';
-                ctx.fillText(pt.label, x, y - 8);
-            } else if (cosVal === -1) {
-                ctx.textBaseline = 'top';
-                ctx.fillText(pt.label, x, y + 8);
-            }
-            // Skip labels for cos=0 points as they clutter the axis
         }
         
         // Current angle marker
