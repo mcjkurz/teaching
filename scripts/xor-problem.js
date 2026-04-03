@@ -521,17 +521,13 @@ class XORVisualization {
             msgBox.className = 'message-box';
         }
         
-        // Update boundary equation with current weights (algebraic + values)
-        const formatNum = (n) => n >= 0 ? `+ ${n.toFixed(1)}` : `− ${Math.abs(n).toFixed(1)}`;
-        const eqnValues = `${w1.toFixed(1)}·x₁ ${formatNum(w2)}·x₂ ${formatNum(b)} ≥ 0 → 1`;
-        const eqnAlgebra = `w₁·x₁ + w₂·x₂ + b ≥ 0 → 1`;
-        document.getElementById('boundaryEquation').innerHTML = `<span class="equation-algebra">${eqnAlgebra}</span><br><span class="equation-values">${eqnValues}</span>`;
     }
     
     update() {
         this.drawInputSpace(this.canvas1, this.ctx1, true);
         this.drawPerceptronDiagram();
         this.updateClassificationStatus();
+        this.updatePerceptronEvals();
     }
     
     drawPerceptronDiagram() {
@@ -1139,6 +1135,9 @@ class XORVisualization {
         this.drawHiddenSpace();
         this.drawNetworkDiagram();
         this.updateComputationTable();
+        this.updateH1Evals();
+        this.updateH2Evals();
+        this.updateOutputEvals();
     }
     
     drawNetworkDiagram() {
@@ -1232,6 +1231,91 @@ class XORVisualization {
         ctx.fillText('+c', neurons.y.x, neurons.y.y + radius + 12);
     }
     
+    fmtSigned(n) {
+        return n >= 0 ? `+ ${n.toFixed(1)}` : `− ${Math.abs(n).toFixed(1)}`;
+    }
+
+    fmtTerms(weights, inputs, bias) {
+        let s = `${weights[0].toFixed(1)}·${inputs[0]}`;
+        for (let i = 1; i < weights.length; i++) {
+            s += ` ${this.fmtSigned(weights[i])}·${inputs[i]}`;
+        }
+        s += ` ${this.fmtSigned(bias)}`;
+        return s;
+    }
+
+    buildEvalRow(label, termsStr, sum, result) {
+        const cls = result === 1 ? 'output-1' : 'output-0';
+        return `<div class="eval-row">`
+            + `<span class="eval-label">${label}</span>`
+            + `<span class="eval-expansion">= σ(${termsStr})</span>`
+            + `<span class="eval-sum">= σ(${sum.toFixed(1)})</span>`
+            + `<span class="eval-arrow">→</span>`
+            + `<span class="eval-result ${cls}"><strong>${result}</strong></span>`
+            + `</div>`;
+    }
+
+    updatePerceptronEvals() {
+        const el = document.getElementById('perceptronEvals');
+        if (!el) return;
+        const { w1, w2, b } = this.perceptron;
+        let html = '<div class="eval-title">Evaluate all inputs</div>';
+        for (const pt of this.points) {
+            const sum = w1 * pt.x + w2 * pt.y + b;
+            const result = this.step(sum);
+            const terms = this.fmtTerms([w1, w2], [pt.x, pt.y], b);
+            html += this.buildEvalRow(`f(${pt.x}, ${pt.y})`, terms, sum, result);
+        }
+        el.innerHTML = html;
+    }
+
+    updateH1Evals() {
+        const el = document.getElementById('h1Evals');
+        if (!el) return;
+        const { w11, w12, b1 } = this.weights;
+        let html = '<div class="eval-title">Evaluate all inputs</div>';
+        for (const pt of this.points) {
+            const sum = w11 * pt.x + w12 * pt.y + b1;
+            const result = this.step(sum);
+            const terms = this.fmtTerms([w11, w12], [pt.x, pt.y], b1);
+            html += this.buildEvalRow(`h₁(${pt.x}, ${pt.y})`, terms, sum, result);
+        }
+        el.innerHTML = html;
+    }
+
+    updateH2Evals() {
+        const el = document.getElementById('h2Evals');
+        if (!el) return;
+        const { w21, w22, b2 } = this.weights;
+        let html = '<div class="eval-title">Evaluate all inputs</div>';
+        for (const pt of this.points) {
+            const sum = w21 * pt.x + w22 * pt.y + b2;
+            const result = this.step(sum);
+            const terms = this.fmtTerms([w21, w22], [pt.x, pt.y], b2);
+            html += this.buildEvalRow(`h₂(${pt.x}, ${pt.y})`, terms, sum, result);
+        }
+        el.innerHTML = html;
+    }
+
+    updateOutputEvals() {
+        const el = document.getElementById('outputEvals');
+        if (!el) return;
+        const { v1, v2, c } = this.weights;
+        let html = '<div class="eval-title">Evaluate all hidden outputs</div>';
+        const seen = new Set();
+        for (const pt of this.points) {
+            const { h1, h2 } = this.forwardPassStep(pt.x, pt.y);
+            const key = `${h1},${h2}`;
+            if (seen.has(key)) continue;
+            seen.add(key);
+            const sum = v1 * h1 + v2 * h2 + c;
+            const result = this.step(sum);
+            const terms = this.fmtTerms([v1, v2], [h1, h2], c);
+            html += this.buildEvalRow(`y(${h1}, ${h2})`, terms, sum, result);
+        }
+        el.innerHTML = html;
+    }
+
     loadXORSolution() {
         this.weights = { ...this.xorSolution };
         this.updateSliders();

@@ -90,9 +90,7 @@
                             </div>
                             <button class="preset-btn" id="resetPerceptron">Reset Weights</button>
                         </div>
-                        <div class="boundary-equation">
-                            <h4>Decision Rule</h4>
-                            <div id="boundaryEquation" class="equation">w₁x₁ + w₂x₂ + b ≥ 0 → output 1</div>
+                        <div class="eval-equations" id="perceptronEvals">
                         </div>
                         <div class="message-box" id="messageBox">
                             Adjust the weights to separate the classes!
@@ -151,6 +149,8 @@
                             <input type="range" id="b1" min="-20" max="20" step="0.1" value="-0.5">
                         </div>
                         <p class="gate-explanation">h₁ = σ(w₁₁·x₁ + w₁₂·x₂ + b₁)<br>Boundary: w₁₁·x₁ + w₁₂·x₂ + b₁ = 0</p>
+                        <div class="eval-equations" id="h1Evals">
+                        </div>
                     </div>
                 </div>
 
@@ -176,6 +176,8 @@
                             <input type="range" id="b2" min="-20" max="20" step="0.1" value="1.5">
                         </div>
                         <p class="gate-explanation">h₂ = σ(w₂₁·x₁ + w₂₂·x₂ + b₂)<br>Boundary: w₂₁·x₁ + w₂₂·x₂ + b₂ = 0</p>
+                        <div class="eval-equations" id="h2Evals">
+                        </div>
                     </div>
                 </div>
 
@@ -218,6 +220,8 @@
                         <div class="weight-row">
                             <label>c: <span id="cVal">-0.5</span></label>
                             <input type="range" id="c" min="-20" max="20" step="0.1" value="-0.5">
+                        </div>
+                        <div class="eval-equations" id="outputEvals">
                         </div>
                     </div>
                 </div>
