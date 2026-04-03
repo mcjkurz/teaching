@@ -777,9 +777,13 @@ class XORVisualization {
         ctx.setLineDash([]);
         this.drawBoundaryLine(ctx, w11, w12, b1, toScreen);
         
-        // Draw points with XOR target outputs (what we're trying to achieve)
-        const xorOutputs = this.gateOutputs['xor'];
-        this.drawPointsExtended(ctx, toScreen, xorOutputs);
+        // Draw points with actual h1 outputs (dynamic based on current weights)
+        const h1Outputs = {};
+        for (const pt of this.points) {
+            const z = w11 * pt.x + w12 * pt.y + b1;
+            h1Outputs[pt.key] = this.step(z);
+        }
+        this.drawPointsExtended(ctx, toScreen, h1Outputs);
     }
     
     drawNANDGate() {
@@ -826,9 +830,13 @@ class XORVisualization {
         ctx.setLineDash([]);
         this.drawBoundaryLine(ctx, w21, w22, b2, toScreen);
         
-        // Draw points with XOR target outputs (what we're trying to achieve)
-        const xorOutputs = this.gateOutputs['xor'];
-        this.drawPointsExtended(ctx, toScreen, xorOutputs);
+        // Draw points with actual h2 outputs (dynamic based on current weights)
+        const h2Outputs = {};
+        for (const pt of this.points) {
+            const z = w21 * pt.x + w22 * pt.y + b2;
+            h2Outputs[pt.key] = this.step(z);
+        }
+        this.drawPointsExtended(ctx, toScreen, h2Outputs);
     }
     
     drawAxesAndGrid(ctx, W, H, padding, toScreen, xLabel, yLabel) {
@@ -1089,18 +1097,17 @@ class XORVisualization {
             ctx.setLineDash([]);
         }
         
-        // Transformed points - always use XOR outputs for Part 2
+        // Transformed points - use actual network output (dynamic)
         // Group points by their hidden space coordinates to handle overlaps
-        const outputs = this.gateOutputs['xor'];
         const pointGroups = {};
         
         for (const pt of this.points) {
-            const { h1, h2 } = this.forwardPassStep(pt.x, pt.y);
+            const { h1, h2, yBinary } = this.forwardPassStep(pt.x, pt.y);
             const key = `${h1},${h2}`;
             if (!pointGroups[key]) {
                 pointGroups[key] = { h1, h2, points: [] };
             }
-            pointGroups[key].points.push(pt);
+            pointGroups[key].points.push({ ...pt, yBinary });
         }
         
         // Draw each group
@@ -1112,8 +1119,7 @@ class XORVisualization {
             if (pts.length === 1) {
                 // Single point - draw normally
                 const pt = pts[0];
-                const output = outputs[pt.key];
-                ctx.fillStyle = output === 1 ? '#2e7d32' : '#c62828';
+                ctx.fillStyle = pt.yBinary === 1 ? '#2e7d32' : '#c62828';
                 ctx.beginPath();
                 ctx.arc(screen.x, screen.y, 14, 0, 2 * Math.PI);
                 ctx.fill();
@@ -1126,8 +1132,8 @@ class XORVisualization {
             } else {
                 // Multiple points at same location - draw stacked/combined
                 // Check if all have same output
-                const allSameOutput = pts.every(p => outputs[p.key] === outputs[pts[0].key]);
-                const output = outputs[pts[0].key];
+                const allSameOutput = pts.every(p => p.yBinary === pts[0].yBinary);
+                const output = pts[0].yBinary;
                 
                 // Draw larger circle to indicate multiple points
                 ctx.fillStyle = output === 1 ? '#2e7d32' : '#c62828';
