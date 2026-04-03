@@ -99,6 +99,16 @@ class XORVisualization {
         this.drawStepFunction(this.canvasStepPart1, this.ctxStepPart1);
         this.drawStepFunction(this.canvasStep, this.ctxStep);
 
+        // Mini network diagrams
+        this.canvasMiniH1 = document.getElementById('miniNetH1');
+        this.ctxMiniH1 = this.scaleForDPI(this.canvasMiniH1);
+        this.canvasMiniH2 = document.getElementById('miniNetH2');
+        this.ctxMiniH2 = this.scaleForDPI(this.canvasMiniH2);
+        this.canvasMiniOutput = document.getElementById('miniNetOutput');
+        this.ctxMiniOutput = this.scaleForDPI(this.canvasMiniOutput);
+        
+        this.drawMiniNetworks();
+
         this.setupPerceptronHover();
     }
     
@@ -1469,6 +1479,105 @@ class XORVisualization {
         ctx.fillText('+b₁', neurons.h1.x, neurons.h1.y + radius + 12);
         ctx.fillText('+b₂', neurons.h2.x, neurons.h2.y + radius + 12);
         ctx.fillText('+c', neurons.y.x, neurons.y.y + radius + 12);
+    }
+    
+    drawMiniNetworks() {
+        this.drawMiniNetwork(this.canvasMiniH1, this.ctxMiniH1, 'h1');
+        this.drawMiniNetwork(this.canvasMiniH2, this.ctxMiniH2, 'h2');
+        this.drawMiniNetwork(this.canvasMiniOutput, this.ctxMiniOutput, 'output');
+    }
+    
+    drawMiniNetwork(canvas, ctx, highlight) {
+        if (!canvas || !ctx) return;
+        
+        const W = canvas.logicalWidth;
+        const H = canvas.logicalHeight;
+        
+        ctx.clearRect(0, 0, W, H);
+        
+        const layerX = [30, W/2, W - 30];
+        const inputY = [H/2 - 18, H/2 + 18];
+        const hiddenY = [H/2 - 18, H/2 + 18];
+        const outputY = H/2;
+        const radius = 12;
+        
+        const neurons = {
+            x1: { x: layerX[0], y: inputY[0] },
+            x2: { x: layerX[0], y: inputY[1] },
+            h1: { x: layerX[1], y: hiddenY[0] },
+            h2: { x: layerX[1], y: hiddenY[1] },
+            y:  { x: layerX[2], y: outputY }
+        };
+        
+        const greyColor = '#ccc';
+        const greyText = '#aaa';
+        
+        // Colors for highlighted elements
+        const inputColor = { bg: '#e3f2fd', border: '#1976d2', text: '#1976d2' };
+        const h1Color = { bg: '#fff3e0', border: '#f57c00', text: '#e65100' };
+        const h2Color = { bg: '#fff3e0', border: '#f57c00', text: '#e65100' };
+        const outputColor = { bg: '#e8f5e9', border: '#388e3c', text: '#2e7d32' };
+        
+        // Draw connections
+        const drawConnection = (from, to, isHighlighted) => {
+            ctx.strokeStyle = isHighlighted ? '#666' : greyColor;
+            ctx.lineWidth = isHighlighted ? 1.5 : 1;
+            ctx.beginPath();
+            ctx.moveTo(from.x + radius, from.y);
+            ctx.lineTo(to.x - radius, to.y);
+            ctx.stroke();
+        };
+        
+        // Determine which connections to highlight
+        const h1Connections = highlight === 'h1';
+        const h2Connections = highlight === 'h2';
+        const outputConnections = highlight === 'output';
+        
+        // Hidden layer connections
+        drawConnection(neurons.x1, neurons.h1, h1Connections);
+        drawConnection(neurons.x2, neurons.h1, h1Connections);
+        drawConnection(neurons.x1, neurons.h2, h2Connections);
+        drawConnection(neurons.x2, neurons.h2, h2Connections);
+        
+        // Output layer connections
+        drawConnection(neurons.h1, neurons.y, outputConnections);
+        drawConnection(neurons.h2, neurons.y, outputConnections);
+        
+        // Draw neurons
+        const drawNeuron = (n, label, colors, isHighlighted) => {
+            if (isHighlighted) {
+                ctx.fillStyle = colors.bg;
+                ctx.strokeStyle = colors.border;
+                ctx.lineWidth = 2;
+            } else {
+                ctx.fillStyle = '#f5f5f5';
+                ctx.strokeStyle = greyColor;
+                ctx.lineWidth = 1;
+            }
+            
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, radius, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.stroke();
+            
+            ctx.fillStyle = isHighlighted ? colors.text : greyText;
+            ctx.font = 'bold 9px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(label, n.x, n.y);
+        };
+        
+        // Input neurons - highlighted for h1 and h2
+        const inputHighlight = highlight === 'h1' || highlight === 'h2';
+        drawNeuron(neurons.x1, 'x₁', inputColor, inputHighlight);
+        drawNeuron(neurons.x2, 'x₂', inputColor, inputHighlight);
+        
+        // Hidden neurons
+        drawNeuron(neurons.h1, 'h₁', h1Color, highlight === 'h1' || highlight === 'output');
+        drawNeuron(neurons.h2, 'h₂', h2Color, highlight === 'h2' || highlight === 'output');
+        
+        // Output neuron
+        drawNeuron(neurons.y, 'y', outputColor, highlight === 'output');
     }
     
     fmtSigned(n) {

@@ -530,6 +530,16 @@ h4 {
     border-radius: 8px;
 }
 
+.mini-network-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.75rem;
+}
+
+.mini-network-wrapper canvas {
+    background: transparent;
+}
+
 .weight-row {
     display: flex;
     align-items: center;
