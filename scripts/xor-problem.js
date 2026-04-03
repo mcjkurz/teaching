@@ -1364,12 +1364,22 @@ class XORVisualization {
         if (!outputOp || !xorExplanation) return;
         
         // Determine what operator the output layer implements
+        // Only show simple operators (AND, OR) in the formula
         if (outputPattern.name === 'AND') {
             outputOp.textContent = 'AND';
         } else if (outputPattern.name === 'OR') {
             outputOp.textContent = 'OR';
+        } else if (outputPattern.name === 'NAND') {
+            outputOp.textContent = 'NAND';
+        } else if (outputPattern.name === 'NOR') {
+            outputOp.textContent = 'NOR';
+        } else if (outputPattern.name === 'XOR') {
+            outputOp.textContent = 'XOR';
+        } else if (outputPattern.name === 'XNOR') {
+            outputOp.textContent = 'XNOR';
         } else {
-            outputOp.textContent = outputPattern.name;
+            // For non-standard patterns, show a generic operator
+            outputOp.textContent = '⊕';
         }
         
         // Check if we have a valid XOR solution
