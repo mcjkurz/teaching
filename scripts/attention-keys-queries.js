@@ -41,6 +41,11 @@ class AttentionVisualization {
         const displayHeight = Math.max(1, Math.round(rect.height || this.canvas.height));
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
+        // Keep on-screen size fixed in CSS pixels.
+        this.canvas.style.width = `${displayWidth}px`;
+        this.canvas.style.height = `${displayHeight}px`;
+
+        // Increase backing-store resolution for sharper rendering.
         this.canvas.width = Math.round(displayWidth * dpr);
         this.canvas.height = Math.round(displayHeight * dpr);
 
