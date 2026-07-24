@@ -5,12 +5,12 @@ class AttentionVisualization {
         this.canvas = document.getElementById('vectorCanvas');
         this.ctx = this.canvas.getContext('2d');
         
-        // Canvas dimensions and center
-        this.width = this.canvas.width;
-        this.height = this.canvas.height;
-        this.centerX = this.width / 2;
-        this.centerY = this.height / 2;
-        this.scale = 150; // Scale factor for coordinate system (pixels per unit)
+        // Canvas dimensions and center (logical/CSS pixels)
+        this.width = 0;
+        this.height = 0;
+        this.centerX = 0;
+        this.centerY = 0;
+        this.scale = 0; // Scale factor for coordinate system (pixels per unit)
         this.maxCoord = 1; // Maximum coordinate value (-1 to 1)
         
         // Key vectors (in black), using slight length differences while preserving angles
@@ -28,10 +28,31 @@ class AttentionVisualization {
         this.draggingVector = null;
         this.dragOffset = { x: 0, y: 0 };
         
+        this.setupCanvasResolution();
         this.setupEventListeners();
         this.setupResizeListener();
         this.setupMainFormula();
         this.update();
+    }
+
+    setupCanvasResolution() {
+        const rect = this.canvas.getBoundingClientRect();
+        const displayWidth = Math.max(1, Math.round(rect.width || this.canvas.width));
+        const displayHeight = Math.max(1, Math.round(rect.height || this.canvas.height));
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+        this.canvas.width = Math.round(displayWidth * dpr);
+        this.canvas.height = Math.round(displayHeight * dpr);
+
+        // Draw using logical pixels; browser maps to higher internal resolution.
+        this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+        this.ctx.scale(dpr, dpr);
+
+        this.width = displayWidth;
+        this.height = displayHeight;
+        this.centerX = this.width / 2;
+        this.centerY = this.height / 2;
+        this.scale = Math.min(this.width, this.height) * 0.375;
     }
     
     setupEventListeners() {
@@ -68,12 +89,13 @@ class AttentionVisualization {
     }
     
     setupResizeListener() {
-        // Listen for window resize to update formula layout
+        // Listen for window resize to update canvas and formula layout
         window.addEventListener('resize', () => {
             clearTimeout(this.resizeTimeout);
             this.resizeTimeout = setTimeout(() => {
+                this.setupCanvasResolution();
                 this.setupMainFormula();
-                this.updateDisplay();
+                this.update();
             }, 250);
         });
     }
@@ -104,23 +126,19 @@ class AttentionVisualization {
     
     getMousePos(e) {
         const rect = this.canvas.getBoundingClientRect();
-        const scaleX = this.canvas.width / rect.width;
-        const scaleY = this.canvas.height / rect.height;
         
         return {
-            x: (e.clientX - rect.left) * scaleX,
-            y: (e.clientY - rect.top) * scaleY
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top
         };
     }
     
     getTouchPos(e) {
         const rect = this.canvas.getBoundingClientRect();
-        const scaleX = this.canvas.width / rect.width;
-        const scaleY = this.canvas.height / rect.height;
         
         return {
-            x: (e.touches[0].clientX - rect.left) * scaleX,
-            y: (e.touches[0].clientY - rect.top) * scaleY
+            x: e.touches[0].clientX - rect.left,
+            y: e.touches[0].clientY - rect.top
         };
     }
     
