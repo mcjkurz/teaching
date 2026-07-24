@@ -13,11 +13,11 @@ class AttentionVisualization {
         this.scale = 150; // Scale factor for coordinate system (pixels per unit)
         this.maxCoord = 1; // Maximum coordinate value (-1 to 1)
         
-        // Fixed key vectors (in black) - from Figure 1
+        // Key vectors (in black), using slight length differences while preserving angles
         this.keys = {
-            '水': { x: 0.7, y: 0.5, color: '#2F4F4F' },  // Water
-            '風': { x: 0.5, y: 0.71, color: '#2F4F4F' }, // Wind
-            '有': { x: -0.6, y: 0.7, color: '#2F4F4F' }  // Have
+            '水': { x: 0.64, y: 0.46, color: '#2F4F4F' },  // Water (slightly shorter)
+            '風': { x: 0.5, y: 0.71, color: '#2F4F4F' },   // Wind (baseline)
+            '有': { x: -0.65, y: 0.76, color: '#2F4F4F' }  // Have (slightly longer)
         };
         
         // Movable query vector (in red)
@@ -25,6 +25,7 @@ class AttentionVisualization {
         
         // Interaction state
         this.dragging = false;
+        this.draggingVector = null;
         this.dragOffset = { x: 0, y: 0 };
         
         this.setupEventListeners();
@@ -156,13 +157,38 @@ class AttentionVisualization {
         );
         return distance <= threshold;
     }
+
+    getDraggableVectorAtPoint(mouseX, mouseY) {
+        // Query first so existing behavior remains intuitive when endpoints overlap.
+        if (this.isPointNearEndpoint(mouseX, mouseY, this.query)) {
+            return { type: 'query' };
+        }
+
+        for (const [label, keyVec] of Object.entries(this.keys)) {
+            if (this.isPointNearEndpoint(mouseX, mouseY, keyVec)) {
+                return { type: 'key', label };
+            }
+        }
+
+        return null;
+    }
+
+    getVectorFromDragTarget(target) {
+        if (!target) return null;
+        if (target.type === 'query') return this.query;
+        if (target.type === 'key') return this.keys[target.label];
+        return null;
+    }
     
     handleMouseDown(e) {
         const mousePos = this.getMousePos(e);
-        
-        if (this.isPointNearEndpoint(mousePos.x, mousePos.y, this.query)) {
+
+        const dragTarget = this.getDraggableVectorAtPoint(mousePos.x, mousePos.y);
+        if (dragTarget) {
+            const vector = this.getVectorFromDragTarget(dragTarget);
             this.dragging = true;
-            const endpoint = this.getVectorEndpoint(this.query);
+            this.draggingVector = dragTarget;
+            const endpoint = this.getVectorEndpoint(vector);
             this.dragOffset = {
                 x: mousePos.x - endpoint.x,
                 y: mousePos.y - endpoint.y
@@ -180,13 +206,17 @@ class AttentionVisualization {
             
             const canvasPos = this.screenToCanvas(adjustedPos.x, adjustedPos.y);
             const constrained = this.constrainVector(canvasPos.x, canvasPos.y);
-            
-            this.query = constrained;
+
+            const vector = this.getVectorFromDragTarget(this.draggingVector);
+            if (vector) {
+                vector.x = constrained.x;
+                vector.y = constrained.y;
+            }
             this.update();
         } else {
             // Update cursor
             const mousePos = this.getMousePos(e);
-            if (this.isPointNearEndpoint(mousePos.x, mousePos.y, this.query)) {
+            if (this.getDraggableVectorAtPoint(mousePos.x, mousePos.y)) {
                 this.canvas.style.cursor = 'grab';
             } else {
                 this.canvas.style.cursor = 'default';
@@ -199,6 +229,7 @@ class AttentionVisualization {
             this.canvas.style.cursor = 'default';
         }
         this.dragging = false;
+        this.draggingVector = null;
     }
     
     handleTouchStart(e) {
@@ -265,7 +296,7 @@ class AttentionVisualization {
         // Draw axes
         this.drawAxes();
         
-        // Draw key vectors (fixed, in black)
+        // Draw key vectors (movable, in black)
         for (const [label, keyVec] of Object.entries(this.keys)) {
             this.drawVector(keyVec, keyVec.color, `K(${label})`, false);
         }

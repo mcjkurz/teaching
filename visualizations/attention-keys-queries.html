@@ -28,7 +28,7 @@
         <main>
             <!-- Interactive Canvas Section -->
             <section class="canvas-section">
-                <p>Drag the red query vector <strong style="color: #CB0000;">Q</strong> to see how attention scores change for each key vector:</p>
+                <p>Drag the red query vector <strong style="color: #CB0000;">Q</strong> or any black key vector <strong>K</strong> to see how attention scores change:</p>
                 <div class="canvas-and-results">
                     <div class="canvas-container">
                         <canvas id="vectorCanvas" width="400" height="400"></canvas>
@@ -128,14 +128,14 @@
                 <h3>How It Works</h3>
                 <p>This visualization demonstrates the core attention mechanism used in transformer models:</p>
                 <ul>
-                    <li><strong>Key Vectors (K):</strong> Three fixed vectors labeled with Chinese characters 水 (water), 風 (wind), and 有 (have), shown in black.</li>
+                    <li><strong>Key Vectors (K):</strong> Three movable vectors labeled with Chinese characters 水 (water), 風 (wind), and 有 (have), shown in black.</li>
                     <li><strong>Query Vector (Q):</strong> A movable red vector that you can drag around to explore different positions.</li>
                     <li><strong>Dot Products:</strong> For each key vector, we compute the dot product with the query: <code>Q · K</code></li>
                     <li><strong>Softmax:</strong> The dot products are passed through a softmax function to produce attention weights that sum to 1.</li>
                     <li><strong>Interpretation:</strong> Higher attention weights indicate stronger relevance between the query and that particular key. When Q is close to a key vector (small angle), the attention weight for that key increases.</li>
                 </ul>
                 <p><em>Note: In the full transformer attention formula, dot products are scaled by 1/√d<sub>k</sub> for numerical stability with high-dimensional vectors, but for this 2D visualization (d<sub>k</sub>=2), we omit this scaling factor as it has minimal impact on the observed behavior.</em></p>
-                <p>Try moving the query vector closer to different keys and observe how the attention distribution changes!</p>
+                <p>Try moving the query and key vectors around, and observe how the attention distribution changes!</p>
             </section>
         </main>
 
