@@ -232,7 +232,7 @@ Term 1, 2026–2027</p>
       <td class="topic">Collocations</td>
       <td>
         <ul class="readings">
-          <li>Collocation as a method; the contingency table（列聯表）</li>
+          <li>Collocation as a method; the contingency table（列聯表）; statistical significance, Fisher's exact test, p value</li>
           <li>Stefan Evert, “Corpora and Collocations”</li>
         </ul>
       </td>
@@ -271,8 +271,8 @@ Term 1, 2026–2027</p>
     <tr>
       <td class="week">6</td>
       <td class="date">8 Oct</td>
-      <td class="topic">Comparing Documents</td>
-      <td>Comparing the word usage of two documents; contingency table, part 2（列聯表，第二部分）</td>
+      <td class="topic">Working with Documents</td>
+      <td>Regular expressions (regex; 正規表示式); comparing the word usage of two documents; contingency table, part 2（列聯表，第二部分）</td>
     </tr>
   </tbody>
   <tbody class="block-a">
