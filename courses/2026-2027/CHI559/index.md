@@ -315,10 +315,12 @@ title: CHI559
       <td class="week">13</td>
       <td class="date">11月25日</td>
       <td class="topic">課程總結與收尾</td>
+      <td>
         <ul class="readings">
           <li>方法整合回顧、補足未竟內容，以及期末專題準備</li>
           <li>Nan Z. Da, “The Computational Case against Computational Literary Studies”</li>
         </ul>
+      </td>
     </tr>
   </tbody>
   <tbody class="due">
