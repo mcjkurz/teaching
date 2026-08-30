@@ -121,7 +121,7 @@ Term 1, 2026–2027
 <li>How are women portrayed, and what roles are they assigned in the context of crisis?</li>
 </ul>
 <p>The presentations should be comparative. You are expected to analyze the assigned text in relation to other primary works from the course, highlighting both significant continuities (shared themes, styles, or arguments) and departures (unique elements or innovations, cultural influences, etc.).</p>
-<p><strong>3. Short comparative essays.</strong> Out of five (5) topics, students are expected to choose four (4) and write short comparative essays-reflections on the primary texts (short stories or novels) covered throughout the course. Essays must present personal analysis and insights, focusing on one or more of the course’s key themes: the individual and society, the body, fictionality, and womanhood. Your approach must be comparative. Your analysis should incorporate <strong>at least one primary text from the respective two-week block.</strong> You are encouraged to draw connections to texts from other weeks. Each essay should be between 1,500 and 2,000 characters in length. All essays must be submitted via the Assignment module on Moodle.</p>
+<p><strong>3. Short comparative essays.</strong> Out of five (5) topics, students are expected to choose four (4) and write short comparative essays-reflections on the primary texts (short stories or novels) covered throughout the course. Essays must present personal analysis and insights, focusing on one or more of the course’s key themes: the individual and society, the body, fictionality, and womanhood. Your approach must be comparative. Your analysis should incorporate <strong>at least one primary text from the respective block.</strong> You are encouraged to draw connections to texts from other weeks. Each essay should be between 1,500 and 2,000 characters in length. All essays must be submitted via the Assignment module on Moodle.</p>
 <p><strong>4. Final project</strong> offers three options.</p>
 <p><strong>Option 1.</strong> Write an analytical paper (3,500–4,000 characters) that is comparative in nature and considers at least two different primary texts covered in class. Submit the PDF version of your paper through Moodle before the deadline. The paper should have a title, include quotations from the analyzed texts, and standardized references. You are welcome to consult secondary sources, but this is not required. The final paper should not contain your comparative short essays copied verbatim, although it can be developed from them.</p>
 <p><strong>Option 2.</strong> Write an interview (3,500–4,000 characters) with one of the protagonists from the texts we have read. You will need to think about what their answers could have been if they were asked your questions in their own time. The questions concern the topics we have covered in class.</p>
@@ -137,7 +137,7 @@ Term 1, 2026–2027
 <li>女性如何被描寫，在危機中被賦予何種角色？</li>
 </ul>
 <p>報告須具比較性。須將指定文本與課程中其他原始作品對讀，指出重要的延續（共享主題、風格或論點）與差異（獨特之處、創新、文化影響等）。</p>
-<p><strong>3. 短篇比較文章：</strong>五個題目中選寫四篇，就課程所讀原始文本（短篇或長篇）撰寫短篇比較反思。文章須有個人分析與見解，聚焦課程關鍵主題之一或多項：個人與社會、身體、虛構性、女性。必須採取比較進路。分析須<strong>至少納入該兩週單元中的一篇原始文本</strong>，亦鼓勵連結其他週次的文本。每篇 1,500 至 2,000 字。一律經 Moodle 作業區繳交。</p>
+<p><strong>3. 短篇比較文章：</strong>五個題目中選寫四篇，就課程所讀原始文本（短篇或長篇）撰寫短篇比較反思。文章須有個人分析與見解，聚焦課程關鍵主題之一或多項：個人與社會、身體、虛構性、女性。必須採取比較進路。分析須<strong>至少納入該單元中的一篇原始文本</strong>，亦鼓勵連結其他週次的文本。每篇 1,500 至 2,000 字。一律經 Moodle 作業區繳交。</p>
 <p><strong>4. 期末專題：</strong>有三個選項。</p>
 <p><strong>選項一：</strong>撰寫比較性的分析論文（3,500–4,000 字），至少討論課堂上兩篇不同的原始文本。於截止日期前經 Moodle 提交 PDF。論文須有標題、引用所分析文本，並採用規範註釋。可參考二手文獻，但非必須。期末論文不得原文照搬比較短文，但可由其發展而成。</p>
 <p><strong>選項二：</strong>撰寫訪問稿（3,500–4,000 字），訪問所讀文本中的一位人物。須設想對方若在其所處時代被問及這些問題，可能如何作答。問題須關涉課堂討論的主題。</p>
@@ -236,7 +236,7 @@ Term 1, 2026–2027
       <td class="week" rowspan="2">5</td>
       <td>Lecture</td>
       <td class="date">29 Sep</td>
-      <td class="topic" rowspan="2">The Nazi Camp</td>
+      <td class="topic" rowspan="2">The Automation of the Senses</td>
       <td>
         <ul class="readings">
           <li>塔杜施·博羅夫斯基：〈女士們、先生們，請進毒氣室〉，於《在我們奧斯威辛》，第47–79頁</li>
@@ -287,14 +287,6 @@ Term 1, 2026–2027
       <td><ul class="readings"><li>韓江：《少年來了》</li></ul></td>
     </tr>
   </tbody>
-  <tbody class="due">
-    <tr>
-      <td></td>
-      <td></td>
-      <td class="date">17 Oct</td>
-      <td colspan="2"><strong>Comparative reflection (Weeks 6 &amp; 7) due, 9:00 am</strong></td>
-    </tr>
-  </tbody>
   <tbody class="block-b">
     <tr>
       <td class="week" rowspan="2">8</td>
@@ -309,26 +301,28 @@ Term 1, 2026–2027
       <td><ul class="readings"><li>提姆·奧布萊恩：〈死者的生命〉，於《士兵的重負》</li></ul></td>
     </tr>
   </tbody>
+  <tbody class="due">
+    <tr>
+      <td></td>
+      <td></td>
+      <td class="date">24 Oct</td>
+      <td colspan="2"><strong>Comparative reflection (Weeks 6–8) due, 9:00 am</strong></td>
+    </tr>
+  </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week" rowspan="2">9</td>
       <td>Lecture</td>
       <td class="date">27 Oct</td>
       <td class="topic" rowspan="2">Between the Heroic and the Ordinary</td>
-      <td><ul class="readings"><li>Rithy Panh, <em>The Missing Picture</em> (we will watch the film together)</li></ul></td>
+      <td><ul class="readings">
+	  <li>梁昂：《他們先殺了我父親：柬埔寨女孩的回憶》</li>
+	  <li>(optional)Rithy Panh, <em>The Missing Picture</em> (we will watch the film together)</li></ul></td>
     </tr>
     <tr>
       <td>Tutorial</td>
       <td class="date">29 Oct</td>
       <td><ul class="readings"><li>約翰·赫西：《廣島》（原版）</li></ul></td>
-    </tr>
-  </tbody>
-  <tbody class="due">
-    <tr>
-      <td></td>
-      <td></td>
-      <td class="date">31 Oct</td>
-      <td colspan="2"><strong>Comparative reflection (Weeks 8 &amp; 9) due, 9:00 am</strong></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -351,6 +345,14 @@ Term 1, 2026–2027
       <td><ul class="readings"><li>閻連科《為人民服務》</li></ul></td>
     </tr>
   </tbody>
+  <tbody class="due">
+    <tr>
+      <td></td>
+      <td></td>
+      <td class="date">7 Nov</td>
+      <td colspan="2"><strong>Comparative reflection (Weeks 9 &amp; 10) due, 9:00 am</strong></td>
+    </tr>
+  </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week" rowspan="2">11</td>
@@ -365,14 +367,6 @@ Term 1, 2026–2027
       <td><ul class="readings"><li>李昂：《殺夫》</li></ul></td>
     </tr>
   </tbody>
-  <tbody class="due">
-    <tr>
-      <td></td>
-      <td></td>
-      <td class="date">14 Nov</td>
-      <td colspan="2"><strong>Comparative reflection (Weeks 10 &amp; 11) due, 9:00 am</strong></td>
-    </tr>
-  </tbody>
   <tbody class="block-b">
     <tr>
       <td class="week" rowspan="2">12</td>
@@ -384,7 +378,15 @@ Term 1, 2026–2027
     <tr>
       <td>Tutorial</td>
       <td class="date">19 Nov</td>
-      <td><ul class="readings"><li>梁昂：《他們先殺了我父親：柬埔寨女孩的回憶》（美籍柬埔寨裔作家的自傳性回憶錄）</li></ul></td>
+      <td><ul class="readings"><li>梁昂：《他們先殺了我父親：柬埔寨女孩的回憶》</li></ul></td>
+    </tr>
+  </tbody>
+  <tbody class="due">
+    <tr>
+      <td></td>
+      <td></td>
+      <td class="date">21 Nov</td>
+      <td colspan="2"><strong>Comparative reflection (Weeks 11 &amp; 12) due, 9:00 am</strong></td>
     </tr>
   </tbody>
   <tbody class="block-a">
