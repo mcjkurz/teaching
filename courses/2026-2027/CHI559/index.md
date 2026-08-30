@@ -162,13 +162,13 @@ title: CHI559
         <ul class="readings">
           <li>作者訊號；文體標記；特徵選取</li>
           <li>Z 分數與基於距離的文體比較</li>
-          <li>Paul Vierthaler, “Fiction and History: Polarity and Stylistic Gradience in Late Imperial Chinese Literature,” <em>Journal of Cultural Analytics</em> 1, no. 1 (2016), <a href="https://doi.org/10.7910/DVN/4ZVSKA">https://doi.org/10.7910/DVN/4ZVSKA</a></li>
+          <li>John Burrows, “‘Delta’: a Measure of Stylistic Difference and a Guide to Likely Authorship”</li>
         </ul>
       </td>
     </tr>
     <tr class="presentation">
       <td class="topic">課堂報告</td>
-      <td>John Burrows, “‘Delta’: a Measure of Stylistic Difference and a Guide to Likely Authorship,” <em>Literary and Linguistic Computing</em> 17, no. 3 (2002): 267–287</td>
+      <td>Paul Vierthaler, “Fiction and History: Polarity and Stylistic Gradience in Late Imperial Chinese Literature,” <em>Journal of Cultural Analytics</em> 1, no. 1 (2016)</td>
     </tr>
   </tbody>
   <tbody class="due">
@@ -238,7 +238,7 @@ title: CHI559
       <td class="topic">編碼器（一）</td>
       <td>
         <ul class="readings">
-          <li>什麼是意義？詞向量與餘弦相似度</li>
+          <li>什麼是「語義」？詞向量與餘弦相似度</li>
           <li>以詞向量研究概念史</li>
           <li>Daniel Jurafsky and James H. Martin, “Vector Semantics and Embeddings”</li>
         </ul>

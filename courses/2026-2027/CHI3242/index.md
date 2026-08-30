@@ -333,7 +333,7 @@ title: CHI3242
       <td class="topic"><span class="lang-en">Encoders I</span><span class="lang-zh" lang="zh-Hant">編碼器（一）</span></td>
       <td>
         <ul class="readings">
-          <li><span class="lang-en">What is meaning? word vectors and cosine similarity</span><span class="lang-zh" lang="zh-Hant">什麼是意義？詞向量與餘弦相似度</span></li>
+          <li><span class="lang-en">What is meaning? word vectors and cosine similarity</span><span class="lang-zh" lang="zh-Hant">什麼是「語義」？詞向量與餘弦相似度</span></li>
           <li><span class="lang-en">Conceptual history with word vectors</span><span class="lang-zh" lang="zh-Hant">以詞向量研究概念史</span></li>
           <li>Daniel Jurafsky and James H. Martin, “Vector Semantics and Embeddings”</li>
         </ul>
