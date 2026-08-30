@@ -221,6 +221,10 @@
                 setLang(btn.getAttribute("data-lang"));
             });
         })();
+        document.addEventListener("click", function (e) {
+            var link = e.target.closest('a[href="#"]');
+            if (link) e.preventDefault();
+        });
     </script>
 </body>
 </html>
