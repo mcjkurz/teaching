@@ -271,8 +271,8 @@ Term 1, 2026–2027</p>
     <tr>
       <td class="week">6</td>
       <td class="date">8 Oct</td>
-      <td class="topic">Regular Expressions</td>
-      <td>Regular expressions (regex; 正規表示式) for cleaning text corpora</td>
+      <td class="topic">Decoders and LLMs</td>
+      <td>From BERT to GPT; generative models; what is “context”?; LLMs for data extraction; Python API (OpenRouter)</td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -370,8 +370,8 @@ Term 1, 2026–2027</p>
     <tr>
       <td class="week">13</td>
       <td class="date">26 Nov</td>
-      <td class="topic">Decoders and LLMs</td>
-      <td>From BERT to GPT; generative models; what is “context”?; LLMs for data extraction; Python API (OpenRouter)</td>
+      <td class="topic">Regular Expressions + Review of the Course</td>
+      <td>Regular expressions (regex; 正規表示式) for cleaning text corpora; integrative review of methods and final-project preparation</td>
     </tr>
   </tbody>
   <tbody class="due">
