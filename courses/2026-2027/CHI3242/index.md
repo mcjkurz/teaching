@@ -167,8 +167,8 @@ Term 1, 2026–2027</p>
 <ul>
 <li>作業一</li>
 <li>作業二</li>
-<li>作業三：主題模型</li>
-<li>作業四：詞向量</li>
+<li>作業三</li>
+<li>作業四</li>
 </ul>
 <p><strong>3. 期末專題：</strong>學生自建數據集，將數碼方法應用於自選題目，並以中文撰寫 LaTeX 報告呈現研究成果。於截止日期前經 Moodle 提交 PDF。報告須包括以下部分：</p>
 <ul>
@@ -279,8 +279,8 @@ Term 1, 2026–2027</p>
     <tr>
       <td class="week">7</td>
       <td class="date">15 Oct</td>
-      <td class="topic">Comparing Writers</td>
-      <td>Comparing the word usage of two selected writers; contingency table, part 2（列聯表，第二部分）</td>
+      <td class="topic">Comparing Corpora</td>
+      <td>Comparing the word usage of two corpora; contingency table, part 2（列聯表，第二部分）</td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -308,6 +308,20 @@ Term 1, 2026–2027</p>
     <tr>
       <td class="week">9</td>
       <td class="date">29 Oct</td>
+      <td class="topic">Stylometry</td>
+      <td>
+        <ul class="readings">
+          <li>Authorship signals; style markers; feature selection</li>
+          <li>Z-scores and distance-based stylistic comparison</li>
+          <li>John Burrows, “‘Delta’: a Measure of Stylistic Difference and a Guide to Likely Authorship”</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+  <tbody class="block-b">
+    <tr>
+      <td class="week">10</td>
+      <td class="date">5 Nov</td>
       <td class="topic">Classification I</td>
       <td>
         <ul class="readings">
@@ -317,32 +331,18 @@ Term 1, 2026–2027</p>
       </td>
     </tr>
   </tbody>
-  <tbody class="block-b">
-    <tr>
-      <td class="week">10</td>
-      <td class="date">5 Nov</td>
-      <td class="topic">Word Vectors</td>
-      <td>
-        <ul class="readings">
-          <li>詞向量; conceptual history with word vectors</li>
-          <li>Daniel Jurafsky and James H. Martin, “Vector Semantics and Embeddings”</li>
-        </ul>
-      </td>
-    </tr>
-  </tbody>
-  <tbody class="due">
-    <tr>
-      <td></td>
-      <td class="date">9 Nov</td>
-      <td colspan="2"><strong>Assignment 3 (Topic modeling) due, 9:00 am</strong></td>
-    </tr>
-  </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week">11</td>
       <td class="date">12 Nov</td>
-      <td class="topic">Encoders I</td>
-      <td>Document vectors（文件向量）; contextual embeddings; BERT</td>
+      <td class="topic">Encoders I + Word Vectors</td>
+      <td>
+        <ul class="readings">
+          <li>Document vectors（文件向量）; contextual embeddings; BERT</li>
+          <li>Conceptual history with word vectors</li>
+          <li>Daniel Jurafsky and James H. Martin, “Vector Semantics and Embeddings”</li>
+        </ul>
+      </td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -363,7 +363,7 @@ Term 1, 2026–2027</p>
     <tr>
       <td></td>
       <td class="date">23 Nov</td>
-      <td colspan="2"><strong>Assignment 4 (Word vectors) due, 9:00 am</strong></td>
+      <td colspan="2"><strong>Assignment 4 due, 9:00 am</strong></td>
     </tr>
   </tbody>
   <tbody class="block-a">
