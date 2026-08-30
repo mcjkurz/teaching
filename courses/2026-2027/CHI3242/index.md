@@ -146,7 +146,6 @@ Term 1, 2026–2027</p>
 <div class="lang-en">
 <p><strong>1. Seminars.</strong> Each week, a three-hour seminar combines conceptual discussion with supervised hands-on practice. Students work with Chinese texts and learn methods ranging from word frequencies and collocations to topic models, word vectors, and neural language models. Prior programming experience is not required. We introduce agentic coding in the first weeks and then use AI coding agents throughout.</p>
 <p><strong>2. Individual assignments.</strong> Four assignments apply the tools covered in seminars. All work must be submitted via the Assignment module on Moodle. Detailed instructions are published on the <a href="{{ '/courses/2026-2027/CHI3242/assignments/' | relative_url }}">Assignments page</a>.</p>
-<p><a href="#">Assignment 1</a></p>
 <p><strong>3. Final project.</strong> Students build their own datasets, apply digital methods to a topic of their choice, and present their findings through a complete working GitHub repository (sources, code, and README files) and an accompanying report in Chinese. Submit the repository URL and the report through Moodle before the deadline. The report should include the following parts:</p>
 <ul>
 <li><strong>Abstract:</strong> a summary of goals, experiments, and findings (max. 150 characters)</li>
@@ -339,7 +338,6 @@ Term 1, 2026–2027</p>
       <td class="topic">Encoders II + Classification II</td>
       <td>
         <ul class="readings">
-          <li>Contextual embeddings; BERT</li>
           <li>Neural networks（神經網絡）</li>
           <li>Training BERT-based classifiers (sentiment analysis); uploading a model to Hugging Face</li>
           <li>Kurt Vonnegut, “The Shapes of Stories” (lecture)</li>
@@ -353,7 +351,7 @@ Term 1, 2026–2027</p>
       <td class="week">12</td>
       <td class="date">19 Nov</td>
       <td class="topic">Decoders and LLMs</td>
-      <td>From BERT to GPT; generative models; what is “context”?; LLMs for data extraction; Python API (OpenRouter)</td>
+      <td>From BERT to GPT; generative models; what is “context”?; next-token probability; LLMs for data extraction; Python API (OpenRouter)</td>
     </tr>
   </tbody>
   <tbody class="due">
