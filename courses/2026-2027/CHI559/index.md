@@ -295,7 +295,7 @@ title: CHI559
       <td class="topic">數據可視化與批判性反思</td>
       <td>
         <ul class="readings">
-          <li>Nan Z. Da, “The Computational Case against Computational Literary Studies”（選讀）</li>
+          <li>Nan Z. Da, “The Computational Case against Computational Literary Studies”</li>
         </ul>
       </td>
     </tr>
@@ -327,8 +327,8 @@ title: CHI559
 <li>Blei, David M. “Probabilistic Topic Models.”</li>
 <li>秦穎：〈《唐語林》中對話網路的視覺化和統計分析初探〉，《數字人文》2022年第1期。</li>
 <li>Algee-Hewitt, Mark, Edwin Fredner, and Hannah Walser. “The Novel as Data.” In <em>The Cambridge Companion to the Novel</em>, 189–215. Cambridge: Cambridge University Press, 2018.</li>
-<li>Allen, Sarah M., Jack Chen, and Xiaofei Tian. <em>Literary History in and beyond China: Reading Text and World</em>. Cambridge, MA: Harvard University Asia Center, 2023.（選讀）</li>
-<li>Guldi, Jo. <em>The Dangerous Art of Text Mining: A Methodology for Digital History</em>. Cambridge: Cambridge University Press, 2023.（選讀）</li>
+<li>Allen, Sarah M., Jack Chen, and Xiaofei Tian. <em>Literary History in and beyond China: Reading Text and World</em>. Cambridge, MA: Harvard University Asia Center, 2023.</li>
+<li>Guldi, Jo. <em>The Dangerous Art of Text Mining: A Methodology for Digital History</em>. Cambridge: Cambridge University Press, 2023.</li>
 <li>Slingerland, Edward. “Part II. Quantitative Approaches to Concepts of Mind and Body.” In <em>Mind and Body in Early China: Beyond Orientalism and the Myth of Holism</em>. Oxford: Oxford University Press, 2018.</li>
 <li>Woloch, Alex. <em>The One vs. the Many: Minor Characters and the Space of the Protagonist in the Novel</em>. Princeton: Princeton University Press, 2003, pp. 12–42.</li>
 <li>Evert, Stefan. “Corpora and Collocations.”</li>
@@ -359,7 +359,7 @@ title: CHI559
 <li>Kozlowski, Austin C., Matt Taddy, and James A. Evans. “The Geometry of Culture: Analyzing the Meanings of Class through Word Embeddings.” <em>American Sociological Review</em> 84, no. 5 (2019): 905–949.</li>
 <li>Moretti, Franco. <em>Distant Reading</em>. London: Verso, 2013.</li>
 <li>Ramsay, Stephen. <em>Reading Machines: Toward an Algorithmic Criticism</em>. Urbana: University of Illinois Press, 2011.</li>
-<li>Schreibman, Susan, Ray Siemens, and John Unsworth, eds. <em>A New Companion to Digital Humanities</em>. 2nd ed. Chichester: Wiley, 2015.（選讀）</li>
+<li>Schreibman, Susan, Ray Siemens, and John Unsworth, eds. <em>A New Companion to Digital Humanities</em>. 2nd ed. Chichester: Wiley, 2015.</li>
 <li>Sturgeon, Donald. “Digitizing Premodern Text with the Chinese Text Project.” <em>Journal of Chinese History</em> 4, no. 2 (2020): 486–498.</li>
 <li>Tsui, Lik Hang. “Charting the Emergence of the Digital Humanities in China.” In <em>Chinese Culture in the 21st Century and Its Global Dimensions</em>, edited by Kelly Kar Yue Chan and Chi Sum Garfield Lau, 203–216. Singapore: Springer, 2020.</li>
 <li>Underwood, Ted. <em>Distant Horizons: Digital Evidence and Literary Change</em>. Chicago: University of Chicago Press, 2019.</li>
