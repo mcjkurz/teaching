@@ -340,7 +340,7 @@ Term 1, 2026–2027</p>
       <td>
         <ul class="readings">
           <li>Contextual embeddings; BERT</li>
-          <li>Document vectors（文件向量）</li>
+          <li>Neural networks（神經網絡）</li>
           <li>Training BERT-based classifiers (sentiment analysis); uploading a model to Hugging Face</li>
           <li>Kurt Vonnegut, “The Shapes of Stories” (lecture)</li>
           <li>Katherine Elkins, <em>The Shapes of Stories: Sentiment Analysis for Narrative</em> (selections)</li>
