@@ -74,7 +74,7 @@ title: CHI559
 <li>作業一</li>
 <li>作業二</li>
 </ul>
-<p><strong>4. 課堂報告：</strong>學生須就一篇數字人文領域的研究論文作口頭報告（約 20 分鐘），說明該論文的研究問題、方法、數據與結論，並提出批判性評價。報告篇目與時間於學期初安排。當週報告的學生須作為該文獻的講解人，帶動討論。</p>
+<p><strong>4. 課堂報告：</strong>全學期共五次課堂報告，自第3週起每隔一週一次（第3、5、7、9、11週）。學生須就一篇數字人文領域的研究論文作口頭報告（約 20 分鐘），說明該論文的研究問題、方法、數據與結論，並提出批判性評價。報告結束後全班討論。報告篇目與時間於學期初安排。當週報告的學生須作為該文獻的講解人，帶動討論。</p>
 <p><strong>5. 期末專題：</strong>一項綜合性的數字人文項目，須運用課程中的工具研究中國研究相關主題。於截止日期前經 Moodle 提交 PDF。報告應包含可視化圖表、數據集描述、結果的批判性分析，並公開所有使用的資源鏈接（如 GitHub 倉庫）。報告須包括以下部分：</p>
 <ul>
 <li><strong>摘要：</strong>目標、實驗與發現的概述</li>
@@ -106,8 +106,6 @@ title: CHI559
           <li>研究環境搭建：GitHub、VS Code、人工智能編程助手</li>
           <li>李飛躍、桑海（主編）：《數字人文引論》（選讀）</li>
           <li>Stephen Ramsay, “Algorithmic Criticism”</li>
-          <li>Stephen Best and Sharon Marcus, “Surface Reading: An Introduction”</li>
-          <li>Franco Moretti, “Conjectures on World Literature,” in <em>Distant Reading</em></li>
         </ul>
       </td>
     </tr>
@@ -132,7 +130,12 @@ title: CHI559
       <td class="week">3</td>
       <td class="date">9月23日</td>
       <td class="topic">正則表達式</td>
-      <td>用於文學模式識別的正則表達式（regex）</td>
+      <td>
+        <ul class="readings">
+          <li>用於文學模式識別的正則表達式（regex）</li>
+          <li>課堂報告</li>
+        </ul>
+      </td>
     </tr>
   </tbody>
   <tbody class="due">
@@ -164,6 +167,7 @@ title: CHI559
         <ul class="readings">
           <li>王賀：《數字人文與中國現代文學》（選讀）</li>
           <li>Paul Vierthaler, “Fiction and History: Polarity and Stylistic Gradience in Late Imperial Chinese Literature,” <em>Journal of Cultural Analytics</em> 1, no. 1 (2016), <a href="https://doi.org/10.7910/DVN/4ZVSKA">https://doi.org/10.7910/DVN/4ZVSKA</a></li>
+          <li>Franco Moretti, “Conjectures on World Literature,” in <em>Distant Reading</em>（課堂報告與討論）</li>
         </ul>
       </td>
     </tr>
@@ -176,7 +180,6 @@ title: CHI559
       <td>
         <ul class="readings">
           <li>皮特·布勞德韋爾、陳威、大衛·謝帕德：〈《全唐詩》：文學史、主題模型、散度度量〉，《數位人文》2023年第1期</li>
-          <li>課堂報告開始</li>
         </ul>
       </td>
     </tr>
@@ -205,7 +208,6 @@ title: CHI559
         <ul class="readings">
           <li>Daniel Jurafsky and James H. Martin, “Vector Semantics and Embeddings”</li>
           <li>Tomas Mikolov et al., “Efficient Estimation of Word Representations in Vector Space”</li>
-          <li>課堂報告</li>
         </ul>
       </td>
     </tr>
@@ -222,7 +224,12 @@ title: CHI559
       <td class="week">9</td>
       <td class="date">10月28日</td>
       <td class="topic">分類（進階篇）</td>
-      <td>上下文嵌入與 Transformer；課堂報告</td>
+      <td>
+        <ul class="readings">
+          <li>上下文嵌入與 Transformer</li>
+          <li>課堂報告</li>
+        </ul>
+      </td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -230,7 +237,7 @@ title: CHI559
       <td class="week">10</td>
       <td class="date">11月4日</td>
       <td class="topic">生成式人工智能</td>
-      <td>解碼、提示工程與 LLM API（OpenRouter）；課堂報告</td>
+      <td>解碼、提示工程與 LLM API（OpenRouter）</td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -241,7 +248,7 @@ title: CHI559
       <td>
         <ul class="readings">
           <li>秦穎：〈《唐語林》中對話網路的視覺化和統計分析初探〉，《數字人文》2022年第1期</li>
-          <li>課堂報告</li>
+          <li>Stephen Best and Sharon Marcus, “Surface Reading: An Introduction”（課堂報告與討論）</li>
         </ul>
       </td>
     </tr>
@@ -255,7 +262,6 @@ title: CHI559
         <ul class="readings">
           <li>Nathan Yau, <em>Data Points</em>（選讀）</li>
           <li>Nan Z. Da, “The Computational Case against Computational Literary Studies”（選讀）</li>
-          <li>課堂報告</li>
         </ul>
       </td>
     </tr>
