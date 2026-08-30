@@ -251,13 +251,13 @@ title: CHI559
           <li>什麼是意義？詞向量與餘弦相似度</li>
           <li>以詞向量研究概念史</li>
           <li>Daniel Jurafsky and James H. Martin, “Vector Semantics and Embeddings”</li>
-          <li>Donald Sturgeon, “Unsupervised Identification of Text Reuse in Early Chinese Literature”（教師導讀，課堂合讀）</li>
+          <li>Donald Sturgeon, “Unsupervised Identification of Text Reuse in Early Chinese Literature”</li>
         </ul>
       </td>
     </tr>
     <tr class="presentation">
       <td class="topic">課堂報告</td>
-      <td>Edward Slingerland, Ryan Nichols, Kristoffer Nielbo, and Carson Logan, “The Distant Reading of Religious Texts: A ‘Big Data’ Approach to Mind-Body Concepts in Early China”</td>
+      <td>Edward Slingerland, “Part II. Quantitative Approaches to Concepts of Mind and Body,” in <em>Mind and Body in Early China</em></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -306,7 +306,6 @@ title: CHI559
       <td class="topic">數據可視化與批判性反思</td>
       <td>
         <ul class="readings">
-          <li>Nathan Yau, <em>Data Points</em>（選讀）</li>
           <li>Nan Z. Da, “The Computational Case against Computational Literary Studies”（選讀）</li>
         </ul>
       </td>
@@ -340,9 +339,7 @@ title: CHI559
 <li>Algee-Hewitt, Mark, Edwin Fredner, and Hannah Walser. “The Novel as Data.” In <em>The Cambridge Companion to the Novel</em>, 189–215. Cambridge: Cambridge University Press, 2018.</li>
 <li>Allen, Sarah M., Jack Chen, and Xiaofei Tian. <em>Literary History in and beyond China: Reading Text and World</em>. Cambridge, MA: Harvard University Asia Center, 2023.（選讀）</li>
 <li>Guldi, Jo. <em>The Dangerous Art of Text Mining: A Methodology for Digital History</em>. Cambridge: Cambridge University Press, 2023.（選讀）</li>
-<li>Slingerland, Edward, Ryan Nichols, Kristoffer Nielbo, and Carson Logan. “The Distant Reading of Religious Texts: A ‘Big Data’ Approach to Mind-Body Concepts in Early China.” <em>Journal of the American Academy of Religion</em> 85, no. 4 (2017): 985–1016.</li>
-<li>Slingerland, Edward. <em>Mind and Body in Early China: Beyond Orientalism and the Myth of Holism</em>. Oxford: Oxford University Press, 2018.（選讀，數字人文相關章節）</li>
-<li>Yau, Nathan. <em>Data Points: Visualization That Means Something</em>. Hoboken: John Wiley &amp; Sons, 2013.（選讀）</li>
+<li>Slingerland, Edward. “Part II. Quantitative Approaches to Concepts of Mind and Body.” In <em>Mind and Body in Early China: Beyond Orientalism and the Myth of Holism</em>. Oxford: Oxford University Press, 2018.</li>
 <li>Woloch, Alex. <em>The One vs. the Many: Minor Characters and the Space of the Protagonist in the Novel</em>. Princeton: Princeton University Press, 2003, pp. 12–42.</li>
 <li>Evert, Stefan. “Corpora and Collocations.”</li>
 <li>Vierthaler, Paul. “Fiction and History: Polarity and Stylistic Gradience in Late Imperial Chinese Literature.” <em>Journal of Cultural Analytics</em> 1, no. 1 (2016). <a href="https://doi.org/10.7910/DVN/4ZVSKA">https://doi.org/10.7910/DVN/4ZVSKA</a>.</li>
