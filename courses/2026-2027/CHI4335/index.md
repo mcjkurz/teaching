@@ -436,7 +436,7 @@ Term 1, 2026–2027</p>
     <tr>
       <td>Tutorial</td>
       <td class="date">26 Nov</td>
-      <td><ul class="readings"><li>卡勒德·胡賽尼：《追風箏的孩子》</li></ul></td>
+      <td><ul class="readings"><li>雙雪濤：《平原上的摩西》</li></ul></td>
     </tr>
   </tbody>
   <tbody class="due">
