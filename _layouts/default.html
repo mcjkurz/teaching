@@ -18,14 +18,6 @@
             margin: 0 auto;
             padding: 2rem 1rem 4rem;
         }
-        nav {
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #e0e0e0;
-            font-size: 0.9rem;
-        }
-        nav a { color: #0066cc; text-decoration: none; }
-        nav a:hover { text-decoration: underline; }
         main h1 { font-size: 1.8rem; font-weight: 400; margin: 0 0 0.75rem; }
         .updated {
             font-size: 0.8rem;
@@ -146,32 +138,6 @@
 </head>
 <body>
     <div class="wrap">
-        <nav>
-            {% if page.url == '/' %}
-            Teaching
-            {% else %}
-            <a href="{{ '/' | relative_url }}">Teaching</a>
-            {% assign filtered = '' %}
-            {% assign path_parts = page.url | split: '/' %}
-            {% for p in path_parts %}
-              {% if p != '' %}
-                {% if filtered != '' %}{% assign filtered = filtered | append: '|' %}{% endif %}
-                {% assign filtered = filtered | append: p %}
-              {% endif %}
-            {% endfor %}
-            {% assign crumbs = filtered | split: '|' %}
-            {% assign acc = '' %}
-            {% for crumb in crumbs %}
-              {% assign acc = acc | append: '/' | append: crumb %}
-              <span style="color:#999;"> / </span>
-              {% if forloop.last %}
-              <span>{{ page.title }}</span>
-              {% else %}
-              <a href="{{ acc | append: '/' | relative_url }}">{{ crumb | capitalize }}</a>
-              {% endif %}
-            {% endfor %}
-            {% endif %}
-        </nav>
         <main>
             {{ content }}
         </main>
