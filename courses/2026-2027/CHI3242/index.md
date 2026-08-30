@@ -399,15 +399,17 @@ title: CHI3242
 <span class="lang-zh" lang="zh-Hant">注意事項</span>
 </h2>
 <div class="lang-en">
-
-1. Students are expected to spend a total of 9 hours (i.e. 3 hours of class contact and 6 hours of personal study) per week to achieve the course learning outcomes.
-2. Students shall be aware of the University regulations about dishonest practice in course work, tests and examinations, and the possible consequences as stipulated in the Regulations Governing University Examinations. In particular, plagiarism, being a kind of dishonest practice, is “the presentation of another person’s work without proper acknowledgement of the source, including exact phrases, or summarised ideas, or even footnotes/citations, whether protected by copyright or not, as the student’s own work.” Students are required to strictly follow university regulations governing academic integrity and honesty.
-3. To enhance students’ understanding of plagiarism, a mini-course “Online Tutorial on Plagiarism Awareness” is available on [https://pla.ln.edu.hk/](https://pla.ln.edu.hk/).
+<ol>
+<li>Students are expected to spend a total of 9 hours (i.e. 3 hours of class contact and 6 hours of personal study) per week to achieve the course learning outcomes.</li>
+<li>Students shall be aware of the University regulations about dishonest practice in course work, tests and examinations, and the possible consequences as stipulated in the Regulations Governing University Examinations. In particular, plagiarism, being a kind of dishonest practice, is “the presentation of another person’s work without proper acknowledgement of the source, including exact phrases, or summarised ideas, or even footnotes/citations, whether protected by copyright or not, as the student’s own work.” Students are required to strictly follow university regulations governing academic integrity and honesty.</li>
+<li>To enhance students’ understanding of plagiarism, a mini-course “Online Tutorial on Plagiarism Awareness” is available on <a href="https://pla.ln.edu.hk/">https://pla.ln.edu.hk/</a>.</li>
+</ol>
 </div>
 <div class="lang-zh" lang="zh-Hant">
-
-1. 學生每週須投入共 9 小時（即 3 小時課堂接觸、6 小時自修），以達致課程學習成果。  
-2. 學生須注意大學有關習作及考試不誠實行為的規例，以及《大學考試規例》所訂的可能後果。抄襲屬不誠實行為，指「未經妥為註明來源，將他人作品（包括原句、撮述的觀點，以至腳註／引文，無論是否受版權保護）呈交作為自己的作品」。學生須嚴格遵守大學有關學術誠信的規例。  
-3. 為加深對抄襲的認識，可修讀小型課程「Online Tutorial on Plagiarism Awareness」： [https://pla.ln.edu.hk/](https://pla.ln.edu.hk/)。
+<ol>
+<li>學生每週須投入共 9 小時（即 3 小時課堂接觸、6 小時自修），以達致課程學習成果。</li>
+<li>學生須注意大學有關習作及考試不誠實行為的規例，以及《大學考試規例》所訂的可能後果。抄襲屬不誠實行為，指「未經妥為註明來源，將他人作品（包括原句、撮述的觀點，以至腳註／引文，無論是否受版權保護）呈交作為自己的作品」。學生須嚴格遵守大學有關學術誠信的規例。</li>
+<li>為加深對抄襲的認識，可修讀小型課程「Online Tutorial on Plagiarism Awareness」：<a href="https://pla.ln.edu.hk/">https://pla.ln.edu.hk/</a>。</li>
+</ol>
 </div>
 </div>

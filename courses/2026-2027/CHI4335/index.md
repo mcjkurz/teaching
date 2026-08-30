@@ -3,19 +3,19 @@ layout: default
 title: CHI4335
 ---
 
-<p class="updated">Last updated: Aug 30, 2026</p>
-<div class="course-header">
+<p class="updated i18n-block"><span class="lang-en">Last updated: Aug 30, 2026</span><span class="lang-zh" lang="zh-Hant">最後更新：2026年8月30日</span></p>
+<div class="course-header i18n-block">
 <div class="course-header-info">
-<h1>CHI 4335 Course Syllabus</h1>
+<h1><span class="lang-en">CHI 4335 Course Syllabus</span><span class="lang-zh" lang="zh-Hant">CHI 4335 課程大綱</span></h1>
 <p><strong>Special Topics in Comparative Literature: Facing the Extreme</strong><br>
 <strong>比較文學專題：面對極端</strong><br>
-Term 1, 2026–2027</p>
-<p><strong>Lecture:</strong> Tue, 1:00–2:59 pm (LYH 201/1)<br>
-<strong>Tutorial A:</strong> Thu, 11:30 am–12:29 pm (LKK 308)<br>
-<strong>Tutorial B:</strong> Thu, 12:30–1:29 pm (LKK 308)</p>
-<p><strong>Instructor:</strong> Maciej Kurzynski 馬傑 (maciej.kurzynski[at]ln.edu.hk)<br>
-<strong>Office hours:</strong> Tue 3:00–5:00 pm and Fri 10:00 am–12:00 pm, HSH G06, or by appointment<br>
-<strong>Language of Instruction:</strong> Putonghua（普通話）</p>
+<span class="lang-en">Term 1, 2026–2027</span><span class="lang-zh" lang="zh-Hant">2026–2027 學年第一學期</span></p>
+<p><strong><span class="lang-en">Lecture:</span><span class="lang-zh" lang="zh-Hant">講座：</span></strong> <span class="lang-en">Tue, 1:00–2:59 pm (LYH 201/1)</span><span class="lang-zh" lang="zh-Hant">星期二，下午 1:00–2:59（LYH 201/1）</span><br>
+<strong><span class="lang-en">Tutorial A:</span><span class="lang-zh" lang="zh-Hant">導修 A：</span></strong> <span class="lang-en">Thu, 11:30 am–12:29 pm (LKK 308)</span><span class="lang-zh" lang="zh-Hant">星期四，上午 11:30–12:29（LKK 308）</span><br>
+<strong><span class="lang-en">Tutorial B:</span><span class="lang-zh" lang="zh-Hant">導修 B：</span></strong> <span class="lang-en">Thu, 12:30–1:29 pm (LKK 308)</span><span class="lang-zh" lang="zh-Hant">星期四，下午 12:30–1:29（LKK 308）</span></p>
+<p><strong><span class="lang-en">Instructor:</span><span class="lang-zh" lang="zh-Hant">教師：</span></strong> Maciej Kurzynski 馬傑 (maciej.kurzynski[at]ln.edu.hk)<br>
+<strong><span class="lang-en">Office hours:</span><span class="lang-zh" lang="zh-Hant">辦公室時間：</span></strong> <span class="lang-en">Tue 3:00–5:00 pm and Fri 10:00 am–12:00 pm, HSH G06, or by appointment</span><span class="lang-zh" lang="zh-Hant">星期二下午 3:00–5:00 及星期五上午 10:00–12:00，HSH G06，或另行預約</span><br>
+<strong><span class="lang-en">Language of Instruction:</span><span class="lang-zh" lang="zh-Hant">授課語言：</span></strong> <span class="lang-en">Putonghua（普通話）</span><span class="lang-zh" lang="zh-Hant">普通話</span></p>
 </div>
 <div class="course-header-image">
 <img src="cover.png" alt="Illustration for Facing the Extreme">
@@ -23,7 +23,7 @@ Term 1, 2026–2027</p>
 </div>
 
 <div class="i18n-block">
-<h2>Course Description</h2>
+<h2><span class="lang-en">Course Description</span><span class="lang-zh" lang="zh-Hant">課程簡介</span></h2>
 <div class="lang-en">
 <p>The famous historian Eric Hobsbawm called the twentieth century the “Age of Extremes.” This course, offered in Putonghua, adopts a comparative lens to explore how extreme experiences have been represented in world literature, with special attention to modern China. Through a selection of key texts, the course examines how different literary traditions and genres respond to natural and man-made catastrophes, extreme political ideologies, the darker aspects of human emotions, but also extreme happiness. Students will engage with different critical perspectives, including ecocriticism, trauma theory, cognitive literary studies, and gender studies, to analyze how literature not only reflects but also challenges the human condition in the face of extremity. Particular emphasis is placed on close reading: students will train the ability to <em>describe</em> literary phenomena with precision, not only to interpret them.</p>
 </div>
@@ -33,7 +33,7 @@ Term 1, 2026–2027</p>
 </div>
 
 <div class="i18n-block">
-<h2>Aims</h2>
+<h2><span class="lang-en">Aims</span><span class="lang-zh" lang="zh-Hant">課程目標</span></h2>
 <div class="lang-en">
 <p>This course aims to train students to describe literary phenomena with precision through close reading and to engage in cross-cultural analysis of how literature represents and responds to the extreme. By analyzing and comparing key texts from various literary, philosophical, and cultural traditions, the course enhances students’ understanding of how literature documents, critiques, and shapes human responses to catastrophe and extremity. The course also encourages students to view literary texts as both artistic expressions and cultural documents that reflect and challenge societal values in times of crisis.</p>
 </div>
@@ -43,7 +43,7 @@ Term 1, 2026–2027</p>
 </div>
 
 <div class="i18n-block">
-<h2>Learning Outcomes</h2>
+<h2><span class="lang-en">Learning Outcomes</span><span class="lang-zh" lang="zh-Hant">學習成果</span></h2>
 <div class="lang-en">
 <p>Upon completion of this course, students should be able to:</p>
 <ul>
@@ -65,7 +65,7 @@ Term 1, 2026–2027</p>
 </div>
 
 <div class="i18n-block">
-<h2>Language of Instruction</h2>
+<h2><span class="lang-en">Language of Instruction</span><span class="lang-zh" lang="zh-Hant">授課語言</span></h2>
 <div class="lang-en">
 <p>The course is conducted fully in Putonghua. All primary sources (novels, stories, diaries, etc.) are in Chinese. However, some theoretical texts are in English, and you are expected to read them in English, unless a Chinese translation is available. The instructor might provide translated versions if needed. There are many AI tools that can help you translate theoretical texts free of charge (e.g., <a href="https://perplexity.ai/">Perplexity</a>, <a href="https://chat.deepseek.com">DeepSeek</a>, <a href="https://poe.com">Poe</a>, <a href="https://gemini.google.com">Gemini</a>). In-class discussions will be held in Putonghua, and students should complete and submit all assessed work in Chinese.</p>
 </div>
@@ -75,7 +75,7 @@ Term 1, 2026–2027</p>
 </div>
 
 <div class="i18n-block">
-<h2>Assessment</h2>
+<h2><span class="lang-en">Assessment</span><span class="lang-zh" lang="zh-Hant">評核</span></h2>
 <div class="lang-en">
 <p>Students’ progress towards the learning outcomes will be measured by means of:</p>
 <table class="assessment">
@@ -105,7 +105,7 @@ Term 1, 2026–2027</p>
 </div>
 
 <div class="i18n-block">
-<h2>Attendance Policy</h2>
+<h2><span class="lang-en">Attendance Policy</span><span class="lang-zh" lang="zh-Hant">出席規定</span></h2>
 <div class="lang-en">
 <p>Students are expected to attend all classes. <strong>One</strong> unexplained absence (either lecture or tutorial) is permitted, no questions asked. Unexplained absences will not impact the final grade by more than 20% (the maximum you can get for in-class discussion and participation), unless a student misses more than eight (8) meetings, in which case there will be insufficient evidence of participation to award a passing grade. Lectures and tutorials are counted as separate meetings. Every unexplained absence (beyond the one everyone gets for free) will remove 10% from the participation component (which equals 2% of the final grade). For example, if you are absent two times without explanation (in addition to the one no-questions-asked absence granted to everyone), you will receive 100% − 20% = 80% of the total possible contribution from participation, which amounts to 80% × 20% = 16% of the final grade. Remember to come to class on time and prepared.</p>
 </div>
@@ -115,7 +115,7 @@ Term 1, 2026–2027</p>
 </div>
 
 <div class="i18n-block">
-<h2>AI Policy</h2>
+<h2><span class="lang-en">AI Policy</span><span class="lang-zh" lang="zh-Hant">人工智能使用規定</span></h2>
 <div class="lang-en">
 <p>Students may use artificial intelligence (AI) when completing assignments for this course. However, every such use must be explicitly documented. Any assignment completed with the assistance of an AI tool must include a statement identifying the tool and explaining how it was employed. AI-generated output may not be reproduced in submitted work, whether verbatim or with only superficial modifications. Doing so constitutes academic misconduct and will affect the assessment of the work.</p>
 </div>
@@ -125,7 +125,7 @@ Term 1, 2026–2027</p>
 </div>
 
 <div class="i18n-block">
-<h2>Course Design</h2>
+<h2><span class="lang-en">Course Design</span><span class="lang-zh" lang="zh-Hant">課程設計</span></h2>
 <div class="lang-en">
 <p><strong>1. Lectures.</strong> Each week, the lecture will focus on the broader historical contexts and theoretical issues surrounding the selected texts.</p>
 <p><strong>2. Presentations.</strong> During the tutorial sessions, students will work individually or collaborate in small teams (comprising 2 members) to deliver two oral presentations (20–30 mins each) on selected <strong>primary</strong> texts (novels or short stories). The students presenting each week are topic experts who are expected to lead the discussion in tutorials and be active during lectures. The presentations should incorporate carefully chosen quotations and paraphrased content from the story, addressing one or more of the following questions:</p>
@@ -165,7 +165,7 @@ Term 1, 2026–2027</p>
 </div>
 
 <div class="i18n-block">
-<h2>Trigger Warning</h2>
+<h2><span class="lang-en">Trigger Warning</span><span class="lang-zh" lang="zh-Hant">內容警示</span></h2>
 <div class="lang-en">
 <p>This course will engage with content that may be emotionally difficult for some students, including discussions of violence and trauma. If you find certain materials challenging, <strong>please do not hesitate to consult the instructor.</strong> We can explore alternative approaches, such as focusing on theoretical texts or supplementary readings. Your well-being is very important, and accommodations can be made to ensure a productive and supportive learning environment.</p>
 </div>
@@ -193,42 +193,42 @@ Term 1, 2026–2027</p>
   <tbody class="block-a">
     <tr>
       <td class="week" rowspan="2">1</td>
-      <td>Lecture</td>
-      <td class="date">1 Sep</td>
-      <td class="topic" rowspan="2">Introduction</td>
-      <td>The Extreme in Literature: key concepts, course objectives, and a survey of texts</td>
+      <td><span class="lang-en">Lecture</span><span class="lang-zh" lang="zh-Hant">講座</span></td>
+      <td class="date"><span class="lang-en">1 Sep</span><span class="lang-zh" lang="zh-Hant">9月1日</span></td>
+      <td class="topic" rowspan="2"><span class="lang-en">Introduction</span><span class="lang-zh" lang="zh-Hant">導論</span></td>
+      <td><span class="lang-en">The Extreme in Literature: key concepts, course objectives, and a survey of texts</span><span class="lang-zh" lang="zh-Hant">文學中的極端：核心概念、課程目標與文本概覽</span></td>
     </tr>
     <tr>
-      <td>Tutorial</td>
-      <td class="date">3 Sep</td>
+      <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
+      <td class="date"><span class="lang-en">3 Sep</span><span class="lang-zh" lang="zh-Hant">9月3日</span></td>
       <td><ul class="readings"><li>魯迅：〈祝福〉</li></ul></td>
     </tr>
   </tbody>
   <tbody class="block-b">
     <tr>
       <td class="week" rowspan="2">2</td>
-      <td>Lecture</td>
-      <td class="date">8 Sep</td>
-      <td class="topic" rowspan="2">Regarding the Pain of Others</td>
+      <td><span class="lang-en">Lecture</span><span class="lang-zh" lang="zh-Hant">講座</span></td>
+      <td class="date"><span class="lang-en">8 Sep</span><span class="lang-zh" lang="zh-Hant">9月8日</span></td>
+      <td class="topic" rowspan="2"><span class="lang-en">Regarding the Pain of Others</span><span class="lang-zh" lang="zh-Hant">旁觀他人之痛苦</span></td>
       <td><ul class="readings"><li>蘇珊·桑塔格：《旁觀他人之痛苦》第三章與第六章</li></ul></td>
     </tr>
     <tr>
-      <td>Tutorial</td>
-      <td class="date">10 Sep</td>
+      <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
+      <td class="date"><span class="lang-en">10 Sep</span><span class="lang-zh" lang="zh-Hant">9月10日</span></td>
       <td><ul class="readings"><li>白樺：《苦戀》</li></ul></td>
     </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week" rowspan="2">3</td>
-      <td>Lecture</td>
-      <td class="date">15 Sep</td>
-      <td class="topic" rowspan="2">Writing the Shoah</td>
+      <td><span class="lang-en">Lecture</span><span class="lang-zh" lang="zh-Hant">講座</span></td>
+      <td class="date"><span class="lang-en">15 Sep</span><span class="lang-zh" lang="zh-Hant">9月15日</span></td>
+      <td class="topic" rowspan="2"><span class="lang-en">Writing the Shoah</span><span class="lang-zh" lang="zh-Hant">書寫大屠殺</span></td>
       <td><ul class="readings"><li>房春光：〈寫還是不寫，這是個問題：納粹大屠殺早期見證文學的書寫語境〉，《外國文學》2020年第3期，頁154–164</li></ul></td>
     </tr>
     <tr>
-      <td>Tutorial</td>
-      <td class="date">17 Sep</td>
+      <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
+      <td class="date"><span class="lang-en">17 Sep</span><span class="lang-zh" lang="zh-Hant">9月17日</span></td>
       <td><ul class="readings"><li>埃利·維瑟爾：《夜》</li></ul></td>
     </tr>
   </tbody>
@@ -236,96 +236,96 @@ Term 1, 2026–2027</p>
     <tr>
       <td></td>
       <td></td>
-      <td class="date">20 Sep</td>
-      <td colspan="2"><strong>Comparative essay (Weeks 2 &amp; 3) due, 9:00 am</strong></td>
+      <td class="date"><span class="lang-en">20 Sep</span><span class="lang-zh" lang="zh-Hant">9月20日</span></td>
+      <td colspan="2"><strong><span class="lang-en">Comparative essay (Weeks 2 &amp; 3) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第2、3週）截止，上午9:00</span></strong></td>
     </tr>
   </tbody>
   <tbody class="block-b">
     <tr>
       <td class="week" rowspan="2">4</td>
-      <td>Lecture</td>
-      <td class="date">22 Sep</td>
-      <td class="topic" rowspan="2">Spiritual Resistance in a Labor Camp</td>
+      <td><span class="lang-en">Lecture</span><span class="lang-zh" lang="zh-Hant">講座</span></td>
+      <td class="date"><span class="lang-en">22 Sep</span><span class="lang-zh" lang="zh-Hant">9月22日</span></td>
+      <td class="topic" rowspan="2"><span class="lang-en">Spiritual Resistance in a Labor Camp</span><span class="lang-zh" lang="zh-Hant">勞改營中的精神抵抗</span></td>
       <td><ul class="readings"><li>Tzvetan Todorov, “The Life of the Mind,” in <em>Facing the Extreme</em>, pp. 91–118</li></ul></td>
     </tr>
     <tr>
-      <td>Tutorial</td>
-      <td class="date">24 Sep</td>
+      <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
+      <td class="date"><span class="lang-en">24 Sep</span><span class="lang-zh" lang="zh-Hant">9月24日</span></td>
       <td><ul class="readings"><li>高爾泰：《尋找家園》（節選）</li></ul></td>
     </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week" rowspan="2">5</td>
-      <td>Lecture</td>
-      <td class="date">29 Sep</td>
-      <td class="topic" rowspan="2">The Automation of the Senses</td>
+      <td><span class="lang-en">Lecture</span><span class="lang-zh" lang="zh-Hant">講座</span></td>
+      <td class="date"><span class="lang-en">29 Sep</span><span class="lang-zh" lang="zh-Hant">9月29日</span></td>
+      <td class="topic" rowspan="2"><span class="lang-en">The Automation of the Senses</span><span class="lang-zh" lang="zh-Hant">感官的自動化</span></td>
       <td>
         <ul class="readings">
           <li>塔杜施·博羅夫斯基：〈女士們、先生們，請進毒氣室〉，於《在我們奧斯威辛》，第47–79頁</li>
           <li>瓦爾拉姆·沙拉莫夫：〈手推車〉</li>
-          <li>(optional) Leona Toker, “Gulag Literature and the Literature of Nazi Camps” (Chapter 4: Forced Labor)</li>
+          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Leona Toker, “Gulag Literature and the Literature of Nazi Camps” (Chapter 4: Forced Labor)</li>
         </ul>
       </td>
     </tr>
     <tr>
-      <td>Tutorial</td>
-      <td class="date">1 Oct</td>
-      <td><strong>No class (National Day)</strong></td>
+      <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
+      <td class="date"><span class="lang-en">1 Oct</span><span class="lang-zh" lang="zh-Hant">10月1日</span></td>
+      <td><strong><span class="lang-en">No class (National Day)</span><span class="lang-zh" lang="zh-Hant">停課（國慶日）</span></strong></td>
     </tr>
   </tbody>
   <tbody class="due">
     <tr>
       <td></td>
       <td></td>
-      <td class="date">3 Oct</td>
-      <td colspan="2"><strong>Comparative essay (Weeks 4 &amp; 5) due, 9:00 am</strong></td>
+      <td class="date"><span class="lang-en">3 Oct</span><span class="lang-zh" lang="zh-Hant">10月3日</span></td>
+      <td colspan="2"><strong><span class="lang-en">Comparative essay (Weeks 4 &amp; 5) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第4、5週）截止，上午9:00</span></strong></td>
     </tr>
   </tbody>
   <tbody class="block-b">
     <tr>
       <td class="week" rowspan="2">6</td>
-      <td>Lecture</td>
-      <td class="date">6 Oct</td>
-      <td class="topic" rowspan="2">Trauma and Narrative</td>
+      <td><span class="lang-en">Lecture</span><span class="lang-zh" lang="zh-Hant">講座</span></td>
+      <td class="date"><span class="lang-en">6 Oct</span><span class="lang-zh" lang="zh-Hant">10月6日</span></td>
+      <td class="topic" rowspan="2"><span class="lang-en">Trauma and Narrative</span><span class="lang-zh" lang="zh-Hant">創傷與敘事</span></td>
       <td><ul class="readings"><li>Wendy O’Brien, “Telling Time: Literature, Temporality and Trauma”</li></ul></td>
     </tr>
     <tr>
-      <td>Tutorial</td>
-      <td class="date">8 Oct</td>
+      <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
+      <td class="date"><span class="lang-en">8 Oct</span><span class="lang-zh" lang="zh-Hant">10月8日</span></td>
       <td><ul class="readings"><li>張翎：《餘震》</li></ul></td>
     </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week" rowspan="2">7</td>
-      <td>Lecture</td>
-      <td class="date">13 Oct</td>
-      <td class="topic" rowspan="2">Trauma and Society</td>
+      <td><span class="lang-en">Lecture</span><span class="lang-zh" lang="zh-Hant">講座</span></td>
+      <td class="date"><span class="lang-en">13 Oct</span><span class="lang-zh" lang="zh-Hant">10月13日</span></td>
+      <td class="topic" rowspan="2"><span class="lang-en">Trauma and Society</span><span class="lang-zh" lang="zh-Hant">創傷與社會</span></td>
       <td>
         <ul class="readings">
           <li>陶東風：〈走向建構主義的文化創傷理論〉，《文藝理論研究》2024年第3期，頁34–44</li>
-          <li>(optional) Jeffrey C. Alexander, “Toward a Theory of Cultural Trauma”</li>
+          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Jeffrey C. Alexander, “Toward a Theory of Cultural Trauma”</li>
         </ul>
       </td>
     </tr>
     <tr>
-      <td>Tutorial</td>
-      <td class="date">15 Oct</td>
+      <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
+      <td class="date"><span class="lang-en">15 Oct</span><span class="lang-zh" lang="zh-Hant">10月15日</span></td>
       <td><ul class="readings"><li>韓江：《少年來了》</li></ul></td>
     </tr>
   </tbody>
   <tbody class="block-b">
     <tr>
       <td class="week" rowspan="2">8</td>
-      <td>Lecture</td>
-      <td class="date">20 Oct</td>
-      <td class="topic" rowspan="2">Trauma and War</td>
+      <td><span class="lang-en">Lecture</span><span class="lang-zh" lang="zh-Hant">講座</span></td>
+      <td class="date"><span class="lang-en">20 Oct</span><span class="lang-zh" lang="zh-Hant">10月20日</span></td>
+      <td class="topic" rowspan="2"><span class="lang-en">Trauma and War</span><span class="lang-zh" lang="zh-Hant">創傷與戰爭</span></td>
       <td><ul class="readings"><li>Patrick Colm Hogan, “On Being Moved: Cognition and Emotion in Literature and Film”</li></ul></td>
     </tr>
     <tr>
-      <td>Tutorial</td>
-      <td class="date">22 Oct</td>
+      <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
+      <td class="date"><span class="lang-en">22 Oct</span><span class="lang-zh" lang="zh-Hant">10月22日</span></td>
       <td><ul class="readings"><li>提姆·奧布萊恩：〈死者的生命〉，於《士兵的重負》</li></ul></td>
     </tr>
   </tbody>
@@ -333,45 +333,45 @@ Term 1, 2026–2027</p>
     <tr>
       <td></td>
       <td></td>
-      <td class="date">24 Oct</td>
-      <td colspan="2"><strong>Comparative essay (Weeks 6, 7, 8) due, 9:00 am</strong></td>
+      <td class="date"><span class="lang-en">24 Oct</span><span class="lang-zh" lang="zh-Hant">10月24日</span></td>
+      <td colspan="2"><strong><span class="lang-en">Comparative essay (Weeks 6, 7, 8) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第6、7、8週）截止，上午9:00</span></strong></td>
     </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week" rowspan="2">9</td>
-      <td>Lecture</td>
-      <td class="date">27 Oct</td>
-      <td class="topic" rowspan="2">Between the Heroic and the Ordinary</td>
+      <td><span class="lang-en">Lecture</span><span class="lang-zh" lang="zh-Hant">講座</span></td>
+      <td class="date"><span class="lang-en">27 Oct</span><span class="lang-zh" lang="zh-Hant">10月27日</span></td>
+      <td class="topic" rowspan="2"><span class="lang-en">Between the Heroic and the Ordinary</span><span class="lang-zh" lang="zh-Hant">英雄與日常之間</span></td>
       <td>
         <ul class="readings">
           <li>梁昂：《他們先殺了我父親：柬埔寨女孩的回憶》（節選）</li>
-          <li>(optional) Rithy Panh, <em>The Missing Picture</em></li>
+          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Rithy Panh, <em>The Missing Picture</em></li>
         </ul>
       </td>
     </tr>
     <tr>
-      <td>Tutorial</td>
-      <td class="date">29 Oct</td>
+      <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
+      <td class="date"><span class="lang-en">29 Oct</span><span class="lang-zh" lang="zh-Hant">10月29日</span></td>
       <td><ul class="readings"><li>約翰·赫西：《廣島》（原版）</li></ul></td>
     </tr>
   </tbody>
   <tbody class="block-b">
     <tr>
       <td class="week" rowspan="2">10</td>
-      <td>Lecture</td>
-      <td class="date">3 Nov</td>
-      <td class="topic" rowspan="2">The Sublime</td>
+      <td><span class="lang-en">Lecture</span><span class="lang-zh" lang="zh-Hant">講座</span></td>
+      <td class="date"><span class="lang-en">3 Nov</span><span class="lang-zh" lang="zh-Hant">11月3日</span></td>
+      <td class="topic" rowspan="2"><span class="lang-en">The Sublime</span><span class="lang-zh" lang="zh-Hant">崇高</span></td>
       <td>
         <ul class="readings">
           <li>〈用毛澤東思想武裝起來的人是最大的戰鬥力〉，於《解放軍報》1966年10月14日</li>
-          <li>(optional) 王斑：〈實踐的崇高主體〉，於《歷史的崇高形象：二十世紀中國的美學與政治》</li>
+          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> 王斑：〈實踐的崇高主體〉，於《歷史的崇高形象：二十世紀中國的美學與政治》</li>
         </ul>
       </td>
     </tr>
     <tr>
-      <td>Tutorial</td>
-      <td class="date">5 Nov</td>
+      <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
+      <td class="date"><span class="lang-en">5 Nov</span><span class="lang-zh" lang="zh-Hant">11月5日</span></td>
       <td><ul class="readings"><li>閻連科：《為人民服務》</li></ul></td>
     </tr>
   </tbody>
@@ -379,16 +379,16 @@ Term 1, 2026–2027</p>
     <tr>
       <td></td>
       <td></td>
-      <td class="date">7 Nov</td>
-      <td colspan="2"><strong>Comparative essay (Weeks 9 &amp; 10) due, 9:00 am</strong></td>
+      <td class="date"><span class="lang-en">7 Nov</span><span class="lang-zh" lang="zh-Hant">11月7日</span></td>
+      <td colspan="2"><strong><span class="lang-en">Comparative essay (Weeks 9 &amp; 10) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第9、10週）截止，上午9:00</span></strong></td>
     </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week" rowspan="2">11</td>
-      <td>Lecture</td>
-      <td class="date">10 Nov</td>
-      <td class="topic" rowspan="2">Gender Violence</td>
+      <td><span class="lang-en">Lecture</span><span class="lang-zh" lang="zh-Hant">講座</span></td>
+      <td class="date"><span class="lang-en">10 Nov</span><span class="lang-zh" lang="zh-Hant">11月10日</span></td>
+      <td class="topic" rowspan="2"><span class="lang-en">Gender Violence</span><span class="lang-zh" lang="zh-Hant">性別暴力</span></td>
       <td>
         <ul class="readings">
           <li>李海燕：〈話說《白毛女》：民族敘事中的階級與性別政治〉，《二十一世紀》1999年4月號（總第52期），頁110–118</li>
@@ -397,27 +397,27 @@ Term 1, 2026–2027</p>
       </td>
     </tr>
     <tr>
-      <td>Tutorial</td>
-      <td class="date">12 Nov</td>
+      <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
+      <td class="date"><span class="lang-en">12 Nov</span><span class="lang-zh" lang="zh-Hant">11月12日</span></td>
       <td><ul class="readings"><li>李昂：《殺夫》</li></ul></td>
     </tr>
   </tbody>
   <tbody class="block-b">
     <tr>
       <td class="week" rowspan="2">12</td>
-      <td>Lecture</td>
-      <td class="date">17 Nov</td>
-      <td class="topic" rowspan="2">Racial Violence</td>
+      <td><span class="lang-en">Lecture</span><span class="lang-zh" lang="zh-Hant">講座</span></td>
+      <td class="date"><span class="lang-en">17 Nov</span><span class="lang-zh" lang="zh-Hant">11月17日</span></td>
+      <td class="topic" rowspan="2"><span class="lang-en">Racial Violence</span><span class="lang-zh" lang="zh-Hant">種族暴力</span></td>
       <td>
         <ul class="readings">
           <li>Grace Elizabeth Hale, “Deadly Amusements: Spectacle Lynchings and the Contradictions of Segregation as Culture,” in <em>Making Whiteness</em>, pp. 199–239</li>
-          <li>(optional) Frantz Fanon, “The Lived Experience of the Black Man,” in <em>Black Skin, White Masks</em></li>
+          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Frantz Fanon, “The Lived Experience of the Black Man,” in <em>Black Skin, White Masks</em></li>
         </ul>
       </td>
     </tr>
     <tr>
-      <td>Tutorial</td>
-      <td class="date">19 Nov</td>
+      <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
+      <td class="date"><span class="lang-en">19 Nov</span><span class="lang-zh" lang="zh-Hant">11月19日</span></td>
       <td><ul class="readings"><li>詹姆斯·鮑德溫：〈去見那個男人〉</li></ul></td>
     </tr>
   </tbody>
@@ -425,21 +425,21 @@ Term 1, 2026–2027</p>
     <tr>
       <td></td>
       <td></td>
-      <td class="date">21 Nov</td>
-      <td colspan="2"><strong>Comparative essay (Weeks 11 &amp; 12) due, 9:00 am</strong></td>
+      <td class="date"><span class="lang-en">21 Nov</span><span class="lang-zh" lang="zh-Hant">11月21日</span></td>
+      <td colspan="2"><strong><span class="lang-en">Comparative essay (Weeks 11 &amp; 12) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第11、12週）截止，上午9:00</span></strong></td>
     </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week" rowspan="2">13</td>
-      <td>Lecture</td>
-      <td class="date">24 Nov</td>
-      <td class="topic" rowspan="2">Towards Redemption</td>
+      <td><span class="lang-en">Lecture</span><span class="lang-zh" lang="zh-Hant">講座</span></td>
+      <td class="date"><span class="lang-en">24 Nov</span><span class="lang-zh" lang="zh-Hant">11月24日</span></td>
+      <td class="topic" rowspan="2"><span class="lang-en">Towards Redemption</span><span class="lang-zh" lang="zh-Hant">走向救贖</span></td>
       <td><ul class="readings"><li>瓦爾特·本雅明：《歷史哲學論綱》</li></ul></td>
     </tr>
     <tr>
-      <td>Tutorial</td>
-      <td class="date">26 Nov</td>
+      <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
+      <td class="date"><span class="lang-en">26 Nov</span><span class="lang-zh" lang="zh-Hant">11月26日</span></td>
       <td><ul class="readings"><li>雙雪濤：《平原上的摩西》</li></ul></td>
     </tr>
   </tbody>
@@ -447,8 +447,8 @@ Term 1, 2026–2027</p>
     <tr>
       <td></td>
       <td></td>
-      <td class="date">7 Dec</td>
-      <td colspan="2"><strong>Final project due, 9:00 am</strong></td>
+      <td class="date"><span class="lang-en">7 Dec</span><span class="lang-zh" lang="zh-Hant">12月7日</span></td>
+      <td colspan="2"><strong><span class="lang-en">Final project due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">期末專題截止，上午9:00</span></strong></td>
     </tr>
   </tbody>
 </table>
@@ -461,15 +461,17 @@ Term 1, 2026–2027</p>
 <span class="lang-zh" lang="zh-Hant">注意事項</span>
 </h2>
 <div class="lang-en">
-
-1. Students are expected to spend a total of 9 hours (i.e. 3 hours of class contact and 6 hours of personal study) per week to achieve the course learning outcomes.
-2. Students shall be aware of the University regulations about dishonest practice in course work, tests and examinations, and the possible consequences as stipulated in the Regulations Governing University Examinations. In particular, plagiarism, being a kind of dishonest practice, is “the presentation of another person’s work without proper acknowledgement of the source, including exact phrases, or summarised ideas, or even footnotes/citations, whether protected by copyright or not, as the student’s own work.” Students are required to strictly follow university regulations governing academic integrity and honesty.
-3. To enhance students’ understanding of plagiarism, a mini-course “Online Tutorial on Plagiarism Awareness” is available on [https://pla.ln.edu.hk/](https://pla.ln.edu.hk/).
+<ol>
+<li>Students are expected to spend a total of 9 hours (i.e. 3 hours of class contact and 6 hours of personal study) per week to achieve the course learning outcomes.</li>
+<li>Students shall be aware of the University regulations about dishonest practice in course work, tests and examinations, and the possible consequences as stipulated in the Regulations Governing University Examinations. In particular, plagiarism, being a kind of dishonest practice, is “the presentation of another person’s work without proper acknowledgement of the source, including exact phrases, or summarised ideas, or even footnotes/citations, whether protected by copyright or not, as the student’s own work.” Students are required to strictly follow university regulations governing academic integrity and honesty.</li>
+<li>To enhance students’ understanding of plagiarism, a mini-course “Online Tutorial on Plagiarism Awareness” is available on <a href="https://pla.ln.edu.hk/">https://pla.ln.edu.hk/</a>.</li>
+</ol>
 </div>
 <div class="lang-zh" lang="zh-Hant">
-
-1. 學生每週須投入共 9 小時（即 3 小時課堂接觸、6 小時自修），以達致課程學習成果。  
-2. 學生須注意大學有關習作及考試不誠實行為的規例，以及《大學考試規例》所訂的可能後果。抄襲屬不誠實行為，指「未經妥為註明來源，將他人作品（包括原句、撮述的觀點，以至腳註／引文，無論是否受版權保護）呈交作為自己的作品」。學生須嚴格遵守大學有關學術誠信的規例。  
-3. 為加深對抄襲的認識，可修讀小型課程「Online Tutorial on Plagiarism Awareness」： [https://pla.ln.edu.hk/](https://pla.ln.edu.hk/)。
+<ol>
+<li>學生每週須投入共 9 小時（即 3 小時課堂接觸、6 小時自修），以達致課程學習成果。</li>
+<li>學生須注意大學有關習作及考試不誠實行為的規例，以及《大學考試規例》所訂的可能後果。抄襲屬不誠實行為，指「未經妥為註明來源，將他人作品（包括原句、撮述的觀點，以至腳註／引文，無論是否受版權保護）呈交作為自己的作品」。學生須嚴格遵守大學有關學術誠信的規例。</li>
+<li>為加深對抄襲的認識，可修讀小型課程「Online Tutorial on Plagiarism Awareness」：<a href="https://pla.ln.edu.hk/">https://pla.ln.edu.hk/</a>。</li>
+</ol>
 </div>
 </div>
