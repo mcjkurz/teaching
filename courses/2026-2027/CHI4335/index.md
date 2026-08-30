@@ -85,82 +85,40 @@ This course will engage with content that may be emotionally difficult for some 
 
 Classes run 1 September – 30 November 2026. Lectures are on Tuesdays; tutorials are on Thursdays (same week). **Thursday 1 October is National Day: no tutorial.**
 
-### Week 1: Introduction
-
-- **Tue 1 Sep (lecture):** The Extreme in Literature. Introduction to key concepts, course objectives, and a survey of texts.
-- **Thu 3 Sep (tutorial):** 魯迅：〈祝福〉
-
-### Week 2: Regarding the Pain of Others
-
-- **Tue 8 Sep (lecture):** 蘇珊·桑塔格：《旁觀他人之痛苦》第三章與第六章
-- **Thu 10 Sep (tutorial):** 白樺：《苦戀》
-
-### Week 3: Writing the Shoah
-
-- **Tue 15 Sep (lecture):** 房春光〈写还是不写，这是个问题——纳粹大屠杀早期见证文学的书写语境〉
-- **Thu 17 Sep (tutorial):** 埃利·維瑟爾：《夜》
-
-**Comparative reflection (Weeks 2 & 3) due Sat 20 Sep, 9:00 am.**
-
-### Week 4: *Laogai* and Spiritual Resistance
-
-- **Tue 22 Sep (lecture):** Tzvetan Todorov, “The Life of the Mind,” in *Facing the Extreme*, pp. 91–118.
-- **Thu 24 Sep (tutorial):** 高爾泰：《尋找家園》（節選）
-
-### Week 5: The Nazi Camp
-
-- **Tue 29 Sep (lecture):** 高爾泰：《尋找家園》（節選）；瓦爾拉姆·沙拉莫夫：〈手推車〉. Presentation: 塔杜施·博羅夫斯基：〈女士們、先生們，請進毒氣室〉，於《在我們奧斯威辛》，第47–79頁. Optional: Leona Toker, “Gulag Literature and the Literature of Nazi Camps” (Chapter 4: Forced Labor).
-- **Thu 1 Oct:** no tutorial (National Day)
-
-**Comparative reflection (Weeks 4 & 5) due Sat 3 Oct, 9:00 am.**
-
-### Week 6: Trauma and Agency
-
-- **Tue 6 Oct (lecture):** O’Brien, “Telling Time: Literature, Temporality and Trauma”
-- **Thu 8 Oct (tutorial):** 張翎《餘震》
-
-### Week 7: Social Movements & Trauma
-
-- **Tue 13 Oct (lecture):** Collective trauma, social movements, and literary form
-- **Thu 15 Oct (tutorial):** 韓江：《少年來了》
-
-**Comparative reflection (Weeks 6 & 7) due Sat 17 Oct, 9:00 am.**
-
-### Week 8: War Experience
-
-- **Tue 20 Oct (lecture):** Hogan, “On Being Moved: Cognition and Emotion in Literature and Film”
-- **Thu 22 Oct (tutorial):** 提姆·奧布萊恩：〈死者的生命〉，於《士兵的重負》
-
-### Week 9: Between the Heroic and the Ordinary
-
-- **Tue 27 Oct (lecture):** Rithy Panh, *The Missing Picture* (we will watch the film together)
-- **Thu 29 Oct (tutorial):** 約翰·赫西：《廣島》（原版）
-
-**Comparative reflection (Weeks 8 & 9) due Sat 31 Oct, 9:00 am.**
-
-### Week 10: The Sublime
-
-- **Tue 3 Nov (lecture):** 〈用毛泽东思想武装起来的人是最大的战斗力〉，於《解放军报》1966年10月14日. Optional: Booth, “The Rhetoric of Fiction” (selections); Walsh, “Rhetoric of Fictionality” (selections).
-- **Thu 5 Nov (tutorial):** 阎连科《为人民服务》
-
-### Week 11: Domestic Violence
-
-- **Tue 10 Nov (lecture):** 李海燕：《话说〈白毛女〉——民族叙事中的阶级与性别政治》
-- **Thu 12 Nov (tutorial):** 李昂：《殺夫》
-
-**Comparative reflection (Weeks 10 & 11) due Sat 14 Nov, 9:00 am.**
-
-### Week 12: Regarding the Past
-
-- **Tue 17 Nov (lecture):** 瓦尔特·本雅明：《歷史哲學論綱》
-- **Thu 19 Nov (tutorial):** 卡勒德·胡賽尼：《追風箏的孩子》（第一章到第十章）
-
-### Week 13: Towards Redemption
-
-- **Tue 24 Nov (lecture):** Review and summary of the course
-- **Thu 26 Nov (tutorial):** 卡勒德·胡賽尼：《追風箏的孩子》（第十一章到第二十五章）
-
-**Final paper due Fri 11 Dec, 9:00 pm.**
+| Event | Date | Description | Readings |
+| --- | --- | --- | --- |
+| Lecture | 1 Sep | Introduction | The Extreme in Literature: key concepts, course objectives, and a survey of texts |
+| Tutorial | 3 Sep | Introduction | 魯迅：〈祝福〉 |
+| Lecture | 8 Sep | Regarding the Pain of Others | 蘇珊·桑塔格：《旁觀他人之痛苦》第三章與第六章 |
+| Tutorial | 10 Sep | Regarding the Pain of Others | 白樺：《苦戀》 |
+| Lecture | 15 Sep | Writing the Shoah | 房春光〈写还是不写，这是个问题——纳粹大屠杀早期见证文学的书写语境〉 |
+| Tutorial | 17 Sep | Writing the Shoah | 埃利·維瑟爾：《夜》 |
+| Due | 20 Sep | **Comparative reflection (Weeks 2 & 3) due, 9:00 am** | |
+| Lecture | 22 Sep | *Laogai* and Spiritual Resistance | Tzvetan Todorov, “The Life of the Mind,” in *Facing the Extreme*, pp. 91–118 |
+| Tutorial | 24 Sep | *Laogai* and Spiritual Resistance | 高爾泰：《尋找家園》（節選） |
+| Lecture | 29 Sep | The Nazi Camp | 高爾泰：《尋找家園》（節選）；瓦爾拉姆·沙拉莫夫：〈手推車〉. Presentation: 塔杜施·博羅夫斯基：〈女士們、先生們，請進毒氣室〉，於《在我們奧斯威辛》，第47–79頁. Optional: Leona Toker, “Gulag Literature and the Literature of Nazi Camps” (Chapter 4: Forced Labor) |
+| Tutorial | 1 Oct | **No class (National Day)** | |
+| Due | 3 Oct | **Comparative reflection (Weeks 4 & 5) due, 9:00 am** | |
+| Lecture | 6 Oct | Trauma and Agency | O’Brien, “Telling Time: Literature, Temporality and Trauma” |
+| Tutorial | 8 Oct | Trauma and Agency | 張翎《餘震》 |
+| Lecture | 13 Oct | Social Movements & Trauma | Collective trauma, social movements, and literary form |
+| Tutorial | 15 Oct | Social Movements & Trauma | 韓江：《少年來了》 |
+| Due | 17 Oct | **Comparative reflection (Weeks 6 & 7) due, 9:00 am** | |
+| Lecture | 20 Oct | War Experience | Hogan, “On Being Moved: Cognition and Emotion in Literature and Film” |
+| Tutorial | 22 Oct | War Experience | 提姆·奧布萊恩：〈死者的生命〉，於《士兵的重負》 |
+| Lecture | 27 Oct | Between the Heroic and the Ordinary | Rithy Panh, *The Missing Picture* (we will watch the film together) |
+| Tutorial | 29 Oct | Between the Heroic and the Ordinary | 約翰·赫西：《廣島》（原版） |
+| Due | 31 Oct | **Comparative reflection (Weeks 8 & 9) due, 9:00 am** | |
+| Lecture | 3 Nov | The Sublime | 〈用毛泽东思想武装起来的人是最大的战斗力〉，於《解放军报》1966年10月14日. Optional: Booth, “The Rhetoric of Fiction” (selections); Walsh, “Rhetoric of Fictionality” (selections) |
+| Tutorial | 5 Nov | The Sublime | 阎连科《为人民服务》 |
+| Lecture | 10 Nov | Domestic Violence | 李海燕：《话说〈白毛女〉——民族叙事中的阶级与性别政治》 |
+| Tutorial | 12 Nov | Domestic Violence | 李昂：《殺夫》 |
+| Due | 14 Nov | **Comparative reflection (Weeks 10 & 11) due, 9:00 am** | |
+| Lecture | 17 Nov | Regarding the Past | 瓦尔特·本雅明：《歷史哲學論綱》 |
+| Tutorial | 19 Nov | Regarding the Past | 卡勒德·胡賽尼：《追風箏的孩子》（第一章到第十章） |
+| Lecture | 24 Nov | Towards Redemption | Review and summary of the course |
+| Tutorial | 26 Nov | Towards Redemption | 卡勒德·胡賽尼：《追風箏的孩子》（第十一章到第二十五章） |
+| Due | 11 Dec | **Final paper due, 9:00 pm** | |
 
 ## Important Notes
 
