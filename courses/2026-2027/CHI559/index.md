@@ -15,6 +15,9 @@ title: CHI559
 <strong>辦公時間：</strong>星期二 3:00–5:00、星期五 10:00–12:00，HSH G06，或另行預約<br>
 <strong>授課語言：</strong>普通話</p>
 </div>
+<div class="course-header-image">
+<img src="cover.png" alt="環球中國研究中的數字人文">
+</div>
 </div>
 
 <h2>課程簡介</h2>
