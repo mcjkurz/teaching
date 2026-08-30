@@ -21,7 +21,7 @@ Term 1, 2026–2027</p>
 </div>
 
 <div class="i18n-block">
-<h2>Course Description</h2>
+<h2><span class="lang-en">Course Description</span><span class="lang-zh" lang="zh-Hant">課程簡介</span></h2>
 <div class="lang-en">
 <p>This course offers a beginner-friendly introduction to Digital Humanities, surveying tools for exploring and analyzing Chinese texts, including novels, blogs, news articles, poetry, and more. Students will use accessible software and learn basic techniques to study patterns in Chinese literature and social media, assess trends in digital archives, and visualize data. Prior programming experience is not required. From early in the course we will use agentic coding: AI coding assistants that help write, debug, and evaluate research code. Weekly seminars cover fundamental concepts and methods and provide supervised hands-on practice. The final project asks students to build their own datasets, apply digital methods to a topic of their choice, and present their findings through a complete working GitHub repository and an accompanying report.</p>
 </div>
@@ -31,7 +31,7 @@ Term 1, 2026–2027</p>
 </div>
 
 <div class="i18n-block">
-<h2>Aims</h2>
+<h2><span class="lang-en">Aims</span><span class="lang-zh" lang="zh-Hant">課程目標</span></h2>
 <div class="lang-en">
 <p>This course aims to introduce students to digital humanities in both practical and theoretical terms. Students will develop digital literacy, including the ability to employ digital tools and AI coding agents in creative ways, to evaluate information on the web critically, and to manage that information by searching, editing, uploading, and visualizing textual data. Familiarity with these tools equips students with transferable skills and with the means to champion more inclusive narratives and a broader cultural understanding.</p>
 </div>
@@ -41,7 +41,7 @@ Term 1, 2026–2027</p>
 </div>
 
 <div class="i18n-block">
-<h2>Learning Outcomes</h2>
+<h2><span class="lang-en">Learning Outcomes</span><span class="lang-zh" lang="zh-Hant">學習成果</span></h2>
 <div class="lang-en">
 <p>Upon completion of this course, students should be able to:</p>
 <ul>
@@ -65,7 +65,7 @@ Term 1, 2026–2027</p>
 </div>
 
 <div class="i18n-block">
-<h2>Language of Instruction</h2>
+<h2><span class="lang-en">Language of Instruction</span><span class="lang-zh" lang="zh-Hant">授課語言</span></h2>
 <div class="lang-en">
 <p>The course is conducted in Putonghua. Primary materials (novels, poetry, and other Chinese texts) are in Chinese. Technical readings and Python documentation are often in English, and you are expected to read them in English unless a Chinese translation is available. The instructor might provide translated versions if needed. There are many AI tools that can help you translate technical texts free of charge (e.g., <a href="https://perplexity.ai/">Perplexity</a>, <a href="https://chat.deepseek.com">DeepSeek</a>, <a href="https://poe.com">Poe</a>, <a href="https://gemini.google.com">Gemini</a>). In-class discussions will be held in Putonghua, and students should complete and submit all assessed work in Chinese.</p>
 </div>
@@ -75,7 +75,7 @@ Term 1, 2026–2027</p>
 </div>
 
 <div class="i18n-block">
-<h2>Preliminary Setup</h2>
+<h2><span class="lang-en">Preliminary Setup</span><span class="lang-zh" lang="zh-Hant">課前準備</span></h2>
 <div class="lang-en">
 <p>Please complete the following <strong>before the first seminar</strong>:</p>
 <ol>
@@ -97,7 +97,7 @@ Term 1, 2026–2027</p>
 </div>
 
 <div class="i18n-block">
-<h2>Assessment</h2>
+<h2><span class="lang-en">Assessment</span><span class="lang-zh" lang="zh-Hant">評核</span></h2>
 <div class="lang-en">
 <p>Students’ progress towards the learning outcomes will be measured by means of:</p>
 <table class="assessment">
@@ -127,7 +127,7 @@ Term 1, 2026–2027</p>
 </div>
 
 <div class="i18n-block">
-<h2>Attendance Policy</h2>
+<h2><span class="lang-en">Attendance Policy</span><span class="lang-zh" lang="zh-Hant">出席規定</span></h2>
 <div class="lang-en">
 <p>Students are expected to attend all seminars. <strong>One</strong> unexplained absence is permitted, no questions asked. Unexplained absences will not impact the final grade by more than 20% (the maximum you can get for in-class discussion and participation), unless a student misses more than four (4) meetings, in which case there will be insufficient evidence of participation to award a passing grade. Every unexplained absence (beyond the one everyone gets for free) will remove 10% from the participation component (which equals 2% of the final grade). For example, if you are absent two times without explanation (in addition to the one no-questions-asked absence granted to everyone), you will receive 100% − 20% = 80% of the total possible contribution from participation, which amounts to 80% × 20% = 16% of the final grade. Remember to come to class on time and prepared.</p>
 </div>
@@ -137,7 +137,7 @@ Term 1, 2026–2027</p>
 </div>
 
 <div class="i18n-block">
-<h2>AI Policy</h2>
+<h2><span class="lang-en">AI Policy</span><span class="lang-zh" lang="zh-Hant">人工智能使用規定</span></h2>
 <div class="lang-en">
 <p>This course teaches agentic coding, and students are expected to use AI coding assistants. Every such use must be explicitly documented. Any assignment completed with the assistance of an AI tool must include a statement identifying the tool and explaining how it was employed. Students must understand and be able to explain the code and analysis they submit. AI-generated prose may not be reproduced in submitted work, whether verbatim or with only superficial modifications. Doing so constitutes academic misconduct and will affect the assessment of the work.</p>
 </div>
@@ -147,7 +147,7 @@ Term 1, 2026–2027</p>
 </div>
 
 <div class="i18n-block">
-<h2>Course Design</h2>
+<h2><span class="lang-en">Course Design</span><span class="lang-zh" lang="zh-Hant">課程設計</span></h2>
 <div class="lang-en">
 <p><strong>1. Seminars.</strong> Each week, a three-hour seminar combines conceptual discussion with supervised hands-on practice. Students work with Chinese texts and learn methods ranging from word frequencies and collocations to topic models, word vectors, and neural language models. Prior programming experience is not required. We introduce agentic coding in the first weeks and then use AI coding agents throughout.</p>
 <p><strong>2. Assignments and project proposal.</strong> Two graded assignments apply the tools covered in seminars. Assignment 0 is not graded. The final assignment item is a final project proposal. All work must be submitted via the Assignment module on Moodle. Instructions are linked in the schedule table.</p>
@@ -193,10 +193,10 @@ Term 1, 2026–2027</p>
     <tr>
       <td class="week">1</td>
       <td class="date">3 Sep</td>
-      <td class="topic">Introduction</td>
+      <td class="topic"><span class="lang-en">Introduction</span><span class="lang-zh" lang="zh-Hant">導論</span></td>
       <td>
         <ul class="readings">
-          <li>Digital Humanities: key concepts; agentic coding; Git, GitHub, OpenRouter, OpenCode, and VS Code</li>
+          <li><span class="lang-en">Digital Humanities: key concepts; agentic coding; Git, GitHub, OpenRouter, OpenCode, and VS Code</span><span class="lang-zh" lang="zh-Hant">數字人文：核心概念；智能體編程；Git、GitHub、OpenRouter、OpenCode 與 VS Code</span></li>
         </ul>
       </td>
     </tr>
@@ -205,11 +205,11 @@ Term 1, 2026–2027</p>
     <tr>
       <td class="week">2</td>
       <td class="date">10 Sep</td>
-      <td class="topic">Language, Text, Encoding</td>
+      <td class="topic"><span class="lang-en">Language, Text, Encoding</span><span class="lang-zh" lang="zh-Hant">語言、文本與編碼</span></td>
       <td>
         <ul class="readings">
-          <li>What is a text? Binary, Unicode, UTF-8; files as data</li>
-          <li>Chinese text segmentation; Bag of Words (BoW); stopwords; Zipf’s law</li>
+          <li><span class="lang-en">What is a text? Binary, Unicode, UTF-8; files as data</span><span class="lang-zh" lang="zh-Hant">什麼是文本？二進位、Unicode、UTF-8；把檔案視為資料</span></li>
+          <li><span class="lang-en">Chinese text segmentation; Bag of Words (BoW); stopwords; Zipf’s law</span><span class="lang-zh" lang="zh-Hant">中文分詞；詞袋模型（BoW）；停用詞；Zipf 定律</span></li>
         </ul>
       </td>
     </tr>
@@ -218,14 +218,14 @@ Term 1, 2026–2027</p>
     <tr>
       <td></td>
       <td class="date">14 Sep</td>
-      <td colspan="2"><a href="#">Assignment 0 (not graded) due, 9:00 am</a></td>
+      <td colspan="2"><a href="#"><span class="lang-en">Assignment 0 (not graded) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">作業0（不計分）截止，上午9:00</span></a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week">3</td>
       <td class="date">17 Sep</td>
-      <td class="topic">Collocations</td>
+      <td class="topic"><span class="lang-en">Collocations</span><span class="lang-zh" lang="zh-Hant">搭配詞</span></td>
       <td>
         <ul class="readings">
           <li>Collocation as a method; the contingency table（列聯表）; statistical significance, Fisher's exact test, p value</li>
@@ -238,10 +238,10 @@ Term 1, 2026–2027</p>
     <tr>
       <td class="week">4</td>
       <td class="date">24 Sep</td>
-      <td class="topic">What Is a Character?</td>
+      <td class="topic"><span class="lang-en">What Is a Character?</span><span class="lang-zh" lang="zh-Hant">什麼是「角色」？</span></td>
       <td>
         <ul class="readings">
-          <li>Character, word, person</li>
+          <li><span class="lang-en">Character, word, person</span><span class="lang-zh" lang="zh-Hant">角色、詞語、人物</span></li>
           <li>Alex Woloch, <em>The One vs. the Many</em>, pp. 12–42</li>
           <li>蕭紅：《生死場》</li>
         </ul>
@@ -253,21 +253,21 @@ Term 1, 2026–2027</p>
       <td class="week">5</td>
       <td class="date">1 Oct</td>
       <td class="topic"></td>
-      <td><strong>No class (National Day)</strong></td>
+      <td><strong><span class="lang-en">No class (National Day)</span><span class="lang-zh" lang="zh-Hant">停課（國慶日）</span></strong></td>
     </tr>
   </tbody>
   <tbody class="due">
     <tr>
       <td></td>
       <td class="date">7 Oct</td>
-      <td colspan="2"><a href="#">Assignment 1 due, 9:00 am</a></td>
+      <td colspan="2"><a href="#"><span class="lang-en">Assignment 1 due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">作業1截止，上午9:00</span></a></td>
     </tr>
   </tbody>
   <tbody class="block-b">
     <tr>
       <td class="week">6</td>
       <td class="date">8 Oct</td>
-      <td class="topic">From Words to Corpora</td>
+      <td class="topic"><span class="lang-en">From Words to Corpora</span><span class="lang-zh" lang="zh-Hant">從詞語到語料庫</span></td>
       <td>
         <ul class="readings">
           <li>Regular expressions (regex; 正規表示式)</li>
@@ -281,7 +281,7 @@ Term 1, 2026–2027</p>
     <tr>
       <td class="week">7</td>
       <td class="date">15 Oct</td>
-      <td class="topic">Topic Modeling</td>
+      <td class="topic"><span class="lang-en">Topic Modeling</span><span class="lang-zh" lang="zh-Hant">主題模型</span></td>
       <td>
         <ul class="readings">
           <li>LDA; what is a “topic”?（主題是什麼？）</li>
@@ -294,7 +294,7 @@ Term 1, 2026–2027</p>
     <tr>
       <td class="week">8</td>
       <td class="date">22 Oct</td>
-      <td class="topic">Stylometry</td>
+      <td class="topic"><span class="lang-en">Stylometry</span><span class="lang-zh" lang="zh-Hant">文體計量學</span></td>
       <td>
         <ul class="readings">
           <li>Authorship signals; style markers; feature selection</li>
@@ -309,14 +309,14 @@ Term 1, 2026–2027</p>
     <tr>
       <td></td>
       <td class="date">26 Oct</td>
-      <td colspan="2"><a href="#">Assignment 2 due, 9:00 am</a></td>
+      <td colspan="2"><a href="#"><span class="lang-en">Assignment 2 due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">作業2截止，上午9:00</span></a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week">9</td>
       <td class="date">29 Oct</td>
-      <td class="topic">Classification I</td>
+      <td class="topic"><span class="lang-en">Classification I</span><span class="lang-zh" lang="zh-Hant">分類（一）</span></td>
       <td>
         <ul class="readings">
           <li>Logistic regression for text classification</li>
@@ -329,7 +329,7 @@ Term 1, 2026–2027</p>
     <tr>
       <td class="week">10</td>
       <td class="date">5 Nov</td>
-      <td class="topic">Encoders I</td>
+      <td class="topic"><span class="lang-en">Encoders I</span><span class="lang-zh" lang="zh-Hant">編碼器（一）</span></td>
       <td>
         <ul class="readings">
           <li>What is meaning? word vectors and cosine similarity</li>
@@ -343,7 +343,7 @@ Term 1, 2026–2027</p>
     <tr>
       <td class="week">11</td>
       <td class="date">12 Nov</td>
-      <td class="topic">Encoders II + Classification II</td>
+      <td class="topic"><span class="lang-en">Encoders II + Classification II</span><span class="lang-zh" lang="zh-Hant">編碼器（二）＋分類（二）</span></td>
       <td>
         <ul class="readings">
           <li>Neural networks（神經網絡）</li>
@@ -358,14 +358,14 @@ Term 1, 2026–2027</p>
     <tr>
       <td></td>
       <td class="date">16 Nov</td>
-      <td colspan="2"><a href="#">Final Project Proposal due, 9:00 am</a></td>
+      <td colspan="2"><a href="#"><span class="lang-en">Final Project Proposal due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">期末專題計劃書截止，上午9:00</span></a></td>
     </tr>
   </tbody>
   <tbody class="block-b">
     <tr>
       <td class="week">12</td>
       <td class="date">19 Nov</td>
-      <td class="topic">Decoders and LLMs</td>
+      <td class="topic"><span class="lang-en">Decoders and LLMs</span><span class="lang-zh" lang="zh-Hant">解碼器與大型語言模型</span></td>
       <td>From BERT to GPT; generative models; what is “context”?; next-token probability; LLMs for data extraction; Python API (OpenRouter)</td>
     </tr>
   </tbody>
@@ -373,15 +373,15 @@ Term 1, 2026–2027</p>
     <tr>
       <td class="week">13</td>
       <td class="date">26 Nov</td>
-      <td class="topic">Review and Loose Ends</td>
-      <td>Integrative review of methods, tying up loose ends, and final-project preparation</td>
+      <td class="topic"><span class="lang-en">Review and Loose Ends</span><span class="lang-zh" lang="zh-Hant">課程總結與收尾</span></td>
+      <td><span class="lang-en">Integrative review of methods, tying up loose ends, and final-project preparation</span><span class="lang-zh" lang="zh-Hant">方法整合回顧、補足未竟內容，以及期末專題準備</span></td>
     </tr>
   </tbody>
   <tbody class="due">
     <tr>
       <td></td>
       <td class="date">7 Dec</td>
-      <td colspan="2"><strong>Final project due, 9:00 am</strong></td>
+      <td colspan="2"><strong><span class="lang-en">Final project due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">期末專題截止，上午9:00</span></strong></td>
     </tr>
   </tbody>
 </table>
