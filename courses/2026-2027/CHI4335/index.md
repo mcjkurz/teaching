@@ -433,8 +433,8 @@ Term 1, 2026–2027</p>
     <tr>
       <td></td>
       <td></td>
-      <td class="date">11 Dec</td>
-      <td colspan="2"><strong>Final project due, 9:00 pm</strong></td>
+      <td class="date">7 Dec</td>
+      <td colspan="2"><strong>Final project due, 9:00 am</strong></td>
     </tr>
   </tbody>
 </table>
