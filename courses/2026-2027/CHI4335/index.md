@@ -201,7 +201,7 @@ title: CHI4335
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
       <td class="date"><span class="lang-en">3 Sep</span><span class="lang-zh" lang="zh-Hant">9月3日</span></td>
-      <td><ul class="readings"><li>魯迅：〈祝福〉</li></ul></td>
+      <td><span class="lang-en">Course requirements and assignments</span><span class="lang-zh" lang="zh-Hant">課程要求與作業說明</span></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -210,7 +210,7 @@ title: CHI4335
       <td><span class="lang-en">Lecture</span><span class="lang-zh" lang="zh-Hant">講座</span></td>
       <td class="date"><span class="lang-en">8 Sep</span><span class="lang-zh" lang="zh-Hant">9月8日</span></td>
       <td class="topic" rowspan="2"><span class="lang-en">Regarding the Pain of Others</span><span class="lang-zh" lang="zh-Hant">旁觀他人之痛苦</span></td>
-      <td><ul class="readings"><li>蘇珊·桑塔格：《旁觀他人之痛苦》第三章與第六章</li></ul></td>
+      <td><ul class="readings"><li>蘇珊·桑塔格：《旁觀他人之痛苦》第三章與第六章</li><li>魯迅：〈祝福〉</li></ul></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
