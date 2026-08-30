@@ -213,7 +213,7 @@ Term 1, 2026–2027</p>
     <tr>
       <td></td>
       <td class="date">14 Sep</td>
-      <td colspan="2"><strong><a href="#">Assignment 1 due, 9:00 am</a></strong></td>
+      <td colspan="2"><a href="#">Assignment 1 due, 9:00 am</a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -255,7 +255,7 @@ Term 1, 2026–2027</p>
     <tr>
       <td></td>
       <td class="date">7 Oct</td>
-      <td colspan="2"><strong><a href="#">Assignment 2 due, 9:00 am</a></strong></td>
+      <td colspan="2"><a href="#">Assignment 2 due, 9:00 am</a></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -304,7 +304,7 @@ Term 1, 2026–2027</p>
     <tr>
       <td></td>
       <td class="date">26 Oct</td>
-      <td colspan="2"><strong><a href="{{ '/courses/2026-2027/CHI3242/assignment-3/' | relative_url }}">Assignment 3 due, 9:00 am</a></strong></td>
+      <td colspan="2"><a href="{{ '/courses/2026-2027/CHI3242/assignment-3/' | relative_url }}">Assignment 3 due, 9:00 am</a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -360,8 +360,8 @@ Term 1, 2026–2027</p>
   <tbody class="due">
     <tr>
       <td></td>
-      <td class="date">23 Nov</td>
-      <td colspan="2"><strong><a href="{{ '/courses/2026-2027/CHI3242/assignment-4/' | relative_url }}">Assignment 4 due, 9:00 am</a></strong></td>
+      <td class="date">16 Nov</td>
+      <td colspan="2"><a href="{{ '/courses/2026-2027/CHI3242/assignment-4/' | relative_url }}">Assignment 4 due, 9:00 am</a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
