@@ -38,6 +38,15 @@ header p {
     color: #666;
 }
 
+header p a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+header p a:hover {
+    text-decoration: underline;
+}
+
 /* Visualization list */
 .visualization-list {
     list-style: none;

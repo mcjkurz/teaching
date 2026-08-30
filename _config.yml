@@ -1,0 +1,10 @@
+title: Teaching
+description: Course materials and interactive visualizations
+markdown: kramdown
+kramdown:
+  input: GFM
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - .gitignore

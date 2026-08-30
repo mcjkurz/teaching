@@ -1,10 +1,16 @@
-# Teaching Visualizations
+# Teaching
 
-Interactive web-based visualizations for teaching machine learning concepts (mostly targeting students in the humanities).
+Course materials and interactive visualizations for teaching machine learning concepts (mostly targeting students in the humanities).
 
 **Website**: https://mcjkurz.github.io/teaching/
 
+## Courses
+
+- [CHI4335 (2026–2027)](https://mcjkurz.github.io/teaching/courses/2026-2027/CHI4335/) — Special Topics in Comparative Literature: Facing the Extreme
+
 ## Visualizations
+
+Index: https://mcjkurz.github.io/teaching/visualizations/
 
 ### Z-Scores for Stylometry
 - **Demo**: https://mcjkurz.github.io/teaching/visualizations/z-scores-for-stylometry.html
