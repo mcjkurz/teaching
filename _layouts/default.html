@@ -139,14 +139,16 @@
         .page-list a { text-decoration: none; font-weight: 500; }
         .page-list a:hover { text-decoration: underline; }
         .page-list .description { display: block; color: #666; font-size: 0.9rem; margin-top: 0.25rem; }
-        .lang-toggle {
+        .lang-toggle-global {
             font-size: 0.8rem;
             font-weight: 400;
             line-height: 1;
             white-space: nowrap;
             color: #888;
+            text-align: right;
+            margin: 0 0 0.8rem;
         }
-        .lang-toggle button {
+        .lang-toggle-global button {
             background: none;
             border: none;
             padding: 0;
@@ -156,15 +158,15 @@
             line-height: 1;
             vertical-align: middle;
         }
-        .lang-toggle button.is-active {
+        .lang-toggle-global button.is-active {
             color: #333;
             font-weight: 600;
             cursor: default;
             pointer-events: none;
         }
         .i18n-block .lang-zh { display: none; }
-        .i18n-block.is-zh .lang-en { display: none; }
-        .i18n-block.is-zh .lang-zh { display: block; }
+        body.lang-zh .i18n-block .lang-en { display: none; }
+        body.lang-zh .i18n-block .lang-zh { display: block; }
     </style>
 </head>
 <body>
@@ -174,23 +176,38 @@
         </main>
     </div>
     <script>
-        document.querySelectorAll(".i18n-block").forEach(function (block) {
-            var heading = block.querySelector("h2");
-            if (!heading) return;
-            var toggle = document.createElement("span");
-            toggle.className = "lang-toggle";
-            toggle.innerHTML = '<button type="button" data-lang="en" class="is-active">English</button> | <button type="button" data-lang="zh">中文</button>';
-            heading.appendChild(toggle);
+        (function () {
+            var blocks = document.querySelectorAll(".i18n-block");
+            if (!blocks.length) return;
+
+            var main = document.querySelector("main");
+            if (!main) return;
+
+            var savedLang = localStorage.getItem("preferredLanguage");
+            var initialLang = savedLang === "zh" ? "zh" : "en";
+            document.body.classList.toggle("lang-zh", initialLang === "zh");
+
+            var toggle = document.createElement("div");
+            toggle.className = "lang-toggle-global";
+            toggle.innerHTML = '<button type="button" data-lang="en">English</button> | <button type="button" data-lang="zh">中文</button>';
+            main.insertBefore(toggle, main.firstChild);
+
+            function setLang(lang) {
+                var isZh = lang === "zh";
+                document.body.classList.toggle("lang-zh", isZh);
+                localStorage.setItem("preferredLanguage", isZh ? "zh" : "en");
+                toggle.querySelectorAll("button").forEach(function (b) {
+                    b.classList.toggle("is-active", b.getAttribute("data-lang") === (isZh ? "zh" : "en"));
+                });
+            }
+
+            setLang(initialLang);
             toggle.addEventListener("click", function (e) {
                 var btn = e.target.closest("button");
                 if (!btn) return;
-                var lang = btn.getAttribute("data-lang");
-                block.classList.toggle("is-zh", lang === "zh");
-                toggle.querySelectorAll("button").forEach(function (b) {
-                    b.classList.toggle("is-active", b === btn);
-                });
+                setLang(btn.getAttribute("data-lang"));
             });
-        });
+        })();
     </script>
 </body>
 </html>
