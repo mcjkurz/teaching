@@ -52,10 +52,10 @@ title: CHI559
 <thead><tr><th>項目</th><th>比重</th></tr></thead>
 <tbody>
 <tr><td>課堂參與</td><td>10%</td></tr>
-<tr><td>作業（2份）</td><td>20%</td></tr>
+<tr><td>作業（2份）</td><td>30%</td></tr>
 <tr><td>課堂報告</td><td>20%</td></tr>
 <tr><td>專題計劃書</td><td>10%</td></tr>
-<tr><td>期末專題</td><td>40%</td></tr>
+<tr><td>期末專題</td><td>30%</td></tr>
 </tbody>
 </table>
 <p><strong>評分等級：</strong> A 85%–100%；A− 80%–84%；B+ 75%–79%；B 70%–74%；B− 65%–69%；C+ 60%–64%；C 55%–59%；C− 50%–54%；D+ 45%–49%；D 40%–44%；F 0%–39%</p>
