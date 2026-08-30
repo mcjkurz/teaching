@@ -114,6 +114,7 @@ title: CHI559
         <ul class="readings">
           <li>什麼是文本？二進位、Unicode、UTF-8；把檔案視為資料</li>
           <li>中文分詞；詞袋模型（BoW）；停用詞；Zipf 定律</li>
+          <li>Stephen Ramsay, “Algorithmic Criticism”</li>
         </ul>
       </td>
     </tr>
@@ -146,7 +147,7 @@ title: CHI559
     </tr>
     <tr class="presentation">
       <td class="topic">課堂報告</td>
-      <td>Stephen Ramsay, “Algorithmic Criticism”</td>
+      <td>Edward Slingerland, “Part II. Quantitative Approaches to Concepts of Mind and Body,” in <em>Mind and Body in Early China</em></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -197,6 +198,7 @@ title: CHI559
           <li>正規表示式（regex）（<a href="https://regexone.com/">https://regexone.com/</a>）</li>
           <li>比較兩個語料庫的用詞</li>
           <li>列聯表，第二部分</li>
+          <li>Franco Moretti, “Conjectures on World Literature,” in <em>Distant Reading</em></li>
         </ul>
       </td>
     </tr>
@@ -209,14 +211,14 @@ title: CHI559
       <td>
         <ul class="readings">
           <li>LDA；什麼是「主題」？</li>
-          <li>皮特·布勞德韋爾、陳威、大衛·謝帕德：〈《全唐詩》：文學史、主題模型、散度度量〉，《數位人文》2023年第1期</li>
-          <li>David M. Blei, “Probabilistic Topic Models”</li>
+          <li>（選讀）蘇祺：〈主題模型〉，第十章，李飛躍、桑海（主編）《數字人文引論》。北京：中華書局，2026年</li>
+          <li>（選讀）David M. Blei, “Probabilistic Topic Models”</li>
         </ul>
       </td>
     </tr>
     <tr class="presentation">
       <td class="topic">課堂報告</td>
-      <td>Franco Moretti, “Conjectures on World Literature,” in <em>Distant Reading</em></td>
+      <td>皮特·布勞德韋爾、陳威、大衛·謝帕德著，曹瀛月譯：〈《全唐詩》：文學史、主題模型、散度度量〉，《數位人文》2023年第1期；Peter Broadwell, Jack W. Chen, and David Shepard, “Reading the Quan Tang shi: Literary History, Topic Modeling, Divergence Measures,” <em>Digital Humanities Quarterly</em> 13, no. 4 (2019)</td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -249,13 +251,14 @@ title: CHI559
         <ul class="readings">
           <li>什麼是「語義」？詞向量與餘弦相似度</li>
           <li>以詞向量研究概念史</li>
-          <li>Daniel Jurafsky and James H. Martin, “Vector Semantics and Embeddings”</li>
+          <li>胡韌奮：〈語言模型〉，第九章，李飛躍、桑海（主編）《數字人文引論》。北京：中華書局，2026年</li>
+          <li>（選讀）Daniel Jurafsky and James H. Martin, “Vector Semantics and Embeddings”</li>
         </ul>
       </td>
     </tr>
     <tr class="presentation">
       <td class="topic">課堂報告</td>
-      <td>Edward Slingerland, “Part II. Quantitative Approaches to Concepts of Mind and Body,” in <em>Mind and Body in Early China</em></td>
+      <td>Mariana Zorkina, “Describing Objects in Tang Dynasty Poetic Language: A Study Based on Word Embeddings,” <em>Journal of Chinese Literature and Culture</em> 5, no. 2 (2018): 250–275</td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -287,7 +290,7 @@ title: CHI559
     </tr>
     <tr class="presentation">
       <td class="topic">課堂報告</td>
-      <td>Stephen Best and Sharon Marcus, “Surface Reading: An Introduction”</td>
+      <td>孔存良、孫茂松：〈大模型與人文研究〉，第二章，李飛躍、桑海（主編）《數字人文引論》。北京：中華書局，2026年</td>
     </tr>
   </tbody>
   <tbody class="due">
@@ -304,7 +307,9 @@ title: CHI559
       <td class="topic">數據可視化與批判性反思</td>
       <td>
         <ul class="readings">
+          <li>李飛躍：〈古籍數字化與詩學範式革新〉，第七章，李飛躍、桑海（主編）《數字人文引論》。北京：中華書局，2026年</li>
           <li>Nan Z. Da, “The Computational Case against Computational Literary Studies”</li>
+          <li>（選讀）Stephen Best and Sharon Marcus, “Surface Reading: An Introduction”</li>
         </ul>
       </td>
     </tr>
