@@ -174,17 +174,20 @@ Term 1, 2026–2027</p>
 </div>
 </div>
 
-## Class Schedule
-
+<div class="i18n-block">
+<h2>
+<span class="lang-en">Class Schedule</span>
+<span class="lang-zh" lang="zh-Hant">課程進度</span>
+</h2>
 <div class="table-scroll">
 <table class="schedule">
   <thead>
     <tr>
-      <th>Week</th>
-      <th>Event</th>
-      <th>Date</th>
-      <th>Topic</th>
-      <th>Readings</th>
+      <th><span class="lang-en">Week</span><span class="lang-zh" lang="zh-Hant">週次</span></th>
+      <th><span class="lang-en">Event</span><span class="lang-zh" lang="zh-Hant">課堂類別</span></th>
+      <th><span class="lang-en">Date</span><span class="lang-zh" lang="zh-Hant">日期</span></th>
+      <th><span class="lang-en">Topic</span><span class="lang-zh" lang="zh-Hant">課題</span></th>
+      <th><span class="lang-en">Readings</span><span class="lang-zh" lang="zh-Hant">閱讀</span></th>
     </tr>
   </thead>
   <tbody class="block-a">
@@ -221,7 +224,7 @@ Term 1, 2026–2027</p>
       <td>Lecture</td>
       <td class="date">15 Sep</td>
       <td class="topic" rowspan="2">Writing the Shoah</td>
-      <td><ul class="readings"><li>房春光：〈寫還是不寫，這是個問題——納粹大屠殺早期見證文學的書寫語境〉，《外國文學》2020年第3期，頁154–164</li></ul></td>
+      <td><ul class="readings"><li>房春光：〈寫還是不寫，這是個問題：納粹大屠殺早期見證文學的書寫語境〉，《外國文學》2020年第3期，頁154–164</li></ul></td>
     </tr>
     <tr>
       <td>Tutorial</td>
@@ -388,8 +391,8 @@ Term 1, 2026–2027</p>
       <td class="topic" rowspan="2">Gender Violence</td>
       <td>
         <ul class="readings">
-          <li>李海燕：〈話說《白毛女》——民族敘事中的階級與性別政治〉，《二十一世紀》1999年4月號（總第52期），頁110–118</li>
-          <li>申丹：〈敘事形式與性別政治——女性主義敘事學評析〉，《北京大學學報（哲學社會科學版）》2004年第1期，頁136–146</li>
+          <li>李海燕：〈話說《白毛女》：民族敘事中的階級與性別政治〉，《二十一世紀》1999年4月號（總第52期），頁110–118</li>
+          <li>申丹：〈敘事形式與性別政治：女性主義敘事學評析〉，《北京大學學報（哲學社會科學版）》2004年第1期，頁136–146</li>
         </ul>
       </td>
     </tr>
@@ -450,9 +453,23 @@ Term 1, 2026–2027</p>
   </tbody>
 </table>
 </div>
+</div>
 
-## Important Notes
+<div class="i18n-block">
+<h2>
+<span class="lang-en">Important Notes</span>
+<span class="lang-zh" lang="zh-Hant">注意事項</span>
+</h2>
+<div class="lang-en">
 
 1. Students are expected to spend a total of 9 hours (i.e. 3 hours of class contact and 6 hours of personal study) per week to achieve the course learning outcomes.
 2. Students shall be aware of the University regulations about dishonest practice in course work, tests and examinations, and the possible consequences as stipulated in the Regulations Governing University Examinations. In particular, plagiarism, being a kind of dishonest practice, is “the presentation of another person’s work without proper acknowledgement of the source, including exact phrases, or summarised ideas, or even footnotes/citations, whether protected by copyright or not, as the student’s own work.” Students are required to strictly follow university regulations governing academic integrity and honesty.
 3. To enhance students’ understanding of plagiarism, a mini-course “Online Tutorial on Plagiarism Awareness” is available on [https://pla.ln.edu.hk/](https://pla.ln.edu.hk/).
+</div>
+<div class="lang-zh" lang="zh-Hant">
+
+1. 學生每週須投入共 9 小時（即 3 小時課堂接觸、6 小時自修），以達致課程學習成果。  
+2. 學生須注意大學有關習作及考試不誠實行為的規例，以及《大學考試規例》所訂的可能後果。抄襲屬不誠實行為，指「未經妥為註明來源，將他人作品（包括原句、撮述的觀點，以至腳註／引文，無論是否受版權保護）呈交作為自己的作品」。學生須嚴格遵守大學有關學術誠信的規例。  
+3. 為加深對抄襲的認識，可修讀小型課程「Online Tutorial on Plagiarism Awareness」： [https://pla.ln.edu.hk/](https://pla.ln.edu.hk/)。
+</div>
+</div>

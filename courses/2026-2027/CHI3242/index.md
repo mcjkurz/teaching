@@ -23,7 +23,7 @@ Term 1, 2026–2027</p>
 <div class="i18n-block">
 <h2>Course Description</h2>
 <div class="lang-en">
-<p>This course offers a beginner-friendly introduction to Digital Humanities, surveying tools for exploring and analyzing Chinese texts—novels, blogs, news articles, poetry, and more. Students will use accessible software and learn basic techniques to study patterns in Chinese literature and social media, assess trends in digital archives, and visualize data. Prior programming experience is not required. From early in the course we will use agentic coding: AI coding assistants that help write, debug, and evaluate research code. Weekly seminars cover fundamental concepts and methods and provide supervised hands-on practice. The final project asks students to build their own datasets, apply digital methods to a topic of their choice, and present their findings through a complete working GitHub repository and an accompanying report.</p>
+<p>This course offers a beginner-friendly introduction to Digital Humanities, surveying tools for exploring and analyzing Chinese texts, including novels, blogs, news articles, poetry, and more. Students will use accessible software and learn basic techniques to study patterns in Chinese literature and social media, assess trends in digital archives, and visualize data. Prior programming experience is not required. From early in the course we will use agentic coding: AI coding assistants that help write, debug, and evaluate research code. Weekly seminars cover fundamental concepts and methods and provide supervised hands-on practice. The final project asks students to build their own datasets, apply digital methods to a topic of their choice, and present their findings through a complete working GitHub repository and an accompanying report.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
 <p>本課程以淺白方式介紹數碼人文（Digital Humanities），廣泛概覽可用於探索與分析中文文本（小說、網誌、新聞、詩歌等）的數碼工具。學生將運用易於上手的軟件，學習基本技術，以研究中國文學與社交媒體中的模式、評估數碼檔案中的趨勢，並進行數據可視化。無須具備編程經驗。課程初期即引入智能體編程（agentic coding）：以人工智能編程助手協助撰寫、除錯並評估研究代碼。每週研討課講授數碼人文的基本概念與方法，並在教師指導下進行實作練習。期末專題要求學生自建數據集，將數碼方法應用於自選題目，並以完整可運作的 GitHub 倉庫及配套報告呈現研究成果。</p>
@@ -174,16 +174,19 @@ Term 1, 2026–2027</p>
 </div>
 </div>
 
-## Class Schedule
-
+<div class="i18n-block">
+<h2>
+<span class="lang-en">Class Schedule</span>
+<span class="lang-zh" lang="zh-Hant">課程進度</span>
+</h2>
 <div class="table-scroll">
 <table class="schedule no-event">
   <thead>
     <tr>
-      <th>Week</th>
-      <th>Date</th>
-      <th>Topic</th>
-      <th>Readings</th>
+      <th><span class="lang-en">Week</span><span class="lang-zh" lang="zh-Hant">週次</span></th>
+      <th><span class="lang-en">Date</span><span class="lang-zh" lang="zh-Hant">日期</span></th>
+      <th><span class="lang-en">Topic</span><span class="lang-zh" lang="zh-Hant">課題</span></th>
+      <th><span class="lang-en">Readings</span><span class="lang-zh" lang="zh-Hant">閱讀</span></th>
     </tr>
   </thead>
   <tbody class="block-a">
@@ -383,9 +386,23 @@ Term 1, 2026–2027</p>
   </tbody>
 </table>
 </div>
+</div>
 
-## Important Notes
+<div class="i18n-block">
+<h2>
+<span class="lang-en">Important Notes</span>
+<span class="lang-zh" lang="zh-Hant">注意事項</span>
+</h2>
+<div class="lang-en">
 
 1. Students are expected to spend a total of 9 hours (i.e. 3 hours of class contact and 6 hours of personal study) per week to achieve the course learning outcomes.
 2. Students shall be aware of the University regulations about dishonest practice in course work, tests and examinations, and the possible consequences as stipulated in the Regulations Governing University Examinations. In particular, plagiarism, being a kind of dishonest practice, is “the presentation of another person’s work without proper acknowledgement of the source, including exact phrases, or summarised ideas, or even footnotes/citations, whether protected by copyright or not, as the student’s own work.” Students are required to strictly follow university regulations governing academic integrity and honesty.
 3. To enhance students’ understanding of plagiarism, a mini-course “Online Tutorial on Plagiarism Awareness” is available on [https://pla.ln.edu.hk/](https://pla.ln.edu.hk/).
+</div>
+<div class="lang-zh" lang="zh-Hant">
+
+1. 學生每週須投入共 9 小時（即 3 小時課堂接觸、6 小時自修），以達致課程學習成果。  
+2. 學生須注意大學有關習作及考試不誠實行為的規例，以及《大學考試規例》所訂的可能後果。抄襲屬不誠實行為，指「未經妥為註明來源，將他人作品（包括原句、撮述的觀點，以至腳註／引文，無論是否受版權保護）呈交作為自己的作品」。學生須嚴格遵守大學有關學術誠信的規例。  
+3. 為加深對抄襲的認識，可修讀小型課程「Online Tutorial on Plagiarism Awareness」： [https://pla.ln.edu.hk/](https://pla.ln.edu.hk/)。
+</div>
+</div>

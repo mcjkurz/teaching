@@ -306,7 +306,7 @@ title: CHI559
 <ol>
 <li>孫超編：《數字人文與古代文學研究》。上海：三聯書店，2023年。</li>
 <li>蔣傑編：《數字人文與史學研究》。上海：三聯書店，2023年。</li>
-<li>陳逸雲：〈聲律智慧化在辨音、校讎和輔助創作上的應用——以「搜韻網」為例〉，《數字人文》2023年第1期。</li>
+<li>陳逸雲：〈聲律智慧化在辨音、校讎和輔助創作上的應用：以「搜韻網」為例〉，《數字人文》2023年第1期。</li>
 <li>黃一農：〈大數據時代避諱學的新機遇：以清初為例〉，《數字人文》2022年第4期。</li>
 <li>Ahnert, Ruth, Sebastian E. Ahnert, Catherine Nicole Coleman, and Scott B. Weingart. <em>The Network Turn</em>. Cambridge: Cambridge University Press, 2020.</li>
 <li>Bol, Peter K. “The Visualization and Analysis of Historical Space.” <em>Journal of Chinese History</em> 4, no. 2 (2020): 511–519.</li>
@@ -326,6 +326,6 @@ title: CHI559
 <h2>注意事項</h2>
 <ol>
 <li>學生每週須投入共 9 小時（即 3 小時課堂接觸、6 小時自修），以達致課程學習成果。</li>
-<li>學生須注意大學有關習作及考試不誠實行為的規例，以及《大學考試規例》所訂的可能後果。抄襲屬不誠實行為，指「未經妥為註明來源，將他人作品——包括原句、撮述的觀點，以至腳註／引文，無論是否受版權保護——呈交作為自己的作品」。學生須嚴格遵守大學有關學術誠信的規例。</li>
+<li>學生須注意大學有關習作及考試不誠實行為的規例，以及《大學考試規例》所訂的可能後果。抄襲屬不誠實行為，指「未經妥為註明來源，將他人作品（包括原句、撮述的觀點，以至腳註／引文，無論是否受版權保護）呈交作為自己的作品」。學生須嚴格遵守大學有關學術誠信的規例。</li>
 <li>為加深對抄襲的認識，可修讀小型課程「Online Tutorial on Plagiarism Awareness」：<a href="https://pla.ln.edu.hk/">https://pla.ln.edu.hk/</a>。</li>
 </ol>
