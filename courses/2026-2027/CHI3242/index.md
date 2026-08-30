@@ -15,6 +15,9 @@ Term 1, 2026–2027</p>
 <strong>Office hours:</strong> Tue 3:00–5:00 pm and Fri 10:00 am–12:00 pm, HSH G06, or by appointment<br>
 <strong>Language of Instruction:</strong> Putonghua（普通話）</p>
 </div>
+<div class="course-header-image">
+<img src="cover.png" alt="Illustration for Text Mining for Chinese Humanities">
+</div>
 </div>
 
 <div class="i18n-block">
