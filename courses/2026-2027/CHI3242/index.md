@@ -20,10 +20,10 @@ Term 1, 2026–2027</p>
 <div class="i18n-block">
 <h2>Course Description</h2>
 <div class="lang-en">
-<p>This course offers a beginner-friendly introduction to Digital Humanities, surveying tools for exploring and analyzing Chinese texts—novels, blogs, news articles, poetry, and more. Students will use accessible software and learn basic techniques to study patterns in Chinese literature and social media, assess trends in digital archives, and visualize data. Prior programming experience is not required. From early in the course we will use <em>agentic coding</em>: AI coding assistants that help write, debug, and evaluate research code. Weekly seminars cover fundamental concepts and methods and provide supervised hands-on practice. The final project asks students to build their own datasets, apply digital methods to a topic of their choice, and present their findings as a LaTeX paper.</p>
+<p>This course offers a beginner-friendly introduction to Digital Humanities, surveying tools for exploring and analyzing Chinese texts—novels, blogs, news articles, poetry, and more. Students will use accessible software and learn basic techniques to study patterns in Chinese literature and social media, assess trends in digital archives, and visualize data. Prior programming experience is not required. From early in the course we will use <em>agentic coding</em>: AI coding assistants that help write, debug, and evaluate research code. Weekly seminars cover fundamental concepts and methods and provide supervised hands-on practice. The final project asks students to build their own datasets, apply digital methods to a topic of their choice, and present their findings through a complete working GitHub repository and an accompanying report.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
-<p>本課程以淺白方式介紹數碼人文（Digital Humanities），廣泛概覽可用於探索與分析中文文本（小說、網誌、新聞、詩歌等）的數碼工具。學生將運用易於上手的軟件，學習基本技術，以研究中國文學與社交媒體中的模式、評估數碼檔案中的趨勢，並進行數據可視化。無須具備編程經驗。課程初期即引入<em>智能體編程</em>（agentic coding）：以人工智能編程助手協助撰寫、除錯並評估研究代碼。每週研討課講授數碼人文的基本概念與方法，並在教師指導下進行實作練習。期末專題要求學生自建數據集，將數碼方法應用於自選題目，並以 LaTeX 論文呈現研究成果。</p>
+<p>本課程以淺白方式介紹數碼人文（Digital Humanities），廣泛概覽可用於探索與分析中文文本（小說、網誌、新聞、詩歌等）的數碼工具。學生將運用易於上手的軟件，學習基本技術，以研究中國文學與社交媒體中的模式、評估數碼檔案中的趨勢，並進行數據可視化。無須具備編程經驗。課程初期即引入<em>智能體編程</em>（agentic coding）：以人工智能編程助手協助撰寫、除錯並評估研究代碼。每週研討課講授數碼人文的基本概念與方法，並在教師指導下進行實作練習。期末專題要求學生自建數據集，將數碼方法應用於自選題目，並以完整可運作的 GitHub 倉庫及配套報告呈現研究成果。</p>
 </div>
 </div>
 
@@ -146,13 +146,8 @@ Term 1, 2026–2027</p>
 <div class="lang-en">
 <p><strong>1. Seminars.</strong> Each week, a three-hour seminar combines conceptual discussion with supervised hands-on practice. Students work with Chinese texts and learn methods ranging from word frequencies and collocations to topic models, word vectors, and neural language models. Prior programming experience is not required. We introduce agentic coding in the first weeks and then use AI coding agents throughout.</p>
 <p><strong>2. Individual assignments.</strong> Four assignments apply the tools covered in seminars. All work must be submitted via the Assignment module on Moodle. Detailed instructions are published on the <a href="{{ '/courses/2026-2027/CHI3242/assignments/' | relative_url }}">Assignments page</a>.</p>
-<ul>
-<li>Assignment 1</li>
-<li>Assignment 2</li>
-<li>Assignment 3</li>
-<li>Assignment 4</li>
-</ul>
-<p><strong>3. Final project.</strong> Students build their own datasets, apply digital methods to a topic of their choice, and present their findings as a LaTeX-based report in Chinese. Submit the PDF version of your paper through Moodle before the deadline. The report should include the following parts:</p>
+<p><a href="#">Assignment 1</a></p>
+<p><strong>3. Final project.</strong> Students build their own datasets, apply digital methods to a topic of their choice, and present their findings through a complete working GitHub repository (sources, code, and README files) and an accompanying report in Chinese. Submit the repository URL and the report through Moodle before the deadline. The report should include the following parts:</p>
 <ul>
 <li><strong>Abstract:</strong> a summary of goals, experiments, and findings (max. 150 characters)</li>
 <li><strong>Dataset:</strong> corpus description, sources, and preprocessing steps</li>
@@ -164,13 +159,7 @@ Term 1, 2026–2027</p>
 <div class="lang-zh" lang="zh-Hant">
 <p><strong>1. 研討課：</strong>每週三小時研討課結合概念講授與教師指導下的實作。學生處理中文文本，學習從詞頻、搭配、主題模型、詞向量到神經語言模型等方法。無須具備編程經驗。最初數週引入智能體編程，其後貫穿全學期使用人工智能編程助手。</p>
 <p><strong>2. 個人作業：</strong>共四份作業，一律經 Moodle 作業區繳交。作業說明集中刊於<a href="{{ '/courses/2026-2027/CHI3242/assignments/' | relative_url }}">作業頁面</a>。</p>
-<ul>
-<li>作業一</li>
-<li>作業二</li>
-<li>作業三</li>
-<li>作業四</li>
-</ul>
-<p><strong>3. 期末專題：</strong>學生自建數據集，將數碼方法應用於自選題目，並以中文撰寫 LaTeX 報告呈現研究成果。於截止日期前經 Moodle 提交 PDF。報告須包括以下部分：</p>
+<p><strong>3. 期末專題：</strong>學生自建數據集，將數碼方法應用於自選題目，並以完整可運作的 GitHub 倉庫（含原始資料、程式碼與 README）及中文配套報告呈現研究成果。於截止日期前經 Moodle 提交倉庫網址及報告。報告須包括以下部分：</p>
 <ul>
 <li><strong>摘要：</strong>目標、實驗與發現的概述（最多 150 字）</li>
 <li><strong>數據集：</strong>語料說明、來源與預處理步驟</li>
@@ -303,8 +292,8 @@ Term 1, 2026–2027</p>
         <ul class="readings">
           <li>Authorship signals; style markers; feature selection</li>
           <li>Z-scores and distance-based stylistic comparison</li>
-          <li>(optional) Mike Scott, “Key words of individual texts: Aboutness and style”</li>
           <li>John Burrows, “‘Delta’: a Measure of Stylistic Difference and a Guide to Likely Authorship”</li>
+          <li>(optional) Mike Scott, “Key words of individual texts: Aboutness and style”</li>
         </ul>
       </td>
     </tr>
@@ -323,7 +312,6 @@ Term 1, 2026–2027</p>
       <td class="topic">Classification I</td>
       <td>
         <ul class="readings">
-          <li>Feature engineering for literary text classification</li>
           <li>Logistic regression for text classification</li>
           <li>Baselines, train/test splits, and error analysis</li>
         </ul>
@@ -355,7 +343,7 @@ Term 1, 2026–2027</p>
           <li>Document vectors（文件向量）</li>
           <li>Training BERT-based classifiers (sentiment analysis); uploading a model to Hugging Face</li>
           <li>Kurt Vonnegut, “The Shapes of Stories” (lecture)</li>
-          <li>Katherine Elkins, <em>The Shapes of Stories: Sentiment Analysis for Narrative</em></li>
+          <li>Katherine Elkins, <em>The Shapes of Stories: Sentiment Analysis for Narrative</em> (selections)</li>
         </ul>
       </td>
     </tr>
@@ -379,8 +367,8 @@ Term 1, 2026–2027</p>
     <tr>
       <td class="week">13</td>
       <td class="date">26 Nov</td>
-      <td class="topic">Review of the Course</td>
-      <td>Integrative review of methods and final-project preparation</td>
+      <td class="topic">Review and Loose Ends</td>
+      <td>Integrative review of methods, tying up loose ends, and final-project preparation</td>
     </tr>
   </tbody>
   <tbody class="due">
