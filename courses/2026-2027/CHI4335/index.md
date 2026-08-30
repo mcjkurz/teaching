@@ -398,13 +398,13 @@ Term 1, 2026–2027
       <td class="week" rowspan="2">13</td>
       <td>Lecture</td>
       <td class="date">24 Nov</td>
-      <td class="topic" rowspan="2">Review and summary of the course</td>
-      <td></td>
+      <td class="topic" rowspan="2">Towards Redemption</td>
+      <td>Review and summary of the course</td>
     </tr>
     <tr>
       <td>Tutorial</td>
       <td class="date">26 Nov</td>
-      <td>卡勒德·胡賽尼：《追風箏的孩子》（第十一章到第二十五章）</td>
+      <td><ul class="readings"><li>卡勒德·胡賽尼：《追風箏的孩子》（第十一章到第二十五章）</li></ul></td>
     </tr>
   </tbody>
   <tbody class="due">
