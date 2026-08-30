@@ -145,22 +145,12 @@ Term 1, 2026–2027</p>
 <h2>Course Design</h2>
 <div class="lang-en">
 <p><strong>1. Seminars.</strong> Each week, a three-hour seminar combines conceptual discussion with supervised hands-on practice. Students work with Chinese texts and learn methods ranging from word frequencies and collocations to topic models, word vectors, and neural language models. Prior programming experience is not required. We introduce agentic coding in the first weeks and then use AI coding agents throughout.</p>
-<p><strong>2. Individual assignments.</strong> Four assignments apply the tools covered in seminars. Later assignments use a corpus provided by the instructor. All work must be submitted via the Assignment module on Moodle (for Assignment 1: paste the public GitHub URL).</p>
-<p><strong>Assignment 1: Repository and text passport.</strong> Create a public GitHub repository for a Chinese novel you choose. Submit only the repository URL on Moodle. The repository must contain exactly these files:</p>
+<p><strong>2. Individual assignments.</strong> Four assignments apply the tools covered in seminars. All work must be submitted via the Assignment module on Moodle. Detailed instructions are published on the <a href="{{ '/courses/2026-2027/CHI3242/assignments/' | relative_url }}">Assignments page</a>.</p>
 <ul>
-<li><code>README.md</code> — your name, student ID, and book metadata (author, title, source or URL, and a one-sentence reason for choosing it)</li>
-<li><code>data/novel.txt</code> — the full text, plain text, encoded as UTF-8</li>
-<li><code>analysis.py</code> or <code>analysis.ipynb</code> — a script that reads <code>data/novel.txt</code> as UTF-8, segments the Chinese text, removes stopwords, and writes the two output files below</li>
-<li><code>output/stats.txt</code> — four lines, in this order: (1) encoding: UTF-8; (2) character count, excluding whitespace; (3) token count after segmentation; (4) number of unique types after stopword removal</li>
-<li><code>output/top20.csv</code> — the 20 most frequent content words, two columns, no header: <code>word,count</code></li>
-<li><code>figures/wordcloud.png</code> — a wordcloud of those content words</li>
-<li><code>report.md</code> — 500–800 characters in Chinese: what do the top words suggest about this novel, and what changes if you count characters instead of segmented words?</li>
-</ul>
-<p>Later assignments:</p>
-<ul>
-<li>Assignment 2: Corpus comparison</li>
-<li>Assignment 3: Topic modeling</li>
-<li>Assignment 4: Word vectors</li>
+<li>Assignment 1</li>
+<li>Assignment 2</li>
+<li>Assignment 3</li>
+<li>Assignment 4</li>
 </ul>
 <p><strong>3. Final project.</strong> Students build their own datasets, apply digital methods to a topic of their choice, and present their findings as a LaTeX-based report in Chinese. Submit the PDF version of your paper through Moodle before the deadline. The report should include the following parts:</p>
 <ul>
@@ -173,20 +163,10 @@ Term 1, 2026–2027</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
 <p><strong>1. 研討課：</strong>每週三小時研討課結合概念講授與教師指導下的實作。學生處理中文文本，學習從詞頻、搭配、主題模型、詞向量到神經語言模型等方法。無須具備編程經驗。最初數週引入智能體編程，其後貫穿全學期使用人工智能編程助手。</p>
-<p><strong>2. 個人作業：</strong>四份作業應用研討課所學工具。其後作業使用教師提供的語料。一律經 Moodle 作業區繳交（作業一：只須提交公開 GitHub 倉庫網址）。</p>
-<p><strong>作業一：倉庫與文本護照。</strong>自選一部中文小說，建立公開 GitHub 倉庫。於 Moodle 只提交該倉庫網址。倉庫內須包含下列檔案，不得缺漏：</p>
+<p><strong>2. 個人作業：</strong>共四份作業，一律經 Moodle 作業區繳交。作業說明集中刊於<a href="{{ '/courses/2026-2027/CHI3242/assignments/' | relative_url }}">作業頁面</a>。</p>
 <ul>
-<li><code>README.md</code> — 姓名、學號，以及書籍資訊（作者、書名、來源或網址，並用一句話說明為何選此書）</li>
-<li><code>data/novel.txt</code> — 全書純文字，編碼為 UTF-8</li>
-<li><code>analysis.py</code> 或 <code>analysis.ipynb</code> — 以 UTF-8 讀入 <code>data/novel.txt</code>，作中文分詞、去除停用詞，並產出下列兩個輸出檔</li>
-<li><code>output/stats.txt</code> — 四行，順序固定：（1）encoding: UTF-8；（2）字元數（不含空白）；（3）分詞後詞數；（4）去除停用詞後的詞種數</li>
-<li><code>output/top20.csv</code> — 頻率最高的 20 個實詞，兩欄、無表頭：<code>word,count</code></li>
-<li><code>figures/wordcloud.png</code> — 以上實詞的詞雲</li>
-<li><code>report.md</code> — 中文 500–800 字：高頻詞說明了這部小說的什麼？若只計字元、不作分詞，會有何不同？</li>
-</ul>
-<p>其後作業：</p>
-<ul>
-<li>作業二：語料比較</li>
+<li>作業一</li>
+<li>作業二</li>
 <li>作業三：主題模型</li>
 <li>作業四：詞向量</li>
 </ul>
@@ -238,6 +218,13 @@ Term 1, 2026–2027</p>
       </td>
     </tr>
   </tbody>
+  <tbody class="due">
+    <tr>
+      <td></td>
+      <td class="date">14 Sep</td>
+      <td colspan="2"><strong>Assignment 1 due, 9:00 am</strong></td>
+    </tr>
+  </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week">3</td>
@@ -251,13 +238,6 @@ Term 1, 2026–2027</p>
       </td>
     </tr>
   </tbody>
-  <tbody class="due">
-    <tr>
-      <td></td>
-      <td class="date">21 Sep</td>
-      <td colspan="2"><strong>Assignment 1 (Repository and text passport) due, 9:00 am</strong></td>
-    </tr>
-  </tbody>
   <tbody class="block-b">
     <tr>
       <td class="week">4</td>
@@ -265,7 +245,7 @@ Term 1, 2026–2027</p>
       <td class="topic">What Is a Character?</td>
       <td>
         <ul class="readings">
-          <li>A humanistic week: character, word, person</li>
+          <li>Character, word, person</li>
           <li>Alex Woloch, <em>The One vs. the Many</em>, pp. 12–42</li>
           <li>蕭紅：《生死場》</li>
         </ul>
@@ -280,12 +260,19 @@ Term 1, 2026–2027</p>
       <td><strong>No class (National Day)</strong></td>
     </tr>
   </tbody>
+  <tbody class="due">
+    <tr>
+      <td></td>
+      <td class="date">7 Oct</td>
+      <td colspan="2"><strong>Assignment 2 due, 9:00 am</strong></td>
+    </tr>
+  </tbody>
   <tbody class="block-b">
     <tr>
       <td class="week">6</td>
       <td class="date">8 Oct</td>
-      <td class="topic">Preparing a Corpus</td>
-      <td>Cleaning a text corpus; regular expressions (regex; 正規表示式)</td>
+      <td class="topic">Python for Corpus Processing</td>
+      <td>External libraries, package setup, and regular expressions (regex; 正規表示式) for cleaning text corpora</td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -314,18 +301,18 @@ Term 1, 2026–2027</p>
     <tr>
       <td></td>
       <td class="date">26 Oct</td>
-      <td colspan="2"><strong>Assignment 2 (Corpus comparison) due, 9:00 am</strong></td>
+      <td colspan="2"><strong>Assignment 3 due, 9:00 am</strong></td>
     </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week">9</td>
       <td class="date">29 Oct</td>
-      <td class="topic">Network Analysis</td>
+      <td class="topic">Classification I</td>
       <td>
         <ul class="readings">
-          <li>網絡分析; finding matching words in classical Chinese poetry</li>
-          <li>馬昭儀、何捷、劉帥帥：〈從唐小說中的空間交互看都城長安的社會感知變遷〉</li>
+          <li>Feature engineering for literary text classification</li>
+          <li>Baselines, train/test splits, and error analysis</li>
         </ul>
       </td>
     </tr>
@@ -368,7 +355,6 @@ Term 1, 2026–2027</p>
           <li>Training BERT-based classifiers (sentiment analysis); uploading a model to Hugging Face</li>
           <li>Kurt Vonnegut, “The Shapes of Stories” (lecture)</li>
           <li>Katherine Elkins, <em>The Shapes of Stories: Sentiment Analysis for Narrative</em></li>
-          <li>徐懷中：《牽風記》</li>
         </ul>
       </td>
     </tr>

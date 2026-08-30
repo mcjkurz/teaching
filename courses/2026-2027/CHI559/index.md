@@ -69,18 +69,11 @@ title: CHI559
 <h2>課程設計</h2>
 <p><strong>1. 研討課：</strong>每週研討課結合導論講座與互動實驗，處理中國歷史與文化數據，並將數字工具與傳統研究方法對讀。最初數週從研究環境與智能體編程講起，其後進入正則表達式、列聯表、文體計量、主題模型、分類、詞向量、生成式人工智能、社會網絡分析與數據可視化。</p>
 <p><strong>2. 期中 Python 測驗：</strong>評估學生對 Python 編程基礎、環境設置及基本文本處理腳本的掌握程度。</p>
-<p><strong>3. 個人作業：</strong>兩份作業。作業一繳交公開 GitHub 倉庫網址；作業二經 Moodle 繳交書面分析與輸出。一律經 Moodle 作業區提交。</p>
-<p><strong>作業一：倉庫與文本護照。</strong>自選一部中文小說，建立公開 GitHub 倉庫。於 Moodle 只提交該倉庫網址。倉庫內須包含下列檔案，不得缺漏：</p>
+<p><strong>3. 個人作業：</strong>兩份作業，一律經 Moodle 作業區提交。作業說明集中刊於<a href="{{ '/courses/2026-2027/CHI559/assignments/' | relative_url }}">作業頁面</a>。</p>
 <ul>
-<li><code>README.md</code> — 姓名、學號，以及書籍資訊（作者、書名、來源或網址，並用一句話說明為何選此書）</li>
-<li><code>data/novel.txt</code> — 全書純文字，編碼為 UTF-8</li>
-<li><code>analysis.py</code> 或 <code>analysis.ipynb</code> — 以 UTF-8 讀入 <code>data/novel.txt</code>，作中文分詞、去除停用詞，並產出下列輸出檔</li>
-<li><code>output/stats.txt</code> — 四行，順序固定：（1）encoding: UTF-8；（2）字元數（不含空白）；（3）分詞後詞數；（4）去除停用詞後的詞種數</li>
-<li><code>output/top20.csv</code> — 頻率最高的 20 個實詞，兩欄、無表頭：<code>word,count</code></li>
-<li><code>figures/wordcloud.png</code> — 以上實詞的詞雲</li>
-<li><code>report.md</code> — 中文 800–1,200 字：高頻詞說明了這部小說的什麼？若只計字元、不作分詞，會有何不同？並用一兩句話聯繫 Moretti、Ramsay 或「表面閱讀」中的一個概念。</li>
+<li>作業一</li>
+<li>作業二</li>
 </ul>
-<p><strong>作業二：主題模型。</strong></p>
 <p><strong>4. 課堂報告：</strong>學生須就一篇數字人文領域的研究論文作口頭報告（約 20 分鐘），說明該論文的研究問題、方法、數據與結論，並提出批判性評價。報告篇目與時間於學期初安排。當週報告的學生須作為該文獻的講解人，帶動討論。</p>
 <p><strong>5. 期末專題：</strong>一項綜合性的數字人文項目，須運用課程中的工具研究中國研究相關主題。於截止日期前經 Moodle 提交 PDF。報告應包含可視化圖表、數據集描述、結果的批判性分析，並公開所有使用的資源鏈接（如 GitHub 倉庫）。報告須包括以下部分：</p>
 <ul>
