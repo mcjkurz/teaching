@@ -41,8 +41,7 @@ title: CHI559
 <ol>
 <li>註冊 <a href="https://github.com/">GitHub</a> 帳號。</li>
 <li>註冊 <a href="https://openrouter.ai/">OpenRouter</a> 帳號（其後將用於大型語言模型 API）。</li>
-<li>在個人電腦上安裝 <a href="https://www.python.org/downloads/">Python</a> 與 <a href="https://code.visualstudio.com/">Visual Studio Code（VS Code）</a>。</li>
-<li>安裝妥 Python 與 VS Code 後，再安裝 <a href="https://opencode.ai/">OpenCode</a>。</li>
+<li>在個人電腦上安裝 <a href="https://www.python.org/downloads/">Python</a>、<a href="https://code.visualstudio.com/">Visual Studio Code（VS Code）</a>，然後安裝 <a href="https://opencode.ai/">OpenCode</a>。</li>
 </ol>
 <p>第一週將搭建研究環境（GitHub、VS Code、OpenCode、人工智能編程助手）。請攜已安裝妥當的手提電腦上課。</p>
 

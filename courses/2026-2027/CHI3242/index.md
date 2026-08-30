@@ -81,8 +81,7 @@ title: CHI3242
 <ol>
 <li>Create a <a href="https://github.com/">GitHub</a> account.</li>
 <li>Create an <a href="https://openrouter.ai/">OpenRouter</a> account (we will use it later for large-language-model APIs).</li>
-<li>A classroom with computers will be available. You may also bring your own laptop. If you use your own computer, install <a href="https://www.python.org/downloads/">Python</a> and <a href="https://code.visualstudio.com/">Visual Studio Code (VS Code)</a> before the first class.</li>
-<li>After Python and VS Code are installed, install <a href="https://opencode.ai/">OpenCode</a>.</li>
+<li>A classroom with computers will be available. You may also bring your own laptop. If you use your own computer, install <a href="https://www.python.org/downloads/">Python</a>, <a href="https://code.visualstudio.com/">Visual Studio Code (VS Code)</a>, and then <a href="https://opencode.ai/">OpenCode</a> before the first class.</li>
 </ol>
 <p>We will learn agentic coding early in the course and use AI coding assistants in VS Code and OpenCode to write and debug research code.</p>
 </div>
@@ -91,8 +90,7 @@ title: CHI3242
 <ol>
 <li>註冊 <a href="https://github.com/">GitHub</a> 帳號。</li>
 <li>註冊 <a href="https://openrouter.ai/">OpenRouter</a> 帳號（其後將用於大型語言模型 API）。</li>
-<li>課堂備有電腦室。亦可自備手提電腦。若使用個人電腦，請於開課前安裝 <a href="https://www.python.org/downloads/">Python</a> 與 <a href="https://code.visualstudio.com/">Visual Studio Code（VS Code）</a>。</li>
-<li>安裝妥 Python 與 VS Code 後，再安裝 <a href="https://opencode.ai/">OpenCode</a>。</li>
+<li>課堂備有電腦室。亦可自備手提電腦。若使用個人電腦，請於開課前安裝 <a href="https://www.python.org/downloads/">Python</a>、<a href="https://code.visualstudio.com/">Visual Studio Code（VS Code）</a>，然後安裝 <a href="https://opencode.ai/">OpenCode</a>。</li>
 </ol>
 <p>課程初期即講授智能體編程，並在 VS Code 與 OpenCode 中使用人工智能編程助手撰寫與除錯研究代碼。</p>
 </div>
