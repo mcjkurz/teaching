@@ -117,10 +117,10 @@ Term 1, 2026–2027</p>
 <div class="i18n-block">
 <h2>AI Policy</h2>
 <div class="lang-en">
-<p>Students may use artificial intelligence (AI) when completing assignments for this course. However, every such use must be explicitly documented. Any assignment completed with the assistance of an AI tool must include a statement identifying the tool and explaining how it was employed. Copying and pasting AI-generated output directly into an assignment is forbidden.</p>
+<p>Students may use artificial intelligence (AI) when completing assignments for this course. However, every such use must be explicitly documented. Any assignment completed with the assistance of an AI tool must include a statement identifying the tool and explaining how it was employed. Copying and pasting AI-generated output directly into an assignment constitutes academic misconduct and is prohibited.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
-<p>本課程允許學生使用人工智能工具完成作業。然而，任何此類使用均須明確記錄。凡使用人工智能工具協助完成的作業，均須附上聲明，註明所使用的工具，並說明其具體用途。不得將人工智能生成的內容直接複製貼上至作業中。</p>
+<p>本課程允許學生使用人工智能工具完成作業。然而，任何此類使用均須明確記錄。凡使用人工智能工具協助完成的作業，均須附上聲明，註明所使用的工具，並說明其具體用途。將人工智能生成的內容直接複製貼上至作業中，將被視為學術不當行為，並嚴格禁止。</p>
 </div>
 </div>
 
