@@ -147,7 +147,7 @@ title: CHI559
       <td class="topic">什麼是「角色」？</td>
       <td>
         <ul class="readings">
-          <li>角色、詞語、人物</li>
+          <li>角色、詞語、空間</li>
           <li>Alex Woloch, <em>The One vs. the Many</em>, pp. 12–42</li>
         </ul>
       </td>
