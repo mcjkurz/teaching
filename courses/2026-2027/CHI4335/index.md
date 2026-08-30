@@ -347,8 +347,7 @@ Term 1, 2026–2027
       <td>
         <ul class="readings">
           <li>〈用毛澤東思想武裝起來的人是最大的戰鬥力〉，於《解放軍報》1966年10月14日</li>
-          <li>(optional) Booth, “The Rhetoric of Fiction” (selections)</li>
-          <li>(optional) Walsh, “Rhetoric of Fictionality” (selections)</li>
+          <li>王斑：〈實踐的崇高主體〉，於《歷史的崇高形象：二十世紀中國的美學與政治》</li>
         </ul>
       </td>
     </tr>
