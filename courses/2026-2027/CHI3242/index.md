@@ -279,8 +279,8 @@ Term 1, 2026–2027</p>
     <tr>
       <td class="week">7</td>
       <td class="date">15 Oct</td>
-      <td class="topic">Comparing Corpora</td>
-      <td>Comparing the word usage of two corpora; contingency table, part 2（列聯表，第二部分）</td>
+      <td class="topic">Comparing Documents</td>
+      <td>Comparing the word usage of two documents; contingency table, part 2（列聯表，第二部分）</td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -297,13 +297,6 @@ Term 1, 2026–2027</p>
       </td>
     </tr>
   </tbody>
-  <tbody class="due">
-    <tr>
-      <td></td>
-      <td class="date">26 Oct</td>
-      <td colspan="2"><strong>Assignment 3 due, 9:00 am</strong></td>
-    </tr>
-  </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week">9</td>
@@ -316,6 +309,13 @@ Term 1, 2026–2027</p>
           <li>John Burrows, “‘Delta’: a Measure of Stylistic Difference and a Guide to Likely Authorship”</li>
         </ul>
       </td>
+    </tr>
+  </tbody>
+  <tbody class="due">
+    <tr>
+      <td></td>
+      <td class="date">26 Oct</td>
+      <td colspan="2"><strong>Assignment 3 due, 9:00 am</strong></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -335,10 +335,10 @@ Term 1, 2026–2027</p>
     <tr>
       <td class="week">11</td>
       <td class="date">12 Nov</td>
-      <td class="topic">Encoders I + Word Vectors</td>
+      <td class="topic">Encoders I</td>
       <td>
         <ul class="readings">
-          <li>Document vectors（文件向量）; contextual embeddings; BERT</li>
+          <li>Document vectors（文件向量）; word2vec; contextual embeddings; BERT</li>
           <li>Conceptual history with word vectors</li>
           <li>Daniel Jurafsky and James H. Martin, “Vector Semantics and Embeddings”</li>
         </ul>
@@ -349,7 +349,7 @@ Term 1, 2026–2027</p>
     <tr>
       <td class="week">12</td>
       <td class="date">19 Nov</td>
-      <td class="topic">Encoders II</td>
+      <td class="topic">Encoders II + Classification II</td>
       <td>
         <ul class="readings">
           <li>Training BERT-based classifiers (sentiment analysis); uploading a model to Hugging Face</li>
