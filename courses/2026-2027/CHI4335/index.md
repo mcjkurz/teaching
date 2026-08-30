@@ -123,9 +123,11 @@ Term 1, 2026–2027
 <p>The presentations should be comparative. You are expected to analyze the assigned text in relation to other primary works from the course, highlighting both significant continuities (shared themes, styles, or arguments) and departures (unique elements or innovations, cultural influences, etc.).</p>
 <p><strong>3. Short comparative essays.</strong> Out of five (5) topics, students are expected to choose four (4) and write short comparative essays-reflections on the primary texts (short stories or novels) covered throughout the course. Essays must present personal analysis and insights, focusing on one or more of the course’s key themes: the individual and society, the body, fictionality, and womanhood. Your approach must be comparative. Your analysis should incorporate <strong>at least one primary text from the respective block.</strong> You are encouraged to draw connections to texts from other weeks. Each essay should be between 1,500 and 2,000 characters in length. All essays must be submitted via the Assignment module on Moodle.</p>
 <p><strong>4. Final project</strong> offers three options.</p>
-<p><strong>Option 1.</strong> Write an analytical paper (3,500–4,000 characters) that is comparative in nature and considers at least two different primary texts covered in class. Submit the PDF version of your paper through Moodle before the deadline. The paper should have a title, include quotations from the analyzed texts, and standardized references. You are welcome to consult secondary sources, but this is not required. The final paper should not contain your comparative short essays copied verbatim, although it can be developed from them.</p>
-<p><strong>Option 2.</strong> Write an interview (3,500–4,000 characters) with one of the protagonists from the texts we have read. You will need to think about what their answers could have been if they were asked your questions in their own time. The questions concern the topics we have covered in class.</p>
-<p><strong>Option 3.</strong> Write a narrative continuation (3,500–4,000 characters) of one of the stories that we have read. What might have happened afterwards? Use your imagination, and focus on the questions central to this course (see Course Design above).</p>
+<ul>
+<li><strong>Option 1.</strong> Write an analytical paper (3,500–4,000 characters) that is comparative in nature and considers at least two different primary texts covered in class. Submit the PDF version of your paper through Moodle before the deadline. The paper should have a title, include quotations from the analyzed texts, and standardized references. You are welcome to consult secondary sources, but this is not required. The final paper should not contain your comparative short essays copied verbatim, although it can be developed from them.</li>
+<li><strong>Option 2.</strong> Write an interview (3,500–4,000 characters) with one of the protagonists from the texts we have read. You will need to think about what their answers could have been if they were asked your questions in their own time. The questions concern the topics we have covered in class.</li>
+<li><strong>Option 3.</strong> Write a narrative continuation (3,500–4,000 characters) of one of the stories that we have read. What might have happened afterwards? Use your imagination, and focus on the questions central to this course (see Course Design above).</li>
+</ul>
 </div>
 <div class="lang-zh" lang="zh-Hant">
 <p><strong>1. 講座：</strong>每週講座聚焦所選文本的歷史脈絡與理論問題。</p>
@@ -139,9 +141,11 @@ Term 1, 2026–2027
 <p>報告須具比較性。須將指定文本與課程中其他原始作品對讀，指出重要的延續（共享主題、風格或論點）與差異（獨特之處、創新、文化影響等）。</p>
 <p><strong>3. 短篇比較文章：</strong>五個題目中選寫四篇，就課程所讀原始文本（短篇或長篇）撰寫短篇比較反思。文章須有個人分析與見解，聚焦課程關鍵主題之一或多項：個人與社會、身體、虛構性、女性。必須採取比較進路。分析須<strong>至少納入該單元中的一篇原始文本</strong>，亦鼓勵連結其他週次的文本。每篇 1,500 至 2,000 字。一律經 Moodle 作業區繳交。</p>
 <p><strong>4. 期末專題：</strong>有三個選項。</p>
-<p><strong>選項一：</strong>撰寫比較性的分析論文（3,500–4,000 字），至少討論課堂上兩篇不同的原始文本。於截止日期前經 Moodle 提交 PDF。論文須有標題、引用所分析文本，並採用規範註釋。可參考二手文獻，但非必須。期末論文不得原文照搬比較短文，但可由其發展而成。</p>
-<p><strong>選項二：</strong>撰寫訪問稿（3,500–4,000 字），訪問所讀文本中的一位人物。須設想對方若在其所處時代被問及這些問題，可能如何作答。問題須關涉課堂討論的主題。</p>
-<p><strong>選項三：</strong>為所讀故事之一撰寫敘事續篇（3,500–4,000 字）。其後可能發生何事？發揮想像，並扣緊本課程的核心問題（見上方「課程設計」）。</p>
+<ul>
+<li><strong>選項一：</strong>撰寫比較性的分析論文（3,500–4,000 字），至少討論課堂上兩篇不同的原始文本。於截止日期前經 Moodle 提交 PDF。論文須有標題、引用所分析文本，並採用規範註釋。可參考二手文獻，但非必須。期末論文不得原文照搬比較短文，但可由其發展而成。</li>
+<li><strong>選項二：</strong>撰寫訪問稿（3,500–4,000 字），訪問所讀文本中的一位人物。須設想對方若在其所處時代被問及這些問題，可能如何作答。問題須關涉課堂討論的主題。</li>
+<li><strong>選項三：</strong>為所讀故事之一撰寫敘事續篇（3,500–4,000 字）。其後可能發生何事？發揮想像，並扣緊本課程的核心問題（見上方「課程設計」）。</li>
+</ul>
 </div>
 </div>
 
@@ -399,8 +403,8 @@ Term 1, 2026–2027
     </tr>
     <tr>
       <td>Tutorial</td>
-      <td class="date">卡勒德·胡賽尼：《追風箏的孩子》（第十一章到第二十五章）</td>
-      <td></td>
+      <td class="date">26 Nov</td>
+      <td>卡勒德·胡賽尼：《追風箏的孩子》（第十一章到第二十五章）</td>
     </tr>
   </tbody>
   <tbody class="due">
