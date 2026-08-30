@@ -201,7 +201,7 @@ Term 1, 2026–2027
       <td>Lecture</td>
       <td class="date">15 Sep</td>
       <td class="topic" rowspan="2">Writing the Shoah</td>
-      <td><ul class="readings"><li>房春光〈寫還是不寫，這是個問題——納粹大屠殺早期見證文學的書寫語境〉</li></ul></td>
+      <td><ul class="readings"><li>房春光：〈寫還是不寫，這是個問題——納粹大屠殺早期見證文學的書寫語境〉</li></ul></td>
     </tr>
     <tr>
       <td>Tutorial</td>
@@ -270,7 +270,7 @@ Term 1, 2026–2027
     <tr>
       <td>Tutorial</td>
       <td class="date">8 Oct</td>
-      <td><ul class="readings"><li>張翎《餘震》</li></ul></td>
+      <td><ul class="readings"><li>張翎：《餘震》</li></ul></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -306,7 +306,7 @@ Term 1, 2026–2027
       <td></td>
       <td></td>
       <td class="date">24 Oct</td>
-      <td colspan="2"><strong>Comparative reflection (Weeks 6–8) due, 9:00 am</strong></td>
+      <td colspan="2"><strong>Comparative reflection (Weeks 6, 7, 8) due, 9:00 am</strong></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -317,7 +317,7 @@ Term 1, 2026–2027
       <td class="topic" rowspan="2">Between the Heroic and the Ordinary</td>
       <td><ul class="readings">
 	  <li>梁昂：《他們先殺了我父親：柬埔寨女孩的回憶》</li>
-	  <li>(optional)Rithy Panh, <em>The Missing Picture</em> (we will watch the film together)</li></ul></td>
+	  <li>(optional) Rithy Panh, <em>The Missing Picture</em></li></ul></td>
     </tr>
     <tr>
       <td>Tutorial</td>
@@ -342,7 +342,7 @@ Term 1, 2026–2027
     <tr>
       <td>Tutorial</td>
       <td class="date">5 Nov</td>
-      <td><ul class="readings"><li>閻連科《為人民服務》</li></ul></td>
+      <td><ul class="readings"><li>閻連科：《為人民服務》</li></ul></td>
     </tr>
   </tbody>
   <tbody class="due">
@@ -378,7 +378,7 @@ Term 1, 2026–2027
     <tr>
       <td>Tutorial</td>
       <td class="date">19 Nov</td>
-      <td><ul class="readings"><li>梁昂：《他們先殺了我父親：柬埔寨女孩的回憶》</li></ul></td>
+      <td><ul class="readings"><li>卡勒德·胡賽尼：《追風箏的孩子》（第一章到第十章）</li></ul></td>
     </tr>
   </tbody>
   <tbody class="due">
@@ -394,12 +394,12 @@ Term 1, 2026–2027
       <td class="week" rowspan="2">13</td>
       <td>Lecture</td>
       <td class="date">24 Nov</td>
-      <td class="topic" rowspan="2">TBD</td>
+      <td class="topic" rowspan="2">Review and summary of the course</td>
       <td></td>
     </tr>
     <tr>
       <td>Tutorial</td>
-      <td class="date">26 Nov</td>
+      <td class="date">卡勒德·胡賽尼：《追風箏的孩子》（第十一章到第二十五章）</td>
       <td></td>
     </tr>
   </tbody>
