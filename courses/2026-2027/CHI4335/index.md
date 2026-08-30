@@ -274,7 +274,7 @@ Term 1, 2026–2027</p>
       <td>Lecture</td>
       <td class="date">6 Oct</td>
       <td class="topic" rowspan="2">Trauma and Agency</td>
-      <td><ul class="readings"><li>O’Brien, “Telling Time: Literature, Temporality and Trauma”</li></ul></td>
+      <td><ul class="readings"><li>Wendy O’Brien, “Telling Time: Literature, Temporality and Trauma”</li></ul></td>
     </tr>
     <tr>
       <td>Tutorial</td>
@@ -307,7 +307,7 @@ Term 1, 2026–2027</p>
       <td>Lecture</td>
       <td class="date">20 Oct</td>
       <td class="topic" rowspan="2">War Experience</td>
-      <td><ul class="readings"><li>Hogan, “On Being Moved: Cognition and Emotion in Literature and Film”</li></ul></td>
+      <td><ul class="readings"><li>Patrick Colm Hogan, “On Being Moved: Cognition and Emotion in Literature and Film”</li></ul></td>
     </tr>
     <tr>
       <td>Tutorial</td>
