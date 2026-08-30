@@ -271,22 +271,14 @@ Term 1, 2026–2027</p>
     <tr>
       <td class="week">6</td>
       <td class="date">8 Oct</td>
-      <td class="topic">Decoders and LLMs</td>
-      <td>From BERT to GPT; generative models; what is “context”?; LLMs for data extraction; Python API (OpenRouter)</td>
+      <td class="topic">Comparing Documents</td>
+      <td>Comparing the word usage of two documents; contingency table, part 2（列聯表，第二部分）</td>
     </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week">7</td>
       <td class="date">15 Oct</td>
-      <td class="topic">Comparing Documents</td>
-      <td>Comparing the word usage of two documents; contingency table, part 2（列聯表，第二部分）</td>
-    </tr>
-  </tbody>
-  <tbody class="block-b">
-    <tr>
-      <td class="week">8</td>
-      <td class="date">22 Oct</td>
       <td class="topic">Topic Modeling</td>
       <td>
         <ul class="readings">
@@ -297,10 +289,10 @@ Term 1, 2026–2027</p>
       </td>
     </tr>
   </tbody>
-  <tbody class="block-a">
+  <tbody class="block-b">
     <tr>
-      <td class="week">9</td>
-      <td class="date">29 Oct</td>
+      <td class="week">8</td>
+      <td class="date">22 Oct</td>
       <td class="topic">Stylometry</td>
       <td>
         <ul class="readings">
@@ -318,10 +310,10 @@ Term 1, 2026–2027</p>
       <td colspan="2"><strong>Assignment 3 due, 9:00 am</strong></td>
     </tr>
   </tbody>
-  <tbody class="block-b">
+  <tbody class="block-a">
     <tr>
-      <td class="week">10</td>
-      <td class="date">5 Nov</td>
+      <td class="week">9</td>
+      <td class="date">29 Oct</td>
       <td class="topic">Classification I</td>
       <td>
         <ul class="readings">
@@ -331,10 +323,10 @@ Term 1, 2026–2027</p>
       </td>
     </tr>
   </tbody>
-  <tbody class="block-a">
+  <tbody class="block-b">
     <tr>
-      <td class="week">11</td>
-      <td class="date">12 Nov</td>
+      <td class="week">10</td>
+      <td class="date">5 Nov</td>
       <td class="topic">Encoders I</td>
       <td>
         <ul class="readings">
@@ -345,10 +337,10 @@ Term 1, 2026–2027</p>
       </td>
     </tr>
   </tbody>
-  <tbody class="block-b">
+  <tbody class="block-a">
     <tr>
-      <td class="week">12</td>
-      <td class="date">19 Nov</td>
+      <td class="week">11</td>
+      <td class="date">12 Nov</td>
       <td class="topic">Encoders II + Classification II</td>
       <td>
         <ul class="readings">
@@ -357,6 +349,14 @@ Term 1, 2026–2027</p>
           <li>Katherine Elkins, <em>The Shapes of Stories: Sentiment Analysis for Narrative</em></li>
         </ul>
       </td>
+    </tr>
+  </tbody>
+  <tbody class="block-b">
+    <tr>
+      <td class="week">12</td>
+      <td class="date">19 Nov</td>
+      <td class="topic">Decoders and LLMs</td>
+      <td>From BERT to GPT; generative models; what is “context”?; LLMs for data extraction; Python API (OpenRouter)</td>
     </tr>
   </tbody>
   <tbody class="due">
