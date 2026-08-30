@@ -271,8 +271,14 @@ Term 1, 2026–2027</p>
     <tr>
       <td class="week">6</td>
       <td class="date">8 Oct</td>
-      <td class="topic">Working with Documents</td>
-      <td>Regular expressions (regex; 正規表示式); comparing the word usage of two documents; contingency table, part 2（列聯表，第二部分）</td>
+      <td class="topic">From Words to Corpora</td>
+      <td>
+        <ul class="readings">
+          <li>Regular expressions (regex; 正規表示式)</li>
+          <li>Comparing the word usage of two corpora</li>
+          <li>Contingency table, part 2（列聯表，第二部分）</li>
+        </ul>
+      </td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -283,7 +289,6 @@ Term 1, 2026–2027</p>
       <td>
         <ul class="readings">
           <li>LDA; what is a “topic”?（主題是什麼？）</li>
-          <li>Mike Scott, “Key words of individual texts: Aboutness and style”</li>
           <li>David M. Blei, “Probabilistic Topic Models”</li>
         </ul>
       </td>
@@ -298,6 +303,7 @@ Term 1, 2026–2027</p>
         <ul class="readings">
           <li>Authorship signals; style markers; feature selection</li>
           <li>Z-scores and distance-based stylistic comparison</li>
+          <li>(optional) Mike Scott, “Key words of individual texts: Aboutness and style”</li>
           <li>John Burrows, “‘Delta’: a Measure of Stylistic Difference and a Guide to Likely Authorship”</li>
         </ul>
       </td>
@@ -318,6 +324,7 @@ Term 1, 2026–2027</p>
       <td>
         <ul class="readings">
           <li>Feature engineering for literary text classification</li>
+          <li>Logistic regression for text classification</li>
           <li>Baselines, train/test splits, and error analysis</li>
         </ul>
       </td>
@@ -372,8 +379,8 @@ Term 1, 2026–2027</p>
     <tr>
       <td class="week">13</td>
       <td class="date">26 Nov</td>
-      <td class="topic">Regular Expressions + Review of the Course</td>
-      <td>Regular expressions (regex; 正規表示式) for cleaning text corpora; integrative review of methods and final-project preparation</td>
+      <td class="topic">Review of the Course</td>
+      <td>Integrative review of methods and final-project preparation</td>
     </tr>
   </tbody>
   <tbody class="due">
