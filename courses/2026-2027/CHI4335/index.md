@@ -4,19 +4,23 @@ title: CHI4335
 ---
 
 <p class="updated">Last updated: Aug 30, 2026</p>
-# CHI 4335 Course Syllabus
-
-**Special Topics in Comparative Literature: Facing the Extreme**  
-**比較文學專題：面對極端**  
-Term 1, 2026–2027
-
-**Lecture:** Tue, 1:00–2:59 pm (LYH 201/1)  
-**Tutorial A:** Thu, 11:30 am–12:29 pm (LKK 308)  
-**Tutorial B:** Thu, 12:30–1:29 pm (LKK 308)
-
-**Instructor:** Maciej Kurzynski 馬傑 (maciej.kurzynski[at]ln.edu.hk)  
-**Office hours:** Tue 3:00–5:00 pm and Fri 10:00 am–12:00 pm, HSH G06, or by appointment  
-**Language of Instruction:** Putonghua（普通話）
+<div class="course-header">
+<div class="course-header-info">
+<h1>CHI 4335 Course Syllabus</h1>
+<p><strong>Special Topics in Comparative Literature: Facing the Extreme</strong><br>
+<strong>比較文學專題：面對極端</strong><br>
+Term 1, 2026–2027</p>
+<p><strong>Lecture:</strong> Tue, 1:00–2:59 pm (LYH 201/1)<br>
+<strong>Tutorial A:</strong> Thu, 11:30 am–12:29 pm (LKK 308)<br>
+<strong>Tutorial B:</strong> Thu, 12:30–1:29 pm (LKK 308)</p>
+<p><strong>Instructor:</strong> Maciej Kurzynski 馬傑 (maciej.kurzynski[at]ln.edu.hk)<br>
+<strong>Office hours:</strong> Tue 3:00–5:00 pm and Fri 10:00 am–12:00 pm, HSH G06, or by appointment<br>
+<strong>Language of Instruction:</strong> Putonghua（普通話）</p>
+</div>
+<div class="course-header-image">
+<img src="cover.png" alt="Illustration for Facing the Extreme">
+</div>
+</div>
 
 <div class="i18n-block">
 <h2>Course Description</h2>
@@ -78,7 +82,7 @@ Term 1, 2026–2027
 <thead><tr><th>Component</th><th>Weight</th></tr></thead>
 <tbody>
 <tr><td>In-class discussion and participation</td><td>20%</td></tr>
-<tr><td>Comparative reflections (4)</td><td>20%</td></tr>
+<tr><td>Comparative reflections (3)</td><td>20%</td></tr>
 <tr><td>Oral presentations (2)</td><td>20%</td></tr>
 <tr><td>Final paper</td><td>40%</td></tr>
 </tbody>
@@ -91,7 +95,7 @@ Term 1, 2026–2027
 <thead><tr><th>項目</th><th>比重</th></tr></thead>
 <tbody>
 <tr><td>課堂討論與參與</td><td>20%</td></tr>
-<tr><td>比較反思（4篇）</td><td>20%</td></tr>
+<tr><td>比較反思（3篇）</td><td>20%</td></tr>
 <tr><td>口頭報告（2次）</td><td>20%</td></tr>
 <tr><td>期末論文</td><td>40%</td></tr>
 </tbody>
@@ -122,7 +126,7 @@ Term 1, 2026–2027
 <li>How are women portrayed, and what roles are they assigned in the context of crisis?</li>
 </ul>
 <p>The presentations should be comparative. You are expected to analyze the assigned text in relation to other primary works from the course, highlighting both significant continuities (shared themes, styles, or arguments) and departures (unique elements or innovations, cultural influences, etc.).</p>
-<p><strong>3. Short comparative essays.</strong> Out of five (5) topics, students are expected to choose four (4) and write short comparative essays-reflections on the primary texts (short stories or novels) covered throughout the course. Essays must present personal analysis and insights, focusing on one or more of the course’s key themes: the individual and society, the body, fictionality, and womanhood. Your approach must be comparative. Your analysis should incorporate <strong>at least one primary text from the respective block.</strong> You are encouraged to draw connections to texts from other weeks. Each essay should be between 1,500 and 2,000 characters in length. All essays must be submitted via the Assignment module on Moodle.</p>
+<p><strong>3. Short comparative essays.</strong> Out of five (5) topics, students are expected to submit three (3) short comparative reflections in Chinese on the primary texts (short stories or novels) covered throughout the course. Essays must present personal analysis and insights, focusing on one or more of the course’s key themes: the individual and society, the body, fictionality, and womanhood. Your approach must be comparative. Your analysis should incorporate <strong>at least one primary text from the respective block.</strong> You are encouraged to draw connections to texts from other weeks. Each essay should be between 1,500 and 2,000 characters in length. All essays must be submitted via the Assignment module on Moodle. If more than three essays are submitted, only the three highest scores will count.</p>
 <p><strong>4. Final project</strong> offers three options.</p>
 <ul>
 <li><strong>Option 1.</strong> Write an analytical paper (3,500–4,000 characters) that is comparative in nature and considers at least two different primary texts covered in class. Submit the PDF version of your paper through Moodle before the deadline. The paper should have a title, include quotations from the analyzed texts, and standardized references. You are welcome to consult secondary sources, but this is not required. The final paper should not contain your comparative short essays copied verbatim, although it can be developed from them.</li>
@@ -140,7 +144,7 @@ Term 1, 2026–2027
 <li>女性如何被描寫，在危機中被賦予何種角色？</li>
 </ul>
 <p>報告須具比較性。須將指定文本與課程中其他原始作品對讀，指出重要的延續（共享主題、風格或論點）與差異（獨特之處、創新、文化影響等）。</p>
-<p><strong>3. 短篇比較文章：</strong>五個題目中選寫四篇，就課程所讀原始文本（短篇或長篇）撰寫短篇比較反思。文章須有個人分析與見解，聚焦課程關鍵主題之一或多項：個人與社會、身體、虛構性、女性。必須採取比較進路。分析須<strong>至少納入該單元中的一篇原始文本</strong>，亦鼓勵連結其他週次的文本。每篇 1,500 至 2,000 字。一律經 Moodle 作業區繳交。</p>
+<p><strong>3. 短篇比較文章：</strong>五個題目中選寫三篇，以中文就課程所讀原始文本（短篇或長篇）撰寫短篇比較反思。文章須有個人分析與見解，聚焦課程關鍵主題之一或多項：個人與社會、身體、虛構性、女性。必須採取比較進路。分析須<strong>至少納入該單元中的一篇原始文本</strong>，亦鼓勵連結其他週次的文本。每篇 1,500 至 2,000 字。一律經 Moodle 作業區繳交。若繳交超過三篇，只計入得分最高的三篇。</p>
 <p><strong>4. 期末專題：</strong>有三個選項。</p>
 <ul>
 <li><strong>選項一：</strong>撰寫比較性的分析論文（3,500–4,000 字），至少討論課堂上兩篇不同的原始文本。於截止日期前經 Moodle 提交 PDF。論文須有標題、引用所分析文本，並採用規範註釋。可參考二手文獻，但非必須。期末論文不得原文照搬比較短文，但可由其發展而成。</li>
@@ -206,7 +210,7 @@ Term 1, 2026–2027
       <td>Lecture</td>
       <td class="date">15 Sep</td>
       <td class="topic" rowspan="2">Writing the Shoah</td>
-      <td><ul class="readings"><li>房春光：〈寫還是不寫，這是個問題——納粹大屠殺早期見證文學的書寫語境〉</li></ul></td>
+      <td><ul class="readings"><li>房春光：〈寫還是不寫，這是個問題——納粹大屠殺早期見證文學的書寫語境〉，《外國文學》2020年第3期，頁154–164</li></ul></td>
     </tr>
     <tr>
       <td>Tutorial</td>
@@ -227,7 +231,7 @@ Term 1, 2026–2027
       <td class="week" rowspan="2">4</td>
       <td>Lecture</td>
       <td class="date">22 Sep</td>
-      <td class="topic" rowspan="2"><em>Laogai</em> and Spiritual Resistance</td>
+      <td class="topic" rowspan="2">Spiritual Resistance in a Labor Camp</td>
       <td><ul class="readings"><li>Tzvetan Todorov, “The Life of the Mind,” in <em>Facing the Extreme</em>, pp. 91–118</li></ul></td>
     </tr>
     <tr>
