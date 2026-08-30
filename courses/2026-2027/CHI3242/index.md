@@ -3,17 +3,17 @@ layout: default
 title: CHI3242
 ---
 
-<p class="updated">Last updated: Aug 30, 2026</p>
-<div class="course-header">
+<p class="updated i18n-block"><span class="lang-en">Last updated: Aug 30, 2026</span><span class="lang-zh" lang="zh-Hant">最後更新：2026年8月30日</span></p>
+<div class="course-header i18n-block">
 <div class="course-header-info">
-<h1>CHI 3242 Course Syllabus</h1>
+<h1><span class="lang-en">CHI 3242 Course Syllabus</span><span class="lang-zh" lang="zh-Hant">CHI 3242 課程大綱</span></h1>
 <p><strong>Text Mining for Chinese Humanities</strong><br>
 <strong>中國人文研究中的文本挖掘</strong><br>
-Term 1, 2026–2027</p>
-<p><strong>Seminar:</strong> Thu, 3:30–6:29 pm (LCH 213)</p>
-<p><strong>Instructor:</strong> Maciej Kurzynski 馬傑 (maciej.kurzynski[at]ln.edu.hk)<br>
-<strong>Office hours:</strong> Tue 3:00–5:00 pm and Fri 10:00 am–12:00 pm, HSH G06, or by appointment<br>
-<strong>Language of Instruction:</strong> Putonghua（普通話）</p>
+<span class="lang-en">Term 1, 2026–2027</span><span class="lang-zh" lang="zh-Hant">2026–2027 學年第一學期</span></p>
+<p><strong><span class="lang-en">Seminar:</span><span class="lang-zh" lang="zh-Hant">研討課：</span></strong> <span class="lang-en">Thu, 3:30–6:29 pm (LCH 213)</span><span class="lang-zh" lang="zh-Hant">星期四，下午 3:30–6:29（LCH 213）</span></p>
+<p><strong><span class="lang-en">Instructor:</span><span class="lang-zh" lang="zh-Hant">教師：</span></strong> Maciej Kurzynski 馬傑 (maciej.kurzynski[at]ln.edu.hk)<br>
+<strong><span class="lang-en">Office hours:</span><span class="lang-zh" lang="zh-Hant">辦公室時間：</span></strong> <span class="lang-en">Tue 3:00–5:00 pm and Fri 10:00 am–12:00 pm, HSH G06, or by appointment</span><span class="lang-zh" lang="zh-Hant">星期二下午 3:00–5:00 及星期五上午 10:00–12:00，HSH G06，或另行預約</span><br>
+<strong><span class="lang-en">Language of Instruction:</span><span class="lang-zh" lang="zh-Hant">授課語言：</span></strong> <span class="lang-en">Putonghua（普通話）</span><span class="lang-zh" lang="zh-Hant">普通話</span></p>
 </div>
 <div class="course-header-image">
 <img src="cover.png" alt="Illustration for Text Mining for Chinese Humanities">
@@ -192,11 +192,11 @@ Term 1, 2026–2027</p>
   <tbody class="block-a">
     <tr>
       <td class="week">1</td>
-      <td class="date">3 Sep</td>
+      <td class="date"><span class="lang-en">3 Sep</span><span class="lang-zh" lang="zh-Hant">9月3日</span></td>
       <td class="topic"><span class="lang-en">Introduction</span><span class="lang-zh" lang="zh-Hant">導論</span></td>
       <td>
         <ul class="readings">
-          <li><span class="lang-en">Digital Humanities: key concepts; agentic coding; Git, GitHub, OpenRouter, OpenCode, and VS Code</span><span class="lang-zh" lang="zh-Hant">數字人文：核心概念；智能體編程；Git、GitHub、OpenRouter、OpenCode 與 VS Code</span></li>
+          <li><span class="lang-en">Digital Humanities: key concepts; agentic coding; Git, GitHub, OpenRouter, OpenCode, and VS Code</span><span class="lang-zh" lang="zh-Hant">數碼人文：核心概念；智能體編程；Git、GitHub、OpenRouter、OpenCode 與 VS Code</span></li>
         </ul>
       </td>
     </tr>
@@ -204,7 +204,7 @@ Term 1, 2026–2027</p>
   <tbody class="block-b">
     <tr>
       <td class="week">2</td>
-      <td class="date">10 Sep</td>
+      <td class="date"><span class="lang-en">10 Sep</span><span class="lang-zh" lang="zh-Hant">9月10日</span></td>
       <td class="topic"><span class="lang-en">Language, Text, Encoding</span><span class="lang-zh" lang="zh-Hant">語言、文本與編碼</span></td>
       <td>
         <ul class="readings">
@@ -217,18 +217,18 @@ Term 1, 2026–2027</p>
   <tbody class="due">
     <tr>
       <td></td>
-      <td class="date">14 Sep</td>
+      <td class="date"><span class="lang-en">14 Sep</span><span class="lang-zh" lang="zh-Hant">9月14日</span></td>
       <td colspan="2"><a href="#"><span class="lang-en">Assignment 0 (not graded) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">作業0（不計分）截止，上午9:00</span></a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week">3</td>
-      <td class="date">17 Sep</td>
+      <td class="date"><span class="lang-en">17 Sep</span><span class="lang-zh" lang="zh-Hant">9月17日</span></td>
       <td class="topic"><span class="lang-en">Collocations</span><span class="lang-zh" lang="zh-Hant">搭配詞</span></td>
       <td>
         <ul class="readings">
-          <li>Collocation as a method; the contingency table（列聯表）; statistical significance, Fisher's exact test, p value</li>
+          <li><span class="lang-en">Collocation as a method; the contingency table; statistical significance, Fisher's exact test, p value</span><span class="lang-zh" lang="zh-Hant">搭配作為方法；列聯表；統計顯著性、Fisher 精確檢定、p 值</span></li>
           <li>Stefan Evert, “Corpora and Collocations”</li>
         </ul>
       </td>
@@ -237,7 +237,7 @@ Term 1, 2026–2027</p>
   <tbody class="block-b">
     <tr>
       <td class="week">4</td>
-      <td class="date">24 Sep</td>
+      <td class="date"><span class="lang-en">24 Sep</span><span class="lang-zh" lang="zh-Hant">9月24日</span></td>
       <td class="topic"><span class="lang-en">What Is a Character?</span><span class="lang-zh" lang="zh-Hant">什麼是「角色」？</span></td>
       <td>
         <ul class="readings">
@@ -251,7 +251,7 @@ Term 1, 2026–2027</p>
   <tbody class="block-a">
     <tr>
       <td class="week">5</td>
-      <td class="date">1 Oct</td>
+      <td class="date"><span class="lang-en">1 Oct</span><span class="lang-zh" lang="zh-Hant">10月1日</span></td>
       <td class="topic"></td>
       <td><strong><span class="lang-en">No class (National Day)</span><span class="lang-zh" lang="zh-Hant">停課（國慶日）</span></strong></td>
     </tr>
@@ -259,20 +259,20 @@ Term 1, 2026–2027</p>
   <tbody class="due">
     <tr>
       <td></td>
-      <td class="date">7 Oct</td>
+      <td class="date"><span class="lang-en">7 Oct</span><span class="lang-zh" lang="zh-Hant">10月7日</span></td>
       <td colspan="2"><a href="#"><span class="lang-en">Assignment 1 due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">作業1截止，上午9:00</span></a></td>
     </tr>
   </tbody>
   <tbody class="block-b">
     <tr>
       <td class="week">6</td>
-      <td class="date">8 Oct</td>
+      <td class="date"><span class="lang-en">8 Oct</span><span class="lang-zh" lang="zh-Hant">10月8日</span></td>
       <td class="topic"><span class="lang-en">From Words to Corpora</span><span class="lang-zh" lang="zh-Hant">從詞語到語料庫</span></td>
       <td>
         <ul class="readings">
-          <li>Regular expressions (regex; 正規表示式)</li>
-          <li>Comparing the word usage of two corpora</li>
-          <li>Contingency table, part 2（列聯表，第二部分）</li>
+          <li><span class="lang-en">Regular expressions (regex)</span><span class="lang-zh" lang="zh-Hant">正規表示式（regex）</span></li>
+          <li><span class="lang-en">Comparing the word usage of two corpora</span><span class="lang-zh" lang="zh-Hant">比較兩個語料庫的用詞</span></li>
+          <li><span class="lang-en">Contingency table, part 2</span><span class="lang-zh" lang="zh-Hant">列聯表，第二部分</span></li>
         </ul>
       </td>
     </tr>
@@ -280,11 +280,11 @@ Term 1, 2026–2027</p>
   <tbody class="block-a">
     <tr>
       <td class="week">7</td>
-      <td class="date">15 Oct</td>
+      <td class="date"><span class="lang-en">15 Oct</span><span class="lang-zh" lang="zh-Hant">10月15日</span></td>
       <td class="topic"><span class="lang-en">Topic Modeling</span><span class="lang-zh" lang="zh-Hant">主題模型</span></td>
       <td>
         <ul class="readings">
-          <li>LDA; what is a “topic”?（主題是什麼？）</li>
+          <li><span class="lang-en">LDA; what is a “topic”?</span><span class="lang-zh" lang="zh-Hant">LDA；什麼是「主題」？</span></li>
           <li>David M. Blei, “Probabilistic Topic Models”</li>
         </ul>
       </td>
@@ -293,14 +293,14 @@ Term 1, 2026–2027</p>
   <tbody class="block-b">
     <tr>
       <td class="week">8</td>
-      <td class="date">22 Oct</td>
+      <td class="date"><span class="lang-en">22 Oct</span><span class="lang-zh" lang="zh-Hant">10月22日</span></td>
       <td class="topic"><span class="lang-en">Stylometry</span><span class="lang-zh" lang="zh-Hant">文體計量學</span></td>
       <td>
         <ul class="readings">
-          <li>Authorship signals; style markers; feature selection</li>
-          <li>Z-scores and distance-based stylistic comparison</li>
+          <li><span class="lang-en">Authorship signals; style markers; feature selection</span><span class="lang-zh" lang="zh-Hant">作者訊號；文體標記；特徵選取</span></li>
+          <li><span class="lang-en">Z-scores and distance-based stylistic comparison</span><span class="lang-zh" lang="zh-Hant">Z 分數與基於距離的文體比較</span></li>
           <li>John Burrows, “‘Delta’: a Measure of Stylistic Difference and a Guide to Likely Authorship”</li>
-          <li>(optional) Mike Scott, “Key words of individual texts: Aboutness and style”</li>
+          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Mike Scott, “Key words of individual texts: Aboutness and style”</li>
         </ul>
       </td>
     </tr>
@@ -308,19 +308,19 @@ Term 1, 2026–2027</p>
   <tbody class="due">
     <tr>
       <td></td>
-      <td class="date">26 Oct</td>
+      <td class="date"><span class="lang-en">26 Oct</span><span class="lang-zh" lang="zh-Hant">10月26日</span></td>
       <td colspan="2"><a href="#"><span class="lang-en">Assignment 2 due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">作業2截止，上午9:00</span></a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week">9</td>
-      <td class="date">29 Oct</td>
+      <td class="date"><span class="lang-en">29 Oct</span><span class="lang-zh" lang="zh-Hant">10月29日</span></td>
       <td class="topic"><span class="lang-en">Classification I</span><span class="lang-zh" lang="zh-Hant">分類（一）</span></td>
       <td>
         <ul class="readings">
-          <li>Logistic regression for text classification</li>
-          <li>Binary and multi-class classification (softmax); loss function (cross-entropy)</li>
+          <li><span class="lang-en">Logistic regression for text classification</span><span class="lang-zh" lang="zh-Hant">用於文本分類的邏輯迴歸</span></li>
+          <li><span class="lang-en">Binary and multi-class classification (softmax); loss function (cross-entropy)</span><span class="lang-zh" lang="zh-Hant">二元與多類分類（softmax）；損失函數（交叉熵）</span></li>
         </ul>
       </td>
     </tr>
@@ -328,12 +328,12 @@ Term 1, 2026–2027</p>
   <tbody class="block-b">
     <tr>
       <td class="week">10</td>
-      <td class="date">5 Nov</td>
+      <td class="date"><span class="lang-en">5 Nov</span><span class="lang-zh" lang="zh-Hant">11月5日</span></td>
       <td class="topic"><span class="lang-en">Encoders I</span><span class="lang-zh" lang="zh-Hant">編碼器（一）</span></td>
       <td>
         <ul class="readings">
-          <li>What is meaning? word vectors and cosine similarity</li>
-          <li>Conceptual history with word vectors</li>
+          <li><span class="lang-en">What is meaning? word vectors and cosine similarity</span><span class="lang-zh" lang="zh-Hant">什麼是意義？詞向量與餘弦相似度</span></li>
+          <li><span class="lang-en">Conceptual history with word vectors</span><span class="lang-zh" lang="zh-Hant">以詞向量研究概念史</span></li>
           <li>Daniel Jurafsky and James H. Martin, “Vector Semantics and Embeddings”</li>
         </ul>
       </td>
@@ -342,14 +342,14 @@ Term 1, 2026–2027</p>
   <tbody class="block-a">
     <tr>
       <td class="week">11</td>
-      <td class="date">12 Nov</td>
+      <td class="date"><span class="lang-en">12 Nov</span><span class="lang-zh" lang="zh-Hant">11月12日</span></td>
       <td class="topic"><span class="lang-en">Encoders II + Classification II</span><span class="lang-zh" lang="zh-Hant">編碼器（二）＋分類（二）</span></td>
       <td>
         <ul class="readings">
-          <li>Neural networks（神經網絡）</li>
-          <li>Training BERT-based classifiers (sentiment analysis); uploading a model to Hugging Face</li>
-          <li>Kurt Vonnegut, “The Shapes of Stories” (lecture)</li>
-          <li>Katherine Elkins, <em>The Shapes of Stories: Sentiment Analysis for Narrative</em> (selections)</li>
+          <li><span class="lang-en">Neural networks</span><span class="lang-zh" lang="zh-Hant">神經網絡</span></li>
+          <li><span class="lang-en">Training BERT-based classifiers (sentiment analysis); uploading a model to Hugging Face</span><span class="lang-zh" lang="zh-Hant">訓練基於 BERT 的分類器（情感分析）；上載模型至 Hugging Face</span></li>
+          <li>Kurt Vonnegut, “The Shapes of Stories” <span class="lang-en">(lecture)</span><span class="lang-zh" lang="zh-Hant">（講座）</span></li>
+          <li>Katherine Elkins, <em>The Shapes of Stories: Sentiment Analysis for Narrative</em> <span class="lang-en">(selections)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span></li>
         </ul>
       </td>
     </tr>
@@ -357,22 +357,27 @@ Term 1, 2026–2027</p>
   <tbody class="due">
     <tr>
       <td></td>
-      <td class="date">16 Nov</td>
+      <td class="date"><span class="lang-en">16 Nov</span><span class="lang-zh" lang="zh-Hant">11月16日</span></td>
       <td colspan="2"><a href="#"><span class="lang-en">Final Project Proposal due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">期末專題計劃書截止，上午9:00</span></a></td>
     </tr>
   </tbody>
   <tbody class="block-b">
     <tr>
       <td class="week">12</td>
-      <td class="date">19 Nov</td>
+      <td class="date"><span class="lang-en">19 Nov</span><span class="lang-zh" lang="zh-Hant">11月19日</span></td>
       <td class="topic"><span class="lang-en">Decoders and LLMs</span><span class="lang-zh" lang="zh-Hant">解碼器與大型語言模型</span></td>
-      <td>From BERT to GPT; generative models; what is “context”?; next-token probability; LLMs for data extraction; Python API (OpenRouter)</td>
+      <td>
+        <ul class="readings">
+          <li><span class="lang-en">From BERT to GPT; generative models; what is “context”?; next-token probability</span><span class="lang-zh" lang="zh-Hant">從 BERT 到 GPT；生成模型；什麼是「語境」？；下一詞元機率</span></li>
+          <li><span class="lang-en">LLMs for data extraction; Python API (OpenRouter)</span><span class="lang-zh" lang="zh-Hant">以大型語言模型抽取資料；Python API（OpenRouter）</span></li>
+        </ul>
+      </td>
     </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week">13</td>
-      <td class="date">26 Nov</td>
+      <td class="date"><span class="lang-en">26 Nov</span><span class="lang-zh" lang="zh-Hant">11月26日</span></td>
       <td class="topic"><span class="lang-en">Review and Loose Ends</span><span class="lang-zh" lang="zh-Hant">課程總結與收尾</span></td>
       <td><span class="lang-en">Integrative review of methods, tying up loose ends, and final-project preparation</span><span class="lang-zh" lang="zh-Hant">方法整合回顧、補足未竟內容，以及期末專題準備</span></td>
     </tr>
@@ -380,7 +385,7 @@ Term 1, 2026–2027</p>
   <tbody class="due">
     <tr>
       <td></td>
-      <td class="date">7 Dec</td>
+      <td class="date"><span class="lang-en">7 Dec</span><span class="lang-zh" lang="zh-Hant">12月7日</span></td>
       <td colspan="2"><strong><span class="lang-en">Final project due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">期末專題截止，上午9:00</span></strong></td>
     </tr>
   </tbody>
