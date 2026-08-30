@@ -7,7 +7,8 @@ title: CHI4335
 
 **Special Topics in Comparative Literature: Facing the Extreme**  
 **比較文學專題：世界文學中的極端體驗**  
-Term 1, 2026–2027
+Term 1, 2026–2027  
+<p class="updated">Last updated: Aug 30, 2026</p>
 
 **Lecture:** Tue, 1:00–2:59 pm (LYH 201/1)  
 **Tutorial A:** Thu, 11:30 am–12:29 pm (LKK 308)  
@@ -20,20 +21,20 @@ Term 1, 2026–2027
 <div class="i18n-block">
 <h2>Course Description</h2>
 <div class="lang-en">
-<p>The famous historian Eric Hobsbawm called the twentieth century the “Age of Extremes.” This course, offered in Putonghua, adopts a comparative lens to explore how extreme experiences have been represented in world literature, with special attention to modern China. Through a selection of key texts, the course examines how different literary traditions and genres respond to natural and man-made catastrophes, extreme political ideologies, the darker aspects of human emotions, but also extreme happiness. Students will engage with different critical perspectives, including ecocriticism, trauma theory, cognitive literary studies, and gender studies, to analyze how literature not only reflects but also challenges the human condition in the face of extremity.</p>
+<p>The famous historian Eric Hobsbawm called the twentieth century the “Age of Extremes.” This course, offered in Putonghua, adopts a comparative lens to explore how extreme experiences have been represented in world literature, with special attention to modern China. Through a selection of key texts, the course examines how different literary traditions and genres respond to natural and man-made catastrophes, extreme political ideologies, the darker aspects of human emotions, but also extreme happiness. Students will engage with different critical perspectives, including ecocriticism, trauma theory, cognitive literary studies, and gender studies, to analyze how literature not only reflects but also challenges the human condition in the face of extremity. Particular emphasis is placed on close reading: students will train the ability to <em>describe</em> literary phenomena with precision, not only to interpret them.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
-<p>著名史家霍布斯邦（Eric Hobsbawm）稱二十世紀為「極端的年代」。本課程以普通話授課，採取比較視野，探討極端經驗如何在世界文學中被再現，並特別關注現代中國。透過一系列重要文本，本課程考察不同文學傳統與文類如何回應天災人禍、極端政治意識形態、人類情感的幽暗面，以及極端的幸福。學生將接觸生態批評、創傷理論、認知文學研究、性別研究等批評視角，分析文學如何既反映、亦挑戰極端處境中的人類處境。</p>
+<p>著名史家霍布斯邦（Eric Hobsbawm）稱二十世紀為「極端的年代」。本課程以普通話授課，採取比較視野，探討極端經驗如何在世界文學中被再現，並特別關注現代中國。透過一系列重要文本，本課程考察不同文學傳統與文類如何回應天災人禍、極端政治意識形態、人類情感的幽暗面，以及極端的幸福。學生將接觸生態批評、創傷理論、認知文學研究、性別研究等批評視角，分析文學如何既反映、亦挑戰極端處境中的人類處境。課程特別重視細讀：學生將訓練以精確的語言<em>描述</em>文學現象的能力，而不止於詮釋。</p>
 </div>
 </div>
 
 <div class="i18n-block">
 <h2>Aims</h2>
 <div class="lang-en">
-<p>This course aims to equip students with the tools necessary to engage in cross-cultural analysis and to critically reflect on how literature represents and responds to the extreme. By analyzing and comparing key texts from various literary, philosophical, and cultural traditions, the course enhances students’ understanding of how literature documents, critiques, and shapes human responses to catastrophe and extremity. The course also encourages students to view literary texts as both artistic expressions and cultural documents that reflect and challenge societal values in times of crisis.</p>
+<p>This course aims to train students to describe literary phenomena with precision through close reading—not only to interpret them—and to engage in cross-cultural analysis of how literature represents and responds to the extreme. Description grounds interpretation. By analyzing and comparing key texts from various literary, philosophical, and cultural traditions, the course enhances students’ understanding of how literature documents, critiques, and shapes human responses to catastrophe and extremity. The course also encourages students to view literary texts as both artistic expressions and cultural documents that reflect and challenge societal values in times of crisis.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
-<p>本課程旨在培養學生進行跨文化分析的能力，並批判地思考文學如何再現與回應極端。透過分析、比較來自不同文學、哲學與文化傳統的重要文本，課程加深學生對文學如何記錄、批判並形塑人類面對災難與極端之回應的理解。課程亦鼓勵學生將文學文本視為藝術表達，同時視為反映並挑戰危機時刻社會價值的文化文獻。</p>
+<p>本課程旨在培養學生以細讀精確描述文學現象的能力——而不止於詮釋——並進行跨文化分析，思考文學如何再現與回應極端。描述為詮釋奠基。透過分析、比較來自不同文學、哲學與文化傳統的重要文本，課程加深學生對文學如何記錄、批判並形塑人類面對災難與極端之回應的理解。課程亦鼓勵學生將文學文本視為藝術表達，同時視為反映並挑戰危機時刻社會價值的文化文獻。</p>
 </div>
 </div>
 
@@ -283,7 +284,12 @@ Term 1, 2026–2027
       <td>Lecture</td>
       <td class="date">13 Oct</td>
       <td class="topic" rowspan="2">Social Movements &amp; Trauma</td>
-      <td>Collective trauma, social movements, and literary form</td>
+      <td>
+        <ul class="readings">
+          <li>陶東風：〈走向建構主義的文化創傷理論〉，《文藝理論研究》2024年第3期，頁34–44</li>
+          <li>(optional) Jeffrey C. Alexander, “Toward a Theory of Cultural Trauma”</li>
+        </ul>
+      </td>
     </tr>
     <tr>
       <td>Tutorial</td>
@@ -319,9 +325,12 @@ Term 1, 2026–2027
       <td>Lecture</td>
       <td class="date">27 Oct</td>
       <td class="topic" rowspan="2">Between the Heroic and the Ordinary</td>
-      <td><ul class="readings">
-	  <li>梁昂：《他們先殺了我父親：柬埔寨女孩的回憶》</li>
-	  <li>(optional) Rithy Panh, <em>The Missing Picture</em></li></ul></td>
+      <td>
+        <ul class="readings">
+          <li>梁昂：《他們先殺了我父親：柬埔寨女孩的回憶》（節選）</li>
+          <li>(optional) Rithy Panh, <em>The Missing Picture</em></li>
+        </ul>
+      </td>
     </tr>
     <tr>
       <td>Tutorial</td>
@@ -363,7 +372,12 @@ Term 1, 2026–2027
       <td>Lecture</td>
       <td class="date">10 Nov</td>
       <td class="topic" rowspan="2">Domestic Violence</td>
-      <td><ul class="readings"><li>李海燕：《話說〈白毛女〉——民族敘事中的階級與性別政治》</li></ul></td>
+      <td>
+        <ul class="readings">
+          <li>李海燕：《話說〈白毛女〉——民族敘事中的階級與性別政治》</li>
+          <li>申丹：〈敘事形式與性別政治——女性主義敘事學評析〉</li>
+        </ul>
+      </td>
     </tr>
     <tr>
       <td>Tutorial</td>
