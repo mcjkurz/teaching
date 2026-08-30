@@ -11,7 +11,7 @@ title: CHI559
 2026–2027 學年第一學期<br>
 中文（國際漢學）文學碩士課程　·　專修範圍選修　·　3 學分</p>
 <p><strong>研討課：</strong>逢星期三（9月16日停課，補課於10月3日星期六；日期見課程進度）</p>
-<p><strong>教師：</strong>馬傑（maciej.kurzynski[at]ln.edu.hk）<br>
+<p><strong>教師：</strong>Maciej Kurzynski 馬傑（maciej.kurzynski[at]ln.edu.hk）<br>
 <strong>辦公時間：</strong>星期二 3:00–5:00、星期五 10:00–12:00，HSH G06，或另行預約<br>
 <strong>授課語言：</strong>普通話</p>
 </div>
@@ -165,7 +165,7 @@ title: CHI559
   <tbody class="block-a">
     <tr>
       <td class="week" rowspan="2">5</td>
-      <td class="date" rowspan="2">10月3日<small>（六；補9月16日）</small></td>
+      <td class="date" rowspan="2">10月3日<small>（六）</small></td>
       <td class="topic">文體計量學</td>
       <td>
         <ul class="readings">
@@ -194,7 +194,7 @@ title: CHI559
       <td class="topic">從詞語到語料庫</td>
       <td>
         <ul class="readings">
-          <li>正規表示式（regex）</li>
+          <li>正規表示式（regex）（<a href="https://regexone.com/">https://regexone.com/</a>）</li>
           <li>比較兩個語料庫的用詞</li>
           <li>列聯表，第二部分</li>
         </ul>

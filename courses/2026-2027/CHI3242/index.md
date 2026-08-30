@@ -269,7 +269,7 @@ title: CHI3242
       <td class="topic"><span class="lang-en">From Words to Corpora</span><span class="lang-zh" lang="zh-Hant">從詞語到語料庫</span></td>
       <td>
         <ul class="readings">
-          <li><span class="lang-en">Regular expressions (regex)</span><span class="lang-zh" lang="zh-Hant">正規表示式（regex）</span></li>
+          <li><span class="lang-en">Regular expressions (regex) (<a href="https://regexone.com/">https://regexone.com/</a>)</span><span class="lang-zh" lang="zh-Hant">正規表示式（regex）（<a href="https://regexone.com/">https://regexone.com/</a>）</span></li>
           <li><span class="lang-en">Comparing the word usage of two corpora</span><span class="lang-zh" lang="zh-Hant">比較兩個語料庫的用詞</span></li>
           <li><span class="lang-en">Contingency table, part 2</span><span class="lang-zh" lang="zh-Hant">列聯表，第二部分</span></li>
         </ul>
