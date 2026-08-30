@@ -20,10 +20,10 @@ Term 1, 2026–2027</p>
 <div class="i18n-block">
 <h2>Course Description</h2>
 <div class="lang-en">
-<p>This course offers a beginner-friendly introduction to Digital Humanities, surveying tools for exploring and analyzing Chinese texts—novels, blogs, news articles, poetry, and more. Students will use accessible software and learn basic techniques to study patterns in Chinese literature and social media, assess trends in digital archives, and visualize data. Prior programming experience is not required. From early in the course we will use <em>agentic coding</em>: AI coding assistants that help write, debug, and evaluate research code, while students remain responsible for understanding every result they submit. Weekly seminars cover fundamental concepts and methods and provide supervised hands-on practice. The final project asks students to build their own datasets, apply digital methods to a topic of their choice, and present their findings as a LaTeX paper.</p>
+<p>This course offers a beginner-friendly introduction to Digital Humanities, surveying tools for exploring and analyzing Chinese texts—novels, blogs, news articles, poetry, and more. Students will use accessible software and learn basic techniques to study patterns in Chinese literature and social media, assess trends in digital archives, and visualize data. Prior programming experience is not required. From early in the course we will use <em>agentic coding</em>: AI coding assistants that help write, debug, and evaluate research code. Weekly seminars cover fundamental concepts and methods and provide supervised hands-on practice. The final project asks students to build their own datasets, apply digital methods to a topic of their choice, and present their findings as a LaTeX paper.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
-<p>本課程以淺白方式介紹數碼人文（Digital Humanities），廣泛概覽可用於探索與分析中文文本（小說、網誌、新聞、詩歌等）的數碼工具。學生將運用易於上手的軟件，學習基本技術，以研究中國文學與社交媒體中的模式、評估數碼檔案中的趨勢，並進行數據可視化。無須具備編程經驗。課程初期即引入<em>智能體編程</em>（agentic coding）：以人工智能編程助手協助撰寫、除錯並評估研究代碼，惟學生須理解並能解釋所提交的每一項結果。每週研討課講授數碼人文的基本概念與方法，並在教師指導下進行實作練習。期末專題要求學生自建數據集，將數碼方法應用於自選題目，並以 LaTeX 論文呈現研究成果。</p>
+<p>本課程以淺白方式介紹數碼人文（Digital Humanities），廣泛概覽可用於探索與分析中文文本（小說、網誌、新聞、詩歌等）的數碼工具。學生將運用易於上手的軟件，學習基本技術，以研究中國文學與社交媒體中的模式、評估數碼檔案中的趨勢，並進行數據可視化。無須具備編程經驗。課程初期即引入<em>智能體編程</em>（agentic coding）：以人工智能編程助手協助撰寫、除錯並評估研究代碼。每週研討課講授數碼人文的基本概念與方法，並在教師指導下進行實作練習。期末專題要求學生自建數據集，將數碼方法應用於自選題目，並以 LaTeX 論文呈現研究成果。</p>
 </div>
 </div>
 
@@ -80,7 +80,7 @@ Term 1, 2026–2027</p>
 <li>Create an <a href="https://openrouter.ai/">OpenRouter</a> account (we will use it later for large-language-model APIs).</li>
 <li>A classroom with computers will be available. You may also bring your own laptop. If you use your own computer, install <a href="https://www.python.org/downloads/">Python</a> and <a href="https://code.visualstudio.com/">Visual Studio Code (VS Code)</a> before the first class.</li>
 </ol>
-<p>We will learn agentic coding early in the course and use AI coding assistants in VS Code to write and debug research code. You remain responsible for understanding everything you submit.</p>
+<p>We will learn agentic coding early in the course and use AI coding assistants in VS Code to write and debug research code.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
 <p>請於<strong>第一次研討課之前</strong>完成下列準備：</p>
@@ -89,7 +89,7 @@ Term 1, 2026–2027</p>
 <li>註冊 <a href="https://openrouter.ai/">OpenRouter</a> 帳號（其後將用於大型語言模型 API）。</li>
 <li>課堂備有電腦室。亦可自備手提電腦。若使用個人電腦，請於開課前安裝 <a href="https://www.python.org/downloads/">Python</a> 與 <a href="https://code.visualstudio.com/">Visual Studio Code（VS Code）</a>。</li>
 </ol>
-<p>課程初期即講授智能體編程，並在 VS Code 中使用人工智能編程助手撰寫與除錯研究代碼。學生須理解並能解釋所提交的全部內容。</p>
+<p>課程初期即講授智能體編程，並在 VS Code 中使用人工智能編程助手撰寫與除錯研究代碼。</p>
 </div>
 </div>
 
@@ -124,10 +124,10 @@ Term 1, 2026–2027</p>
 <div class="i18n-block">
 <h2>Attendance Policy</h2>
 <div class="lang-en">
-<p>Students are expected to attend all seminars. <strong>One</strong> unexplained absence is permitted, no questions asked. Unexplained absences will not impact the final grade by more than 20% (the maximum you can get for in-class discussion and participation), unless a student misses more than five (5) meetings, in which case there will be insufficient evidence of participation to award a passing grade. Every unexplained absence (beyond the one everyone gets for free) will remove 10% from the participation component (which equals 2% of the final grade). For example, if you are absent two times without explanation (in addition to the one no-questions-asked absence granted to everyone), you will receive 100% − 20% = 80% of the total possible contribution from participation, which amounts to 80% × 20% = 16% of the final grade. Remember to come to class on time and prepared.</p>
+<p>Students are expected to attend all seminars. <strong>One</strong> unexplained absence is permitted, no questions asked. Unexplained absences will not impact the final grade by more than 20% (the maximum you can get for in-class discussion and participation), unless a student misses more than four (4) meetings, in which case there will be insufficient evidence of participation to award a passing grade. Every unexplained absence (beyond the one everyone gets for free) will remove 10% from the participation component (which equals 2% of the final grade). For example, if you are absent two times without explanation (in addition to the one no-questions-asked absence granted to everyone), you will receive 100% − 20% = 80% of the total possible contribution from participation, which amounts to 80% × 20% = 16% of the final grade. Remember to come to class on time and prepared.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
-<p>學生須出席所有研討課。<strong>一次</strong>無故缺席不計，無須解釋。無故缺席對學期成績的影響不會超過 20%（即課堂討論與參與的上限），惟缺席超過五次者，將因缺乏足夠評核依據而不能獲得及格成績。在人人皆有的一次免費缺席之外，每次無故缺席將從參與分扣除 10%（即學期總分的 2%）。例如，若除人人皆有的一次外再無故缺席兩次，參與分可得 100% − 20% = 80%，即學期總分的 80% × 20% = 16%。請準時出席，並預先準備。</p>
+<p>學生須出席所有研討課。<strong>一次</strong>無故缺席不計，無須解釋。無故缺席對學期成績的影響不會超過 20%（即課堂討論與參與的上限），惟缺席超過四次者，將因缺乏足夠評核依據而不能獲得及格成績。在人人皆有的一次免費缺席之外，每次無故缺席將從參與分扣除 10%（即學期總分的 2%）。例如，若除人人皆有的一次外再無故缺席兩次，參與分可得 100% − 20% = 80%，即學期總分的 80% × 20% = 16%。請準時出席，並預先準備。</p>
 </div>
 </div>
 
@@ -198,7 +198,12 @@ Term 1, 2026–2027</p>
       <td class="week">1</td>
       <td class="date">3 Sep</td>
       <td class="topic">Introduction</td>
-      <td>Digital Humanities: key concepts; agentic coding; GitHub, OpenRouter, and VS Code</td>
+      <td>
+        <ul class="readings">
+          <li>Digital Humanities: key concepts; agentic coding; GitHub, OpenRouter, and VS Code</li>
+          <li>Franco Moretti, “Conjectures on World Literature,” in <em>Distant Reading</em></li>
+        </ul>
+      </td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -213,10 +218,10 @@ Term 1, 2026–2027</p>
     <tr>
       <td class="week">3</td>
       <td class="date">17 Sep</td>
-      <td class="topic">Working with Text</td>
+      <td class="topic">Working with Texts</td>
       <td>
         <ul class="readings">
-          <li>Text files; Chinese text segmentation; Bag of Words (BoW); stopwords</li>
+          <li>Encoding (binary, Unicode, UTF-8); text files; Chinese text segmentation; Bag of Words (BoW); stopwords</li>
           <li>蕭紅：《生死場》</li>
         </ul>
       </td>
@@ -237,8 +242,8 @@ Term 1, 2026–2027</p>
       <td>
         <ul class="readings">
           <li>Contingency table, part 1（列聯表，第一部分）; what is a “character”?</li>
-          <li>Alex Woloch, <em>The One and the Many</em> (introduction)</li>
-          <li>Stefan Evert, “Corpora and Collocations” (excerpts)</li>
+          <li>Alex Woloch, <em>The One vs. the Many</em>, pp. 12–42</li>
+          <li>Stefan Evert, “Corpora and Collocations”</li>
         </ul>
       </td>
     </tr>
@@ -306,7 +311,12 @@ Term 1, 2026–2027</p>
       <td class="week">10</td>
       <td class="date">5 Nov</td>
       <td class="topic">Word Vectors</td>
-      <td>詞向量; conceptual history with word vectors</td>
+      <td>
+        <ul class="readings">
+          <li>詞向量; conceptual history with word vectors</li>
+          <li>Daniel Jurafsky and James H. Martin, “Vector Semantics and Embeddings”</li>
+        </ul>
+      </td>
     </tr>
   </tbody>
   <tbody class="due">
@@ -332,6 +342,8 @@ Term 1, 2026–2027</p>
       <td>
         <ul class="readings">
           <li>Training BERT-based classifiers (sentiment analysis); uploading a model to Hugging Face</li>
+          <li>Kurt Vonnegut, “The Shapes of Stories” (lecture)</li>
+          <li>Katherine Elkins, <em>The Shapes of Stories: Sentiment Analysis for Narrative</em></li>
           <li>徐懷中：《牽風記》</li>
         </ul>
       </td>

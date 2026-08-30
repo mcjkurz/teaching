@@ -61,7 +61,7 @@ title: CHI559
 <p><strong>評分等級：</strong> A 85%–100%；A− 80%–84%；B+ 75%–79%；B 70%–74%；B− 65%–69%；C+ 60%–64%；C 55%–59%；C− 50%–54%；D+ 45%–49%；D 40%–44%；F 0%–39%</p>
 
 <h2>出席規定</h2>
-<p>學生須出席所有研討課。<strong>一次</strong>無故缺席不計，無須解釋。無故缺席對學期成績的影響不會超過 10%（即課堂參與的上限），惟缺席超過五次者，將因缺乏足夠評核依據而不能獲得及格成績。在人人皆有的一次免費缺席之外，每次無故缺席將從參與分扣除 10%（即學期總分的 1%）。例如，若除人人皆有的一次外再無故缺席兩次，參與分可得 100% − 20% = 80%，即學期總分的 80% × 10% = 8%。請準時出席，並預先準備。</p>
+<p>學生須出席所有研討課。<strong>一次</strong>無故缺席不計，無須解釋。無故缺席對學期成績的影響不會超過 10%（即課堂參與的上限），惟缺席超過四次者，將因缺乏足夠評核依據而不能獲得及格成績。在人人皆有的一次免費缺席之外，每次無故缺席將從參與分扣除 10%（即學期總分的 1%）。例如，若除人人皆有的一次外再無故缺席兩次，參與分可得 100% − 20% = 80%，即學期總分的 80% × 10% = 8%。請準時出席，並預先準備。</p>
 
 <h2>人工智能使用規定</h2>
 <p>本課程講授智能體編程，學生須使用人工智能編程助手撰寫、除錯並評估研究代碼。任何此類使用均須明確記錄。凡使用人工智能工具協助完成的作業，均須附上聲明，註明所使用的工具，並說明其具體用途。學生必須理解並能解釋所提交的程式碼與分析。不得在所提交的作業中原文照錄人工智能生成的分析文字，亦不得僅作表面修改後使用。違者將被視為學術不當行為，並會影響該作業的評核結果。</p>
@@ -105,6 +105,9 @@ title: CHI559
         <ul class="readings">
           <li>研究環境搭建：GitHub、VS Code、人工智能編程助手</li>
           <li>李飛躍、桑海（主編）：《數字人文引論》（選讀）</li>
+          <li>Stephen Ramsay, “Algorithmic Criticism”</li>
+          <li>Stephen Best and Sharon Marcus, “Surface Reading: An Introduction”</li>
+          <li>Franco Moretti, “Conjectures on World Literature,” in <em>Distant Reading</em></li>
         </ul>
       </td>
     </tr>
@@ -139,7 +142,8 @@ title: CHI559
       <td class="topic">列聯表與搭配詞分析</td>
       <td>
         <ul class="readings">
-          <li>Stefan Evert, “Corpora and Collocations”（節選）</li>
+          <li>Alex Woloch, <em>The One vs. the Many</em>, pp. 12–42</li>
+          <li>Stefan Evert, “Corpora and Collocations”</li>
         </ul>
       </td>
     </tr>
@@ -152,6 +156,7 @@ title: CHI559
       <td>
         <ul class="readings">
           <li>王賀：《數字人文與中國現代文學》（選讀）</li>
+          <li>Paul Vierthaler, “Fiction and History: Polarity and Stylistic Gradience in Late Imperial Chinese Literature,” <em>Journal of Cultural Analytics</em> 1, no. 1 (2016), <a href="https://doi.org/10.7910/DVN/4ZVSKA">https://doi.org/10.7910/DVN/4ZVSKA</a></li>
         </ul>
       </td>
     </tr>
@@ -181,7 +186,14 @@ title: CHI559
       <td class="week">7</td>
       <td class="date">10月14日</td>
       <td class="topic">分類（基礎篇）</td>
-      <td>情感分析與 TF-IDF；課堂報告</td>
+      <td>
+        <ul class="readings">
+          <li>情感分析與 TF-IDF</li>
+          <li>Kurt Vonnegut, “The Shapes of Stories”（講座）</li>
+          <li>Katherine Elkins, <em>The Shapes of Stories: Sentiment Analysis for Narrative</em></li>
+          <li>課堂報告</li>
+        </ul>
+      </td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -191,7 +203,8 @@ title: CHI559
       <td class="topic">詞向量（靜態嵌入）</td>
       <td>
         <ul class="readings">
-          <li>Daniel Jurafsky and James H. Martin, <em>Speech and Language Processing</em>, chapter 6（選讀）</li>
+          <li>Daniel Jurafsky and James H. Martin, “Vector Semantics and Embeddings”</li>
+          <li>Tomas Mikolov et al., “Efficient Estimation of Word Representations in Vector Space”</li>
           <li>課堂報告</li>
         </ul>
       </td>
@@ -277,6 +290,16 @@ title: CHI559
 <li>Guldi, Jo. <em>The Dangerous Art of Text Mining: A Methodology for Digital History</em>. Cambridge: Cambridge University Press, 2023.（選讀）</li>
 <li>Slingerland, Edward. <em>Mind and Body in Early China: Beyond Orientalism and the Myth of Holism</em>. Oxford: Oxford University Press, 2018.（數字人文相關章節）</li>
 <li>Yau, Nathan. <em>Data Points: Visualization That Means Something</em>. Hoboken: John Wiley &amp; Sons, 2013.（選讀）</li>
+<li>Woloch, Alex. <em>The One vs. the Many: Minor Characters and the Space of the Protagonist in the Novel</em>. Princeton: Princeton University Press, 2003, pp. 12–42.</li>
+<li>Evert, Stefan. “Corpora and Collocations.”</li>
+<li>Vierthaler, Paul. “Fiction and History: Polarity and Stylistic Gradience in Late Imperial Chinese Literature.” <em>Journal of Cultural Analytics</em> 1, no. 1 (2016). <a href="https://doi.org/10.7910/DVN/4ZVSKA">https://doi.org/10.7910/DVN/4ZVSKA</a>.</li>
+<li>Ramsay, Stephen. “Algorithmic Criticism.” In <em>Reading Machines: Toward an Algorithmic Criticism</em>. Urbana: University of Illinois Press, 2011.</li>
+<li>Vonnegut, Kurt. “The Shapes of Stories.” Lecture.</li>
+<li>Elkins, Katherine. <em>The Shapes of Stories: Sentiment Analysis for Narrative</em>.</li>
+<li>Best, Stephen, and Sharon Marcus. “Surface Reading: An Introduction.” <em>Representations</em> 108, no. 1 (2009): 1–21.</li>
+<li>Moretti, Franco. “Conjectures on World Literature.” In <em>Distant Reading</em>. London: Verso, 2013.</li>
+<li>Mikolov, Tomas, Kai Chen, Greg Corrado, and Jeffrey Dean. “Efficient Estimation of Word Representations in Vector Space.” 2013.</li>
+<li>Jurafsky, Daniel, and James H. Martin. “Vector Semantics and Embeddings.” In <em>Speech and Language Processing</em>. 3rd ed.</li>
 </ol>
 
 <h2>延伸閱讀</h2>
