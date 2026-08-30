@@ -52,11 +52,10 @@ title: CHI559
 <thead><tr><th>項目</th><th>比重</th></tr></thead>
 <tbody>
 <tr><td>課堂參與</td><td>10%</td></tr>
-<tr><td>期中 Python 測驗</td><td>10%</td></tr>
 <tr><td>作業（2份）</td><td>20%</td></tr>
 <tr><td>課堂報告</td><td>20%</td></tr>
 <tr><td>專題計劃書</td><td>10%</td></tr>
-<tr><td>期末專題</td><td>30%</td></tr>
+<tr><td>期末專題</td><td>40%</td></tr>
 </tbody>
 </table>
 <p><strong>評分等級：</strong> A 85%–100%；A− 80%–84%；B+ 75%–79%；B 70%–74%；B− 65%–69%；C+ 60%–64%；C 55%–59%；C− 50%–54%；D+ 45%–49%；D 40%–44%；F 0%–39%</p>
@@ -69,10 +68,9 @@ title: CHI559
 
 <h2>課程設計</h2>
 <p><strong>1. 研討課：</strong>每週研討課結合概念講授與教師指導下的實作。學生處理中文文本，學習從詞頻、搭配、主題模型、詞向量到神經語言模型等方法。無須具備編程經驗。最初數週引入智能體編程，其後貫穿全學期使用人工智能編程助手。</p>
-<p><strong>2. 期中 Python 測驗：</strong>評估學生對 Python 編程基礎、環境設置及基本文本處理腳本的掌握程度。</p>
-<p><strong>3. 作業與專題計劃書：</strong>共兩份計分作業；作業0不計分。最後一項作業為期末專題計劃書。一律經 Moodle 作業區繳交。作業說明連結見下方課程進度表。</p>
-<p><strong>4. 課堂報告：</strong>全學期共五次課堂報告，自第3週起每隔一週一次（第3、5、7、9、11週）。學生須就一篇數字人文領域的研究論文作口頭報告（約 20 分鐘），說明該論文的研究問題、方法、數據與結論，並提出批判性評價。報告結束後全班討論。報告篇目見下方課程進度。當週報告的學生須作為該文獻的講解人，帶動討論。</p>
-<p><strong>5. 期末專題：</strong>學生自建數據集，將數字方法應用於自選的中國研究題目，並以完整可運作的 GitHub 倉庫（含原始資料、程式碼與 README）及中文配套報告呈現研究成果。於截止日期前經 Moodle 提交倉庫網址及報告。報告須包括以下部分：</p>
+<p><strong>2. 作業與專題計劃書：</strong>共兩份計分作業；作業0不計分。最後一項作業為期末專題計劃書。一律經 Moodle 作業區繳交。作業說明連結見下方課程進度表。</p>
+<p><strong>3. 課堂報告：</strong>全學期共五次課堂報告，自第3週起每隔一週一次（第3、5、7、9、11週）。學生須就一篇數字人文領域的研究論文作口頭報告（約 20 分鐘），說明該論文的研究問題、方法、數據與結論，並提出批判性評價。報告結束後全班討論。報告篇目見下方課程進度。當週報告的學生須作為該文獻的講解人，帶動討論。</p>
+<p><strong>4. 期末專題：</strong>學生自建數據集，將數字方法應用於自選的中國研究題目，並以完整可運作的 GitHub 倉庫（含原始資料、程式碼與 README）及中文配套報告呈現研究成果。於截止日期前經 Moodle 提交倉庫網址及報告。報告須包括以下部分：</p>
 <ul>
 <li><strong>摘要：</strong>目標、實驗與發現的概述（最多 150 字）</li>
 <li><strong>數據集：</strong>語料說明、來源與預處理步驟</li>
@@ -101,7 +99,6 @@ title: CHI559
       <td>
         <ul class="readings">
           <li>數字人文：核心概念；智能體編程；Git、GitHub、OpenRouter、OpenCode 與 VS Code</li>
-          <li>李飛躍、桑海（主編）：《數字人文引論》（選讀）</li>
         </ul>
       </td>
     </tr>
@@ -143,13 +140,6 @@ title: CHI559
       <td>Stephen Ramsay, “Algorithmic Criticism”</td>
     </tr>
   </tbody>
-  <tbody class="due">
-    <tr>
-      <td></td>
-      <td class="date">9月28日</td>
-      <td colspan="2"><strong>期中 Python 測驗，上午9:00</strong></td>
-    </tr>
-  </tbody>
   <tbody class="block-b">
     <tr>
       <td class="week">4</td>
@@ -172,7 +162,6 @@ title: CHI559
         <ul class="readings">
           <li>作者訊號；文體標記；特徵選取</li>
           <li>Z 分數與基於距離的文體比較</li>
-          <li>王賀：《數字人文與中國現代文學》（選讀）</li>
           <li>Paul Vierthaler, “Fiction and History: Polarity and Stylistic Gradience in Late Imperial Chinese Literature,” <em>Journal of Cultural Analytics</em> 1, no. 1 (2016), <a href="https://doi.org/10.7910/DVN/4ZVSKA">https://doi.org/10.7910/DVN/4ZVSKA</a></li>
         </ul>
       </td>
@@ -252,7 +241,6 @@ title: CHI559
           <li>什麼是意義？詞向量與餘弦相似度</li>
           <li>以詞向量研究概念史</li>
           <li>Daniel Jurafsky and James H. Martin, “Vector Semantics and Embeddings”</li>
-          <li>Donald Sturgeon, “Unsupervised Identification of Text Reuse in Early Chinese Literature”</li>
         </ul>
       </td>
     </tr>
@@ -283,7 +271,7 @@ title: CHI559
       <td class="topic">解碼器與大型語言模型</td>
       <td>
         <ul class="readings">
-          <li>從 BERT 到 GPT；生成模型；什麼是「語境」？；下一詞元機率</li>
+          <li>從 BERT 到 GPT；生成模型；什麼是「上下文」？；下一詞元機率</li>
           <li>以大型語言模型抽取資料；Python API（OpenRouter）</li>
         </ul>
       </td>

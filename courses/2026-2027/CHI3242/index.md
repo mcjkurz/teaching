@@ -369,7 +369,7 @@ title: CHI3242
       <td class="topic"><span class="lang-en">Decoders and LLMs</span><span class="lang-zh" lang="zh-Hant">解碼器與大型語言模型</span></td>
       <td>
         <ul class="readings">
-          <li><span class="lang-en">From BERT to GPT; generative models; what is “context”?; next-token probability</span><span class="lang-zh" lang="zh-Hant">從 BERT 到 GPT；生成模型；什麼是「語境」？；下一詞元機率</span></li>
+          <li><span class="lang-en">From BERT to GPT; generative models; what is “context”?; next-token probability</span><span class="lang-zh" lang="zh-Hant">從 BERT 到 GPT；生成模型；什麼是「上下文」？；下一詞元機率</span></li>
           <li><span class="lang-en">LLMs for data extraction; Python API (OpenRouter)</span><span class="lang-zh" lang="zh-Hant">以大型語言模型抽取資料；Python API（OpenRouter）</span></li>
         </ul>
       </td>
