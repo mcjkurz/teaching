@@ -305,7 +305,7 @@ title: CHI559
       <td class="topic">數據可視化與批判性反思</td>
       <td>
         <ul class="readings">
-          <li>(optional) Stephen Best and Sharon Marcus, “Surface Reading: An Introduction”</li>
+          <li>Stephen Best and Sharon Marcus, “Surface Reading: An Introduction”</li>
         </ul>
       </td>
     </tr>
