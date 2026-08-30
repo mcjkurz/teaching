@@ -35,7 +35,7 @@ Term 1, 2026–2027</p>
 <div class="i18n-block">
 <h2>Aims</h2>
 <div class="lang-en">
-<p>This course aims to train students to describe literary phenomena with precision through close reading—not only to interpret them—and to engage in cross-cultural analysis of how literature represents and responds to the extreme. Description grounds interpretation. By analyzing and comparing key texts from various literary, philosophical, and cultural traditions, the course enhances students’ understanding of how literature documents, critiques, and shapes human responses to catastrophe and extremity. The course also encourages students to view literary texts as both artistic expressions and cultural documents that reflect and challenge societal values in times of crisis.</p>
+<p>This course aims to train students to describe literary phenomena with precision through close reading and to engage in cross-cultural analysis of how literature represents and responds to the extreme. By analyzing and comparing key texts from various literary, philosophical, and cultural traditions, the course enhances students’ understanding of how literature documents, critiques, and shapes human responses to catastrophe and extremity. The course also encourages students to view literary texts as both artistic expressions and cultural documents that reflect and challenge societal values in times of crisis.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
 <p>本課程旨在培養學生透過細讀精確描述文學現象的能力——而不止於詮釋——並進行跨文化分析，思考文學如何再現與回應極端處境。描述為詮釋奠基。透過分析、比較來自不同文學、哲學與文化傳統的重要文本，課程加深學生對文學如何記錄、批判並形塑人類對災難與極端處境之回應的理解。課程亦鼓勵學生將文學文本既視為藝術表達，也視為反映並挑戰危機時刻社會價值的文化文獻。</p>
