@@ -9,7 +9,7 @@ title: CHI3242 Assignment 1
 <div class="i18n-block">
 <h2>Repository and Text Passport</h2>
 <div class="lang-en">
-<p><strong>Due:</strong> 14 Sep, 9:00 am</p>
+<p><strong>Due:</strong> 7 Oct, 9:00 am</p>
 <p>Submit one public GitHub repository URL on Moodle. The repository must include:</p>
 <ul>
 <li><code>README.md</code> (name, student ID, book metadata, source URL)</li>
@@ -22,7 +22,7 @@ title: CHI3242 Assignment 1
 </ul>
 </div>
 <div class="lang-zh" lang="zh-Hant">
-<p><strong>截止：</strong>9月14日 上午9:00</p>
+<p><strong>截止：</strong>10月7日 上午9:00</p>
 <p>於 Moodle 提交一個公開 GitHub 倉庫網址。倉庫須包含：</p>
 <ul>
 <li><code>README.md</code>（姓名、學號、書籍資訊、來源網址）</li>

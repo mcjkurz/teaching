@@ -83,7 +83,7 @@ title: CHI4335
 <tbody>
 <tr><td>In-class discussion and participation</td><td>20%</td></tr>
 <tr><td>Comparative essays (2)</td><td>20%</td></tr>
-<tr><td>Oral presentations (2)</td><td>20%</td></tr>
+<tr><td>Oral presentation (1)</td><td>20%</td></tr>
 <tr><td>Final project</td><td>40%</td></tr>
 </tbody>
 </table>
@@ -96,7 +96,7 @@ title: CHI4335
 <tbody>
 <tr><td>課堂討論與參與</td><td>20%</td></tr>
 <tr><td>比較短文（2篇）</td><td>20%</td></tr>
-<tr><td>口頭報告（2次）</td><td>20%</td></tr>
+<tr><td>口頭報告（1次）</td><td>20%</td></tr>
 <tr><td>期末專題</td><td>40%</td></tr>
 </tbody>
 </table>
@@ -128,14 +128,14 @@ title: CHI4335
 <h2><span class="lang-en">Course Design</span><span class="lang-zh" lang="zh-Hant">課程設計</span></h2>
 <div class="lang-en">
 <p><strong>1. Lectures.</strong> Each week, the lecture will focus on the broader historical contexts and theoretical issues surrounding the selected texts.</p>
-<p><strong>2. Presentations.</strong> During the tutorial sessions, students will work individually or collaborate in small teams (comprising 2 members) to deliver two oral presentations (20–30 mins each) on selected <strong>primary</strong> texts (novels or short stories). The students presenting each week are topic experts who are expected to lead the discussion in tutorials and be active during lectures. The presentations should incorporate carefully chosen quotations and paraphrased content from the story, addressing one or more of the following questions:</p>
+<p><strong>2. Presentation.</strong> During the tutorial sessions, students will work individually or collaborate in small teams (comprising 2 members) to deliver one oral presentation (20–30 mins) on a selected <strong>primary</strong> text (novel or short story). The students presenting each week are topic experts who are expected to lead the discussion in tutorials and be active during lectures. The presentation should incorporate carefully chosen quotations and paraphrased content from the story, addressing one or more of the following questions:</p>
 <ul>
 <li>How does the text portray the impact of extreme experiences on individuals and society?</li>
 <li>How is the body represented?</li>
 <li>How does the author mix fictional and non-fictional discourse?</li>
 <li>How are women portrayed, and what roles are they assigned in the context of crisis?</li>
 </ul>
-<p>The presentations should be comparative. You are expected to analyze the assigned text in relation to other primary works from the course, highlighting both significant continuities (shared themes, styles, or arguments) and departures (unique elements or innovations, cultural influences, etc.).</p>
+<p>The presentation should be comparative. You are expected to analyze the assigned text in relation to other primary works from the course, highlighting both significant continuities (shared themes, styles, or arguments) and departures (unique elements or innovations, cultural influences, etc.).</p>
 <p><strong>3. Comparative essays.</strong> Out of five (5) topics, students are expected to submit two (2) comparative essays in Chinese on the primary texts (short stories or novels) covered throughout the course. Essays must present personal analysis and insights, focusing on one or more of the course’s key themes: the individual and society, the body, fictionality, and womanhood. Each essay should center on close analysis and precise description of the texts, supported by relevant quotations. In addition to developing thematic claims, each essay should explain how particular textual features, such as metaphors, dialogue, narrative perspective, imagery, and style, function in the work and shape its meaning. Your approach must be comparative. Your analysis should incorporate <strong>at least one primary text from the respective block.</strong> You are encouraged to draw connections to texts from other weeks. Each essay should be between 1,500 and 2,000 characters in length. All essays must be submitted via the Assignment module on Moodle. If more than two essays are submitted, only the two highest scores will count.</p>
 <p><strong>4. Final project</strong> offers three options.</p>
 <ul>
@@ -146,7 +146,7 @@ title: CHI4335
 </div>
 <div class="lang-zh" lang="zh-Hant">
 <p><strong>1. 講座：</strong>每週講座聚焦所選文本的歷史脈絡與理論問題。</p>
-<p><strong>2. 報告：</strong>導修課上，學生可獨立或兩人小組，就指定<strong>一手</strong>文本（長篇或短篇小說）作兩次口頭報告（每次20–30分鐘）。當週報告的學生須作為該主題的專家，帶領導修討論，並在講座中積極參與。報告應從作品中精選引文並準確轉述內容，回應下列一項或多項問題：</p>
+<p><strong>2. 報告：</strong>導修課上，學生可獨立或兩人小組，就指定<strong>一手</strong>文本（長篇或短篇小說）作一次口頭報告（20–30分鐘）。當週報告的學生須作為該主題的專家，帶領導修討論，並在講座中積極參與。報告應從作品中精選引文並準確轉述內容，回應下列一項或多項問題：</p>
 <ul>
 <li>文本如何描寫極端經驗對個人與社會的影響？</li>
 <li>身體如何被再現？</li>
@@ -236,7 +236,7 @@ title: CHI4335
     <tr>
       <td></td>
       <td></td>
-      <td class="date"><span class="lang-en">20 Sep</span><span class="lang-zh" lang="zh-Hant">9月20日</span></td>
+      <td class="date"><span class="lang-en">21 Sep</span><span class="lang-zh" lang="zh-Hant">9月21日</span></td>
       <td colspan="2"><strong><span class="lang-en">Comparative essay (Weeks 2 &amp; 3) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第2、3週）截止，上午9:00</span></strong></td>
     </tr>
   </tbody>
@@ -278,7 +278,7 @@ title: CHI4335
     <tr>
       <td></td>
       <td></td>
-      <td class="date"><span class="lang-en">3 Oct</span><span class="lang-zh" lang="zh-Hant">10月3日</span></td>
+      <td class="date"><span class="lang-en">5 Oct</span><span class="lang-zh" lang="zh-Hant">10月5日</span></td>
       <td colspan="2"><strong><span class="lang-en">Comparative essay (Weeks 4 &amp; 5) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第4、5週）截止，上午9:00</span></strong></td>
     </tr>
   </tbody>
@@ -333,7 +333,7 @@ title: CHI4335
     <tr>
       <td></td>
       <td></td>
-      <td class="date"><span class="lang-en">24 Oct</span><span class="lang-zh" lang="zh-Hant">10月24日</span></td>
+      <td class="date"><span class="lang-en">26 Oct</span><span class="lang-zh" lang="zh-Hant">10月26日</span></td>
       <td colspan="2"><strong><span class="lang-en">Comparative essay (Weeks 6, 7, 8) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第6、7、8週）截止，上午9:00</span></strong></td>
     </tr>
   </tbody>
@@ -379,7 +379,7 @@ title: CHI4335
     <tr>
       <td></td>
       <td></td>
-      <td class="date"><span class="lang-en">7 Nov</span><span class="lang-zh" lang="zh-Hant">11月7日</span></td>
+      <td class="date"><span class="lang-en">9 Nov</span><span class="lang-zh" lang="zh-Hant">11月9日</span></td>
       <td colspan="2"><strong><span class="lang-en">Comparative essay (Weeks 9 &amp; 10) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第9、10週）截止，上午9:00</span></strong></td>
     </tr>
   </tbody>
@@ -425,7 +425,7 @@ title: CHI4335
     <tr>
       <td></td>
       <td></td>
-      <td class="date"><span class="lang-en">21 Nov</span><span class="lang-zh" lang="zh-Hant">11月21日</span></td>
+      <td class="date"><span class="lang-en">23 Nov</span><span class="lang-zh" lang="zh-Hant">11月23日</span></td>
       <td colspan="2"><strong><span class="lang-en">Comparative essay (Weeks 11 &amp; 12) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第11、12週）截止，上午9:00</span></strong></td>
     </tr>
   </tbody>

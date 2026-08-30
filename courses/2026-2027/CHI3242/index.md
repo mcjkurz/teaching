@@ -23,10 +23,10 @@ title: CHI3242
 <div class="i18n-block">
 <h2><span class="lang-en">Course Description</span><span class="lang-zh" lang="zh-Hant">課程簡介</span></h2>
 <div class="lang-en">
-<p>This course offers a beginner-friendly introduction to Digital Humanities, surveying tools for exploring and analyzing Chinese texts, including novels, blogs, news articles, poetry, and more. Students will use accessible software and learn basic techniques to study patterns in Chinese literature and social media, assess trends in digital archives, and visualize data. Prior programming experience is not required. From early in the course we will use agentic coding: AI coding assistants that help write, debug, and evaluate research code. Weekly seminars cover fundamental concepts and methods and provide supervised hands-on practice. The final project asks students to build their own datasets, apply digital methods to a topic of their choice, and present their findings through a complete working GitHub repository and an accompanying report.</p>
+<p>This course offers a beginner-friendly introduction to Digital Humanities, surveying tools for exploring and analyzing Chinese texts, including novels, blogs, news articles, poetry, and more. Students will use accessible software and learn basic techniques to study patterns in Chinese literature and social media, assess trends in digital archives, and visualize data. Prior programming experience is not required. From early in the course we will use agentic coding: AI coding assistants that help write, debug, and evaluate research code. Weekly seminars cover fundamental concepts and methods and provide supervised hands-on practice. For the final project, students may use corpora shared in class or build their own datasets, apply digital methods to a topic of their choice, and present their findings through a complete working GitHub repository and an accompanying report.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
-<p>本課程以淺白方式介紹數碼人文（Digital Humanities），廣泛概覽可用於探索與分析中文文本（小說、網誌、新聞、詩歌等）的數碼工具。學生將運用易於上手的軟件，學習基本技術，以研究中國文學與社交媒體中的模式、評估數碼檔案中的趨勢，並進行數據可視化。無須具備編程經驗。課程初期即引入智能體編程（agentic coding）：以人工智能編程助手協助撰寫、除錯並評估研究代碼。每週研討課講授數碼人文的基本概念與方法，並在教師指導下進行實作練習。期末專題要求學生自建數據集，將數碼方法應用於自選題目，並以完整可運作的 GitHub 倉庫及配套報告呈現研究成果。</p>
+<p>本課程以淺白方式介紹數碼人文（Digital Humanities），廣泛概覽可用於探索與分析中文文本（小說、網誌、新聞、詩歌等）的數碼工具。學生將運用易於上手的軟件，學習基本技術，以研究中國文學與社交媒體中的模式、評估數碼檔案中的趨勢，並進行數據可視化。無須具備編程經驗。課程初期即引入智能體編程（agentic coding）：以人工智能編程助手協助撰寫、除錯並評估研究代碼。每週研討課講授數碼人文的基本概念與方法，並在教師指導下進行實作練習。期末專題中，學生可使用課堂提供的語料，或自建數據集，將數碼方法應用於自選題目，並以完整可運作的 GitHub 倉庫及配套報告呈現研究成果。</p>
 </div>
 </div>
 
@@ -151,7 +151,7 @@ title: CHI3242
 <div class="lang-en">
 <p><strong>1. Seminars.</strong> Each week, a three-hour seminar combines conceptual discussion with supervised hands-on practice. Students work with Chinese texts and learn methods ranging from word frequencies and collocations to topic models, word vectors, and neural language models. Prior programming experience is not required. We introduce agentic coding in the first weeks and then use AI coding agents throughout.</p>
 <p><strong>2. Assignments and project proposal.</strong> Two graded assignments apply the tools covered in seminars. Assignment 0 is not graded. The final assignment item is a final project proposal. All work must be submitted via the Assignment module on Moodle. Instructions are linked in the schedule table.</p>
-<p><strong>3. Final project.</strong> Students build their own datasets, apply digital methods to a topic of their choice, and present their findings through a complete working GitHub repository (sources, code, and README files) and an accompanying report in Chinese. Submit the repository URL and the report through Moodle before the deadline. The report should include the following parts:</p>
+<p><strong>3. Final project.</strong> Students may use corpora shared in class or build their own datasets, apply digital methods to a topic of their choice, and present their findings through a complete working GitHub repository (sources, code, and README files) and an accompanying report in Chinese. Submit the repository URL and the report through Moodle before the deadline. The report should include the following parts:</p>
 <ul>
 <li><strong>Abstract:</strong> a summary of goals, experiments, and findings (max. 150 characters)</li>
 <li><strong>Dataset:</strong> corpus description, sources, and preprocessing steps</li>
@@ -163,7 +163,7 @@ title: CHI3242
 <div class="lang-zh" lang="zh-Hant">
 <p><strong>1. 研討課：</strong>每週三小時研討課結合概念講授與教師指導下的實作。學生處理中文文本，學習從詞頻、搭配、主題模型、詞向量到神經語言模型等方法。無須具備編程經驗。最初數週引入智能體編程，其後貫穿全學期使用人工智能編程助手。</p>
 <p><strong>2. 作業與專題計劃書：</strong>共兩份計分作業；作業0不計分。最後一項作業為期末專題計劃書。一律經 Moodle 作業區繳交。作業說明連結見下方課程進度表。</p>
-<p><strong>3. 期末專題：</strong>學生自建數據集，將數碼方法應用於自選題目，並以完整可運作的 GitHub 倉庫（含原始資料、程式碼與 README）及中文配套報告呈現研究成果。於截止日期前經 Moodle 提交倉庫網址及報告。報告須包括以下部分：</p>
+<p><strong>3. 期末專題：</strong>學生可使用課堂提供的語料，或自建數據集，將數碼方法應用於自選題目，並以完整可運作的 GitHub 倉庫（含原始資料、程式碼與 README）及中文配套報告呈現研究成果。於截止日期前經 Moodle 提交倉庫網址及報告。報告須包括以下部分：</p>
 <ul>
 <li><strong>摘要：</strong>目標、實驗與發現的概述（最多 150 字）</li>
 <li><strong>數據集：</strong>語料說明、來源與預處理步驟</li>
@@ -217,7 +217,7 @@ title: CHI3242
   <tbody class="due">
     <tr>
       <td></td>
-      <td class="date"><span class="lang-en">14 Sep</span><span class="lang-zh" lang="zh-Hant">9月14日</span></td>
+      <td class="date"><span class="lang-en">16 Sep</span><span class="lang-zh" lang="zh-Hant">9月16日</span></td>
       <td colspan="2"><a href="#"><span class="lang-en">Assignment 0 (not graded) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">作業0（不計分）截止，上午9:00</span></a></td>
     </tr>
   </tbody>
@@ -243,7 +243,6 @@ title: CHI3242
         <ul class="readings">
           <li><span class="lang-en">Character, word, person</span><span class="lang-zh" lang="zh-Hant">角色、詞語、人物</span></li>
           <li>Alex Woloch, <em>The One vs. the Many</em>, pp. 12–42</li>
-          <li>蕭紅：《生死場》</li>
         </ul>
       </td>
     </tr>
@@ -252,8 +251,8 @@ title: CHI3242
     <tr>
       <td class="week">5</td>
       <td class="date"><span class="lang-en">1 Oct</span><span class="lang-zh" lang="zh-Hant">10月1日</span></td>
-      <td class="topic"></td>
-      <td><strong><span class="lang-en">No class (National Day)</span><span class="lang-zh" lang="zh-Hant">停課（國慶日）</span></strong></td>
+      <td class="topic"><span class="lang-en">No class (National Day)</span><span class="lang-zh" lang="zh-Hant">停課（國慶日）</span></td>
+      <td></td>
     </tr>
   </tbody>
   <tbody class="due">
@@ -285,7 +284,7 @@ title: CHI3242
       <td>
         <ul class="readings">
           <li><span class="lang-en">LDA; what is a “topic”?</span><span class="lang-zh" lang="zh-Hant">LDA；什麼是「主題」？</span></li>
-          <li>David M. Blei, “Probabilistic Topic Models”</li>
+          <li>蘇祺：〈主題模型〉，第十章，李飛躍、桑海（主編）《數字人文引論》。北京：中華書局，2026年</li>
         </ul>
       </td>
     </tr>
@@ -308,7 +307,7 @@ title: CHI3242
   <tbody class="due">
     <tr>
       <td></td>
-      <td class="date"><span class="lang-en">26 Oct</span><span class="lang-zh" lang="zh-Hant">10月26日</span></td>
+      <td class="date"><span class="lang-en">28 Oct</span><span class="lang-zh" lang="zh-Hant">10月28日</span></td>
       <td colspan="2"><a href="#"><span class="lang-en">Assignment 2 due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">作業2截止，上午9:00</span></a></td>
     </tr>
   </tbody>
@@ -335,7 +334,7 @@ title: CHI3242
         <ul class="readings">
           <li><span class="lang-en">What is meaning? word vectors and cosine similarity</span><span class="lang-zh" lang="zh-Hant">什麼是「語義」？詞向量與餘弦相似度</span></li>
           <li><span class="lang-en">Conceptual history with word vectors</span><span class="lang-zh" lang="zh-Hant">以詞向量研究概念史</span></li>
-          <li>Daniel Jurafsky and James H. Martin, “Vector Semantics and Embeddings”</li>
+          <li>胡韌奮：〈語言模型〉，第九章，李飛躍、桑海（主編）《數字人文引論》。北京：中華書局，2026年</li>
         </ul>
       </td>
     </tr>
@@ -358,7 +357,7 @@ title: CHI3242
   <tbody class="due">
     <tr>
       <td></td>
-      <td class="date"><span class="lang-en">16 Nov</span><span class="lang-zh" lang="zh-Hant">11月16日</span></td>
+      <td class="date"><span class="lang-en">18 Nov</span><span class="lang-zh" lang="zh-Hant">11月18日</span></td>
       <td colspan="2"><a href="#"><span class="lang-en">Final Project Proposal due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">期末專題計劃書截止，上午9:00</span></a></td>
     </tr>
   </tbody>

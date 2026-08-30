@@ -7,9 +7,29 @@ title: CHI3242 Assignments
 <h1>CHI 3242 Assignments</h1>
 
 <div class="i18n-block">
+<h2>Assignment 0 (not graded)</h2>
+<div class="lang-en">
+<p><strong>Due:</strong> 16 Sep, 9:00 am</p>
+<p>Submit one public GitHub repository URL on Moodle. The repository must include:</p>
+<ul>
+<li><code>README.md</code> (name, student ID)</li>
+<li>one UTF-8 plain-text file (Chinese text)</li>
+</ul>
+</div>
+<div class="lang-zh" lang="zh-Hant">
+<p><strong>截止：</strong>9月16日 上午9:00</p>
+<p>於 Moodle 提交一個公開 GitHub 倉庫網址。倉庫須包含：</p>
+<ul>
+<li><code>README.md</code>（姓名、學號）</li>
+<li>一份 UTF-8 純文字檔（中文文本）</li>
+</ul>
+</div>
+</div>
+
+<div class="i18n-block">
 <h2>Assignment 1</h2>
 <div class="lang-en">
-<p><strong>Due:</strong> 14 Sep, 9:00 am</p>
+<p><strong>Due:</strong> 7 Oct, 9:00 am</p>
 <p>Submit one public GitHub repository URL on Moodle. The repository must include:</p>
 <ul>
 <li><code>README.md</code> (name, student ID, book metadata, source URL)</li>
@@ -22,7 +42,7 @@ title: CHI3242 Assignments
 </ul>
 </div>
 <div class="lang-zh" lang="zh-Hant">
-<p><strong>截止：</strong>9月14日 上午9:00</p>
+<p><strong>截止：</strong>10月7日 上午9:00</p>
 <p>於 Moodle 提交一個公開 GitHub 倉庫網址。倉庫須包含：</p>
 <ul>
 <li><code>README.md</code>（姓名、學號、書籍資訊、來源網址）</li>
@@ -39,35 +59,23 @@ title: CHI3242 Assignments
 <div class="i18n-block">
 <h2>Assignment 2</h2>
 <div class="lang-en">
-<p><strong>Due:</strong> 7 Oct, 9:00 am</p>
-<p>Corpus comparison using contingency-table logic. Compare two text segments (or two short texts), identify salient words, and discuss one interpretive finding.</p>
-</div>
-<div class="lang-zh" lang="zh-Hant">
-<p><strong>截止：</strong>10月7日 上午9:00</p>
-<p>以列聯表邏輯進行語料比較。比較兩段文本（或兩份短文本），找出顯著詞並提出一項文本詮釋。</p>
-</div>
-</div>
-
-<div class="i18n-block">
-<h2>Assignment 3</h2>
-<div class="lang-en">
-<p><strong>Due:</strong> 26 Oct, 9:00 am</p>
+<p><strong>Due:</strong> 28 Oct, 9:00 am</p>
 <p>Topic modeling exercise based on class workflow (preprocessing, model output, and short interpretation).</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
-<p><strong>截止：</strong>10月26日 上午9:00</p>
+<p><strong>截止：</strong>10月28日 上午9:00</p>
 <p>按課堂流程完成主題模型作業（預處理、模型輸出、簡短詮釋）。</p>
 </div>
 </div>
 
 <div class="i18n-block">
-<h2>Assignment 4</h2>
+<h2>Final Project Proposal</h2>
 <div class="lang-en">
-<p><strong>Due:</strong> 23 Nov, 9:00 am</p>
-<p>Word vectors and classification mini-task. Show vector-based evidence and discuss one limitation.</p>
+<p><strong>Due:</strong> 18 Nov, 9:00 am</p>
+<p>Submit a final project proposal in Chinese. State the research question, the dataset and its source (a corpus shared in class or one you collect), the method and rationale, the expected contribution, and possible limitations.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
-<p><strong>截止：</strong>11月23日 上午9:00</p>
-<p>詞向量與分類小作業。提交向量證據，並說明一項方法限制。</p>
+<p><strong>截止：</strong>11月18日 上午9:00</p>
+<p>提交期末專題計劃書（中文），須說明研究問題、擬用數據集與來源（課堂提供的語料或自建數據集）、方法及理據，以及預期貢獻與可能的局限。</p>
 </div>
 </div>

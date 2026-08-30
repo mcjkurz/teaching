@@ -10,7 +10,7 @@ title: CHI559
 <p><strong>環球中國研究中的數字人文</strong><br>
 2026–2027 學年第一學期<br>
 中文（國際漢學）文學碩士課程　·　專修範圍選修　·　3 學分</p>
-<p><strong>研討課：</strong>逢星期三（第5週改於10月3日星期六；日期見課程進度）</p>
+<p><strong>研討課：</strong>逢星期三（9月16日停課，補課於10月3日星期六；日期見課程進度）</p>
 <p><strong>教師：</strong>馬傑（maciej.kurzynski[at]ln.edu.hk）<br>
 <strong>辦公時間：</strong>星期二 3:00–5:00、星期五 10:00–12:00，HSH G06，或另行預約<br>
 <strong>授課語言：</strong>普通話</p>
@@ -21,7 +21,7 @@ title: CHI559
 </div>
 
 <h2>課程簡介</h2>
-<p>本課程介紹數字人文及其在環球中國研究中的角色，講授適用於中國歷史、文學與文化數據的主要工具與方法。學生將學習基本技術，以研究中國文學與歷史文本中的模式，並進行數據可視化。無須具備編程經驗。課程初期即引入智能體編程：以人工智能編程助手協助撰寫、除錯並評估研究代碼。每週研討課結合概念講授、實作與文獻討論。學生須就一篇數字人文研究論文作口頭報告。期末專題要求學生自建數據集，將數字方法應用於自選題目，並以完整可運作的 GitHub 倉庫及配套報告呈現研究成果。</p>
+<p>本課程介紹數字人文及其在環球中國研究中的角色，講授適用於中國歷史、文學與文化數據的主要工具與方法。學生將學習基本技術，以研究中國文學與歷史文本中的模式，並進行數據可視化。無須具備編程經驗。課程初期即引入智能體編程：以人工智能編程助手協助撰寫、除錯並評估研究代碼。每週研討課結合概念講授、實作與文獻討論。學生須就一篇數字人文研究論文作口頭報告。期末專題中，學生可使用課堂提供的語料，或自建數據集，將數字方法應用於自選題目，並以完整可運作的 GitHub 倉庫及配套報告呈現研究成果。</p>
 
 <h2>課程目標</h2>
 <p>本課程旨在培養碩士生獨立運用數字工具處理中國研究問題的能力，並能批判地評估新技術對學科的影響。學生將學習以人工智能編程助手撰寫、除錯並評估研究代碼，同時理解方法的限度與倫理挑戰，最終設計一項將數字人文與中國研究相結合的項目。</p>
@@ -72,7 +72,7 @@ title: CHI559
 <p><strong>1. 研討課：</strong>每週研討課結合概念講授與教師指導下的實作。學生處理中文文本，學習從詞頻、搭配、主題模型、詞向量到神經語言模型等方法。無須具備編程經驗。最初數週引入智能體編程，其後貫穿全學期使用人工智能編程助手。</p>
 <p><strong>2. 作業與專題計劃書：</strong>共兩份計分作業；作業0不計分。最後一項作業為期末專題計劃書。一律經 Moodle 作業區繳交。作業說明連結見下方課程進度表。</p>
 <p><strong>3. 課堂報告：</strong>全學期共五次課堂報告，自第3週起每隔一週一次（第3、5、7、9、11週）。學生須就一篇數字人文領域的研究論文作口頭報告（約 20 分鐘），說明該論文的研究問題、方法、數據與結論，並提出批判性評價。報告結束後全班討論。報告篇目見下方課程進度。當週報告的學生須作為該文獻的講解人，帶動討論。</p>
-<p><strong>4. 期末專題：</strong>學生自建數據集，將數字方法應用於自選的中國研究題目，並以完整可運作的 GitHub 倉庫（含原始資料、程式碼與 README）及中文配套報告呈現研究成果。於截止日期前經 Moodle 提交倉庫網址及報告。報告須包括以下部分：</p>
+<p><strong>4. 期末專題：</strong>學生可使用課堂提供的語料，或自建數據集，將數字方法應用於自選的中國研究題目，並以完整可運作的 GitHub 倉庫（含原始資料、程式碼與 README）及中文配套報告呈現研究成果。於截止日期前經 Moodle 提交倉庫網址及報告。報告須包括以下部分：</p>
 <ul>
 <li><strong>摘要：</strong>目標、實驗與發現的概述（最多 150 字）</li>
 <li><strong>數據集：</strong>語料說明、來源與預處理步驟</li>
@@ -118,10 +118,17 @@ title: CHI559
       </td>
     </tr>
   </tbody>
+  <tbody class="makeup">
+    <tr>
+      <td></td>
+      <td class="date">9月16日</td>
+      <td colspan="2">停課；補課於 10月3日（星期六）</td>
+    </tr>
+  </tbody>
   <tbody class="due">
     <tr>
       <td></td>
-      <td class="date">9月14日</td>
+      <td class="date">9月22日</td>
       <td colspan="2"><a href="#">作業0（不計分）截止，上午9:00</a></td>
     </tr>
   </tbody>
@@ -158,7 +165,7 @@ title: CHI559
   <tbody class="block-a">
     <tr>
       <td class="week" rowspan="2">5</td>
-      <td class="date" rowspan="2">10月3日<small>（六）</small></td>
+      <td class="date" rowspan="2">10月3日<small>（六；補9月16日）</small></td>
       <td class="topic">文體計量學</td>
       <td>
         <ul class="readings">
@@ -176,7 +183,7 @@ title: CHI559
   <tbody class="due">
     <tr>
       <td></td>
-      <td class="date">10月7日</td>
+      <td class="date">10月6日</td>
       <td colspan="2"><a href="#">作業1截止，上午9:00</a></td>
     </tr>
   </tbody>
@@ -229,7 +236,7 @@ title: CHI559
   <tbody class="due">
     <tr>
       <td></td>
-      <td class="date">10月26日</td>
+      <td class="date">10月27日</td>
       <td colspan="2"><a href="#">作業2截止，上午9:00</a></td>
     </tr>
   </tbody>
@@ -286,7 +293,7 @@ title: CHI559
   <tbody class="due">
     <tr>
       <td></td>
-      <td class="date">11月16日</td>
+      <td class="date">11月17日</td>
       <td colspan="2"><a href="#">期末專題計劃書截止，上午9:00</a></td>
     </tr>
   </tbody>
@@ -319,53 +326,6 @@ title: CHI559
   </tbody>
 </table>
 </div>
-
-<h2>指定閱讀</h2>
-<ol>
-<li>李飛躍、桑海（主編）：《數字人文引論》。北京：中華書局，2026年。</li>
-<li>王賀：《數字人文與中國現代文學》。上海：三聯書店，2023年。</li>
-<li>梅麗莎·特拉斯等著，陳靜等譯：《數字人文導讀》。南京：南京大學出版社，2022年。</li>
-<li>皮特·布勞德韋爾、陳威、大衛·謝帕德著，曹瀛月譯：〈《全唐詩》：文學史、主題模型、散度度量〉，《數位人文》2023年第1期。</li>
-<li>Blei, David M. “Probabilistic Topic Models.”</li>
-<li>秦穎：〈《唐語林》中對話網路的視覺化和統計分析初探〉，《數字人文》2022年第1期。</li>
-<li>Algee-Hewitt, Mark, Edwin Fredner, and Hannah Walser. “The Novel as Data.” In <em>The Cambridge Companion to the Novel</em>, 189–215. Cambridge: Cambridge University Press, 2018.</li>
-<li>Allen, Sarah M., Jack Chen, and Xiaofei Tian. <em>Literary History in and beyond China: Reading Text and World</em>. Cambridge, MA: Harvard University Asia Center, 2023.</li>
-<li>Guldi, Jo. <em>The Dangerous Art of Text Mining: A Methodology for Digital History</em>. Cambridge: Cambridge University Press, 2023.</li>
-<li>Slingerland, Edward. “Part II. Quantitative Approaches to Concepts of Mind and Body.” In <em>Mind and Body in Early China: Beyond Orientalism and the Myth of Holism</em>. Oxford: Oxford University Press, 2018.</li>
-<li>Woloch, Alex. <em>The One vs. the Many: Minor Characters and the Space of the Protagonist in the Novel</em>. Princeton: Princeton University Press, 2003, pp. 12–42.</li>
-<li>Evert, Stefan. “Corpora and Collocations.”</li>
-<li>Vierthaler, Paul. “Fiction and History: Polarity and Stylistic Gradience in Late Imperial Chinese Literature.” <em>Journal of Cultural Analytics</em> 1, no. 1 (2016). <a href="https://doi.org/10.7910/DVN/4ZVSKA">https://doi.org/10.7910/DVN/4ZVSKA</a>.</li>
-<li>Burrows, John. “‘Delta’: a Measure of Stylistic Difference and a Guide to Likely Authorship.” <em>Literary and Linguistic Computing</em> 17, no. 3 (2002): 267–287.</li>
-<li>Ramsay, Stephen. “Algorithmic Criticism.” In <em>Reading Machines: Toward an Algorithmic Criticism</em>. Urbana: University of Illinois Press, 2011.</li>
-<li>Vonnegut, Kurt. “The Shapes of Stories.” Lecture.</li>
-<li>Elkins, Katherine. <em>The Shapes of Stories: Sentiment Analysis for Narrative</em>.</li>
-<li>Best, Stephen, and Sharon Marcus. “Surface Reading: An Introduction.” <em>Representations</em> 108, no. 1 (2009): 1–21.</li>
-<li>Moretti, Franco. “Conjectures on World Literature.” In <em>Distant Reading</em>. London: Verso, 2013.</li>
-<li>Mikolov, Tomas, Kai Chen, Greg Corrado, and Jeffrey Dean. “Efficient Estimation of Word Representations in Vector Space.” 2013.</li>
-<li>Jurafsky, Daniel, and James H. Martin. “Vector Semantics and Embeddings.” In <em>Speech and Language Processing</em>. 3rd ed.</li>
-<li>Sturgeon, Donald. “Unsupervised Identification of Text Reuse in Early Chinese Literature.” <em>Digital Scholarship in the Humanities</em> 33, no. 3 (2018): 670–684.</li>
-</ol>
-
-<h2>延伸閱讀</h2>
-<ol>
-<li>孫超編：《數字人文與古代文學研究》。上海：三聯書店，2023年。</li>
-<li>蔣傑編：《數字人文與史學研究》。上海：三聯書店，2023年。</li>
-<li>陳逸雲：〈聲律智慧化在辨音、校讎和輔助創作上的應用：以「搜韻網」為例〉，《數字人文》2023年第1期。</li>
-<li>黃一農：〈大數據時代避諱學的新機遇：以清初為例〉，《數字人文》2022年第4期。</li>
-<li>Ahnert, Ruth, Sebastian E. Ahnert, Catherine Nicole Coleman, and Scott B. Weingart. <em>The Network Turn</em>. Cambridge: Cambridge University Press, 2020.</li>
-<li>Bol, Peter K. “The Visualization and Analysis of Historical Space.” <em>Journal of Chinese History</em> 4, no. 2 (2020): 511–519.</li>
-<li>Bolukbasi, Tolga, et al. “Man Is to Computer Programmer as Woman Is to Homemaker? Debiasing Word Embeddings.” arXiv:1607.06520.</li>
-<li>Da, Nan Z. “The Computational Case against Computational Literary Studies.” <em>Critical Inquiry</em> 45, no. 3 (2019): 601–639.</li>
-<li>De Weerdt, Hilde. “Key Challenges in Digital Chinese Studies.” Digital Modern Languages Seminar, King’s College London, 2021. <a href="https://www.youtube.com/watch?v=51D3C-3XHZQ">https://www.youtube.com/watch?v=51D3C-3XHZQ</a>.</li>
-<li>Jurafsky, Daniel, and James H. Martin. <em>Speech and Language Processing</em>. 3rd ed. Chapter 6. <a href="https://web.stanford.edu/~jurafsky/slp3/ed3book_jan72023.pdf">https://web.stanford.edu/~jurafsky/slp3/ed3book_jan72023.pdf</a>.</li>
-<li>Kozlowski, Austin C., Matt Taddy, and James A. Evans. “The Geometry of Culture: Analyzing the Meanings of Class through Word Embeddings.” <em>American Sociological Review</em> 84, no. 5 (2019): 905–949.</li>
-<li>Moretti, Franco. <em>Distant Reading</em>. London: Verso, 2013.</li>
-<li>Ramsay, Stephen. <em>Reading Machines: Toward an Algorithmic Criticism</em>. Urbana: University of Illinois Press, 2011.</li>
-<li>Schreibman, Susan, Ray Siemens, and John Unsworth, eds. <em>A New Companion to Digital Humanities</em>. 2nd ed. Chichester: Wiley, 2015.</li>
-<li>Sturgeon, Donald. “Digitizing Premodern Text with the Chinese Text Project.” <em>Journal of Chinese History</em> 4, no. 2 (2020): 486–498.</li>
-<li>Tsui, Lik Hang. “Charting the Emergence of the Digital Humanities in China.” In <em>Chinese Culture in the 21st Century and Its Global Dimensions</em>, edited by Kelly Kar Yue Chan and Chi Sum Garfield Lau, 203–216. Singapore: Springer, 2020.</li>
-<li>Underwood, Ted. <em>Distant Horizons: Digital Evidence and Literary Change</em>. Chicago: University of Chicago Press, 2019.</li>
-</ol>
 
 <h2>注意事項</h2>
 <ol>
