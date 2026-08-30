@@ -3,18 +3,18 @@ layout: default
 title: CHI4335
 ---
 
+<p class="updated">Last updated: Aug 30, 2026</p>
 # CHI 4335 Course Syllabus
 
 **Special Topics in Comparative Literature: Facing the Extreme**  
-**比較文學專題：世界文學中的極端體驗**  
-Term 1, 2026–2027  
-<p class="updated">Last updated: Aug 30, 2026</p>
+**比較文學專題：面對極端**  
+Term 1, 2026–2027
 
 **Lecture:** Tue, 1:00–2:59 pm (LYH 201/1)  
 **Tutorial A:** Thu, 11:30 am–12:29 pm (LKK 308)  
 **Tutorial B:** Thu, 12:30–1:29 pm (LKK 308)
 
-**Instructor:** Maciej Kurzynski 馬傑 ([maciej.kurzynski@ln.edu.hk](mailto:maciej.kurzynski@ln.edu.hk))  
+**Instructor:** Maciej Kurzynski 馬傑 (maciej.kurzynski[at]ln.edu.hk)  
 **Office hours:** Tue 3:00–5:00 pm and Fri 10:00 am–12:00 pm, HSH G06, or by appointment  
 **Language of Instruction:** Putonghua（普通話）
 
