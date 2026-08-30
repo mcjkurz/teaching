@@ -44,7 +44,7 @@
         main table.schedule tbody.block-b { background: #f3f5f7; }
         main table.schedule tbody.due { background: #fff6e5; }
         main table.schedule tbody.due tr:first-child td { border-top: 2px solid #e6d3a5; }
-        main table.schedule td:nth-child(1) {
+        main table.schedule td.week {
             white-space: nowrap;
             font-weight: 600;
             color: #444;
@@ -52,10 +52,7 @@
             text-align: center;
             width: 3.2em;
         }
-        main table.schedule td:nth-child(2),
-        main table.schedule td:nth-child(3) { white-space: nowrap; }
-        main table.schedule td:nth-child(2) { color: #555; font-weight: 500; }
-        main table.schedule td:nth-child(4) { vertical-align: middle; font-weight: 500; }
+        main table.schedule td.topic { vertical-align: middle; }
         @media (max-width: 768px) {
             .wrap { padding: 1rem 1rem 3rem; }
             main h1 { font-size: 1.5rem; }
@@ -70,6 +67,30 @@
         .page-list a { text-decoration: none; font-weight: 500; }
         .page-list a:hover { text-decoration: underline; }
         .page-list .description { display: block; color: #666; font-size: 0.9rem; margin-top: 0.25rem; }
+        .lang-toggle {
+            font-size: 0.8rem;
+            font-weight: 400;
+            margin-left: 0.6rem;
+            white-space: nowrap;
+            color: #888;
+        }
+        .lang-toggle button {
+            background: none;
+            border: none;
+            padding: 0;
+            color: #0066cc;
+            cursor: pointer;
+            font: inherit;
+        }
+        .lang-toggle button.is-active {
+            color: #333;
+            font-weight: 600;
+            cursor: default;
+            pointer-events: none;
+        }
+        .i18n-block .lang-zh { display: none; }
+        .i18n-block.is-zh .lang-en { display: none; }
+        .i18n-block.is-zh .lang-zh { display: block; }
     </style>
 </head>
 <body>
@@ -85,5 +106,24 @@
             {{ content }}
         </main>
     </div>
+    <script>
+        document.querySelectorAll(".i18n-block").forEach(function (block) {
+            var heading = block.querySelector("h2");
+            if (!heading) return;
+            var toggle = document.createElement("span");
+            toggle.className = "lang-toggle";
+            toggle.innerHTML = '<button type="button" data-lang="en" class="is-active">English</button> | <button type="button" data-lang="zh">中文</button>';
+            heading.appendChild(toggle);
+            toggle.addEventListener("click", function (e) {
+                var btn = e.target.closest("button");
+                if (!btn) return;
+                var lang = btn.getAttribute("data-lang");
+                block.classList.toggle("is-zh", lang === "zh");
+                toggle.querySelectorAll("button").forEach(function (b) {
+                    b.classList.toggle("is-active", b === btn);
+                });
+            });
+        });
+    </script>
 </body>
 </html>

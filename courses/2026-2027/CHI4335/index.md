@@ -14,11 +14,18 @@ Term 1, 2026–2027
 **Tutorial B:** Thu, 12:30–1:29 pm (LKK 308, Leung Kau Kui Building)
 
 **Instructor:** Maciej Kurzynski 馬傑 ([maciej.kurzynski@ln.edu.hk](mailto:maciej.kurzynski@ln.edu.hk))  
-**Office hours:** Tue 3:00–5:00 pm and Fri 10:00 am–12:00 pm, HSH G06, or by appointment
+**Office hours:** Tue 3:00–5:00 pm and Fri 10:00 am–12:00 pm, HSH G06, or by appointment  
+**Language of Instruction:** Putonghua（普通話）
 
-## Course Description
-
-The famous historian Eric Hobsbawm called the twentieth century the “Age of Extremes.” This course, offered in Putonghua, adopts a comparative lens to explore how extreme experiences have been represented in world literature, with special attention to modern China. Through a selection of key texts, the course examines how different literary traditions and genres respond to natural and man-made catastrophes, extreme political ideologies, the darker aspects of human emotions, but also extreme happiness. Students will engage with different critical perspectives, including ecocriticism, trauma theory, cognitive literary studies, and gender studies, to analyze how literature not only reflects but also challenges the human condition in the face of extremity.
+<div class="i18n-block">
+<h2>Course Description</h2>
+<div class="lang-en">
+<p>The famous historian Eric Hobsbawm called the twentieth century the “Age of Extremes.” This course, offered in Putonghua, adopts a comparative lens to explore how extreme experiences have been represented in world literature, with special attention to modern China. Through a selection of key texts, the course examines how different literary traditions and genres respond to natural and man-made catastrophes, extreme political ideologies, the darker aspects of human emotions, but also extreme happiness. Students will engage with different critical perspectives, including ecocriticism, trauma theory, cognitive literary studies, and gender studies, to analyze how literature not only reflects but also challenges the human condition in the face of extremity.</p>
+</div>
+<div class="lang-zh" lang="zh-Hant">
+<p>著名史家霍布斯邦（Eric Hobsbawm）稱二十世紀為「極端的年代」。本課程以普通話授課，採取比較視野，探討極端經驗如何在世界文學中被再現，並特別關注現代中國。透過一系列重要文本，本課程考察不同文學傳統與文類如何回應天災人禍、極端政治意識形態、人類情感的幽暗面，以及極端的幸福。學生將接觸生態批評、創傷理論、認知文學研究、性別研究等批評視角，分析文學如何既反映、亦挑戰極端處境中的人類處境。</p>
+</div>
+</div>
 
 ## Aims
 
@@ -97,10 +104,10 @@ Classes run 1 September – 30 November 2026. Lectures are on Tuesdays; tutorial
   </thead>
   <tbody class="block-a">
     <tr>
-      <td rowspan="2">1</td>
+      <td class="week" rowspan="2">1</td>
       <td>Lecture</td>
       <td>1 Sep</td>
-      <td rowspan="2">Introduction</td>
+      <td class="topic" rowspan="2">Introduction</td>
       <td>The Extreme in Literature: key concepts, course objectives, and a survey of texts</td>
     </tr>
     <tr>
@@ -111,10 +118,10 @@ Classes run 1 September – 30 November 2026. Lectures are on Tuesdays; tutorial
   </tbody>
   <tbody class="block-b">
     <tr>
-      <td rowspan="2">2</td>
+      <td class="week" rowspan="2">2</td>
       <td>Lecture</td>
       <td>8 Sep</td>
-      <td rowspan="2">Regarding the Pain of Others</td>
+      <td class="topic" rowspan="2">Regarding the Pain of Others</td>
       <td>蘇珊·桑塔格：《旁觀他人之痛苦》第三章與第六章</td>
     </tr>
     <tr>
@@ -125,10 +132,10 @@ Classes run 1 September – 30 November 2026. Lectures are on Tuesdays; tutorial
   </tbody>
   <tbody class="block-a">
     <tr>
-      <td rowspan="2">3</td>
+      <td class="week" rowspan="2">3</td>
       <td>Lecture</td>
       <td>15 Sep</td>
-      <td rowspan="2">Writing the Shoah</td>
+      <td class="topic" rowspan="2">Writing the Shoah</td>
       <td>房春光〈写还是不写，这是个问题——纳粹大屠杀早期见证文学的书写语境〉</td>
     </tr>
     <tr>
@@ -140,17 +147,17 @@ Classes run 1 September – 30 November 2026. Lectures are on Tuesdays; tutorial
   <tbody class="due">
     <tr>
       <td></td>
-      <td>Due</td>
+      <td></td>
       <td>20 Sep</td>
       <td colspan="2"><strong>Comparative reflection (Weeks 2 &amp; 3) due, 9:00 am</strong></td>
     </tr>
   </tbody>
   <tbody class="block-b">
     <tr>
-      <td rowspan="2">4</td>
+      <td class="week" rowspan="2">4</td>
       <td>Lecture</td>
       <td>22 Sep</td>
-      <td rowspan="2"><em>Laogai</em> and Spiritual Resistance</td>
+      <td class="topic" rowspan="2"><em>Laogai</em> and Spiritual Resistance</td>
       <td>Tzvetan Todorov, “The Life of the Mind,” in <em>Facing the Extreme</em>, pp. 91–118</td>
     </tr>
     <tr>
@@ -161,11 +168,11 @@ Classes run 1 September – 30 November 2026. Lectures are on Tuesdays; tutorial
   </tbody>
   <tbody class="block-a">
     <tr>
-      <td rowspan="2">5</td>
+      <td class="week" rowspan="2">5</td>
       <td>Lecture</td>
       <td>29 Sep</td>
-      <td rowspan="2">The Nazi Camp</td>
-      <td>高爾泰：《尋找家園》（節選）；瓦爾拉姆·沙拉莫夫：〈手推車〉. Presentation: 塔杜施·博羅夫斯基：〈女士們、先生們，請進毒氣室〉，於《在我們奧斯威辛》，第47–79頁. Optional: Leona Toker, “Gulag Literature and the Literature of Nazi Camps” (Chapter 4: Forced Labor)</td>
+      <td class="topic" rowspan="2">The Nazi Camp</td>
+      <td>塔杜施·博羅夫斯基：〈女士們、先生們，請進毒氣室〉，於《在我們奧斯威辛》，第47–79頁. Optional: Leona Toker, “Gulag Literature and the Literature of Nazi Camps” (Chapter 4: Forced Labor)</td>
     </tr>
     <tr>
       <td>Tutorial</td>
@@ -176,17 +183,17 @@ Classes run 1 September – 30 November 2026. Lectures are on Tuesdays; tutorial
   <tbody class="due">
     <tr>
       <td></td>
-      <td>Due</td>
+      <td></td>
       <td>3 Oct</td>
       <td colspan="2"><strong>Comparative reflection (Weeks 4 &amp; 5) due, 9:00 am</strong></td>
     </tr>
   </tbody>
   <tbody class="block-b">
     <tr>
-      <td rowspan="2">6</td>
+      <td class="week" rowspan="2">6</td>
       <td>Lecture</td>
       <td>6 Oct</td>
-      <td rowspan="2">Trauma and Agency</td>
+      <td class="topic" rowspan="2">Trauma and Agency</td>
       <td>O’Brien, “Telling Time: Literature, Temporality and Trauma”</td>
     </tr>
     <tr>
@@ -197,10 +204,10 @@ Classes run 1 September – 30 November 2026. Lectures are on Tuesdays; tutorial
   </tbody>
   <tbody class="block-a">
     <tr>
-      <td rowspan="2">7</td>
+      <td class="week" rowspan="2">7</td>
       <td>Lecture</td>
       <td>13 Oct</td>
-      <td rowspan="2">Social Movements &amp; Trauma</td>
+      <td class="topic" rowspan="2">Social Movements &amp; Trauma</td>
       <td>Collective trauma, social movements, and literary form</td>
     </tr>
     <tr>
@@ -212,17 +219,17 @@ Classes run 1 September – 30 November 2026. Lectures are on Tuesdays; tutorial
   <tbody class="due">
     <tr>
       <td></td>
-      <td>Due</td>
+      <td></td>
       <td>17 Oct</td>
       <td colspan="2"><strong>Comparative reflection (Weeks 6 &amp; 7) due, 9:00 am</strong></td>
     </tr>
   </tbody>
   <tbody class="block-b">
     <tr>
-      <td rowspan="2">8</td>
+      <td class="week" rowspan="2">8</td>
       <td>Lecture</td>
       <td>20 Oct</td>
-      <td rowspan="2">War Experience</td>
+      <td class="topic" rowspan="2">War Experience</td>
       <td>Hogan, “On Being Moved: Cognition and Emotion in Literature and Film”</td>
     </tr>
     <tr>
@@ -233,10 +240,10 @@ Classes run 1 September – 30 November 2026. Lectures are on Tuesdays; tutorial
   </tbody>
   <tbody class="block-a">
     <tr>
-      <td rowspan="2">9</td>
+      <td class="week" rowspan="2">9</td>
       <td>Lecture</td>
       <td>27 Oct</td>
-      <td rowspan="2">Between the Heroic and the Ordinary</td>
+      <td class="topic" rowspan="2">Between the Heroic and the Ordinary</td>
       <td>Rithy Panh, <em>The Missing Picture</em> (we will watch the film together)</td>
     </tr>
     <tr>
@@ -248,17 +255,17 @@ Classes run 1 September – 30 November 2026. Lectures are on Tuesdays; tutorial
   <tbody class="due">
     <tr>
       <td></td>
-      <td>Due</td>
+      <td></td>
       <td>31 Oct</td>
       <td colspan="2"><strong>Comparative reflection (Weeks 8 &amp; 9) due, 9:00 am</strong></td>
     </tr>
   </tbody>
   <tbody class="block-b">
     <tr>
-      <td rowspan="2">10</td>
+      <td class="week" rowspan="2">10</td>
       <td>Lecture</td>
       <td>3 Nov</td>
-      <td rowspan="2">The Sublime</td>
+      <td class="topic" rowspan="2">The Sublime</td>
       <td>〈用毛泽东思想武装起来的人是最大的战斗力〉，於《解放军报》1966年10月14日. Optional: Booth, “The Rhetoric of Fiction” (selections); Walsh, “Rhetoric of Fictionality” (selections)</td>
     </tr>
     <tr>
@@ -269,10 +276,10 @@ Classes run 1 September – 30 November 2026. Lectures are on Tuesdays; tutorial
   </tbody>
   <tbody class="block-a">
     <tr>
-      <td rowspan="2">11</td>
+      <td class="week" rowspan="2">11</td>
       <td>Lecture</td>
       <td>10 Nov</td>
-      <td rowspan="2">Domestic Violence</td>
+      <td class="topic" rowspan="2">Domestic Violence</td>
       <td>李海燕：《话说〈白毛女〉——民族叙事中的阶级与性别政治》</td>
     </tr>
     <tr>
@@ -284,17 +291,17 @@ Classes run 1 September – 30 November 2026. Lectures are on Tuesdays; tutorial
   <tbody class="due">
     <tr>
       <td></td>
-      <td>Due</td>
+      <td></td>
       <td>14 Nov</td>
       <td colspan="2"><strong>Comparative reflection (Weeks 10 &amp; 11) due, 9:00 am</strong></td>
     </tr>
   </tbody>
   <tbody class="block-b">
     <tr>
-      <td rowspan="2">12</td>
+      <td class="week" rowspan="2">12</td>
       <td>Lecture</td>
       <td>17 Nov</td>
-      <td rowspan="2">Regarding the Past</td>
+      <td class="topic" rowspan="2">Regarding the Past</td>
       <td>瓦尔特·本雅明：《歷史哲學論綱》</td>
     </tr>
     <tr>
@@ -305,10 +312,10 @@ Classes run 1 September – 30 November 2026. Lectures are on Tuesdays; tutorial
   </tbody>
   <tbody class="block-a">
     <tr>
-      <td rowspan="2">13</td>
+      <td class="week" rowspan="2">13</td>
       <td>Lecture</td>
       <td>24 Nov</td>
-      <td rowspan="2">TBD</td>
+      <td class="topic" rowspan="2">TBD</td>
       <td></td>
     </tr>
     <tr>
@@ -320,7 +327,7 @@ Classes run 1 September – 30 November 2026. Lectures are on Tuesdays; tutorial
   <tbody class="due">
     <tr>
       <td></td>
-      <td>Due</td>
+      <td></td>
       <td>11 Dec</td>
       <td colspan="2"><strong>Final paper due, 9:00 pm</strong></td>
     </tr>
