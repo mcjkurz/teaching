@@ -90,8 +90,6 @@ This course will engage with content that may be emotionally difficult for some 
 
 ## Class Schedule
 
-Classes run 1 September – 30 November 2026. Lectures are on Tuesdays; tutorials are on Thursdays (same week). **Thursday 1 October is National Day: no tutorial.**
-
 <table class="schedule">
   <thead>
     <tr>
@@ -106,49 +104,49 @@ Classes run 1 September – 30 November 2026. Lectures are on Tuesdays; tutorial
     <tr>
       <td class="week" rowspan="2">1</td>
       <td>Lecture</td>
-      <td>1 Sep</td>
+      <td class="date">1 Sep</td>
       <td class="topic" rowspan="2">Introduction</td>
       <td>The Extreme in Literature: key concepts, course objectives, and a survey of texts</td>
     </tr>
     <tr>
       <td>Tutorial</td>
-      <td>3 Sep</td>
-      <td>魯迅：〈祝福〉</td>
+      <td class="date">3 Sep</td>
+      <td><ul class="readings"><li>魯迅：〈祝福〉</li></ul></td>
     </tr>
   </tbody>
   <tbody class="block-b">
     <tr>
       <td class="week" rowspan="2">2</td>
       <td>Lecture</td>
-      <td>8 Sep</td>
+      <td class="date">8 Sep</td>
       <td class="topic" rowspan="2">Regarding the Pain of Others</td>
-      <td>蘇珊·桑塔格：《旁觀他人之痛苦》第三章與第六章</td>
+      <td><ul class="readings"><li>蘇珊·桑塔格：《旁觀他人之痛苦》第三章與第六章</li></ul></td>
     </tr>
     <tr>
       <td>Tutorial</td>
-      <td>10 Sep</td>
-      <td>白樺：《苦戀》</td>
+      <td class="date">10 Sep</td>
+      <td><ul class="readings"><li>白樺：《苦戀》</li></ul></td>
     </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week" rowspan="2">3</td>
       <td>Lecture</td>
-      <td>15 Sep</td>
+      <td class="date">15 Sep</td>
       <td class="topic" rowspan="2">Writing the Shoah</td>
-      <td>房春光〈写还是不写，这是个问题——纳粹大屠杀早期见证文学的书写语境〉</td>
+      <td><ul class="readings"><li>房春光〈寫還是不寫，這是個問題——納粹大屠殺早期見證文學的書寫語境〉</li></ul></td>
     </tr>
     <tr>
       <td>Tutorial</td>
-      <td>17 Sep</td>
-      <td>埃利·維瑟爾：《夜》</td>
+      <td class="date">17 Sep</td>
+      <td><ul class="readings"><li>埃利·維瑟爾：《夜》</li></ul></td>
     </tr>
   </tbody>
   <tbody class="due">
     <tr>
       <td></td>
       <td></td>
-      <td>20 Sep</td>
+      <td class="date">20 Sep</td>
       <td colspan="2"><strong>Comparative reflection (Weeks 2 &amp; 3) due, 9:00 am</strong></td>
     </tr>
   </tbody>
@@ -156,27 +154,33 @@ Classes run 1 September – 30 November 2026. Lectures are on Tuesdays; tutorial
     <tr>
       <td class="week" rowspan="2">4</td>
       <td>Lecture</td>
-      <td>22 Sep</td>
+      <td class="date">22 Sep</td>
       <td class="topic" rowspan="2"><em>Laogai</em> and Spiritual Resistance</td>
-      <td>Tzvetan Todorov, “The Life of the Mind,” in <em>Facing the Extreme</em>, pp. 91–118</td>
+      <td><ul class="readings"><li>Tzvetan Todorov, “The Life of the Mind,” in <em>Facing the Extreme</em>, pp. 91–118</li></ul></td>
     </tr>
     <tr>
       <td>Tutorial</td>
-      <td>24 Sep</td>
-      <td>高爾泰：《尋找家園》（節選）</td>
+      <td class="date">24 Sep</td>
+      <td><ul class="readings"><li>高爾泰：《尋找家園》（節選）</li></ul></td>
     </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week" rowspan="2">5</td>
       <td>Lecture</td>
-      <td>29 Sep</td>
+      <td class="date">29 Sep</td>
       <td class="topic" rowspan="2">The Nazi Camp</td>
-      <td>塔杜施·博羅夫斯基：〈女士們、先生們，請進毒氣室〉，於《在我們奧斯威辛》，第47–79頁. Optional: Leona Toker, “Gulag Literature and the Literature of Nazi Camps” (Chapter 4: Forced Labor)</td>
+      <td>
+        <ul class="readings">
+          <li>塔杜施·博羅夫斯基：〈女士們、先生們，請進毒氣室〉，於《在我們奧斯威辛》，第47–79頁</li>
+          <li>瓦爾拉姆·沙拉莫夫：〈手推車〉</li>
+          <li class="optional">Optional: Leona Toker, “Gulag Literature and the Literature of Nazi Camps” (Chapter 4: Forced Labor)</li>
+        </ul>
+      </td>
     </tr>
     <tr>
       <td>Tutorial</td>
-      <td>1 Oct</td>
+      <td class="date">1 Oct</td>
       <td><strong>No class (National Day)</strong></td>
     </tr>
   </tbody>
@@ -184,7 +188,7 @@ Classes run 1 September – 30 November 2026. Lectures are on Tuesdays; tutorial
     <tr>
       <td></td>
       <td></td>
-      <td>3 Oct</td>
+      <td class="date">3 Oct</td>
       <td colspan="2"><strong>Comparative reflection (Weeks 4 &amp; 5) due, 9:00 am</strong></td>
     </tr>
   </tbody>
@@ -192,35 +196,35 @@ Classes run 1 September – 30 November 2026. Lectures are on Tuesdays; tutorial
     <tr>
       <td class="week" rowspan="2">6</td>
       <td>Lecture</td>
-      <td>6 Oct</td>
+      <td class="date">6 Oct</td>
       <td class="topic" rowspan="2">Trauma and Agency</td>
-      <td>O’Brien, “Telling Time: Literature, Temporality and Trauma”</td>
+      <td><ul class="readings"><li>O’Brien, “Telling Time: Literature, Temporality and Trauma”</li></ul></td>
     </tr>
     <tr>
       <td>Tutorial</td>
-      <td>8 Oct</td>
-      <td>張翎《餘震》</td>
+      <td class="date">8 Oct</td>
+      <td><ul class="readings"><li>張翎《餘震》</li></ul></td>
     </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week" rowspan="2">7</td>
       <td>Lecture</td>
-      <td>13 Oct</td>
+      <td class="date">13 Oct</td>
       <td class="topic" rowspan="2">Social Movements &amp; Trauma</td>
       <td>Collective trauma, social movements, and literary form</td>
     </tr>
     <tr>
       <td>Tutorial</td>
-      <td>15 Oct</td>
-      <td>韓江：《少年來了》</td>
+      <td class="date">15 Oct</td>
+      <td><ul class="readings"><li>韓江：《少年來了》</li></ul></td>
     </tr>
   </tbody>
   <tbody class="due">
     <tr>
       <td></td>
       <td></td>
-      <td>17 Oct</td>
+      <td class="date">17 Oct</td>
       <td colspan="2"><strong>Comparative reflection (Weeks 6 &amp; 7) due, 9:00 am</strong></td>
     </tr>
   </tbody>
@@ -228,35 +232,35 @@ Classes run 1 September – 30 November 2026. Lectures are on Tuesdays; tutorial
     <tr>
       <td class="week" rowspan="2">8</td>
       <td>Lecture</td>
-      <td>20 Oct</td>
+      <td class="date">20 Oct</td>
       <td class="topic" rowspan="2">War Experience</td>
-      <td>Hogan, “On Being Moved: Cognition and Emotion in Literature and Film”</td>
+      <td><ul class="readings"><li>Hogan, “On Being Moved: Cognition and Emotion in Literature and Film”</li></ul></td>
     </tr>
     <tr>
       <td>Tutorial</td>
-      <td>22 Oct</td>
-      <td>提姆·奧布萊恩：〈死者的生命〉，於《士兵的重負》</td>
+      <td class="date">22 Oct</td>
+      <td><ul class="readings"><li>提姆·奧布萊恩：〈死者的生命〉，於《士兵的重負》</li></ul></td>
     </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week" rowspan="2">9</td>
       <td>Lecture</td>
-      <td>27 Oct</td>
+      <td class="date">27 Oct</td>
       <td class="topic" rowspan="2">Between the Heroic and the Ordinary</td>
-      <td>Rithy Panh, <em>The Missing Picture</em> (we will watch the film together)</td>
+      <td><ul class="readings"><li>Rithy Panh, <em>The Missing Picture</em> (we will watch the film together)</li></ul></td>
     </tr>
     <tr>
       <td>Tutorial</td>
-      <td>29 Oct</td>
-      <td>約翰·赫西：《廣島》（原版）</td>
+      <td class="date">29 Oct</td>
+      <td><ul class="readings"><li>約翰·赫西：《廣島》（原版）</li></ul></td>
     </tr>
   </tbody>
   <tbody class="due">
     <tr>
       <td></td>
       <td></td>
-      <td>31 Oct</td>
+      <td class="date">31 Oct</td>
       <td colspan="2"><strong>Comparative reflection (Weeks 8 &amp; 9) due, 9:00 am</strong></td>
     </tr>
   </tbody>
@@ -264,35 +268,41 @@ Classes run 1 September – 30 November 2026. Lectures are on Tuesdays; tutorial
     <tr>
       <td class="week" rowspan="2">10</td>
       <td>Lecture</td>
-      <td>3 Nov</td>
+      <td class="date">3 Nov</td>
       <td class="topic" rowspan="2">The Sublime</td>
-      <td>〈用毛泽东思想武装起来的人是最大的战斗力〉，於《解放军报》1966年10月14日. Optional: Booth, “The Rhetoric of Fiction” (selections); Walsh, “Rhetoric of Fictionality” (selections)</td>
+      <td>
+        <ul class="readings">
+          <li>〈用毛澤東思想武裝起來的人是最大的戰鬥力〉，於《解放軍報》1966年10月14日</li>
+          <li class="optional">Optional: Booth, “The Rhetoric of Fiction” (selections)</li>
+          <li class="optional">Optional: Walsh, “Rhetoric of Fictionality” (selections)</li>
+        </ul>
+      </td>
     </tr>
     <tr>
       <td>Tutorial</td>
-      <td>5 Nov</td>
-      <td>阎连科《为人民服务》</td>
+      <td class="date">5 Nov</td>
+      <td><ul class="readings"><li>閻連科《為人民服務》</li></ul></td>
     </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week" rowspan="2">11</td>
       <td>Lecture</td>
-      <td>10 Nov</td>
+      <td class="date">10 Nov</td>
       <td class="topic" rowspan="2">Domestic Violence</td>
-      <td>李海燕：《话说〈白毛女〉——民族叙事中的阶级与性别政治》</td>
+      <td><ul class="readings"><li>李海燕：《話說〈白毛女〉——民族敘事中的階級與性別政治》</li></ul></td>
     </tr>
     <tr>
       <td>Tutorial</td>
-      <td>12 Nov</td>
-      <td>李昂：《殺夫》</td>
+      <td class="date">12 Nov</td>
+      <td><ul class="readings"><li>李昂：《殺夫》</li></ul></td>
     </tr>
   </tbody>
   <tbody class="due">
     <tr>
       <td></td>
       <td></td>
-      <td>14 Nov</td>
+      <td class="date">14 Nov</td>
       <td colspan="2"><strong>Comparative reflection (Weeks 10 &amp; 11) due, 9:00 am</strong></td>
     </tr>
   </tbody>
@@ -300,27 +310,27 @@ Classes run 1 September – 30 November 2026. Lectures are on Tuesdays; tutorial
     <tr>
       <td class="week" rowspan="2">12</td>
       <td>Lecture</td>
-      <td>17 Nov</td>
+      <td class="date">17 Nov</td>
       <td class="topic" rowspan="2">Regarding the Past</td>
-      <td>瓦尔特·本雅明：《歷史哲學論綱》</td>
+      <td><ul class="readings"><li>瓦爾特·本雅明：《歷史哲學論綱》</li></ul></td>
     </tr>
     <tr>
       <td>Tutorial</td>
-      <td>19 Nov</td>
-      <td>梁昂：《他們先殺了我父親：柬埔寨女孩的回憶》（美籍柬埔寨裔作家的自傳性回憶錄）</td>
+      <td class="date">19 Nov</td>
+      <td><ul class="readings"><li>梁昂：《他們先殺了我父親：柬埔寨女孩的回憶》（美籍柬埔寨裔作家的自傳性回憶錄）</li></ul></td>
     </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week" rowspan="2">13</td>
       <td>Lecture</td>
-      <td>24 Nov</td>
+      <td class="date">24 Nov</td>
       <td class="topic" rowspan="2">TBD</td>
       <td></td>
     </tr>
     <tr>
       <td>Tutorial</td>
-      <td>26 Nov</td>
+      <td class="date">26 Nov</td>
       <td></td>
     </tr>
   </tbody>
@@ -328,7 +338,7 @@ Classes run 1 September – 30 November 2026. Lectures are on Tuesdays; tutorial
     <tr>
       <td></td>
       <td></td>
-      <td>11 Dec</td>
+      <td class="date">11 Dec</td>
       <td colspan="2"><strong>Final paper due, 9:00 pm</strong></td>
     </tr>
   </tbody>
