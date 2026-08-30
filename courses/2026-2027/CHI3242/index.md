@@ -200,7 +200,7 @@ Term 1, 2026–2027</p>
       <td class="topic">Introduction</td>
       <td>
         <ul class="readings">
-          <li>Digital Humanities: key concepts; agentic coding; GitHub, OpenRouter, and VS Code</li>
+          <li>Digital Humanities: key concepts; agentic coding; Git, GitHub, OpenRouter, OpenCode, and VS Code</li>
         </ul>
       </td>
     </tr>
@@ -271,8 +271,8 @@ Term 1, 2026–2027</p>
     <tr>
       <td class="week">6</td>
       <td class="date">8 Oct</td>
-      <td class="topic">Python for Corpus Processing</td>
-      <td>External libraries, package setup, and regular expressions (regex; 正規表示式) for cleaning text corpora</td>
+      <td class="topic">Regular Expressions</td>
+      <td>Regular expressions (regex; 正規表示式) for cleaning text corpora</td>
     </tr>
   </tbody>
   <tbody class="block-a">
