@@ -374,7 +374,7 @@ Term 1, 2026–2027</p>
       <td class="week" rowspan="2">11</td>
       <td>Lecture</td>
       <td class="date">10 Nov</td>
-      <td class="topic" rowspan="2">Domestic Violence</td>
+      <td class="topic" rowspan="2">Gender Violence</td>
       <td>
         <ul class="readings">
           <li>李海燕：〈話說《白毛女》——民族敘事中的階級與性別政治〉，《二十一世紀》1999年4月號（總第52期），頁110–118</li>
@@ -393,13 +393,19 @@ Term 1, 2026–2027</p>
       <td class="week" rowspan="2">12</td>
       <td>Lecture</td>
       <td class="date">17 Nov</td>
-      <td class="topic" rowspan="2">Regarding the Past</td>
-      <td><ul class="readings"><li>瓦爾特·本雅明：《歷史哲學論綱》</li></ul></td>
+      <td class="topic" rowspan="2">Racial Violence</td>
+      <td>
+        <ul class="readings">
+          <li>魯迅：〈《吶喊》自序〉</li>
+          <li>Grace Elizabeth Hale, “Deadly Amusements: Spectacle Lynchings and the Contradictions of Segregation as Culture,” in <em>Making Whiteness</em>, pp. 199–239</li>
+          <li>(optional) Frantz Fanon, “The Lived Experience of the Black Man,” in <em>Black Skin, White Masks</em></li>
+        </ul>
+      </td>
     </tr>
     <tr>
       <td>Tutorial</td>
       <td class="date">19 Nov</td>
-      <td><ul class="readings"><li>卡勒德·胡賽尼：《追風箏的孩子》（第一章到第十章）</li></ul></td>
+      <td><ul class="readings"><li>詹姆斯·鮑德溫：〈去見那個男人〉</li></ul></td>
     </tr>
   </tbody>
   <tbody class="due">
@@ -416,12 +422,12 @@ Term 1, 2026–2027</p>
       <td>Lecture</td>
       <td class="date">24 Nov</td>
       <td class="topic" rowspan="2">Towards Redemption</td>
-      <td>Review and summary of the course</td>
+      <td><ul class="readings"><li>瓦爾特·本雅明：《歷史哲學論綱》</li></ul></td>
     </tr>
     <tr>
       <td>Tutorial</td>
       <td class="date">26 Nov</td>
-      <td><ul class="readings"><li>卡勒德·胡賽尼：《追風箏的孩子》（第十一章到第二十五章）</li></ul></td>
+      <td><ul class="readings"><li>卡勒德·胡賽尼：《追風箏的孩子》</li></ul></td>
     </tr>
   </tbody>
   <tbody class="due">
