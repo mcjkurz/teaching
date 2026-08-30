@@ -63,27 +63,7 @@
             margin: 2.75rem 0 0.9rem;
             padding-top: 1.5rem;
             border-top: 1px solid #e6e6e6;
-            cursor: pointer;
         }
-        main h2.is-folded { margin-bottom: 0; }
-        .section-fold {
-            flex-shrink: 0;
-            background: none;
-            border: none;
-            color: #777;
-            cursor: pointer;
-            font: inherit;
-            font-size: 0.75rem;
-            line-height: 1;
-            padding: 0.2rem 0;
-            width: 0.8rem;
-        }
-        .section-fold:hover { color: #0066cc; }
-        .section-fold:focus-visible {
-            outline: 2px solid #0066cc;
-            outline-offset: 2px;
-        }
-        h2.is-folded + .section-body { display: none; }
         main h3 { font-size: 1.1rem; font-weight: 500; margin: 1.5rem 0 0.5rem; }
         main p { margin-bottom: 1rem; }
         main ul, main ol { margin: 0 0 1rem 1.4rem; }
@@ -197,44 +177,6 @@
         </main>
     </div>
     <script>
-        document.querySelectorAll("main h2").forEach(function (heading) {
-            var body = document.createElement("div");
-            body.className = "section-body";
-            var parent = heading.parentElement;
-            if (parent && parent.classList.contains("i18n-block")) {
-                while (heading.nextSibling) body.appendChild(heading.nextSibling);
-                parent.appendChild(body);
-            } else {
-                var node = heading.nextSibling;
-                while (node && !(node.nodeType === 1 && (node.tagName === "H2" || node.classList.contains("i18n-block")))) {
-                    var next = node.nextSibling;
-                    body.appendChild(node);
-                    node = next;
-                }
-                heading.after(body);
-            }
-            var fold = document.createElement("button");
-            fold.type = "button";
-            fold.className = "section-fold";
-            fold.setAttribute("aria-expanded", "true");
-            fold.setAttribute("aria-label", "Collapse section");
-            fold.textContent = "▾";
-            heading.insertBefore(fold, heading.firstChild);
-            function toggleSection() {
-                var collapsed = heading.classList.toggle("is-folded");
-                fold.setAttribute("aria-expanded", collapsed ? "false" : "true");
-                fold.setAttribute("aria-label", collapsed ? "Expand section" : "Collapse section");
-                fold.textContent = collapsed ? "▸" : "▾";
-            }
-            fold.addEventListener("click", function (e) {
-                e.stopPropagation();
-                toggleSection();
-            });
-            heading.addEventListener("click", function (e) {
-                if (e.target.closest(".lang-toggle")) return;
-                toggleSection();
-            });
-        });
         document.querySelectorAll(".i18n-block").forEach(function (block) {
             var heading = block.querySelector("h2");
             if (!heading) return;
