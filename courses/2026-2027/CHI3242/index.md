@@ -104,7 +104,7 @@ Term 1, 2026–2027</p>
 <thead><tr><th>Component</th><th>Weight</th></tr></thead>
 <tbody>
 <tr><td>In-class discussion and participation</td><td>20%</td></tr>
-<tr><td>Individual assignments (4)</td><td>40%</td></tr>
+<tr><td>Assignments (2) + project proposal</td><td>40%</td></tr>
 <tr><td>Final project</td><td>40%</td></tr>
 </tbody>
 </table>
@@ -116,7 +116,7 @@ Term 1, 2026–2027</p>
 <thead><tr><th>項目</th><th>比重</th></tr></thead>
 <tbody>
 <tr><td>課堂討論與參與</td><td>20%</td></tr>
-<tr><td>個人作業（4份）</td><td>40%</td></tr>
+<tr><td>作業（2份）＋專題計劃書</td><td>40%</td></tr>
 <tr><td>期末專題</td><td>40%</td></tr>
 </tbody>
 </table>
@@ -148,7 +148,7 @@ Term 1, 2026–2027</p>
 <h2>Course Design</h2>
 <div class="lang-en">
 <p><strong>1. Seminars.</strong> Each week, a three-hour seminar combines conceptual discussion with supervised hands-on practice. Students work with Chinese texts and learn methods ranging from word frequencies and collocations to topic models, word vectors, and neural language models. Prior programming experience is not required. We introduce agentic coding in the first weeks and then use AI coding agents throughout.</p>
-<p><strong>2. Individual assignments.</strong> Four assignments apply the tools covered in seminars. All work must be submitted via the Assignment module on Moodle. Instructions are linked in the schedule table.</p>
+<p><strong>2. Assignments and project proposal.</strong> Two graded assignments apply the tools covered in seminars. Assignment 0 is not graded. The final assignment item is a final project proposal. All work must be submitted via the Assignment module on Moodle. Instructions are linked in the schedule table.</p>
 <p><strong>3. Final project.</strong> Students build their own datasets, apply digital methods to a topic of their choice, and present their findings through a complete working GitHub repository (sources, code, and README files) and an accompanying report in Chinese. Submit the repository URL and the report through Moodle before the deadline. The report should include the following parts:</p>
 <ul>
 <li><strong>Abstract:</strong> a summary of goals, experiments, and findings (max. 150 characters)</li>
@@ -160,7 +160,7 @@ Term 1, 2026–2027</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
 <p><strong>1. 研討課：</strong>每週三小時研討課結合概念講授與教師指導下的實作。學生處理中文文本，學習從詞頻、搭配、主題模型、詞向量到神經語言模型等方法。無須具備編程經驗。最初數週引入智能體編程，其後貫穿全學期使用人工智能編程助手。</p>
-<p><strong>2. 個人作業：</strong>共四份作業，一律經 Moodle 作業區繳交。作業說明連結見下方課程進度表。</p>
+<p><strong>2. 作業與專題計劃書：</strong>共兩份計分作業；作業0不計分。最後一項作業為期末專題計劃書。一律經 Moodle 作業區繳交。作業說明連結見下方課程進度表。</p>
 <p><strong>3. 期末專題：</strong>學生自建數據集，將數碼方法應用於自選題目，並以完整可運作的 GitHub 倉庫（含原始資料、程式碼與 README）及中文配套報告呈現研究成果。於截止日期前經 Moodle 提交倉庫網址及報告。報告須包括以下部分：</p>
 <ul>
 <li><strong>摘要：</strong>目標、實驗與發現的概述（最多 150 字）</li>
@@ -213,7 +213,7 @@ Term 1, 2026–2027</p>
     <tr>
       <td></td>
       <td class="date">14 Sep</td>
-      <td colspan="2"><a href="#">Assignment 1 due, 9:00 am</a></td>
+      <td colspan="2"><a href="#">Assignment 0 (not graded) due, 9:00 am</a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -255,7 +255,7 @@ Term 1, 2026–2027</p>
     <tr>
       <td></td>
       <td class="date">7 Oct</td>
-      <td colspan="2"><a href="#">Assignment 2 due, 9:00 am</a></td>
+      <td colspan="2"><a href="#">Assignment 1 due, 9:00 am</a></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -304,7 +304,7 @@ Term 1, 2026–2027</p>
     <tr>
       <td></td>
       <td class="date">26 Oct</td>
-      <td colspan="2"><a href="{{ '/courses/2026-2027/CHI3242/assignment-3/' | relative_url }}">Assignment 3 due, 9:00 am</a></td>
+      <td colspan="2"><a href="#">Assignment 2 due, 9:00 am</a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -349,19 +349,19 @@ Term 1, 2026–2027</p>
       </td>
     </tr>
   </tbody>
+  <tbody class="due">
+    <tr>
+      <td></td>
+      <td class="date">16 Nov</td>
+      <td colspan="2"><a href="#">Final Project Proposal due, 9:00 am</a></td>
+    </tr>
+  </tbody>
   <tbody class="block-b">
     <tr>
       <td class="week">12</td>
       <td class="date">19 Nov</td>
       <td class="topic">Decoders and LLMs</td>
       <td>From BERT to GPT; generative models; what is “context”?; next-token probability; LLMs for data extraction; Python API (OpenRouter)</td>
-    </tr>
-  </tbody>
-  <tbody class="due">
-    <tr>
-      <td></td>
-      <td class="date">16 Nov</td>
-      <td colspan="2"><a href="{{ '/courses/2026-2027/CHI3242/assignment-4/' | relative_url }}">Assignment 4 due, 9:00 am</a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
