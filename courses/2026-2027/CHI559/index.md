@@ -14,7 +14,6 @@ title: CHI559
 <p><strong>教師：</strong>馬傑（maciej.kurzynski[at]ln.edu.hk）<br>
 <strong>辦公時間：</strong>星期二 3:00–5:00、星期五 10:00–12:00，HSH G06，或另行預約<br>
 <strong>授課語言：</strong>普通話<br>
-<strong>先修條件：</strong>無</p>
 </div>
 </div>
 
