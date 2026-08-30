@@ -330,7 +330,7 @@ Term 1, 2026–2027</p>
       <td class="topic">Encoders I</td>
       <td>
         <ul class="readings">
-          <li>Document vectors（文件向量）; word2vec; contextual embeddings; BERT</li>
+          <li>What is meaning? word vectors and cosine similarity</li>
           <li>Conceptual history with word vectors</li>
           <li>Daniel Jurafsky and James H. Martin, “Vector Semantics and Embeddings”</li>
         </ul>
@@ -344,6 +344,8 @@ Term 1, 2026–2027</p>
       <td class="topic">Encoders II + Classification II</td>
       <td>
         <ul class="readings">
+          <li>Contextual embeddings; BERT</li>
+          <li>Document vectors（文件向量）</li>
           <li>Training BERT-based classifiers (sentiment analysis); uploading a model to Hugging Face</li>
           <li>Kurt Vonnegut, “The Shapes of Stories” (lecture)</li>
           <li>Katherine Elkins, <em>The Shapes of Stories: Sentiment Analysis for Narrative</em></li>
