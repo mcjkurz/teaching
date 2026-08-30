@@ -28,7 +28,7 @@ Term 1, 2026–2027</p>
 <p>The famous historian Eric Hobsbawm called the twentieth century the “Age of Extremes.” This course, offered in Putonghua, adopts a comparative lens to explore how extreme experiences have been represented in world literature, with special attention to modern China. Through a selection of key texts, the course examines how different literary traditions and genres respond to natural and man-made catastrophes, extreme political ideologies, the darker aspects of human emotions, but also extreme happiness. Students will engage with different critical perspectives, including ecocriticism, trauma theory, cognitive literary studies, and gender studies, to analyze how literature not only reflects but also challenges the human condition in the face of extremity. Particular emphasis is placed on close reading: students will train the ability to <em>describe</em> literary phenomena with precision, not only to interpret them.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
-<p>著名史家霍布斯邦（Eric Hobsbawm）稱二十世紀為「極端的年代」。本課程以普通話授課，採取比較視野，探討極端經驗如何在世界文學中被再現，並特別關注現代中國。透過一系列重要文本，本課程考察不同文學傳統與文類如何回應天災人禍、極端政治意識形態、人類情感的幽暗面，以及極端的幸福。學生將接觸生態批評、創傷理論、認知文學研究、性別研究等批評視角，分析文學如何既反映、亦挑戰極端處境中的人類處境。課程特別重視細讀：學生將訓練以精確的語言<em>描述</em>文學現象的能力，而不止於詮釋。</p>
+<p>著名史家霍布斯邦（Eric Hobsbawm）稱二十世紀為「極端的年代」。本課程以普通話授課，採取比較視野，探討極端經驗如何在世界文學中被再現，並特別關注現代中國。透過一系列重要文本，本課程考察不同文學傳統與文類如何回應天災人禍、極端政治意識形態、人類情感的幽暗面，乃至極致的幸福。學生將接觸生態批評、創傷理論、認知文學研究、性別研究等批評視角，分析文學如何反映人類在極端處境下的生存狀態，並對其提出挑戰。課程特別重視細讀：學生將接受訓練，以精確的語言<em>描述</em>文學現象，而不止於詮釋。</p>
 </div>
 </div>
 
@@ -38,7 +38,7 @@ Term 1, 2026–2027</p>
 <p>This course aims to train students to describe literary phenomena with precision through close reading—not only to interpret them—and to engage in cross-cultural analysis of how literature represents and responds to the extreme. Description grounds interpretation. By analyzing and comparing key texts from various literary, philosophical, and cultural traditions, the course enhances students’ understanding of how literature documents, critiques, and shapes human responses to catastrophe and extremity. The course also encourages students to view literary texts as both artistic expressions and cultural documents that reflect and challenge societal values in times of crisis.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
-<p>本課程旨在培養學生以細讀精確描述文學現象的能力——而不止於詮釋——並進行跨文化分析，思考文學如何再現與回應極端。描述為詮釋奠基。透過分析、比較來自不同文學、哲學與文化傳統的重要文本，課程加深學生對文學如何記錄、批判並形塑人類面對災難與極端之回應的理解。課程亦鼓勵學生將文學文本視為藝術表達，同時視為反映並挑戰危機時刻社會價值的文化文獻。</p>
+<p>本課程旨在培養學生透過細讀精確描述文學現象的能力——而不止於詮釋——並進行跨文化分析，思考文學如何再現與回應極端處境。描述為詮釋奠基。透過分析、比較來自不同文學、哲學與文化傳統的重要文本，課程加深學生對文學如何記錄、批判並形塑人類對災難與極端處境之回應的理解。課程亦鼓勵學生將文學文本既視為藝術表達，也視為反映並挑戰危機時刻社會價值的文化文獻。</p>
 </div>
 </div>
 
@@ -56,8 +56,8 @@ Term 1, 2026–2027</p>
 <div class="lang-zh" lang="zh-Hant">
 <p>完成本課程後，學生應能：</p>
 <ul>
-<li>辨識並批判地思考文學所描寫之極端經驗相關的主要哲學與社會問題</li>
-<li>認識並闡明不同文化與文類中，文學回應極端的特徵</li>
+<li>辨識並批判地思考文學所描寫的極端經驗所涉及之主要哲學與社會問題</li>
+<li>認識並闡明不同文化與文類中，文學回應極端處境的特徵</li>
 <li>比較文學與文化文本中，關於災難、創傷與人類韌性的跨文化視角</li>
 <li>既精確又具創意地分析文學與文化文本，並考慮其更廣的歷史、文化與哲學脈絡</li>
 </ul>
@@ -67,10 +67,10 @@ Term 1, 2026–2027</p>
 <div class="i18n-block">
 <h2>Language of Instruction</h2>
 <div class="lang-en">
-<p>The course is conducted fully in Putonghua. All primary sources (novels, stories, diaries, etc.) are in Chinese. However, some theoretical texts are in English, and you are expected to read them in English, unless a Chinese translation is available. The instructor might provide translated versions if needed. There are many AI tools that can help you translate primary sources free of charge (e.g., <a href="https://perplexity.ai/">https://perplexity.ai/</a>, <a href="https://chat.deepseek.com">https://chat.deepseek.com</a>). In-class discussions will be held in Putonghua, and student submissions and assessments should be written in Chinese.</p>
+<p>The course is conducted fully in Putonghua. All primary sources (novels, stories, diaries, etc.) are in Chinese. However, some theoretical texts are in English, and you are expected to read them in English, unless a Chinese translation is available. The instructor might provide translated versions if needed. There are many AI tools that can help you translate theoretical texts free of charge (e.g., <a href="https://perplexity.ai/">https://perplexity.ai/</a>, <a href="https://chat.deepseek.com">https://chat.deepseek.com</a>). In-class discussions will be held in Putonghua, and student submissions and assessments should be written in Chinese.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
-<p>本課程全程以普通話進行。所有原始文獻（小說、故事、日記等）均為中文。部分理論文本為英文，除非已有中譯，否則須以英文閱讀。如有需要，教師或會提供譯本。亦有不少免費人工智能工具可協助翻譯原始文獻（例如 <a href="https://perplexity.ai/">https://perplexity.ai/</a>、<a href="https://chat.deepseek.com">https://chat.deepseek.com</a>）。課堂討論以普通話進行，學生作業與評核須以中文撰寫。</p>
+<p>本課程全程以普通話進行。所有一手文本（小說、故事、日記等）均為中文。部分理論文本為英文，除非已有中譯，否則須以英文閱讀。如有需要，教師或會提供譯本。亦有不少免費人工智能工具可協助翻譯理論文本（例如 <a href="https://perplexity.ai/">https://perplexity.ai/</a>、<a href="https://chat.deepseek.com">https://chat.deepseek.com</a>）。課堂討論以普通話進行，學生作業與評核須以中文撰寫。</p>
 </div>
 </div>
 
@@ -110,7 +110,7 @@ Term 1, 2026–2027</p>
 <p>Students are expected to attend all classes. <strong>One</strong> unexplained absence (either lecture or tutorial) is permitted, no questions asked. Unexplained absences will not impact the final grade by more than 20% (the maximum you can get for in-class discussion and participation), unless a student misses more than ten (10) meetings, in which case there will not be enough input to give them a passing grade. Every unexplained absence (beyond the one everyone gets for free) will remove 10% from the participation component (which equals 2% of the final grade). For example, if you are absent two times without explanation (in addition to the one no-questions-asked absence granted to everyone), you will receive 100% − 20% = 80% of the total possible contribution from participation, which amounts to 80% × 20% = 16% of the final grade. Remember to come to class on time and prepared.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
-<p>學生須出席所有課堂。<strong>一次</strong>無故缺席（講座或導修皆可）不計，無須解釋。無故缺席對學期成績的影響不會超過 20%（即課堂討論與參與的上限），惟缺席超過十次者，將因投入不足而難以給予及格成績。在人人皆有的一次免費缺席之外，每次無故缺席將從參與分扣除 10%（即學期總分的 2%）。例如，若除人人皆有的一次外再無故缺席兩次，參與分可得 100% − 20% = 80%，即學期總分的 80% × 20% = 16%。請準時出席，並預先準備。</p>
+<p>學生須出席所有課堂。<strong>一次</strong>無故缺席（講座或導修皆可）不計，無須解釋。無故缺席對學期成績的影響不會超過 20%（即課堂討論與參與的上限），惟缺席超過十次者，將因缺乏足夠評核依據而不能獲得及格成績。在人人皆有的一次免費缺席之外，每次無故缺席將從參與分扣除 10%（即學期總分的 2%）。例如，若除人人皆有的一次外再無故缺席兩次，參與分可得 100% − 20% = 80%，即學期總分的 80% × 20% = 16%。請準時出席，並預先準備。</p>
 </div>
 </div>
 
@@ -130,25 +130,25 @@ Term 1, 2026–2027</p>
 <p><strong>4. Final project</strong> offers three options.</p>
 <ul>
 <li><strong>Option 1.</strong> Write an analytical paper (3,500–4,000 characters) that is comparative in nature and considers at least two different primary texts covered in class. Submit the PDF version of your paper through Moodle before the deadline. The paper should have a title, include quotations from the analyzed texts, and standardized references. You are welcome to consult secondary sources, but this is not required. The final paper should not contain your comparative short essays copied verbatim, although it can be developed from them.</li>
-<li><strong>Option 2.</strong> Write an interview (3,500–4,000 characters) with one of the protagonists from the texts we have read. You will need to think about what their answers could have been if they were asked your questions in their own time. The questions concern the topics we have covered in class.</li>
+<li><strong>Option 2.</strong> Write an interview (3,500–4,000 characters) with one of the protagonists from the texts we have read. Consider how the protagonist might have answered your questions in the period in which they lived. The questions should concern the topics we have covered in class.</li>
 <li><strong>Option 3.</strong> Write a narrative continuation (3,500–4,000 characters) of one of the stories that we have read. What might have happened afterwards? Use your imagination, and focus on the questions central to this course (see Course Design above).</li>
 </ul>
 </div>
 <div class="lang-zh" lang="zh-Hant">
 <p><strong>1. 講座：</strong>每週講座聚焦所選文本的歷史脈絡與理論問題。</p>
-<p><strong>2. 報告：</strong>導修課上，學生可獨立或兩人小組，就指定<strong>原始</strong>文本（長篇或短篇小說）作口頭報告（20–30分鐘）。當週報告的學生為該題專家，須帶領導修討論，並在講座中積極參與。報告應選用恰當引文與轉述，並回應下列一項或多項問題：</p>
+<p><strong>2. 報告：</strong>導修課上，學生可獨立或兩人小組，就指定<strong>一手</strong>文本（長篇或短篇小說）作口頭報告（20–30分鐘）。當週報告的學生須作為該主題的專家，帶領導修討論，並在講座中積極參與。報告應從作品中精選引文並準確轉述內容，回應下列一項或多項問題：</p>
 <ul>
 <li>文本如何描寫極端經驗對個人與社會的影響？</li>
 <li>身體如何被再現？</li>
 <li>作者如何混用虛構與非虛構話語？</li>
 <li>女性如何被描寫，在危機中被賦予何種角色？</li>
 </ul>
-<p>報告須具比較性。須將指定文本與課程中其他原始作品對讀，指出重要的延續（共享主題、風格或論點）與差異（獨特之處、創新、文化影響等）。</p>
-<p><strong>3. 短篇比較文章：</strong>五個題目中選寫三篇，以中文就課程所讀原始文本（短篇或長篇）撰寫短篇比較反思。文章須有個人分析與見解，聚焦課程關鍵主題之一或多項：個人與社會、身體、虛構性、女性。必須採取比較進路。分析須<strong>至少納入該單元中的一篇原始文本</strong>，亦鼓勵連結其他週次的文本。每篇 1,500 至 2,000 字。一律經 Moodle 作業區繳交。若繳交超過三篇，只計入得分最高的三篇。</p>
+<p>報告須具比較性。須將指定文本與課程中其他一手作品對讀，指出重要的延續（共享主題、風格或論點）與差異（獨特之處、創新、文化影響等）。</p>
+<p><strong>3. 短篇比較文章：</strong>五個題目中選寫三篇，以中文就課程所讀一手文本（短篇或長篇小說）撰寫短篇比較反思。文章須有個人分析與見解，聚焦課程關鍵主題之一或多項：個人與社會、身體、虛構性、女性身分。必須採取比較進路。分析須<strong>至少納入該單元中的一部一手作品</strong>，亦鼓勵連結其他週次的文本。每篇 1,500 至 2,000 字。一律經 Moodle 作業區繳交。若繳交超過三篇，只計入得分最高的三篇。</p>
 <p><strong>4. 期末專題：</strong>有三個選項。</p>
 <ul>
-<li><strong>選項一：</strong>撰寫比較性的分析論文（3,500–4,000 字），至少討論課堂上兩篇不同的原始文本。於截止日期前經 Moodle 提交 PDF。論文須有標題、引用所分析文本，並採用規範註釋。可參考二手文獻，但非必須。期末論文不得原文照搬比較短文，但可由其發展而成。</li>
-<li><strong>選項二：</strong>撰寫訪問稿（3,500–4,000 字），訪問所讀文本中的一位人物。須設想對方若在其所處時代被問及這些問題，可能如何作答。問題須關涉課堂討論的主題。</li>
+<li><strong>選項一：</strong>撰寫比較性的分析論文（3,500–4,000 字），至少討論課堂上兩部不同的一手作品。於截止日期前經 Moodle 提交 PDF。論文須有標題、引用所分析文本，並採用規範註釋。可參考二手文獻，但非必須。期末論文不得原文照搬比較短文，但可由其發展而成。</li>
+<li><strong>選項二：</strong>撰寫訪問稿（3,500–4,000 字），訪問所讀文本中的一位主角。須設想對方在其所處時代可能如何回答你的問題。問題須關涉課堂討論的主題。</li>
 <li><strong>選項三：</strong>為所讀故事之一撰寫敘事續篇（3,500–4,000 字）。其後可能發生何事？發揮想像，並扣緊本課程的核心問題（見上方「課程設計」）。</li>
 </ul>
 </div>
@@ -160,7 +160,7 @@ Term 1, 2026–2027</p>
 <p>This course will engage with content that may be emotionally difficult for some students, including discussions of violence and trauma. If you find certain materials challenging, <strong>please do not hesitate to consult the instructor.</strong> We can explore alternative approaches, such as focusing on theoretical texts or supplementary readings. Your well-being is very important, and accommodations can be made to ensure a productive and supportive learning environment.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
-<p>本課程將處理部分學生或感沉重的內容，包括暴力與創傷的討論。若某些材料令你難以應付，<strong>請務必與教師商量。</strong> 我們可考慮替代安排，例如改以理論文本或補充閱讀為主。你的身心健康十分重要，我們會作出適當調整，以維持有效而支持性的學習環境。</p>
+<p>本課程將處理可能令部分學生在情緒上感到難以承受的內容，包括暴力與創傷的討論。若某些材料令你感到難以應付，<strong>請務必與教師商量。</strong> 我們可考慮替代安排，例如改以理論文本或補充閱讀為主。你的身心健康十分重要，我們會作出適當調整，以維持有效而支持性的學習環境。</p>
 </div>
 </div>
 
@@ -377,8 +377,8 @@ Term 1, 2026–2027</p>
       <td class="topic" rowspan="2">Domestic Violence</td>
       <td>
         <ul class="readings">
-          <li>李海燕：《話說〈白毛女〉——民族敘事中的階級與性別政治》</li>
-          <li>申丹：〈敘事形式與性別政治——女性主義敘事學評析〉</li>
+          <li>李海燕：〈話說《白毛女》——民族敘事中的階級與性別政治〉，《二十一世紀》1999年4月號（總第52期），頁110–118</li>
+          <li>申丹：〈敘事形式與性別政治——女性主義敘事學評析〉，《北京大學學報（哲學社會科學版）》2004年第1期，頁136–146</li>
         </ul>
       </td>
     </tr>

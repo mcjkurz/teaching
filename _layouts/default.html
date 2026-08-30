@@ -54,12 +54,41 @@
             border-radius: 2px;
         }
         main h2 {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.55rem;
             font-size: 1.55rem;
             font-weight: 600;
             margin: 2.75rem 0 0.9rem;
             padding-top: 1.5rem;
             border-top: 1px solid #e6e6e6;
         }
+        main h2.is-folded { margin-bottom: 0; }
+        .section-fold {
+            margin-left: auto;
+            flex-shrink: 0;
+            background: none;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            color: #888;
+            cursor: pointer;
+            font: inherit;
+            font-size: 0.72rem;
+            font-weight: 400;
+            line-height: 1;
+            letter-spacing: 0.02em;
+            padding: 0.18rem 0.42rem;
+            opacity: 0;
+            transition: opacity 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+        }
+        .section-fold:hover { color: #333; border-color: #bbb; }
+        main h2:hover .section-fold,
+        main h2:focus-within .section-fold { opacity: 1; }
+        @media (hover: none) {
+            .section-fold { opacity: 0.7; }
+        }
+        h2.is-folded + .section-body { display: none; }
         main h3 { font-size: 1.1rem; font-weight: 500; margin: 1.5rem 0 0.5rem; }
         main p { margin-bottom: 1rem; }
         main ul, main ol { margin: 0 0 1rem 1.4rem; }
@@ -112,12 +141,6 @@
         .page-list a { text-decoration: none; font-weight: 500; }
         .page-list a:hover { text-decoration: underline; }
         .page-list .description { display: block; color: #666; font-size: 0.9rem; margin-top: 0.25rem; }
-        .i18n-block h2 {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 0.55rem;
-        }
         .lang-toggle {
             font-size: 0.8rem;
             font-weight: 400;
@@ -179,13 +202,45 @@
         </main>
     </div>
     <script>
+        document.querySelectorAll("main h2").forEach(function (heading) {
+            var body = document.createElement("div");
+            body.className = "section-body";
+            var parent = heading.parentElement;
+            if (parent && parent.classList.contains("i18n-block")) {
+                while (heading.nextSibling) body.appendChild(heading.nextSibling);
+                parent.appendChild(body);
+            } else {
+                var node = heading.nextSibling;
+                while (node && !(node.nodeType === 1 && (node.tagName === "H2" || node.classList.contains("i18n-block")))) {
+                    var next = node.nextSibling;
+                    body.appendChild(node);
+                    node = next;
+                }
+                heading.after(body);
+            }
+            var fold = document.createElement("button");
+            fold.type = "button";
+            fold.className = "section-fold";
+            fold.setAttribute("aria-expanded", "true");
+            fold.setAttribute("aria-label", "Collapse section");
+            fold.textContent = "fold";
+            heading.appendChild(fold);
+            fold.addEventListener("click", function (e) {
+                e.stopPropagation();
+                var collapsed = heading.classList.toggle("is-folded");
+                fold.setAttribute("aria-expanded", collapsed ? "false" : "true");
+                fold.setAttribute("aria-label", collapsed ? "Expand section" : "Collapse section");
+                fold.textContent = collapsed ? "unfold" : "fold";
+            });
+        });
         document.querySelectorAll(".i18n-block").forEach(function (block) {
             var heading = block.querySelector("h2");
             if (!heading) return;
             var toggle = document.createElement("span");
             toggle.className = "lang-toggle";
             toggle.innerHTML = '<button type="button" data-lang="en" class="is-active">English</button> | <button type="button" data-lang="zh">中文</button>';
-            heading.appendChild(toggle);
+            var foldBtn = heading.querySelector(".section-fold");
+            heading.insertBefore(toggle, foldBtn);
             toggle.addEventListener("click", function (e) {
                 var btn = e.target.closest("button");
                 if (!btn) return;
