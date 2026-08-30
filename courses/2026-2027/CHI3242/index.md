@@ -104,7 +104,8 @@ Term 1, 2026–2027</p>
 <thead><tr><th>Component</th><th>Weight</th></tr></thead>
 <tbody>
 <tr><td>In-class discussion and participation</td><td>20%</td></tr>
-<tr><td>Assignments (2) + project proposal</td><td>40%</td></tr>
+<tr><td>Assignments (2)</td><td>30%</td></tr>
+<tr><td>Project proposal</td><td>10%</td></tr>
 <tr><td>Final project</td><td>40%</td></tr>
 </tbody>
 </table>
@@ -116,7 +117,8 @@ Term 1, 2026–2027</p>
 <thead><tr><th>項目</th><th>比重</th></tr></thead>
 <tbody>
 <tr><td>課堂討論與參與</td><td>20%</td></tr>
-<tr><td>作業（2份）＋專題計劃書</td><td>40%</td></tr>
+<tr><td>作業（2份）</td><td>30%</td></tr>
+<tr><td>專題計劃書</td><td>10%</td></tr>
 <tr><td>期末專題</td><td>40%</td></tr>
 </tbody>
 </table>
@@ -375,7 +377,7 @@ Term 1, 2026–2027</p>
   <tbody class="due">
     <tr>
       <td></td>
-      <td class="date">13 Dec</td>
+      <td class="date">7 Dec</td>
       <td colspan="2"><strong>Final project due, 9:00 am</strong></td>
     </tr>
   </tbody>
