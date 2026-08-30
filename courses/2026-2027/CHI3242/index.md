@@ -285,6 +285,7 @@ title: CHI3242
         <ul class="readings">
           <li><span class="lang-en">LDA; what is a “topic”?</span><span class="lang-zh" lang="zh-Hant">LDA；什麼是「主題」？</span></li>
           <li>蘇祺：〈主題模型〉，第十章，李飛躍、桑海（主編）《數字人文引論》。北京：中華書局，2026年</li>
+          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> David M. Blei, “Probabilistic Topic Models”</li>
         </ul>
       </td>
     </tr>
