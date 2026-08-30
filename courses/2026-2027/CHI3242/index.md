@@ -385,7 +385,7 @@ title: CHI3242
     <tr>
       <td></td>
       <td class="date"><span class="lang-en">7 Dec</span><span class="lang-zh" lang="zh-Hant">12月7日</span></td>
-      <td colspan="2"><strong><span class="lang-en">Final project due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">期末專題截止，上午9:00</span></strong></td>
+      <td colspan="2"><span class="lang-en">Final project due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">期末專題截止，上午9:00</span></td>
     </tr>
   </tbody>
 </table>

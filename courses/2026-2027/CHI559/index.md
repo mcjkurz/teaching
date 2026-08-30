@@ -327,7 +327,7 @@ title: CHI559
     <tr>
       <td></td>
       <td class="date">12月7日</td>
-      <td colspan="2"><strong>期末專題截止，上午9:00</strong></td>
+      <td colspan="2">期末專題截止，上午9:00</td>
     </tr>
   </tbody>
 </table>

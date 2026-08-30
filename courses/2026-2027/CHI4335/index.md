@@ -237,7 +237,7 @@ title: CHI4335
       <td></td>
       <td></td>
       <td class="date"><span class="lang-en">21 Sep</span><span class="lang-zh" lang="zh-Hant">9月21日</span></td>
-      <td colspan="2"><strong><span class="lang-en">Comparative essay (Weeks 2 &amp; 3) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第2、3週）截止，上午9:00</span></strong></td>
+      <td colspan="2"><span class="lang-en">Comparative essay (Weeks 2 &amp; 3) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第2、3週）截止，上午9:00</span></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -271,7 +271,7 @@ title: CHI4335
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
       <td class="date"><span class="lang-en">1 Oct</span><span class="lang-zh" lang="zh-Hant">10月1日</span></td>
-      <td><strong><span class="lang-en">No class (National Day)</span><span class="lang-zh" lang="zh-Hant">停課（國慶日）</span></strong></td>
+      <td><span class="lang-en">No class (National Day)</span><span class="lang-zh" lang="zh-Hant">停課（國慶日）</span></td>
     </tr>
   </tbody>
   <tbody class="due">
@@ -279,7 +279,7 @@ title: CHI4335
       <td></td>
       <td></td>
       <td class="date"><span class="lang-en">5 Oct</span><span class="lang-zh" lang="zh-Hant">10月5日</span></td>
-      <td colspan="2"><strong><span class="lang-en">Comparative essay (Weeks 4 &amp; 5) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第4、5週）截止，上午9:00</span></strong></td>
+      <td colspan="2"><span class="lang-en">Comparative essay (Weeks 4 &amp; 5) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第4、5週）截止，上午9:00</span></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -334,7 +334,7 @@ title: CHI4335
       <td></td>
       <td></td>
       <td class="date"><span class="lang-en">26 Oct</span><span class="lang-zh" lang="zh-Hant">10月26日</span></td>
-      <td colspan="2"><strong><span class="lang-en">Comparative essay (Weeks 6, 7, 8) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第6、7、8週）截止，上午9:00</span></strong></td>
+      <td colspan="2"><span class="lang-en">Comparative essay (Weeks 6, 7, 8) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第6、7、8週）截止，上午9:00</span></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -380,7 +380,7 @@ title: CHI4335
       <td></td>
       <td></td>
       <td class="date"><span class="lang-en">9 Nov</span><span class="lang-zh" lang="zh-Hant">11月9日</span></td>
-      <td colspan="2"><strong><span class="lang-en">Comparative essay (Weeks 9 &amp; 10) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第9、10週）截止，上午9:00</span></strong></td>
+      <td colspan="2"><span class="lang-en">Comparative essay (Weeks 9 &amp; 10) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第9、10週）截止，上午9:00</span></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -426,7 +426,7 @@ title: CHI4335
       <td></td>
       <td></td>
       <td class="date"><span class="lang-en">23 Nov</span><span class="lang-zh" lang="zh-Hant">11月23日</span></td>
-      <td colspan="2"><strong><span class="lang-en">Comparative essay (Weeks 11 &amp; 12) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第11、12週）截止，上午9:00</span></strong></td>
+      <td colspan="2"><span class="lang-en">Comparative essay (Weeks 11 &amp; 12) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第11、12週）截止，上午9:00</span></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -448,7 +448,7 @@ title: CHI4335
       <td></td>
       <td></td>
       <td class="date"><span class="lang-en">7 Dec</span><span class="lang-zh" lang="zh-Hant">12月7日</span></td>
-      <td colspan="2"><strong><span class="lang-en">Final project due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">期末專題截止，上午9:00</span></strong></td>
+      <td colspan="2"><span class="lang-en">Final project due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">期末專題截止，上午9:00</span></td>
     </tr>
   </tbody>
 </table>
