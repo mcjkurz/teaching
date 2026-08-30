@@ -78,11 +78,11 @@ Term 1, 2026–2027</p>
 <h2>Assessment</h2>
 <div class="lang-en">
 <p>Students’ progress towards the learning outcomes will be measured by means of:</p>
-<table>
+<table class="assessment">
 <thead><tr><th>Component</th><th>Weight</th></tr></thead>
 <tbody>
 <tr><td>In-class discussion and participation</td><td>20%</td></tr>
-<tr><td>Comparative essays (3)</td><td>20%</td></tr>
+<tr><td>Comparative essays (2)</td><td>20%</td></tr>
 <tr><td>Oral presentations (2)</td><td>20%</td></tr>
 <tr><td>Final project</td><td>40%</td></tr>
 </tbody>
@@ -91,11 +91,11 @@ Term 1, 2026–2027</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
 <p>學生的學習成果將以下列方式評核：</p>
-<table>
+<table class="assessment">
 <thead><tr><th>項目</th><th>比重</th></tr></thead>
 <tbody>
 <tr><td>課堂討論與參與</td><td>20%</td></tr>
-<tr><td>比較短文（3篇）</td><td>20%</td></tr>
+<tr><td>比較短文（2篇）</td><td>20%</td></tr>
 <tr><td>口頭報告（2次）</td><td>20%</td></tr>
 <tr><td>期末專題</td><td>40%</td></tr>
 </tbody>
@@ -128,7 +128,7 @@ Term 1, 2026–2027</p>
 <h2>Course Design</h2>
 <div class="lang-en">
 <p><strong>1. Lectures.</strong> Each week, the lecture will focus on the broader historical contexts and theoretical issues surrounding the selected texts.</p>
-<p><strong>2. Presentations.</strong> During the tutorial sessions, students will work individually or collaborate in small teams (comprising 2 members) to deliver oral presentations (20–30 mins) on selected <strong>primary</strong> texts (novels or short stories). The students presenting each week are topic experts who are expected to lead the discussion in tutorials and be active during lectures. The presentations should incorporate carefully chosen quotations and paraphrased content from the story, addressing one or more of the following questions:</p>
+<p><strong>2. Presentations.</strong> During the tutorial sessions, students will work individually or collaborate in small teams (comprising 2 members) to deliver two oral presentations (20–30 mins each) on selected <strong>primary</strong> texts (novels or short stories). The students presenting each week are topic experts who are expected to lead the discussion in tutorials and be active during lectures. The presentations should incorporate carefully chosen quotations and paraphrased content from the story, addressing one or more of the following questions:</p>
 <ul>
 <li>How does the text portray the impact of extreme experiences on individuals and society?</li>
 <li>How is the body represented?</li>
@@ -136,7 +136,7 @@ Term 1, 2026–2027</p>
 <li>How are women portrayed, and what roles are they assigned in the context of crisis?</li>
 </ul>
 <p>The presentations should be comparative. You are expected to analyze the assigned text in relation to other primary works from the course, highlighting both significant continuities (shared themes, styles, or arguments) and departures (unique elements or innovations, cultural influences, etc.).</p>
-<p><strong>3. Comparative essays.</strong> Out of five (5) topics, students are expected to submit three (3) comparative essays in Chinese on the primary texts (short stories or novels) covered throughout the course. Essays must present personal analysis and insights, focusing on one or more of the course’s key themes: the individual and society, the body, fictionality, and womanhood. Your approach must be comparative. Your analysis should incorporate <strong>at least one primary text from the respective block.</strong> You are encouraged to draw connections to texts from other weeks. Each essay should be between 1,500 and 2,000 characters in length. All essays must be submitted via the Assignment module on Moodle. If more than three essays are submitted, only the three highest scores will count.</p>
+<p><strong>3. Comparative essays.</strong> Out of five (5) topics, students are expected to submit two (2) comparative essays in Chinese on the primary texts (short stories or novels) covered throughout the course. Essays must present personal analysis and insights, focusing on one or more of the course’s key themes: the individual and society, the body, fictionality, and womanhood. Each essay should center on close analysis and precise description of the texts, supported by relevant quotations. Rather than relying mainly on broad thematic claims, it should explain how particular textual features—such as metaphors, dialogue, narrative perspective, imagery, or style—function in the work and shape its meaning. Your approach must be comparative. Your analysis should incorporate <strong>at least one primary text from the respective block.</strong> You are encouraged to draw connections to texts from other weeks. Each essay should be between 1,500 and 2,000 characters in length. All essays must be submitted via the Assignment module on Moodle. If more than two essays are submitted, only the two highest scores will count.</p>
 <p><strong>4. Final project</strong> offers three options.</p>
 <ul>
 <li><strong>Option 1.</strong> Write an analytical paper (3,500–4,000 characters) that is comparative in nature and considers at least two different primary texts covered in class. Submit the PDF version of your paper through Moodle before the deadline. The paper should have a title, quote the texts analyzed, and use properly formatted citations and references. You are welcome to consult secondary sources, but this is not required. The final paper should not contain your comparative essays copied verbatim, although it can be developed from them.</li>
@@ -146,7 +146,7 @@ Term 1, 2026–2027</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
 <p><strong>1. 講座：</strong>每週講座聚焦所選文本的歷史脈絡與理論問題。</p>
-<p><strong>2. 報告：</strong>導修課上，學生可獨立或兩人小組，就指定<strong>一手</strong>文本（長篇或短篇小說）作口頭報告（20–30分鐘）。當週報告的學生須作為該主題的專家，帶領導修討論，並在講座中積極參與。報告應從作品中精選引文並準確轉述內容，回應下列一項或多項問題：</p>
+<p><strong>2. 報告：</strong>導修課上，學生可獨立或兩人小組，就指定<strong>一手</strong>文本（長篇或短篇小說）作兩次口頭報告（每次20–30分鐘）。當週報告的學生須作為該主題的專家，帶領導修討論，並在講座中積極參與。報告應從作品中精選引文並準確轉述內容，回應下列一項或多項問題：</p>
 <ul>
 <li>文本如何描寫極端經驗對個人與社會的影響？</li>
 <li>身體如何被再現？</li>
@@ -154,7 +154,7 @@ Term 1, 2026–2027</p>
 <li>女性如何被描寫，在危機中被賦予何種角色？</li>
 </ul>
 <p>報告須具比較性。須將指定文本與課程中其他一手作品對讀，指出重要的延續（共享主題、風格或論點）與差異（獨特之處、創新、文化影響等）。</p>
-<p><strong>3. 比較短文：</strong>五個題目中選寫三篇，以中文就課程所讀一手文本（短篇或長篇小說）撰寫比較短文。文章須有個人分析與見解，聚焦課程關鍵主題之一或多項：個人與社會、身體、虛構性、女性身分。必須採取比較進路。分析須<strong>至少納入該單元中的一部一手作品</strong>，亦鼓勵連結其他週次的文本。每篇 1,500 至 2,000 字。一律經 Moodle 作業區繳交。若繳交超過三篇，只計入得分最高的三篇。</p>
+<p><strong>3. 比較短文：</strong>五個題目中選寫兩篇，以中文就課程所讀一手文本（短篇或長篇小說）撰寫比較短文。文章須有個人分析與見解，聚焦課程關鍵主題之一或多項：個人與社會、身體、虛構性、女性身分。每篇文章須以文本細讀與精確描述為核心，並引用相關段落作為依據。文章不應停留於寬泛的主題論述，而須分析特定文本元素——例如隱喻、對話、敘事視角、意象或文體——在作品中發揮何種功能，以及如何形塑意義。必須採取比較進路。分析須<strong>至少納入該單元中的一部一手作品</strong>，亦鼓勵連結其他週次的文本。每篇 1,500 至 2,000 字。一律經 Moodle 作業區繳交。若繳交超過兩篇，只計入得分最高的兩篇。</p>
 <p><strong>4. 期末專題：</strong>有三個選項。</p>
 <ul>
 <li><strong>選項一：</strong>撰寫比較性的分析論文（3,500–4,000 字），至少討論課堂上兩部不同的一手作品。於截止日期前經 Moodle 提交 PDF。論文須有標題、引用所分析的文本，並採用規範的引註及參考書目格式。可參考二手文獻，但非必須。期末論文不得原文照搬比較短文，但可由其發展而成。</li>
@@ -176,6 +176,7 @@ Term 1, 2026–2027</p>
 
 ## Class Schedule
 
+<div class="table-scroll">
 <table class="schedule">
   <thead>
     <tr>
@@ -283,7 +284,7 @@ Term 1, 2026–2027</p>
       <td class="week" rowspan="2">6</td>
       <td>Lecture</td>
       <td class="date">6 Oct</td>
-      <td class="topic" rowspan="2">Trauma and Agency</td>
+      <td class="topic" rowspan="2">Trauma and Narrative</td>
       <td><ul class="readings"><li>Wendy O’Brien, “Telling Time: Literature, Temporality and Trauma”</li></ul></td>
     </tr>
     <tr>
@@ -297,7 +298,7 @@ Term 1, 2026–2027</p>
       <td class="week" rowspan="2">7</td>
       <td>Lecture</td>
       <td class="date">13 Oct</td>
-      <td class="topic" rowspan="2">Social Movements &amp; Trauma</td>
+      <td class="topic" rowspan="2">Trauma and Society</td>
       <td>
         <ul class="readings">
           <li>陶東風：〈走向建構主義的文化創傷理論〉，《文藝理論研究》2024年第3期，頁34–44</li>
@@ -316,7 +317,7 @@ Term 1, 2026–2027</p>
       <td class="week" rowspan="2">8</td>
       <td>Lecture</td>
       <td class="date">20 Oct</td>
-      <td class="topic" rowspan="2">War Experience</td>
+      <td class="topic" rowspan="2">Trauma and War</td>
       <td><ul class="readings"><li>Patrick Colm Hogan, “On Being Moved: Cognition and Emotion in Literature and Film”</li></ul></td>
     </tr>
     <tr>
@@ -448,6 +449,7 @@ Term 1, 2026–2027</p>
     </tr>
   </tbody>
 </table>
+</div>
 
 ## Important Notes
 

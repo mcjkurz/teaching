@@ -67,7 +67,33 @@
         main table { width: 100%; border-collapse: collapse; margin: 0 0 1.5rem; font-size: 0.88rem; }
         main th, main td { text-align: left; padding: 0.5rem 0.65rem; border-bottom: 1px solid #e6e6e6; vertical-align: middle; }
         main th { font-weight: 600; background: #f5f5f5; border-bottom: 2px solid #ddd; }
-        main table.schedule { border-collapse: separate; border-spacing: 0; }
+        main table.assessment { table-layout: fixed; }
+        main table.assessment th:last-child,
+        main table.assessment td:last-child {
+            width: 7rem;
+            text-align: center;
+            white-space: nowrap;
+        }
+        .table-scroll {
+            width: 100%;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+            -webkit-overflow-scrolling: touch;
+        }
+        .table-scroll table { margin-bottom: 0; }
+        main table.schedule {
+            min-width: 760px;
+            table-layout: fixed;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        main table.schedule th:nth-child(1) { width: 7%; }
+        main table.schedule th:nth-child(2) { width: 11%; }
+        main table.schedule th:nth-child(3) { width: 12%; }
+        main table.schedule th:nth-child(4) { width: 22%; }
+        main table.schedule th:nth-child(5) { width: 48%; }
+        main table.schedule th,
+        main table.schedule td { overflow-wrap: break-word; }
         main table.schedule tbody + tbody tr:first-child td { border-top: 2px solid #c5c9ce; }
         main table.schedule tbody.block-b { background: #f3f5f7; }
         main table.schedule tbody.due { background: #fff6e5; }
@@ -82,7 +108,6 @@
         main table.schedule td.date,
         main table.schedule th:nth-child(3) {
             white-space: nowrap;
-            min-width: 7em;
         }
         main table.schedule ul.readings {
             margin: 0;
@@ -95,7 +120,6 @@
         @media (max-width: 768px) {
             .wrap { padding: 1rem 1rem 3rem; }
             main h1 { font-size: 1.5rem; }
-            main table { display: block; overflow-x: auto; }
             .course-header { flex-direction: column; }
             .course-header-image { max-width: none; width: 100%; }
         }
