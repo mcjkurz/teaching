@@ -145,9 +145,19 @@ Term 1, 2026–2027</p>
 <h2>Course Design</h2>
 <div class="lang-en">
 <p><strong>1. Seminars.</strong> Each week, a three-hour seminar combines conceptual discussion with supervised hands-on practice. Students work with Chinese texts and learn methods ranging from word frequencies and collocations to topic models, word vectors, and neural language models. Prior programming experience is not required. We introduce agentic coding in the first weeks and then use AI coding agents throughout.</p>
-<p><strong>2. Individual assignments.</strong> Four assignments ask students to apply the tools covered in seminars to a corpus of Chinese texts provided by the instructor. Each assignment produces a short written analysis together with the relevant visualizations or model outputs. All assignments must be submitted via the Assignment module on Moodle.</p>
+<p><strong>2. Individual assignments.</strong> Four assignments apply the tools covered in seminars. Later assignments use a corpus provided by the instructor. All work must be submitted via the Assignment module on Moodle (for Assignment 1: paste the public GitHub URL).</p>
+<p><strong>Assignment 1: Repository and text passport.</strong> Create a public GitHub repository for a Chinese novel you choose. Submit only the repository URL on Moodle. The repository must contain exactly these files:</p>
 <ul>
-<li>Assignment 1: Wordcloud</li>
+<li><code>README.md</code> — your name, student ID, and book metadata (author, title, source or URL, and a one-sentence reason for choosing it)</li>
+<li><code>data/novel.txt</code> — the full text, plain text, encoded as UTF-8</li>
+<li><code>analysis.py</code> or <code>analysis.ipynb</code> — a script that reads <code>data/novel.txt</code> as UTF-8, segments the Chinese text, removes stopwords, and writes the two output files below</li>
+<li><code>output/stats.txt</code> — four lines, in this order: (1) encoding: UTF-8; (2) character count, excluding whitespace; (3) token count after segmentation; (4) number of unique types after stopword removal</li>
+<li><code>output/top20.csv</code> — the 20 most frequent content words, two columns, no header: <code>word,count</code></li>
+<li><code>figures/wordcloud.png</code> — a wordcloud of those content words</li>
+<li><code>report.md</code> — 500–800 characters in Chinese: what do the top words suggest about this novel, and what changes if you count characters instead of segmented words?</li>
+</ul>
+<p>Later assignments:</p>
+<ul>
 <li>Assignment 2: Corpus comparison</li>
 <li>Assignment 3: Topic modeling</li>
 <li>Assignment 4: Word vectors</li>
@@ -163,9 +173,19 @@ Term 1, 2026–2027</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
 <p><strong>1. 研討課：</strong>每週三小時研討課結合概念講授與教師指導下的實作。學生處理中文文本，學習從詞頻、搭配、主題模型、詞向量到神經語言模型等方法。無須具備編程經驗。最初數週引入智能體編程，其後貫穿全學期使用人工智能編程助手。</p>
-<p><strong>2. 個人作業：</strong>四份作業要求學生將研討課所學工具，應用於教師提供的中文語料。每份作業須繳交簡短書面分析，並附上相關可視化或模型輸出。一律經 Moodle 作業區繳交。</p>
+<p><strong>2. 個人作業：</strong>四份作業應用研討課所學工具。其後作業使用教師提供的語料。一律經 Moodle 作業區繳交（作業一：只須提交公開 GitHub 倉庫網址）。</p>
+<p><strong>作業一：倉庫與文本護照。</strong>自選一部中文小說，建立公開 GitHub 倉庫。於 Moodle 只提交該倉庫網址。倉庫內須包含下列檔案，不得缺漏：</p>
 <ul>
-<li>作業一：詞雲</li>
+<li><code>README.md</code> — 姓名、學號，以及書籍資訊（作者、書名、來源或網址，並用一句話說明為何選此書）</li>
+<li><code>data/novel.txt</code> — 全書純文字，編碼為 UTF-8</li>
+<li><code>analysis.py</code> 或 <code>analysis.ipynb</code> — 以 UTF-8 讀入 <code>data/novel.txt</code>，作中文分詞、去除停用詞，並產出下列兩個輸出檔</li>
+<li><code>output/stats.txt</code> — 四行，順序固定：（1）encoding: UTF-8；（2）字元數（不含空白）；（3）分詞後詞數；（4）去除停用詞後的詞種數</li>
+<li><code>output/top20.csv</code> — 頻率最高的 20 個實詞，兩欄、無表頭：<code>word,count</code></li>
+<li><code>figures/wordcloud.png</code> — 以上實詞的詞雲</li>
+<li><code>report.md</code> — 中文 500–800 字：高頻詞說明了這部小說的什麼？若只計字元、不作分詞，會有何不同？</li>
+</ul>
+<p>其後作業：</p>
+<ul>
 <li>作業二：語料比較</li>
 <li>作業三：主題模型</li>
 <li>作業四：詞向量</li>
@@ -201,7 +221,6 @@ Term 1, 2026–2027</p>
       <td>
         <ul class="readings">
           <li>Digital Humanities: key concepts; agentic coding; GitHub, OpenRouter, and VS Code</li>
-          <li>Franco Moretti, “Conjectures on World Literature,” in <em>Distant Reading</em></li>
         </ul>
       </td>
     </tr>
@@ -210,19 +229,24 @@ Term 1, 2026–2027</p>
     <tr>
       <td class="week">2</td>
       <td class="date">10 Sep</td>
-      <td class="topic">Python and Agentic Coding</td>
-      <td>Variables, lists, loops, and functions; writing and debugging code with an AI coding agent</td>
+      <td class="topic">Language, Text, Encoding</td>
+      <td>
+        <ul class="readings">
+          <li>What is a text? Binary, Unicode, UTF-8; files as data</li>
+          <li>Chinese text segmentation; Bag of Words (BoW); stopwords; Zipf’s law</li>
+        </ul>
+      </td>
     </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week">3</td>
       <td class="date">17 Sep</td>
-      <td class="topic">Working with Texts</td>
+      <td class="topic">Collocations</td>
       <td>
         <ul class="readings">
-          <li>Encoding (binary, Unicode, UTF-8); text files; Chinese text segmentation; Bag of Words (BoW); stopwords</li>
-          <li>蕭紅：《生死場》</li>
+          <li>Collocation as a method; the contingency table（列聯表）</li>
+          <li>Stefan Evert, “Corpora and Collocations”</li>
         </ul>
       </td>
     </tr>
@@ -231,19 +255,19 @@ Term 1, 2026–2027</p>
     <tr>
       <td></td>
       <td class="date">21 Sep</td>
-      <td colspan="2"><strong>Assignment 1 (Wordcloud) due, 9:00 am</strong></td>
+      <td colspan="2"><strong>Assignment 1 (Repository and text passport) due, 9:00 am</strong></td>
     </tr>
   </tbody>
   <tbody class="block-b">
     <tr>
       <td class="week">4</td>
       <td class="date">24 Sep</td>
-      <td class="topic">Collocation Analysis</td>
+      <td class="topic">What Is a Character?</td>
       <td>
         <ul class="readings">
-          <li>Contingency table, part 1（列聯表，第一部分）; what is a “character”?</li>
+          <li>A humanistic week: character, word, person</li>
           <li>Alex Woloch, <em>The One vs. the Many</em>, pp. 12–42</li>
-          <li>Stefan Evert, “Corpora and Collocations”</li>
+          <li>蕭紅：《生死場》</li>
         </ul>
       </td>
     </tr>
