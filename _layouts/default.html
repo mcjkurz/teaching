@@ -63,30 +63,25 @@
             margin: 2.75rem 0 0.9rem;
             padding-top: 1.5rem;
             border-top: 1px solid #e6e6e6;
+            cursor: pointer;
         }
         main h2.is-folded { margin-bottom: 0; }
         .section-fold {
-            margin-left: auto;
             flex-shrink: 0;
             background: none;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-            color: #888;
+            border: none;
+            color: #777;
             cursor: pointer;
             font: inherit;
-            font-size: 0.72rem;
-            font-weight: 400;
+            font-size: 0.75rem;
             line-height: 1;
-            letter-spacing: 0.02em;
-            padding: 0.18rem 0.42rem;
-            opacity: 0;
-            transition: opacity 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+            padding: 0.2rem 0;
+            width: 0.8rem;
         }
-        .section-fold:hover { color: #333; border-color: #bbb; }
-        main h2:hover .section-fold,
-        main h2:focus-within .section-fold { opacity: 1; }
-        @media (hover: none) {
-            .section-fold { opacity: 0.7; }
+        .section-fold:hover { color: #0066cc; }
+        .section-fold:focus-visible {
+            outline: 2px solid #0066cc;
+            outline-offset: 2px;
         }
         h2.is-folded + .section-body { display: none; }
         main h3 { font-size: 1.1rem; font-weight: 500; margin: 1.5rem 0 0.5rem; }
@@ -223,14 +218,21 @@
             fold.className = "section-fold";
             fold.setAttribute("aria-expanded", "true");
             fold.setAttribute("aria-label", "Collapse section");
-            fold.textContent = "fold";
-            heading.appendChild(fold);
-            fold.addEventListener("click", function (e) {
-                e.stopPropagation();
+            fold.textContent = "▾";
+            heading.insertBefore(fold, heading.firstChild);
+            function toggleSection() {
                 var collapsed = heading.classList.toggle("is-folded");
                 fold.setAttribute("aria-expanded", collapsed ? "false" : "true");
                 fold.setAttribute("aria-label", collapsed ? "Expand section" : "Collapse section");
-                fold.textContent = collapsed ? "unfold" : "fold";
+                fold.textContent = collapsed ? "▸" : "▾";
+            }
+            fold.addEventListener("click", function (e) {
+                e.stopPropagation();
+                toggleSection();
+            });
+            heading.addEventListener("click", function (e) {
+                if (e.target.closest(".lang-toggle")) return;
+                toggleSection();
             });
         });
         document.querySelectorAll(".i18n-block").forEach(function (block) {
@@ -239,8 +241,7 @@
             var toggle = document.createElement("span");
             toggle.className = "lang-toggle";
             toggle.innerHTML = '<button type="button" data-lang="en" class="is-active">English</button> | <button type="button" data-lang="zh">中文</button>';
-            var foldBtn = heading.querySelector(".section-fold");
-            heading.insertBefore(toggle, foldBtn);
+            heading.appendChild(toggle);
             toggle.addEventListener("click", function (e) {
                 var btn = e.target.closest("button");
                 if (!btn) return;

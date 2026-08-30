@@ -57,8 +57,8 @@ Term 1, 2026–2027</p>
 <p>完成本課程後，學生應能：</p>
 <ul>
 <li>辨識並批判地思考文學所描寫的極端經驗所涉及之主要哲學與社會問題</li>
-<li>認識並闡明不同文化與文類中，文學回應極端處境的特徵</li>
-<li>比較文學與文化文本中，關於災難、創傷與人類韌性的跨文化視角</li>
+<li>辨識並闡明不同文化與文類中，文學回應極端處境的核心特徵</li>
+<li>比較並對照文學與文化文本所呈現的災難、創傷與人類韌性之跨文化視角</li>
 <li>既精確又具創意地分析文學與文化文本，並考慮其更廣的歷史、文化與哲學脈絡</li>
 </ul>
 </div>
@@ -67,10 +67,10 @@ Term 1, 2026–2027</p>
 <div class="i18n-block">
 <h2>Language of Instruction</h2>
 <div class="lang-en">
-<p>The course is conducted fully in Putonghua. All primary sources (novels, stories, diaries, etc.) are in Chinese. However, some theoretical texts are in English, and you are expected to read them in English, unless a Chinese translation is available. The instructor might provide translated versions if needed. There are many AI tools that can help you translate theoretical texts free of charge (e.g., <a href="https://perplexity.ai/">https://perplexity.ai/</a>, <a href="https://chat.deepseek.com">https://chat.deepseek.com</a>). In-class discussions will be held in Putonghua, and student submissions and assessments should be written in Chinese.</p>
+<p>The course is conducted fully in Putonghua. All primary sources (novels, stories, diaries, etc.) are in Chinese. However, some theoretical texts are in English, and you are expected to read them in English, unless a Chinese translation is available. The instructor might provide translated versions if needed. There are many AI tools that can help you translate theoretical texts free of charge (e.g., <a href="https://perplexity.ai/">https://perplexity.ai/</a>, <a href="https://chat.deepseek.com">https://chat.deepseek.com</a>, <a href="https://poe.com">https://poe.com</a>, <a href="https://gemini.google.com">https://gemini.google.com</a>). In-class discussions will be held in Putonghua, and students should complete and submit all assessed work in Chinese.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
-<p>本課程全程以普通話進行。所有一手文本（小說、故事、日記等）均為中文。部分理論文本為英文，除非已有中譯，否則須以英文閱讀。如有需要，教師或會提供譯本。亦有不少免費人工智能工具可協助翻譯理論文本（例如 <a href="https://perplexity.ai/">https://perplexity.ai/</a>、<a href="https://chat.deepseek.com">https://chat.deepseek.com</a>）。課堂討論以普通話進行，學生作業與評核須以中文撰寫。</p>
+<p>本課程全程以普通話進行。所有一手文本（小說、故事、日記等）均為中文。部分理論文本為英文，除非已有中譯，否則須以英文閱讀。如有需要，教師或會提供譯本。亦有不少免費人工智能工具可協助翻譯理論文本（例如 <a href="https://perplexity.ai/">https://perplexity.ai/</a>、<a href="https://chat.deepseek.com">https://chat.deepseek.com</a>、<a href="https://poe.com">https://poe.com</a>、<a href="https://gemini.google.com">https://gemini.google.com</a>）。課堂討論以普通話進行，所有評核作業均須以中文完成並提交。</p>
 </div>
 </div>
 
@@ -84,7 +84,7 @@ Term 1, 2026–2027</p>
 <tr><td>In-class discussion and participation</td><td>20%</td></tr>
 <tr><td>Comparative reflections (3)</td><td>20%</td></tr>
 <tr><td>Oral presentations (2)</td><td>20%</td></tr>
-<tr><td>Final paper</td><td>40%</td></tr>
+<tr><td>Final project</td><td>40%</td></tr>
 </tbody>
 </table>
 <p><strong>Grading scale:</strong> A 85%–100%; A− 80%–84%; B+ 75%–79%; B 70%–74%; B− 65%–69%; C+ 60%–64%; C 55%–59%; C− 50%–54%; D+ 45%–49%; D 40%–44%; F 0%–39%</p>
@@ -97,7 +97,7 @@ Term 1, 2026–2027</p>
 <tr><td>課堂討論與參與</td><td>20%</td></tr>
 <tr><td>比較反思（3篇）</td><td>20%</td></tr>
 <tr><td>口頭報告（2次）</td><td>20%</td></tr>
-<tr><td>期末論文</td><td>40%</td></tr>
+<tr><td>期末專題</td><td>40%</td></tr>
 </tbody>
 </table>
 <p><strong>評分等級：</strong> A 85%–100%；A− 80%–84%；B+ 75%–79%；B 70%–74%；B− 65%–69%；C+ 60%–64%；C 55%–59%；C− 50%–54%；D+ 45%–49%；D 40%–44%；F 0%–39%</p>
@@ -107,10 +107,10 @@ Term 1, 2026–2027</p>
 <div class="i18n-block">
 <h2>Attendance Policy</h2>
 <div class="lang-en">
-<p>Students are expected to attend all classes. <strong>One</strong> unexplained absence (either lecture or tutorial) is permitted, no questions asked. Unexplained absences will not impact the final grade by more than 20% (the maximum you can get for in-class discussion and participation), unless a student misses more than ten (10) meetings, in which case there will not be enough input to give them a passing grade. Every unexplained absence (beyond the one everyone gets for free) will remove 10% from the participation component (which equals 2% of the final grade). For example, if you are absent two times without explanation (in addition to the one no-questions-asked absence granted to everyone), you will receive 100% − 20% = 80% of the total possible contribution from participation, which amounts to 80% × 20% = 16% of the final grade. Remember to come to class on time and prepared.</p>
+<p>Students are expected to attend all classes. <strong>One</strong> unexplained absence (either lecture or tutorial) is permitted, no questions asked. Unexplained absences will not impact the final grade by more than 20% (the maximum you can get for in-class discussion and participation), unless a student misses more than eight (8) meetings, in which case there will be insufficient evidence of participation to award a passing grade. Lectures and tutorials are counted as separate meetings. Every unexplained absence (beyond the one everyone gets for free) will remove 10% from the participation component (which equals 2% of the final grade). For example, if you are absent two times without explanation (in addition to the one no-questions-asked absence granted to everyone), you will receive 100% − 20% = 80% of the total possible contribution from participation, which amounts to 80% × 20% = 16% of the final grade. Remember to come to class on time and prepared.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
-<p>學生須出席所有課堂。<strong>一次</strong>無故缺席（講座或導修皆可）不計，無須解釋。無故缺席對學期成績的影響不會超過 20%（即課堂討論與參與的上限），惟缺席超過十次者，將因缺乏足夠評核依據而不能獲得及格成績。在人人皆有的一次免費缺席之外，每次無故缺席將從參與分扣除 10%（即學期總分的 2%）。例如，若除人人皆有的一次外再無故缺席兩次，參與分可得 100% − 20% = 80%，即學期總分的 80% × 20% = 16%。請準時出席，並預先準備。</p>
+<p>學生須出席所有課堂。<strong>一次</strong>無故缺席（講座或導修皆可）不計，無須解釋。無故缺席對學期成績的影響不會超過 20%（即課堂討論與參與的上限），惟缺席超過八次者，將因缺乏足夠評核依據而不能獲得及格成績。講座與導修按不同課堂分別計算。在人人皆有的一次免費缺席之外，每次無故缺席將從參與分扣除 10%（即學期總分的 2%）。例如，若除人人皆有的一次外再無故缺席兩次，參與分可得 100% − 20% = 80%，即學期總分的 80% × 20% = 16%。請準時出席，並預先準備。</p>
 </div>
 </div>
 
@@ -126,10 +126,10 @@ Term 1, 2026–2027</p>
 <li>How are women portrayed, and what roles are they assigned in the context of crisis?</li>
 </ul>
 <p>The presentations should be comparative. You are expected to analyze the assigned text in relation to other primary works from the course, highlighting both significant continuities (shared themes, styles, or arguments) and departures (unique elements or innovations, cultural influences, etc.).</p>
-<p><strong>3. Short comparative essays.</strong> Out of five (5) topics, students are expected to submit three (3) short comparative reflections in Chinese on the primary texts (short stories or novels) covered throughout the course. Essays must present personal analysis and insights, focusing on one or more of the course’s key themes: the individual and society, the body, fictionality, and womanhood. Your approach must be comparative. Your analysis should incorporate <strong>at least one primary text from the respective block.</strong> You are encouraged to draw connections to texts from other weeks. Each essay should be between 1,500 and 2,000 characters in length. All essays must be submitted via the Assignment module on Moodle. If more than three essays are submitted, only the three highest scores will count.</p>
+<p><strong>3. Comparative reflections.</strong> Out of five (5) topics, students are expected to submit three (3) short comparative reflections in Chinese on the primary texts (short stories or novels) covered throughout the course. Essays must present personal analysis and insights, focusing on one or more of the course’s key themes: the individual and society, the body, fictionality, and womanhood. Your approach must be comparative. Your analysis should incorporate <strong>at least one primary text from the respective block.</strong> You are encouraged to draw connections to texts from other weeks. Each essay should be between 1,500 and 2,000 characters in length. All essays must be submitted via the Assignment module on Moodle. If more than three essays are submitted, only the three highest scores will count.</p>
 <p><strong>4. Final project</strong> offers three options.</p>
 <ul>
-<li><strong>Option 1.</strong> Write an analytical paper (3,500–4,000 characters) that is comparative in nature and considers at least two different primary texts covered in class. Submit the PDF version of your paper through Moodle before the deadline. The paper should have a title, include quotations from the analyzed texts, and standardized references. You are welcome to consult secondary sources, but this is not required. The final paper should not contain your comparative short essays copied verbatim, although it can be developed from them.</li>
+<li><strong>Option 1.</strong> Write an analytical paper (3,500–4,000 characters) that is comparative in nature and considers at least two different primary texts covered in class. Submit the PDF version of your paper through Moodle before the deadline. The paper should have a title, quote the texts analyzed, and use properly formatted citations and references. You are welcome to consult secondary sources, but this is not required. The final paper should not contain your comparative reflections copied verbatim, although it can be developed from them.</li>
 <li><strong>Option 2.</strong> Write an interview (3,500–4,000 characters) with one of the protagonists from the texts we have read. Consider how the protagonist might have answered your questions in the period in which they lived. The questions should concern the topics we have covered in class.</li>
 <li><strong>Option 3.</strong> Write a narrative continuation (3,500–4,000 characters) of one of the stories that we have read. What might have happened afterwards? Use your imagination, and focus on the questions central to this course (see Course Design above).</li>
 </ul>
@@ -144,10 +144,10 @@ Term 1, 2026–2027</p>
 <li>女性如何被描寫，在危機中被賦予何種角色？</li>
 </ul>
 <p>報告須具比較性。須將指定文本與課程中其他一手作品對讀，指出重要的延續（共享主題、風格或論點）與差異（獨特之處、創新、文化影響等）。</p>
-<p><strong>3. 短篇比較文章：</strong>五個題目中選寫三篇，以中文就課程所讀一手文本（短篇或長篇小說）撰寫短篇比較反思。文章須有個人分析與見解，聚焦課程關鍵主題之一或多項：個人與社會、身體、虛構性、女性身分。必須採取比較進路。分析須<strong>至少納入該單元中的一部一手作品</strong>，亦鼓勵連結其他週次的文本。每篇 1,500 至 2,000 字。一律經 Moodle 作業區繳交。若繳交超過三篇，只計入得分最高的三篇。</p>
+<p><strong>3. 比較反思：</strong>五個題目中選寫三篇，以中文就課程所讀一手文本（短篇或長篇小說）撰寫比較反思。文章須有個人分析與見解，聚焦課程關鍵主題之一或多項：個人與社會、身體、虛構性、女性身分。必須採取比較進路。分析須<strong>至少納入該單元中的一部一手作品</strong>，亦鼓勵連結其他週次的文本。每篇 1,500 至 2,000 字。一律經 Moodle 作業區繳交。若繳交超過三篇，只計入得分最高的三篇。</p>
 <p><strong>4. 期末專題：</strong>有三個選項。</p>
 <ul>
-<li><strong>選項一：</strong>撰寫比較性的分析論文（3,500–4,000 字），至少討論課堂上兩部不同的一手作品。於截止日期前經 Moodle 提交 PDF。論文須有標題、引用所分析文本，並採用規範註釋。可參考二手文獻，但非必須。期末論文不得原文照搬比較短文，但可由其發展而成。</li>
+<li><strong>選項一：</strong>撰寫比較性的分析論文（3,500–4,000 字），至少討論課堂上兩部不同的一手作品。於截止日期前經 Moodle 提交 PDF。論文須有標題、引用所分析的文本，並採用規範的引註及參考書目格式。可參考二手文獻，但非必須。期末論文不得原文照搬比較反思，但可由其發展而成。</li>
 <li><strong>選項二：</strong>撰寫訪問稿（3,500–4,000 字），訪問所讀文本中的一位主角。須設想對方在其所處時代可能如何回答你的問題。問題須關涉課堂討論的主題。</li>
 <li><strong>選項三：</strong>為所讀故事之一撰寫敘事續篇（3,500–4,000 字）。其後可能發生何事？發揮想像，並扣緊本課程的核心問題（見上方「課程設計」）。</li>
 </ul>
@@ -160,7 +160,7 @@ Term 1, 2026–2027</p>
 <p>This course will engage with content that may be emotionally difficult for some students, including discussions of violence and trauma. If you find certain materials challenging, <strong>please do not hesitate to consult the instructor.</strong> We can explore alternative approaches, such as focusing on theoretical texts or supplementary readings. Your well-being is very important, and accommodations can be made to ensure a productive and supportive learning environment.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
-<p>本課程將處理可能令部分學生在情緒上感到難以承受的內容，包括暴力與創傷的討論。若某些材料令你感到難以應付，<strong>請務必與教師商量。</strong> 我們可考慮替代安排，例如改以理論文本或補充閱讀為主。你的身心健康十分重要，我們會作出適當調整，以維持有效而支持性的學習環境。</p>
+<p>本課程將處理可能令部分學生在情緒上感到難以承受的內容，包括暴力與創傷的討論。若某些材料令你感到難以應付，<strong>請隨時與教師商量。</strong> 我們可考慮替代安排，例如改以理論文本或補充閱讀為主。你的身心健康十分重要；我們可作出適當調整，以確保學習環境既有利學習，也能提供支持。</p>
 </div>
 </div>
 
@@ -429,7 +429,7 @@ Term 1, 2026–2027</p>
       <td></td>
       <td></td>
       <td class="date">11 Dec</td>
-      <td colspan="2"><strong>Final paper due, 9:00 pm</strong></td>
+      <td colspan="2"><strong>Final project due, 9:00 pm</strong></td>
     </tr>
   </tbody>
 </table>
