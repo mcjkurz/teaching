@@ -264,7 +264,7 @@ title: CHI4335
         <ul class="readings">
           <li>塔杜施·博羅夫斯基：〈女士們、先生們，請進毒氣室〉，於《在我們奧斯威辛》，第47–79頁</li>
           <li>瓦爾拉姆·沙拉莫夫：〈手推車〉</li>
-          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Leona Toker, “Gulag Literature and the Literature of Nazi Camps” (Chapter 4: Forced Labor)</li>
+          <li>(optional) Leona Toker, “Gulag Literature and the Literature of Nazi Camps” (Chapter 4: Forced Labor)</li>
         </ul>
       </td>
     </tr>
@@ -305,7 +305,7 @@ title: CHI4335
       <td>
         <ul class="readings">
           <li>陶東風：〈走向建構主義的文化創傷理論〉，《文藝理論研究》2024年第3期，頁34–44</li>
-          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Jeffrey C. Alexander, “Toward a Theory of Cultural Trauma”</li>
+          <li>(optional) Jeffrey C. Alexander, “Toward a Theory of Cultural Trauma”</li>
         </ul>
       </td>
     </tr>
@@ -346,7 +346,7 @@ title: CHI4335
       <td>
         <ul class="readings">
           <li>梁昂：《他們先殺了我父親：柬埔寨女孩的回憶》（節選）</li>
-          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Rithy Panh, <em>The Missing Picture</em></li>
+          <li>(optional) Rithy Panh, <em>The Missing Picture</em></li>
         </ul>
       </td>
     </tr>
@@ -365,7 +365,7 @@ title: CHI4335
       <td>
         <ul class="readings">
           <li>〈用毛澤東思想武裝起來的人是最大的戰鬥力〉，於《解放軍報》1966年10月14日</li>
-          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> 王斑：〈實踐的崇高主體〉，於《歷史的崇高形象：二十世紀中國的美學與政治》</li>
+          <li>（選讀）王斑：〈實踐的崇高主體〉，於《歷史的崇高形象：二十世紀中國的美學與政治》</li>
         </ul>
       </td>
     </tr>
@@ -411,7 +411,7 @@ title: CHI4335
       <td>
         <ul class="readings">
           <li>Grace Elizabeth Hale, “Deadly Amusements: Spectacle Lynchings and the Contradictions of Segregation as Culture,” in <em>Making Whiteness</em>, pp. 199–239</li>
-          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Frantz Fanon, “The Lived Experience of the Black Man,” in <em>Black Skin, White Masks</em></li>
+          <li>(optional) Frantz Fanon, “The Lived Experience of the Black Man,” in <em>Black Skin, White Masks</em></li>
         </ul>
       </td>
     </tr>

@@ -105,7 +105,7 @@ title: CHI559
       </td>
     </tr>
   </tbody>
-  <tbody class="block-b">
+  <tbody class="block-a">
     <tr>
       <td class="week">2</td>
       <td class="date">9月9日</td>
@@ -150,7 +150,7 @@ title: CHI559
       <td>Edward Slingerland, “Part II. Quantitative Approaches to Concepts of Mind and Body,” in <em>Mind and Body in Early China</em></td>
     </tr>
   </tbody>
-  <tbody class="block-b">
+  <tbody class="block-a">
     <tr>
       <td class="week">4</td>
       <td class="date">9月30日</td>
@@ -166,13 +166,12 @@ title: CHI559
   <tbody class="block-a">
     <tr>
       <td class="week" rowspan="2">5</td>
-      <td class="date" rowspan="2">10月3日<small>（六）</small></td>
+      <td class="date" rowspan="2">10月3日<small class="makeup-note">（六）</small></td>
       <td class="topic">文體計量學</td>
       <td>
         <ul class="readings">
           <li>作者訊號；文體標記；特徵選取</li>
           <li>Z 分數與基於距離的文體比較</li>
-          <li>John Burrows, “‘Delta’: a Measure of Stylistic Difference and a Guide to Likely Authorship”</li>
         </ul>
       </td>
     </tr>
@@ -188,7 +187,7 @@ title: CHI559
       <td colspan="2"><a href="#">作業1截止，上午9:00</a></td>
     </tr>
   </tbody>
-  <tbody class="block-b">
+  <tbody class="block-a">
     <tr>
       <td class="week">6</td>
       <td class="date">10月7日</td>
@@ -197,8 +196,7 @@ title: CHI559
         <ul class="readings">
           <li>正規表示式（regex）（<a href="https://regexone.com/">https://regexone.com/</a>）</li>
           <li>比較兩個語料庫的用詞</li>
-          <li>列聯表，第二部分</li>
-          <li>Franco Moretti, “Conjectures on World Literature,” in <em>Distant Reading</em></li>
+          <li>弗朗哥·莫萊蒂：〈世界文學猜想〉，節選自《世界文學理論讀本》；Franco Moretti, “Conjectures on World Literature,” in <em>Distant Reading</em></li>
         </ul>
       </td>
     </tr>
@@ -212,7 +210,7 @@ title: CHI559
         <ul class="readings">
           <li>LDA；什麼是「主題」？</li>
           <li>（選讀）蘇祺：〈主題模型〉，第十章，李飛躍、桑海（主編）《數字人文引論》。北京：中華書局，2026年</li>
-          <li>（選讀）David M. Blei, “Probabilistic Topic Models”</li>
+          <li>(optional) David M. Blei, “Probabilistic Topic Models”</li>
         </ul>
       </td>
     </tr>
@@ -221,7 +219,7 @@ title: CHI559
       <td>皮特·布勞德韋爾、陳威、大衛·謝帕德著，曹瀛月譯：〈《全唐詩》：文學史、主題模型、散度度量〉，《數位人文》2023年第1期；Peter Broadwell, Jack W. Chen, and David Shepard, “Reading the Quan Tang shi: Literary History, Topic Modeling, Divergence Measures,” <em>Digital Humanities Quarterly</em> 13, no. 4 (2019)</td>
     </tr>
   </tbody>
-  <tbody class="block-b">
+  <tbody class="block-a">
     <tr>
       <td class="week">8</td>
       <td class="date">10月21日</td>
@@ -252,7 +250,7 @@ title: CHI559
           <li>什麼是「語義」？詞向量與餘弦相似度</li>
           <li>以詞向量研究概念史</li>
           <li>胡韌奮：〈語言模型〉，第九章，李飛躍、桑海（主編）《數字人文引論》。北京：中華書局，2026年</li>
-          <li>（選讀）Daniel Jurafsky and James H. Martin, “Vector Semantics and Embeddings”</li>
+          <li>(optional) Daniel Jurafsky and James H. Martin, “Vector Semantics and Embeddings”</li>
         </ul>
       </td>
     </tr>
@@ -261,7 +259,7 @@ title: CHI559
       <td>Mariana Zorkina, “Describing Objects in Tang Dynasty Poetic Language: A Study Based on Word Embeddings,” <em>Journal of Chinese Literature and Culture</em> 5, no. 2 (2018): 250–275</td>
     </tr>
   </tbody>
-  <tbody class="block-b">
+  <tbody class="block-a">
     <tr>
       <td class="week">10</td>
       <td class="date">11月4日</td>
@@ -271,7 +269,7 @@ title: CHI559
           <li>神經網絡</li>
           <li>訓練基於 BERT 的分類器（情感分析）；上載模型至 Hugging Face</li>
           <li>Kurt Vonnegut, “The Shapes of Stories”（講座）</li>
-          <li>Katherine Elkins, <em>The Shapes of Stories: Sentiment Analysis for Narrative</em>（選讀）</li>
+          <li>Katherine Elkins, <em>The Shapes of Stories: Sentiment Analysis for Narrative</em> (optional)</li>
         </ul>
       </td>
     </tr>
@@ -300,16 +298,14 @@ title: CHI559
       <td colspan="2"><a href="#">期末專題計劃書截止，上午9:00</a></td>
     </tr>
   </tbody>
-  <tbody class="block-b">
+  <tbody class="block-a">
     <tr>
       <td class="week">12</td>
       <td class="date">11月18日</td>
       <td class="topic">數據可視化與批判性反思</td>
       <td>
         <ul class="readings">
-          <li>李飛躍：〈古籍數字化與詩學範式革新〉，第七章，李飛躍、桑海（主編）《數字人文引論》。北京：中華書局，2026年</li>
-          <li>Nan Z. Da, “The Computational Case against Computational Literary Studies”</li>
-          <li>（選讀）Stephen Best and Sharon Marcus, “Surface Reading: An Introduction”</li>
+          <li>(optional) Stephen Best and Sharon Marcus, “Surface Reading: An Introduction”</li>
         </ul>
       </td>
     </tr>
@@ -319,7 +315,10 @@ title: CHI559
       <td class="week">13</td>
       <td class="date">11月25日</td>
       <td class="topic">課程總結與收尾</td>
-      <td>方法整合回顧、補足未竟內容，以及期末專題準備</td>
+        <ul class="readings">
+          <li>方法整合回顧、補足未竟內容，以及期末專題準備</li>
+          <li>Nan Z. Da, “The Computational Case against Computational Literary Studies”</li>
+        </ul>
     </tr>
   </tbody>
   <tbody class="due">

@@ -271,7 +271,6 @@ title: CHI3242
         <ul class="readings">
           <li><span class="lang-en">Regular expressions (regex) (<a href="https://regexone.com/">https://regexone.com/</a>)</span><span class="lang-zh" lang="zh-Hant">正規表示式（regex）（<a href="https://regexone.com/">https://regexone.com/</a>）</span></li>
           <li><span class="lang-en">Comparing the word usage of two corpora</span><span class="lang-zh" lang="zh-Hant">比較兩個語料庫的用詞</span></li>
-          <li><span class="lang-en">Contingency table, part 2</span><span class="lang-zh" lang="zh-Hant">列聯表，第二部分</span></li>
         </ul>
       </td>
     </tr>
@@ -285,7 +284,7 @@ title: CHI3242
         <ul class="readings">
           <li><span class="lang-en">LDA; what is a “topic”?</span><span class="lang-zh" lang="zh-Hant">LDA；什麼是「主題」？</span></li>
           <li>蘇祺：〈主題模型〉，第十章，李飛躍、桑海（主編）《數字人文引論》。北京：中華書局，2026年</li>
-          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> David M. Blei, “Probabilistic Topic Models”</li>
+          <li>(optional) David M. Blei, “Probabilistic Topic Models”</li>
         </ul>
       </td>
     </tr>
@@ -299,8 +298,7 @@ title: CHI3242
         <ul class="readings">
           <li><span class="lang-en">Authorship signals; style markers; feature selection</span><span class="lang-zh" lang="zh-Hant">作者訊號；文體標記；特徵選取</span></li>
           <li><span class="lang-en">Z-scores and distance-based stylistic comparison</span><span class="lang-zh" lang="zh-Hant">Z 分數與基於距離的文體比較</span></li>
-          <li>John Burrows, “‘Delta’: a Measure of Stylistic Difference and a Guide to Likely Authorship”</li>
-          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Mike Scott, “Key words of individual texts: Aboutness and style”</li>
+          <li>(optional) Mike Scott, “Key words of individual texts: Aboutness and style”</li>
         </ul>
       </td>
     </tr>
@@ -350,7 +348,7 @@ title: CHI3242
           <li><span class="lang-en">Neural networks</span><span class="lang-zh" lang="zh-Hant">神經網絡</span></li>
           <li><span class="lang-en">Training BERT-based classifiers (sentiment analysis); uploading a model to Hugging Face</span><span class="lang-zh" lang="zh-Hant">訓練基於 BERT 的分類器（情感分析）；上載模型至 Hugging Face</span></li>
           <li>Kurt Vonnegut, “The Shapes of Stories” <span class="lang-en">(lecture)</span><span class="lang-zh" lang="zh-Hant">（講座）</span></li>
-          <li>Katherine Elkins, <em>The Shapes of Stories: Sentiment Analysis for Narrative</em> <span class="lang-en">(selections)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span></li>
+          <li>Katherine Elkins, <em>The Shapes of Stories: Sentiment Analysis for Narrative</em> (optional)</li>
         </ul>
       </td>
     </tr>
