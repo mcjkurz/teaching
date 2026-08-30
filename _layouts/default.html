@@ -70,7 +70,6 @@
             list-style: none;
             margin-left: -1.15em;
         }
-        main table.schedule ul.readings li.optional { color: #666; }
         @media (max-width: 768px) {
             .wrap { padding: 1rem 1rem 3rem; }
             main h1 { font-size: 1.5rem; }
@@ -85,10 +84,16 @@
         .page-list a { text-decoration: none; font-weight: 500; }
         .page-list a:hover { text-decoration: underline; }
         .page-list .description { display: block; color: #666; font-size: 0.9rem; margin-top: 0.25rem; }
+        .i18n-block h2 {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.55rem;
+        }
         .lang-toggle {
             font-size: 0.8rem;
             font-weight: 400;
-            margin-left: 0.6rem;
+            line-height: 1;
             white-space: nowrap;
             color: #888;
         }
@@ -99,6 +104,8 @@
             color: #0066cc;
             cursor: pointer;
             font: inherit;
+            line-height: 1;
+            vertical-align: middle;
         }
         .lang-toggle button.is-active {
             color: #333;

@@ -27,66 +27,133 @@ Term 1, 2026–2027
 </div>
 </div>
 
-## Aims
+<div class="i18n-block">
+<h2>Aims</h2>
+<div class="lang-en">
+<p>This course aims to equip students with the tools necessary to engage in cross-cultural analysis and to critically reflect on how literature represents and responds to the extreme. By analyzing and comparing key texts from various literary, philosophical, and cultural traditions, the course enhances students’ understanding of how literature documents, critiques, and shapes human responses to catastrophe and extremity. The course also encourages students to view literary texts as both artistic expressions and cultural documents that reflect and challenge societal values in times of crisis.</p>
+</div>
+<div class="lang-zh" lang="zh-Hant">
+<p>本課程旨在培養學生進行跨文化分析的能力，並批判地思考文學如何再現與回應極端。透過分析、比較來自不同文學、哲學與文化傳統的重要文本，課程加深學生對文學如何記錄、批判並形塑人類面對災難與極端之回應的理解。課程亦鼓勵學生將文學文本視為藝術表達，同時視為反映並挑戰危機時刻社會價值的文化文獻。</p>
+</div>
+</div>
 
-This course aims to equip students with the tools necessary to engage in cross-cultural analysis and to critically reflect on how literature represents and responds to the extreme. By analyzing and comparing key texts from various literary, philosophical, and cultural traditions, the course enhances students’ understanding of how literature documents, critiques, and shapes human responses to catastrophe and extremity. The course also encourages students to view literary texts as both artistic expressions and cultural documents that reflect and challenge societal values in times of crisis.
+<div class="i18n-block">
+<h2>Learning Outcomes</h2>
+<div class="lang-en">
+<p>Upon completion of this course, students should be able to:</p>
+<ul>
+<li>Identify and critically engage with the main philosophical and social issues related to extreme experiences as portrayed in literature</li>
+<li>Recognize and articulate the defining features of literary responses to extremity across different cultures and genres</li>
+<li>Compare and contrast cross-cultural perspectives on catastrophe, trauma, and human resilience as expressed in literary and cultural texts</li>
+<li>Analyze literary and cultural texts with both precision and creativity, considering their broader historical, cultural, and philosophical contexts</li>
+</ul>
+</div>
+<div class="lang-zh" lang="zh-Hant">
+<p>完成本課程後，學生應能：</p>
+<ul>
+<li>辨識並批判地思考文學所描寫之極端經驗相關的主要哲學與社會問題</li>
+<li>認識並闡明不同文化與文類中，文學回應極端的特徵</li>
+<li>比較文學與文化文本中，關於災難、創傷與人類韌性的跨文化視角</li>
+<li>既精確又具創意地分析文學與文化文本，並考慮其更廣的歷史、文化與哲學脈絡</li>
+</ul>
+</div>
+</div>
 
-## Learning Outcomes
+<div class="i18n-block">
+<h2>Language of Instruction</h2>
+<div class="lang-en">
+<p>The course is conducted fully in Putonghua. All primary sources (novels, stories, diaries, etc.) are in Chinese. However, some theoretical texts are in English, and you are expected to read them in English, unless a Chinese translation is available. The instructor might provide translated versions if needed. There are many AI tools that can help you translate primary sources free of charge (e.g., <a href="https://perplexity.ai/">https://perplexity.ai/</a>, <a href="https://chat.deepseek.com">https://chat.deepseek.com</a>). In-class discussions will be held in Putonghua, and student submissions and assessments should be written in Chinese.</p>
+</div>
+<div class="lang-zh" lang="zh-Hant">
+<p>本課程全程以普通話進行。所有原始文獻（小說、故事、日記等）均為中文。部分理論文本為英文，除非已有中譯，否則須以英文閱讀。如有需要，教師或會提供譯本。亦有不少免費人工智能工具可協助翻譯原始文獻（例如 <a href="https://perplexity.ai/">https://perplexity.ai/</a>、<a href="https://chat.deepseek.com">https://chat.deepseek.com</a>）。課堂討論以普通話進行，學生作業與評核須以中文撰寫。</p>
+</div>
+</div>
 
-Upon completion of this course, students should be able to:
+<div class="i18n-block">
+<h2>Assessment</h2>
+<div class="lang-en">
+<p>Students’ progress towards the learning outcomes will be measured by means of:</p>
+<table>
+<thead><tr><th>Component</th><th>Weight</th></tr></thead>
+<tbody>
+<tr><td>In-class discussion and participation</td><td>20%</td></tr>
+<tr><td>Comparative reflections (4)</td><td>20%</td></tr>
+<tr><td>Oral presentations (2)</td><td>20%</td></tr>
+<tr><td>Final paper</td><td>40%</td></tr>
+</tbody>
+</table>
+<p><strong>Grading scale:</strong> A 85%–100%; A− 80%–84%; B+ 75%–79%; B 70%–74%; B− 65%–69%; C+ 60%–64%; C 55%–59%; C− 50%–54%; D+ 45%–49%; D 40%–44%; F 0%–39%</p>
+</div>
+<div class="lang-zh" lang="zh-Hant">
+<p>學生的學習成果將以下列方式評核：</p>
+<table>
+<thead><tr><th>項目</th><th>比重</th></tr></thead>
+<tbody>
+<tr><td>課堂討論與參與</td><td>20%</td></tr>
+<tr><td>比較反思（4篇）</td><td>20%</td></tr>
+<tr><td>口頭報告（2次）</td><td>20%</td></tr>
+<tr><td>期末論文</td><td>40%</td></tr>
+</tbody>
+</table>
+<p><strong>評分等級：</strong> A 85%–100%；A− 80%–84%；B+ 75%–79%；B 70%–74%；B− 65%–69%；C+ 60%–64%；C 55%–59%；C− 50%–54%；D+ 45%–49%；D 40%–44%；F 0%–39%</p>
+</div>
+</div>
 
-- Identify and critically engage with the main philosophical and social issues related to extreme experiences as portrayed in literature
-- Recognize and articulate the defining features of literary responses to extremity across different cultures and genres
-- Compare and contrast cross-cultural perspectives on catastrophe, trauma, and human resilience as expressed in literary and cultural texts
-- Analyze literary and cultural texts with both precision and creativity, considering their broader historical, cultural, and philosophical contexts
+<div class="i18n-block">
+<h2>Attendance Policy</h2>
+<div class="lang-en">
+<p>Students are expected to attend all classes. <strong>One</strong> unexplained absence (either lecture or tutorial) is permitted, no questions asked. Unexplained absences will not impact the final grade by more than 20% (the maximum you can get for in-class discussion and participation), unless a student misses more than ten (10) meetings, in which case there will not be enough input to give them a passing grade. Every unexplained absence (beyond the one everyone gets for free) will remove 10% from the participation component (which equals 2% of the final grade). For example, if you are absent two times without explanation (in addition to the one no-questions-asked absence granted to everyone), you will receive 100% − 20% = 80% of the total possible contribution from participation, which amounts to 80% × 20% = 16% of the final grade. Remember to come to class on time and prepared.</p>
+</div>
+<div class="lang-zh" lang="zh-Hant">
+<p>學生須出席所有課堂。<strong>一次</strong>無故缺席（講座或導修皆可）不計，無須解釋。無故缺席對學期成績的影響不會超過 20%（即課堂討論與參與的上限），惟缺席超過十次者，將因投入不足而難以給予及格成績。在人人皆有的一次免費缺席之外，每次無故缺席將從參與分扣除 10%（即學期總分的 2%）。例如，若除人人皆有的一次外再無故缺席兩次，參與分可得 100% − 20% = 80%，即學期總分的 80% × 20% = 16%。請準時出席，並預先準備。</p>
+</div>
+</div>
 
-## Language of Instruction
+<div class="i18n-block">
+<h2>Course Design</h2>
+<div class="lang-en">
+<p><strong>1. Lectures.</strong> Each week, the lecture will focus on the broader historical contexts and theoretical issues surrounding the selected texts.</p>
+<p><strong>2. Presentations.</strong> During the tutorial sessions, students will work individually or collaborate in small teams (comprising 2 members) to deliver oral presentations (20–30 mins) on selected <strong>primary</strong> texts (novels or short stories). The students presenting each week are topic experts who are expected to lead the discussion in tutorials and be active during lectures. The presentations should incorporate carefully chosen quotations and paraphrased content from the story, addressing one or more of the following questions:</p>
+<ul>
+<li>How does the text portray the impact of extreme experiences on individuals and society?</li>
+<li>How is the body represented?</li>
+<li>How does the author mix fictional and non-fictional discourse?</li>
+<li>How are women portrayed, and what roles are they assigned in the context of crisis?</li>
+</ul>
+<p>The presentations should be comparative. You are expected to analyze the assigned text in relation to other primary works from the course, highlighting both significant continuities (shared themes, styles, or arguments) and departures (unique elements or innovations, cultural influences, etc.).</p>
+<p><strong>3. Short comparative essays.</strong> Out of five (5) topics, students are expected to choose four (4) and write short comparative essays-reflections on the primary texts (short stories or novels) covered throughout the course. Essays must present personal analysis and insights, focusing on one or more of the course’s key themes: the individual and society, the body, fictionality, and womanhood. Your approach must be comparative. Your analysis should incorporate <strong>at least one primary text from the respective two-week block.</strong> You are encouraged to draw connections to texts from other weeks. Each essay should be between 1,500 and 2,000 characters in length. All essays must be submitted via the Assignment module on Moodle.</p>
+<p><strong>4. Final project</strong> offers three options.</p>
+<p><strong>Option 1.</strong> Write an analytical paper (3,500–4,000 characters) that is comparative in nature and considers at least two different primary texts covered in class. Submit the PDF version of your paper through Moodle before the deadline. The paper should have a title, include quotations from the analyzed texts, and standardized references. You are welcome to consult secondary sources, but this is not required. The final paper should not contain your comparative short essays copied verbatim, although it can be developed from them.</p>
+<p><strong>Option 2.</strong> Write an interview (3,500–4,000 characters) with one of the protagonists from the texts we have read. You will need to think about what their answers could have been if they were asked your questions in their own time. The questions concern the topics we have covered in class.</p>
+<p><strong>Option 3.</strong> Write a narrative continuation (3,500–4,000 characters) of one of the stories that we have read. What might have happened afterwards? Use your imagination, and focus on the questions central to this course (see Course Design above).</p>
+</div>
+<div class="lang-zh" lang="zh-Hant">
+<p><strong>1. 講座。</strong> 每週講座聚焦所選文本的歷史脈絡與理論問題。</p>
+<p><strong>2. 報告。</strong> 導修課上，學生可獨立或兩人小組，就指定<strong>原始</strong>文本（長篇或短篇小說）作口頭報告（20–30分鐘）。當週報告的學生為該題專家，須帶領導修討論，並在講座中積極參與。報告應選用恰當引文與轉述，並回應下列一項或多項問題：</p>
+<ul>
+<li>文本如何描寫極端經驗對個人與社會的影響？</li>
+<li>身體如何被再現？</li>
+<li>作者如何混用虛構與非虛構話語？</li>
+<li>女性如何被描寫，在危機中被賦予何種角色？</li>
+</ul>
+<p>報告須具比較性。須將指定文本與課程中其他原始作品對讀，指出重要的延續（共享主題、風格或論點）與差異（獨特之處、創新、文化影響等）。</p>
+<p><strong>3. 短篇比較文章。</strong> 五個題目中選寫四篇，就課程所讀原始文本（短篇或長篇）撰寫短篇比較反思。文章須有個人分析與見解，聚焦課程關鍵主題之一或多項：個人與社會、身體、虛構性、女性。必須採取比較進路。分析須<strong>至少納入該兩週單元中的一篇原始文本</strong>，亦鼓勵連結其他週次的文本。每篇 1,500 至 2,000 字。一律經 Moodle 作業區繳交。</p>
+<p><strong>4. 期末專題</strong>有三個選項。</p>
+<p><strong>選項一。</strong> 撰寫比較性的分析論文（3,500–4,000 字），至少討論課堂上兩篇不同的原始文本。於截止日期前經 Moodle 提交 PDF。論文須有標題、引用所分析文本，並採用規範註釋。可參考二手文獻，但非必須。期末論文不得原文照搬比較短文，但可由其發展而成。</p>
+<p><strong>選項二。</strong> 撰寫訪問稿（3,500–4,000 字），訪問所讀文本中的一位人物。須設想對方若在其所處時代被問及這些問題，可能如何作答。問題須關涉課堂討論的主題。</p>
+<p><strong>選項三。</strong> 為所讀故事之一撰寫敘事續篇（3,500–4,000 字）。其後可能發生何事？發揮想像，並扣緊本課程的核心問題（見上方「課程設計」）。</p>
+</div>
+</div>
 
-The course is conducted fully in Putonghua. All primary sources (novels, stories, diaries, etc.) are in Chinese. However, some theoretical texts are in English, and you are expected to read them in English, unless a Chinese translation is available. The instructor might provide translated versions if needed. There are many AI tools that can help you translate primary sources free of charge (e.g., [https://perplexity.ai/](https://perplexity.ai/), [https://chat.deepseek.com](https://chat.deepseek.com)). In-class discussions will be held in Putonghua, and student submissions and assessments should be written in Chinese.
-
-## Assessment
-
-Students’ progress towards the learning outcomes will be measured by means of:
-
-| Component | Weight |
-| --- | --- |
-| In-class discussion and participation | 20% |
-| Comparative reflections (4) | 20% |
-| Oral presentations (2) | 20% |
-| Final paper | 40% |
-
-**Grading scale:** A 85%–100%; A− 80%–84%; B+ 75%–79%; B 70%–74%; B− 65%–69%; C+ 60%–64%; C 55%–59%; C− 50%–54%; D+ 45%–49%; D 40%–44%; F 0%–39%
-
-## Attendance Policy
-
-Students are expected to attend all classes. **One** unexplained absence (either lecture or tutorial) is permitted, no questions asked. Unexplained absences will not impact the final grade by more than 20% (the maximum you can get for in-class discussion and participation), unless a student misses more than ten (10) meetings, in which case there will not be enough input to give them a passing grade. Every unexplained absence (beyond the one everyone gets for free) will remove 10% from the participation component (which equals 2% of the final grade). For example, if you are absent two times without explanation (in addition to the one no-questions-asked absence granted to everyone), you will receive 100% − 20% = 80% of the total possible contribution from participation, which amounts to 80% × 20% = 16% of the final grade. Remember to come to class on time and prepared.
-
-## Course Design
-
-**1. Lectures.** Each week, the lecture will focus on the broader historical contexts and theoretical issues surrounding the selected texts.
-
-**2. Presentations.** During the tutorial sessions, students will work individually or collaborate in small teams (comprising 2 members) to deliver oral presentations (20–30 mins) on selected **primary** texts (novels or short stories). The students presenting each week are topic experts who are expected to lead the discussion in tutorials and be active during lectures. The presentations should incorporate carefully chosen quotations and paraphrased content from the story, addressing one or more of the following questions:
-
-- How does the text portray the impact of extreme experiences on individuals and society?
-- How is the body represented?
-- How does the author mix fictional and non-fictional discourse?
-- How are women portrayed, and what roles are they assigned in the context of crisis?
-
-The presentations should be comparative. You are expected to analyze the assigned text in relation to other primary works from the course, highlighting both significant continuities (shared themes, styles, or arguments) and departures (unique elements or innovations, cultural influences, etc.).
-
-**3. Short comparative essays.** Out of five (5) topics, students are expected to choose four (4) and write short comparative essays-reflections on the primary texts (short stories or novels) covered throughout the course. Essays must present personal analysis and insights, focusing on one or more of the course’s key themes: the individual and society, the body, fictionality, and womanhood. Your approach must be comparative. Your analysis should incorporate **at least one primary text from the respective two-week block.** You are encouraged to draw connections to texts from other weeks. Each essay should be between 1,500 and 2,000 characters in length. All essays must be submitted via the Assignment module on Moodle.
-
-**4. Final project** offers three options.
-
-**Option 1.** Write an analytical paper (3,500–4,000 characters) that is comparative in nature and considers at least two different primary texts covered in class. Submit the PDF version of your paper through Moodle before the deadline. The paper should have a title, include quotations from the analyzed texts, and standardized references. You are welcome to consult secondary sources, but this is not required. The final paper should not contain your comparative short essays copied verbatim, although it can be developed from them.
-
-**Option 2.** Write an interview (3,500–4,000 characters) with one of the protagonists from the texts we have read. You will need to think about what their answers could have been if they were asked your questions in their own time. The questions concern the topics we have covered in class.
-
-**Option 3.** Write a narrative continuation (3,500–4,000 characters) of one of the stories that we have read. What might have happened afterwards? Use your imagination, and focus on the questions central to this course (see Course Design above).
-
-## Trigger Warning
-
-This course will engage with content that may be emotionally difficult for some students, including discussions of violence and trauma. If you find certain materials challenging, **please do not hesitate to consult the instructor.** We can explore alternative approaches, such as focusing on theoretical texts or supplementary readings. Your well-being is very important, and accommodations can be made to ensure a productive and supportive learning environment.
+<div class="i18n-block">
+<h2>Trigger Warning</h2>
+<div class="lang-en">
+<p>This course will engage with content that may be emotionally difficult for some students, including discussions of violence and trauma. If you find certain materials challenging, <strong>please do not hesitate to consult the instructor.</strong> We can explore alternative approaches, such as focusing on theoretical texts or supplementary readings. Your well-being is very important, and accommodations can be made to ensure a productive and supportive learning environment.</p>
+</div>
+<div class="lang-zh" lang="zh-Hant">
+<p>本課程將處理部分學生或感沉重的內容，包括暴力與創傷的討論。若某些材料令你難以應付，<strong>請務必與教師商量。</strong> 我們可考慮替代安排，例如改以理論文本或補充閱讀為主。你的身心健康十分重要，我們會作出適當調整，以維持有效而支持性的學習環境。</p>
+</div>
+</div>
 
 ## Class Schedule
 
@@ -174,7 +241,7 @@ This course will engage with content that may be emotionally difficult for some 
         <ul class="readings">
           <li>塔杜施·博羅夫斯基：〈女士們、先生們，請進毒氣室〉，於《在我們奧斯威辛》，第47–79頁</li>
           <li>瓦爾拉姆·沙拉莫夫：〈手推車〉</li>
-          <li class="optional">Optional: Leona Toker, “Gulag Literature and the Literature of Nazi Camps” (Chapter 4: Forced Labor)</li>
+          <li>(optional) Leona Toker, “Gulag Literature and the Literature of Nazi Camps” (Chapter 4: Forced Labor)</li>
         </ul>
       </td>
     </tr>
@@ -273,8 +340,8 @@ This course will engage with content that may be emotionally difficult for some 
       <td>
         <ul class="readings">
           <li>〈用毛澤東思想武裝起來的人是最大的戰鬥力〉，於《解放軍報》1966年10月14日</li>
-          <li class="optional">Optional: Booth, “The Rhetoric of Fiction” (selections)</li>
-          <li class="optional">Optional: Walsh, “Rhetoric of Fictionality” (selections)</li>
+          <li>(optional) Booth, “The Rhetoric of Fiction” (selections)</li>
+          <li>(optional) Walsh, “Rhetoric of Fictionality” (selections)</li>
         </ul>
       </td>
     </tr>
