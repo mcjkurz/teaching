@@ -212,6 +212,7 @@ title: CHI559
         <ul class="readings">
           <li>LDA；什麼是「主題」？</li>
           <li>皮特·布勞德韋爾、陳威、大衛·謝帕德：〈《全唐詩》：文學史、主題模型、散度度量〉，《數位人文》2023年第1期</li>
+          <li>David M. Blei, “Probabilistic Topic Models”</li>
         </ul>
       </td>
     </tr>
@@ -335,6 +336,7 @@ title: CHI559
 <li>王賀：《數字人文與中國現代文學》。上海：三聯書店，2023年。</li>
 <li>梅麗莎·特拉斯等著，陳靜等譯：《數字人文導讀》。南京：南京大學出版社，2022年。</li>
 <li>皮特·布勞德韋爾、陳威、大衛·謝帕德著，曹瀛月譯：〈《全唐詩》：文學史、主題模型、散度度量〉，《數位人文》2023年第1期。</li>
+<li>Blei, David M. “Probabilistic Topic Models.”</li>
 <li>秦穎：〈《唐語林》中對話網路的視覺化和統計分析初探〉，《數字人文》2022年第1期。</li>
 <li>Algee-Hewitt, Mark, Edwin Fredner, and Hannah Walser. “The Novel as Data.” In <em>The Cambridge Companion to the Novel</em>, 189–215. Cambridge: Cambridge University Press, 2018.</li>
 <li>Allen, Sarah M., Jack Chen, and Xiaofei Tian. <em>Literary History in and beyond China: Reading Text and World</em>. Cambridge, MA: Harvard University Asia Center, 2023.（選讀）</li>
