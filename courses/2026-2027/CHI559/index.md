@@ -19,7 +19,7 @@ title: CHI559
 </div>
 
 <h2>課程簡介</h2>
-<p>本課程介紹數字人文及其在環球中國研究中的角色，講授適用於中國歷史、文學與文化數據的主要工具與方法，包括語料庫語言學、文體計量學、主題模型、情感分析、社會網絡分析、數據可視化，以及生成式人工智能與智能體編程。每週研討課結合導論講座與互動實驗，強調理論與實作並重。無須具備編程經驗。學生須就一篇數字人文研究論文作口頭報告，並完成一項綜合性期末專題。</p>
+<p>本課程介紹數字人文及其在環球中國研究中的角色，講授適用於中國歷史、文學與文化數據的主要工具與方法。學生將學習基本技術，以研究中國文學與歷史文本中的模式，並進行數據可視化。無須具備編程經驗。課程初期即引入智能體編程：以人工智能編程助手協助撰寫、除錯並評估研究代碼。每週研討課結合概念講授、實作與文獻討論。學生須就一篇數字人文研究論文作口頭報告。期末專題要求學生自建數據集，將數字方法應用於自選題目，並以完整可運作的 GitHub 倉庫及配套報告呈現研究成果。</p>
 
 <h2>課程目標</h2>
 <p>本課程旨在培養碩士生獨立運用數字工具處理中國研究問題的能力，並能批判地評估新技術對學科的影響。學生將學習以人工智能編程助手撰寫、除錯並評估研究代碼，同時理解方法的限度與倫理挑戰，最終設計一項將數字人文與中國研究相結合的項目。</p>
@@ -53,9 +53,10 @@ title: CHI559
 <tbody>
 <tr><td>課堂參與</td><td>10%</td></tr>
 <tr><td>期中 Python 測驗</td><td>10%</td></tr>
-<tr><td>個人作業（2份）</td><td>20%</td></tr>
+<tr><td>作業（2份）</td><td>20%</td></tr>
 <tr><td>課堂報告</td><td>20%</td></tr>
-<tr><td>期末專題</td><td>40%</td></tr>
+<tr><td>專題計劃書</td><td>10%</td></tr>
+<tr><td>期末專題</td><td>30%</td></tr>
 </tbody>
 </table>
 <p><strong>評分等級：</strong> A 85%–100%；A− 80%–84%；B+ 75%–79%；B 70%–74%；B− 65%–69%；C+ 60%–64%；C 55%–59%；C− 50%–54%；D+ 45%–49%；D 40%–44%；F 0%–39%</p>
@@ -67,17 +68,13 @@ title: CHI559
 <p>本課程講授智能體編程，學生須使用人工智能編程助手撰寫、除錯並評估研究代碼。任何此類使用均須明確記錄。凡使用人工智能工具協助完成的作業，均須附上聲明，註明所使用的工具，並說明其具體用途。學生必須理解並能解釋所提交的程式碼與分析。不得在所提交的作業中原文照錄人工智能生成的分析文字，亦不得僅作表面修改後使用。違者將被視為學術不當行為，並會影響該作業的評核結果。</p>
 
 <h2>課程設計</h2>
-<p><strong>1. 研討課：</strong>每週研討課結合導論講座與互動實驗，處理中國歷史與文化數據，並將數字工具與傳統研究方法對讀。最初數週從研究環境與智能體編程講起，其後進入正則表達式、列聯表、文體計量、主題模型、分類、詞向量、生成式人工智能、社會網絡分析與數據可視化。</p>
+<p><strong>1. 研討課：</strong>每週研討課結合概念講授與教師指導下的實作。學生處理中文文本，學習從詞頻、搭配、主題模型、詞向量到神經語言模型等方法。無須具備編程經驗。最初數週引入智能體編程，其後貫穿全學期使用人工智能編程助手。</p>
 <p><strong>2. 期中 Python 測驗：</strong>評估學生對 Python 編程基礎、環境設置及基本文本處理腳本的掌握程度。</p>
-<p><strong>3. 個人作業：</strong>兩份作業，一律經 Moodle 作業區提交。作業說明連結見下方課程進度表。</p>
+<p><strong>3. 作業與專題計劃書：</strong>共兩份計分作業；作業0不計分。最後一項作業為期末專題計劃書。一律經 Moodle 作業區繳交。作業說明連結見下方課程進度表。</p>
+<p><strong>4. 課堂報告：</strong>全學期共五次課堂報告，自第3週起每隔一週一次（第3、5、7、9、11週）。學生須就一篇數字人文領域的研究論文作口頭報告（約 20 分鐘），說明該論文的研究問題、方法、數據與結論，並提出批判性評價。報告結束後全班討論。報告篇目見下方課程進度。當週報告的學生須作為該文獻的講解人，帶動討論。</p>
+<p><strong>5. 期末專題：</strong>學生自建數據集，將數字方法應用於自選的中國研究題目，並以完整可運作的 GitHub 倉庫（含原始資料、程式碼與 README）及中文配套報告呈現研究成果。於截止日期前經 Moodle 提交倉庫網址及報告。報告須包括以下部分：</p>
 <ul>
-<li>作業一</li>
-<li>作業二</li>
-</ul>
-<p><strong>4. 課堂報告：</strong>全學期共五次課堂報告，自第3週起每隔一週一次（第3、5、7、9、11週）。學生須就一篇數字人文領域的研究論文作口頭報告（約 20 分鐘），說明該論文的研究問題、方法、數據與結論，並提出批判性評價。報告結束後全班討論。報告篇目與時間於學期初安排。當週報告的學生須作為該文獻的講解人，帶動討論。</p>
-<p><strong>5. 期末專題：</strong>一項綜合性的數字人文項目，須運用課程中的工具研究中國研究相關主題。於截止日期前經 Moodle 提交 PDF。報告應包含可視化圖表、數據集描述、結果的批判性分析，並公開所有使用的資源鏈接（如 GitHub 倉庫）。報告須包括以下部分：</p>
-<ul>
-<li><strong>摘要：</strong>目標、實驗與發現的概述</li>
+<li><strong>摘要：</strong>目標、實驗與發現的概述（最多 150 字）</li>
 <li><strong>數據集：</strong>語料說明、來源與預處理步驟</li>
 <li><strong>方法：</strong>所用技術及其理據；簡要說明方法如何運作</li>
 <li><strong>分析：</strong>結果、可視化、詮釋與理論討論</li>
@@ -100,12 +97,11 @@ title: CHI559
     <tr>
       <td class="week">1</td>
       <td class="date">9月2日</td>
-      <td class="topic">計算文學研究導論</td>
+      <td class="topic">導論</td>
       <td>
         <ul class="readings">
-          <li>研究環境搭建：GitHub、VS Code、人工智能編程助手</li>
+          <li>數字人文：核心概念；智能體編程；Git、GitHub、OpenRouter、OpenCode 與 VS Code</li>
           <li>李飛躍、桑海（主編）：《數字人文引論》（選讀）</li>
-          <li>Stephen Ramsay, “Algorithmic Criticism”</li>
         </ul>
       </td>
     </tr>
@@ -114,100 +110,126 @@ title: CHI559
     <tr>
       <td class="week">2</td>
       <td class="date">9月9日</td>
-      <td class="topic">文本處理與中文自然語言處理</td>
-      <td>中文分詞、詞袋模型、停用詞；智能體編程實作</td>
+      <td class="topic">語言、文本與編碼</td>
+      <td>
+        <ul class="readings">
+          <li>什麼是文本？二進位、Unicode、UTF-8；把檔案視為資料</li>
+          <li>中文分詞；詞袋模型（BoW）；停用詞；Zipf 定律</li>
+        </ul>
+      </td>
     </tr>
   </tbody>
   <tbody class="due">
     <tr>
       <td></td>
-      <td class="date">9月21日</td>
-      <td colspan="2"><strong><a href="{{ '/courses/2026-2027/CHI559/assignment-1/' | relative_url }}">作業一（倉庫與文本護照）截止，上午 9:00</a></strong></td>
+      <td class="date">9月14日</td>
+      <td colspan="2"><a href="#">作業0（不計分）截止，上午9:00</a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
-      <td class="week">3</td>
-      <td class="date">9月23日</td>
-      <td class="topic">正則表達式</td>
+      <td class="week" rowspan="2">3</td>
+      <td class="date" rowspan="2">9月23日</td>
+      <td class="topic">搭配詞</td>
       <td>
         <ul class="readings">
-          <li>用於文學模式識別的正則表達式（regex）</li>
-          <li>課堂報告</li>
+          <li>搭配作為方法；列聯表；統計顯著性、Fisher 精確檢定、p 值</li>
+          <li>Stefan Evert, “Corpora and Collocations”</li>
         </ul>
       </td>
+    </tr>
+    <tr class="presentation">
+      <td class="topic">課堂報告</td>
+      <td>Stephen Ramsay, “Algorithmic Criticism”</td>
     </tr>
   </tbody>
   <tbody class="due">
     <tr>
       <td></td>
       <td class="date">9月28日</td>
-      <td colspan="2"><strong>期中 Python 測驗，上午 9:00</strong></td>
+      <td colspan="2"><strong>期中 Python 測驗，上午9:00</strong></td>
     </tr>
   </tbody>
   <tbody class="block-b">
     <tr>
       <td class="week">4</td>
       <td class="date">9月30日</td>
-      <td class="topic">列聯表與搭配詞分析</td>
+      <td class="topic">什麼是「角色」？</td>
       <td>
         <ul class="readings">
+          <li>角色、詞語、人物</li>
           <li>Alex Woloch, <em>The One vs. the Many</em>, pp. 12–42</li>
-          <li>Stefan Evert, “Corpora and Collocations”</li>
         </ul>
       </td>
     </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
-      <td class="week">5</td>
-      <td class="date">10月3日<small>（六）</small></td>
-      <td class="topic">文體計量學與作者歸屬</td>
+      <td class="week" rowspan="2">5</td>
+      <td class="date" rowspan="2">10月3日<small>（六）</small></td>
+      <td class="topic">文體計量學</td>
       <td>
         <ul class="readings">
+          <li>作者訊號；文體標記；特徵選取</li>
+          <li>Z 分數與基於距離的文體比較</li>
           <li>王賀：《數字人文與中國現代文學》（選讀）</li>
           <li>Paul Vierthaler, “Fiction and History: Polarity and Stylistic Gradience in Late Imperial Chinese Literature,” <em>Journal of Cultural Analytics</em> 1, no. 1 (2016), <a href="https://doi.org/10.7910/DVN/4ZVSKA">https://doi.org/10.7910/DVN/4ZVSKA</a></li>
-          <li>Franco Moretti, “Conjectures on World Literature,” in <em>Distant Reading</em>（課堂報告與討論）</li>
         </ul>
       </td>
+    </tr>
+    <tr class="presentation">
+      <td class="topic">課堂報告</td>
+      <td>John Burrows, “‘Delta’: a Measure of Stylistic Difference and a Guide to Likely Authorship,” <em>Literary and Linguistic Computing</em> 17, no. 3 (2002): 267–287</td>
+    </tr>
+  </tbody>
+  <tbody class="due">
+    <tr>
+      <td></td>
+      <td class="date">10月7日</td>
+      <td colspan="2"><a href="#">作業1截止，上午9:00</a></td>
     </tr>
   </tbody>
   <tbody class="block-b">
     <tr>
       <td class="week">6</td>
       <td class="date">10月7日</td>
-      <td class="topic">主題模型</td>
+      <td class="topic">從詞語到語料庫</td>
       <td>
         <ul class="readings">
-          <li>皮特·布勞德韋爾、陳威、大衛·謝帕德：〈《全唐詩》：文學史、主題模型、散度度量〉，《數位人文》2023年第1期</li>
+          <li>正規表示式（regex）</li>
+          <li>比較兩個語料庫的用詞</li>
+          <li>列聯表，第二部分</li>
         </ul>
       </td>
     </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
-      <td class="week">7</td>
-      <td class="date">10月14日</td>
-      <td class="topic">分類（基礎篇）</td>
+      <td class="week" rowspan="2">7</td>
+      <td class="date" rowspan="2">10月14日</td>
+      <td class="topic">主題模型</td>
       <td>
         <ul class="readings">
-          <li>情感分析與 TF-IDF</li>
-          <li>Kurt Vonnegut, “The Shapes of Stories”（講座）</li>
-          <li>Katherine Elkins, <em>The Shapes of Stories: Sentiment Analysis for Narrative</em></li>
-          <li>課堂報告</li>
+          <li>LDA；什麼是「主題」？</li>
+          <li>皮特·布勞德韋爾、陳威、大衛·謝帕德：〈《全唐詩》：文學史、主題模型、散度度量〉，《數位人文》2023年第1期</li>
         </ul>
       </td>
+    </tr>
+    <tr class="presentation">
+      <td class="topic">課堂報告</td>
+      <td>Franco Moretti, “Conjectures on World Literature,” in <em>Distant Reading</em></td>
     </tr>
   </tbody>
   <tbody class="block-b">
     <tr>
       <td class="week">8</td>
       <td class="date">10月21日</td>
-      <td class="topic">詞向量（靜態嵌入）</td>
+      <td class="topic">分類（一）</td>
       <td>
         <ul class="readings">
-          <li>Daniel Jurafsky and James H. Martin, “Vector Semantics and Embeddings”</li>
-          <li>Tomas Mikolov et al., “Efficient Estimation of Word Representations in Vector Space”</li>
+          <li>用於文本分類的邏輯迴歸</li>
+          <li>二元與多類分類（softmax）；損失函數（交叉熵）</li>
+          <li>TF-IDF</li>
         </ul>
       </td>
     </tr>
@@ -216,41 +238,65 @@ title: CHI559
     <tr>
       <td></td>
       <td class="date">10月26日</td>
-      <td colspan="2"><strong><a href="{{ '/courses/2026-2027/CHI559/assignment-2/' | relative_url }}">作業二（主題模型）截止，上午 9:00</a></strong></td>
+      <td colspan="2"><a href="#">作業2截止，上午9:00</a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
-      <td class="week">9</td>
-      <td class="date">10月28日</td>
-      <td class="topic">分類（進階篇）</td>
+      <td class="week" rowspan="2">9</td>
+      <td class="date" rowspan="2">10月28日</td>
+      <td class="topic">編碼器（一）</td>
       <td>
         <ul class="readings">
-          <li>上下文嵌入與 Transformer</li>
-          <li>課堂報告</li>
+          <li>什麼是意義？詞向量與餘弦相似度</li>
+          <li>以詞向量研究概念史</li>
+          <li>Daniel Jurafsky and James H. Martin, “Vector Semantics and Embeddings”</li>
+          <li>Donald Sturgeon, “Unsupervised Identification of Text Reuse in Early Chinese Literature”（教師導讀，課堂合讀）</li>
         </ul>
       </td>
+    </tr>
+    <tr class="presentation">
+      <td class="topic">課堂報告</td>
+      <td>Edward Slingerland, Ryan Nichols, Kristoffer Nielbo, and Carson Logan, “The Distant Reading of Religious Texts: A ‘Big Data’ Approach to Mind-Body Concepts in Early China”</td>
     </tr>
   </tbody>
   <tbody class="block-b">
     <tr>
       <td class="week">10</td>
       <td class="date">11月4日</td>
-      <td class="topic">生成式人工智能</td>
-      <td>解碼、提示工程與 LLM API（OpenRouter）</td>
+      <td class="topic">編碼器（二）＋分類（二）</td>
+      <td>
+        <ul class="readings">
+          <li>神經網絡</li>
+          <li>訓練基於 BERT 的分類器（情感分析）；上載模型至 Hugging Face</li>
+          <li>Kurt Vonnegut, “The Shapes of Stories”（講座）</li>
+          <li>Katherine Elkins, <em>The Shapes of Stories: Sentiment Analysis for Narrative</em>（選讀）</li>
+        </ul>
+      </td>
     </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
-      <td class="week">11</td>
-      <td class="date">11月11日</td>
-      <td class="topic">文學社會網絡分析</td>
+      <td class="week" rowspan="2">11</td>
+      <td class="date" rowspan="2">11月11日</td>
+      <td class="topic">解碼器與大型語言模型</td>
       <td>
         <ul class="readings">
-          <li>秦穎：〈《唐語林》中對話網路的視覺化和統計分析初探〉，《數字人文》2022年第1期</li>
-          <li>Stephen Best and Sharon Marcus, “Surface Reading: An Introduction”（課堂報告與討論）</li>
+          <li>從 BERT 到 GPT；生成模型；什麼是「語境」？；下一詞元機率</li>
+          <li>以大型語言模型抽取資料；Python API（OpenRouter）</li>
         </ul>
       </td>
+    </tr>
+    <tr class="presentation">
+      <td class="topic">課堂報告</td>
+      <td>Stephen Best and Sharon Marcus, “Surface Reading: An Introduction”</td>
+    </tr>
+  </tbody>
+  <tbody class="due">
+    <tr>
+      <td></td>
+      <td class="date">11月16日</td>
+      <td colspan="2"><a href="#">期末專題計劃書截止，上午9:00</a></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -270,15 +316,15 @@ title: CHI559
     <tr>
       <td class="week">13</td>
       <td class="date">11月25日</td>
-      <td class="topic">總結</td>
-      <td>方法整合、倫理與挑戰；期末專題討論</td>
+      <td class="topic">課程總結與收尾</td>
+      <td>方法整合回顧、補足未竟內容，以及期末專題準備</td>
     </tr>
   </tbody>
   <tbody class="due">
     <tr>
       <td></td>
-      <td class="date">12月13日</td>
-      <td colspan="2"><strong>期末專題截止，上午 9:00</strong></td>
+      <td class="date">12月7日</td>
+      <td colspan="2"><strong>期末專題截止，上午9:00</strong></td>
     </tr>
   </tbody>
 </table>
@@ -294,11 +340,13 @@ title: CHI559
 <li>Algee-Hewitt, Mark, Edwin Fredner, and Hannah Walser. “The Novel as Data.” In <em>The Cambridge Companion to the Novel</em>, 189–215. Cambridge: Cambridge University Press, 2018.</li>
 <li>Allen, Sarah M., Jack Chen, and Xiaofei Tian. <em>Literary History in and beyond China: Reading Text and World</em>. Cambridge, MA: Harvard University Asia Center, 2023.（選讀）</li>
 <li>Guldi, Jo. <em>The Dangerous Art of Text Mining: A Methodology for Digital History</em>. Cambridge: Cambridge University Press, 2023.（選讀）</li>
-<li>Slingerland, Edward. <em>Mind and Body in Early China: Beyond Orientalism and the Myth of Holism</em>. Oxford: Oxford University Press, 2018.（數字人文相關章節）</li>
+<li>Slingerland, Edward, Ryan Nichols, Kristoffer Nielbo, and Carson Logan. “The Distant Reading of Religious Texts: A ‘Big Data’ Approach to Mind-Body Concepts in Early China.” <em>Journal of the American Academy of Religion</em> 85, no. 4 (2017): 985–1016.</li>
+<li>Slingerland, Edward. <em>Mind and Body in Early China: Beyond Orientalism and the Myth of Holism</em>. Oxford: Oxford University Press, 2018.（選讀，數字人文相關章節）</li>
 <li>Yau, Nathan. <em>Data Points: Visualization That Means Something</em>. Hoboken: John Wiley &amp; Sons, 2013.（選讀）</li>
 <li>Woloch, Alex. <em>The One vs. the Many: Minor Characters and the Space of the Protagonist in the Novel</em>. Princeton: Princeton University Press, 2003, pp. 12–42.</li>
 <li>Evert, Stefan. “Corpora and Collocations.”</li>
 <li>Vierthaler, Paul. “Fiction and History: Polarity and Stylistic Gradience in Late Imperial Chinese Literature.” <em>Journal of Cultural Analytics</em> 1, no. 1 (2016). <a href="https://doi.org/10.7910/DVN/4ZVSKA">https://doi.org/10.7910/DVN/4ZVSKA</a>.</li>
+<li>Burrows, John. “‘Delta’: a Measure of Stylistic Difference and a Guide to Likely Authorship.” <em>Literary and Linguistic Computing</em> 17, no. 3 (2002): 267–287.</li>
 <li>Ramsay, Stephen. “Algorithmic Criticism.” In <em>Reading Machines: Toward an Algorithmic Criticism</em>. Urbana: University of Illinois Press, 2011.</li>
 <li>Vonnegut, Kurt. “The Shapes of Stories.” Lecture.</li>
 <li>Elkins, Katherine. <em>The Shapes of Stories: Sentiment Analysis for Narrative</em>.</li>
@@ -306,6 +354,7 @@ title: CHI559
 <li>Moretti, Franco. “Conjectures on World Literature.” In <em>Distant Reading</em>. London: Verso, 2013.</li>
 <li>Mikolov, Tomas, Kai Chen, Greg Corrado, and Jeffrey Dean. “Efficient Estimation of Word Representations in Vector Space.” 2013.</li>
 <li>Jurafsky, Daniel, and James H. Martin. “Vector Semantics and Embeddings.” In <em>Speech and Language Processing</em>. 3rd ed.</li>
+<li>Sturgeon, Donald. “Unsupervised Identification of Text Reuse in Early Chinese Literature.” <em>Digital Scholarship in the Humanities</em> 33, no. 3 (2018): 670–684.</li>
 </ol>
 
 <h2>延伸閱讀</h2>
