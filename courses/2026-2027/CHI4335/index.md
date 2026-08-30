@@ -67,10 +67,10 @@ Term 1, 2026–2027</p>
 <div class="i18n-block">
 <h2>Language of Instruction</h2>
 <div class="lang-en">
-<p>The course is conducted fully in Putonghua. All primary sources (novels, stories, diaries, etc.) are in Chinese. However, some theoretical texts are in English, and you are expected to read them in English, unless a Chinese translation is available. The instructor might provide translated versions if needed. There are many AI tools that can help you translate theoretical texts free of charge (e.g., <a href="https://perplexity.ai/">https://perplexity.ai/</a>, <a href="https://chat.deepseek.com">https://chat.deepseek.com</a>, <a href="https://poe.com">https://poe.com</a>, <a href="https://gemini.google.com">https://gemini.google.com</a>). In-class discussions will be held in Putonghua, and students should complete and submit all assessed work in Chinese.</p>
+<p>The course is conducted fully in Putonghua. All primary sources (novels, stories, diaries, etc.) are in Chinese. However, some theoretical texts are in English, and you are expected to read them in English, unless a Chinese translation is available. The instructor might provide translated versions if needed. There are many AI tools that can help you translate theoretical texts free of charge (e.g., <a href="https://perplexity.ai/">Perplexity</a>, <a href="https://chat.deepseek.com">DeepSeek</a>, <a href="https://poe.com">Poe</a>, <a href="https://gemini.google.com">Gemini</a>). In-class discussions will be held in Putonghua, and students should complete and submit all assessed work in Chinese.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
-<p>本課程全程以普通話進行。所有一手文本（小說、故事、日記等）均為中文。部分理論文本為英文，除非已有中譯，否則須以英文閱讀。如有需要，教師或會提供譯本。亦有不少免費人工智能工具可協助翻譯理論文本（例如 <a href="https://perplexity.ai/">https://perplexity.ai/</a>、<a href="https://chat.deepseek.com">https://chat.deepseek.com</a>、<a href="https://poe.com">https://poe.com</a>、<a href="https://gemini.google.com">https://gemini.google.com</a>）。課堂討論以普通話進行，所有評核作業均須以中文完成並提交。</p>
+<p>本課程全程以普通話進行。所有一手文本（小說、故事、日記等）均為中文。部分理論文本為英文，除非已有中譯，否則須以英文閱讀。如有需要，教師或會提供譯本。亦有不少免費人工智能工具可協助翻譯理論文本（例如 <a href="https://perplexity.ai/">Perplexity</a>、<a href="https://chat.deepseek.com">DeepSeek</a>、<a href="https://poe.com">Poe</a>、<a href="https://gemini.google.com">Gemini</a>）。課堂討論以普通話進行，所有評核作業均須以中文完成並提交。</p>
 </div>
 </div>
 
