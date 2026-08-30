@@ -69,7 +69,7 @@ title: CHI559
 <h2>課程設計</h2>
 <p><strong>1. 研討課：</strong>每週研討課結合導論講座與互動實驗，處理中國歷史與文化數據，並將數字工具與傳統研究方法對讀。最初數週從研究環境與智能體編程講起，其後進入正則表達式、列聯表、文體計量、主題模型、分類、詞向量、生成式人工智能、社會網絡分析與數據可視化。</p>
 <p><strong>2. 期中 Python 測驗：</strong>評估學生對 Python 編程基礎、環境設置及基本文本處理腳本的掌握程度。</p>
-<p><strong>3. 個人作業：</strong>兩份作業，一律經 Moodle 作業區提交。作業說明集中刊於<a href="{{ '/courses/2026-2027/CHI559/assignments/' | relative_url }}">作業頁面</a>。</p>
+<p><strong>3. 個人作業：</strong>兩份作業，一律經 Moodle 作業區提交。作業說明連結見下方課程進度表。</p>
 <ul>
 <li>作業一</li>
 <li>作業二</li>
@@ -124,7 +124,7 @@ title: CHI559
     <tr>
       <td></td>
       <td class="date">9月21日</td>
-      <td colspan="2"><strong>作業一（倉庫與文本護照）截止，上午 9:00</strong></td>
+      <td colspan="2"><strong><a href="{{ '/courses/2026-2027/CHI559/assignment-1/' | relative_url }}">作業一（倉庫與文本護照）截止，上午 9:00</a></strong></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -214,7 +214,7 @@ title: CHI559
     <tr>
       <td></td>
       <td class="date">10月26日</td>
-      <td colspan="2"><strong>作業二（主題模型）截止，上午 9:00</strong></td>
+      <td colspan="2"><strong><a href="{{ '/courses/2026-2027/CHI559/assignment-2/' | relative_url }}">作業二（主題模型）截止，上午 9:00</a></strong></td>
     </tr>
   </tbody>
   <tbody class="block-a">
