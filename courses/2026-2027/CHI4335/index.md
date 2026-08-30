@@ -85,40 +85,247 @@ This course will engage with content that may be emotionally difficult for some 
 
 Classes run 1 September – 30 November 2026. Lectures are on Tuesdays; tutorials are on Thursdays (same week). **Thursday 1 October is National Day: no tutorial.**
 
-| Event | Date | Description | Readings |
-| --- | --- | --- | --- |
-| Lecture | 1 Sep | Introduction | The Extreme in Literature: key concepts, course objectives, and a survey of texts |
-| Tutorial | 3 Sep | Introduction | 魯迅：〈祝福〉 |
-| Lecture | 8 Sep | Regarding the Pain of Others | 蘇珊·桑塔格：《旁觀他人之痛苦》第三章與第六章 |
-| Tutorial | 10 Sep | Regarding the Pain of Others | 白樺：《苦戀》 |
-| Lecture | 15 Sep | Writing the Shoah | 房春光〈写还是不写，这是个问题——纳粹大屠杀早期见证文学的书写语境〉 |
-| Tutorial | 17 Sep | Writing the Shoah | 埃利·維瑟爾：《夜》 |
-| Due | 20 Sep | **Comparative reflection (Weeks 2 & 3) due, 9:00 am** | |
-| Lecture | 22 Sep | *Laogai* and Spiritual Resistance | Tzvetan Todorov, “The Life of the Mind,” in *Facing the Extreme*, pp. 91–118 |
-| Tutorial | 24 Sep | *Laogai* and Spiritual Resistance | 高爾泰：《尋找家園》（節選） |
-| Lecture | 29 Sep | The Nazi Camp | 高爾泰：《尋找家園》（節選）；瓦爾拉姆·沙拉莫夫：〈手推車〉. Presentation: 塔杜施·博羅夫斯基：〈女士們、先生們，請進毒氣室〉，於《在我們奧斯威辛》，第47–79頁. Optional: Leona Toker, “Gulag Literature and the Literature of Nazi Camps” (Chapter 4: Forced Labor) |
-| Tutorial | 1 Oct | **No class (National Day)** | |
-| Due | 3 Oct | **Comparative reflection (Weeks 4 & 5) due, 9:00 am** | |
-| Lecture | 6 Oct | Trauma and Agency | O’Brien, “Telling Time: Literature, Temporality and Trauma” |
-| Tutorial | 8 Oct | Trauma and Agency | 張翎《餘震》 |
-| Lecture | 13 Oct | Social Movements & Trauma | Collective trauma, social movements, and literary form |
-| Tutorial | 15 Oct | Social Movements & Trauma | 韓江：《少年來了》 |
-| Due | 17 Oct | **Comparative reflection (Weeks 6 & 7) due, 9:00 am** | |
-| Lecture | 20 Oct | War Experience | Hogan, “On Being Moved: Cognition and Emotion in Literature and Film” |
-| Tutorial | 22 Oct | War Experience | 提姆·奧布萊恩：〈死者的生命〉，於《士兵的重負》 |
-| Lecture | 27 Oct | Between the Heroic and the Ordinary | Rithy Panh, *The Missing Picture* (we will watch the film together) |
-| Tutorial | 29 Oct | Between the Heroic and the Ordinary | 約翰·赫西：《廣島》（原版） |
-| Due | 31 Oct | **Comparative reflection (Weeks 8 & 9) due, 9:00 am** | |
-| Lecture | 3 Nov | The Sublime | 〈用毛泽东思想武装起来的人是最大的战斗力〉，於《解放军报》1966年10月14日. Optional: Booth, “The Rhetoric of Fiction” (selections); Walsh, “Rhetoric of Fictionality” (selections) |
-| Tutorial | 5 Nov | The Sublime | 阎连科《为人民服务》 |
-| Lecture | 10 Nov | Domestic Violence | 李海燕：《话说〈白毛女〉——民族叙事中的阶级与性别政治》 |
-| Tutorial | 12 Nov | Domestic Violence | 李昂：《殺夫》 |
-| Due | 14 Nov | **Comparative reflection (Weeks 10 & 11) due, 9:00 am** | |
-| Lecture | 17 Nov | Regarding the Past | 瓦尔特·本雅明：《歷史哲學論綱》 |
-| Tutorial | 19 Nov | Regarding the Past | 卡勒德·胡賽尼：《追風箏的孩子》（第一章到第十章） |
-| Lecture | 24 Nov | Towards Redemption | Review and summary of the course |
-| Tutorial | 26 Nov | Towards Redemption | 卡勒德·胡賽尼：《追風箏的孩子》（第十一章到第二十五章） |
-| Due | 11 Dec | **Final paper due, 9:00 pm** | |
+<table class="schedule">
+  <thead>
+    <tr>
+      <th>Week</th>
+      <th>Event</th>
+      <th>Date</th>
+      <th>Topic</th>
+      <th>Readings</th>
+    </tr>
+  </thead>
+  <tbody class="block-a">
+    <tr>
+      <td rowspan="2">1</td>
+      <td>Lecture</td>
+      <td>1 Sep</td>
+      <td rowspan="2">Introduction</td>
+      <td>The Extreme in Literature: key concepts, course objectives, and a survey of texts</td>
+    </tr>
+    <tr>
+      <td>Tutorial</td>
+      <td>3 Sep</td>
+      <td>魯迅：〈祝福〉</td>
+    </tr>
+  </tbody>
+  <tbody class="block-b">
+    <tr>
+      <td rowspan="2">2</td>
+      <td>Lecture</td>
+      <td>8 Sep</td>
+      <td rowspan="2">Regarding the Pain of Others</td>
+      <td>蘇珊·桑塔格：《旁觀他人之痛苦》第三章與第六章</td>
+    </tr>
+    <tr>
+      <td>Tutorial</td>
+      <td>10 Sep</td>
+      <td>白樺：《苦戀》</td>
+    </tr>
+  </tbody>
+  <tbody class="block-a">
+    <tr>
+      <td rowspan="2">3</td>
+      <td>Lecture</td>
+      <td>15 Sep</td>
+      <td rowspan="2">Writing the Shoah</td>
+      <td>房春光〈写还是不写，这是个问题——纳粹大屠杀早期见证文学的书写语境〉</td>
+    </tr>
+    <tr>
+      <td>Tutorial</td>
+      <td>17 Sep</td>
+      <td>埃利·維瑟爾：《夜》</td>
+    </tr>
+  </tbody>
+  <tbody class="due">
+    <tr>
+      <td></td>
+      <td>Due</td>
+      <td>20 Sep</td>
+      <td colspan="2"><strong>Comparative reflection (Weeks 2 &amp; 3) due, 9:00 am</strong></td>
+    </tr>
+  </tbody>
+  <tbody class="block-b">
+    <tr>
+      <td rowspan="2">4</td>
+      <td>Lecture</td>
+      <td>22 Sep</td>
+      <td rowspan="2"><em>Laogai</em> and Spiritual Resistance</td>
+      <td>Tzvetan Todorov, “The Life of the Mind,” in <em>Facing the Extreme</em>, pp. 91–118</td>
+    </tr>
+    <tr>
+      <td>Tutorial</td>
+      <td>24 Sep</td>
+      <td>高爾泰：《尋找家園》（節選）</td>
+    </tr>
+  </tbody>
+  <tbody class="block-a">
+    <tr>
+      <td rowspan="2">5</td>
+      <td>Lecture</td>
+      <td>29 Sep</td>
+      <td rowspan="2">The Nazi Camp</td>
+      <td>高爾泰：《尋找家園》（節選）；瓦爾拉姆·沙拉莫夫：〈手推車〉. Presentation: 塔杜施·博羅夫斯基：〈女士們、先生們，請進毒氣室〉，於《在我們奧斯威辛》，第47–79頁. Optional: Leona Toker, “Gulag Literature and the Literature of Nazi Camps” (Chapter 4: Forced Labor)</td>
+    </tr>
+    <tr>
+      <td>Tutorial</td>
+      <td>1 Oct</td>
+      <td><strong>No class (National Day)</strong></td>
+    </tr>
+  </tbody>
+  <tbody class="due">
+    <tr>
+      <td></td>
+      <td>Due</td>
+      <td>3 Oct</td>
+      <td colspan="2"><strong>Comparative reflection (Weeks 4 &amp; 5) due, 9:00 am</strong></td>
+    </tr>
+  </tbody>
+  <tbody class="block-b">
+    <tr>
+      <td rowspan="2">6</td>
+      <td>Lecture</td>
+      <td>6 Oct</td>
+      <td rowspan="2">Trauma and Agency</td>
+      <td>O’Brien, “Telling Time: Literature, Temporality and Trauma”</td>
+    </tr>
+    <tr>
+      <td>Tutorial</td>
+      <td>8 Oct</td>
+      <td>張翎《餘震》</td>
+    </tr>
+  </tbody>
+  <tbody class="block-a">
+    <tr>
+      <td rowspan="2">7</td>
+      <td>Lecture</td>
+      <td>13 Oct</td>
+      <td rowspan="2">Social Movements &amp; Trauma</td>
+      <td>Collective trauma, social movements, and literary form</td>
+    </tr>
+    <tr>
+      <td>Tutorial</td>
+      <td>15 Oct</td>
+      <td>韓江：《少年來了》</td>
+    </tr>
+  </tbody>
+  <tbody class="due">
+    <tr>
+      <td></td>
+      <td>Due</td>
+      <td>17 Oct</td>
+      <td colspan="2"><strong>Comparative reflection (Weeks 6 &amp; 7) due, 9:00 am</strong></td>
+    </tr>
+  </tbody>
+  <tbody class="block-b">
+    <tr>
+      <td rowspan="2">8</td>
+      <td>Lecture</td>
+      <td>20 Oct</td>
+      <td rowspan="2">War Experience</td>
+      <td>Hogan, “On Being Moved: Cognition and Emotion in Literature and Film”</td>
+    </tr>
+    <tr>
+      <td>Tutorial</td>
+      <td>22 Oct</td>
+      <td>提姆·奧布萊恩：〈死者的生命〉，於《士兵的重負》</td>
+    </tr>
+  </tbody>
+  <tbody class="block-a">
+    <tr>
+      <td rowspan="2">9</td>
+      <td>Lecture</td>
+      <td>27 Oct</td>
+      <td rowspan="2">Between the Heroic and the Ordinary</td>
+      <td>Rithy Panh, <em>The Missing Picture</em> (we will watch the film together)</td>
+    </tr>
+    <tr>
+      <td>Tutorial</td>
+      <td>29 Oct</td>
+      <td>約翰·赫西：《廣島》（原版）</td>
+    </tr>
+  </tbody>
+  <tbody class="due">
+    <tr>
+      <td></td>
+      <td>Due</td>
+      <td>31 Oct</td>
+      <td colspan="2"><strong>Comparative reflection (Weeks 8 &amp; 9) due, 9:00 am</strong></td>
+    </tr>
+  </tbody>
+  <tbody class="block-b">
+    <tr>
+      <td rowspan="2">10</td>
+      <td>Lecture</td>
+      <td>3 Nov</td>
+      <td rowspan="2">The Sublime</td>
+      <td>〈用毛泽东思想武装起来的人是最大的战斗力〉，於《解放军报》1966年10月14日. Optional: Booth, “The Rhetoric of Fiction” (selections); Walsh, “Rhetoric of Fictionality” (selections)</td>
+    </tr>
+    <tr>
+      <td>Tutorial</td>
+      <td>5 Nov</td>
+      <td>阎连科《为人民服务》</td>
+    </tr>
+  </tbody>
+  <tbody class="block-a">
+    <tr>
+      <td rowspan="2">11</td>
+      <td>Lecture</td>
+      <td>10 Nov</td>
+      <td rowspan="2">Domestic Violence</td>
+      <td>李海燕：《话说〈白毛女〉——民族叙事中的阶级与性别政治》</td>
+    </tr>
+    <tr>
+      <td>Tutorial</td>
+      <td>12 Nov</td>
+      <td>李昂：《殺夫》</td>
+    </tr>
+  </tbody>
+  <tbody class="due">
+    <tr>
+      <td></td>
+      <td>Due</td>
+      <td>14 Nov</td>
+      <td colspan="2"><strong>Comparative reflection (Weeks 10 &amp; 11) due, 9:00 am</strong></td>
+    </tr>
+  </tbody>
+  <tbody class="block-b">
+    <tr>
+      <td rowspan="2">12</td>
+      <td>Lecture</td>
+      <td>17 Nov</td>
+      <td rowspan="2">Regarding the Past</td>
+      <td>瓦尔特·本雅明：《歷史哲學論綱》</td>
+    </tr>
+    <tr>
+      <td>Tutorial</td>
+      <td>19 Nov</td>
+      <td>梁昂：《他們先殺了我父親：柬埔寨女孩的回憶》（美籍柬埔寨裔作家的自傳性回憶錄）</td>
+    </tr>
+  </tbody>
+  <tbody class="block-a">
+    <tr>
+      <td rowspan="2">13</td>
+      <td>Lecture</td>
+      <td>24 Nov</td>
+      <td rowspan="2">TBD</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Tutorial</td>
+      <td>26 Nov</td>
+      <td></td>
+    </tr>
+  </tbody>
+  <tbody class="due">
+    <tr>
+      <td></td>
+      <td>Due</td>
+      <td>11 Dec</td>
+      <td colspan="2"><strong>Final paper due, 9:00 pm</strong></td>
+    </tr>
+  </tbody>
+</table>
 
 ## Important Notes
 
