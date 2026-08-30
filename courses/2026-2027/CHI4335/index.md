@@ -9,9 +9,9 @@ title: CHI4335
 **比較文學專題：世界文學中的極端體驗**  
 Term 1, 2026–2027
 
-**Lecture:** Tue, 1:00–2:59 pm (LYH 201/1, Lau Lee Yuen Haan Amenities Building)  
-**Tutorial A:** Thu, 11:30 am–12:29 pm (LKK 308, Leung Kau Kui Building)  
-**Tutorial B:** Thu, 12:30–1:29 pm (LKK 308, Leung Kau Kui Building)
+**Lecture:** Tue, 1:00–2:59 pm (LYH 201/1)  
+**Tutorial A:** Thu, 11:30 am–12:29 pm (LKK 308)  
+**Tutorial B:** Thu, 12:30–1:29 pm (LKK 308)
 
 **Instructor:** Maciej Kurzynski 馬傑 ([maciej.kurzynski@ln.edu.hk](mailto:maciej.kurzynski@ln.edu.hk))  
 **Office hours:** Tue 3:00–5:00 pm and Fri 10:00 am–12:00 pm, HSH G06, or by appointment  
@@ -128,8 +128,8 @@ Term 1, 2026–2027
 <p><strong>Option 3.</strong> Write a narrative continuation (3,500–4,000 characters) of one of the stories that we have read. What might have happened afterwards? Use your imagination, and focus on the questions central to this course (see Course Design above).</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
-<p><strong>1. 講座。</strong> 每週講座聚焦所選文本的歷史脈絡與理論問題。</p>
-<p><strong>2. 報告。</strong> 導修課上，學生可獨立或兩人小組，就指定<strong>原始</strong>文本（長篇或短篇小說）作口頭報告（20–30分鐘）。當週報告的學生為該題專家，須帶領導修討論，並在講座中積極參與。報告應選用恰當引文與轉述，並回應下列一項或多項問題：</p>
+<p><strong>1. 講座：</strong>每週講座聚焦所選文本的歷史脈絡與理論問題。</p>
+<p><strong>2. 報告：</strong>導修課上，學生可獨立或兩人小組，就指定<strong>原始</strong>文本（長篇或短篇小說）作口頭報告（20–30分鐘）。當週報告的學生為該題專家，須帶領導修討論，並在講座中積極參與。報告應選用恰當引文與轉述，並回應下列一項或多項問題：</p>
 <ul>
 <li>文本如何描寫極端經驗對個人與社會的影響？</li>
 <li>身體如何被再現？</li>
@@ -137,11 +137,11 @@ Term 1, 2026–2027
 <li>女性如何被描寫，在危機中被賦予何種角色？</li>
 </ul>
 <p>報告須具比較性。須將指定文本與課程中其他原始作品對讀，指出重要的延續（共享主題、風格或論點）與差異（獨特之處、創新、文化影響等）。</p>
-<p><strong>3. 短篇比較文章。</strong> 五個題目中選寫四篇，就課程所讀原始文本（短篇或長篇）撰寫短篇比較反思。文章須有個人分析與見解，聚焦課程關鍵主題之一或多項：個人與社會、身體、虛構性、女性。必須採取比較進路。分析須<strong>至少納入該兩週單元中的一篇原始文本</strong>，亦鼓勵連結其他週次的文本。每篇 1,500 至 2,000 字。一律經 Moodle 作業區繳交。</p>
-<p><strong>4. 期末專題</strong>有三個選項。</p>
-<p><strong>選項一。</strong> 撰寫比較性的分析論文（3,500–4,000 字），至少討論課堂上兩篇不同的原始文本。於截止日期前經 Moodle 提交 PDF。論文須有標題、引用所分析文本，並採用規範註釋。可參考二手文獻，但非必須。期末論文不得原文照搬比較短文，但可由其發展而成。</p>
-<p><strong>選項二。</strong> 撰寫訪問稿（3,500–4,000 字），訪問所讀文本中的一位人物。須設想對方若在其所處時代被問及這些問題，可能如何作答。問題須關涉課堂討論的主題。</p>
-<p><strong>選項三。</strong> 為所讀故事之一撰寫敘事續篇（3,500–4,000 字）。其後可能發生何事？發揮想像，並扣緊本課程的核心問題（見上方「課程設計」）。</p>
+<p><strong>3. 短篇比較文章：</strong>五個題目中選寫四篇，就課程所讀原始文本（短篇或長篇）撰寫短篇比較反思。文章須有個人分析與見解，聚焦課程關鍵主題之一或多項：個人與社會、身體、虛構性、女性。必須採取比較進路。分析須<strong>至少納入該兩週單元中的一篇原始文本</strong>，亦鼓勵連結其他週次的文本。每篇 1,500 至 2,000 字。一律經 Moodle 作業區繳交。</p>
+<p><strong>4. 期末專題：</strong>有三個選項。</p>
+<p><strong>選項一：</strong>撰寫比較性的分析論文（3,500–4,000 字），至少討論課堂上兩篇不同的原始文本。於截止日期前經 Moodle 提交 PDF。論文須有標題、引用所分析文本，並採用規範註釋。可參考二手文獻，但非必須。期末論文不得原文照搬比較短文，但可由其發展而成。</p>
+<p><strong>選項二：</strong>撰寫訪問稿（3,500–4,000 字），訪問所讀文本中的一位人物。須設想對方若在其所處時代被問及這些問題，可能如何作答。問題須關涉課堂討論的主題。</p>
+<p><strong>選項三：</strong>為所讀故事之一撰寫敘事續篇（3,500–4,000 字）。其後可能發生何事？發揮想像，並扣緊本課程的核心問題（見上方「課程設計」）。</p>
 </div>
 </div>
 
