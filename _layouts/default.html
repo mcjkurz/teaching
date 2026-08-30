@@ -121,10 +121,29 @@
 <body>
     <div class="wrap">
         <nav>
+            {% if page.url == '/' %}
+            Teaching
+            {% else %}
             <a href="{{ '/' | relative_url }}">Teaching</a>
-            {% if page.url != '/' %}
-            <span style="color:#999;"> / </span>
-            <span>{{ page.title }}</span>
+            {% assign filtered = '' %}
+            {% assign path_parts = page.url | split: '/' %}
+            {% for p in path_parts %}
+              {% if p != '' %}
+                {% if filtered != '' %}{% assign filtered = filtered | append: '|' %}{% endif %}
+                {% assign filtered = filtered | append: p %}
+              {% endif %}
+            {% endfor %}
+            {% assign crumbs = filtered | split: '|' %}
+            {% assign acc = '' %}
+            {% for crumb in crumbs %}
+              {% assign acc = acc | append: '/' | append: crumb %}
+              <span style="color:#999;"> / </span>
+              {% if forloop.last %}
+              <span>{{ page.title }}</span>
+              {% else %}
+              <a href="{{ acc | append: '/' | relative_url }}">{{ crumb | capitalize }}</a>
+              {% endif %}
+            {% endfor %}
             {% endif %}
         </nav>
         <main>
