@@ -82,7 +82,7 @@ Term 1, 2026–2027</p>
 <thead><tr><th>Component</th><th>Weight</th></tr></thead>
 <tbody>
 <tr><td>In-class discussion and participation</td><td>20%</td></tr>
-<tr><td>Comparative reflections (3)</td><td>20%</td></tr>
+<tr><td>Comparative essays (3)</td><td>20%</td></tr>
 <tr><td>Oral presentations (2)</td><td>20%</td></tr>
 <tr><td>Final project</td><td>40%</td></tr>
 </tbody>
@@ -95,7 +95,7 @@ Term 1, 2026–2027</p>
 <thead><tr><th>項目</th><th>比重</th></tr></thead>
 <tbody>
 <tr><td>課堂討論與參與</td><td>20%</td></tr>
-<tr><td>比較反思（3篇）</td><td>20%</td></tr>
+<tr><td>比較短文（3篇）</td><td>20%</td></tr>
 <tr><td>口頭報告（2次）</td><td>20%</td></tr>
 <tr><td>期末專題</td><td>40%</td></tr>
 </tbody>
@@ -126,10 +126,10 @@ Term 1, 2026–2027</p>
 <li>How are women portrayed, and what roles are they assigned in the context of crisis?</li>
 </ul>
 <p>The presentations should be comparative. You are expected to analyze the assigned text in relation to other primary works from the course, highlighting both significant continuities (shared themes, styles, or arguments) and departures (unique elements or innovations, cultural influences, etc.).</p>
-<p><strong>3. Comparative reflections.</strong> Out of five (5) topics, students are expected to submit three (3) short comparative reflections in Chinese on the primary texts (short stories or novels) covered throughout the course. Essays must present personal analysis and insights, focusing on one or more of the course’s key themes: the individual and society, the body, fictionality, and womanhood. Your approach must be comparative. Your analysis should incorporate <strong>at least one primary text from the respective block.</strong> You are encouraged to draw connections to texts from other weeks. Each essay should be between 1,500 and 2,000 characters in length. All essays must be submitted via the Assignment module on Moodle. If more than three essays are submitted, only the three highest scores will count.</p>
+<p><strong>3. Comparative essays.</strong> Out of five (5) topics, students are expected to submit three (3) comparative essays in Chinese on the primary texts (short stories or novels) covered throughout the course. Essays must present personal analysis and insights, focusing on one or more of the course’s key themes: the individual and society, the body, fictionality, and womanhood. Your approach must be comparative. Your analysis should incorporate <strong>at least one primary text from the respective block.</strong> You are encouraged to draw connections to texts from other weeks. Each essay should be between 1,500 and 2,000 characters in length. All essays must be submitted via the Assignment module on Moodle. If more than three essays are submitted, only the three highest scores will count.</p>
 <p><strong>4. Final project</strong> offers three options.</p>
 <ul>
-<li><strong>Option 1.</strong> Write an analytical paper (3,500–4,000 characters) that is comparative in nature and considers at least two different primary texts covered in class. Submit the PDF version of your paper through Moodle before the deadline. The paper should have a title, quote the texts analyzed, and use properly formatted citations and references. You are welcome to consult secondary sources, but this is not required. The final paper should not contain your comparative reflections copied verbatim, although it can be developed from them.</li>
+<li><strong>Option 1.</strong> Write an analytical paper (3,500–4,000 characters) that is comparative in nature and considers at least two different primary texts covered in class. Submit the PDF version of your paper through Moodle before the deadline. The paper should have a title, quote the texts analyzed, and use properly formatted citations and references. You are welcome to consult secondary sources, but this is not required. The final paper should not contain your comparative essays copied verbatim, although it can be developed from them.</li>
 <li><strong>Option 2.</strong> Write an interview (3,500–4,000 characters) with one of the protagonists from the texts we have read. Consider how the protagonist might have answered your questions in the period in which they lived. The questions should concern the topics we have covered in class.</li>
 <li><strong>Option 3.</strong> Write a narrative continuation (3,500–4,000 characters) of one of the stories that we have read. What might have happened afterwards? Use your imagination, and focus on the questions central to this course (see Course Design above).</li>
 </ul>
@@ -144,10 +144,10 @@ Term 1, 2026–2027</p>
 <li>女性如何被描寫，在危機中被賦予何種角色？</li>
 </ul>
 <p>報告須具比較性。須將指定文本與課程中其他一手作品對讀，指出重要的延續（共享主題、風格或論點）與差異（獨特之處、創新、文化影響等）。</p>
-<p><strong>3. 比較反思：</strong>五個題目中選寫三篇，以中文就課程所讀一手文本（短篇或長篇小說）撰寫比較反思。文章須有個人分析與見解，聚焦課程關鍵主題之一或多項：個人與社會、身體、虛構性、女性身分。必須採取比較進路。分析須<strong>至少納入該單元中的一部一手作品</strong>，亦鼓勵連結其他週次的文本。每篇 1,500 至 2,000 字。一律經 Moodle 作業區繳交。若繳交超過三篇，只計入得分最高的三篇。</p>
+<p><strong>3. 比較短文：</strong>五個題目中選寫三篇，以中文就課程所讀一手文本（短篇或長篇小說）撰寫比較短文。文章須有個人分析與見解，聚焦課程關鍵主題之一或多項：個人與社會、身體、虛構性、女性身分。必須採取比較進路。分析須<strong>至少納入該單元中的一部一手作品</strong>，亦鼓勵連結其他週次的文本。每篇 1,500 至 2,000 字。一律經 Moodle 作業區繳交。若繳交超過三篇，只計入得分最高的三篇。</p>
 <p><strong>4. 期末專題：</strong>有三個選項。</p>
 <ul>
-<li><strong>選項一：</strong>撰寫比較性的分析論文（3,500–4,000 字），至少討論課堂上兩部不同的一手作品。於截止日期前經 Moodle 提交 PDF。論文須有標題、引用所分析的文本，並採用規範的引註及參考書目格式。可參考二手文獻，但非必須。期末論文不得原文照搬比較反思，但可由其發展而成。</li>
+<li><strong>選項一：</strong>撰寫比較性的分析論文（3,500–4,000 字），至少討論課堂上兩部不同的一手作品。於截止日期前經 Moodle 提交 PDF。論文須有標題、引用所分析的文本，並採用規範的引註及參考書目格式。可參考二手文獻，但非必須。期末論文不得原文照搬比較短文，但可由其發展而成。</li>
 <li><strong>選項二：</strong>撰寫訪問稿（3,500–4,000 字），訪問所讀文本中的一位主角。須設想對方在其所處時代可能如何回答你的問題。問題須關涉課堂討論的主題。</li>
 <li><strong>選項三：</strong>為所讀故事之一撰寫敘事續篇（3,500–4,000 字）。其後可能發生何事？發揮想像，並扣緊本課程的核心問題（見上方「課程設計」）。</li>
 </ul>
@@ -223,7 +223,7 @@ Term 1, 2026–2027</p>
       <td></td>
       <td></td>
       <td class="date">20 Sep</td>
-      <td colspan="2"><strong>Comparative reflection (Weeks 2 &amp; 3) due, 9:00 am</strong></td>
+      <td colspan="2"><strong>Comparative essay (Weeks 2 &amp; 3) due, 9:00 am</strong></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -265,7 +265,7 @@ Term 1, 2026–2027</p>
       <td></td>
       <td></td>
       <td class="date">3 Oct</td>
-      <td colspan="2"><strong>Comparative reflection (Weeks 4 &amp; 5) due, 9:00 am</strong></td>
+      <td colspan="2"><strong>Comparative essay (Weeks 4 &amp; 5) due, 9:00 am</strong></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -320,7 +320,7 @@ Term 1, 2026–2027</p>
       <td></td>
       <td></td>
       <td class="date">24 Oct</td>
-      <td colspan="2"><strong>Comparative reflection (Weeks 6, 7, 8) due, 9:00 am</strong></td>
+      <td colspan="2"><strong>Comparative essay (Weeks 6, 7, 8) due, 9:00 am</strong></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -366,7 +366,7 @@ Term 1, 2026–2027</p>
       <td></td>
       <td></td>
       <td class="date">7 Nov</td>
-      <td colspan="2"><strong>Comparative reflection (Weeks 9 &amp; 10) due, 9:00 am</strong></td>
+      <td colspan="2"><strong>Comparative essay (Weeks 9 &amp; 10) due, 9:00 am</strong></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -396,7 +396,6 @@ Term 1, 2026–2027</p>
       <td class="topic" rowspan="2">Racial Violence</td>
       <td>
         <ul class="readings">
-          <li>魯迅：〈《吶喊》自序〉</li>
           <li>Grace Elizabeth Hale, “Deadly Amusements: Spectacle Lynchings and the Contradictions of Segregation as Culture,” in <em>Making Whiteness</em>, pp. 199–239</li>
           <li>(optional) Frantz Fanon, “The Lived Experience of the Black Man,” in <em>Black Skin, White Masks</em></li>
         </ul>
@@ -413,7 +412,7 @@ Term 1, 2026–2027</p>
       <td></td>
       <td></td>
       <td class="date">21 Nov</td>
-      <td colspan="2"><strong>Comparative reflection (Weeks 11 &amp; 12) due, 9:00 am</strong></td>
+      <td colspan="2"><strong>Comparative essay (Weeks 11 &amp; 12) due, 9:00 am</strong></td>
     </tr>
   </tbody>
   <tbody class="block-a">
