@@ -80,8 +80,7 @@ title: CHI3242
 <p>Please complete the following <strong>before the first seminar</strong>:</p>
 <ol>
 <li>Create a <a href="https://github.com/">GitHub</a> account.</li>
-<li>Create an <a href="https://openrouter.ai/">OpenRouter</a> account (we will use it later for large-language-model APIs).</li>
-<li>A classroom with computers will be available. You may also bring your own laptop. If you use your own computer, install <a href="https://www.python.org/downloads/">Python</a>, <a href="https://code.visualstudio.com/">Visual Studio Code (VS Code)</a>, and then <a href="https://opencode.ai/">OpenCode</a> before the first class. If you don’t use your own computer, make sure to complete <strong>steps 1 &amp; 2</strong>.</li>
+<li>A classroom with computers will be available. You may also bring your own laptop. If you use your own computer, install <a href="https://www.python.org/downloads/">Python</a>, <a href="https://code.visualstudio.com/">Visual Studio Code (VS Code)</a>, and then <a href="https://opencode.ai/">OpenCode</a> before the first class.</li>
 </ol>
 <p>We will learn agentic coding early in the course and use AI coding assistants in VS Code and OpenCode to write and debug research code.</p>
 </div>
@@ -89,8 +88,7 @@ title: CHI3242
 <p>請於<strong>第一次研討課之前</strong>完成下列準備：</p>
 <ol>
 <li>註冊 <a href="https://github.com/">GitHub</a> 帳號。</li>
-<li>註冊 <a href="https://openrouter.ai/">OpenRouter</a> 帳號（其後將用於大型語言模型 API）。</li>
-<li>課堂備有電腦室。亦可自備手提電腦。若使用個人電腦，請於開課前安裝 <a href="https://www.python.org/downloads/">Python</a>、<a href="https://code.visualstudio.com/">Visual Studio Code（VS Code）</a>，然後安裝 <a href="https://opencode.ai/">OpenCode</a>。若使用課室電腦，請務必完成<strong>第 1、2 項</strong>。</li>
+<li>課堂備有電腦室。亦可自備手提電腦。若使用個人電腦，請於開課前安裝 <a href="https://www.python.org/downloads/">Python</a>、<a href="https://code.visualstudio.com/">Visual Studio Code（VS Code）</a>，然後安裝 <a href="https://opencode.ai/">OpenCode</a>。</li>
 </ol>
 <p>課程初期即講授智能體編程，並在 VS Code 與 OpenCode 中使用人工智能編程助手撰寫與除錯研究代碼。</p>
 </div>
@@ -196,7 +194,7 @@ title: CHI3242
       <td class="topic"><span class="lang-en">Introduction</span><span class="lang-zh" lang="zh-Hant">導論</span></td>
       <td>
         <ul class="readings">
-          <li><span class="lang-en">Digital Humanities: key concepts; agentic coding; Git, GitHub, OpenRouter, OpenCode, and VS Code</span><span class="lang-zh" lang="zh-Hant">數字人文：核心概念；智能體編程；Git、GitHub、OpenRouter、OpenCode 與 VS Code</span></li>
+          <li><span class="lang-en">Digital Humanities: key concepts; agentic coding; Git, GitHub, OpenCode, and VS Code</span><span class="lang-zh" lang="zh-Hant">數字人文：核心概念；智能體編程；Git、GitHub、OpenCode 與 VS Code</span></li>
         </ul>
       </td>
     </tr>

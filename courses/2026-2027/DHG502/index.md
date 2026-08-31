@@ -45,7 +45,6 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
 <p>Please complete the following <strong>before the first seminar</strong>. MA students <strong>must use their own computers</strong>; no shared classroom machines will be provided.</p>
 <ol>
 <li>Create a <a href="https://github.com/">GitHub</a> account.</li>
-<li>Create an <a href="https://openrouter.ai/">OpenRouter</a> account (we will use free or instructor-designated models later in the course).</li>
 <li>On your laptop, install <a href="https://www.python.org/downloads/">Python</a>, <a href="https://code.visualstudio.com/">Visual Studio Code (VS Code)</a>, and then <a href="https://opencode.ai/">OpenCode</a>.</li>
 <li>Install or update <a href="https://www.google.com/chrome/">Google Chrome</a> or <a href="https://www.microsoft.com/edge">Microsoft Edge</a> for the image-annotation lab.</li>
 </ol>
@@ -293,7 +292,6 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
             <li>Digital museum, library, and archive platforms; examples from the Hong Kong Heritage Museum and Hong Kong Palace Museum</li>
             <li>3D and virtual reconstructions as case studies in historical accuracy, interpretation, and audience experience</li>
             <li>Hands-on: use <a href="https://immarkus.xmarkus.org/">IMMARKUS</a> to annotate regions in an East Asian historical image; inspect CSV and JSON-LD exports</li>
-            <li>Brief demonstration: organizing and tagging personal archival photographs with <a href="https://tropy.org/">Tropy</a></li>
           </ul>
         </div>
         <div class="schedule-section reading">
@@ -442,5 +440,5 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
 <li>Students are expected to spend a total of 9 hours (i.e. 3 hours of class contact and 6 hours of personal study) per week to achieve the course learning outcomes.</li>
 <li>Students shall be aware of the University regulations about dishonest practice in course work, tests and examinations, and the possible consequences as stipulated in the Regulations Governing University Examinations. In particular, plagiarism, being a kind of dishonest practice, is “the presentation of another person’s work without proper acknowledgement of the source, including exact phrases, or summarised ideas, or even footnotes/citations, whether protected by copyright or not, as the student’s own work.” Students are required to strictly follow university regulations governing academic integrity and honesty.</li>
 <li>To enhance students’ understanding of plagiarism, a mini-course “Online Tutorial on Plagiarism Awareness” is available on <a href="https://pla.ln.edu.hk/">https://pla.ln.edu.hk/</a>.</li>
-<li><strong>Ethical data acquisition:</strong> Any automated collection of material from websites, digital libraries, archives, databases, or other platforms—including scraping and bulk downloading—must be discussed with and approved by the instructor before it begins. Students must follow the provider’s terms of use, access conditions, copyright and privacy requirements, and technical limits; use an official download service or API when one is available; limit the frequency and volume of requests; and never bypass access controls. Data acquisition for assessed work must be conducted under the instructor’s supervision. Unauthorized or overly aggressive collection may disrupt services, cause an account or network to be blocked, and make the resulting dataset unsuitable for assessment.</li>
+<li><strong>Ethical data acquisition:</strong> Scraping, bulk downloading, or other automated collection must be approved and supervised by the instructor. Students must follow the provider’s rules and technical limits and use official download tools when available. Unauthorized collection cannot be used for assessed work.</li>
 </ol>
