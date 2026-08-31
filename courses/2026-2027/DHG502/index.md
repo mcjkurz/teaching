@@ -10,7 +10,7 @@ title: DHG502
 <p><strong>Digital Approaches in Historical Research</strong><br>
 Term 1, 2026–2027<br>
 MA in Digital History in Global Asia · Core · 3 credits</p>
-<p><strong>Seminar:</strong> Mon, 6:30–9:29 pm (MPL 1201, Lingnan@West Kowloon Campus; 19 Oct cancelled; dates in the schedule)</p>
+<p><strong>Seminar:</strong> Mon, 6:30–9:30 pm (MPL 1201, Lingnan@West Kowloon Campus; 19 Oct cancelled; dates in the schedule)</p>
 <p><strong>Instructor:</strong> Maciej Kurzynski 馬傑 (maciej.kurzynski[at]ln.edu.hk)<br>
 <strong>Office hours:</strong> Tue 3:00–5:00 pm and Fri 10:00 am–12:00 pm, HSH G06, or by appointment<br>
 <strong>Language of Instruction:</strong> English</p>

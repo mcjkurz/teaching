@@ -10,7 +10,7 @@ title: CHI3242
 <p><strong>Text Mining for Chinese Humanities</strong><br>
 <strong>中國人文研究中的文本挖掘</strong><br>
 <span class="lang-en">Term 1, 2026–2027</span><span class="lang-zh" lang="zh-Hant">2026–2027 學年第一學期</span></p>
-<p><strong><span class="lang-en">Seminar:</span><span class="lang-zh" lang="zh-Hant">研討課：</span></strong> <span class="lang-en">Thu, 3:30–6:29 pm (LCH 213)</span><span class="lang-zh" lang="zh-Hant">星期四，下午 3:30–6:29（LCH 213）</span></p>
+<p><strong><span class="lang-en">Seminar:</span><span class="lang-zh" lang="zh-Hant">研討課：</span></strong> <span class="lang-en">Thu, 3:30–6:30 pm (LCH 213)</span><span class="lang-zh" lang="zh-Hant">星期四，下午 3:30–6:30（LCH 213）</span></p>
 <p><strong><span class="lang-en">Instructor:</span><span class="lang-zh" lang="zh-Hant">教師：</span></strong> Maciej Kurzynski 馬傑 (maciej.kurzynski[at]ln.edu.hk)<br>
 <strong><span class="lang-en">Office hours:</span><span class="lang-zh" lang="zh-Hant">辦公室時間：</span></strong> <span class="lang-en">Tue 3:00–5:00 pm and Fri 10:00 am–12:00 pm, HSH G06, or by appointment</span><span class="lang-zh" lang="zh-Hant">星期二下午 3:00–5:00 及星期五上午 10:00–12:00，HSH G06，或另行預約</span><br>
 <strong><span class="lang-en">Language of Instruction:</span><span class="lang-zh" lang="zh-Hant">授課語言：</span></strong> <span class="lang-en">Putonghua（普通話）</span><span class="lang-zh" lang="zh-Hant">普通話</span></p>
