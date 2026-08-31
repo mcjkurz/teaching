@@ -8,11 +8,10 @@ title: DHG502 Assignments
 
 <h2>Submission Rules</h2>
 <ul>
-<li>All assessed work is individual unless the instructor explicitly states otherwise. You may discuss methods and help classmates troubleshoot, but the submitted repository, analysis, and prose must be your own. Acknowledge any substantial help.</li>
+<li>Assignments and the in-class presentation are individual work. The project proposal and final project may be completed individually or in a group of up to three students. You may discuss methods and help classmates troubleshoot, but acknowledge any substantial help.</li>
 <li>Submit the requested files and repository URL through Moodle. The Moodle timestamp determines whether work is on time.</li>
 <li>A repository may be public or private. For a private repository, grant the instructor access before the deadline. Do not put your student ID in a public repository.</li>
 <li>Only redistribute sources and data that are public domain, openly licensed, or shared with permission. If material is restricted, provide metadata, stable links, and acquisition instructions instead of uploading the files.</li>
-<li>Never commit API keys, passwords, access tokens, or other secrets. Store keys outside the repository (for example, in a local <code>.env</code> file excluded by <code>.gitignore</code>). If a key is exposed, revoke it immediately.</li>
 <li>Every graded submission must include <code>AI-USE.md</code>. Identify each AI tool and model used; describe the tasks for which it was used; include representative prompts or session excerpts; explain important changes you made; and state how you checked the output. If no AI was used, state this explicitly.</li>
 <li>Analytical prose must be written by the student. AI may help with code and troubleshooting, but students must understand and be able to explain everything they submit.</li>
 <li>If illness or another serious circumstance may prevent timely submission, request an extension as early as possible and provide documentation when required. Approved extensions carry no penalty. Unapproved late work is handled under the programme’s current late-submission rules.</li>
@@ -24,20 +23,8 @@ title: DHG502 Assignments
 <ul>
 <li><code>README.md</code> with your name, course code, a one-sentence description, and the source citation</li>
 <li><code>data/source.txt</code>, a short historical source saved as UTF-8 plain text</li>
-<li><code>.gitignore</code> containing at least <code>.env</code></li>
 </ul>
 <p>Do not include your student ID in the repository. The source should be public domain or openly licensed; otherwise, use a short instructor-provided source.</p>
-
-<h2>Final Project Checkpoint (not graded)</h2>
-<p><strong>Due:</strong> 9 Oct, 9:00 am</p>
-<p>Submit 250–350 words on Moodle addressing:</p>
-<ul>
-<li>a preliminary historical research question</li>
-<li>a candidate primary-source collection and how you can lawfully access or share it</li>
-<li>one possible digital method and why it may help answer the question</li>
-<li>one likely problem involving data quality, language, bias, ethics, or feasibility</li>
-</ul>
-<p>This is an early feasibility check, not a commitment. The topic and method may change before the graded proposal.</p>
 
 <h2>Assignment 1: From Text to Evidence (15%)</h2>
 <p><strong>Due:</strong> 12 Oct, 9:00 am</p>
@@ -64,7 +51,7 @@ title: DHG502 Assignments
 </ul>
 
 <h2>Assignment 2: From Historical Sources to Structured Data (15%)</h2>
-<p><strong>Due:</strong> 6 Nov, 9:00 am</p>
+<p><strong>Due:</strong> 9 Nov, 9:00 am</p>
 <p>Create a small structured dataset from historical page images. Choose one of the following tracks:</p>
 <ul>
 <li><strong>Track A—OCR/HTR:</strong> transcribe 3–5 printed or handwritten pages, then represent each page as a structured record with stable identifiers, source metadata, transcription text, method, and validation status.</li>
@@ -107,8 +94,8 @@ title: DHG502 Assignments
 
 <h2>Final Project Proposal</h2>
 <p><strong>Weight:</strong> 10%<br>
-<strong>Due:</strong> 13 Nov, 9:00 am</p>
-<p>Submit a 600–800-word proposal and <code>AI-USE.md</code> in English through Moodle. The proposal must include:</p>
+<strong>Due:</strong> 20 Nov, 9:00 am</p>
+<p>The proposal may be completed individually or in a group of up to three students. Groups submit one shared proposal and identify every member. Submit a 600–800-word proposal and <code>AI-USE.md</code> in English through Moodle. The proposal must include:</p>
 <ul>
 <li>a focused historical research question and its significance</li>
 <li>brief engagement with at least three relevant scholarly works</li>
@@ -132,7 +119,7 @@ title: DHG502 Assignments
 
 <h2>Final Project (30%)</h2>
 <p><strong>Due:</strong> 7 Dec, 9:00 am</p>
-<p>Use one or more course methods to answer a focused historical question. Submit the repository URL and a 2,000–3,000-word report in English through Moodle. The report word count excludes the abstract, bibliography, captions, and appendices.</p>
+<p>The final project may be completed individually or in a group of up to three students. Groups submit one shared project and identify every member. Use one or more course methods to answer a focused historical question. Submit the repository URL and a 2,000–3,000-word report in English through Moodle. The report word count excludes the abstract, bibliography, captions, and appendices.</p>
 
 <h3>Required repository contents</h3>
 <ul>
