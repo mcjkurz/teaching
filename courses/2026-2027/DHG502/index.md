@@ -21,19 +21,20 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
 </div>
 
 <h2>Course Description</h2>
-<p>This course introduces digital humanities and their role in historical research through a practical source-to-data workflow. Students learn to turn historical texts and images into documented datasets; work with corpora, networks, structured data, and databases; annotate cultural-heritage images; and evaluate computational results. The course also examines large language models as tools for transcription, structured information extraction, semantic search, and research coding. Prior programming experience is not required. Small historical datasets, prepared examples, and guided exercises allow students to focus on historical reasoning, source criticism, validation, and interpretation rather than code complexity. From the first weeks we introduce agentic coding: AI coding assistants that help write, debug, test, and document research code. Weekly seminars combine conceptual discussion, hands-on practice, and discussion of short assigned readings. Each student presents an academic paper that uses a method covered in class. The final project applies one or more digital methods to a historical topic and presents the results through a reproducible GitHub repository and an accompanying report.</p>
+<p>This course familiarizes students with the approaches, theories, and tools of digital historical scholarship. It is designed to develop their skills as thinkers, writers, and creators of historical narratives about Global Asia, enabling them to support historical arguments with digital evidence. Through a practical source-to-data workflow, students learn to turn historical texts and images into documented datasets; work with corpora, networks, structured data, and databases; annotate cultural-heritage images; and evaluate computational results. Case studies address urban life, heritage, mobility, networks, race, class, and gender, as well as the ways digital technologies are changing research and presentation in museums, libraries, and archives. The course also examines large language models as tools for transcription, structured information extraction, semantic search, and research coding. Prior programming experience is not required. Small historical datasets, prepared examples, and guided exercises allow students to focus on historical reasoning, source criticism, validation, and interpretation rather than code complexity. From the first weeks we introduce agentic coding: AI coding assistants that help write, debug, test, and document research code. Weekly seminars combine conceptual discussion, hands-on practice, and discussion of short assigned readings. Each student presents an academic paper that uses a method covered in class. The final project applies one or more digital methods to a historical topic and presents the results through a reproducible GitHub repository and an accompanying report.</p>
 
 <h2>Aims</h2>
-<p>This course aims to train MA students to apply digital tools independently to historical research questions, and to evaluate critically how new technologies are changing the discipline. Students will learn to write, debug, and evaluate research code with AI coding assistants, while remaining attentive to the limits of methods and to ethical challenges, and will design a project that brings digital methods to bear on a historical problem.</p>
+<p>This course aims to train MA students to examine the approaches, theories, and tools of digital historical scholarship; investigate their connections with established historical methods; and apply them independently to questions about Global Asia. Students will work with Asian historical sources, archives, and databases; consider digital forms of research and public presentation; and evaluate critically how new technologies are changing the discipline. They will learn to write, debug, and evaluate research code with AI coding assistants while remaining attentive to methodological limits and ethical challenges, and will design a project that brings digital methods to bear on a historical problem.</p>
 
 <h2>Learning Outcomes</h2>
 <p>Upon completion of this course, students should be able to:</p>
 <ul>
-<li>Identify major digital-humanities tools and methods relevant to historical research</li>
+<li>Identify major approaches, theories, and tools in digital historical scholarship and relate them to established historical methods</li>
+<li>Explain how digital technologies affect historical research and presentation in museums, libraries, and archives</li>
 <li>Turn historical texts and images into documented, structured research data</li>
 <li>Apply appropriate computational methods to historical research questions</li>
 <li>Use AI-assisted coding tools to write, debug, test, and document research code</li>
-<li>Evaluate computational and AI-generated results against historical evidence</li>
+<li>Evaluate the benefits, limitations, and ethical challenges of computational and AI-generated results against historical evidence</li>
 <li>Design and communicate a reproducible project that combines digital methods with historical inquiry</li>
 </ul>
 
@@ -106,6 +107,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
       <td>
         <ul class="readings">
           <li>Digital history: research questions, source criticism, and the source-to-data workflow</li>
+          <li>Guiding question: What does it mean to think historically about the digital and digitally about the historical?</li>
           <li>Hands-on: Git, GitHub, VS Code, OpenCode, and carefully guided agentic coding</li>
           <li>Mats Fridlund, “A Middle Way between Normal and Paradigmatic Digital Historical Research,” in <em>Digital Histories: Emergent Approaches within the New Digital History</em> (2020)</li>
         </ul>
@@ -143,6 +145,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
         <ul class="readings">
           <li>Research questions, selection and sampling; regex; tokenization; cleaning; stopwords; transformation logs</li>
           <li>Bag of words, word frequencies, Zipf’s law, and the difference between a source and a dataset</li>
+          <li>Brief demonstration: the <a href="https://ctext.org/">Chinese Text Project</a> as a digital source and corpus platform</li>
           <li>Jo Guldi, <em>The Dangerous Art of Text Mining: A Methodology for Digital History</em>, Introduction and Chapter 1</li>
           <li>Hands-on preparation: <a href="https://regexone.com/">RegexOne</a>, Lessons 1–8</li>
         </ul>
@@ -247,6 +250,8 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
       <td>
         <ul class="readings">
           <li>Interpretation, preservation, reconstruction, authenticity, and the digital representation of cultural heritage</li>
+          <li>Digital museum, library, and archive platforms; examples from the Hong Kong Heritage Museum and Hong Kong Palace Museum</li>
+          <li>3D and virtual reconstructions as case studies in historical accuracy, interpretation, and audience experience</li>
           <li>Hands-on: use <a href="https://immarkus.xmarkus.org/">IMMARKUS</a> to annotate regions in an East Asian historical image; inspect CSV and JSON-LD exports</li>
           <li>Brief demonstration: organizing and tagging personal archival photographs with <a href="https://tropy.org/">Tropy</a></li>
           <li>Freeman Tilden, <em>Interpreting Our Heritage</em>, Introduction and selected chapter on interpretation</li>
@@ -332,6 +337,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
       <td>
         <ul class="readings">
           <li>Error taxonomies; precision and recall; citation checking; temporal bias; abstention; privacy, cost, and inspectable agent workflows</li>
+          <li>Deepfakes and synthetic historical media: evidence, provenance, and misleading plausibility</li>
           <li>Historical-persona simulation as an adversarial exercise: identify ventriloquism, unsupported claims, anachronism, and archival silences</li>
           <li>American Historical Association, <a href="https://www.historians.org/resource/guiding-principles-for-artificial-intelligence-in-history-education/">“Guiding Principles for Artificial Intelligence in History Education”</a> (2025), selected principles</li>
           <li>Carl T. Bergstrom and Jevin D. West, <em>Calling Bullshit: The Art of Skepticism in a Data-Driven World</em>, Chapters 4 (“Causality”) and 5 (“Numbers and Nonsense”)</li>
@@ -346,7 +352,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
       <td class="topic">Data Visualization, Reproducibility, and Project Clinic</td>
       <td>
         <ul class="readings">
-          <li>Visualization as argument; moving between aggregate patterns and close reading</li>
+          <li>Visualization as argument; charts, timelines, and network diagrams; moving between aggregate patterns and close reading</li>
           <li>Data dictionaries, dependencies, transformation logs, README files, re-run checks, and responsible sharing</li>
           <li>Toby Burrows, <a href="https://doi.org/10.1007/s42803-023-00068-9">“Reproducibility, Verifiability, and Computational Historical Research”</a> (2023), selected sections</li>
           <li>(optional) Nan Z. Da, “The Computational Case against Computational Literary Studies,” <em>Critical Inquiry</em> 45, no. 3 (2019)</li>
@@ -370,4 +376,5 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
 <li>Students are expected to spend a total of 9 hours (i.e. 3 hours of class contact and 6 hours of personal study) per week to achieve the course learning outcomes.</li>
 <li>Students shall be aware of the University regulations about dishonest practice in course work, tests and examinations, and the possible consequences as stipulated in the Regulations Governing University Examinations. In particular, plagiarism, being a kind of dishonest practice, is “the presentation of another person’s work without proper acknowledgement of the source, including exact phrases, or summarised ideas, or even footnotes/citations, whether protected by copyright or not, as the student’s own work.” Students are required to strictly follow university regulations governing academic integrity and honesty.</li>
 <li>To enhance students’ understanding of plagiarism, a mini-course “Online Tutorial on Plagiarism Awareness” is available on <a href="https://pla.ln.edu.hk/">https://pla.ln.edu.hk/</a>.</li>
+<li><strong>Ethical data acquisition:</strong> Any automated collection of material from websites, digital libraries, archives, databases, or other platforms—including scraping and bulk downloading—must be discussed with and approved by the instructor before it begins. Students must follow the provider’s terms of use, access conditions, copyright and privacy requirements, and technical limits; use an official download service or API when one is available; limit the frequency and volume of requests; and never bypass access controls. Data acquisition for assessed work must be conducted under the instructor’s supervision. Unauthorized or overly aggressive collection may disrupt services, cause an account or network to be blocked, and make the resulting dataset unsuitable for assessment.</li>
 </ol>
