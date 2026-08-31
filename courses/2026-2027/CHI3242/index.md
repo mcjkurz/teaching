@@ -241,7 +241,7 @@ title: CHI3242
       <td class="topic"><span class="lang-en">What Is a Character?</span><span class="lang-zh" lang="zh-Hant">什麼是「角色」？</span></td>
       <td>
         <ul class="readings">
-          <li><span class="lang-en">Character, word, person</span><span class="lang-zh" lang="zh-Hant">角色、詞語、人物</span></li>
+          <li><span class="lang-en">Character, word, space</span><span class="lang-zh" lang="zh-Hant">角色、詞語、空間</span></li>
           <li>Alex Woloch, <em>The One vs. the Many</em>, pp. 12–42</li>
         </ul>
       </td>
