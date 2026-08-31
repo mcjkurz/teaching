@@ -87,7 +87,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
       <th>Week</th>
       <th>Date</th>
       <th>Topic</th>
-      <th>Readings</th>
+      <th>Class Content and Readings</th>
     </tr>
   </thead>
   <tbody class="block-a">
@@ -96,12 +96,20 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
       <td class="date">7 Sep</td>
       <td class="topic">Introduction</td>
       <td>
-        <ul class="readings">
-          <li>Digital history: research questions, source criticism, and the source-to-data workflow</li>
-          <li>Guiding question: What does it mean to think historically about the digital and digitally about the historical?</li>
-          <li>Hands-on: Git, GitHub, VS Code, OpenCode, and carefully guided agentic coding</li>
-          <li>Mats Fridlund, “A Middle Way between Normal and Paradigmatic Digital Historical Research,” in <em>Digital Histories: Emergent Approaches within the New Digital History</em> (2020)</li>
-        </ul>
+        <div class="schedule-section">
+          <strong class="schedule-label">Class content</strong>
+          <ul class="readings">
+            <li>Digital history: research questions, source criticism, and the source-to-data workflow</li>
+            <li>Guiding question: What does it mean to think historically about the digital and digitally about the historical?</li>
+            <li>Hands-on: Git, GitHub, VS Code, OpenCode, and carefully guided agentic coding</li>
+          </ul>
+        </div>
+        <div class="schedule-section reading">
+          <strong class="schedule-label">Required reading</strong>
+          <ul class="readings">
+            <li>Mats Fridlund, “A Middle Way between Normal and Paradigmatic Digital Historical Research,” in <em>Digital Histories: Emergent Approaches within the New Digital History</em> (2020)</li>
+          </ul>
+        </div>
       </td>
     </tr>
   </tbody>
@@ -111,12 +119,20 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
       <td class="date">14 Sep</td>
       <td class="topic">Sources as Data: Labor, Context, and Risk</td>
       <td>
-        <ul class="readings">
-          <li>Files as data; binary, Unicode, and UTF-8; CSV and JSON by example</li>
-          <li>Metadata, provenance, sampling, archival silences, copyright, privacy, and research data</li>
-          <li>Billy Perrigo, “OpenAI Used Kenyan Workers on Less Than $2 Per Hour to Make ChatGPT Less Toxic,” <em>TIME</em>, 18 January 2023</li>
-          <li>Johan Jarlbrink, “All the Work that Makes It Work: Digital Methods and Manual Labour,” in <em>Digital Histories: Emergent Approaches within the New Digital History</em> (2020)</li>
-        </ul>
+        <div class="schedule-section">
+          <strong class="schedule-label">Class content</strong>
+          <ul class="readings">
+            <li>Files as data; binary, Unicode, and UTF-8; CSV and JSON by example</li>
+            <li>Metadata, provenance, sampling, archival silences, copyright, privacy, and research data</li>
+          </ul>
+        </div>
+        <div class="schedule-section reading">
+          <strong class="schedule-label">Required readings</strong>
+          <ul class="readings">
+            <li>Billy Perrigo, “OpenAI Used Kenyan Workers on Less Than $2 Per Hour to Make ChatGPT Less Toxic,” <em>TIME</em>, 18 January 2023</li>
+            <li>Johan Jarlbrink, “All the Work that Makes It Work: Digital Methods and Manual Labour,” in <em>Digital Histories: Emergent Approaches within the New Digital History</em> (2020)</li>
+          </ul>
+        </div>
       </td>
     </tr>
   </tbody>
@@ -133,12 +149,25 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
       <td class="date" rowspan="2">21 Sep</td>
       <td class="topic">Building a Corpus</td>
       <td>
-        <ul class="readings">
-          <li>Research questions, selection and sampling; regex; tokenization; cleaning; stopwords; transformation logs</li>
-          <li>Brief demonstration: the <a href="https://ctext.org/">Chinese Text Project</a> as a digital source and corpus platform</li>
-          <li>Jo Guldi, <em>The Dangerous Art of Text Mining: A Methodology for Digital History</em>, Introduction and Chapter 1</li>
-          <li>Hands-on preparation: <a href="https://regexone.com/">RegexOne</a>, Lessons 1–8</li>
-        </ul>
+        <div class="schedule-section">
+          <strong class="schedule-label">Class content</strong>
+          <ul class="readings">
+            <li>Research questions, selection and sampling; regex; tokenization; cleaning; stopwords; transformation logs</li>
+            <li>Brief demonstration: the <a href="https://ctext.org/">Chinese Text Project</a> as a digital source and corpus platform</li>
+          </ul>
+        </div>
+        <div class="schedule-section reading">
+          <strong class="schedule-label">Required reading</strong>
+          <ul class="readings">
+            <li>Jo Guldi, <em>The Dangerous Art of Text Mining: A Methodology for Digital History</em>, Introduction and Chapter 1</li>
+          </ul>
+        </div>
+        <div class="schedule-section">
+          <strong class="schedule-label">Preparation</strong>
+          <ul class="readings">
+            <li><a href="https://regexone.com/">RegexOne</a>, Lessons 1–8</li>
+          </ul>
+        </div>
       </td>
     </tr>
     <tr class="presentation">
@@ -152,10 +181,18 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
       <td class="date">28 Sep</td>
       <td class="topic">Collocations</td>
       <td>
-        <ul class="readings">
-          <li>Collocation as a method; contingency tables; Fisher’s exact test; effect, significance, and historical interpretation</li>
-          <li>Stefan Evert, “Corpora and Collocations”</li>
-        </ul>
+        <div class="schedule-section">
+          <strong class="schedule-label">Class content</strong>
+          <ul class="readings">
+            <li>Collocation as a method; contingency tables; Fisher’s exact test; effect, significance, and historical interpretation</li>
+          </ul>
+        </div>
+        <div class="schedule-section reading">
+          <strong class="schedule-label">Required reading</strong>
+          <ul class="readings">
+            <li>Stefan Evert, “Corpora and Collocations”</li>
+          </ul>
+        </div>
       </td>
     </tr>
   </tbody>
@@ -165,12 +202,20 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
       <td class="date" rowspan="2">5 Oct</td>
       <td class="topic">Historical Network Analysis</td>
       <td>
-        <ul class="readings">
-          <li>Nodes, edges, and historical relationships; data formats; centrality and community</li>
-          <li>Entity identity, tabular edge lists, missing relationships, and uncertainty</li>
-          <li>Working with historical datasets (e.g. CBDB); Gephi, Palladio, and Python</li>
-          <li>Scott B. Weingart, “Demystifying Networks, Parts I &amp; II”</li>
-        </ul>
+        <div class="schedule-section">
+          <strong class="schedule-label">Class content</strong>
+          <ul class="readings">
+            <li>Nodes, edges, and historical relationships; data formats; centrality and community</li>
+            <li>Entity identity, tabular edge lists, missing relationships, and uncertainty</li>
+            <li>Working with historical datasets (e.g. CBDB); Gephi, Palladio, and Python</li>
+          </ul>
+        </div>
+        <div class="schedule-section reading">
+          <strong class="schedule-label">Required reading</strong>
+          <ul class="readings">
+            <li>Scott B. Weingart, “Demystifying Networks, Parts I &amp; II”</li>
+          </ul>
+        </div>
       </td>
     </tr>
     <tr class="presentation">
@@ -191,12 +236,25 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
       <td class="date">12 Oct</td>
       <td class="topic">OCR, HTR, and Multimodal Transcription</td>
       <td>
-        <ul class="readings">
-          <li>From printed and handwritten page images to text; layout, transcription, normalization, and correction</li>
-          <li>Validation with human ground truth; character and word error rates; why plausible text may still be wrong</li>
-          <li>Laura Turner O’Hara, <a href="https://programminghistorian.org/en/lessons/cleaning-ocrd-text-with-regular-expressions">“Cleaning OCR’d Text with Regular Expressions”</a> (selected sections)</li>
-          <li>(optional) Maria Levchenko, <a href="https://arxiv.org/abs/2510.06743">“Evaluating LLMs for Historical Document OCR: A Methodological Framework for Digital Humanities”</a> (2025), Introduction and Conclusion</li>
-        </ul>
+        <div class="schedule-section">
+          <strong class="schedule-label">Class content</strong>
+          <ul class="readings">
+            <li>From printed and handwritten page images to text; layout, transcription, normalization, and correction</li>
+            <li>Validation with human ground truth; character and word error rates; why plausible text may still be wrong</li>
+          </ul>
+        </div>
+        <div class="schedule-section reading">
+          <strong class="schedule-label">Required reading</strong>
+          <ul class="readings">
+            <li>Laura Turner O’Hara, <a href="https://programminghistorian.org/en/lessons/cleaning-ocrd-text-with-regular-expressions">“Cleaning OCR’d Text with Regular Expressions”</a> (selected sections)</li>
+          </ul>
+        </div>
+        <div class="schedule-section">
+          <strong class="schedule-label">Optional reading</strong>
+          <ul class="readings">
+            <li>Maria Levchenko, <a href="https://arxiv.org/abs/2510.06743">“Evaluating LLMs for Historical Document OCR: A Methodological Framework for Digital Humanities”</a> (2025), Introduction and Conclusion</li>
+          </ul>
+        </div>
       </td>
     </tr>
   </tbody>
@@ -213,11 +271,19 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
       <td class="date" rowspan="2">26 Oct</td>
       <td class="topic">Topic Modeling</td>
       <td>
-        <ul class="readings">
-          <li>LDA; what is a “topic”?; model choices, close reading, and interpretive limits</li>
-          <li>Conceptual comparison with embedding-based document clustering</li>
-          <li>(optional) David M. Blei, “Probabilistic Topic Models” (2012)</li>
-        </ul>
+        <div class="schedule-section">
+          <strong class="schedule-label">Class content</strong>
+          <ul class="readings">
+            <li>LDA; what is a “topic”?; model choices, close reading, and interpretive limits</li>
+            <li>Conceptual comparison with embedding-based document clustering</li>
+          </ul>
+        </div>
+        <div class="schedule-section reading">
+          <strong class="schedule-label">Optional reading</strong>
+          <ul class="readings">
+            <li>David M. Blei, “Probabilistic Topic Models” (2012)</li>
+          </ul>
+        </div>
       </td>
     </tr>
     <tr class="presentation">
@@ -231,16 +297,34 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
       <td class="date">2 Nov</td>
       <td class="topic">Cultural Heritage and Image Annotation</td>
       <td>
-        <ul class="readings">
-          <li>Interpretation, preservation, reconstruction, authenticity, and the digital representation of cultural heritage</li>
-          <li>Digital museum, library, and archive platforms; examples from the Hong Kong Heritage Museum and Hong Kong Palace Museum</li>
-          <li>3D and virtual reconstructions as case studies in historical accuracy, interpretation, and audience experience</li>
-          <li>Hands-on: use <a href="https://immarkus.xmarkus.org/">IMMARKUS</a> to annotate regions in an East Asian historical image; inspect CSV and JSON-LD exports</li>
-          <li>Brief demonstration: organizing and tagging personal archival photographs with <a href="https://tropy.org/">Tropy</a></li>
-          <li>Freeman Tilden, <em>Interpreting Our Heritage</em>, Introduction and selected chapter on interpretation</li>
-          <li>(optional) Hilde De Weerdt et al., <a href="https://dhq.digitalhumanities.org/vol/19/4/000808/000808.html">“Contextual Semantic Text and Image Annotation in the MARKUS Environment”</a>, <em>Digital Humanities Quarterly</em> 19, no. 4 (2025), selected sections</li>
-          <li>Lab guide: <a href="https://ldas.jp/en/posts/immarkus-handson/">“Reading Digital Historical Sources with IIIF and Web Annotation—An IMMARKUS Hands-on”</a></li>
-        </ul>
+        <div class="schedule-section">
+          <strong class="schedule-label">Class content</strong>
+          <ul class="readings">
+            <li>Interpretation, preservation, reconstruction, authenticity, and the digital representation of cultural heritage</li>
+            <li>Digital museum, library, and archive platforms; examples from the Hong Kong Heritage Museum and Hong Kong Palace Museum</li>
+            <li>3D and virtual reconstructions as case studies in historical accuracy, interpretation, and audience experience</li>
+            <li>Hands-on: use <a href="https://immarkus.xmarkus.org/">IMMARKUS</a> to annotate regions in an East Asian historical image; inspect CSV and JSON-LD exports</li>
+            <li>Brief demonstration: organizing and tagging personal archival photographs with <a href="https://tropy.org/">Tropy</a></li>
+          </ul>
+        </div>
+        <div class="schedule-section reading">
+          <strong class="schedule-label">Required reading</strong>
+          <ul class="readings">
+            <li>Freeman Tilden, <em>Interpreting Our Heritage</em>, Introduction and selected chapter on interpretation</li>
+          </ul>
+        </div>
+        <div class="schedule-section">
+          <strong class="schedule-label">Optional reading</strong>
+          <ul class="readings">
+            <li>Hilde De Weerdt et al., <a href="https://dhq.digitalhumanities.org/vol/19/4/000808/000808.html">“Contextual Semantic Text and Image Annotation in the MARKUS Environment”</a>, <em>Digital Humanities Quarterly</em> 19, no. 4 (2025), selected sections</li>
+          </ul>
+        </div>
+        <div class="schedule-section">
+          <strong class="schedule-label">Lab guide</strong>
+          <ul class="readings">
+            <li><a href="https://ldas.jp/en/posts/immarkus-handson/">“Reading Digital Historical Sources with IIIF and Web Annotation—An IMMARKUS Hands-on”</a></li>
+          </ul>
+        </div>
       </td>
     </tr>
   </tbody>
@@ -257,11 +341,19 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
       <td class="date" rowspan="2">9 Nov</td>
       <td class="topic">Conceptual History and Word Vectors</td>
       <td>
-        <ul class="readings">
-          <li>What is meaning? Word vectors and cosine similarity</li>
-          <li>Static and contextual embeddings; conceptual change and historical bias</li>
-          <li>(optional) Daniel Jurafsky and James H. Martin, “Vector Semantics and Embeddings”</li>
-        </ul>
+        <div class="schedule-section">
+          <strong class="schedule-label">Class content</strong>
+          <ul class="readings">
+            <li>What is meaning? Word vectors and cosine similarity</li>
+            <li>Static and contextual embeddings; conceptual change and historical bias</li>
+          </ul>
+        </div>
+        <div class="schedule-section reading">
+          <strong class="schedule-label">Optional reading</strong>
+          <ul class="readings">
+            <li>Daniel Jurafsky and James H. Martin, “Vector Semantics and Embeddings”</li>
+          </ul>
+        </div>
       </td>
     </tr>
     <tr class="presentation">
@@ -275,12 +367,20 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
       <td class="date">16 Nov</td>
       <td class="topic">Databases and Structured Historical Data</td>
       <td>
-        <ul class="readings">
-          <li>Schemas, records, fields, data types, identifiers, and one-to-many relationships</li>
-          <li>CSV versus JSON; SQLite and introductory SQL; why a database is not a spreadsheet</li>
-          <li>In-class: build and query a small database of historical people, sources, and events</li>
-          <li>Agustín Cosovschi, <a href="https://programminghistorian.org/en/lessons/designing-database-nodegoat">“From Sources to Data: Designing a Database for the Humanities and Social Sciences with nodegoat”</a> (selected sections)</li>
-        </ul>
+        <div class="schedule-section">
+          <strong class="schedule-label">Class content</strong>
+          <ul class="readings">
+            <li>Schemas, records, fields, data types, identifiers, and one-to-many relationships</li>
+            <li>CSV versus JSON; SQLite and introductory SQL; why a database is not a spreadsheet</li>
+            <li>In-class: build and query a small database of historical people, sources, and events</li>
+          </ul>
+        </div>
+        <div class="schedule-section reading">
+          <strong class="schedule-label">Required reading</strong>
+          <ul class="readings">
+            <li>Agustín Cosovschi, <a href="https://programminghistorian.org/en/lessons/designing-database-nodegoat">“From Sources to Data: Designing a Database for the Humanities and Social Sciences with nodegoat”</a> (selected sections)</li>
+          </ul>
+        </div>
       </td>
     </tr>
   </tbody>
@@ -297,14 +397,27 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
       <td class="date" rowspan="2">23 Nov</td>
       <td class="topic">LLM Workflows for Historical Sources</td>
       <td>
-        <ul class="readings">
-          <li>From BERT to GPT; next-token probability, context, tokens, and APIs</li>
-          <li>JSON-schema structured outputs; information and entity extraction; source-linked semantic search and retrieval-augmented generation (RAG)</li>
-          <li>Hands-on: extract a small batch, check it against human-coded examples, and record errors</li>
-          <li>Ted Underwood, Laura K. Nelson, and Matthew Wilkens, “Can Language Models Represent the Past without Anachronism?”</li>
-          <li>Thierry Poibeau, “What Do Historical Language Models Model?”</li>
-          <li>(optional) Maximilian Hindermann et al., <a href="https://openhumanitiesdata.metajnl.com/articles/10.5334/johd.481">“The RISE Humanities Data Benchmark: A Framework for Evaluating Large Language Models for Humanities Tasks”</a> (2026), Introduction</li>
-        </ul>
+        <div class="schedule-section">
+          <strong class="schedule-label">Class content</strong>
+          <ul class="readings">
+            <li>From BERT to GPT; next-token probability, context, tokens, and APIs</li>
+            <li>JSON-schema structured outputs; information and entity extraction; source-linked semantic search and retrieval-augmented generation (RAG)</li>
+            <li>Hands-on: extract a small batch, check it against human-coded examples, and record errors</li>
+          </ul>
+        </div>
+        <div class="schedule-section reading">
+          <strong class="schedule-label">Required readings</strong>
+          <ul class="readings">
+            <li>Ted Underwood, Laura K. Nelson, and Matthew Wilkens, “Can Language Models Represent the Past without Anachronism?”</li>
+            <li>Thierry Poibeau, “What Do Historical Language Models Model?”</li>
+          </ul>
+        </div>
+        <div class="schedule-section">
+          <strong class="schedule-label">Optional reading</strong>
+          <ul class="readings">
+            <li>Maximilian Hindermann et al., <a href="https://openhumanitiesdata.metajnl.com/articles/10.5334/johd.481">“The RISE Humanities Data Benchmark: A Framework for Evaluating Large Language Models for Humanities Tasks”</a> (2026), Introduction</li>
+          </ul>
+        </div>
       </td>
     </tr>
     <tr class="presentation">
@@ -318,12 +431,20 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
       <td class="date">30 Nov</td>
       <td class="topic">Data Visualization and Reproducibility</td>
       <td>
-        <ul class="readings">
-          <li>Visualization as argument; charts, timelines, and network diagrams; moving between aggregate patterns and close reading</li>
-          <li>Data dictionaries, dependencies, transformation logs, README files, re-run checks, and responsible sharing</li>
-          <li>Carl T. Bergstrom and Jevin D. West, <em>Calling Bullshit: The Art of Skepticism in a Data-Driven World</em>, Chapters 4 (“Causality”) and 5 (“Numbers and Nonsense”)</li>
-          <li>Toby Burrows, <a href="https://doi.org/10.1007/s42803-023-00068-9">“Reproducibility, Verifiability, and Computational Historical Research”</a> (2023), selected sections</li>
-        </ul>
+        <div class="schedule-section">
+          <strong class="schedule-label">Class content</strong>
+          <ul class="readings">
+            <li>Visualization as argument; charts, timelines, and network diagrams; moving between aggregate patterns and close reading</li>
+            <li>Data dictionaries, dependencies, transformation logs, README files, re-run checks, and responsible sharing</li>
+          </ul>
+        </div>
+        <div class="schedule-section reading">
+          <strong class="schedule-label">Required readings</strong>
+          <ul class="readings">
+            <li>Carl T. Bergstrom and Jevin D. West, <em>Calling Bullshit: The Art of Skepticism in a Data-Driven World</em>, Chapters 4 (“Causality”) and 5 (“Numbers and Nonsense”)</li>
+            <li>Toby Burrows, <a href="https://doi.org/10.1007/s42803-023-00068-9">“Reproducibility, Verifiability, and Computational Historical Research”</a> (2023), selected sections</li>
+          </ul>
+        </div>
       </td>
     </tr>
   </tbody>
