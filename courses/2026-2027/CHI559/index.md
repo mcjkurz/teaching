@@ -226,7 +226,7 @@ title: CHI559
       <td class="topic">分類（一）</td>
       <td>
         <ul class="readings">
-          <li>用於文本分類的邏輯迴歸</li>
+          <li>用於文本分類的邏輯迴歸（情感分析）</li>
           <li>二元與多類分類（softmax）；損失函數（交叉熵）</li>
           <li>TF-IDF</li>
         </ul>

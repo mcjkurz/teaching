@@ -317,7 +317,7 @@ title: CHI3242
       <td class="topic"><span class="lang-en">Classification I</span><span class="lang-zh" lang="zh-Hant">分類（一）</span></td>
       <td>
         <ul class="readings">
-          <li><span class="lang-en">Logistic regression for text classification</span><span class="lang-zh" lang="zh-Hant">用於文本分類的邏輯迴歸</span></li>
+          <li><span class="lang-en">Logistic regression for text classification (sentiment analysis)</span><span class="lang-zh" lang="zh-Hant">用於文本分類的邏輯迴歸（情感分析）</span></li>
           <li><span class="lang-en">Binary and multi-class classification (softmax); loss function (cross-entropy)</span><span class="lang-zh" lang="zh-Hant">二元與多類分類（softmax）；損失函數（交叉熵）</span></li>
           <li>TF-IDF</li>
         </ul>
