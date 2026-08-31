@@ -26,7 +26,7 @@ title: CHI3242
 <p>This course offers a beginner-friendly introduction to Digital Humanities, surveying tools for exploring and analyzing Chinese texts, including novels, blogs, news articles, poetry, and more. Students will use accessible software and learn basic techniques to study patterns in Chinese literature and social media, assess trends in digital archives, and visualize data. Prior programming experience is not required. From early in the course we will use agentic coding: AI coding assistants that help write, debug, and evaluate research code. Weekly seminars cover fundamental concepts and methods and provide supervised hands-on practice. For the final project, students may use corpora shared in class or build their own datasets, apply digital methods to a topic of their choice, and present their findings through a complete working GitHub repository and an accompanying report.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
-<p>本課程以淺白方式介紹數碼人文（Digital Humanities），廣泛概覽可用於探索與分析中文文本（小說、網誌、新聞、詩歌等）的數碼工具。學生將運用易於上手的軟件，學習基本技術，以研究中國文學與社交媒體中的模式、評估數碼檔案中的趨勢，並進行數據可視化。無須具備編程經驗。課程初期即引入智能體編程（agentic coding）：以人工智能編程助手協助撰寫、除錯並評估研究代碼。每週研討課講授數碼人文的基本概念與方法，並在教師指導下進行實作練習。期末專題中，學生可使用課堂提供的語料，或自建數據集，將數碼方法應用於自選題目，並以完整可運作的 GitHub 倉庫及配套報告呈現研究成果。</p>
+<p>本課程以淺白方式介紹數字人文（Digital Humanities），廣泛概覽可用於探索與分析中文文本（小說、網誌、新聞、詩歌等）的數字工具。學生將運用易於上手的軟件，學習基本技術，以研究中國文學與社交媒體中的模式、評估數字檔案中的趨勢，並進行數據可視化。無須具備編程經驗。課程初期即引入智能體編程（agentic coding）：以人工智能編程助手協助撰寫、除錯並評估研究代碼。每週研討課講授數字人文的基本概念與方法，並在教師指導下進行實作練習。期末專題中，學生可使用課堂提供的語料，或自建數據集，將數字方法應用於自選題目，並以完整可運作的 GitHub 倉庫及配套報告呈現研究成果。</p>
 </div>
 </div>
 
@@ -36,7 +36,7 @@ title: CHI3242
 <p>This course aims to introduce students to digital humanities in both practical and theoretical terms. Students will develop digital literacy, including the ability to employ digital tools and AI coding agents in creative ways, to evaluate information on the web critically, and to manage that information by searching, editing, uploading, and visualizing textual data. Familiarity with these tools equips students with transferable skills and with the means to champion more inclusive narratives and a broader cultural understanding.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
-<p>本課程旨在從實踐與理論兩方面，引介學生進入數碼人文領域。學生將培養數碼素養，包括創造性地運用數碼工具與人工智能編程助手、批判地評估網絡資訊，以及透過搜尋、編輯、上傳與可視化文本數據來管理資訊。熟悉這些工具，將使學生掌握可遷移的技能，並有能力推動更具包容性的敘事與更廣的文化理解。</p>
+<p>本課程旨在從實踐與理論兩方面，引介學生進入數字人文領域。學生將培養數字素養，包括創造性地運用數字工具與人工智能編程助手、批判地評估網絡資訊，以及透過搜尋、編輯、上傳與可視化文本數據來管理資訊。熟悉這些工具，將使學生掌握可遷移的技能，並有能力推動更具包容性的敘事與更廣的文化理解。</p>
 </div>
 </div>
 
@@ -57,9 +57,9 @@ title: CHI3242
 <ul>
 <li>比較用於文本挖掘與數據可視化的不同工具</li>
 <li>運用簡易的 Python 程式、套件與人工智能編程助手分析文學現象</li>
-<li>以基本機率方法偵測數碼檔案中的偏差</li>
-<li>辨識可用數碼人文方法探討的研究問題</li>
-<li>設計並完成一項數碼人文專題</li>
+<li>以基本機率方法偵測數字檔案中的偏差</li>
+<li>辨識可用數字人文方法探討的研究問題</li>
+<li>設計並完成一項數字人文專題</li>
 </ul>
 </div>
 </div>
@@ -81,7 +81,7 @@ title: CHI3242
 <ol>
 <li>Create a <a href="https://github.com/">GitHub</a> account.</li>
 <li>Create an <a href="https://openrouter.ai/">OpenRouter</a> account (we will use it later for large-language-model APIs).</li>
-<li>A classroom with computers will be available. You may also bring your own laptop. If you use your own computer, install <a href="https://www.python.org/downloads/">Python</a>, <a href="https://code.visualstudio.com/">Visual Studio Code (VS Code)</a>, and then <a href="https://opencode.ai/">OpenCode</a> before the first class.</li>
+<li>A classroom with computers will be available. You may also bring your own laptop. If you use your own computer, install <a href="https://www.python.org/downloads/">Python</a>, <a href="https://code.visualstudio.com/">Visual Studio Code (VS Code)</a>, and then <a href="https://opencode.ai/">OpenCode</a> before the first class. If you don’t use your own computer, make sure to complete <strong>steps 1 &amp; 2</strong>.</li>
 </ol>
 <p>We will learn agentic coding early in the course and use AI coding assistants in VS Code and OpenCode to write and debug research code.</p>
 </div>
@@ -90,7 +90,7 @@ title: CHI3242
 <ol>
 <li>註冊 <a href="https://github.com/">GitHub</a> 帳號。</li>
 <li>註冊 <a href="https://openrouter.ai/">OpenRouter</a> 帳號（其後將用於大型語言模型 API）。</li>
-<li>課堂備有電腦室。亦可自備手提電腦。若使用個人電腦，請於開課前安裝 <a href="https://www.python.org/downloads/">Python</a>、<a href="https://code.visualstudio.com/">Visual Studio Code（VS Code）</a>，然後安裝 <a href="https://opencode.ai/">OpenCode</a>。</li>
+<li>課堂備有電腦室。亦可自備手提電腦。若使用個人電腦，請於開課前安裝 <a href="https://www.python.org/downloads/">Python</a>、<a href="https://code.visualstudio.com/">Visual Studio Code（VS Code）</a>，然後安裝 <a href="https://opencode.ai/">OpenCode</a>。若使用課室電腦，請務必完成<strong>第 1、2 項</strong>。</li>
 </ol>
 <p>課程初期即講授智能體編程，並在 VS Code 與 OpenCode 中使用人工智能編程助手撰寫與除錯研究代碼。</p>
 </div>
@@ -163,7 +163,7 @@ title: CHI3242
 <div class="lang-zh" lang="zh-Hant">
 <p><strong>1. 研討課：</strong>每週三小時研討課結合概念講授與教師指導下的實作。學生處理中文文本，學習從詞頻、搭配、主題模型、詞向量到神經語言模型等方法。無須具備編程經驗。最初數週引入智能體編程，其後貫穿全學期使用人工智能編程助手。</p>
 <p><strong>2. 作業與專題計劃書：</strong>共兩份計分作業；作業0不計分。最後一項作業為期末專題計劃書。一律經 Moodle 作業區繳交。作業說明連結見下方課程進度表。</p>
-<p><strong>3. 期末專題：</strong>學生可使用課堂提供的語料，或自建數據集，將數碼方法應用於自選題目，並以完整可運作的 GitHub 倉庫（含原始資料、程式碼與 README）及中文配套報告呈現研究成果。於截止日期前經 Moodle 提交倉庫網址及報告。報告須包括以下部分：</p>
+<p><strong>3. 期末專題：</strong>學生可使用課堂提供的語料，或自建數據集，將數字方法應用於自選題目，並以完整可運作的 GitHub 倉庫（含原始資料、程式碼與 README）及中文配套報告呈現研究成果。於截止日期前經 Moodle 提交倉庫網址及報告。報告須包括以下部分：</p>
 <ul>
 <li><strong>摘要：</strong>目標、實驗與發現的概述（最多 150 字）</li>
 <li><strong>數據集：</strong>語料說明、來源與預處理步驟</li>
@@ -196,7 +196,7 @@ title: CHI3242
       <td class="topic"><span class="lang-en">Introduction</span><span class="lang-zh" lang="zh-Hant">導論</span></td>
       <td>
         <ul class="readings">
-          <li><span class="lang-en">Digital Humanities: key concepts; agentic coding; Git, GitHub, OpenRouter, OpenCode, and VS Code</span><span class="lang-zh" lang="zh-Hant">數碼人文：核心概念；智能體編程；Git、GitHub、OpenRouter、OpenCode 與 VS Code</span></li>
+          <li><span class="lang-en">Digital Humanities: key concepts; agentic coding; Git, GitHub, OpenRouter, OpenCode, and VS Code</span><span class="lang-zh" lang="zh-Hant">數字人文：核心概念；智能體編程；Git、GitHub、OpenRouter、OpenCode 與 VS Code</span></li>
         </ul>
       </td>
     </tr>
