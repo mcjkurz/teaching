@@ -105,7 +105,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           </ul>
         </div>
         <div class="schedule-section reading">
-          <strong class="schedule-label">Required reading</strong>
+          <strong class="schedule-label">Readings</strong>
           <ul class="readings">
             <li>Mats Fridlund, “A Middle Way between Normal and Paradigmatic Digital Historical Research,” in <em>Digital Histories: Emergent Approaches within the New Digital History</em> (2020)</li>
           </ul>
@@ -127,7 +127,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           </ul>
         </div>
         <div class="schedule-section reading">
-          <strong class="schedule-label">Required readings</strong>
+          <strong class="schedule-label">Readings</strong>
           <ul class="readings">
             <li>Billy Perrigo, “OpenAI Used Kenyan Workers on Less Than $2 Per Hour to Make ChatGPT Less Toxic,” <em>TIME</em>, 18 January 2023</li>
             <li>Johan Jarlbrink, “All the Work that Makes It Work: Digital Methods and Manual Labour,” in <em>Digital Histories: Emergent Approaches within the New Digital History</em> (2020)</li>
@@ -152,20 +152,14 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
         <div class="schedule-section">
           <strong class="schedule-label">Class content</strong>
           <ul class="readings">
-            <li>Research questions, selection and sampling; regex; tokenization; cleaning; stopwords; transformation logs</li>
+            <li>Research questions, selection and sampling; regex (<a href="https://regexone.com/">RegexOne</a>); tokenization; cleaning; stopwords; transformation logs</li>
             <li>Brief demonstration: the <a href="https://ctext.org/">Chinese Text Project</a> as a digital source and corpus platform</li>
           </ul>
         </div>
         <div class="schedule-section reading">
-          <strong class="schedule-label">Required reading</strong>
+          <strong class="schedule-label">Readings</strong>
           <ul class="readings">
             <li>Jo Guldi, <em>The Dangerous Art of Text Mining: A Methodology for Digital History</em>, Introduction and Chapter 1</li>
-          </ul>
-        </div>
-        <div class="schedule-section">
-          <strong class="schedule-label">Preparation</strong>
-          <ul class="readings">
-            <li><a href="https://regexone.com/">RegexOne</a>, Lessons 1–8</li>
           </ul>
         </div>
       </td>
@@ -188,7 +182,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           </ul>
         </div>
         <div class="schedule-section reading">
-          <strong class="schedule-label">Required reading</strong>
+          <strong class="schedule-label">Readings</strong>
           <ul class="readings">
             <li>Stefan Evert, “Corpora and Collocations”</li>
           </ul>
@@ -211,7 +205,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           </ul>
         </div>
         <div class="schedule-section reading">
-          <strong class="schedule-label">Required reading</strong>
+          <strong class="schedule-label">Readings</strong>
           <ul class="readings">
             <li>Scott B. Weingart, “Demystifying Networks, Parts I &amp; II”</li>
           </ul>
@@ -244,15 +238,10 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           </ul>
         </div>
         <div class="schedule-section reading">
-          <strong class="schedule-label">Required reading</strong>
+          <strong class="schedule-label">Readings</strong>
           <ul class="readings">
             <li>Laura Turner O’Hara, <a href="https://programminghistorian.org/en/lessons/cleaning-ocrd-text-with-regular-expressions">“Cleaning OCR’d Text with Regular Expressions”</a> (selected sections)</li>
-          </ul>
-        </div>
-        <div class="schedule-section">
-          <strong class="schedule-label">Optional reading</strong>
-          <ul class="readings">
-            <li>Maria Levchenko, <a href="https://arxiv.org/abs/2510.06743">“Evaluating LLMs for Historical Document OCR: A Methodological Framework for Digital Humanities”</a> (2025), Introduction and Conclusion</li>
+            <li>(optional) Maria Levchenko, <a href="https://arxiv.org/abs/2510.06743">“Evaluating LLMs for Historical Document OCR: A Methodological Framework for Digital Humanities”</a> (2025), Introduction and Conclusion</li>
           </ul>
         </div>
       </td>
@@ -279,9 +268,9 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           </ul>
         </div>
         <div class="schedule-section reading">
-          <strong class="schedule-label">Optional reading</strong>
+          <strong class="schedule-label">Readings</strong>
           <ul class="readings">
-            <li>David M. Blei, “Probabilistic Topic Models” (2012)</li>
+            <li>(optional) David M. Blei, “Probabilistic Topic Models” (2012)</li>
           </ul>
         </div>
       </td>
@@ -308,15 +297,10 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           </ul>
         </div>
         <div class="schedule-section reading">
-          <strong class="schedule-label">Required reading</strong>
+          <strong class="schedule-label">Readings</strong>
           <ul class="readings">
             <li>Freeman Tilden, <em>Interpreting Our Heritage</em>, Introduction and selected chapter on interpretation</li>
-          </ul>
-        </div>
-        <div class="schedule-section">
-          <strong class="schedule-label">Optional reading</strong>
-          <ul class="readings">
-            <li>Hilde De Weerdt et al., <a href="https://dhq.digitalhumanities.org/vol/19/4/000808/000808.html">“Contextual Semantic Text and Image Annotation in the MARKUS Environment”</a>, <em>Digital Humanities Quarterly</em> 19, no. 4 (2025), selected sections</li>
+            <li>(optional) Hilde De Weerdt et al., <a href="https://dhq.digitalhumanities.org/vol/19/4/000808/000808.html">“Contextual Semantic Text and Image Annotation in the MARKUS Environment”</a>, <em>Digital Humanities Quarterly</em> 19, no. 4 (2025), selected sections</li>
           </ul>
         </div>
         <div class="schedule-section">
@@ -349,9 +333,9 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           </ul>
         </div>
         <div class="schedule-section reading">
-          <strong class="schedule-label">Optional reading</strong>
+          <strong class="schedule-label">Readings</strong>
           <ul class="readings">
-            <li>Daniel Jurafsky and James H. Martin, “Vector Semantics and Embeddings”</li>
+            <li>(optional) Daniel Jurafsky and James H. Martin, “Vector Semantics and Embeddings”</li>
           </ul>
         </div>
       </td>
@@ -376,7 +360,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           </ul>
         </div>
         <div class="schedule-section reading">
-          <strong class="schedule-label">Required reading</strong>
+          <strong class="schedule-label">Readings</strong>
           <ul class="readings">
             <li>Agustín Cosovschi, <a href="https://programminghistorian.org/en/lessons/designing-database-nodegoat">“From Sources to Data: Designing a Database for the Humanities and Social Sciences with nodegoat”</a> (selected sections)</li>
           </ul>
@@ -406,16 +390,11 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           </ul>
         </div>
         <div class="schedule-section reading">
-          <strong class="schedule-label">Required readings</strong>
+          <strong class="schedule-label">Readings</strong>
           <ul class="readings">
             <li>Ted Underwood, Laura K. Nelson, and Matthew Wilkens, “Can Language Models Represent the Past without Anachronism?”</li>
             <li>Thierry Poibeau, “What Do Historical Language Models Model?”</li>
-          </ul>
-        </div>
-        <div class="schedule-section">
-          <strong class="schedule-label">Optional reading</strong>
-          <ul class="readings">
-            <li>Maximilian Hindermann et al., <a href="https://openhumanitiesdata.metajnl.com/articles/10.5334/johd.481">“The RISE Humanities Data Benchmark: A Framework for Evaluating Large Language Models for Humanities Tasks”</a> (2026), Introduction</li>
+            <li>(optional) Maximilian Hindermann et al., <a href="https://openhumanitiesdata.metajnl.com/articles/10.5334/johd.481">“The RISE Humanities Data Benchmark: A Framework for Evaluating Large Language Models for Humanities Tasks”</a> (2026), Introduction</li>
           </ul>
         </div>
       </td>
@@ -439,7 +418,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           </ul>
         </div>
         <div class="schedule-section reading">
-          <strong class="schedule-label">Required readings</strong>
+          <strong class="schedule-label">Readings</strong>
           <ul class="readings">
             <li>Carl T. Bergstrom and Jevin D. West, <em>Calling Bullshit: The Art of Skepticism in a Data-Driven World</em>, Chapters 4 (“Causality”) and 5 (“Numbers and Nonsense”)</li>
             <li>Toby Burrows, <a href="https://doi.org/10.1007/s42803-023-00068-9">“Reproducibility, Verifiability, and Computational Historical Research”</a> (2023), selected sections</li>
