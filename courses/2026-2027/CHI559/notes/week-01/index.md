@@ -53,6 +53,26 @@ for the first 80 chapters and for the last 40 chapters.</pre>
 </div>
 
 <p>完成後，在左側點開產生的 HTML 檔。若一切順利，你應看到類似下面的結果：可旋轉的三維投影，以及前八十回與後四十回的正負特徵詞。也可以直接打開這個<a href="hongloumeng_3d.html">互動示例</a>。</p>
+
+<h2>4. 儲存到 GitHub</h2>
+<p>請把結果存回你的倉庫，否則關閉 Codespace 後可能丟失。兩步即可：</p>
+<ol>
+<li><strong>提交（commit）：</strong>點左側的 Source Control（分支圖示），寫一句說明（例如「第1週練習」），再按 <strong>Commit</strong>。或在終端機執行：</li>
+</ol>
+
+```
+git add -A
+git commit -m "第1週練習"
+```
+
+<ol start="2">
+<li><strong>推送（push）：</strong>同一側欄再按 <strong>Sync Changes</strong> 或 <strong>Push</strong>。或在終端機執行：</li>
+</ol>
+
+```
+git push
+```
+
 <figure class="example">
 <img src="expected-result.png" alt="《紅樓夢》三維 PCA 與正負特徵詞的預期結果">
 <figcaption>預期結果示例</figcaption>
