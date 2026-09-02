@@ -52,7 +52,7 @@ The page should also show the top 20 positive features and the top 20 negative f
 for the first 80 chapters and for the last 40 chapters.</pre>
 </div>
 
-<p>完成後，在左側點開產生的 HTML 檔。若一切順利，你應看到類似下面的結果：可旋轉的三維投影，以及前八十回與後四十回的正負特徵詞。也可以直接打開這個<a href="hongloumeng_3d.html">互動示例</a>。</p>
+<p>完成後，Codespace 裡多半打不開這個 HTML。在左側檔案上按右鍵，選 <strong>Download</strong>，下載到自己的電腦，再用瀏覽器打開。若一切順利，你應看到類似下面的結果：可旋轉的三維投影，以及前八十回與後四十回的正負特徵詞。也可以直接打開這個<a href="hongloumeng_3d.html">互動示例</a>。</p>
 
 <h2>4. 儲存到 GitHub</h2>
 <p>請把結果存回你的倉庫，否則關閉 Codespace 後可能丟失。兩步即可：</p>
