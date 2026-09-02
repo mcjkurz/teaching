@@ -4,6 +4,7 @@ title: CHI559 第1週講義
 ---
 
 <p class="updated">最後更新：2026年9月2日</p>
+<p><a href="../../">CHI 559 課程大綱</a></p>
 <h1>第1週　導論</h1>
 
 <h2>1. 建立倉庫並啟動 Codespace</h2>
