@@ -30,23 +30,18 @@ title: CHI559 第1週講義
 <p>將下列提示完整複製，貼進 OpenCode：</p>
 <div class="prompt">
 <p class="prompt-label">提示 1</p>
-<pre>There is a .txt file of the 红楼梦 novel in this folder.
+<pre>The 红楼梦 novel is already in this folder as a .txt file.
 jieba, qhchina, numpy, matplotlib, and scikit-learn are already installed; do not create a virtual environment or reinstall packages.
 
-Load that file and separate it into 120 chapters.
-Each chapter starts with 第 and the chapter number in Chinese numerals, for example:
-
-第一回  甄士隐梦幻识通灵　贾雨村风尘怀闺秀
-第八十五回  贾存周报升郎中任　薛文起复惹放流刑
-第一一八回  记微嫌舅兄欺弱女　惊谜语妻妾谏痴人
-
-Write the chapters as separate .txt files (you may create a folder for them).
-Tokenize each chapter with jieba and find the 300 most common words in the entire novel.
-Then use a stylometric approach: calculate a z-score for each of those word frequencies in each chapter, and project the chapter vectors into 3D space with PCA.
-Color chapters 1–80 red and chapters 81–120 blue.
-For Chinese fonts, import qhchina and call load_fonts() from it.
-Save a .png at the end.
-The script must be restartable, so write a .py file as well.</pre>
+In the root folder, create a Python script (.py) that:
+- loads that file and splits it into 120 chapters (each chapter starts with 第 and a Chinese numeral, e.g. 第一回, 第八十五回, 第一一八回)
+- tokenizes each chapter with jieba
+- finds the 300 most common words in the novel
+- calculates a z-score for each of those word frequencies in each chapter
+- projects the chapter vectors into 3D with PCA
+- colors chapters 1–80 red and 81–120 blue
+- imports qhchina and calls load_fonts()
+- saves a .png</pre>
 </div>
 
 <p>完成後，檢查結果：在左側檔案列表中點開 <code>.png</code> 檔。</p>
