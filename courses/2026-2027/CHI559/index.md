@@ -3,7 +3,7 @@ layout: default
 title: CHI559
 ---
 
-<p class="updated">最後更新：2026年8月30日</p>
+<p class="updated">最後更新：2026年9月2日</p>
 <div class="course-header">
 <div class="course-header-info">
 <h1>CHI 559 課程大綱</h1>
@@ -83,13 +83,14 @@ title: CHI559
 <h2>課程進度</h2>
 
 <div class="table-scroll">
-<table class="schedule no-event">
+<table class="schedule no-event with-notes">
   <thead>
     <tr>
       <th>週次</th>
       <th>日期</th>
       <th>課題</th>
       <th>閱讀</th>
+      <th>講義</th>
     </tr>
   </thead>
   <tbody class="block-a">
@@ -102,6 +103,7 @@ title: CHI559
           <li>數字人文：核心概念；智能體編程；Git、GitHub、OpenCode 與 VS Code</li>
         </ul>
       </td>
+      <td class="notes"><a href="notes/week-01/">講義</a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -116,20 +118,21 @@ title: CHI559
           <li>Stephen Ramsay, “Algorithmic Criticism”</li>
         </ul>
       </td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="makeup">
     <tr>
       <td></td>
       <td class="date">9月16日</td>
-      <td colspan="2">停課；補課於 10月3日（星期六）</td>
+      <td colspan="3">停課；補課於 10月3日（星期六）</td>
     </tr>
   </tbody>
   <tbody class="due">
     <tr>
       <td></td>
       <td class="date">9月22日</td>
-      <td colspan="2"><a href="#">作業0（不計分）截止，上午9:00</a></td>
+      <td colspan="3"><a href="#">作業0（不計分）截止，上午9:00</a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -143,10 +146,12 @@ title: CHI559
           <li>Stefan Evert, “Corpora and Collocations”</li>
         </ul>
       </td>
+      <td class="notes"></td>
     </tr>
     <tr class="presentation">
       <td class="topic">課堂報告</td>
       <td>Edward Slingerland, “Part II. Quantitative Approaches to Concepts of Mind and Body,” in <em>Mind and Body in Early China</em></td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -160,6 +165,7 @@ title: CHI559
           <li>Alex Woloch, <em>The One vs. the Many</em>, pp. 12–42</li>
         </ul>
       </td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -173,17 +179,19 @@ title: CHI559
           <li>Z 分數與基於距離的文體比較</li>
         </ul>
       </td>
+      <td class="notes"></td>
     </tr>
     <tr class="presentation">
       <td class="topic">課堂報告</td>
       <td>Paul Vierthaler, “Fiction and History: Polarity and Stylistic Gradience in Late Imperial Chinese Literature,” <em>Journal of Cultural Analytics</em> 1, no. 1 (2016)</td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="due">
     <tr>
       <td></td>
       <td class="date">10月6日</td>
-      <td colspan="2"><a href="#">作業1截止，上午9:00</a></td>
+      <td colspan="3"><a href="#">作業1截止，上午9:00</a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -198,6 +206,7 @@ title: CHI559
           <li>弗朗哥·莫萊蒂：〈世界文學猜想〉，節選自《世界文學理論讀本》；Franco Moretti, “Conjectures on World Literature,” in <em>Distant Reading</em></li>
         </ul>
       </td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -212,10 +221,12 @@ title: CHI559
           <li>(optional) David M. Blei, “Probabilistic Topic Models”</li>
         </ul>
       </td>
+      <td class="notes"></td>
     </tr>
     <tr class="presentation">
       <td class="topic">課堂報告</td>
       <td>皮特·布勞德韋爾、陳威、大衛·謝帕德著，曹瀛月譯：〈《全唐詩》：文學史、主題模型、散度度量〉，《數位人文》2023年第1期；Peter Broadwell, Jack W. Chen, and David Shepard, “Reading the Quan Tang shi: Literary History, Topic Modeling, Divergence Measures,” <em>Digital Humanities Quarterly</em> 13, no. 4 (2019)</td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -230,13 +241,14 @@ title: CHI559
           <li>TF-IDF</li>
         </ul>
       </td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="due">
     <tr>
       <td></td>
       <td class="date">10月27日</td>
-      <td colspan="2"><a href="#">作業2截止，上午9:00</a></td>
+      <td colspan="3"><a href="#">作業2截止，上午9:00</a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -252,10 +264,12 @@ title: CHI559
           <li>(optional) Daniel Jurafsky and James H. Martin, “Vector Semantics and Embeddings”</li>
         </ul>
       </td>
+      <td class="notes"></td>
     </tr>
     <tr class="presentation">
       <td class="topic">課堂報告</td>
       <td>Mariana Zorkina, “Describing Objects in Tang Dynasty Poetic Language: A Study Based on Word Embeddings,” <em>Journal of Chinese Literature and Culture</em> 5, no. 2 (2018): 250–275</td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -271,6 +285,7 @@ title: CHI559
           <li>Katherine Elkins, <em>The Shapes of Stories: Sentiment Analysis for Narrative</em> (optional)</li>
         </ul>
       </td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -284,17 +299,19 @@ title: CHI559
           <li>以大型語言模型抽取資料；Python API（OpenRouter）</li>
         </ul>
       </td>
+      <td class="notes"></td>
     </tr>
     <tr class="presentation">
       <td class="topic">課堂報告</td>
       <td>孔存良、孫茂松：〈大模型與人文研究〉，第二章，李飛躍、桑海（主編）《數字人文引論》。北京：中華書局，2026年</td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="due">
     <tr>
       <td></td>
       <td class="date">11月17日</td>
-      <td colspan="2"><a href="#">期末專題計劃書截止，上午9:00</a></td>
+      <td colspan="3"><a href="#">期末專題計劃書截止，上午9:00</a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -307,6 +324,7 @@ title: CHI559
           <li>Stephen Best and Sharon Marcus, “Surface Reading: An Introduction”</li>
         </ul>
       </td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -320,13 +338,14 @@ title: CHI559
           <li>Nan Z. Da, “The Computational Case against Computational Literary Studies”</li>
         </ul>
       </td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="due">
     <tr>
       <td></td>
       <td class="date">12月7日</td>
-      <td colspan="2">期末專題截止，上午9:00</td>
+      <td colspan="3">期末專題截止，上午9:00</td>
     </tr>
   </tbody>
 </table>
