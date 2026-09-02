@@ -6,8 +6,6 @@ title: CHI559 第1週講義
 <p class="updated">最後更新：2026年9月2日</p>
 <h1>第1週　導論</h1>
 
-<p>本週在 GitHub Codespaces 中搭建研究環境，並用 OpenCode 完成一次可重跑的《紅樓夢》文體計量練習。模板已透過 <code>requirements.txt</code> 與 <code>setup.sh</code> 裝好 jieba、qhchina、numpy、matplotlib、scikit-learn 等套件，無須再建虛擬環境或重裝。</p>
-
 <h2>1. 建立倉庫並啟動 Codespace</h2>
 <ol>
 <li>註冊 <a href="https://github.com/">GitHub</a> 帳號。</li>
