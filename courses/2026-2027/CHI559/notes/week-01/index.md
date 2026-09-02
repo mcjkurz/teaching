@@ -15,19 +15,15 @@ title: CHI559 第1週講義
 <li>進入你剛建立的倉庫，按 <strong>Code → Codespaces → Create codespace</strong>。首次啟動需數分鐘，以完成套件安裝。</li>
 </ol>
 
-<h2>2. 設置 API 金鑰</h2>
-<p>教師會發給你一把 OpenRouter API 金鑰。倉庫裡只有 <code>.env.example</code>，沒有現成的 <code>.env</code>。<code>.env</code> 用來存放金鑰，已列入 <code>.gitignore</code>，不會上傳到 GitHub。</p>
+<h2>2. 連接 OpenCode</h2>
+<p>教師會發給你一把 OpenRouter API 金鑰。不要把金鑰寫進倉庫，也不要與他人分享。</p>
 <ol>
-<li>在 Codespace 終端機執行：</li>
-</ol>
-
-```
-cp .env.example .env
-```
-
-<ol start="2">
-<li>打開 <code>.env</code>，把金鑰填在等號後面，例如 <code>OPENCODE_API_KEY=你的金鑰</code>。不要把 <code>.env</code> 提交到倉庫，也不要與他人分享金鑰。</li>
-<li>在終端機輸入 <code>opencode</code> 啟動。選擇 OpenRouter，必要時再貼上同一把金鑰。模型請選 <strong>GLM-5.3-Flash</strong>。</li>
+<li>在 Codespace 終端機輸入 <code>opencode</code> 並按 Enter。</li>
+<li>輸入 <code>/connect</code> 並按 Enter。</li>
+<li>搜尋並選擇 <strong>OpenRouter</strong>。</li>
+<li>按提示貼上 API 金鑰。</li>
+<li>輸入 <code>/models</code> 並按 Enter。</li>
+<li>選擇 <strong>GLM-5.3-Flash</strong>。</li>
 </ol>
 
 <h2>3. 課堂練習</h2>
