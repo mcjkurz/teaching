@@ -65,7 +65,7 @@ for the first 80 chapters and for the last 40 chapters.</pre>
 <p>三種做法任選其一：</p>
 <ol>
 <li><strong>左側按鈕：</strong>點左側的 Source Control（分支圖示）。先在訊息框寫一句說明（例如 <code>first commit</code>），再按 <strong>Commit</strong>。然後按 <strong>Push</strong> 或 <strong>Sync Changes</strong>。</li>
-<li><strong>終端機：</strong>在 Codespace 終端機執行：
+<li><strong>終端機：</strong>若仍在 OpenCode 中，先輸入 <code>/exit</code> 離開，再在 Codespace 終端機執行：
 <pre>git add -A
 git commit -m "first commit"
 git push</pre>
