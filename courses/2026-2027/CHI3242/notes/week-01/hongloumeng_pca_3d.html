@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>红楼梦 120 回 3D PCA 投影</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+  body { font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif; margin: 0; background: #fafafa; color: #212121; }
+  header { padding: 16px 24px 8px; }
+  h1 { font-size: 22px; margin: 0; }
+  header p { margin: 6px 0 0; color: #616161; font-size: 13px; }
+  #scatter { width: 100%; height: 70vh; }
+  section { padding: 8px 24px 32px; }
+  h2 { font-size: 18px; margin: 24px 0 12px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+  table { width: 100%; border-collapse: collapse; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.15); font-size: 14px; }
+  th, td { padding: 6px 10px; border-bottom: 1px solid #eee; text-align: left; }
+  thead th[colspan] { font-size: 15px; background: #f5f5f5; }
+  td.rank { color: #9e9e9e; width: 2em; }
+  td.word { font-weight: 600; }
+  td.score { text-align: right; font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+<header>
+  <h1>红楼梦 120 回 3D PCA 投影</h1>
+  <p>基于 300 个最常用词的章节词频 z 分数；第 1–80 回红色，第 81–120 回蓝色。拖动旋转，滚轮缩放，模式栏可切换平移/环绕。</p>
+</header>
+<div id="scatter"></div>
+<section>
+  <h2>Top 特征（组内均值 z 分数）</h2>
+  <div class="grid">
+<table><thead><tr><th colspan='3' style='color:#c62828'>第一回–第八十回 · 正特征 (组内均值 z 最高)</th></tr><tr><th>#</th><th>词</th><th>均值 z</th></tr></thead><tbody><tr><td class='rank'>1</td><td class='word'>忙</td><td class='score'>+0.44</td></tr>
+<tr><td class='rank'>2</td><td class='word'>笑</td><td class='score'>+0.38</td></tr>
+<tr><td class='rank'>3</td><td class='word'>至</td><td class='score'>+0.37</td></tr>
+<tr><td class='rank'>4</td><td class='word'>岂</td><td class='score'>+0.36</td></tr>
+<tr><td class='rank'>5</td><td class='word'>再</td><td class='score'>+0.35</td></tr>
+<tr><td class='rank'>6</td><td class='word'>丫鬟</td><td class='score'>+0.33</td></tr>
+<tr><td class='rank'>7</td><td class='word'>与</td><td class='score'>+0.33</td></tr>
+<tr><td class='rank'>8</td><td class='word'>如此</td><td class='score'>+0.32</td></tr>
+<tr><td class='rank'>9</td><td class='word'>皆</td><td class='score'>+0.32</td></tr>
+<tr><td class='rank'>10</td><td class='word'>听说</td><td class='score'>+0.31</td></tr>
+<tr><td class='rank'>11</td><td class='word'>不过</td><td class='score'>+0.30</td></tr>
+<tr><td class='rank'>12</td><td class='word'>这</td><td class='score'>+0.30</td></tr>
+<tr><td class='rank'>13</td><td class='word'>罢了</td><td class='score'>+0.30</td></tr>
+<tr><td class='rank'>14</td><td class='word'>二人</td><td class='score'>+0.30</td></tr>
+<tr><td class='rank'>15</td><td class='word'>如何</td><td class='score'>+0.29</td></tr>
+<tr><td class='rank'>16</td><td class='word'>连</td><td class='score'>+0.29</td></tr>
+<tr><td class='rank'>17</td><td class='word'>可</td><td class='score'>+0.29</td></tr>
+<tr><td class='rank'>18</td><td class='word'>一面</td><td class='score'>+0.27</td></tr>
+<tr><td class='rank'>19</td><td class='word'>亦</td><td class='score'>+0.27</td></tr>
+<tr><td class='rank'>20</td><td class='word'>不成</td><td class='score'>+0.27</td></tr></tbody></table>
+<table><thead><tr><th colspan='3' style='color:#c62828'>第一回–第八十回 · 负特征 (组内均值 z 最低)</th></tr><tr><th>#</th><th>词</th><th>均值 z</th></tr></thead><tbody><tr><td class='rank'>1</td><td class='word'>么</td><td class='score'>-0.55</td></tr>
+<tr><td class='rank'>2</td><td class='word'>没有</td><td class='score'>-0.48</td></tr>
+<tr><td class='rank'>3</td><td class='word'>到</td><td class='score'>-0.45</td></tr>
+<tr><td class='rank'>4</td><td class='word'>听见</td><td class='score'>-0.43</td></tr>
+<tr><td class='rank'>5</td><td class='word'>心里</td><td class='score'>-0.37</td></tr>
+<tr><td class='rank'>6</td><td class='word'>叫</td><td class='score'>-0.36</td></tr>
+<tr><td class='rank'>7</td><td class='word'>过来</td><td class='score'>-0.36</td></tr>
+<tr><td class='rank'>8</td><td class='word'>的话</td><td class='score'>-0.35</td></tr>
+<tr><td class='rank'>9</td><td class='word'>里头</td><td class='score'>-0.34</td></tr>
+<tr><td class='rank'>10</td><td class='word'>老爷</td><td class='score'>-0.33</td></tr>
+<tr><td class='rank'>11</td><td class='word'>外头</td><td class='score'>-0.30</td></tr>
+<tr><td class='rank'>12</td><td class='word'>哭</td><td class='score'>-0.29</td></tr>
+<tr><td class='rank'>13</td><td class='word'>瞧</td><td class='score'>-0.28</td></tr>
+<tr><td class='rank'>14</td><td class='word'>明白</td><td class='score'>-0.28</td></tr>
+<tr><td class='rank'>15</td><td class='word'>贾政</td><td class='score'>-0.28</td></tr>
+<tr><td class='rank'>16</td><td class='word'>问道</td><td class='score'>-0.27</td></tr>
+<tr><td class='rank'>17</td><td class='word'>回来</td><td class='score'>-0.26</td></tr>
+<tr><td class='rank'>18</td><td class='word'>那里</td><td class='score'>-0.26</td></tr>
+<tr><td class='rank'>19</td><td class='word'>到底</td><td class='score'>-0.25</td></tr>
+<tr><td class='rank'>20</td><td class='word'>那些</td><td class='score'>-0.25</td></tr></tbody></table>
+<table><thead><tr><th colspan='3' style='color:#1565c0'>第八十一回–第一百二十回 · 正特征 (组内均值 z 最高)</th></tr><tr><th>#</th><th>词</th><th>均值 z</th></tr></thead><tbody><tr><td class='rank'>1</td><td class='word'>么</td><td class='score'>+1.11</td></tr>
+<tr><td class='rank'>2</td><td class='word'>没有</td><td class='score'>+0.96</td></tr>
+<tr><td class='rank'>3</td><td class='word'>到</td><td class='score'>+0.90</td></tr>
+<tr><td class='rank'>4</td><td class='word'>听见</td><td class='score'>+0.86</td></tr>
+<tr><td class='rank'>5</td><td class='word'>心里</td><td class='score'>+0.74</td></tr>
+<tr><td class='rank'>6</td><td class='word'>叫</td><td class='score'>+0.72</td></tr>
+<tr><td class='rank'>7</td><td class='word'>过来</td><td class='score'>+0.72</td></tr>
+<tr><td class='rank'>8</td><td class='word'>的话</td><td class='score'>+0.71</td></tr>
+<tr><td class='rank'>9</td><td class='word'>里头</td><td class='score'>+0.69</td></tr>
+<tr><td class='rank'>10</td><td class='word'>老爷</td><td class='score'>+0.66</td></tr>
+<tr><td class='rank'>11</td><td class='word'>外头</td><td class='score'>+0.59</td></tr>
+<tr><td class='rank'>12</td><td class='word'>哭</td><td class='score'>+0.58</td></tr>
+<tr><td class='rank'>13</td><td class='word'>瞧</td><td class='score'>+0.57</td></tr>
+<tr><td class='rank'>14</td><td class='word'>明白</td><td class='score'>+0.56</td></tr>
+<tr><td class='rank'>15</td><td class='word'>贾政</td><td class='score'>+0.55</td></tr>
+<tr><td class='rank'>16</td><td class='word'>问道</td><td class='score'>+0.55</td></tr>
+<tr><td class='rank'>17</td><td class='word'>回来</td><td class='score'>+0.53</td></tr>
+<tr><td class='rank'>18</td><td class='word'>那里</td><td class='score'>+0.52</td></tr>
+<tr><td class='rank'>19</td><td class='word'>到底</td><td class='score'>+0.50</td></tr>
+<tr><td class='rank'>20</td><td class='word'>那些</td><td class='score'>+0.50</td></tr></tbody></table>
+<table><thead><tr><th colspan='3' style='color:#1565c0'>第八十一回–第一百二十回 · 负特征 (组内均值 z 最低)</th></tr><tr><th>#</th><th>词</th><th>均值 z</th></tr></thead><tbody><tr><td class='rank'>1</td><td class='word'>忙</td><td class='score'>-0.88</td></tr>
+<tr><td class='rank'>2</td><td class='word'>笑</td><td class='score'>-0.76</td></tr>
+<tr><td class='rank'>3</td><td class='word'>至</td><td class='score'>-0.73</td></tr>
+<tr><td class='rank'>4</td><td class='word'>岂</td><td class='score'>-0.71</td></tr>
+<tr><td class='rank'>5</td><td class='word'>再</td><td class='score'>-0.70</td></tr>
+<tr><td class='rank'>6</td><td class='word'>丫鬟</td><td class='score'>-0.65</td></tr>
+<tr><td class='rank'>7</td><td class='word'>与</td><td class='score'>-0.65</td></tr>
+<tr><td class='rank'>8</td><td class='word'>如此</td><td class='score'>-0.64</td></tr>
+<tr><td class='rank'>9</td><td class='word'>皆</td><td class='score'>-0.63</td></tr>
+<tr><td class='rank'>10</td><td class='word'>听说</td><td class='score'>-0.62</td></tr>
+<tr><td class='rank'>11</td><td class='word'>不过</td><td class='score'>-0.61</td></tr>
+<tr><td class='rank'>12</td><td class='word'>这</td><td class='score'>-0.59</td></tr>
+<tr><td class='rank'>13</td><td class='word'>罢了</td><td class='score'>-0.59</td></tr>
+<tr><td class='rank'>14</td><td class='word'>二人</td><td class='score'>-0.59</td></tr>
+<tr><td class='rank'>15</td><td class='word'>如何</td><td class='score'>-0.58</td></tr>
+<tr><td class='rank'>16</td><td class='word'>连</td><td class='score'>-0.58</td></tr>
+<tr><td class='rank'>17</td><td class='word'>可</td><td class='score'>-0.58</td></tr>
+<tr><td class='rank'>18</td><td class='word'>一面</td><td class='score'>-0.55</td></tr>
+<tr><td class='rank'>19</td><td class='word'>亦</td><td class='score'>-0.55</td></tr>
+<tr><td class='rank'>20</td><td class='word'>不成</td><td class='score'>-0.55</td></tr></tbody></table>
+  </div>
+</section>
+<script>
+const data = {"first80": [{"chapter": 1, "title": "第一回　甄士隐梦幻识通灵　贾雨村风尘怀闺秀", "x": -10.67, "y": -7.039, "z": 4.597}, {"chapter": 2, "title": "第二回　贾夫人仙逝扬州城　冷子兴演说荣国府", "x": -11.488, "y": -4.686, "z": 2.817}, {"chapter": 3, "title": "第三回　贾雨村夤缘复旧职　林黛玉抛父进京都", "x": -3.825, "y": -8.273, "z": 0.724}, {"chapter": 4, "title": "第四回　薄命女偏逢薄命郎　葫芦僧乱判葫芦案", "x": -11.36, "y": -5.527, "z": 3.438}, {"chapter": 5, "title": "第五回　游幻境指迷十二钗　饮仙醪曲演红楼梦", "x": -12.753, "y": -6.103, "z": 1.78}, {"chapter": 6, "title": "第六回　贾宝玉初试云雨情　刘姥姥一进荣国府", "x": 0.628, "y": -3.016, "z": -1.178}, {"chapter": 7, "title": "第七回　送宫花贾琏戏熙凤　宴宁府宝玉会秦钟", "x": 1.684, "y": -2.915, "z": -2.196}, {"chapter": 8, "title": "第八回　比通灵金莺微露意　探宝钗黛玉半含酸", "x": -2.504, "y": -3.68, "z": -4.894}, {"chapter": 9, "title": "第九回　恋风流情友入家塾　起嫌疑顽童闹学堂", "x": -7.421, "y": -1.571, "z": -0.39}, {"chapter": 10, "title": "第十回　金寡妇贪利权受辱　张太医论病细穷源", "x": -6.47, "y": 2.136, "z": 0.046}, {"chapter": 11, "title": "第十一回　庆寿辰宁府排家宴　见熙凤贾瑞起淫心", "x": -3.361, "y": 2.371, "z": -1.808}, {"chapter": 12, "title": "第十二回　王熙凤毒设相思局　贾天祥正照风月鉴", "x": -11.224, "y": 0.258, "z": -2.446}, {"chapter": 13, "title": "第十三回　秦可卿死封龙禁尉　王熙凤协理宁国府", "x": -10.966, "y": -1.926, "z": -0.097}, {"chapter": 14, "title": "第十四回　林如海捐馆扬州城　贾宝玉路谒北静王", "x": -10.762, "y": -1.266, "z": -0.894}, {"chapter": 15, "title": "第十五回　王凤姐弄权铁槛寺　秦鲸卿得趣馒头庵", "x": -9.801, "y": -1.268, "z": -1.933}, {"chapter": 16, "title": "第十六回　贾元春才选凤藻宫　秦鲸卿夭逝黄泉路", "x": -2.898, "y": -3.328, "z": 1.975}, {"chapter": 17, "title": "第十七回　大观园试才题对额　荣国府归省庆元宵", "x": -8.399, "y": -7.397, "z": 2.545}, {"chapter": 18, "title": "第十八回　大观园试才题对额　荣国府归省庆元宵", "x": -8.749, "y": -8.543, "z": 3.033}, {"chapter": 19, "title": "第十九回　情切切良宵花解语　意绵绵静日玉生香", "x": 7.619, "y": -5.275, "z": -1.18}, {"chapter": 20, "title": "第二十回　王熙凤正言弹妒意　林黛玉俏语谑娇音", "x": -2.478, "y": 1.545, "z": -5.514}, {"chapter": 21, "title": "第二十一回　贤袭人娇嗔箴宝玉　俏平儿软语救贾琏", "x": -3.343, "y": -0.751, "z": -4.756}, {"chapter": 22, "title": "第二十二回　听曲文宝玉悟禅机　制灯迷贾政悲谶语", "x": -3.632, "y": -4.605, "z": -1.348}, {"chapter": 23, "title": "第二十三回　西厢记妙词通戏语　牡丹亭艳曲警芳心", "x": -8.772, "y": -0.81, "z": -3.198}, {"chapter": 24, "title": "第二十四回　醉金刚轻财尚义侠　痴女儿遗帕惹相思", "x": 7.648, "y": -0.918, "z": -6.129}, {"chapter": 25, "title": "第二十五回　魇魔法姊弟逢五鬼　红楼梦通灵遇双真", "x": 2.803, "y": -1.398, "z": -4.006}, {"chapter": 26, "title": "第二十六回　蜂腰桥设言传心事　潇湘馆春困发幽情", "x": 2.236, "y": 1.177, "z": -8.343}, {"chapter": 27, "title": "第二十七回　滴翠亭杨妃戏彩蝶　埋香冢飞燕泣残红", "x": 0.232, "y": 0.59, "z": -6.175}, {"chapter": 28, "title": "第二十八回　蒋玉菡情赠茜香罗　薛宝钗羞笼红麝串", "x": 9.499, "y": -0.399, "z": -7.73}, {"chapter": 29, "title": "第二十九回　享福人福深还祷福　痴情女情重愈斟情", "x": 5.482, "y": -1.516, "z": -3.916}, {"chapter": 30, "title": "第三十回　宝钗借扇机带双敲　龄官划蔷痴及局外", "x": -3.727, "y": 1.745, "z": -5.186}, {"chapter": 31, "title": "第三十一回　撕扇子作千金一笑　因麒麟伏白首双星", "x": 5.276, "y": 1.319, "z": -6.285}, {"chapter": 32, "title": "第三十二回　诉肺腑心迷活宝玉　含耻辱情烈死金钏", "x": -1.071, "y": 2.647, "z": -4.178}, {"chapter": 33, "title": "第三十三回　手足耽耽小动唇舌　不肖种种大承笞挞", "x": -8.534, "y": 1.506, "z": -2.201}, {"chapter": 34, "title": "第三十四回　情中情因情感妹妹　错里错以错劝哥哥", "x": 3.144, "y": 0.787, "z": -2.615}, {"chapter": 35, "title": "第三十五回　白玉钏亲尝莲叶羹　黄金莺巧结梅花络", "x": 5.359, "y": -0.47, "z": -7.614}, {"chapter": 36, "title": "第三十六回　绣鸳鸯梦兆绛芸轩　识分定情悟梨香院", "x": 0.686, "y": 0.192, "z": -1.937}, {"chapter": 37, "title": "第三十七回　秋爽斋偶结海棠社　蘅芜苑夜拟菊花题", "x": 7.454, "y": -7.634, "z": 0.128}, {"chapter": 38, "title": "第三十八回　林潇湘魁夺菊花诗　薛蘅芜讽和螃蟹咏", "x": -8.128, "y": -3.97, "z": -4.953}, {"chapter": 39, "title": "第三十九回　村姥姥是信口开合　情哥哥偏寻根究底", "x": -0.04, "y": 0.127, "z": -3.255}, {"chapter": 40, "title": "第四十回　史太君两宴大观园　金鸳鸯三宣牙牌令", "x": 7.724, "y": -5.116, "z": -5.175}, {"chapter": 41, "title": "第四十一回　栊翠庵茶品梅花雪　怡红院劫遇母蝗虫", "x": -2.013, "y": -4.157, "z": -4.561}, {"chapter": 42, "title": "第四十二回　蘅芜君兰言解疑癖　潇湘子雅谑补余香", "x": 2.156, "y": -2.236, "z": -2.046}, {"chapter": 43, "title": "第四十三回　闲取乐偶攒金庆寿　不了情暂撮土为香", "x": 1.889, "y": -2.234, "z": -2.615}, {"chapter": 44, "title": "第四十四回　变生不测凤姐泼醋　喜出望外平儿理妆", "x": 0.146, "y": 0.109, "z": -5.87}, {"chapter": 45, "title": "第四十五回　金兰契互剖金兰语　风雨夕闷制风雨词", "x": 4.618, "y": -2.531, "z": -2.404}, {"chapter": 46, "title": "第四十六回　尴尬人难免尴尬事　鸳鸯女誓绝鸳鸯偶", "x": 8.81, "y": 0.268, "z": -1.191}, {"chapter": 47, "title": "第四十七回　呆霸王调情遭苦打　冷郎君惧祸走他乡", "x": 3.071, "y": -0.753, "z": -3.246}, {"chapter": 48, "title": "第四十八回　情人情误思游艺慕　雅女雅集苦吟诗", "x": -1.625, "y": -2.411, "z": -0.934}, {"chapter": 49, "title": "第四十九回　琉璃世界白雪红梅　脂粉香娃割腥啖膻", "x": -0.591, "y": -4.049, "z": -2.042}, {"chapter": 50, "title": "第五十回　芦雪庵争联即景诗　暖香坞雅制春灯谜", "x": -4.468, "y": -4.876, "z": -3.331}, {"chapter": 51, "title": "第五十一回　薛小妹新编怀古诗　胡庸医乱用虎狼药", "x": 0.956, "y": -3.131, "z": -3.187}, {"chapter": 52, "title": "第五十二回　俏平儿情掩虾须镯　勇晴雯病补雀金裘", "x": 6.683, "y": -2.493, "z": -3.249}, {"chapter": 53, "title": "第五十三回　宁国府除夕祭宗祠　荣国府元宵开夜宴", "x": -5.206, "y": -7.146, "z": 2.031}, {"chapter": 54, "title": "第五十四回　史太君破陈腐旧套　王熙凤效戏彩斑衣", "x": 6.011, "y": -7.764, "z": -1.08}, {"chapter": 55, "title": "第五十五回　辱亲女愚妾争闲气　欺幼主刁奴蓄险心", "x": 5.542, "y": -3.963, "z": 2.815}, {"chapter": 56, "title": "第五十六回　敏探春兴利除宿弊　时宝钗小惠全大体", "x": 6.83, "y": -5.464, "z": 5.601}, {"chapter": 57, "title": "第五十七回　慧紫鹃情辞试忙玉　慈姨妈爱语慰痴颦", "x": 15.859, "y": -4.4, "z": 2.768}, {"chapter": 58, "title": "第五十八回　杏子阴假凤泣虚凰　茜纱窗真情揆痴理", "x": -2.441, "y": -3.879, "z": 2.27}, {"chapter": 59, "title": "第五十九回　柳叶渚边嗔莺咤燕　绛云轩里召将飞符", "x": -5.96, "y": -0.208, "z": -2.733}, {"chapter": 60, "title": "第六十回　茉莉粉替去蔷薇硝　玫瑰露引来茯苓霜", "x": 4.072, "y": -2.158, "z": -1.287}, {"chapter": 61, "title": "第六十一回　投鼠忌器宝玉瞒赃　判冤决狱平儿行权", "x": 1.734, "y": -0.942, "z": 0.866}, {"chapter": 62, "title": "第六十二回　憨湘云醉眠芍药裀　呆香菱情解石榴裙", "x": 18.094, "y": -8.832, "z": -0.047}, {"chapter": 63, "title": "第六十三回　寿怡红群芳开夜宴　死金丹独艳理亲丧", "x": 11.268, "y": -9.212, "z": 2.778}, {"chapter": 64, "title": "第六十四回　幽淑女悲题五美吟　浪荡子情遗九龙珮", "x": 3.057, "y": -4.179, "z": 2.458}, {"chapter": 65, "title": "第六十五回　贾二舍偷娶尤二姨　尤三姐思嫁柳二郎", "x": -2.25, "y": -1.607, "z": 0.681}, {"chapter": 66, "title": "第六十六回　情小妹耻情归地府　冷二郎一冷入空门", "x": -8.663, "y": -1.126, "z": 0.882}, {"chapter": 67, "title": "第六十七回　见土仪颦卿思故里　闻秘事凤姐讯家童", "x": 13.084, "y": 7.713, "z": -2.51}, {"chapter": 68, "title": "第六十八回　苦尤娘赚入大观园　酸凤姐大闹宁国府", "x": -1.325, "y": -2.65, "z": 4.121}, {"chapter": 69, "title": "第六十九回　弄小巧用借剑杀人　觉大限吞生金自逝", "x": -3.764, "y": -2.741, "z": 4.264}, {"chapter": 70, "title": "第七十回　林黛玉重建桃花社　史湘云偶填柳絮词", "x": -4.711, "y": -4.579, "z": -0.9}, {"chapter": 71, "title": "第七十一回　嫌隙人有心生嫌隙　鸳鸯女无意遇鸳鸯", "x": 6.255, "y": -4.042, "z": 2.618}, {"chapter": 72, "title": "第七十二回　王熙凤恃强羞说病　来旺妇倚势霸成亲", "x": 3.588, "y": -2.99, "z": 0.398}, {"chapter": 73, "title": "第七十三回　痴丫头误拾绣春囊　懦小姐不问累金凤", "x": 1.872, "y": -4.363, "z": 3.992}, {"chapter": 74, "title": "第七十四回　惑奸谗抄检大观园　矢孤介杜绝宁国府", "x": 15.675, "y": -7.095, "z": 8.195}, {"chapter": 75, "title": "第七十五回　开夜宴异兆发悲音　赏中秋新词得佳谶", "x": 6.617, "y": -7.851, "z": 3.811}, {"chapter": 76, "title": "第七十六回　凸碧堂品笛感凄清　凹晶馆联诗悲寂寞", "x": -1.313, "y": -7.324, "z": 1.64}, {"chapter": 77, "title": "第七十七回　俏丫鬟抱屈夭风流　美优伶斩情归水月", "x": 12.58, "y": -7.958, "z": 7.965}, {"chapter": 78, "title": "第七十八回　老学士闲征姽婳词　痴公子杜撰芙蓉诔", "x": 1.75, "y": -10.441, "z": 8.631}, {"chapter": 79, "title": "第七十九回　薛文龙悔娶河东狮　贾迎春误嫁中山狼", "x": -10.382, "y": -1.081, "z": 1.267}, {"chapter": 80, "title": "第八十回　美香菱屈受贪夫棒　王道士胡诌妒妇方", "x": -4.261, "y": -2.501, "z": 0.608}], "last40": [{"chapter": 81, "title": "第八十一回　占旺相四美钓游鱼　奉严词两番入家塾", "x": 1.077, "y": 3.913, "z": -1.355}, {"chapter": 82, "title": "第八十二回　老学究讲义警顽心　病潇湘痴魂惊恶梦", "x": 6.334, "y": 5.232, "z": -2.609}, {"chapter": 83, "title": "第八十三回　省宫闱贾元妃染恙　闹闺阃薛宝钗吞声", "x": 5.54, "y": 4.559, "z": -1.844}, {"chapter": 84, "title": "第八十四回　试文字宝玉始提亲　探惊风贾环重结怨", "x": 3.658, "y": 4.059, "z": -0.729}, {"chapter": 85, "title": "第八十五回　贾存周报升郎中任　薛文起复惹放流刑", "x": 6.018, "y": 5.752, "z": -3.788}, {"chapter": 86, "title": "第八十六回　受私贿老官翻案牍　寄闲情淑女解琴书", "x": -1.955, "y": 5.544, "z": -0.268}, {"chapter": 87, "title": "第八十七回　感深秋抚琴悲往事　坐禅寂走火入邪魔", "x": -2.88, "y": 2.561, "z": -3.3}, {"chapter": 88, "title": "第八十八回　博庭欢宝玉赞孤儿　正家法贾珍鞭悍仆", "x": 1.637, "y": 5.639, "z": -2.697}, {"chapter": 89, "title": "第八十九回　人亡物在公子填词　蛇影杯弓颦卿绝粒", "x": -2.499, "y": 5.747, "z": -4.616}, {"chapter": 90, "title": "第九十回　失绵衣贫女耐嗷嘈　送果品小郎惊叵测", "x": -0.454, "y": 6.199, "z": -0.585}, {"chapter": 91, "title": "第九十一回　纵淫心宝蟾工设计　布疑阵宝玉妄谈禅", "x": -5.529, "y": 4.743, "z": -1.062}, {"chapter": 92, "title": "第九十二回　评女传巧姐慕贤良　玩母珠贾政参聚散", "x": 0.656, "y": 4.605, "z": 0.263}, {"chapter": 93, "title": "第九十三回　甄家仆投靠贾家门　水月庵掀翻风月案", "x": -2.362, "y": 6.092, "z": 0.171}, {"chapter": 94, "title": "第九十四回　宴海棠贾母赏花妖　失宝玉通灵知奇祸", "x": 7.601, "y": 6.74, "z": 4.521}, {"chapter": 95, "title": "第九十五回　因讹成实元妃薨逝　以假混真宝玉疯颠", "x": -2.424, "y": 5.311, "z": 3.76}, {"chapter": 96, "title": "第九十六回　瞒消息凤姐设奇谋　泄机关颦儿迷本性", "x": 1.084, "y": 7.545, "z": 1.708}, {"chapter": 97, "title": "第九十七回　林黛玉焚稿断痴情　薛宝钗出闺成大礼", "x": 11.447, "y": 8.45, "z": 3.91}, {"chapter": 98, "title": "第九十八回　苦绛珠魂归离恨天　病神瑛泪洒相思地", "x": -5.637, "y": 3.431, "z": 3.209}, {"chapter": 99, "title": "第九十九回　守官箴恶奴同破例　阅邸报老舅自担惊", "x": -6.281, "y": 4.591, "z": 1.858}, {"chapter": 100, "title": "第一百回　破好事香菱结深恨　悲远嫁宝玉感离情", "x": -2.687, "y": 6.895, "z": 2.373}, {"chapter": 101, "title": "第一百一回　大观园月夜感幽魂　散花寺神签惊异兆", "x": 5.5, "y": 6.595, "z": -4.101}, {"chapter": 102, "title": "第一百二回　宁国府骨肉病灾祲　大观园符水驱妖孽", "x": -9.455, "y": 3.866, "z": 1.582}, {"chapter": 103, "title": "第一百三回　施毒计金桂自焚身　昧真禅雨村空遇旧", "x": -0.194, "y": 7.726, "z": 2.548}, {"chapter": 104, "title": "第一百四回　醉金刚小鳅生大浪　痴公子余痛触前情", "x": -2.142, "y": 5.904, "z": 3.055}, {"chapter": 105, "title": "第一百五回　锦衣军查抄宁国府　骢马使弹劾平安州", "x": -9.552, "y": 4.988, "z": 1.257}, {"chapter": 106, "title": "第一百六回　王熙凤致祸抱羞惭　贾太君祷天消祸患", "x": -7.046, "y": 3.472, "z": 6.1}, {"chapter": 107, "title": "第一百七回　散余资贾母明大义　复世职政老沐天恩", "x": -5.761, "y": 4.124, "z": 4.494}, {"chapter": 108, "title": "第一百八回　强欢笑蘅芜庆生辰　死缠绵潇湘闻鬼哭", "x": 1.818, "y": 5.795, "z": 2.117}, {"chapter": 109, "title": "第一百九回　候芳魂五儿承错爱　还孽债迎女返真元", "x": 10.678, "y": 7.698, "z": 2.266}, {"chapter": 110, "title": "第一百十回　史太君寿终归地府　王凤姐力诎失人心", "x": 0.529, "y": 7.274, "z": 5.571}, {"chapter": 111, "title": "第一百十一回　鸳鸯女殉主登太虚　狗彘奴欺天招伙盗", "x": 2.043, "y": 6.753, "z": 4.285}, {"chapter": 112, "title": "第一百十二回　活冤孽妙尼遭大劫　死雠仇赵妾赴冥曹", "x": 0.053, "y": 8.441, "z": 5.152}, {"chapter": 113, "title": "第一百十三回　忏宿冤凤姐托村妪　释旧憾情婢感痴郎", "x": 1.759, "y": 7.209, "z": 0.746}, {"chapter": 114, "title": "第一百十四回　王熙凤历幻返金陵　甄应嘉蒙恩还玉阙", "x": -7.206, "y": 5.757, "z": 2.059}, {"chapter": 115, "title": "第一百十五回　惑偏私惜春矢素志　证同类宝玉失相知", "x": -0.975, "y": 5.832, "z": 4.099}, {"chapter": 116, "title": "第一百十六回　得通灵幻境悟仙缘　送慈柩故乡全孝道", "x": -2.07, "y": 5.273, "z": 1.653}, {"chapter": 117, "title": "第一百十七回　阻超凡佳人双护玉　欣聚党恶子独承家", "x": 4.221, "y": 8.492, "z": 3.099}, {"chapter": 118, "title": "第一百十八回　记微嫌舅兄欺弱女　惊谜语妻妾谏痴人", "x": 1.89, "y": 6.067, "z": 3.968}, {"chapter": 119, "title": "第一百十九回　中乡魁宝玉却尘缘　沐皇恩贾家延世泽", "x": 9.286, "y": 8.617, "z": 9.01}, {"chapter": 120, "title": "第一百二十回　甄士隐详说太虚情　贾雨村归结红楼梦", "x": -4.065, "y": 2.789, "z": 5.14}]};
+
+function trace(group, name, color) {
+  const pts = data[group];
+  return {
+    type: "scatter3d", mode: "markers", name: name,
+    x: pts.map(p => p.x), y: pts.map(p => p.y), z: pts.map(p => p.z),
+    text: pts.map(p => "第" + p.chapter + "回 " + p.title),
+    hoverinfo: "text",
+    marker: { size: 5, color: color, opacity: 0.85, line: { color: "black", width: 1 } }
+  };
+}
+
+Plotly.newPlot("scatter", [
+  trace("first80", "第一回–第八十回", "#e53935"),
+  trace("last40", "第八十一回–第一百二十回", "#1e88e5")
+], {
+  margin: { l: 0, r: 0, t: 30, b: 0 },
+  scene: {
+    xaxis: { title: "PC1" }, yaxis: { title: "PC2" }, zaxis: { title: "PC3" },
+    aspectmode: "cube"
+  },
+  legend: { orientation: "h", y: 1.06 }
+}, { responsive: true });
+</script>
+</body>
+</html>
