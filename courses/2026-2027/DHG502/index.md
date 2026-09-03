@@ -45,6 +45,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
 <p>Please complete the following <strong>before the first seminar</strong>. MA students <strong>must use their own computers</strong>; no shared classroom machines will be provided.</p>
 <ol>
 <li>Create a <a href="https://github.com/">GitHub</a> account.</li>
+<li>Collect your API key at <a href="https://keyreg.qhchina.org">keyreg.qhchina.org</a>. Do not put the key in a repository or share it with others.</li>
 <li>On your laptop, install <a href="https://www.python.org/downloads/">Python</a>, <a href="https://code.visualstudio.com/">Visual Studio Code (VS Code)</a>, and then <a href="https://opencode.ai/">OpenCode</a>.</li>
 <li>Install or update <a href="https://www.google.com/chrome/">Google Chrome</a> or <a href="https://www.microsoft.com/edge">Microsoft Edge</a> for the image-annotation lab.</li>
 </ol>
@@ -240,7 +241,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           <strong class="schedule-label">Readings</strong>
           <ul class="readings">
             <li>Laura Turner O’Hara, <a href="https://programminghistorian.org/en/lessons/cleaning-ocrd-text-with-regular-expressions">“Cleaning OCR’d Text with Regular Expressions”</a> (selected sections)</li>
-            <li>(optional) Maria Levchenko, <a href="https://arxiv.org/abs/2510.06743">“Evaluating LLMs for Historical Document OCR: A Methodological Framework for Digital Humanities”</a> (2025), Introduction and Conclusion</li>
+            <li>(optional) Maria Levchenko, <a href="https://aclanthology.org/2025.lm4dh-1.7/">“Evaluating LLMs for Historical Document OCR: A Methodological Framework for Digital Humanities”</a> (2025), Introduction and Conclusion</li>
           </ul>
         </div>
       </td>

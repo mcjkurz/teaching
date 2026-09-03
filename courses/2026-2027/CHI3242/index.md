@@ -80,6 +80,7 @@ title: CHI3242
 <p>Please complete the following <strong>before the first seminar</strong>:</p>
 <ol>
 <li>Create a <a href="https://github.com/">GitHub</a> account.</li>
+<li>Collect your API key at <a href="https://keyreg.qhchina.org">keyreg.qhchina.org</a>. Do not put the key in a repository or share it with others.</li>
 <li>A classroom with computers will be available. You may also bring your own laptop. If you use your own computer, install <a href="https://www.python.org/downloads/">Python</a>, <a href="https://code.visualstudio.com/">Visual Studio Code (VS Code)</a>, and then <a href="https://opencode.ai/">OpenCode</a> before the first class.</li>
 </ol>
 <p>We will learn agentic coding early in the course and use AI coding assistants in VS Code and OpenCode to write and debug research code.</p>
@@ -88,6 +89,7 @@ title: CHI3242
 <p>請於<strong>第一次研討課之前</strong>完成下列準備：</p>
 <ol>
 <li>註冊 <a href="https://github.com/">GitHub</a> 帳號。</li>
+<li>請到 <a href="https://keyreg.qhchina.org">keyreg.qhchina.org</a> 領取你的 API 金鑰。不要把金鑰寫進倉庫，也不要與他人分享。</li>
 <li>課堂備有電腦室。亦可自備手提電腦。若使用個人電腦，請於開課前安裝 <a href="https://www.python.org/downloads/">Python</a>、<a href="https://code.visualstudio.com/">Visual Studio Code（VS Code）</a>，然後安裝 <a href="https://opencode.ai/">OpenCode</a>。</li>
 </ol>
 <p>課程初期即講授智能體編程，並在 VS Code 與 OpenCode 中使用人工智能編程助手撰寫與除錯研究代碼。</p>
@@ -213,7 +215,7 @@ title: CHI3242
           <li><span class="lang-en">What is a text? Binary, Unicode, UTF-8; files as data</span><span class="lang-zh" lang="zh-Hant">什麼是文本？二進位、Unicode、UTF-8；把檔案視為資料</span></li>
           <li><span class="lang-en">Chinese text segmentation; Bag of Words (BoW); stopwords; Zipf’s law</span><span class="lang-zh" lang="zh-Hant">中文分詞；詞袋模型（BoW）；停用詞；Zipf 定律</span></li>
           <li>Joel Spolsky, <a href="https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/">“The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets”</a> (2003)</li>
-          <li>Thomas S. Mullaney, <em>The Chinese Typewriter</em>, Introduction</li>
+          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Thomas S. Mullaney, <em>The Chinese Typewriter</em>, Introduction</li>
         </ul>
       </td>
       <td class="notes"></td>
@@ -283,7 +285,6 @@ title: CHI3242
         <ul class="readings">
           <li><span class="lang-en">Regular expressions (regex) (<a href="https://regexone.com/">https://regexone.com/</a>)</span><span class="lang-zh" lang="zh-Hant">正則表達式（regex）（<a href="https://regexone.com/">https://regexone.com/</a>）</span></li>
           <li><span class="lang-en">Comparing the word usage of two corpora</span><span class="lang-zh" lang="zh-Hant">比較兩個語料庫的用詞</span></li>
-          <li>Donald Sturgeon, <a href="https://digitalsinology.org/text-tools-regex/">“Regular expressions with Text Tools for ctext.org”</a></li>
           <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Adam Kilgarriff, “Comparing Corpora,” <em>International Journal of Corpus Linguistics</em> (2001)</li>
         </ul>
       </td>
@@ -315,7 +316,7 @@ title: CHI3242
         <ul class="readings">
           <li><span class="lang-en">Authorship signals; style markers; feature selection</span><span class="lang-zh" lang="zh-Hant">作者訊號；文體標記；特徵選取</span></li>
           <li><span class="lang-en">Z-scores and distance-based stylistic comparison</span><span class="lang-zh" lang="zh-Hant">Z 分數與基於距離的文體比較</span></li>
-          <li>Xianfeng Hu, Yang Wang, and Qiang Wu, <a href="https://arxiv.org/abs/1412.6211">“Multiple Authors Detection: A Quantitative Analysis of <em>Dream of the Red Chamber</em>”</a> (2014)</li>
+          <li>Xianfeng Hu, Yang Wang, and Qiang Wu, <a href="https://doi.org/10.1142/S1793536914500125">“Multiple Authors Detection: A Quantitative Analysis of <em>Dream of the Red Chamber</em>”</a>, <em>Advances in Adaptive Data Analysis</em> 6, no. 4 (2014)</li>
         </ul>
       </td>
       <td class="notes"></td>
@@ -357,7 +358,7 @@ title: CHI3242
           <li>胡韌奮：〈語言模型〉，第九章，李飛躍、桑海（主編）《數字人文引論》。北京：中華書局，2026年</li>
           <li>邱偉雲：<a href="https://www.thepaper.cn/newsDetail_forward_16152515">〈概念史研究的数字转向〉</a>（澎湃，2021）</li>
           <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> William L. Hamilton, Jure Leskovec, and Dan Jurafsky, <a href="https://aclanthology.org/P16-1141/">“Diachronic Word Embeddings Reveal Statistical Laws of Semantic Change”</a> (ACL 2016)</li>
-          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Yuxi Ma, Yongqian Peng, and Yixin Zhu, <a href="https://arxiv.org/abs/2504.12327">“Word Embeddings Track Social Group Changes Across 70 Years in China”</a> (2025)</li>
+          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Yuxi Ma, Yongqian Peng, and Yixin Zhu, <a href="https://escholarship.org/uc/item/57j9j7h6">“Word Embeddings Track Social Group Changes Across 70 Years in China”</a>, in <em>Proceedings of the 47th Annual Meeting of the Cognitive Science Society</em> (2025)</li>
         </ul>
       </td>
       <td class="notes"></td>

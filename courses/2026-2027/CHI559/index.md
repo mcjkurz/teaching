@@ -43,6 +43,7 @@ title: CHI559
 <p>請於<strong>第一次研討課之前</strong>完成下列準備。碩士班<strong>必須使用個人電腦</strong>，課堂不另備公用電腦。</p>
 <ol>
 <li>註冊 <a href="https://github.com/">GitHub</a> 帳號。</li>
+<li>請到 <a href="https://keyreg.qhchina.org">keyreg.qhchina.org</a> 領取你的 API 金鑰。不要把金鑰寫進倉庫，也不要與他人分享。</li>
 <li>在個人電腦上安裝 <a href="https://www.python.org/downloads/">Python</a>、<a href="https://code.visualstudio.com/">Visual Studio Code（VS Code）</a>，然後安裝 <a href="https://opencode.ai/">OpenCode</a>。</li>
 </ol>
 <p>第一週將搭建研究環境（GitHub、VS Code、OpenCode、人工智能編程助手）。請攜已安裝妥當的手提電腦上課。</p>
@@ -118,7 +119,7 @@ title: CHI559
           <li>什麼是文本？二進位、Unicode、UTF-8；把檔案視為資料</li>
           <li>中文分詞；詞袋模型（BoW）；停用詞；Zipf 定律</li>
           <li>Joel Spolsky, <a href="https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/">“The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets”</a> (2003)</li>
-          <li>Thomas S. Mullaney, <em>The Chinese Typewriter</em>, Introduction</li>
+          <li>（選讀）Thomas S. Mullaney, <em>The Chinese Typewriter</em>, Introduction</li>
           <li>Stephen Ramsay, “Algorithmic Criticism”</li>
         </ul>
       </td>
@@ -185,7 +186,7 @@ title: CHI559
         <ul class="readings">
           <li>作者訊號；文體標記；特徵選取</li>
           <li>Z 分數與基於距離的文體比較</li>
-          <li>Xianfeng Hu, Yang Wang, and Qiang Wu, <a href="https://arxiv.org/abs/1412.6211">“Multiple Authors Detection: A Quantitative Analysis of <em>Dream of the Red Chamber</em>”</a> (2014)</li>
+          <li>Xianfeng Hu, Yang Wang, and Qiang Wu, <a href="https://doi.org/10.1142/S1793536914500125">“Multiple Authors Detection: A Quantitative Analysis of <em>Dream of the Red Chamber</em>”</a>, <em>Advances in Adaptive Data Analysis</em> 6, no. 4 (2014)</li>
         </ul>
       </td>
       <td class="notes"></td>
@@ -212,7 +213,6 @@ title: CHI559
         <ul class="readings">
           <li>正則表達式（regex）（<a href="https://regexone.com/">https://regexone.com/</a>）</li>
           <li>比較兩個語料庫的用詞</li>
-          <li>Donald Sturgeon, <a href="https://digitalsinology.org/text-tools-regex/">“Regular expressions with Text Tools for ctext.org”</a></li>
           <li>弗朗哥·莫萊蒂：〈世界文學猜想〉，節選自《世界文學理論讀本》；Franco Moretti, “Conjectures on World Literature,” in <em>Distant Reading</em></li>
         </ul>
       </td>
@@ -277,7 +277,7 @@ title: CHI559
           <li>邱偉雲：<a href="https://www.thepaper.cn/newsDetail_forward_16152515">〈概念史研究的数字转向〉</a>（澎湃，2021）</li>
           <li>(optional) Daniel Jurafsky and James H. Martin, “Vector Semantics and Embeddings”</li>
           <li>（選讀）William L. Hamilton, Jure Leskovec, and Dan Jurafsky, <a href="https://aclanthology.org/P16-1141/">“Diachronic Word Embeddings Reveal Statistical Laws of Semantic Change”</a> (ACL 2016)</li>
-          <li>（選讀）Yuxi Ma, Yongqian Peng, and Yixin Zhu, <a href="https://arxiv.org/abs/2504.12327">“Word Embeddings Track Social Group Changes Across 70 Years in China”</a> (2025)</li>
+          <li>（選讀）Yuxi Ma, Yongqian Peng, and Yixin Zhu, <a href="https://escholarship.org/uc/item/57j9j7h6">“Word Embeddings Track Social Group Changes Across 70 Years in China”</a>, in <em>Proceedings of the 47th Annual Meeting of the Cognitive Science Society</em> (2025)</li>
         </ul>
       </td>
       <td class="notes"></td>
