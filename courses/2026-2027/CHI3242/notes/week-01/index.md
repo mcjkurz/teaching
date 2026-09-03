@@ -61,23 +61,17 @@ for the first 80 chapters and for the last 40 chapters.</pre>
 <p>完成後，Codespace 裡多半打不開這個 HTML。在左側檔案上按右鍵，選 <strong>Download</strong>，下載到自己的電腦，再用瀏覽器打開。若一切順利，你應看到類似下面的結果：可旋轉的三維投影，以及前八十回與後四十回的正負特徵詞。也可以直接打開這個<a href="hongloumeng_3d.html">互動示例</a>。</p>
 
 <h2>4. 儲存到 GitHub</h2>
-<p>請把結果存回你的倉庫，否則關閉 Codespace 後可能丟失。兩步即可：</p>
+<p>請把結果提交（commit）並推送（push）到你的倉庫。關閉瀏覽器或停止 Codespace，檔案不會立刻消失：GitHub 會在 Codespace 閒置若干天後才自動刪除；在此之前，未提交的修改與檔案都會保留。不過 Codespace 一旦被刪除，尚未推送到倉庫的內容就無法找回，因此做完練習後仍應 commit 並 push。</p>
+<p>三種做法任選其一：</p>
 <ol>
-<li><strong>提交（commit）：</strong>點左側的 Source Control（分支圖示），寫一句說明（例如「第1週練習」），再按 <strong>Commit</strong>。或在終端機執行：</li>
+<li><strong>左側按鈕：</strong>點左側的 Source Control（分支圖示）。先在訊息框寫一句說明（例如 <code>first commit</code>），再按 <strong>Commit</strong>。然後按 <strong>Push</strong> 或 <strong>Sync Changes</strong>。</li>
+<li><strong>終端機：</strong>在 Codespace 終端機執行：
+<pre>git add -A
+git commit -m "first commit"
+git push</pre>
+</li>
+<li><strong>交給編程助手：</strong>在 OpenCode 裡直接請它幫你 commit 並 push，例如：<code>Commit all changes with the message "first commit", then push to GitHub.</code></li>
 </ol>
-
-```
-git add -A
-git commit -m "第1週練習"
-```
-
-<ol start="2">
-<li><strong>推送（push）：</strong>同一側欄再按 <strong>Sync Changes</strong> 或 <strong>Push</strong>。或在終端機執行：</li>
-</ol>
-
-```
-git push
-```
 
 <figure class="example">
 <img src="expected-result.png" alt="《紅樓夢》三維 PCA 與正負特徵詞的預期結果">
