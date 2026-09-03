@@ -3,7 +3,7 @@ layout: default
 title: CHI559
 ---
 
-<p class="updated">最後更新：2026年9月2日</p>
+<p class="updated">最後更新：2026年9月3日</p>
 <div class="course-header">
 <div class="course-header-info">
 <h1>CHI 559 課程大綱</h1>
@@ -101,6 +101,8 @@ title: CHI559
       <td>
         <ul class="readings">
           <li>數字人文：核心概念；智能體編程；Git、GitHub、OpenCode 與 VS Code</li>
+          <li>Ted Underwood, <a href="https://tedunderwood.com/2015/06/04/seven-ways-humanists-are-using-computers-to-understand-text/">“Seven Ways Humanists Are Using Computers to Understand Text”</a> (2015)</li>
+          <li>Donald Sturgeon, “Chinese Text Project: A Dynamic Digital Library of Premodern Chinese,” <em>Digital Scholarship in the Humanities</em> 34, no. 1 (2019)</li>
         </ul>
       </td>
       <td class="notes"><a href="notes/week-01/">講義</a></td>
@@ -115,6 +117,8 @@ title: CHI559
         <ul class="readings">
           <li>什麼是文本？二進位、Unicode、UTF-8；把檔案視為資料</li>
           <li>中文分詞；詞袋模型（BoW）；停用詞；Zipf 定律</li>
+          <li>Joel Spolsky, <a href="https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/">“The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets”</a> (2003)</li>
+          <li>Thomas S. Mullaney, <em>The Chinese Typewriter</em>, Introduction</li>
           <li>Stephen Ramsay, “Algorithmic Criticism”</li>
         </ul>
       </td>
@@ -144,6 +148,8 @@ title: CHI559
         <ul class="readings">
           <li>搭配作為方法；列聯表；統計顯著性、Fisher 精確檢定、p 值</li>
           <li>Stefan Evert, “Corpora and Collocations”</li>
+          <li>（選讀）Paul Baker, <em>Using Corpora in Discourse Analysis</em> (2006), Chapter 5, “Collocations”</li>
+          <li>（選讀）J. R. Firth, “A Synopsis of Linguistic Theory” (1957), the “company it keeps” passage</li>
         </ul>
       </td>
       <td class="notes"></td>
@@ -163,6 +169,8 @@ title: CHI559
         <ul class="readings">
           <li>角色、詞語、空間</li>
           <li>Alex Woloch, <em>The One vs. the Many</em>, pp. 12–42</li>
+          <li>Franco Moretti, <a href="https://litlab.stanford.edu/LiteraryLabPamphlet2.pdf">“Network Theory, Plot Analysis”</a> (Stanford Literary Lab Pamphlet 2)</li>
+          <li>（選讀）Andrew Piper, <em>Enumerations</em>, chapter on characterization</li>
         </ul>
       </td>
       <td class="notes"></td>
@@ -177,6 +185,7 @@ title: CHI559
         <ul class="readings">
           <li>作者訊號；文體標記；特徵選取</li>
           <li>Z 分數與基於距離的文體比較</li>
+          <li>Xianfeng Hu, Yang Wang, and Qiang Wu, <a href="https://arxiv.org/abs/1412.6211">“Multiple Authors Detection: A Quantitative Analysis of <em>Dream of the Red Chamber</em>”</a> (2014)</li>
         </ul>
       </td>
       <td class="notes"></td>
@@ -201,8 +210,9 @@ title: CHI559
       <td class="topic">從詞語到語料庫</td>
       <td>
         <ul class="readings">
-          <li>正規表示式（regex）（<a href="https://regexone.com/">https://regexone.com/</a>）</li>
+          <li>正則表達式（regex）（<a href="https://regexone.com/">https://regexone.com/</a>）</li>
           <li>比較兩個語料庫的用詞</li>
+          <li>Donald Sturgeon, <a href="https://digitalsinology.org/text-tools-regex/">“Regular expressions with Text Tools for ctext.org”</a></li>
           <li>弗朗哥·莫萊蒂：〈世界文學猜想〉，節選自《世界文學理論讀本》；Franco Moretti, “Conjectures on World Literature,” in <em>Distant Reading</em></li>
         </ul>
       </td>
@@ -218,6 +228,7 @@ title: CHI559
         <ul class="readings">
           <li>LDA；什麼是「主題」？</li>
           <li>（選讀）蘇祺：〈主題模型〉，第十章，李飛躍、桑海（主編）《數字人文引論》。北京：中華書局，2026年</li>
+          <li>（選讀）Ted Underwood, <a href="https://tedunderwood.com/2012/04/07/topic-modeling-made-just-simple-enough/">“Topic Modeling Made Just Simple Enough”</a> (2012)</li>
           <li>(optional) David M. Blei, “Probabilistic Topic Models”</li>
         </ul>
       </td>
@@ -239,6 +250,8 @@ title: CHI559
           <li>用於文本分類的邏輯迴歸（情感分析）</li>
           <li>二元與多類分類（softmax）；損失函數（交叉熵）</li>
           <li>TF-IDF</li>
+          <li>Daniel Jurafsky and James H. Martin, <a href="https://web.stanford.edu/~jurafsky/slp3/4.pdf"><em>Speech and Language Processing</em></a> (3rd ed. draft), Chapter 4, “Naive Bayes and Sentiment Classification” (sections 4.1–4.4)</li>
+          <li>（選讀）Hoyt Long and Richard Jean So, “Literary Pattern Recognition: Modernism between Close Reading and Machine Learning,” <em>Critical Inquiry</em> 42, no. 2 (2016)</li>
         </ul>
       </td>
       <td class="notes"></td>
@@ -261,7 +274,10 @@ title: CHI559
           <li>什麼是「語義」？詞向量與餘弦相似度</li>
           <li>以詞向量研究概念史</li>
           <li>胡韌奮：〈語言模型〉，第九章，李飛躍、桑海（主編）《數字人文引論》。北京：中華書局，2026年</li>
+          <li>邱偉雲：<a href="https://www.thepaper.cn/newsDetail_forward_16152515">〈概念史研究的数字转向〉</a>（澎湃，2021）</li>
           <li>(optional) Daniel Jurafsky and James H. Martin, “Vector Semantics and Embeddings”</li>
+          <li>（選讀）William L. Hamilton, Jure Leskovec, and Dan Jurafsky, <a href="https://aclanthology.org/P16-1141/">“Diachronic Word Embeddings Reveal Statistical Laws of Semantic Change”</a> (ACL 2016)</li>
+          <li>（選讀）Yuxi Ma, Yongqian Peng, and Yixin Zhu, <a href="https://arxiv.org/abs/2504.12327">“Word Embeddings Track Social Group Changes Across 70 Years in China”</a> (2025)</li>
         </ul>
       </td>
       <td class="notes"></td>
@@ -282,7 +298,10 @@ title: CHI559
           <li>神經網絡</li>
           <li>訓練基於 BERT 的分類器（情感分析）；上載模型至 Hugging Face</li>
           <li>Kurt Vonnegut, “The Shapes of Stories”（講座）</li>
+          <li>Jay Alammar, <a href="https://jalammar.github.io/illustrated-bert/">“The Illustrated BERT”</a></li>
           <li>Katherine Elkins, <em>The Shapes of Stories: Sentiment Analysis for Narrative</em> (optional)</li>
+          <li>（選讀）Andrew Reagan et al., <a href="https://epjdatascience.springeropen.com/articles/10.1140/epjds/s13688-016-0093-1">“The Emotional Arcs of Stories Are Dominated by Six Basic Shapes”</a>, <em>EPJ Data Science</em> (2016)</li>
+          <li>（選讀）3Blue1Brown, <a href="https://www.3blue1brown.com/topics/neural-networks">neural-network series</a>（影片）</li>
         </ul>
       </td>
       <td class="notes"></td>
@@ -297,6 +316,9 @@ title: CHI559
         <ul class="readings">
           <li>從 BERT 到 GPT；生成模型；什麼是「上下文」？；下一詞元機率</li>
           <li>以大型語言模型抽取資料；Python API（OpenRouter）</li>
+          <li>Jay Alammar, <a href="https://jalammar.github.io/illustrated-gpt2/">“The Illustrated GPT-2”</a></li>
+          <li>（選讀）Andrej Karpathy, <a href="https://www.youtube.com/watch?v=zjkBMFhNj_g">“Intro to Large Language Models”</a>（影片）</li>
+          <li>（選讀）Emily M. Bender et al., “On the Dangers of Stochastic Parrots” (FAccT 2021)</li>
         </ul>
       </td>
       <td class="notes"></td>
@@ -336,6 +358,7 @@ title: CHI559
         <ul class="readings">
           <li>方法整合回顧、補足未竟內容，以及期末專題準備</li>
           <li>Nan Z. Da, “The Computational Case against Computational Literary Studies”</li>
+          <li>（選讀）Miriam Posner, <a href="https://miriamposner.com/blog/how-did-they-make-that/">“How Did They Make That?”</a></li>
         </ul>
       </td>
       <td class="notes"></td>

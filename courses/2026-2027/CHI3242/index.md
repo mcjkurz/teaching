@@ -196,6 +196,8 @@ title: CHI3242
       <td>
         <ul class="readings">
           <li><span class="lang-en">Digital Humanities: key concepts; agentic coding; Git, GitHub, OpenCode, and VS Code</span><span class="lang-zh" lang="zh-Hant">數字人文：核心概念；智能體編程；Git、GitHub、OpenCode 與 VS Code</span></li>
+          <li>Ted Underwood, <a href="https://tedunderwood.com/2015/06/04/seven-ways-humanists-are-using-computers-to-understand-text/">“Seven Ways Humanists Are Using Computers to Understand Text”</a> (2015)</li>
+          <li>Donald Sturgeon, “Chinese Text Project: A Dynamic Digital Library of Premodern Chinese,” <em>Digital Scholarship in the Humanities</em> 34, no. 1 (2019)</li>
         </ul>
       </td>
       <td class="notes"><a href="notes/week-01/">Notes</a></td>
@@ -210,6 +212,8 @@ title: CHI3242
         <ul class="readings">
           <li><span class="lang-en">What is a text? Binary, Unicode, UTF-8; files as data</span><span class="lang-zh" lang="zh-Hant">什麼是文本？二進位、Unicode、UTF-8；把檔案視為資料</span></li>
           <li><span class="lang-en">Chinese text segmentation; Bag of Words (BoW); stopwords; Zipf’s law</span><span class="lang-zh" lang="zh-Hant">中文分詞；詞袋模型（BoW）；停用詞；Zipf 定律</span></li>
+          <li>Joel Spolsky, <a href="https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/">“The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets”</a> (2003)</li>
+          <li>Thomas S. Mullaney, <em>The Chinese Typewriter</em>, Introduction</li>
         </ul>
       </td>
       <td class="notes"></td>
@@ -231,6 +235,8 @@ title: CHI3242
         <ul class="readings">
           <li><span class="lang-en">Collocation as a method; the contingency table; statistical significance, Fisher's exact test, p value</span><span class="lang-zh" lang="zh-Hant">搭配作為方法；列聯表；統計顯著性、Fisher 精確檢定、p 值</span></li>
           <li>Stefan Evert, “Corpora and Collocations”</li>
+          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Paul Baker, <em>Using Corpora in Discourse Analysis</em> (2006), Chapter 5, “Collocations”</li>
+          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> J. R. Firth, “A Synopsis of Linguistic Theory” (1957), the “company it keeps” passage</li>
         </ul>
       </td>
       <td class="notes"></td>
@@ -245,6 +251,8 @@ title: CHI3242
         <ul class="readings">
           <li><span class="lang-en">Character, word, space</span><span class="lang-zh" lang="zh-Hant">角色、詞語、空間</span></li>
           <li>Alex Woloch, <em>The One vs. the Many</em>, pp. 12–42</li>
+          <li>Franco Moretti, <a href="https://litlab.stanford.edu/LiteraryLabPamphlet2.pdf">“Network Theory, Plot Analysis”</a> (Stanford Literary Lab Pamphlet 2)</li>
+          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Andrew Piper, <em>Enumerations</em>, chapter on characterization</li>
         </ul>
       </td>
       <td class="notes"></td>
@@ -273,8 +281,10 @@ title: CHI3242
       <td class="topic"><span class="lang-en">From Words to Corpora</span><span class="lang-zh" lang="zh-Hant">從詞語到語料庫</span></td>
       <td>
         <ul class="readings">
-          <li><span class="lang-en">Regular expressions (regex) (<a href="https://regexone.com/">https://regexone.com/</a>)</span><span class="lang-zh" lang="zh-Hant">正規表示式（regex）（<a href="https://regexone.com/">https://regexone.com/</a>）</span></li>
+          <li><span class="lang-en">Regular expressions (regex) (<a href="https://regexone.com/">https://regexone.com/</a>)</span><span class="lang-zh" lang="zh-Hant">正則表達式（regex）（<a href="https://regexone.com/">https://regexone.com/</a>）</span></li>
           <li><span class="lang-en">Comparing the word usage of two corpora</span><span class="lang-zh" lang="zh-Hant">比較兩個語料庫的用詞</span></li>
+          <li>Donald Sturgeon, <a href="https://digitalsinology.org/text-tools-regex/">“Regular expressions with Text Tools for ctext.org”</a></li>
+          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Adam Kilgarriff, “Comparing Corpora,” <em>International Journal of Corpus Linguistics</em> (2001)</li>
         </ul>
       </td>
       <td class="notes"></td>
@@ -289,7 +299,8 @@ title: CHI3242
         <ul class="readings">
           <li><span class="lang-en">LDA; what is a “topic”?</span><span class="lang-zh" lang="zh-Hant">LDA；什麼是「主題」？</span></li>
           <li>蘇祺：〈主題模型〉，第十章，李飛躍、桑海（主編）《數字人文引論》。北京：中華書局，2026年</li>
-          <li>(optional) David M. Blei, “Probabilistic Topic Models”</li>
+          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Ted Underwood, <a href="https://tedunderwood.com/2012/04/07/topic-modeling-made-just-simple-enough/">“Topic Modeling Made Just Simple Enough”</a> (2012)</li>
+          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> David M. Blei, “Probabilistic Topic Models” (2012)</li>
         </ul>
       </td>
       <td class="notes"></td>
@@ -304,7 +315,7 @@ title: CHI3242
         <ul class="readings">
           <li><span class="lang-en">Authorship signals; style markers; feature selection</span><span class="lang-zh" lang="zh-Hant">作者訊號；文體標記；特徵選取</span></li>
           <li><span class="lang-en">Z-scores and distance-based stylistic comparison</span><span class="lang-zh" lang="zh-Hant">Z 分數與基於距離的文體比較</span></li>
-          <li>(optional) Mike Scott, “Key words of individual texts: Aboutness and style”</li>
+          <li>Xianfeng Hu, Yang Wang, and Qiang Wu, <a href="https://arxiv.org/abs/1412.6211">“Multiple Authors Detection: A Quantitative Analysis of <em>Dream of the Red Chamber</em>”</a> (2014)</li>
         </ul>
       </td>
       <td class="notes"></td>
@@ -327,6 +338,8 @@ title: CHI3242
           <li><span class="lang-en">Logistic regression for text classification (sentiment analysis)</span><span class="lang-zh" lang="zh-Hant">用於文本分類的邏輯迴歸（情感分析）</span></li>
           <li><span class="lang-en">Binary and multi-class classification (softmax); loss function (cross-entropy)</span><span class="lang-zh" lang="zh-Hant">二元與多類分類（softmax）；損失函數（交叉熵）</span></li>
           <li>TF-IDF</li>
+          <li>Daniel Jurafsky and James H. Martin, <a href="https://web.stanford.edu/~jurafsky/slp3/4.pdf"><em>Speech and Language Processing</em></a> (3rd ed. draft), Chapter 4, “Naive Bayes and Sentiment Classification” (sections 4.1–4.4)</li>
+          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Hoyt Long and Richard Jean So, “Literary Pattern Recognition: Modernism between Close Reading and Machine Learning,” <em>Critical Inquiry</em> 42, no. 2 (2016)</li>
         </ul>
       </td>
       <td class="notes"></td>
@@ -342,6 +355,9 @@ title: CHI3242
           <li><span class="lang-en">What is meaning? word vectors and cosine similarity</span><span class="lang-zh" lang="zh-Hant">什麼是「語義」？詞向量與餘弦相似度</span></li>
           <li><span class="lang-en">Conceptual history with word vectors</span><span class="lang-zh" lang="zh-Hant">以詞向量研究概念史</span></li>
           <li>胡韌奮：〈語言模型〉，第九章，李飛躍、桑海（主編）《數字人文引論》。北京：中華書局，2026年</li>
+          <li>邱偉雲：<a href="https://www.thepaper.cn/newsDetail_forward_16152515">〈概念史研究的数字转向〉</a>（澎湃，2021）</li>
+          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> William L. Hamilton, Jure Leskovec, and Dan Jurafsky, <a href="https://aclanthology.org/P16-1141/">“Diachronic Word Embeddings Reveal Statistical Laws of Semantic Change”</a> (ACL 2016)</li>
+          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Yuxi Ma, Yongqian Peng, and Yixin Zhu, <a href="https://arxiv.org/abs/2504.12327">“Word Embeddings Track Social Group Changes Across 70 Years in China”</a> (2025)</li>
         </ul>
       </td>
       <td class="notes"></td>
@@ -357,7 +373,10 @@ title: CHI3242
           <li><span class="lang-en">Neural networks</span><span class="lang-zh" lang="zh-Hant">神經網絡</span></li>
           <li><span class="lang-en">Training BERT-based classifiers (sentiment analysis); uploading a model to Hugging Face</span><span class="lang-zh" lang="zh-Hant">訓練基於 BERT 的分類器（情感分析）；上載模型至 Hugging Face</span></li>
           <li>Kurt Vonnegut, “The Shapes of Stories” <span class="lang-en">(lecture)</span><span class="lang-zh" lang="zh-Hant">（講座）</span></li>
-          <li>Katherine Elkins, <em>The Shapes of Stories: Sentiment Analysis for Narrative</em> (optional)</li>
+          <li>Jay Alammar, <a href="https://jalammar.github.io/illustrated-bert/">“The Illustrated BERT”</a></li>
+          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Katherine Elkins, <em>The Shapes of Stories: Sentiment Analysis for Narrative</em></li>
+          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Andrew Reagan et al., <a href="https://epjdatascience.springeropen.com/articles/10.1140/epjds/s13688-016-0093-1">“The Emotional Arcs of Stories Are Dominated by Six Basic Shapes”</a>, <em>EPJ Data Science</em> (2016)</li>
+          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> 3Blue1Brown, <a href="https://www.3blue1brown.com/topics/neural-networks">neural-network series</a> <span class="lang-en">(video)</span><span class="lang-zh" lang="zh-Hant">（影片）</span></li>
         </ul>
       </td>
       <td class="notes"></td>
@@ -379,6 +398,9 @@ title: CHI3242
         <ul class="readings">
           <li><span class="lang-en">From BERT to GPT; generative models; what is “context”?; next-token probability</span><span class="lang-zh" lang="zh-Hant">從 BERT 到 GPT；生成模型；什麼是「上下文」？；下一詞元機率</span></li>
           <li><span class="lang-en">LLMs for data extraction; Python API (OpenRouter)</span><span class="lang-zh" lang="zh-Hant">以大型語言模型抽取資料；Python API（OpenRouter）</span></li>
+          <li>Jay Alammar, <a href="https://jalammar.github.io/illustrated-gpt2/">“The Illustrated GPT-2”</a></li>
+          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Andrej Karpathy, <a href="https://www.youtube.com/watch?v=zjkBMFhNj_g">“Intro to Large Language Models”</a> <span class="lang-en">(video)</span><span class="lang-zh" lang="zh-Hant">（影片）</span></li>
+          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Emily M. Bender et al., “On the Dangers of Stochastic Parrots” (FAccT 2021)</li>
         </ul>
       </td>
       <td class="notes"></td>
@@ -389,7 +411,13 @@ title: CHI3242
       <td class="week">13</td>
       <td class="date"><span class="lang-en">26 Nov</span><span class="lang-zh" lang="zh-Hant">11月26日</span></td>
       <td class="topic"><span class="lang-en">Review and Loose Ends</span><span class="lang-zh" lang="zh-Hant">課程總結與收尾</span></td>
-      <td><span class="lang-en">Integrative review of methods, tying up loose ends, and final-project preparation</span><span class="lang-zh" lang="zh-Hant">方法整合回顧、補足未竟內容，以及期末專題準備</span></td>
+      <td>
+        <ul class="readings">
+          <li><span class="lang-en">Integrative review of methods, tying up loose ends, and final-project preparation</span><span class="lang-zh" lang="zh-Hant">方法整合回顧、補足未竟內容，以及期末專題準備</span></li>
+          <li>Miriam Posner, <a href="https://miriamposner.com/blog/how-did-they-make-that/">“How Did They Make That?”</a></li>
+          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Nan Z. Da, “The Computational Case against Computational Literary Studies,” <em>Critical Inquiry</em> 45, no. 3 (2019)</li>
+        </ul>
+      </td>
       <td class="notes"></td>
     </tr>
   </tbody>
