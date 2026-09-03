@@ -69,7 +69,12 @@ for the first 80 chapters and for the last 40 chapters.</pre>
 git commit -m "first commit"
 git push</pre>
 </li>
-<li><strong>交給編程助手：</strong>在 OpenCode 裡直接請它幫你 commit 並 push，例如：<code>Commit all changes with the message "first commit", then push to GitHub.</code></li>
+<li><strong>交給編程助手：</strong>在 OpenCode 裡直接請它幫你 commit 並 push。將下列提示完整複製，貼進 OpenCode：
+<div class="prompt">
+<p class="prompt-label">提示 3</p>
+<pre>Commit all changes with the message "first commit", then push to GitHub.</pre>
+</div>
+</li>
 </ol>
 
 <figure class="example">
