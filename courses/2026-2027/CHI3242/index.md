@@ -198,8 +198,6 @@ title: CHI3242
       <td>
         <ul class="readings">
           <li><span class="lang-en">Digital Humanities: key concepts; agentic coding; Git, GitHub, OpenCode, and VS Code</span><span class="lang-zh" lang="zh-Hant">數字人文：核心概念；智能體編程；Git、GitHub、OpenCode 與 VS Code</span></li>
-          <li>Ted Underwood, <a href="https://tedunderwood.com/2015/06/04/seven-ways-humanists-are-using-computers-to-understand-text/">“Seven Ways Humanists Are Using Computers to Understand Text”</a> (2015)</li>
-          <li>Donald Sturgeon, “Chinese Text Project: A Dynamic Digital Library of Premodern Chinese,” <em>Digital Scholarship in the Humanities</em> 34, no. 1 (2019)</li>
         </ul>
       </td>
       <td class="notes"><a href="notes/week-01/">Notes</a></td>
@@ -214,7 +212,9 @@ title: CHI3242
         <ul class="readings">
           <li><span class="lang-en">What is a text? Binary, Unicode, UTF-8; files as data</span><span class="lang-zh" lang="zh-Hant">什麼是文本？二進位、Unicode、UTF-8；把檔案視為資料</span></li>
           <li><span class="lang-en">Chinese text segmentation; Bag of Words (BoW); stopwords; Zipf’s law</span><span class="lang-zh" lang="zh-Hant">中文分詞；詞袋模型（BoW）；停用詞；Zipf 定律</span></li>
+          <li>Ted Underwood, <a href="https://tedunderwood.com/2015/06/04/seven-ways-humanists-are-using-computers-to-understand-text/">“Seven Ways Humanists Are Using Computers to Understand Text”</a> (2015)</li>
           <li>Joel Spolsky, <a href="https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/">“The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets”</a> (2003)</li>
+          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Donald Sturgeon, “Chinese Text Project: A Dynamic Digital Library of Premodern Chinese,” <em>Digital Scholarship in the Humanities</em> 34, no. 1 (2019)</li>
           <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Thomas S. Mullaney, <em>The Chinese Typewriter</em>, Introduction</li>
         </ul>
       </td>
