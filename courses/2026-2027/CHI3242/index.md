@@ -3,7 +3,7 @@ layout: default
 title: CHI3242
 ---
 
-<p class="updated i18n-block"><span class="lang-en">Last updated: Aug 30, 2026</span><span class="lang-zh" lang="zh-Hant">最後更新：2026年8月30日</span></p>
+<p class="updated i18n-block"><span class="lang-en">Last updated: Sep 3, 2026</span><span class="lang-zh" lang="zh-Hant">最後更新：2026年9月3日</span></p>
 <div class="course-header i18n-block">
 <div class="course-header-info">
 <h1><span class="lang-en">CHI 3242 Course Syllabus</span><span class="lang-zh" lang="zh-Hant">CHI 3242 課程大綱</span></h1>
@@ -178,13 +178,14 @@ title: CHI3242
 <span class="lang-zh" lang="zh-Hant">課程進度</span>
 </h2>
 <div class="table-scroll">
-<table class="schedule no-event">
+<table class="schedule no-event with-notes">
   <thead>
     <tr>
       <th><span class="lang-en">Week</span><span class="lang-zh" lang="zh-Hant">週次</span></th>
       <th><span class="lang-en">Date</span><span class="lang-zh" lang="zh-Hant">日期</span></th>
       <th><span class="lang-en">Topic</span><span class="lang-zh" lang="zh-Hant">課題</span></th>
       <th><span class="lang-en">Readings</span><span class="lang-zh" lang="zh-Hant">閱讀</span></th>
+      <th>Notes</th>
     </tr>
   </thead>
   <tbody class="block-a">
@@ -197,6 +198,7 @@ title: CHI3242
           <li><span class="lang-en">Digital Humanities: key concepts; agentic coding; Git, GitHub, OpenCode, and VS Code</span><span class="lang-zh" lang="zh-Hant">數字人文：核心概念；智能體編程；Git、GitHub、OpenCode 與 VS Code</span></li>
         </ul>
       </td>
+      <td class="notes"><a href="notes/week-01/">Notes</a></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -210,13 +212,14 @@ title: CHI3242
           <li><span class="lang-en">Chinese text segmentation; Bag of Words (BoW); stopwords; Zipf’s law</span><span class="lang-zh" lang="zh-Hant">中文分詞；詞袋模型（BoW）；停用詞；Zipf 定律</span></li>
         </ul>
       </td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="due">
     <tr>
       <td></td>
       <td class="date"><span class="lang-en">16 Sep</span><span class="lang-zh" lang="zh-Hant">9月16日</span></td>
-      <td colspan="2"><a href="#"><span class="lang-en">Assignment 0 (not graded) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">作業0（不計分）截止，上午9:00</span></a></td>
+      <td colspan="3"><a href="#"><span class="lang-en">Assignment 0 (not graded) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">作業0（不計分）截止，上午9:00</span></a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -230,6 +233,7 @@ title: CHI3242
           <li>Stefan Evert, “Corpora and Collocations”</li>
         </ul>
       </td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -243,6 +247,7 @@ title: CHI3242
           <li>Alex Woloch, <em>The One vs. the Many</em>, pp. 12–42</li>
         </ul>
       </td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -251,13 +256,14 @@ title: CHI3242
       <td class="date"><span class="lang-en">1 Oct</span><span class="lang-zh" lang="zh-Hant">10月1日</span></td>
       <td class="topic"><span class="lang-en">No class (National Day)</span><span class="lang-zh" lang="zh-Hant">停課（國慶日）</span></td>
       <td></td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="due">
     <tr>
       <td></td>
       <td class="date"><span class="lang-en">7 Oct</span><span class="lang-zh" lang="zh-Hant">10月7日</span></td>
-      <td colspan="2"><a href="#"><span class="lang-en">Assignment 1 due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">作業1截止，上午9:00</span></a></td>
+      <td colspan="3"><a href="#"><span class="lang-en">Assignment 1 due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">作業1截止，上午9:00</span></a></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -271,6 +277,7 @@ title: CHI3242
           <li><span class="lang-en">Comparing the word usage of two corpora</span><span class="lang-zh" lang="zh-Hant">比較兩個語料庫的用詞</span></li>
         </ul>
       </td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -285,6 +292,7 @@ title: CHI3242
           <li>(optional) David M. Blei, “Probabilistic Topic Models”</li>
         </ul>
       </td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -299,13 +307,14 @@ title: CHI3242
           <li>(optional) Mike Scott, “Key words of individual texts: Aboutness and style”</li>
         </ul>
       </td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="due">
     <tr>
       <td></td>
       <td class="date"><span class="lang-en">28 Oct</span><span class="lang-zh" lang="zh-Hant">10月28日</span></td>
-      <td colspan="2"><a href="#"><span class="lang-en">Assignment 2 due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">作業2截止，上午9:00</span></a></td>
+      <td colspan="3"><a href="#"><span class="lang-en">Assignment 2 due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">作業2截止，上午9:00</span></a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -320,6 +329,7 @@ title: CHI3242
           <li>TF-IDF</li>
         </ul>
       </td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -334,6 +344,7 @@ title: CHI3242
           <li>胡韌奮：〈語言模型〉，第九章，李飛躍、桑海（主編）《數字人文引論》。北京：中華書局，2026年</li>
         </ul>
       </td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -349,13 +360,14 @@ title: CHI3242
           <li>Katherine Elkins, <em>The Shapes of Stories: Sentiment Analysis for Narrative</em> (optional)</li>
         </ul>
       </td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="due">
     <tr>
       <td></td>
       <td class="date"><span class="lang-en">18 Nov</span><span class="lang-zh" lang="zh-Hant">11月18日</span></td>
-      <td colspan="2"><a href="#"><span class="lang-en">Final Project Proposal due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">期末專題計劃書截止，上午9:00</span></a></td>
+      <td colspan="3"><a href="#"><span class="lang-en">Final Project Proposal due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">期末專題計劃書截止，上午9:00</span></a></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -369,6 +381,7 @@ title: CHI3242
           <li><span class="lang-en">LLMs for data extraction; Python API (OpenRouter)</span><span class="lang-zh" lang="zh-Hant">以大型語言模型抽取資料；Python API（OpenRouter）</span></li>
         </ul>
       </td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -377,13 +390,14 @@ title: CHI3242
       <td class="date"><span class="lang-en">26 Nov</span><span class="lang-zh" lang="zh-Hant">11月26日</span></td>
       <td class="topic"><span class="lang-en">Review and Loose Ends</span><span class="lang-zh" lang="zh-Hant">課程總結與收尾</span></td>
       <td><span class="lang-en">Integrative review of methods, tying up loose ends, and final-project preparation</span><span class="lang-zh" lang="zh-Hant">方法整合回顧、補足未竟內容，以及期末專題準備</span></td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="due">
     <tr>
       <td></td>
       <td class="date"><span class="lang-en">7 Dec</span><span class="lang-zh" lang="zh-Hant">12月7日</span></td>
-      <td colspan="2"><span class="lang-en">Final project due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">期末專題截止，上午9:00</span></td>
+      <td colspan="3"><span class="lang-en">Final project due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">期末專題截止，上午9:00</span></td>
     </tr>
   </tbody>
 </table>
