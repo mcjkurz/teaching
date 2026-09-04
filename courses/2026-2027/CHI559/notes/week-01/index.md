@@ -31,7 +31,7 @@ title: CHI559 第1週講義
 <div class="prompt">
 <p class="prompt-label">提示 1</p>
 <pre>The 红楼梦 novel is already in this folder as a .txt file.
-jieba, qhchina, numpy, matplotlib, and scikit-learn are already installed; do not create a virtual environment or reinstall packages.
+jieba, qhchina, numpy, matplotlib, and scikit-learn are already installed; do not create a virtual environment.
 
 In the root folder, create a Python script (.py) that:
 - loads that file and splits it into 120 chapters (each chapter starts with 第 and a Chinese numeral), for example:
@@ -39,6 +39,7 @@ In the root folder, create a Python script (.py) that:
 第一回  甄士隐梦幻识通灵　贾雨村风尘怀闺秀
 第八十五回  贾存周报升郎中任　薛文起复惹放流刑
 第一一八回  记微嫌舅兄欺弱女　惊谜语妻妾谏痴人
+
 - tokenizes each chapter with jieba
 - finds the 300 most common words in the novel
 - calculates a z-score for each of those word frequencies in each chapter
@@ -52,7 +53,9 @@ In the root folder, create a Python script (.py) that:
 <p>確認無誤後，再把下列提示貼進 OpenCode：</p>
 <div class="prompt">
 <p class="prompt-label">提示 2</p>
-<pre>Create an HTML page that lets me rotate and move that 3D PCA projection.
+<pre>plotly is already installed.
+
+Create an HTML page that lets me rotate and move that 3D PCA projection.
 The page should also show the top 20 positive features and the top 20 negative features
 for the first 80 chapters and for the last 40 chapters.</pre>
 </div>
