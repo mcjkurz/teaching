@@ -43,7 +43,7 @@ title: CHI559
 <p>請於<strong>第一次研討課之前</strong>完成下列準備。碩士班<strong>必須使用個人電腦</strong>，課堂不另備公用電腦。</p>
 <ol>
 <li>註冊 <a href="https://github.com/">GitHub</a> 帳號。</li>
-<li>請到 <a href="https://keyreg.qhchina.org">keyreg.qhchina.org</a> 領取你的 API 金鑰。不要把金鑰寫進倉庫，也不要與他人分享。</li>
+<li>請到 <a href="https://keyreg.qhchina.org">keyreg.qhchina.org</a> 領取你的 API 金鑰（課程代碼：chi559）。不要把金鑰寫進倉庫，也不要與他人分享。</li>
 <li>在個人電腦上安裝 <a href="https://www.python.org/downloads/">Python</a>、<a href="https://code.visualstudio.com/">Visual Studio Code（VS Code）</a>，然後安裝 <a href="https://opencode.ai/">OpenCode</a>。</li>
 </ol>
 <p>第一週將搭建研究環境（GitHub、VS Code、OpenCode、人工智能編程助手）。請攜已安裝妥當的手提電腦上課。</p>

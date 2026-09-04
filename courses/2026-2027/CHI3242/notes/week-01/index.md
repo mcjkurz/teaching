@@ -10,7 +10,7 @@ title: CHI3242 第1週講義
 <h2>1. 建立倉庫並啟動 Codespace</h2>
 <ol>
 <li>註冊 <a href="https://github.com/">GitHub</a> 帳號。</li>
-<li>請到 <a href="https://keyreg.qhchina.org">keyreg.qhchina.org</a> 領取你的 API 金鑰。</li>
+<li>請到 <a href="https://keyreg.qhchina.org">keyreg.qhchina.org</a> 領取你的 API 金鑰（課程代碼：chi3242）。</li>
 <li>前往模板倉庫 <a href="https://github.com/mcjkurz/qh-starter">https://github.com/mcjkurz/qh-starter</a>，按 <strong>Use this template</strong>，建立你自己的倉庫（不要直接在模板上改）。</li>
 <li>進入你剛建立的倉庫，按 <strong>Code → Codespaces → Create codespace</strong>。首次啟動需數分鐘，以完成套件安裝。</li>
 </ol>
