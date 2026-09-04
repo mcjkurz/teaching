@@ -53,11 +53,9 @@ In the root folder, create a Python script (.py) that:
 <p>確認無誤後，再把下列提示貼進 OpenCode：</p>
 <div class="prompt">
 <p class="prompt-label">提示 2</p>
-<pre>plotly is already installed.
-
-Create an HTML page that lets me rotate and move that 3D PCA projection.
+<pre>Create an HTML page that lets me rotate and move that 3D PCA projection.
 The page should also show the top 20 positive features and the top 20 negative features
-for the first 80 chapters and for the last 40 chapters.</pre>
+for the first 80 chapters and for the last 40 chapters. Use plotly (already installed).</pre>
 </div>
 
 <p>完成後，Codespace 裡多半打不開這個 HTML。在左側檔案上按右鍵，選 <strong>Download</strong>，下載到自己的電腦，再用瀏覽器打開。若一切順利，你應看到類似下面的結果：可旋轉的三維投影，以及前八十回與後四十回的正負特徵詞。也可以直接打開這個<a href="hongloumeng_pca_3d.html">互動示例</a>。</p>
