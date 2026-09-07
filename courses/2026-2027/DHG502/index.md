@@ -3,7 +3,7 @@ layout: default
 title: DHG502
 ---
 
-<p class="updated">Last updated: Sep 3, 2026</p>
+<p class="updated">Last updated: Sep 7, 2026</p>
 <div class="course-header">
 <div class="course-header-info">
 <h1>DHG 502 Course Syllabus</h1>
@@ -75,7 +75,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
 <h2>Course Design</h2>
 <p><strong>1. Seminars.</strong> Weekly seminars combine conceptual discussion with supervised hands-on practice. The recurring workflow is source → documented data → method → validation → historical interpretation. Starter materials and a short technical glossary will be provided.</p>
 <p><strong>2. Assignments.</strong> Assignment 0 is ungraded. Two graded assignments, a project proposal, and the final project are submitted through Moodle. Instructions are linked in the schedule.</p>
-<p><strong>3. In-class presentation.</strong> Each student presents an academic paper during one of five presentation sessions (Weeks 3, 5, 7, 9, and 11) and leads the discussion.</p>
+<p><strong>3. In-class presentation.</strong> Each student presents an academic paper during one of five presentation sessions (Weeks 3, 5, 7, 9, and 11) and leads the discussion. For Weeks 3, 5, and 7, an approved Asia-focused pool is the five articles of the <em>Journal of Digital History</em> special issue “ReOrienting Digital History” (2024): Armand; Vierthaler; Henriot; Kaske &amp; Kessler; Levine &amp; Huang.</p>
 <p><strong>4. Final project.</strong> Students work individually or in groups of up to three, apply one or more course methods to a historical question, and submit a reproducible GitHub repository and an English report. Full requirements and marking criteria are on the <a href="assignments/">assignments page</a>.</p>
 
 <h2>Class Schedule</h2>
@@ -131,6 +131,9 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           <ul class="readings">
             <li>Billy Perrigo, “OpenAI Used Kenyan Workers on Less Than $2 Per Hour to Make ChatGPT Less Toxic,” <em>TIME</em>, 18 January 2023</li>
             <li>Johan Jarlbrink, “All the Work that Makes It Work: Digital Methods and Manual Labour,” in <em>Digital Histories: Emergent Approaches within the New Digital History</em> (2020)</li>
+            <li>Roopika Risam, <em>New Digital Worlds: Postcolonial Digital Humanities in Theory, Praxis, and Pedagogy</em> (Northwestern UP, 2018), Introduction</li>
+            <li>(optional) Lara Putnam, “The Transnational and the Text-Searchable: Digitized Sources and the Shadows They Cast,” <em>American Historical Review</em> 121, no. 3 (2016)</li>
+            <li>(optional) Catherine D’Ignazio and Lauren F. Klein, <em>Data Feminism</em> (MIT Press, 2020), Chapter 6, “The Numbers Don’t Speak for Themselves” (open access)</li>
           </ul>
         </div>
       </td>
@@ -160,13 +163,15 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           <strong class="schedule-label">Readings</strong>
           <ul class="readings">
             <li>Jo Guldi, <em>The Dangerous Art of Text Mining: A Methodology for Digital History</em>, Introduction and Chapter 1</li>
+            <li>Donald Sturgeon, “Digitizing Premodern Text with the Chinese Text Project,” <em>Journal of Chinese History</em> 4, no. 2 (2020)</li>
+            <li>Cécile Armand, “ReOrienting Digital History: New Frontiers in Chinese Studies,” <em>Journal of Digital History</em> 3, no. 3 (2024, open access), selected sections</li>
           </ul>
         </div>
       </td>
     </tr>
     <tr class="presentation">
       <td class="topic">Presentation</td>
-      <td>An academic paper of your choosing on corpus construction, text mining, or computational argument in historical research</td>
+      <td>An academic paper of your choosing on corpus construction, text mining, or computational argument in historical research. An approved Asia-focused pool is the five articles of the <em>Journal of Digital History</em> special issue “ReOrienting Digital History” (2024): Armand; Vierthaler; Henriot; Kaske &amp; Kessler; Levine &amp; Huang.</td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -208,13 +213,16 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           <strong class="schedule-label">Readings</strong>
           <ul class="readings">
             <li>Scott B. Weingart, “Demystifying Networks, Parts I &amp; II”</li>
+            <li>Ruth Ahnert, Sebastian E. Ahnert, Catherine Nicole Coleman, and Scott B. Weingart, <em>The Network Turn: Changing Perspectives in the Humanities</em> (Cambridge Elements, 2020; open access)</li>
+            <li>Hilde De Weerdt, Brent Ho, Allon Wagner, Qiao Jiyan, and Chu Mingkin, “Is There a Faction in This List?,” <em>Journal of Chinese History</em> (2016)</li>
+            <li>(optional) Henrike Rudolph and Song Chen, eds., “Beyond Guanxi: Chinese Historical Networks,” <em>Journal of Historical Network Research</em> 4 (2020)</li>
           </ul>
         </div>
       </td>
     </tr>
     <tr class="presentation">
       <td class="topic">Presentation</td>
-      <td>An academic paper of your choosing on historical network analysis</td>
+      <td>An academic paper of your choosing on historical network analysis. An approved Asia-focused pool is the five articles of the <em>Journal of Digital History</em> special issue “ReOrienting Digital History” (2024): Armand; Vierthaler; Henriot; Kaske &amp; Kessler; Levine &amp; Huang.</td>
     </tr>
   </tbody>
   <tbody class="due">
@@ -240,8 +248,14 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
         <div class="schedule-section reading">
           <strong class="schedule-label">Readings</strong>
           <ul class="readings">
+            <li>Maria Levchenko, <a href="https://aclanthology.org/2025.lm4dh-1.7/">“Evaluating LLMs for Historical Document OCR: A Methodological Framework for Digital Humanities”</a> (2025), Introduction and Conclusion</li>
+            <li>Donald Sturgeon, “Unsupervised Extraction of Training Data for Pre-Modern Chinese OCR,” <em>Proceedings of FLAIRS-30</em> (2017)</li>
+          </ul>
+        </div>
+        <div class="schedule-section">
+          <strong class="schedule-label">Lab guide</strong>
+          <ul class="readings">
             <li>Laura Turner O’Hara, <a href="https://programminghistorian.org/en/lessons/cleaning-ocrd-text-with-regular-expressions">“Cleaning OCR’d Text with Regular Expressions”</a> (selected sections)</li>
-            <li>(optional) Maria Levchenko, <a href="https://aclanthology.org/2025.lm4dh-1.7/">“Evaluating LLMs for Historical Document OCR: A Methodological Framework for Digital Humanities”</a> (2025), Introduction and Conclusion</li>
           </ul>
         </div>
       </td>
@@ -270,7 +284,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
         <div class="schedule-section reading">
           <strong class="schedule-label">Readings</strong>
           <ul class="readings">
-            <li>(optional) Ted Underwood, <a href="https://tedunderwood.com/2012/04/07/topic-modeling-made-just-simple-enough/">“Topic Modeling Made Just Simple Enough”</a> (2012)</li>
+            <li>Ted Underwood, <a href="https://tedunderwood.com/2012/04/07/topic-modeling-made-just-simple-enough/">“Topic Modeling Made Just Simple Enough”</a> (2012)</li>
             <li>(optional) David M. Blei, “Probabilistic Topic Models” (2012)</li>
           </ul>
         </div>
@@ -278,7 +292,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
     </tr>
     <tr class="presentation">
       <td class="topic">Presentation</td>
-      <td>An academic paper of your choosing on topic modeling</td>
+      <td>An academic paper of your choosing on topic modeling. An approved Asia-focused pool is the five articles of the <em>Journal of Digital History</em> special issue “ReOrienting Digital History” (2024): Armand; Vierthaler; Henriot; Kaske &amp; Kessler; Levine &amp; Huang.</td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -292,7 +306,8 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           <ul class="readings">
             <li>Interpretation, preservation, reconstruction, authenticity, and the digital representation of cultural heritage</li>
             <li>Digital museum, library, and archive platforms; examples from the Hong Kong Heritage Museum and Hong Kong Palace Museum</li>
-            <li>3D and virtual reconstructions as case studies in historical accuracy, interpretation, and audience experience</li>
+            <li>Computer vision and “distant viewing”: what computational image analysis can and cannot “see,” and how it relates to manual annotation</li>
+            <li>3D and virtual reconstructions as case studies in historical accuracy and interpretation (standards and critique; hands-on 3D modeling is covered in another course)</li>
             <li>Hands-on: use <a href="https://immarkus.xmarkus.org/">IMMARKUS</a> to annotate regions in an East Asian historical image; inspect CSV and JSON-LD exports</li>
           </ul>
         </div>
@@ -300,7 +315,11 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           <strong class="schedule-label">Readings</strong>
           <ul class="readings">
             <li>Freeman Tilden, <em>Interpreting Our Heritage</em>, Introduction and selected chapter on interpretation</li>
+            <li>Taylor Arnold and Lauren Tilton, <em>Distant Viewing: Computational Exploration of Digital Images</em> (MIT Press, 2023; open access), Chapter 1, “Distant Viewing: Theory”</li>
+            <li>Sarah Kenderdine, “Radical Intangibles: Materializing the Ephemeral,” <em>Museum Anthropology Review</em> 19, no. 2 (2024), selected sections</li>
+            <li><em>The London Charter for the Computer-Based Visualisation of Cultural Heritage</em> (standards document)</li>
             <li>(optional) Hilde De Weerdt et al., <a href="https://dhq.digitalhumanities.org/vol/19/4/000808/000808.html">“Contextual Semantic Text and Image Annotation in the MARKUS Environment”</a>, <em>Digital Humanities Quarterly</em> 19, no. 4 (2025), selected sections</li>
+            <li>(optional) A chapter from Fiona Cameron and Sarah Kenderdine, eds., <em>Theorizing Digital Cultural Heritage: A Critical Discourse</em> (MIT Press, 2007)</li>
           </ul>
         </div>
         <div class="schedule-section">
@@ -335,7 +354,9 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
         <div class="schedule-section reading">
           <strong class="schedule-label">Readings</strong>
           <ul class="readings">
-            <li>(optional) Daniel Jurafsky and James H. Martin, “Vector Semantics and Embeddings”</li>
+            <li>Daniel Jurafsky and James H. Martin, “Vector Semantics and Embeddings”</li>
+            <li>Austin C. Kozlowski, Matt Taddy, and James A. Evans, “The Geometry of Culture: Analyzing the Meanings of Class through Word Embeddings,” <em>American Sociological Review</em> 84, no. 5 (2019)</li>
+            <li>(optional) William L. Hamilton, Jure Leskovec, and Dan Jurafsky, “Diachronic Word Embeddings Reveal Statistical Laws of Semantic Change” (ACL 2016)</li>
           </ul>
         </div>
       </td>
@@ -395,6 +416,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
             <li>Ted Underwood, Laura K. Nelson, and Matthew Wilkens, “Can Language Models Represent the Past without Anachronism?”</li>
             <li>Thierry Poibeau, “What Do Historical Language Models Model?”</li>
             <li>(optional) Maximilian Hindermann et al., <a href="https://openhumanitiesdata.metajnl.com/articles/10.5334/johd.481">“The RISE Humanities Data Benchmark: A Framework for Evaluating Large Language Models for Humanities Tasks”</a> (2026), Introduction</li>
+            <li>(optional) A recent piece treating generative AI as an object of historical source criticism, including documented failure modes such as models “over-historicizing” transcriptions with anachronistic archaic characters (to be selected from current literature)</li>
           </ul>
         </div>
       </td>
@@ -422,6 +444,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           <ul class="readings">
             <li>Carl T. Bergstrom and Jevin D. West, <em>Calling Bullshit: The Art of Skepticism in a Data-Driven World</em>, Chapters 4 (“Causality”) and 5 (“Numbers and Nonsense”)</li>
             <li>Toby Burrows, <a href="https://doi.org/10.1007/s42803-023-00068-9">“Reproducibility, Verifiability, and Computational Historical Research”</a> (2023), selected sections</li>
+            <li>(optional) An article from the <em>Journal of Digital History</em> special issue “ReOrienting Digital History” (2024) as an Asia-specific visualization case that doubles as a reproducibility exemplar (code and data layers published with the narrative)</li>
           </ul>
         </div>
       </td>
