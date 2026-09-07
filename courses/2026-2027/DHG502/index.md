@@ -81,13 +81,14 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
 <h2>Class Schedule</h2>
 
 <div class="table-scroll">
-<table class="schedule no-event">
+<table class="schedule no-event with-notes">
   <thead>
     <tr>
       <th>Week</th>
       <th>Date</th>
       <th>Topic</th>
       <th>Class Content and Readings</th>
+      <th>Notes</th>
     </tr>
   </thead>
   <tbody class="block-a">
@@ -111,6 +112,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           </ul>
         </div>
       </td>
+      <td class="notes"><a href="notes/week-01/">Notes</a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -137,13 +139,14 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           </ul>
         </div>
       </td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="due">
     <tr>
       <td></td>
       <td class="date">21 Sep</td>
-      <td colspan="2"><a href="assignments/">Assignment 0 (not graded) due, 9:00 am</a></td>
+      <td colspan="3"><a href="assignments/">Assignment 0 (not graded) due, 9:00 am</a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -168,10 +171,12 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           </ul>
         </div>
       </td>
+      <td class="notes"></td>
     </tr>
     <tr class="presentation">
       <td class="topic">Presentation</td>
       <td>An academic paper of your choosing on corpus construction, text mining, or computational argument in historical research</td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -193,6 +198,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           </ul>
         </div>
       </td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -219,17 +225,19 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           </ul>
         </div>
       </td>
+      <td class="notes"></td>
     </tr>
     <tr class="presentation">
       <td class="topic">Presentation</td>
       <td>An academic paper of your choosing on historical network analysis</td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="due">
     <tr>
       <td></td>
       <td class="date">12 Oct</td>
-      <td colspan="2"><a href="assignments/">Assignment 1 due, 9:00 am</a></td>
+      <td colspan="3"><a href="assignments/">Assignment 1 due, 9:00 am</a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -259,13 +267,14 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           </ul>
         </div>
       </td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="makeup">
     <tr>
       <td></td>
       <td class="date">19 Oct</td>
-      <td colspan="2">No class (Day following Chung Yeung Festival)</td>
+      <td colspan="3">No class (Day following Chung Yeung Festival)</td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -289,10 +298,12 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           </ul>
         </div>
       </td>
+      <td class="notes"></td>
     </tr>
     <tr class="presentation">
       <td class="topic">Presentation</td>
       <td>An academic paper of your choosing on topic modeling</td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -328,13 +339,14 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           </ul>
         </div>
       </td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="due">
     <tr>
       <td></td>
       <td class="date">9 Nov</td>
-      <td colspan="2"><a href="assignments/">Assignment 2 due, 9:00 am</a></td>
+      <td colspan="3"><a href="assignments/">Assignment 2 due, 9:00 am</a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -359,10 +371,12 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           </ul>
         </div>
       </td>
+      <td class="notes"></td>
     </tr>
     <tr class="presentation">
       <td class="topic">Presentation</td>
       <td>An academic paper of your choosing on word embeddings or computational conceptual history</td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -386,13 +400,14 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           </ul>
         </div>
       </td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="due">
     <tr>
       <td></td>
       <td class="date">20 Nov</td>
-      <td colspan="2"><a href="assignments/">Final Project Proposal due, 9:00 am</a></td>
+      <td colspan="3"><a href="assignments/">Final Project Proposal due, 9:00 am</a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -419,10 +434,12 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           </ul>
         </div>
       </td>
+      <td class="notes"></td>
     </tr>
     <tr class="presentation">
       <td class="topic">Presentation</td>
       <td>An academic paper of your choosing on large language models, structured extraction, semantic search, or RAG in historical research</td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -447,13 +464,14 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           </ul>
         </div>
       </td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="due">
     <tr>
       <td></td>
       <td class="date">7 Dec</td>
-      <td colspan="2">Final project due, 9:00 am</td>
+      <td colspan="3">Final project due, 9:00 am</td>
     </tr>
   </tbody>
 </table>
