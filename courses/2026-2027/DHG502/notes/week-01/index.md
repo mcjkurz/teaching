@@ -38,8 +38,8 @@ title: DHG 502 Week 1 Notes
 <ol>
 <li>Open a terminal:
 <ul>
-<li><strong>1(a) local:</strong> in VS Code, open the terminal (<strong>Terminal → New Terminal</strong>).</li>
-<li><strong>1(b) browser:</strong> in your Codespace, open the terminal in the Codespace window.</li>
+<li><strong>(a) Local:</strong> in VS Code, open the terminal (<strong>Terminal → New Terminal</strong>).</li>
+<li><strong>(b) Browser:</strong> in your Codespace, open the terminal in the Codespace window.</li>
 </ul>
 </li>
 <li>Type <code>opencode</code> and press Enter.</li>
@@ -53,8 +53,8 @@ title: DHG 502 Week 1 Notes
 <h2>3. In-class exercise</h2>
 <p>Download <a href="明史.txt">明史.txt</a> and place it in the root folder of your working directory. This is the standard <em>History of Ming</em> (明史) in classical Chinese, traditional characters, UTF-8.</p>
 <ul>
-<li><strong>1(a) local:</strong> save the file into your <code>dhg502</code> repository folder (the one you opened in VS Code).</li>
-<li><strong>1(b) browser:</strong> drag the downloaded file into the Codespace file explorer to upload it, or download it directly into the Codespace using the terminal.</li>
+<li><strong>(a) Local:</strong> save the file into your <code>dhg502</code> repository folder (the one you opened in VS Code).</li>
+<li><strong>(b) Browser:</strong> drag the downloaded file into the Codespace file explorer to upload it, or download it directly into the Codespace using the terminal.</li>
 </ul>
 <p>When the file is in place, copy the following prompt in full and paste it into OpenCode:</p>
 <div class="prompt">
@@ -98,10 +98,16 @@ Then build a single, well-styled HTML page that shows, for each topic:
 
 Save the page as 明史_topics.html.</pre>
 </div>
-<p>When the HTML file is generated, open it in Chrome or Edge. (<strong>1(a) local:</strong> in VS Code, right-click the file and select <strong>Reveal in File Explorer</strong> / <strong>Open in Finder</strong>, then double-click it. <strong>1(b) browser:</strong> HTML often will not open inside the Codespace; right-click the file, select <strong>Download</strong>, then open it on your computer.) You should see a page listing each of the 20 topics with a short label and explanation, its top characters, and the three segments of the <em>明史</em> where that topic is strongest.</p>
+<p>When the HTML file is generated, open it in Chrome or Edge:</p>
+<ul>
+<li><strong>(a) Local:</strong> in VS Code, right-click the file and select <strong>Reveal in File Explorer</strong> / <strong>Open in Finder</strong>, then double-click it.</li>
+<li><strong>(b) Browser:</strong> HTML often will not open inside the Codespace; right-click the file, select <strong>Download</strong>, then open it on your computer.</li>
+</ul>
+<p>You should see a page listing each of the 20 topics with a short label and explanation, its top characters, and the three segments of the <em>明史</em> where that topic is strongest.</p>
 
 <h2>4. Save to GitHub</h2>
-<p>Commit and push your work to your repository. Three options, choose one:</p>
+<p>Commit and push your work so that your changes are preserved in your repository. If you used a Codespace, closing the browser or stopping the Codespace does not delete your files immediately: GitHub removes Codespaces only after they have been idle for a number of days. Until then, uncommitted changes are kept. But once a Codespace is deleted, anything not pushed to your repository is lost, so always commit and push when you finish. The same applies to local work: anything not committed and pushed lives only on your computer.</p>
+<p>Three options, choose one:</p>
 <ol>
 <li><strong>Buttons:</strong> click the Source Control icon on the left (the branch icon). Write a short message (e.g. <code>first commit</code>), then click <strong>Commit</strong>. Then click <strong>Sync Changes</strong> (local) or <strong>Push</strong> (Codespaces) to push.</li>
 <li><strong>Terminal:</strong> if you are still in OpenCode, type <code>/exit</code> to leave it, then run:
@@ -116,4 +122,3 @@ git push</pre>
 </div>
 </li>
 </ol>
-<p>If you used a Codespace, closing the browser or stopping the Codespace does not delete your files immediately: GitHub removes Codespaces only after they have been idle for a number of days. Until then, uncommitted changes are kept. But once a Codespace is deleted, anything not pushed to your repository is lost, so always commit and push when you finish.</p>
