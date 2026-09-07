@@ -163,8 +163,8 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           <strong class="schedule-label">Readings</strong>
           <ul class="readings">
             <li>Jo Guldi, <em>The Dangerous Art of Text Mining: A Methodology for Digital History</em>, Introduction and Chapter 1</li>
-            <li>Donald Sturgeon, “Digitizing Premodern Text with the Chinese Text Project,” <em>Journal of Chinese History</em> 4, no. 2 (2020)</li>
-            <li>Cécile Armand, “ReOrienting Digital History: New Frontiers in Chinese Studies,” <em>Journal of Digital History</em> 3, no. 3 (2024, open access), selected sections</li>
+            <li>(optional) Donald Sturgeon, “Digitizing Premodern Text with the Chinese Text Project,” <em>Journal of Chinese History</em> 4, no. 2 (2020)</li>
+            <li>(optional) Cécile Armand, “ReOrienting Digital History: New Frontiers in Chinese Studies,” <em>Journal of Digital History</em> 3, no. 3 (2024, open access), selected sections</li>
           </ul>
         </div>
       </td>
@@ -307,19 +307,18 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
             <li>Interpretation, preservation, reconstruction, authenticity, and the digital representation of cultural heritage</li>
             <li>Digital museum, library, and archive platforms; examples from the Hong Kong Heritage Museum and Hong Kong Palace Museum</li>
             <li>Computer vision and “distant viewing”: what computational image analysis can and cannot “see,” and how it relates to manual annotation</li>
-            <li>3D and virtual reconstructions as case studies in historical accuracy and interpretation (standards and critique; hands-on 3D modeling is covered in another course)</li>
+            <li>3D and virtual reconstructions as case studies in historical accuracy and interpretation (critique only; hands-on 3D modeling is covered in another course)</li>
             <li>Hands-on: use <a href="https://immarkus.xmarkus.org/">IMMARKUS</a> to annotate regions in an East Asian historical image; inspect CSV and JSON-LD exports</li>
           </ul>
         </div>
         <div class="schedule-section reading">
           <strong class="schedule-label">Readings</strong>
           <ul class="readings">
-            <li>Freeman Tilden, <em>Interpreting Our Heritage</em>, Introduction and selected chapter on interpretation</li>
+            <li>Freeman Tilden, <em>Interpreting Our Heritage</em>, Introduction</li>
             <li>Taylor Arnold and Lauren Tilton, <em>Distant Viewing: Computational Exploration of Digital Images</em> (MIT Press, 2023; open access), Chapter 1, “Distant Viewing: Theory”</li>
             <li>Sarah Kenderdine, “Radical Intangibles: Materializing the Ephemeral,” <em>Museum Anthropology Review</em> 19, no. 2 (2024), selected sections</li>
-            <li><em>The London Charter for the Computer-Based Visualisation of Cultural Heritage</em> (standards document)</li>
             <li>(optional) Hilde De Weerdt et al., <a href="https://dhq.digitalhumanities.org/vol/19/4/000808/000808.html">“Contextual Semantic Text and Image Annotation in the MARKUS Environment”</a>, <em>Digital Humanities Quarterly</em> 19, no. 4 (2025), selected sections</li>
-            <li>(optional) A chapter from Fiona Cameron and Sarah Kenderdine, eds., <em>Theorizing Digital Cultural Heritage: A Critical Discourse</em> (MIT Press, 2007)</li>
+            <li>(optional) Fiona Cameron and Sarah Kenderdine, eds., <em>Theorizing Digital Cultural Heritage: A Critical Discourse</em> (MIT Press, 2007)</li>
           </ul>
         </div>
         <div class="schedule-section">
@@ -383,7 +382,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
         <div class="schedule-section reading">
           <strong class="schedule-label">Readings</strong>
           <ul class="readings">
-            <li>Agustín Cosovschi, <a href="https://programminghistorian.org/en/lessons/designing-database-nodegoat">“From Sources to Data: Designing a Database for the Humanities and Social Sciences with nodegoat”</a> (selected sections)</li>
+            <li>Matthew Lincoln, <a href="https://programminghistorian.org/en/lessons/json-and-jq">“Reshaping JSON with jq”</a> (selected sections)</li>
           </ul>
         </div>
       </td>
