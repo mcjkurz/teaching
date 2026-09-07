@@ -78,25 +78,26 @@ Model:
     topics = lda.get_topics(n_words=20)
 
 Output:
-- Produce a .txt file (e.g. 明史_topics.txt) listing all 20 topics, each with its top 20 words (word + probability), plus a short header (corpus, number of segments, topics, iterations).</pre>
+- Produce a .txt file (e.g. 明史_topics.txt) listing all 20 topics, each with its top 20 words (word + probability), plus a short header (corpus, number of segments, topics, iterations).
+- For each topic, also list the 3 top documents (segments) for that topic, i.e. the segments where the topic is strongest (lda.get_document_topics(doc_id=0, sort_by_prob=True)).</pre>
 </div>
 
-<p>When it finishes, check the result: open <code>明史_topics.txt</code> and inspect the 20 topics and their top characters.</p>
+<p>When it finishes, check the result: open <code>明史_topics.txt</code> and inspect the 20 topics, their top characters, and the strongest segments for each.</p>
 <p>Then copy the following prompt and paste it into OpenCode:</p>
 <div class="prompt">
 <p class="prompt-label">Prompt 2</p>
-<pre>Now explain the topics and present them in a nice HTML page.
+<pre>Build on the 明史_topics.txt results file from the previous step. Do not re-run the topic model; read that file and work from it.
 
-For each of the 20 topics, look at its top 20 words from 明史_topics.txt and:
+For each of the 20 topics, look at its top 20 words and:
 - write a short label (2-4 words) naming what the topic seems to be about;
 - write a one-to-two sentence explanation of what these characters have in common and what the topic likely represents in the 明史.
 
-Then build a single, well-styled HTML page that shows, for each topic:
+Then create a single, well-styled HTML page (明史_topics.html) that shows, for each topic:
 - the topic number and your label and explanation;
 - the top 20 words with their probabilities;
-- the 3 top documents (segments) for that topic, i.e. the segments where the topic is strongest (lda.get_document_topics(doc_id=0, sort_by_prob=True)).
+- the 3 top documents (segments) for that topic.
 
-Save the page as 明史_topics.html.</pre>
+Take all of this from 明史_topics.txt.</pre>
 </div>
 <p>When the HTML file is generated, open it in Chrome or Edge:</p>
 <ul>
