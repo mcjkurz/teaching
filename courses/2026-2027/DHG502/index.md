@@ -74,6 +74,14 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
 
 <h2>Course Design</h2>
 <p><strong>1. Seminars.</strong> Weekly seminars combine conceptual discussion with supervised hands-on practice. The recurring workflow is source → documented data → method → validation → historical interpretation. Starter materials and a short technical glossary will be provided.</p>
+<div style="font-size: 0.9em;">
+<p><strong>Examples of in-class tasks.</strong> Starting in Week 6 (12 Oct), each seminar includes a specific hands-on task that everyone works on together. Examples of such tasks:</p>
+<ul>
+<li>Use the Multimedia Information System (offered by the Hong Kong Public Libraries) to find photos and articles about old Hong Kong. You can focus on a particularly famous place (Kai Tak Airport, Kowloon Walled City, e.g.). Choose one or two articles and summarize them, including the photographs you found. Offer your analysis of the platform: how does it facilitate digital scholarship?</li>
+<li>Go to one of the many Hong Kong museums. What are the digital tools that the museum curators used to welcome the audience? Write a 1,000-word report of your visit.</li>
+<li>Given the provided dataset, train a topic model and identify some of the most important topics. Analyze them: what are these topics about? Is your result replicable? What does the topic distribution tell you about the dataset?</li>
+</ul>
+</div>
 <p><strong>2. Assignments.</strong> Assignment 0 is ungraded. Two graded assignments, a project proposal, and the final project are submitted through Moodle. Instructions are linked in the schedule.</p>
 <p><strong>3. In-class presentation.</strong> Each student presents an academic paper during one of five presentation sessions (Weeks 3, 5, 7, 9, and 11) and leads the discussion. The paper may be in English or Chinese, but the presentation and discussion must be in English.</p>
 <p><strong>4. Final project.</strong> Students work individually or in groups of up to three, apply one or more course methods to a historical question, and submit a reproducible GitHub repository and an English report. Full requirements and marking criteria are on the <a href="assignments/">assignments page</a>.</p>

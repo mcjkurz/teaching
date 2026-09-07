@@ -7,56 +7,34 @@ title: DHG 502 Week 1 Notes
 <p><a href="../../">DHG 502 syllabus</a></p>
 <h1>Week 1 — Introduction</h1>
 
-<p>Complete the <a href="../../#preliminary-setup">preliminary setup</a> from the syllabus <strong>before</strong> the first seminar. MA students must use their own computers. There are two ways to work through the exercises below:</p>
+<p>Complete the <a href="../../#preliminary-setup">preliminary setup</a> from the syllabus before the first seminar. Two paths are offered below:</p>
 <ul>
-<li><strong>(a) Local computer</strong> — install the tools on your own laptop. Choose this if you are comfortable installing software and using a terminal.</li>
-<li><strong>(b) Browser (GitHub Codespaces)</strong> — work entirely in the browser, with no local installation. <strong>Recommended if you have little experience</strong>; it is the smoothest way to get started and you can switch to a local setup later.</li>
+<li><strong>(a) Local computer</strong> — install the tools on your laptop.</li>
+<li><strong>(b) Browser (GitHub Codespaces)</strong> — no installation; <strong>recommended if you have little experience</strong>.</li>
 </ul>
-<p>Both paths lead to the same in-class exercise. Pick one and follow its steps in section 1, then continue with sections 2–4, which are the same for both.</p>
 
-<h2>1. Set up your environment</h2>
-
-<h3>1(a). Local computer</h3>
-<ol>
-<li>Create a <a href="https://github.com/">GitHub</a> account, then create a new public repository named <code>dhg502</code> (initialize it with a <code>README.md</code>).</li>
-<li>Collect your API key at <a href="https://keyreg.qhchina.org">keyreg.qhchina.org</a> (class code: <code>dhg502</code>). Do not put the key in a repository or share it with others.</li>
-<li>Install <a href="https://www.python.org/downloads/">Python</a>, <a href="https://code.visualstudio.com/">Visual Studio Code (VS Code)</a>, and then <a href="https://opencode.ai/">OpenCode</a>.</li>
-<li>Install <a href="https://www.google.com/chrome/">Google Chrome</a> or <a href="https://www.microsoft.com/edge">Microsoft Edge</a>.</li>
-<li>Clone your <code>dhg502</code> repository to your computer and open the folder in VS Code (<strong>File → Open Folder</strong>).</li>
-</ol>
-
-<h3>1(b). Browser (GitHub Codespaces) — recommended for beginners</h3>
+<h2>1. Set up</h2>
+<p>Both paths start the same way:</p>
 <ol>
 <li>Create a <a href="https://github.com/">GitHub</a> account.</li>
-<li>Collect your API key at <a href="https://keyreg.qhchina.org">keyreg.qhchina.org</a> (class code: <code>dhg502</code>). Do not put the key in a repository or share it with others.</li>
-<li>Go to the template repository <a href="https://github.com/mcjkurz/qh-starter">https://github.com/mcjkurz/qh-starter</a>, click <strong>Use this template</strong>, and create your own repository (do not edit the template directly). Name it <code>dhg502</code>.</li>
-<li>Open your new repository, click <strong>Code → Codespaces → Create codespace</strong>. The first startup takes a few minutes while packages install. No software is installed on your computer; everything runs in the browser.</li>
+<li>Collect your API key at <a href="https://keyreg.qhchina.org">keyreg.qhchina.org</a> (class code: <code>dhg502</code>). Keep it private.</li>
+<li>Go to <a href="https://github.com/mcjkurz/qh-starter">https://github.com/mcjkurz/qh-starter</a>, click <strong>Use this template</strong>, and create your own repository named <code>dhg502</code>. It already contains <code>明史.txt</code> and the packages you need.</li>
 </ol>
+<p>Then continue with your chosen path:</p>
+<ul>
+<li><strong>(a) Local:</strong> install <a href="https://www.python.org/downloads/">Python</a>, <a href="https://code.visualstudio.com/">VS Code</a>, <a href="https://opencode.ai/">OpenCode</a>, and <a href="https://www.google.com/chrome/">Chrome</a> or <a href="https://www.microsoft.com/edge">Edge</a>. Clone the <code>dhg502</code> repo and open it in VS Code (<strong>File → Open Folder</strong>).</li>
+<li><strong>(b) Browser:</strong> in your new repo, click <strong>Code → Codespaces → Create codespace</strong>. First startup takes a few minutes; everything runs in the browser.</li>
+</ul>
 
 <h2>2. Connect OpenCode</h2>
-<p>Use the API key you collected at registration. Never write the key into your repository or share it.</p>
 <ol>
-<li>Open a terminal:
-<ul>
-<li><strong>(a) Local:</strong> in VS Code, open the terminal (<strong>Terminal → New Terminal</strong>).</li>
-<li><strong>(b) Browser:</strong> in your Codespace, open the terminal in the Codespace window.</li>
-</ul>
-</li>
-<li>Type <code>opencode</code> and press Enter.</li>
-<li>Type <code>/connect</code> and press Enter.</li>
-<li>Search for and select <strong>OpenRouter</strong>.</li>
-<li>Paste your API key when prompted.</li>
-<li>Type <code>/models</code> and press Enter.</li>
-<li>Select <strong>GLM-5.3-Flash</strong>.</li>
+<li>Open a terminal (<strong>(a)</strong> in VS Code: <strong>Terminal → New Terminal</strong>; <strong>(b)</strong> in the Codespace window).</li>
+<li>Type <code>opencode</code>, then <code>/connect</code>, select <strong>OpenRouter</strong>, and paste your API key.</li>
+<li>Type <code>/models</code> and select <strong>GLM-5.3-Flash</strong>.</li>
 </ol>
 
 <h2>3. In-class exercise</h2>
-<p>Download <a href="明史.txt">明史.txt</a> and place it in the root folder of your working directory. This is the standard <em>History of Ming</em> (明史) in classical Chinese, traditional characters, UTF-8.</p>
-<ul>
-<li><strong>(a) Local:</strong> save the file into your <code>dhg502</code> repository folder (the one you opened in VS Code).</li>
-<li><strong>(b) Browser:</strong> drag the downloaded file into the Codespace file explorer to upload it, or download it directly into the Codespace using the terminal.</li>
-</ul>
-<p>When the file is in place, copy the following prompt in full and paste it into OpenCode:</p>
+<p><code>明史.txt</code> (the <em>History of Ming</em>, classical Chinese, traditional characters, UTF-8) is already in your repo from the template. Paste the following into OpenCode:</p>
 <div class="prompt">
 <p class="prompt-label">Prompt 1</p>
 <pre>Task: Build a character-level LDA topic model on the Ming Dynasty history (明史.txt) using qhchina, and find the top 20 words for each topic.
@@ -76,14 +54,14 @@ Model:
     lda = LDAGibbsSampler(n_topics=20, iterations=100, random_state=42, min_word_count=2, stopwords=stopwords)
     lda.fit(documents)
     topics = lda.get_topics(n_words=20)
+    # to get the top words for a single topic, you can also use:
+    # lda.get_topic_words(topic_id, n_words=20)
 
 Output:
 - Produce a .txt file (e.g. 明史_topics.txt) listing all 20 topics, each with its top 20 words (word + probability), plus a short header (corpus, number of segments, topics, iterations).
 - For each topic, also list the 3 top documents (segments) for that topic, i.e. the segments where the topic is strongest (lda.get_document_topics(doc_id=0, sort_by_prob=True)).</pre>
 </div>
-
-<p>When it finishes, check the result: open <code>明史_topics.txt</code> and inspect the 20 topics, their top characters, and the strongest segments for each.</p>
-<p>Then copy the following prompt and paste it into OpenCode:</p>
+<p>Open <code>明史_topics.txt</code> and check the 20 topics, their top characters, and the strongest segments. Then paste:</p>
 <div class="prompt">
 <p class="prompt-label">Prompt 2</p>
 <pre>Build on the 明史_topics.txt results file from the previous step. Do not re-run the topic model; read that file and work from it.
@@ -99,24 +77,18 @@ Then create a single, well-styled HTML page (明史_topics.html) that shows, for
 
 Take all of this from 明史_topics.txt.</pre>
 </div>
-<p>When the HTML file is generated, open it in Chrome or Edge:</p>
-<ul>
-<li><strong>(a) Local:</strong> in VS Code, right-click the file and select <strong>Reveal in File Explorer</strong> / <strong>Open in Finder</strong>, then double-click it.</li>
-<li><strong>(b) Browser:</strong> HTML often will not open inside the Codespace; right-click the file, select <strong>Download</strong>, then open it on your computer.</li>
-</ul>
-<p>You should see a page listing each of the 20 topics with a short label and explanation, its top characters, and the three segments of the <em>明史</em> where that topic is strongest.</p>
+<p>Open <code>明史_topics.html</code> in Chrome or Edge (<strong>(a)</strong> double-click the file on your computer; <strong>(b)</strong> if it won't open in the Codespace, right-click → <strong>Download</strong>, then open on your computer). You should see each of the 20 topics with a label, explanation, top characters, and strongest segments.</p>
 
 <h2>4. Save to GitHub</h2>
-<p>Commit and push your work so that your changes are preserved in your repository. If you used a Codespace, closing the browser or stopping the Codespace does not delete your files immediately: GitHub removes Codespaces only after they have been idle for a number of days. Until then, uncommitted changes are kept. But once a Codespace is deleted, anything not pushed to your repository is lost, so always commit and push when you finish. The same applies to local work: anything not committed and pushed lives only on your computer.</p>
-<p>Three options, choose one:</p>
+<p>Commit and push so your work is preserved — anything not pushed lives only in your Codespace (or on your laptop) and is lost if that environment is deleted. Three options:</p>
 <ol>
-<li><strong>Buttons:</strong> click the Source Control icon on the left (the branch icon). Write a short message (e.g. <code>first commit</code>), then click <strong>Commit</strong>. Then click <strong>Sync Changes</strong> (local) or <strong>Push</strong> (Codespaces) to push.</li>
-<li><strong>Terminal:</strong> if you are still in OpenCode, type <code>/exit</code> to leave it, then run:
+<li><strong>Buttons:</strong> Source Control icon (left) → message (e.g. <code>first commit</code>) → <strong>Commit</strong> → <strong>Sync Changes</strong> / <strong>Push</strong>.</li>
+<li><strong>Terminal:</strong> <code>/exit</code> OpenCode, then:
 <pre>git add -A
 git commit -m "first commit"
 git push</pre>
 </li>
-<li><strong>Ask the coding assistant:</strong> in OpenCode, ask it to commit and push for you. Copy the following prompt in full and paste it into OpenCode:
+<li><strong>Ask the assistant:</strong> paste into OpenCode:
 <div class="prompt">
 <p class="prompt-label">Prompt 3</p>
 <pre>Commit all changes with the message "first commit", then push to GitHub.</pre>
