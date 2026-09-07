@@ -81,7 +81,7 @@ title: DHG502 Assignments
 </ul>
 
 <h2>In-class Presentation (15%)</h2>
-<p>Give one presentation of approximately 20 minutes during an assigned presentation week. Select an academic paper that uses that week’s method; obtain the instructor’s approval and do not choose a reading already on the syllabus. Explain the research question, historical context, sources/data, method, main findings, and limitations. End with two questions for class discussion. Submit your slides or speaking notes and <code>AI-USE.md</code> on Moodle before class.</p>
+<p>Give one presentation of approximately 20 minutes during an assigned presentation week. Select an academic paper that uses that week’s method; obtain the instructor’s approval and do not choose a reading already on the syllabus. The paper may be in English or Chinese, but the presentation and discussion must be in English. Explain the research question, historical context, sources/data, method, main findings, and limitations. End with two questions for class discussion. Submit your slides or speaking notes and <code>AI-USE.md</code> on Moodle before class.</p>
 
 <h3>Marking criteria</h3>
 <ul>

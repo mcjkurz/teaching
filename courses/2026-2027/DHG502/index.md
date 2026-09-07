@@ -75,7 +75,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
 <h2>Course Design</h2>
 <p><strong>1. Seminars.</strong> Weekly seminars combine conceptual discussion with supervised hands-on practice. The recurring workflow is source → documented data → method → validation → historical interpretation. Starter materials and a short technical glossary will be provided.</p>
 <p><strong>2. Assignments.</strong> Assignment 0 is ungraded. Two graded assignments, a project proposal, and the final project are submitted through Moodle. Instructions are linked in the schedule.</p>
-<p><strong>3. In-class presentation.</strong> Each student presents an academic paper during one of five presentation sessions (Weeks 3, 5, 7, 9, and 11) and leads the discussion. For Weeks 3, 5, and 7, an approved Asia-focused pool is the five articles of the <em>Journal of Digital History</em> special issue “ReOrienting Digital History” (2024): Armand; Vierthaler; Henriot; Kaske &amp; Kessler; Levine &amp; Huang.</p>
+<p><strong>3. In-class presentation.</strong> Each student presents an academic paper during one of five presentation sessions (Weeks 3, 5, 7, 9, and 11) and leads the discussion. The paper may be in English or Chinese, but the presentation and discussion must be in English.</p>
 <p><strong>4. Final project.</strong> Students work individually or in groups of up to three, apply one or more course methods to a historical question, and submit a reproducible GitHub repository and an English report. Full requirements and marking criteria are on the <a href="assignments/">assignments page</a>.</p>
 
 <h2>Class Schedule</h2>
@@ -171,7 +171,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
     </tr>
     <tr class="presentation">
       <td class="topic">Presentation</td>
-      <td>An academic paper of your choosing on corpus construction, text mining, or computational argument in historical research. An approved Asia-focused pool is the five articles of the <em>Journal of Digital History</em> special issue “ReOrienting Digital History” (2024): Armand; Vierthaler; Henriot; Kaske &amp; Kessler; Levine &amp; Huang.</td>
+      <td>An academic paper of your choosing on corpus construction, text mining, or computational argument in historical research</td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -222,7 +222,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
     </tr>
     <tr class="presentation">
       <td class="topic">Presentation</td>
-      <td>An academic paper of your choosing on historical network analysis. An approved Asia-focused pool is the five articles of the <em>Journal of Digital History</em> special issue “ReOrienting Digital History” (2024): Armand; Vierthaler; Henriot; Kaske &amp; Kessler; Levine &amp; Huang.</td>
+      <td>An academic paper of your choosing on historical network analysis</td>
     </tr>
   </tbody>
   <tbody class="due">
@@ -292,7 +292,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
     </tr>
     <tr class="presentation">
       <td class="topic">Presentation</td>
-      <td>An academic paper of your choosing on topic modeling. An approved Asia-focused pool is the five articles of the <em>Journal of Digital History</em> special issue “ReOrienting Digital History” (2024): Armand; Vierthaler; Henriot; Kaske &amp; Kessler; Levine &amp; Huang.</td>
+      <td>An academic paper of your choosing on topic modeling</td>
     </tr>
   </tbody>
   <tbody class="block-a">
