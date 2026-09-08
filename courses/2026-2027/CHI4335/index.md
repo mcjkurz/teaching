@@ -180,7 +180,7 @@ title: CHI4335
 <span class="lang-zh" lang="zh-Hant">課程進度</span>
 </h2>
 <div class="table-scroll">
-<table class="schedule">
+<table class="schedule with-notes">
   <thead>
     <tr>
       <th><span class="lang-en">Week</span><span class="lang-zh" lang="zh-Hant">週次</span></th>
@@ -188,6 +188,7 @@ title: CHI4335
       <th><span class="lang-en">Date</span><span class="lang-zh" lang="zh-Hant">日期</span></th>
       <th><span class="lang-en">Topic</span><span class="lang-zh" lang="zh-Hant">課題</span></th>
       <th><span class="lang-en">Readings</span><span class="lang-zh" lang="zh-Hant">閱讀</span></th>
+      <th><span class="lang-en">Notes</span><span class="lang-zh" lang="zh-Hant">講義</span></th>
     </tr>
   </thead>
   <tbody class="block-a">
@@ -197,11 +198,13 @@ title: CHI4335
       <td class="date"><span class="lang-en">1 Sep</span><span class="lang-zh" lang="zh-Hant">9月1日</span></td>
       <td class="topic" rowspan="2"><span class="lang-en">Introduction</span><span class="lang-zh" lang="zh-Hant">導論</span></td>
       <td><span class="lang-en">The Extreme in Literature: key concepts, course objectives, and a survey of texts</span><span class="lang-zh" lang="zh-Hant">文學中的極端：核心概念、課程目標與文本概覽</span></td>
+      <td class="notes"></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
       <td class="date"><span class="lang-en">3 Sep</span><span class="lang-zh" lang="zh-Hant">9月3日</span></td>
       <td><span class="lang-en">Course requirements and assignments</span><span class="lang-zh" lang="zh-Hant">課程要求與作業說明</span></td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -211,11 +214,13 @@ title: CHI4335
       <td class="date"><span class="lang-en">8 Sep</span><span class="lang-zh" lang="zh-Hant">9月8日</span></td>
       <td class="topic" rowspan="2"><span class="lang-en">Regarding the Pain of Others</span><span class="lang-zh" lang="zh-Hant">旁觀他人之痛苦</span></td>
       <td><ul class="readings"><li>蘇珊·桑塔格：《旁觀他人之痛苦》第三章與第六章</li><li>魯迅：〈祝福〉</li></ul></td>
+      <td class="notes"><a href="notes/week-02/">Notes</a></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
       <td class="date"><span class="lang-en">10 Sep</span><span class="lang-zh" lang="zh-Hant">9月10日</span></td>
       <td><ul class="readings"><li>白樺：《苦戀》</li></ul></td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -225,11 +230,13 @@ title: CHI4335
       <td class="date"><span class="lang-en">15 Sep</span><span class="lang-zh" lang="zh-Hant">9月15日</span></td>
       <td class="topic" rowspan="2"><span class="lang-en">Writing the Shoah</span><span class="lang-zh" lang="zh-Hant">書寫大屠殺</span></td>
       <td><ul class="readings"><li>房春光：〈寫還是不寫，這是個問題：納粹大屠殺早期見證文學的書寫語境〉，《外國文學》2020年第3期，頁154–164</li></ul></td>
+      <td class="notes"></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
       <td class="date"><span class="lang-en">17 Sep</span><span class="lang-zh" lang="zh-Hant">9月17日</span></td>
       <td><ul class="readings"><li>埃利·維瑟爾：《夜》</li></ul></td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="due">
@@ -237,7 +244,7 @@ title: CHI4335
       <td></td>
       <td></td>
       <td class="date"><span class="lang-en">21 Sep</span><span class="lang-zh" lang="zh-Hant">9月21日</span></td>
-      <td colspan="2"><span class="lang-en">Comparative essay (Weeks 2 &amp; 3) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第2、3週）截止，上午9:00</span></td>
+      <td colspan="3"><span class="lang-en">Comparative essay (Weeks 2 &amp; 3) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第2、3週）截止，上午9:00</span></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -247,11 +254,13 @@ title: CHI4335
       <td class="date"><span class="lang-en">22 Sep</span><span class="lang-zh" lang="zh-Hant">9月22日</span></td>
       <td class="topic" rowspan="2"><span class="lang-en">Spiritual Resistance in a Labor Camp</span><span class="lang-zh" lang="zh-Hant">勞改營中的精神抵抗</span></td>
       <td><ul class="readings"><li>Tzvetan Todorov, “The Life of the Mind,” in <em>Facing the Extreme</em>, pp. 91–118</li></ul></td>
+      <td class="notes"></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
       <td class="date"><span class="lang-en">24 Sep</span><span class="lang-zh" lang="zh-Hant">9月24日</span></td>
       <td><ul class="readings"><li>高爾泰：《尋找家園》（節選）</li></ul></td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -267,11 +276,13 @@ title: CHI4335
           <li>(optional) Leona Toker, “Gulag Literature and the Literature of Nazi Camps” (Chapter 4: Forced Labor)</li>
         </ul>
       </td>
+      <td class="notes"></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
       <td class="date"><span class="lang-en">1 Oct</span><span class="lang-zh" lang="zh-Hant">10月1日</span></td>
       <td><span class="lang-en">No class (National Day)</span><span class="lang-zh" lang="zh-Hant">停課（國慶日）</span></td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="due">
@@ -279,7 +290,7 @@ title: CHI4335
       <td></td>
       <td></td>
       <td class="date"><span class="lang-en">5 Oct</span><span class="lang-zh" lang="zh-Hant">10月5日</span></td>
-      <td colspan="2"><span class="lang-en">Comparative essay (Weeks 4 &amp; 5) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第4、5週）截止，上午9:00</span></td>
+      <td colspan="3"><span class="lang-en">Comparative essay (Weeks 4 &amp; 5) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第4、5週）截止，上午9:00</span></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -289,11 +300,13 @@ title: CHI4335
       <td class="date"><span class="lang-en">6 Oct</span><span class="lang-zh" lang="zh-Hant">10月6日</span></td>
       <td class="topic" rowspan="2"><span class="lang-en">Trauma and Narrative</span><span class="lang-zh" lang="zh-Hant">創傷與敘事</span></td>
       <td><ul class="readings"><li>Wendy O’Brien, “Telling Time: Literature, Temporality and Trauma”</li></ul></td>
+      <td class="notes"></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
       <td class="date"><span class="lang-en">8 Oct</span><span class="lang-zh" lang="zh-Hant">10月8日</span></td>
       <td><ul class="readings"><li>張翎：《餘震》</li></ul></td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -308,11 +321,13 @@ title: CHI4335
           <li>(optional) Jeffrey C. Alexander, “Toward a Theory of Cultural Trauma”</li>
         </ul>
       </td>
+      <td class="notes"></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
       <td class="date"><span class="lang-en">15 Oct</span><span class="lang-zh" lang="zh-Hant">10月15日</span></td>
       <td><ul class="readings"><li>韓江：《少年來了》</li></ul></td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -322,11 +337,13 @@ title: CHI4335
       <td class="date"><span class="lang-en">20 Oct</span><span class="lang-zh" lang="zh-Hant">10月20日</span></td>
       <td class="topic" rowspan="2"><span class="lang-en">Trauma and War</span><span class="lang-zh" lang="zh-Hant">創傷與戰爭</span></td>
       <td><ul class="readings"><li>Patrick Colm Hogan, “On Being Moved: Cognition and Emotion in Literature and Film”</li></ul></td>
+      <td class="notes"></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
       <td class="date"><span class="lang-en">22 Oct</span><span class="lang-zh" lang="zh-Hant">10月22日</span></td>
       <td><ul class="readings"><li>提姆·奧布萊恩：〈死者的生命〉，於《士兵的重負》</li></ul></td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="due">
@@ -334,7 +351,7 @@ title: CHI4335
       <td></td>
       <td></td>
       <td class="date"><span class="lang-en">26 Oct</span><span class="lang-zh" lang="zh-Hant">10月26日</span></td>
-      <td colspan="2"><span class="lang-en">Comparative essay (Weeks 6, 7, 8) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第6、7、8週）截止，上午9:00</span></td>
+      <td colspan="3"><span class="lang-en">Comparative essay (Weeks 6, 7, 8) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第6、7、8週）截止，上午9:00</span></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -349,11 +366,13 @@ title: CHI4335
           <li>(optional) Rithy Panh, <em>The Missing Picture</em></li>
         </ul>
       </td>
+      <td class="notes"></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
       <td class="date"><span class="lang-en">29 Oct</span><span class="lang-zh" lang="zh-Hant">10月29日</span></td>
       <td><ul class="readings"><li>約翰·赫西：《廣島》（原版）</li></ul></td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -368,11 +387,13 @@ title: CHI4335
           <li>（選讀）王斑：〈實踐的崇高主體〉，於《歷史的崇高形象：二十世紀中國的美學與政治》</li>
         </ul>
       </td>
+      <td class="notes"></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
       <td class="date"><span class="lang-en">5 Nov</span><span class="lang-zh" lang="zh-Hant">11月5日</span></td>
       <td><ul class="readings"><li>閻連科：《為人民服務》</li></ul></td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="due">
@@ -380,7 +401,7 @@ title: CHI4335
       <td></td>
       <td></td>
       <td class="date"><span class="lang-en">9 Nov</span><span class="lang-zh" lang="zh-Hant">11月9日</span></td>
-      <td colspan="2"><span class="lang-en">Comparative essay (Weeks 9 &amp; 10) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第9、10週）截止，上午9:00</span></td>
+      <td colspan="3"><span class="lang-en">Comparative essay (Weeks 9 &amp; 10) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第9、10週）截止，上午9:00</span></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -395,11 +416,13 @@ title: CHI4335
           <li>申丹：〈敘事形式與性別政治：女性主義敘事學評析〉，《北京大學學報（哲學社會科學版）》2004年第1期，頁136–146</li>
         </ul>
       </td>
+      <td class="notes"></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
       <td class="date"><span class="lang-en">12 Nov</span><span class="lang-zh" lang="zh-Hant">11月12日</span></td>
       <td><ul class="readings"><li>李昂：《殺夫》</li></ul></td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -414,11 +437,13 @@ title: CHI4335
           <li>(optional) Frantz Fanon, “The Lived Experience of the Black Man,” in <em>Black Skin, White Masks</em></li>
         </ul>
       </td>
+      <td class="notes"></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
       <td class="date"><span class="lang-en">19 Nov</span><span class="lang-zh" lang="zh-Hant">11月19日</span></td>
       <td><ul class="readings"><li>詹姆斯·鮑德溫：〈去見那個男人〉</li></ul></td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="due">
@@ -426,7 +451,7 @@ title: CHI4335
       <td></td>
       <td></td>
       <td class="date"><span class="lang-en">23 Nov</span><span class="lang-zh" lang="zh-Hant">11月23日</span></td>
-      <td colspan="2"><span class="lang-en">Comparative essay (Weeks 11 &amp; 12) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第11、12週）截止，上午9:00</span></td>
+      <td colspan="3"><span class="lang-en">Comparative essay (Weeks 11 &amp; 12) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第11、12週）截止，上午9:00</span></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -436,11 +461,13 @@ title: CHI4335
       <td class="date"><span class="lang-en">24 Nov</span><span class="lang-zh" lang="zh-Hant">11月24日</span></td>
       <td class="topic" rowspan="2"><span class="lang-en">Towards Redemption</span><span class="lang-zh" lang="zh-Hant">走向救贖</span></td>
       <td><ul class="readings"><li>瓦爾特·本雅明：《歷史哲學論綱》</li></ul></td>
+      <td class="notes"></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
       <td class="date"><span class="lang-en">26 Nov</span><span class="lang-zh" lang="zh-Hant">11月26日</span></td>
       <td><ul class="readings"><li>雙雪濤：《平原上的摩西》</li></ul></td>
+      <td class="notes"></td>
     </tr>
   </tbody>
   <tbody class="due">
@@ -448,7 +475,7 @@ title: CHI4335
       <td></td>
       <td></td>
       <td class="date"><span class="lang-en">7 Dec</span><span class="lang-zh" lang="zh-Hant">12月7日</span></td>
-      <td colspan="2"><span class="lang-en">Final project due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">期末專題截止，上午9:00</span></td>
+      <td colspan="3"><span class="lang-en">Final project due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">期末專題截止，上午9:00</span></td>
     </tr>
   </tbody>
 </table>
