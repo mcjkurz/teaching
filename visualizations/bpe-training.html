@@ -23,7 +23,7 @@
                 <div class="explanation-box">
                     <h4>What is BPE?</h4>
                     <p>Byte-Pair Encoding starts from a small <strong>base vocabulary</strong> &mdash; individual characters or raw UTF-8 bytes &mdash; and repeatedly merges the most frequent adjacent pair into a new token. Each merge grows the vocabulary by one. After many merges, common substrings (&ldquo;the&rdquo;, &ldquo;ing&rdquo;, whole words) become single tokens. This is how modern tokenizers (GPT-2, LLaMA, etc.) build their vocabularies.</p>
-                    <p style="margin-top:0.5rem;"><strong>Pre-tokenization</strong> splits text on spaces first, so merges never cross word boundaries (toggle it below to compare). Press <em>Next Merge</em> to step through the algorithm.</p>
+                    <p style="margin-top:0.5rem;"><strong>Pre-tokenization</strong> splits text on spaces first, so merges never cross word boundaries (toggle it below to compare). Base tokens show their content (a character or byte); each <strong>merged</strong> token is shown as its new vocabulary ID (e.g. <code>256 (th)</code>). Press <em>Next Merge</em> to step through the algorithm.</p>
                 </div>
             </section>
 

@@ -62,10 +62,35 @@
         return token.units.map(hexByte).join(' ');
     }
 
-    // Primary chip text. Char mode: the characters. Byte mode: the raw hex bytes.
+    // Content of a token (no ID): chars in char mode, "hex (hint)" in byte mode.
+    function tokenContent(token) {
+        if (state.mode === 'char') return token.units.join('');
+        var h = tokenHex(token);
+        var hint = tokenHint(token);
+        return hint ? h + ' (' + hint + ')' : h;
+    }
+
+    // Primary chip text.
+    //  - base token: its content (char, or hex byte in byte mode)
+    //  - merged token: its NEW VOCAB ID (+ a content hint), since each merge
+    //    creates a fresh vocabulary entry identified by that integer.
     function tokenDisplay(token) {
+        if (token.kind === 'merged') return mergedDisplay(token);
         if (state.mode === 'char') return token.units.join('');
         return tokenHex(token);
+    }
+
+    function mergedDisplay(token) {
+        var hint = state.mode === 'char' ? token.units.join('') : (tokenHint(token) || tokenHex(token));
+        return token.id + ' (' + hint + ')';
+    }
+
+    // Rich text for tables / descriptions.
+    //  - base token: content (+ hint)
+    //  - merged token: new vocab ID (+ content hint)
+    function tokenRich(token) {
+        if (token.kind === 'merged') return mergedDisplay(token);
+        return tokenContent(token);
     }
 
     // Decoded UTF-8 hint for byte mode (empty in char mode).
@@ -80,14 +105,6 @@
             if (cp < 0x20 || cp === 0x7F) return '';  // skip control chars
         }
         return d.replace(/ /g, '␣');
-    }
-
-    // Rich text for tables / descriptions: "E4 BD A0 (你)" in byte mode, char string otherwise.
-    function tokenRich(token) {
-        if (state.mode === 'char') return token.units.join('');
-        var h = tokenHex(token);
-        var hint = tokenHint(token);
-        return hint ? h + ' (' + hint + ')' : h;
     }
 
     // ── Init ──────────────────────────────────────────────────────────
@@ -384,10 +401,11 @@
                 chip.className = 'token-chip';
                 if (tok.kind === 'merged') chip.classList.add('merged');
                 chip.textContent = tokenDisplay(tok);
+                // Tooltip: full content of the token (chars, or hex bytes + decoded hint).
                 if (state.mode === 'byte') {
-                    var hint = tokenHint(tok);
-                    var hex = tokenHex(tok);
-                    chip.title = hint ? (hint + '  ·  ' + hex) : hex;
+                    chip.title = 'id ' + tok.id + '  ·  ' + tokenContent(tok);
+                } else if (tok.kind === 'merged') {
+                    chip.title = 'id ' + tok.id + '  ·  ' + tok.units.join('');
                 }
                 el.tokenSequence.appendChild(chip);
                 row.push(chip);
@@ -438,7 +456,7 @@
             if (tok.kind === 'merged' && tok.id === state.vocab.length - 1 && state.merges.length > 0) {
                 tr.className = 'new-token';
             }
-            var disp = tokenRich(tok);
+            var disp = tokenContent(tok);
             var typeCell = tok.kind === 'base'
                 ? '<span class="tag base">base</span>'
                 : '<span class="tag merged">merged</span>';
@@ -592,9 +610,9 @@
                     if (tok.kind === 'merged') chip.classList.add('merged');
                     chip.textContent = tokenDisplay(tok);
                     if (state.mode === 'byte') {
-                        var hint = tokenHint(tok);
-                        var hex = tokenHex(tok);
-                        chip.title = hint ? (hint + '  ·  ' + hex) : hex;
+                        chip.title = 'id ' + tok.id + '  ·  ' + tokenContent(tok);
+                    } else if (tok.kind === 'merged') {
+                        chip.title = 'id ' + tok.id + '  ·  ' + tok.units.join('');
                     }
                 }
                 el.newTokenSequence.appendChild(chip);
