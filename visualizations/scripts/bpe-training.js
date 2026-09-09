@@ -41,6 +41,7 @@
         el.newStats = document.getElementById('newStats');
         el.byteSequencePanel = document.getElementById('byteSequencePanel');
         el.byteSequence = document.getElementById('byteSequence');
+        el.vocabWrapper = document.querySelector('#vocabPanel .table-wrapper');
     }
 
     // ── UTF-8 helpers ─────────────────────────────────────────────────
@@ -95,6 +96,7 @@
         state.vocab = [];
         state.idOfUnit = {};
         state.merges = [];
+        state.justMerged = false;
         stopAuto();
 
         var text = el.textInput.value;
@@ -203,6 +205,7 @@
             }
             return out;
         });
+        state.justMerged = true;   // hint for renderVocab to scroll to bottom
         render();
         return true;
     }
@@ -446,6 +449,13 @@
                 '<td>' + typeCell + '</td>';
             el.vocabTableBody.appendChild(tr);
         });
+        // After a merge, scroll the vocab list to the bottom so the newly
+        // added token is visible. (Only when a merge just happened, so typing
+        // text or switching tabs doesn't hijack the scroll position.)
+        if (state.justMerged && el.vocabWrapper) {
+            el.vocabWrapper.scrollTop = el.vocabWrapper.scrollHeight;
+            state.justMerged = false;
+        }
     }
 
     function renderHistory() {
