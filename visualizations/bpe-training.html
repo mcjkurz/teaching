@@ -99,6 +99,15 @@
                     <ol id="mergeHistory" class="merge-history"></ol>
                 </div>
             </section>
+
+            <!-- ═══ Tokenize new text ═══ -->
+            <section class="card encode-card">
+                <h2 class="section-title"><span class="step-badge alt">Apply</span> Tokenize New Text</h2>
+                <p class="panel-intro">Type any text below. It is tokenized using the merges learned so far (applied in learned order). Units that never appeared in training show up as <span class="oov-inline">red OOV</span> chips.</p>
+                <textarea id="newTextInput" rows="2" spellcheck="false" placeholder="Type new text to tokenize…">the cat ate</textarea>
+                <div id="newTokenSequence" class="token-stage encode-stage"></div>
+                <div class="encode-stats" id="newStats"></div>
+            </section>
         </main>
 
         <footer>

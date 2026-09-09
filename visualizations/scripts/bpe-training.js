@@ -37,6 +37,9 @@
         el.stepDesc = document.getElementById('stepDesc');
         el.infoTabs = document.querySelectorAll('.info-tab');
         el.infoPanels = document.querySelectorAll('.info-panel');
+        el.newTextInput = document.getElementById('newTextInput');
+        el.newTokenSequence = document.getElementById('newTokenSequence');
+        el.newStats = document.getElementById('newStats');
     }
 
     // ── Byte display map (GPT-2 style) ───────────────────────────────
@@ -249,6 +252,7 @@
         renderVocab();
         renderHistory();
         renderStats();
+        renderNewText();
         updateButtons();
     }
 
@@ -450,6 +454,98 @@
         el.btnNext.disabled = pairs.length === 0 || state.vocab.length >= cap;
     }
 
+    // ── Tokenize new text with the trained merges ─────────────────────
+    // Each token is either { id, oov:false } or { oov:true, unit }.
+    function tokenizeNewText(text) {
+        var chunks = state.pretokenize ? text.split(/\s+/).filter(Boolean) : [text];
+        var result = [];
+        chunks.forEach(function (chunk) {
+            var seg = [];
+            var units = state.mode === 'char' ? Array.from(chunk)
+                : Array.from(new TextEncoder().encode(chunk));
+            units.forEach(function (u) {
+                var key = state.mode === 'char' ? 'c:' + u : 'b:' + u;
+                if (key in state.idOfUnit) {
+                    seg.push({ id: state.idOfUnit[key], oov: false });
+                } else {
+                    seg.push({ oov: true, unit: u });
+                }
+            });
+            // apply learned merges in order
+            state.merges.forEach(function (m) {
+                var a = m.pair[0], b = m.pair[1], newId = m.newId;
+                var out = [], i = 0;
+                while (i < seg.length) {
+                    var cur = seg[i], nxt = i < seg.length - 1 ? seg[i + 1] : null;
+                    if (nxt && !cur.oov && !nxt.oov && cur.id === a && nxt.id === b) {
+                        out.push({ id: newId, oov: false });
+                        i += 2;
+                    } else {
+                        out.push(cur);
+                        i += 1;
+                    }
+                }
+                seg = out;
+            });
+            result.push(seg);
+        });
+        return result;
+    }
+
+    function oovDisplay(item) {
+        if (state.mode === 'char') return item.unit;
+        return byteLabel(item.unit);
+    }
+
+    function renderNewText() {
+        el.newTokenSequence.innerHTML = '';
+        var text = el.newTextInput.value;
+        var segments = tokenizeNewText(text);
+        var nTokens = 0, nOov = 0, nChars = Array.from(text).length;
+
+        if (segments.length === 0 || segments.every(function (s) { return s.length === 0; })) {
+            var empty = document.createElement('span');
+            empty.className = 'empty-stage';
+            empty.textContent = 'Type some text above to tokenize it.';
+            el.newTokenSequence.appendChild(empty);
+            el.newStats.innerHTML = '';
+            return;
+        }
+
+        segments.forEach(function (seg, segIdx) {
+            if (segIdx > 0 && state.pretokenize) {
+                var gap = document.createElement('span');
+                gap.className = 'segment-gap';
+                gap.textContent = '␣';
+                el.newTokenSequence.appendChild(gap);
+            }
+            seg.forEach(function (item) {
+                nTokens++;
+                var chip = document.createElement('span');
+                chip.className = 'token-chip';
+                if (item.oov) {
+                    chip.classList.add('oov');
+                    chip.textContent = oovDisplay(item);
+                    chip.title = 'out of vocabulary — not seen during training';
+                    nOov++;
+                } else {
+                    var tok = state.vocab[item.id];
+                    if (tok.kind === 'merged') chip.classList.add('merged');
+                    chip.textContent = tokenDisplay(tok);
+                    if (state.mode === 'byte') {
+                        var hex = tokenHex(tok);
+                        if (hex) chip.title = hex;
+                    }
+                }
+                el.newTokenSequence.appendChild(chip);
+            });
+        });
+
+        el.newStats.innerHTML = '<strong>' + nTokens + '</strong> tokens &middot; ' +
+            '<strong>' + nChars + '</strong> characters' +
+            (nOov ? ' &middot; <span class="oov-count">' + nOov + ' out-of-vocabulary</span>' : '');
+    }
+
     // ── Mode switching ────────────────────────────────────────────────
     function setMode(mode) {
         if (mode === state.mode) return;
@@ -493,6 +589,11 @@
             t = setTimeout(initFromText, 400);
         });
         el.vocabCap.addEventListener('change', function () { renderStep(); updateButtons(); });
+        var nt;
+        el.newTextInput.addEventListener('input', function () {
+            clearTimeout(nt);
+            nt = setTimeout(renderNewText, 200);
+        });
     }
 
     function switchInfoTab(name) {

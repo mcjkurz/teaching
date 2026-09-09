@@ -214,6 +214,30 @@ footer {
 footer a { color: #3498db; text-decoration: none; }
 footer a:hover { text-decoration: underline; }
 
+/* ── Tokenize-new-text card ── */
+.encode-card { padding: 1.5rem; }
+.section-title {
+    font-size: 1.15rem; font-weight: 500; color: #2c3e50; margin-bottom: 0.5rem;
+    display: flex; align-items: center; gap: 0.5rem;
+}
+.step-badge.alt { background: #8e44ad; }
+.encode-stage { margin-bottom: 0.9rem; }
+.encode-stats { font-size: 0.83rem; color: #666; }
+.encode-stats strong { color: #2c3e50; }
+.oov-count { color: #c0392b; font-weight: 600; }
+.oov-inline {
+    color: #c0392b; font-weight: 600;
+}
+.token-chip.oov {
+    background: #fadbd8; border: 1px dashed #e74c3c; color: #922b21;
+}
+textarea#newTextInput {
+    width: 100%; padding: 0.6rem 0.7rem; font-size: 0.95rem;
+    font-family: 'Courier New', monospace; border: 1px solid #ccc;
+    border-radius: 6px; resize: vertical; min-height: 50px; margin-bottom: 0.9rem;
+}
+textarea#newTextInput:focus { outline: none; border-color: #8e44ad; box-shadow: 0 0 3px rgba(142,68,173,0.3); }
+
 @media (max-width: 768px) {
     .container { padding: 1rem; }
     .input-row { flex-direction: column; align-items: stretch; }
