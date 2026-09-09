@@ -6,6 +6,7 @@
         mode: 'char',        // 'char' | 'byte'
         text: '',
         pretokenize: true,   // split on whitespace before BPE
+        base: 10,            // number base for display: 2, 10, or 16
         segments: [],        // array of segments; each segment is an array of token ids
         vocab: [],           // array of { id, units, kind }
         idOfUnit: {},        // map from unit-key -> id  (for base vocab)
@@ -31,6 +32,7 @@
         el.vocabTableBody = document.getElementById('vocabTableBody');
         el.mergeHistory = document.getElementById('mergeHistory');
         el.modeBtns = document.querySelectorAll('.mode-btn');
+        el.baseBtns = document.querySelectorAll('.base-btn');
         el.pretokenToggle = document.getElementById('pretokenToggle');
         el.stepBadge = document.getElementById('stepBadge');
         el.stepDesc = document.getElementById('stepDesc');
@@ -55,11 +57,22 @@
         }
     }
 
-    function hexByte(b) { return b.toString(16).toUpperCase().padStart(2, '0'); }
+    // Format a number in the user-chosen base (2, 10, or 16).
+    // Byte values are zero-padded to a fixed width; vocab IDs are not.
+    function formatNum(n, isByte) {
+        var base = state.base;
+        if (base === 10) return String(n);
+        if (base === 16) {
+            var h = n.toString(16).toUpperCase();
+            return isByte ? h.padStart(2, '0') : h;
+        }
+        var b = n.toString(2);
+        return isByte ? b.padStart(8, '0') : b;
+    }
 
     function tokenHex(token) {
         if (state.mode === 'char') return '';
-        return token.units.map(hexByte).join(' ');
+        return token.units.map(function (v) { return formatNum(v, true); }).join(' ');
     }
 
     // Content of a token (no ID): chars in char mode, "hex (hint)" in byte mode.
@@ -82,7 +95,7 @@
 
     function mergedDisplay(token) {
         var hint = state.mode === 'char' ? token.units.join('') : (tokenHint(token) || tokenHex(token));
-        return token.id + ' (' + hint + ')';
+        return formatNum(token.id, false) + ' (' + hint + ')';
     }
 
     // Rich text for tables / descriptions.
@@ -312,14 +325,14 @@
         for (var i = 0; i < u8.length; i++) {
             var chip = document.createElement('span');
             chip.className = 'byte-chip';
-            chip.textContent = hexByte(u8[i]);
+            chip.textContent = formatNum(u8[i], true);
             // show the printable char as a hint in the tooltip
             if (u8[i] >= 0x20 && u8[i] <= 0x7E) {
-                chip.title = hexByte(u8[i]) + '  ·  ' + String.fromCharCode(u8[i]);
+                chip.title = formatNum(u8[i], true) + '  ·  ' + String.fromCharCode(u8[i]);
             } else if (u8[i] === 0x20) {
-                chip.title = hexByte(u8[i]) + '  ·  space';
+                chip.title = formatNum(u8[i], true) + '  ·  space';
             } else {
-                chip.title = hexByte(u8[i]);
+                chip.title = formatNum(u8[i], true);
             }
             el.byteSequence.appendChild(chip);
         }
@@ -401,11 +414,11 @@
                 chip.className = 'token-chip';
                 if (tok.kind === 'merged') chip.classList.add('merged');
                 chip.textContent = tokenDisplay(tok);
-                // Tooltip: full content of the token (chars, or hex bytes + decoded hint).
+                // Tooltip: full content of the token (chars, or bytes + decoded hint).
                 if (state.mode === 'byte') {
-                    chip.title = 'id ' + tok.id + '  ·  ' + tokenContent(tok);
+                    chip.title = 'id ' + formatNum(tok.id, false) + '  ·  ' + tokenContent(tok);
                 } else if (tok.kind === 'merged') {
-                    chip.title = 'id ' + tok.id + '  ·  ' + tok.units.join('');
+                    chip.title = 'id ' + formatNum(tok.id, false) + '  ·  ' + tok.units.join('');
                 }
                 el.tokenSequence.appendChild(chip);
                 row.push(chip);
@@ -462,7 +475,7 @@
                 : '<span class="tag merged">merged</span>';
             var hint = state.mode === 'byte' ? '<div class="hex-hint">' + escapeHtml(tokenHint(tok)) + '</div>' : '';
             tr.innerHTML =
-                '<td>' + tok.id + '</td>' +
+                '<td>' + formatNum(tok.id, false) + '</td>' +
                 '<td class="vocab-cell">' + escapeHtml(disp) + hint + '</td>' +
                 '<td>' + typeCell + '</td>';
             el.vocabTableBody.appendChild(tr);
@@ -571,7 +584,7 @@
 
     function oovDisplay(item) {
         if (state.mode === 'char') return item.unit;
-        return hexByte(item.unit);
+        return formatNum(item.unit, true);
     }
 
     function renderNewText() {
@@ -610,9 +623,9 @@
                     if (tok.kind === 'merged') chip.classList.add('merged');
                     chip.textContent = tokenDisplay(tok);
                     if (state.mode === 'byte') {
-                        chip.title = 'id ' + tok.id + '  ·  ' + tokenContent(tok);
+                        chip.title = 'id ' + formatNum(tok.id, false) + '  ·  ' + tokenContent(tok);
                     } else if (tok.kind === 'merged') {
-                        chip.title = 'id ' + tok.id + '  ·  ' + tok.units.join('');
+                        chip.title = 'id ' + formatNum(tok.id, false) + '  ·  ' + tok.units.join('');
                     }
                 }
                 el.newTokenSequence.appendChild(chip);
@@ -632,6 +645,16 @@
             btn.classList.toggle('active', btn.dataset.mode === mode);
         });
         initFromText();
+    }
+
+    function setBase(base) {
+        base = parseInt(base, 10) || 10;
+        if (base === state.base) return;
+        state.base = base;
+        el.baseBtns.forEach(function (btn) {
+            btn.classList.toggle('active', parseInt(btn.dataset.base, 10) === base);
+        });
+        render();
     }
 
     // ── Helpers ───────────────────────────────────────────────────────
@@ -655,6 +678,9 @@
         });
         el.modeBtns.forEach(function (btn) {
             btn.addEventListener('click', function () { setMode(btn.dataset.mode); });
+        });
+        el.baseBtns.forEach(function (btn) {
+            btn.addEventListener('click', function () { setBase(btn.dataset.base); });
         });
         // Re-init when text changes (debounced)
         var t;
