@@ -95,13 +95,12 @@
 
     function mergedDisplay(token) {
         if (state.mode === 'char') {
-            // Char mode: the content is the meaningful identifier; show it
-            // (parenthesized to distinguish merged tokens from base chars).
-            // The ID is not shown here — it lives in the vocabulary table.
-            return '(' + token.units.join('') + ')';
+            // Char mode: just show the content (e.g. "at"). The ID lives in
+            // the vocabulary table.
+            return token.units.join('');
         }
-        // Byte mode: just the new vocab ID — the bytes/decoded word stay in
-        // the tooltip and the vocabulary table, not on the chip.
+        // Byte mode: just the new vocab ID. The bytes/decoded word stay in
+        // the tooltip and the vocabulary table.
         return formatNum(token.id, false);
     }
 
