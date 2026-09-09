@@ -65,8 +65,8 @@
 
                 <div class="stage-meta">
                     <span id="statsLine"></span>
-                    <label class="cap-label" for="vocabCap">Vocab cap:
-                        <input type="number" id="vocabCap" value="50" min="2" max="500" step="1">
+                    <label class="cap-label" for="maxMerges">Max merges:
+                        <input type="number" id="maxMerges" value="30" min="0" max="2000" step="1">
                     </label>
                 </div>
             </section>
@@ -90,7 +90,7 @@
                 </div>
 
                 <div class="info-panel" id="vocabPanel">
-                    <p class="panel-intro">Every token the model knows, with its integer ID. Newly merged tokens are highlighted.</p>
+                <p class="panel-intro">Every token the model knows, with its integer ID. Byte-level mode starts with all 256 bytes as base tokens; newly merged tokens are highlighted.</p>
                     <div class="table-wrapper">
                         <table class="vocab-table" id="vocabTable">
                             <thead><tr><th>ID</th><th>Token</th><th>Type</th></tr></thead>
@@ -108,7 +108,7 @@
             <!-- ═══ Tokenize new text ═══ -->
             <section class="card encode-card">
                 <h2 class="section-title"><span class="step-badge alt">Apply</span> Tokenize New Text</h2>
-                <p class="panel-intro">Type any text below. It is tokenized using the merges learned so far (applied in learned order). Units that never appeared in training show up as <span class="oov-inline">red OOV</span> chips.</p>
+                <p class="panel-intro">Type any text below. It is tokenized using the merges learned so far (applied in learned order). In character mode, characters never seen in training show up as <span class="oov-inline">red OOV</span> chips; in byte mode every byte is always representable (the base vocab is all 256 bytes), so there is no OOV.</p>
                 <textarea id="newTextInput" rows="2" spellcheck="false" placeholder="Type new text to tokenize…">the cat ate</textarea>
                 <div id="newTokenSequence" class="token-stage encode-stage"></div>
                 <div class="encode-stats" id="newStats"></div>

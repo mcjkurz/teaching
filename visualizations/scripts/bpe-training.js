@@ -13,8 +13,7 @@
         autoTimer: null
     };
 
-    var DEFAULT_TEXT_CHAR = 'the cat sat on the mat the cat';
-    var DEFAULT_TEXT_BYTE = '你好世界！hello 世界';
+    var DEFAULT_TEXT = 'the cat sat on the mat the cat';
 
     // ── DOM refs ──────────────────────────────────────────────────────
     var el = {};
@@ -25,7 +24,7 @@
         el.btnPrev = document.getElementById('btnPrev');
         el.btnNext = document.getElementById('btnNext');
         el.btnAuto = document.getElementById('btnAuto');
-        el.vocabCap = document.getElementById('vocabCap');
+        el.maxMerges = document.getElementById('maxMerges');
         el.tokenSequence = document.getElementById('tokenSequence');
         el.statsLine = document.getElementById('statsLine');
         el.pairTableBody = document.getElementById('pairTableBody');
@@ -69,10 +68,16 @@
     }
 
     // Decoded UTF-8 hint for byte mode (empty in char mode).
+    // Decoded UTF-8 hint for byte mode (empty in char mode, or for control bytes).
     function tokenHint(token) {
         if (state.mode === 'char') return '';
         var d = tryDecodeUtf8(token.units);
         if (d === null || d.length === 0) return '';
+        var cps = Array.from(d);
+        for (var i = 0; i < cps.length; i++) {
+            var cp = cps[i].codePointAt(0);
+            if (cp < 0x20 || cp === 0x7F) return '';  // skip control chars
+        }
         return d.replace(/ /g, '␣');
     }
 
@@ -105,6 +110,18 @@
             chunks = [text];
         }
 
+        // Byte-level BPE starts with all 256 byte values as the base
+        // vocabulary, so every possible byte is representable from the
+        // outset (no out-of-vocabulary bytes). Char mode builds its base
+        // vocab only from the characters that appear.
+        if (state.mode === 'byte') {
+            for (var bv = 0; bv < 256; bv++) {
+                var bkey = 'b:' + bv;
+                state.vocab.push({ id: bv, units: [bv], kind: 'base' });
+                state.idOfUnit[bkey] = bv;
+            }
+        }
+
         chunks.forEach(function (chunk) {
             var segIds = [];
             if (state.mode === 'char') {
@@ -120,14 +137,7 @@
             } else {
                 var u8 = new TextEncoder().encode(chunk);
                 for (var i = 0; i < u8.length; i++) {
-                    var b = u8[i];
-                    var key = 'b:' + b;
-                    if (!(key in state.idOfUnit)) {
-                        var id = state.vocab.length;
-                        state.vocab.push({ id: id, units: [b], kind: 'base' });
-                        state.idOfUnit[key] = id;
-                    }
-                    segIds.push(state.idOfUnit[key]);
+                    segIds.push(state.idOfUnit['b:' + u8[i]]);
                 }
             }
             if (segIds.length > 0) state.segments.push(segIds);
@@ -164,8 +174,8 @@
             stopAuto();
             return false;
         }
-        var cap = parseInt(el.vocabCap.value, 10) || 50;
-        if (state.vocab.length >= cap) {
+        var cap = parseInt(el.maxMerges.value, 10) || 30;
+        if (state.merges.length >= cap) {
             stopAuto();
             return false;
         }
@@ -300,8 +310,8 @@
         var n = state.merges.length;
         el.stepBadge.textContent = 'Step ' + n;
         var pairs = countPairs();
-        var cap = parseInt(el.vocabCap.value, 10) || 50;
-        var atCap = state.vocab.length >= cap;
+        var cap = parseInt(el.maxMerges.value, 10) || 30;
+        var atCap = state.merges.length >= cap;
         var noPairs = pairs.length === 0;
 
         if (n === 0) {
@@ -489,8 +499,8 @@
     function updateButtons() {
         el.btnPrev.disabled = state.merges.length === 0;
         var pairs = countPairs();
-        var cap = parseInt(el.vocabCap.value, 10) || 50;
-        el.btnNext.disabled = pairs.length === 0 || state.vocab.length >= cap;
+        var cap = parseInt(el.maxMerges.value, 10) || 30;
+        el.btnNext.disabled = pairs.length === 0 || state.merges.length >= cap;
     }
 
     // ── Tokenize new text with the trained merges ─────────────────────
@@ -590,10 +600,6 @@
     function setMode(mode) {
         if (mode === state.mode) return;
         state.mode = mode;
-        var prev = el.textInput.value;
-        if (prev === DEFAULT_TEXT_CHAR || prev === DEFAULT_TEXT_BYTE) {
-            el.textInput.value = mode === 'char' ? DEFAULT_TEXT_CHAR : DEFAULT_TEXT_BYTE;
-        }
         el.modeBtns.forEach(function (btn) {
             btn.classList.toggle('active', btn.dataset.mode === mode);
         });
@@ -628,7 +634,7 @@
             clearTimeout(t);
             t = setTimeout(initFromText, 400);
         });
-        el.vocabCap.addEventListener('change', function () { renderStep(); updateButtons(); });
+        el.maxMerges.addEventListener('change', function () { renderStep(); updateButtons(); });
         var nt;
         el.newTextInput.addEventListener('input', function () {
             clearTimeout(nt);

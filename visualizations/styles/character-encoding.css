@@ -90,18 +90,6 @@ textarea:focus {
     box-shadow: 0 0 3px rgba(52,152,219,0.3);
 }
 
-/* Encode two-column layout */
-.encode-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    align-items: start;
-}
-.encode-input-col textarea { margin-bottom: 0; }
-@media (max-width: 900px) {
-    .encode-layout { grid-template-columns: 1fr; }
-}
-
 /* Output tables */
 .output-wrapper {
     overflow-x: auto; border: 1px solid #e0e0e0; border-radius: 6px;
