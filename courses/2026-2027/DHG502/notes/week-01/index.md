@@ -28,7 +28,12 @@ title: DHG 502 Week 1 Notes
 
 <h2>2. Connect OpenCode</h2>
 <ol>
-<li>Open a terminal (<strong>(a)</strong> in VS Code: <strong>Terminal → New Terminal</strong>; <strong>(b)</strong> in the Codespace window).</li>
+<li>Open a terminal:
+<ul>
+<li><strong>(a) Local:</strong> in VS Code, <strong>Terminal → New Terminal</strong>.</li>
+<li><strong>(b) Browser:</strong> use the terminal in the Codespace window.</li>
+</ul>
+</li>
 <li>Type <code>opencode</code>, then <code>/connect</code>, select <strong>OpenRouter</strong>, and paste your API key.</li>
 <li>Type <code>/models</code> and select <strong>GLM-5.3-Flash</strong>.</li>
 </ol>
@@ -77,7 +82,12 @@ Then create a single, well-styled HTML page (明史_topics.html) that shows, for
 
 Take all of this from 明史_topics.txt.</pre>
 </div>
-<p>Open <code>明史_topics.html</code> in Chrome or Edge (<strong>(a)</strong> double-click the file on your computer; <strong>(b)</strong> if it won't open in the Codespace, right-click → <strong>Download</strong>, then open on your computer). You should see each of the 20 topics with a label, explanation, top characters, and strongest segments.</p>
+<p>Open <code>明史_topics.html</code> in Chrome or Edge:</p>
+<ul>
+<li><strong>(a) Local:</strong> double-click the file on your computer.</li>
+<li><strong>(b) Browser:</strong> if it won't open in the Codespace, right-click → <strong>Download</strong>, then open on your computer.</li>
+</ul>
+<p>You should see each of the 20 topics with a label, explanation, top characters, and strongest segments.</p>
 
 <h2>4. Save to GitHub</h2>
 <p>Commit and push so your work is preserved — anything not pushed lives only in your Codespace (or on your laptop) and is lost if that environment is deleted. Three options:</p>

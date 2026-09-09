@@ -91,6 +91,10 @@
             overflow: hidden;
         }
         main .prompt .prompt-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
             margin: 0;
             padding: 0.45rem 1rem;
             font-size: 0.75rem;
@@ -99,6 +103,30 @@
             color: #0066cc;
             background: #eef3f8;
             border-bottom: 1px solid #d5deea;
+        }
+        main .prompt .copy-btn {
+            background: #fff;
+            border: 1px solid #c5d4e4;
+            color: #0066cc;
+            padding: 0.15rem 0.6rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            border-radius: 3px;
+            cursor: pointer;
+            font-family: inherit;
+            line-height: 1;
+            transition: background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+        }
+        main .prompt .copy-btn:hover { background: #e3ecf5; }
+        main .prompt .copy-btn:focus-visible {
+            outline: 2px solid #0066cc;
+            outline-offset: 1px;
+        }
+        main .prompt .copy-btn.copied {
+            color: #2a8a2a;
+            border-color: #2a8a2a;
+            background: #f0f8ef;
         }
         main .prompt pre {
             margin: 0;
@@ -307,6 +335,44 @@
             var link = e.target.closest('a[href="#"]');
             if (link) e.preventDefault();
         });
+        (function () {
+            document.querySelectorAll(".prompt").forEach(function (prompt) {
+                var pre = prompt.querySelector("pre");
+                var label = prompt.querySelector(".prompt-label");
+                if (!pre || !label) return;
+                var btn = document.createElement("button");
+                btn.type = "button";
+                btn.className = "copy-btn";
+                btn.textContent = "Copy";
+                btn.addEventListener("click", function () {
+                    var text = pre.innerText;
+                    var done = function () {
+                        btn.textContent = "Copied";
+                        btn.classList.add("copied");
+                        setTimeout(function () {
+                            btn.textContent = "Copy";
+                            btn.classList.remove("copied");
+                        }, 1500);
+                    };
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(text).then(done).catch(fallbackCopy);
+                    } else {
+                        fallbackCopy();
+                    }
+                    function fallbackCopy() {
+                        var ta = document.createElement("textarea");
+                        ta.value = text;
+                        ta.style.position = "fixed";
+                        ta.style.opacity = "0";
+                        document.body.appendChild(ta);
+                        ta.select();
+                        try { document.execCommand("copy"); done(); } catch (err) {}
+                        document.body.removeChild(ta);
+                    }
+                });
+                label.appendChild(btn);
+            });
+        })();
     </script>
 </body>
 </html>
