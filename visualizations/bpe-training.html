@@ -23,7 +23,7 @@
                 <div class="explanation-box">
                     <h4>What is BPE?</h4>
                     <p>Byte-Pair Encoding starts from a small <strong>base vocabulary</strong> &mdash; individual characters or raw UTF-8 bytes &mdash; and repeatedly merges the most frequent adjacent pair into a new token. Each merge grows the vocabulary by one. After many merges, common substrings (&ldquo;the&rdquo;, &ldquo;ing&rdquo;, whole words) become single tokens. This is how modern tokenizers (GPT-2, LLaMA, etc.) build their vocabularies.</p>
-                    <p style="margin-top:0.5rem;"><strong>Pre-tokenization</strong> splits text on spaces first, so merges never cross word boundaries (toggle it below to compare). Base tokens show their content (a character or byte); each <strong>merged</strong> token is shown as its new vocabulary ID (e.g. <code>256 (th)</code>). Press <em>Next Merge</em> to step through the algorithm.</p>
+                    <p style="margin-top:0.5rem;"><strong>Pre-tokenization</strong> splits text on spaces first, so merges never cross word boundaries (toggle it below to compare). Base tokens show their content (a character or byte); each <strong>merged</strong> token is shown as its new vocabulary ID (e.g. <code>256 (th)</code>). Press <em>Merge</em> to step through the algorithm.</p>
                 </div>
             </section>
 
@@ -52,7 +52,7 @@
             <section class="card stage">
                 <div class="stage-header">
                     <span class="step-badge" id="stepBadge">Step 0</span>
-                    <span class="step-desc" id="stepDesc">Press “Next Merge” to begin training.</span>
+                    <span class="step-desc" id="stepDesc">Press “Merge” to begin training.</span>
                 </div>
 
                 <div id="byteSequencePanel" class="byte-sequence-panel" style="display:none;">
@@ -64,7 +64,7 @@
 
                 <div class="stage-controls">
                     <button class="btn" id="btnPrev" disabled>&larr; Previous</button>
-                    <button class="btn primary big" id="btnNext">Next Merge &rarr;</button>
+                    <button class="btn primary big" id="btnNext">Merge &rarr;</button>
                     <button class="btn success" id="btnAuto">Auto Run</button>
                     <button class="btn" id="btnReset">&circlearrowleft; Reset</button>
                 </div>
@@ -86,7 +86,7 @@
                 </div>
 
                 <div class="info-panel active" id="pairsPanel">
-                    <p class="panel-intro">Adjacent token pairs, sorted by frequency. The top row is what <em>Next Merge</em> will combine.</p>
+                    <p class="panel-intro">Adjacent token pairs, sorted by frequency. The top row is what <em>Merge</em> will combine.</p>
                     <div class="table-wrapper">
                         <table class="pair-table" id="pairTable">
                             <thead><tr><th>Rank</th><th>Pair</th><th>Count</th></tr></thead>

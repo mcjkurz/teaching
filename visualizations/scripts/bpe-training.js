@@ -94,8 +94,15 @@
     }
 
     function mergedDisplay(token) {
-        var hint = state.mode === 'char' ? token.units.join('') : (tokenHint(token) || tokenHex(token));
-        return formatNum(token.id, false) + ' (' + hint + ')';
+        if (state.mode === 'char') {
+            // Char mode: the content is the meaningful identifier; show it
+            // (parenthesized to distinguish merged tokens from base chars).
+            // The ID is not shown here — it lives in the vocabulary table.
+            return '(' + token.units.join('') + ')';
+        }
+        // Byte mode: just the new vocab ID — the bytes/decoded word stay in
+        // the tooltip and the vocabulary table, not on the chip.
+        return formatNum(token.id, false);
     }
 
     // Rich text for tables / descriptions.
@@ -349,10 +356,10 @@
 
         if (n === 0) {
             el.stepBadge.classList.add('done');
-            el.stepDesc.innerHTML = 'Press “Next Merge” to begin training.';
+            el.stepDesc.innerHTML = 'Press “Merge” to begin training.';
         } else if (noPairs || atCap) {
             el.stepBadge.classList.add('done');
-            var reason = atCap ? 'vocab cap reached' : 'no more pairs to merge';
+            var reason = atCap ? 'max merges reached' : 'no more pairs to merge';
             el.stepDesc.innerHTML = 'Done after ' + n + ' merge' + (n > 1 ? 's' : '') + ' (' + reason + ').';
         } else {
             el.stepBadge.classList.remove('done');
@@ -368,17 +375,15 @@
                 '<span class="count-pill-inline">×' + last.count + '</span>';
         }
 
-        // Dynamic Next button: preview the upcoming merge
+        // The Next button just says "Merge" — the highlighted pair in the
+        // tokenization above shows what will be merged.
         if (noPairs || atCap) {
-            el.btnNext.textContent = 'Next Merge →';
+            el.btnNext.textContent = 'Merge →';
             el.btnNext.disabled = true;
         } else {
             var top = pairs[0];
-            var ta = state.vocab[top.a], tb = state.vocab[top.b];
-            el.btnNext.innerHTML = 'Merge ' + escapeHtml(tokenRich(ta)) + '+' +
-                escapeHtml(tokenRich(tb)) + ' &rarr;';
-            el.btnNext.title = 'Merge into "' + tokenRich(ta) + tokenRich(tb) +
-                '" (count: ' + top.count + ')';
+            el.btnNext.textContent = 'Merge →';
+            el.btnNext.title = 'Merge the highlighted pair (count: ' + top.count + ')';
         }
     }
 
