@@ -5,7 +5,8 @@
     var state = {
         mode: 'char',        // 'char' | 'byte'
         text: '',
-        tokens: [],          // array of token ids
+        pretokenize: true,   // split on whitespace before BPE
+        segments: [],        // array of segments; each segment is an array of token ids
         vocab: [],           // array of { id, units, kind }
         idOfUnit: {},        // map from unit-key -> id  (for base vocab)
         merges: [],          // list of { step, pair:[id,id], newId, count }
@@ -31,6 +32,11 @@
         el.vocabTableBody = document.getElementById('vocabTableBody');
         el.mergeHistory = document.getElementById('mergeHistory');
         el.modeBtns = document.querySelectorAll('.mode-btn');
+        el.pretokenToggle = document.getElementById('pretokenToggle');
+        el.stepBadge = document.getElementById('stepBadge');
+        el.stepDesc = document.getElementById('stepDesc');
+        el.infoTabs = document.querySelectorAll('.info-tab');
+        el.infoPanels = document.querySelectorAll('.info-panel');
     }
 
     // ── Byte display map (GPT-2 style) ───────────────────────────────
@@ -71,51 +77,67 @@
 
     // ── Init ──────────────────────────────────────────────────────────
     function initFromText() {
-        state.tokens = [];
+        state.segments = [];
         state.vocab = [];
         state.idOfUnit = {};
         state.merges = [];
         stopAuto();
 
         var text = el.textInput.value;
+        state.pretokenize = el.pretokenToggle.checked;
 
-        if (state.mode === 'char') {
-            var chars = Array.from(text);
-            chars.forEach(function (ch) {
-                var key = 'c:' + ch;
-                if (!(key in state.idOfUnit)) {
-                    var id = state.vocab.length;
-                    state.vocab.push({ id: id, units: [ch], kind: 'base' });
-                    state.idOfUnit[key] = id;
-                }
-                state.tokens.push(state.idOfUnit[key]);
-            });
+        // Build a list of "chunks". When pre-tokenizing, each chunk is one
+        // whitespace-delimited word (whitespace discarded, acts as a barrier).
+        // When not pre-tokenizing, the whole text is a single chunk.
+        var chunks;
+        if (state.pretokenize) {
+            chunks = text.split(/\s+/).filter(Boolean);
         } else {
-            var u8 = new TextEncoder().encode(text);
-            for (var i = 0; i < u8.length; i++) {
-                var b = u8[i];
-                var key = 'b:' + b;
-                if (!(key in state.idOfUnit)) {
-                    var id = state.vocab.length;
-                    state.vocab.push({ id: id, units: [b], kind: 'base' });
-                    state.idOfUnit[key] = id;
-                }
-                state.tokens.push(state.idOfUnit[key]);
-            }
+            chunks = [text];
         }
+
+        chunks.forEach(function (chunk) {
+            var segIds = [];
+            if (state.mode === 'char') {
+                Array.from(chunk).forEach(function (ch) {
+                    var key = 'c:' + ch;
+                    if (!(key in state.idOfUnit)) {
+                        var id = state.vocab.length;
+                        state.vocab.push({ id: id, units: [ch], kind: 'base' });
+                        state.idOfUnit[key] = id;
+                    }
+                    segIds.push(state.idOfUnit[key]);
+                });
+            } else {
+                var u8 = new TextEncoder().encode(chunk);
+                for (var i = 0; i < u8.length; i++) {
+                    var b = u8[i];
+                    var key = 'b:' + b;
+                    if (!(key in state.idOfUnit)) {
+                        var id = state.vocab.length;
+                        state.vocab.push({ id: id, units: [b], kind: 'base' });
+                        state.idOfUnit[key] = id;
+                    }
+                    segIds.push(state.idOfUnit[key]);
+                }
+            }
+            if (segIds.length > 0) state.segments.push(segIds);
+        });
         render();
     }
 
-    // ── Pair counting ─────────────────────────────────────────────────
+    // ── Pair counting (within segments only) ──────────────────────────
     function countPairs() {
         var counts = {};
-        for (var i = 0; i < state.tokens.length - 1; i++) {
-            var a = state.tokens[i];
-            var b = state.tokens[i + 1];
-            var key = a + ',' + b;
-            if (!counts[key]) counts[key] = { a: a, b: b, count: 0 };
-            counts[key].count++;
-        }
+        state.segments.forEach(function (seg) {
+            for (var i = 0; i < seg.length - 1; i++) {
+                var a = seg[i];
+                var b = seg[i + 1];
+                var key = a + ',' + b;
+                if (!counts[key]) counts[key] = { a: a, b: b, count: 0 };
+                counts[key].count++;
+            }
+        });
         var arr = [];
         for (var k in counts) arr.push(counts[k]);
         arr.sort(function (x, y) {
@@ -148,19 +170,20 @@
             newId: newId,
             count: top.count
         });
-        var newTokens = [];
-        var i = 0;
-        while (i < state.tokens.length) {
-            if (i < state.tokens.length - 1 &&
-                state.tokens[i] === top.a && state.tokens[i + 1] === top.b) {
-                newTokens.push(newId);
-                i += 2;
-            } else {
-                newTokens.push(state.tokens[i]);
-                i += 1;
+        // replace the pair within every segment
+        state.segments = state.segments.map(function (seg) {
+            var out = [], i = 0;
+            while (i < seg.length) {
+                if (i < seg.length - 1 && seg[i] === top.a && seg[i + 1] === top.b) {
+                    out.push(newId);
+                    i += 2;
+                } else {
+                    out.push(seg[i]);
+                    i += 1;
+                }
             }
-        }
-        state.tokens = newTokens;
+            return out;
+        });
         render();
         return true;
     }
@@ -172,16 +195,18 @@
         var last = state.merges.pop();
         state.vocab.pop();
         var a = last.pair[0], b = last.pair[1], newId = last.newId;
-        var newTokens = [];
-        for (var i = 0; i < state.tokens.length; i++) {
-            if (state.tokens[i] === newId) {
-                newTokens.push(a);
-                newTokens.push(b);
-            } else {
-                newTokens.push(state.tokens[i]);
+        state.segments = state.segments.map(function (seg) {
+            var out = [];
+            for (var i = 0; i < seg.length; i++) {
+                if (seg[i] === newId) {
+                    out.push(a);
+                    out.push(b);
+                } else {
+                    out.push(seg[i]);
+                }
             }
-        }
-        state.tokens = newTokens;
+            return out;
+        });
         render();
     }
 
@@ -218,6 +243,7 @@
 
     // ── Rendering ─────────────────────────────────────────────────────
     function render() {
+        renderStep();
         renderTokens();
         renderPairs();
         renderVocab();
@@ -226,34 +252,104 @@
         updateButtons();
     }
 
+    // Step indicator + dynamic Next button label
+    function renderStep() {
+        var n = state.merges.length;
+        el.stepBadge.textContent = 'Step ' + n;
+        var pairs = countPairs();
+        var cap = parseInt(el.vocabCap.value, 10) || 50;
+        var atCap = state.vocab.length >= cap;
+        var noPairs = pairs.length === 0;
+
+        if (n === 0) {
+            el.stepBadge.classList.add('done');
+            el.stepDesc.innerHTML = 'Press “Next Merge” to begin training.';
+        } else if (noPairs || atCap) {
+            el.stepBadge.classList.add('done');
+            var reason = atCap ? 'vocab cap reached' : 'no more pairs to merge';
+            el.stepDesc.innerHTML = 'Done after ' + n + ' merge' + (n > 1 ? 's' : '') + ' (' + reason + ').';
+        } else {
+            el.stepBadge.classList.remove('done');
+            var last = state.merges[state.merges.length - 1];
+            var aTok = state.vocab[last.pair[0]];
+            var bTok = state.vocab[last.pair[1]];
+            var resTok = state.vocab[last.newId];
+            el.stepDesc.innerHTML =
+                'Last merge: <code>' + escapeHtml(tokenDisplay(aTok)) + '</code> + ' +
+                '<code>' + escapeHtml(tokenDisplay(bTok)) + '</code> ' +
+                '<span class="merge-arrow">&rarr;</span> ' +
+                '<code>' + escapeHtml(tokenDisplay(resTok)) + '</code>' +
+                '<span class="count-pill-inline">×' + last.count + '</span>';
+        }
+
+        // Dynamic Next button: preview the upcoming merge
+        if (noPairs || atCap) {
+            el.btnNext.textContent = 'Next Merge →';
+            el.btnNext.disabled = true;
+        } else {
+            var top = pairs[0];
+            var ta = state.vocab[top.a], tb = state.vocab[top.b];
+            var merged = tokenDisplay(ta) + tokenDisplay(tb);
+            el.btnNext.innerHTML = 'Merge ' + escapeHtml(tokenDisplay(ta)) + '+' +
+                escapeHtml(tokenDisplay(tb)) + ' &rarr;';
+            el.btnNext.title = 'Merge "' + tokenDisplay(ta) + '" + "' + tokenDisplay(tb) +
+                '" into "' + merged + '" (count: ' + top.count + ')';
+        }
+    }
+
     function renderTokens() {
         el.tokenSequence.innerHTML = '';
         var pairs = countPairs();
         var topPair = pairs.length ? pairs[0] : null;
 
-        var highlightIdx = new Set();
-        if (topPair) {
-            for (var i = 0; i < state.tokens.length - 1; i++) {
-                if (state.tokens[i] === topPair.a && state.tokens[i + 1] === topPair.b) {
-                    highlightIdx.add(i);
-                    highlightIdx.add(i + 1);
-                }
-            }
+        if (state.segments.length === 0 || totalTokens() === 0) {
+            var empty = document.createElement('span');
+            empty.className = 'empty-stage';
+            empty.textContent = 'Enter some text above to begin.';
+            el.tokenSequence.appendChild(empty);
+            return;
         }
 
-        state.tokens.forEach(function (id, idx) {
-            var tok = state.vocab[id];
-            var chip = document.createElement('span');
-            chip.className = 'token-chip';
-            if (tok.kind === 'merged') chip.classList.add('merged');
-            if (highlightIdx.has(idx)) chip.classList.add('next-merge');
-            chip.textContent = tokenDisplay(tok);
-            if (state.mode === 'byte') {
-                var hex = tokenHex(tok);
-                if (hex) chip.title = hex;
+        // Build chips per segment. We collect chips into a grid so we can
+        // tag next-merge pairs afterwards using per-segment adjacency.
+        var chipGrid = [];   // chipGrid[segIdx][pos] = chip element
+
+        state.segments.forEach(function (seg, segIdx) {
+            if (segIdx > 0 && state.pretokenize) {
+                var gap = document.createElement('span');
+                gap.className = 'segment-gap';
+                gap.textContent = '␣';
+                gap.title = 'word boundary — pre-tokenization prevents merges across this gap';
+                el.tokenSequence.appendChild(gap);
             }
-            el.tokenSequence.appendChild(chip);
+            var row = [];
+            seg.forEach(function (id) {
+                var tok = state.vocab[id];
+                var chip = document.createElement('span');
+                chip.className = 'token-chip';
+                if (tok.kind === 'merged') chip.classList.add('merged');
+                chip.textContent = tokenDisplay(tok);
+                if (state.mode === 'byte') {
+                    var hex = tokenHex(tok);
+                    if (hex) chip.title = hex;
+                }
+                el.tokenSequence.appendChild(chip);
+                row.push(chip);
+            });
+            chipGrid.push(row);
         });
+
+        // Tag the next-merge pair within each segment.
+        if (topPair) {
+            state.segments.forEach(function (seg, s) {
+                for (var i = 0; i < seg.length - 1; i++) {
+                    if (seg[i] === topPair.a && seg[i + 1] === topPair.b) {
+                        chipGrid[s][i].classList.add('next-merge');
+                        chipGrid[s][i + 1].classList.add('next-merge');
+                    }
+                }
+            });
+        }
     }
 
     function renderPairs() {
@@ -327,16 +423,24 @@
         });
     }
 
+    function totalTokens() {
+        var n = 0;
+        state.segments.forEach(function (seg) { n += seg.length; });
+        return n;
+    }
+
     function renderStats() {
-        var nTokens = state.tokens.length;
+        var nTokens = totalTokens();
         var nVocab = state.vocab.length;
         var nMerges = state.merges.length;
         var nChars = Array.from(el.textInput.value).length;
+        var nSegs = state.segments.length;
         el.statsLine.innerHTML =
             '<strong>' + nTokens + '</strong> tokens &middot; ' +
             '<strong>' + nVocab + '</strong> vocab size &middot; ' +
             '<strong>' + nMerges + '</strong> merges &middot; ' +
-            '<strong>' + nChars + '</strong> characters in input';
+            '<strong>' + nSegs + '</strong> ' + (state.pretokenize ? 'words' : 'segment') +
+            ' &middot; <strong>' + nChars + '</strong> characters in input';
     }
 
     function updateButtons() {
@@ -375,6 +479,10 @@
         el.btnPrev.addEventListener('click', previousMerge);
         el.btnNext.addEventListener('click', function () { nextMerge(); });
         el.btnAuto.addEventListener('click', toggleAuto);
+        el.pretokenToggle.addEventListener('change', initFromText);
+        el.infoTabs.forEach(function (tab) {
+            tab.addEventListener('click', function () { switchInfoTab(tab.dataset.info); });
+        });
         el.modeBtns.forEach(function (btn) {
             btn.addEventListener('click', function () { setMode(btn.dataset.mode); });
         });
@@ -384,7 +492,16 @@
             clearTimeout(t);
             t = setTimeout(initFromText, 400);
         });
-        el.vocabCap.addEventListener('change', updateButtons);
+        el.vocabCap.addEventListener('change', function () { renderStep(); updateButtons(); });
+    }
+
+    function switchInfoTab(name) {
+        el.infoTabs.forEach(function (tab) {
+            tab.classList.toggle('active', tab.dataset.info === name);
+        });
+        el.infoPanels.forEach(function (panel) {
+            panel.classList.toggle('active', panel.id === name + 'Panel');
+        });
     }
 
     // ── Boot ──────────────────────────────────────────────────────────
