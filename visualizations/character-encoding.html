@@ -51,26 +51,30 @@
 
                 <!-- ── Encode tab ── -->
                 <div class="tab-panel active" id="encodePanel">
-                    <label class="field-label" for="encodeInput">Text input:</label>
-                    <textarea id="encodeInput" rows="3" spellcheck="false">Hello 你好世界 🌍</textarea>
-
-                    <div class="output-wrapper">
-                        <table class="encode-table" id="encodeTable">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Character</th>
-                                    <th>Code Point</th>
-                                    <th>Bytes (hex)</th>
-                                    <th>Bytes (binary)</th>
-                                    <th>Note</th>
-                                </tr>
-                            </thead>
-                            <tbody id="encodeTableBody"></tbody>
-                        </table>
+                    <div class="encode-layout">
+                        <div class="encode-input-col">
+                            <label class="field-label" for="encodeInput">Text input:</label>
+                            <textarea id="encodeInput" rows="3" spellcheck="false">Hello 你好世界 🌍</textarea>
+                            <div class="summary-line" id="encodeSummary"></div>
+                        </div>
+                        <div class="encode-output-col">
+                            <div class="output-wrapper">
+                                <table class="encode-table" id="encodeTable">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Character</th>
+                                            <th>Code Point</th>
+                                            <th>Bytes (hex)</th>
+                                            <th>Bytes (binary)</th>
+                                            <th>Note</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="encodeTableBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="summary-line" id="encodeSummary"></div>
                 </div>
 
                 <!-- ── Decode tab ── -->

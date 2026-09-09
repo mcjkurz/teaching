@@ -89,6 +89,24 @@ textarea#textInput:focus { outline: none; border-color: #3498db; box-shadow: 0 0
     display: flex; flex-wrap: wrap; gap: 5px; align-items: center;
     margin-bottom: 1.1rem;
 }
+
+/* Raw UTF-8 byte sequence strip (byte mode only) */
+.byte-sequence-panel {
+    margin-bottom: 1.1rem; padding: 0.8rem 0.9rem;
+    background: #f4f0fa; border: 1px solid #e0d6ef; border-radius: 8px;
+}
+.byte-sequence-label {
+    font-size: 0.78rem; color: #6c3483; font-weight: 600; margin-bottom: 0.5rem;
+}
+.byte-sequence {
+    display: flex; flex-wrap: wrap; gap: 4px; align-items: center;
+}
+.byte-chip {
+    display: inline-block; padding: 0.28rem 0.5rem;
+    background: white; border: 1px solid #c8b6e8; border-radius: 5px;
+    font-family: 'Courier New', monospace; font-size: 0.88rem;
+    color: #5b3a8e; font-weight: 600;
+}
 .token-chip {
     display: inline-block; padding: 0.35rem 0.6rem;
     background: #eaf2f8; border: 1px solid #b8d4e8; border-radius: 6px;

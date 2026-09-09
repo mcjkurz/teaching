@@ -40,15 +40,11 @@
         el.newTextInput = document.getElementById('newTextInput');
         el.newTokenSequence = document.getElementById('newTokenSequence');
         el.newStats = document.getElementById('newStats');
+        el.byteSequencePanel = document.getElementById('byteSequencePanel');
+        el.byteSequence = document.getElementById('byteSequence');
     }
 
-    // ── Byte display map (GPT-2 style) ───────────────────────────────
-    function byteLabel(b) {
-        if (b === 0x20) return '␣';
-        if (b >= 0x21 && b <= 0x7E) return String.fromCharCode(b);
-        return '0x' + b.toString(16).toUpperCase().padStart(2, '0');
-    }
-
+    // ── UTF-8 helpers ─────────────────────────────────────────────────
     function tryDecodeUtf8(bytes) {
         try {
             var u8 = new Uint8Array(bytes);
@@ -59,23 +55,33 @@
         }
     }
 
-    function tokenDisplay(token) {
-        if (state.mode === 'char') {
-            return token.units.join('');
-        } else {
-            var decoded = tryDecodeUtf8(token.units);
-            if (decoded !== null && decoded.length > 0) {
-                return decoded.replace(/ /g, '␣');
-            }
-            return token.units.map(byteLabel).join(' ');
-        }
-    }
+    function hexByte(b) { return b.toString(16).toUpperCase().padStart(2, '0'); }
 
     function tokenHex(token) {
         if (state.mode === 'char') return '';
-        return token.units.map(function (b) {
-            return b.toString(16).toUpperCase().padStart(2, '0');
-        }).join(' ');
+        return token.units.map(hexByte).join(' ');
+    }
+
+    // Primary chip text. Char mode: the characters. Byte mode: the raw hex bytes.
+    function tokenDisplay(token) {
+        if (state.mode === 'char') return token.units.join('');
+        return tokenHex(token);
+    }
+
+    // Decoded UTF-8 hint for byte mode (empty in char mode).
+    function tokenHint(token) {
+        if (state.mode === 'char') return '';
+        var d = tryDecodeUtf8(token.units);
+        if (d === null || d.length === 0) return '';
+        return d.replace(/ /g, '␣');
+    }
+
+    // Rich text for tables / descriptions: "E4 BD A0 (你)" in byte mode, char string otherwise.
+    function tokenRich(token) {
+        if (state.mode === 'char') return token.units.join('');
+        var h = tokenHex(token);
+        var hint = tokenHint(token);
+        return hint ? h + ' (' + hint + ')' : h;
     }
 
     // ── Init ──────────────────────────────────────────────────────────
@@ -247,6 +253,7 @@
     // ── Rendering ─────────────────────────────────────────────────────
     function render() {
         renderStep();
+        renderByteSequence();
         renderTokens();
         renderPairs();
         renderVocab();
@@ -254,6 +261,38 @@
         renderStats();
         renderNewText();
         updateButtons();
+    }
+
+    // Static strip showing the raw UTF-8 bytes of the input (byte mode only).
+    function renderByteSequence() {
+        if (state.mode !== 'byte') {
+            el.byteSequencePanel.style.display = 'none';
+            return;
+        }
+        el.byteSequencePanel.style.display = 'block';
+        el.byteSequence.innerHTML = '';
+        var u8 = new TextEncoder().encode(el.textInput.value);
+        if (u8.length === 0) {
+            var empty = document.createElement('span');
+            empty.className = 'empty-stage';
+            empty.textContent = 'Enter text above to see its UTF-8 bytes.';
+            el.byteSequence.appendChild(empty);
+            return;
+        }
+        for (var i = 0; i < u8.length; i++) {
+            var chip = document.createElement('span');
+            chip.className = 'byte-chip';
+            chip.textContent = hexByte(u8[i]);
+            // show the printable char as a hint in the tooltip
+            if (u8[i] >= 0x20 && u8[i] <= 0x7E) {
+                chip.title = hexByte(u8[i]) + '  ·  ' + String.fromCharCode(u8[i]);
+            } else if (u8[i] === 0x20) {
+                chip.title = hexByte(u8[i]) + '  ·  space';
+            } else {
+                chip.title = hexByte(u8[i]);
+            }
+            el.byteSequence.appendChild(chip);
+        }
     }
 
     // Step indicator + dynamic Next button label
@@ -279,10 +318,10 @@
             var bTok = state.vocab[last.pair[1]];
             var resTok = state.vocab[last.newId];
             el.stepDesc.innerHTML =
-                'Last merge: <code>' + escapeHtml(tokenDisplay(aTok)) + '</code> + ' +
-                '<code>' + escapeHtml(tokenDisplay(bTok)) + '</code> ' +
+                'Last merge: <code>' + escapeHtml(tokenRich(aTok)) + '</code> + ' +
+                '<code>' + escapeHtml(tokenRich(bTok)) + '</code> ' +
                 '<span class="merge-arrow">&rarr;</span> ' +
-                '<code>' + escapeHtml(tokenDisplay(resTok)) + '</code>' +
+                '<code>' + escapeHtml(tokenRich(resTok)) + '</code>' +
                 '<span class="count-pill-inline">×' + last.count + '</span>';
         }
 
@@ -293,11 +332,10 @@
         } else {
             var top = pairs[0];
             var ta = state.vocab[top.a], tb = state.vocab[top.b];
-            var merged = tokenDisplay(ta) + tokenDisplay(tb);
-            el.btnNext.innerHTML = 'Merge ' + escapeHtml(tokenDisplay(ta)) + '+' +
-                escapeHtml(tokenDisplay(tb)) + ' &rarr;';
-            el.btnNext.title = 'Merge "' + tokenDisplay(ta) + '" + "' + tokenDisplay(tb) +
-                '" into "' + merged + '" (count: ' + top.count + ')';
+            el.btnNext.innerHTML = 'Merge ' + escapeHtml(tokenRich(ta)) + '+' +
+                escapeHtml(tokenRich(tb)) + ' &rarr;';
+            el.btnNext.title = 'Merge into "' + tokenRich(ta) + tokenRich(tb) +
+                '" (count: ' + top.count + ')';
         }
     }
 
@@ -334,8 +372,9 @@
                 if (tok.kind === 'merged') chip.classList.add('merged');
                 chip.textContent = tokenDisplay(tok);
                 if (state.mode === 'byte') {
+                    var hint = tokenHint(tok);
                     var hex = tokenHex(tok);
-                    if (hex) chip.title = hex;
+                    chip.title = hint ? (hint + '  ·  ' + hex) : hex;
                 }
                 el.tokenSequence.appendChild(chip);
                 row.push(chip);
@@ -370,7 +409,7 @@
             if (idx === 0) tr.className = 'top-pair';
             var aTok = state.vocab[p.a];
             var bTok = state.vocab[p.b];
-            var pairStr = tokenDisplay(aTok) + ' + ' + tokenDisplay(bTok);
+            var pairStr = tokenRich(aTok) + ' + ' + tokenRich(bTok);
             tr.innerHTML =
                 '<td>' + (idx + 1) + '</td>' +
                 '<td class="pair-cell">' + escapeHtml(pairStr) + '</td>' +
@@ -386,14 +425,14 @@
             if (tok.kind === 'merged' && tok.id === state.vocab.length - 1 && state.merges.length > 0) {
                 tr.className = 'new-token';
             }
-            var disp = tokenDisplay(tok);
+            var disp = tokenRich(tok);
             var typeCell = tok.kind === 'base'
                 ? '<span class="tag base">base</span>'
                 : '<span class="tag merged">merged</span>';
-            var hex = state.mode === 'byte' ? '<div class="hex-hint">' + tokenHex(tok) + '</div>' : '';
+            var hint = state.mode === 'byte' ? '<div class="hex-hint">' + escapeHtml(tokenHint(tok)) + '</div>' : '';
             tr.innerHTML =
                 '<td>' + tok.id + '</td>' +
-                '<td class="vocab-cell">' + escapeHtml(disp) + hex + '</td>' +
+                '<td class="vocab-cell">' + escapeHtml(disp) + hint + '</td>' +
                 '<td>' + typeCell + '</td>';
             el.vocabTableBody.appendChild(tr);
         });
@@ -411,14 +450,14 @@
         state.merges.forEach(function (m) {
             var aTok = state.vocab[m.pair[0]];
             var bTok = state.vocab[m.pair[1]];
-            var aStr = aTok ? tokenDisplay(aTok) : '?';
-            var bStr = bTok ? tokenDisplay(bTok) : '?';
+            var aStr = aTok ? tokenRich(aTok) : '?';
+            var bStr = bTok ? tokenRich(bTok) : '?';
             var li = document.createElement('li');
             li.innerHTML =
                 '<span class="step-num">' + m.step + '.</span> ' +
                 '<code>' + escapeHtml(aStr) + '</code> + ' +
                 '<code>' + escapeHtml(bStr) + '</code> &rarr; ' +
-                '<code class="merged-result">' + escapeHtml(tokenDisplay(state.vocab[m.newId])) + '</code> ' +
+                '<code class="merged-result">' + escapeHtml(tokenRich(state.vocab[m.newId])) + '</code> ' +
                 '<span class="count-pill">×' + m.count + '</span>';
             li.addEventListener('click', function () {
                 jumpToStep(m.step);
@@ -494,7 +533,7 @@
 
     function oovDisplay(item) {
         if (state.mode === 'char') return item.unit;
-        return byteLabel(item.unit);
+        return hexByte(item.unit);
     }
 
     function renderNewText() {
@@ -533,8 +572,9 @@
                     if (tok.kind === 'merged') chip.classList.add('merged');
                     chip.textContent = tokenDisplay(tok);
                     if (state.mode === 'byte') {
+                        var hint = tokenHint(tok);
                         var hex = tokenHex(tok);
-                        if (hex) chip.title = hex;
+                        chip.title = hint ? (hint + '  ·  ' + hex) : hex;
                     }
                 }
                 el.newTokenSequence.appendChild(chip);
