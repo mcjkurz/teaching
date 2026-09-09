@@ -25,6 +25,24 @@ header p a:hover { text-decoration: underline; }
     box-shadow: 0 2px 6px rgba(0,0,0,0.08); margin-bottom: 1.25rem;
 }
 
+/* Collapsible explanation */
+.explain-details { padding: 0; }
+.explain-details > summary {
+    cursor: pointer; font-size: 1rem; font-weight: 600; color: #2c3e50;
+    list-style: none; padding: 0.25rem 0; user-select: none;
+}
+.explain-details > summary::-webkit-details-marker { display: none; }
+.explain-details > summary::before {
+    content: '▸'; display: inline-block; margin-right: 0.5rem;
+    color: #888; transition: transform 0.18s ease;
+}
+.explain-details[open] > summary::before { transform: rotate(90deg); }
+.explain-details .read-more {
+    color: #3498db; font-weight: 500; font-size: 0.85rem; margin-left: 0.4rem;
+}
+.explain-details[open] .read-more { display: none; }
+.explain-details .explanation-box { margin-top: 0.75rem; margin-bottom: 0; }
+
 /* Explanation */
 .explanation-box {
     background: #f0f4f8; border-left: 4px solid #3498db; color: #2c3e50;
@@ -47,19 +65,18 @@ header p a:hover { text-decoration: underline; }
 .mode-btn:hover { background: #f0f4f8; border-color: #3498db; }
 .mode-btn.active { background: #3498db; border-color: #3498db; color: white; }
 
-.base-toggle {
-    display: inline-flex; align-items: center; gap: 0.35rem;
-    background: #f0f4f8; padding: 0.3rem 0.5rem; border-radius: 6px;
+.base-select-label {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.83rem; color: #444; cursor: pointer;
+    background: #f0f4f8; padding: 0.4rem 0.7rem; border-radius: 6px;
     border: 1px solid #d5e0ea;
 }
-.base-label { font-size: 0.78rem; color: #555; font-weight: 600; margin-right: 0.15rem; }
-.base-btn {
-    padding: 0.25rem 0.6rem; font-size: 0.8rem; border: 1px solid #ccc;
-    border-radius: 5px; background: #fff; color: #555; cursor: pointer;
-    font-family: 'Courier New', monospace; transition: all 0.18s ease;
+.base-select-label select {
+    padding: 0.25rem 0.5rem; font-size: 0.83rem; border: 1px solid #ccc;
+    border-radius: 5px; background: #fff; color: #333; cursor: pointer;
+    font-family: 'Courier New', monospace;
 }
-.base-btn:hover { border-color: #8e44ad; color: #8e44ad; }
-.base-btn.active { background: #8e44ad; border-color: #8e44ad; color: white; }
+.base-select-label select:focus { outline: none; border-color: #3498db; }
 
 .pretoken-label {
     display: inline-flex; align-items: center; gap: 0.4rem;
@@ -107,19 +124,19 @@ textarea#textInput:focus { outline: none; border-color: #3498db; box-shadow: 0 0
 /* Raw UTF-8 byte sequence strip (byte mode only) */
 .byte-sequence-panel {
     margin-bottom: 1.1rem; padding: 0.8rem 0.9rem;
-    background: #f4f0fa; border: 1px solid #e0d6ef; border-radius: 8px;
+    background: #fafbfc; border: 1px solid #e8edf2; border-radius: 8px;
 }
 .byte-sequence-label {
-    font-size: 0.78rem; color: #6c3483; font-weight: 600; margin-bottom: 0.5rem;
+    font-size: 0.78rem; color: #666; font-weight: 600; margin-bottom: 0.5rem;
 }
 .byte-sequence {
     display: flex; flex-wrap: wrap; gap: 4px; align-items: center;
 }
 .byte-chip {
     display: inline-block; padding: 0.28rem 0.5rem;
-    background: white; border: 1px solid #c8b6e8; border-radius: 5px;
+    background: white; border: 1px solid #d5dde6; border-radius: 5px;
     font-family: 'Courier New', monospace; font-size: 0.88rem;
-    color: #5b3a8e; font-weight: 600;
+    color: #2c3e50; font-weight: 600;
 }
 .token-chip {
     display: inline-block; padding: 0.35rem 0.6rem;
@@ -127,7 +144,7 @@ textarea#textInput:focus { outline: none; border-color: #3498db; box-shadow: 0 0
     font-family: 'Courier New', monospace; font-size: 1rem;
     color: #2c3e50; transition: all 0.2s ease;
 }
-.token-chip.merged { background: #fef9e7; border-color: #f5d96b; color: #7d5a00; }
+.token-chip.merged { /* same style as base tokens */ }
 .token-chip.next-merge {
     background: #d5f5e3; border: 2px solid #27ae60; color: #145a32;
     font-weight: 700; box-shadow: 0 0 0 2px rgba(39,174,96,0.18);
@@ -208,7 +225,7 @@ table.pair-table tr.top-pair { background: #d5f5e3; }
 table.pair-table tr.top-pair td { font-weight: 600; color: #1e8449; }
 .pair-cell, .vocab-cell { font-family: 'Courier New', monospace; }
 .vocab-cell .hex-hint { font-size: 0.7rem; color: #999; margin-top: 2px; }
-table.vocab-table tr.new-token { background: #fef9e7; }
+table.vocab-table tr.new-token { background: #f4f8fb; }
 td.empty { text-align: center; color: #999; padding: 1.4rem; font-style: italic; }
 
 .tag {
@@ -216,7 +233,7 @@ td.empty { text-align: center; color: #999; padding: 1.4rem; font-style: italic;
     font-size: 0.68rem; font-weight: 600; text-transform: uppercase;
 }
 .tag.base { background: #eaf2f8; color: #2980b9; }
-.tag.merged { background: #fef9e7; color: #d68910; }
+.tag.merged { background: #eaf2f8; color: #2980b9; }
 
 /* Merge history */
 .merge-history { list-style: none; padding: 0; margin: 0; max-height: 300px; overflow-y: auto; }
@@ -233,7 +250,7 @@ td.empty { text-align: center; color: #999; padding: 1.4rem; font-style: italic;
     background: #f0f4f8; padding: 0.1rem 0.35rem; border-radius: 3px;
     font-family: 'Courier New', monospace; color: #2c3e50;
 }
-.merge-history .merged-result { background: #fef9e7; color: #7d5a00; font-weight: 600; }
+.merge-history .merged-result { font-weight: 600; }
 .count-pill {
     display: inline-block; background: #eaf2f8; color: #2980b9;
     padding: 0.1rem 0.5rem; border-radius: 10px; font-size: 0.75rem; margin-left: 0.4rem;
@@ -252,7 +269,7 @@ footer a:hover { text-decoration: underline; }
     font-size: 1.15rem; font-weight: 500; color: #2c3e50; margin-bottom: 0.5rem;
     display: flex; align-items: center; gap: 0.5rem;
 }
-.step-badge.alt { background: #8e44ad; }
+.step-badge.alt { background: #7f8c8d; }
 .encode-stage { margin-bottom: 0.9rem; }
 .encode-stats { font-size: 0.83rem; color: #666; }
 .encode-stats strong { color: #2c3e50; }
@@ -261,14 +278,14 @@ footer a:hover { text-decoration: underline; }
     color: #c0392b; font-weight: 600;
 }
 .token-chip.oov {
-    background: #fadbd8; border: 1px dashed #e74c3c; color: #922b21;
+    background: #fdecea; border: 1px dashed #e6a09b; color: #a94442;
 }
 textarea#newTextInput {
     width: 100%; padding: 0.6rem 0.7rem; font-size: 0.95rem;
     font-family: 'Courier New', monospace; border: 1px solid #ccc;
     border-radius: 6px; resize: vertical; min-height: 50px; margin-bottom: 0.9rem;
 }
-textarea#newTextInput:focus { outline: none; border-color: #8e44ad; box-shadow: 0 0 3px rgba(142,68,173,0.3); }
+textarea#newTextInput:focus { outline: none; border-color: #3498db; box-shadow: 0 0 3px rgba(52,152,219,0.3); }
 
 @media (max-width: 768px) {
     .container { padding: 1rem; }

@@ -24,6 +24,24 @@ header p a:hover { text-decoration: underline; }
     background: white; padding: 1.5rem; border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1.5rem;
 }
+
+/* Collapsible explanation */
+.explain-details { padding: 0; }
+.explain-details > summary {
+    cursor: pointer; font-size: 1rem; font-weight: 600; color: #2c3e50;
+    list-style: none; padding: 0.25rem 0; user-select: none;
+}
+.explain-details > summary::-webkit-details-marker { display: none; }
+.explain-details > summary::before {
+    content: '▸'; display: inline-block; margin-right: 0.5rem;
+    color: #888; transition: transform 0.18s ease;
+}
+.explain-details[open] > summary::before { transform: rotate(90deg); }
+.explain-details .read-more {
+    color: #3498db; font-weight: 500; font-size: 0.85rem; margin-left: 0.4rem;
+}
+.explain-details[open] .read-more { display: none; }
+.explain-details .explanation-box { margin-top: 0.75rem; margin-bottom: 0; }
 .step-section h2 {
     font-size: 1.2rem; font-weight: 500; margin-bottom: 1rem; color: #2c3e50;
     display: flex; align-items: center; gap: 0.5rem;

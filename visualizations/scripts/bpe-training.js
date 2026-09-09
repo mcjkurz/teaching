@@ -32,7 +32,7 @@
         el.vocabTableBody = document.getElementById('vocabTableBody');
         el.mergeHistory = document.getElementById('mergeHistory');
         el.modeBtns = document.querySelectorAll('.mode-btn');
-        el.baseBtns = document.querySelectorAll('.base-btn');
+        el.baseSelect = document.getElementById('baseSelect');
         el.pretokenToggle = document.getElementById('pretokenToggle');
         el.stepBadge = document.getElementById('stepBadge');
         el.stepDesc = document.getElementById('stepDesc');
@@ -656,9 +656,7 @@
         base = parseInt(base, 10) || 10;
         if (base === state.base) return;
         state.base = base;
-        el.baseBtns.forEach(function (btn) {
-            btn.classList.toggle('active', parseInt(btn.dataset.base, 10) === base);
-        });
+        el.baseSelect.value = String(base);
         render();
     }
 
@@ -684,9 +682,7 @@
         el.modeBtns.forEach(function (btn) {
             btn.addEventListener('click', function () { setMode(btn.dataset.mode); });
         });
-        el.baseBtns.forEach(function (btn) {
-            btn.addEventListener('click', function () { setBase(btn.dataset.base); });
-        });
+        el.baseSelect.addEventListener('change', function () { setBase(this.value); });
         // Re-init when text changes (debounced)
         var t;
         el.textInput.addEventListener('input', function () {

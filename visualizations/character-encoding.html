@@ -18,12 +18,14 @@
         </header>
 
         <main>
-            <!-- ═══ Explanation ═══ -->
+            <!-- ═══ Explanation (collapsible) ═══ -->
             <section class="step-section">
-                <div class="explanation-box">
-                    <h4>What is a character encoding?</h4>
-                    <p>Computers only store <strong>bytes</strong> (numbers 0&ndash;255). A <em>character encoding</em> is the rule that maps each character to a specific sequence of bytes, and back. The same text produces <em>different</em> bytes under different encodings &mdash; and decoding bytes with the wrong encoding produces mojibake (乱码). Try switching encodings below to see how the byte representation changes, especially for Chinese characters.</p>
-                </div>
+                <details class="explain-details">
+                    <summary>What is a character encoding? <span class="read-more">read more</span></summary>
+                    <div class="explanation-box">
+                        <p>Computers only store <strong>bytes</strong> (numbers 0&ndash;255). A <em>character encoding</em> is the rule that maps each character to a specific sequence of bytes, and back. The same text produces <em>different</em> bytes under different encodings &mdash; and decoding bytes with the wrong encoding produces mojibake (乱码). Try switching encodings below to see how the byte representation changes, especially for Chinese characters.</p>
+                    </div>
+                </details>
             </section>
 
             <!-- ═══ Tab switcher ═══ -->
