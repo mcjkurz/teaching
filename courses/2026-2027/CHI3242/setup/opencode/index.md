@@ -15,7 +15,7 @@ title: 安裝 OpenCode
 <p>OpenCode is the AI coding assistant we use in class. On a new computer (or a new user account), install it once in the terminal, then tell the terminal where to find it.</p>
 
 <h2>1. Open a terminal</h2>
-<p>On a Mac: <strong>Applications → Utilities → Terminal</strong>, or in VS Code choose <strong>Terminal → New Terminal</strong>. On Linux, open your usual terminal. On Windows, the same command works in <a href="https://git-scm.com/">Git Bash</a>.</p>
+<p>On a Mac: <strong>Applications → Utilities → Terminal</strong>, or in VS Code choose <strong>Terminal → New Terminal</strong>. On Windows: open <a href="https://git-scm.com/">Git Bash</a>, or the terminal in VS Code.</p>
 
 <h2>2. Run the installer</h2>
 <p>Paste this line and press Enter:</p>
@@ -28,8 +28,8 @@ title: 安裝 OpenCode
 <li><strong>Easiest:</strong> close the terminal and open a new one. A fresh window reads your settings automatically.</li>
 <li><strong>Stay in the same window:</strong> reload the config file.
 <ul>
-<li>macOS (zsh, the default): <code>source ~/.zshrc</code></li>
-<li>Linux (often bash): <code>source ~/.bashrc</code></li>
+<li>Mac: <code>source ~/.zshrc</code></li>
+<li>Windows (Git Bash): <code>source ~/.bashrc</code></li>
 </ul>
 </li>
 </ul>
@@ -38,14 +38,14 @@ title: 安裝 OpenCode
 <h2>4. Check that it works</h2>
 <p>In the new (or reloaded) terminal, type:</p>
 <pre>opencode</pre>
-<p>If OpenCode starts, you are done. Next, connect it with your course API key — see the <a href="../../notes/week-01/">Week 1 notes</a>.</p>
+<p>If OpenCode starts, you are done.</p>
 <p>More detail, if you need it: <a href="https://opencode.ai/">opencode.ai</a>.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
 <p>OpenCode 是課堂使用的人工智能編程助手。在一台新電腦（或新的使用者帳號）上，只要在終端機裝一次，再讓終端機知道去哪裡找它。</p>
 
 <h2>1. 打開終端機</h2>
-<p>Mac：<strong>應用程式 → 工具程式 → 終端機</strong>；或在 VS Code 選 <strong>Terminal → New Terminal</strong>。Linux：打開常用的終端機即可。Windows：同一個指令可在 <a href="https://git-scm.com/">Git Bash</a> 裡執行。</p>
+<p>Mac：<strong>應用程式 → 工具程式 → 終端機</strong>；或在 VS Code 選 <strong>Terminal → New Terminal</strong>。Windows：打開 <a href="https://git-scm.com/">Git Bash</a>，或 VS Code 裡的終端機。</p>
 
 <h2>2. 執行安裝指令</h2>
 <p>整行貼上，按 Enter：</p>
@@ -58,8 +58,8 @@ title: 安裝 OpenCode
 <li><strong>最簡單：</strong>關掉終端機，再開一個新的。新視窗會自動讀取設定。</li>
 <li><strong>繼續用同一個視窗：</strong>重新載入設定檔。
 <ul>
-<li>macOS（預設是 zsh）：<code>source ~/.zshrc</code></li>
-<li>Linux（常見是 bash）：<code>source ~/.bashrc</code></li>
+<li>Mac：<code>source ~/.zshrc</code></li>
+<li>Windows（Git Bash）：<code>source ~/.bashrc</code></li>
 </ul>
 </li>
 </ul>
@@ -68,7 +68,7 @@ title: 安裝 OpenCode
 <h2>4. 確認可以用</h2>
 <p>在新的（或剛重新載入的）終端機輸入：</p>
 <pre>opencode</pre>
-<p>若 OpenCode 啟動了，就完成了。下一步用課程的 API 金鑰連接，見<a href="../../notes/week-01/">第1週講義</a>。</p>
+<p>若 OpenCode 啟動了，就完成了。</p>
 <p>需要更多說明可到 <a href="https://opencode.ai/">opencode.ai</a>。</p>
 </div>
 </div>

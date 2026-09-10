@@ -31,49 +31,86 @@ title: CHI3242 第2週講義
 </div>
 <p>規律很簡單：<em>n</em> 個位元 → 2<sup><em>n</em></sup> 種可能。8 個位元合稱一個<strong>位元組（byte）</strong>，共 256 種值（0–255）。檔案在硬碟裡、在網路上移動的，就是這些位元組。</p>
 
-<h2>4. ASCII：先夠用英文</h2>
-<p>電腦最早要處理的是英文。工程師用 7 個位元（128 種）編了一張小表，叫 <strong>ASCII</strong>：英文字母、數字、常見標點，每個字符對應一個數字。第八個位元補 0，所以每個 ASCII 字正好佔 1 個位元組。</p>
+<h2>4. 十六進位：二進位的速記</h2>
+<p>我們平時用的數字是<strong>十進位</strong>：每一位有 0–9，共十個符號。二進位每位只有 0 和 1。一長串 0 和 1 很難看，所以工程師常用<strong>十六進位（hexadecimal，簡稱 hex）</strong>當速記：每 4 個位元合成一個符號。</p>
+<p>4 個位元有 16 種可能，因此需要 16 個符號——0 到 9，再用 A 到 F 接著數（A = 10，F = 15）。</p>
 <div class="table-scroll">
 <table>
-<thead><tr><th>字符</th><th>十進位</th><th>二進位</th></tr></thead>
+<thead><tr><th>hex</th><th>4 個位元</th><th>hex</th><th>4 個位元</th></tr></thead>
 <tbody>
-<tr><td><code>A</code></td><td>65</td><td><code>01000001</code></td></tr>
-<tr><td><code>a</code></td><td>97</td><td><code>01100001</code></td></tr>
-<tr><td><code>0</code></td><td>48</td><td><code>00110000</code></td></tr>
-<tr><td><code>!</code></td><td>33</td><td><code>00100001</code></td></tr>
+<tr><td><code>0</code></td><td><code>0000</code></td><td><code>8</code></td><td><code>1000</code></td></tr>
+<tr><td><code>1</code></td><td><code>0001</code></td><td><code>9</code></td><td><code>1001</code></td></tr>
+<tr><td><code>2</code></td><td><code>0010</code></td><td><code>A</code></td><td><code>1010</code></td></tr>
+<tr><td><code>3</code></td><td><code>0011</code></td><td><code>B</code></td><td><code>1011</code></td></tr>
+<tr><td><code>4</code></td><td><code>0100</code></td><td><code>C</code></td><td><code>1100</code></td></tr>
+<tr><td><code>5</code></td><td><code>0101</code></td><td><code>D</code></td><td><code>1101</code></td></tr>
+<tr><td><code>6</code></td><td><code>0110</code></td><td><code>E</code></td><td><code>1110</code></td></tr>
+<tr><td><code>7</code></td><td><code>0111</code></td><td><code>F</code></td><td><code>1111</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>一個位元組正好 8 個位元 = <strong>兩個 hex 符號</strong>。把 <code>01000001</code> 拆成 <code>0100</code> 和 <code>0001</code>，對上表就是 <code>4</code> 和 <code>1</code>，寫成 <code>41</code>。有時會在前面加 <code>0x</code>（寫成 <code>0x41</code>）：<code>0x</code> 只是在說「後面是 hex」，沒有別的意思。<code>65</code>、<code>41</code>、<code>01000001</code> 是<strong>同一個數字</strong>的三種寫法。</p>
+
+<h2>5. ASCII：先夠用英文</h2>
+<p>電腦最早要處理的是英文。工程師用 7 個位元（128 種）編了一張小表，叫 <strong>ASCII</strong>：英文字母、數字、常見標點，每個字符對應一個數字。第八個位元補 0，所以每個 ASCII 字正好佔 1 個位元組。下表三欄是同一個編號的三種寫法。</p>
+<div class="table-scroll">
+<table>
+<thead><tr><th>字符</th><th>十進位</th><th>hex</th><th>二進位</th></tr></thead>
+<tbody>
+<tr><td><code>A</code></td><td>65</td><td><code>41</code></td><td><code>01000001</code></td></tr>
+<tr><td><code>a</code></td><td>97</td><td><code>61</code></td><td><code>01100001</code></td></tr>
+<tr><td><code>0</code></td><td>48</td><td><code>30</code></td><td><code>00110000</code></td></tr>
+<tr><td><code>!</code></td><td>33</td><td><code>21</code></td><td><code>00100001</code></td></tr>
 </tbody>
 </table>
 </div>
 <p>128 格很快就滿了。中文、日文、表情都不在表裡——ASCII 從來沒打算裝下它們。後來各地各自發明編碼（Big5、GBK……），同一個檔案用錯規則打開，就變成亂碼。</p>
 
-<h2>5. Unicode 與 UTF-8</h2>
-<p><strong>Unicode</strong> 是一張幾乎涵蓋全世界文字的大表：每個字符一個獨一無二的編號（<strong>碼位</strong>，code point）。「中」是 U+4E2D，「A」仍是 U+0041。它只規定「哪個字是幾號」，不規定這個號碼怎麼存成位元組。</p>
-<p><strong>UTF-8</strong> 是把碼位寫成位元組的最常見方式，而且是<strong>變長</strong>的：同一個字可能佔 1 到 4 個位元組。英文字母仍只佔 1 個（跟 ASCII 一模一樣），中文常佔 3 個，少數古字或表情佔 4 個。英文檔案因此維持小巧，又能裝下全球文字——這也是網路與檔案儲存的事實標準。</p>
+<h2>6. Unicode：一張世界文字的大目錄</h2>
+<p><strong>Unicode</strong> 的辦法是：做一張幾乎涵蓋全世界文字的大表，每個字符領一個獨一無二的編號。這個編號叫<strong>碼位（code point）</strong>。它只回答「這個字是幾號」，不規定這個號碼在檔案裡要怎麼存。</p>
+<p>碼位習慣寫成 <code>U+</code> 再加上一串 hex：</p>
+<ul>
+<li><code>U+</code> 是標籤，意思是「這是 Unicode 編號」。</li>
+<li>後面的符號是 hex，也就是上一節的寫法。</li>
+</ul>
+<p>例如「A」的編號仍是 hex <code>41</code>，寫成 <code>U+0041</code>（前面多兩個 0，只是把位數寫齊，跟 <code>41</code> 是同一個數）。「中」的編號是 hex <code>4E2D</code>，寫成 <code>U+4E2D</code>。看到 <code>U+4E2D</code>，只要讀成：Unicode 表上，「中」的號碼是 <code>4E2D</code>。</p>
+
+<h2>7. UTF-8：把號碼存成位元組</h2>
+<p><strong>UTF-8</strong> 負責下一步：把碼位寫成位元組，才能存檔或上網。它是<strong>變長</strong>的——號碼小就少佔幾格，號碼大就多佔幾格。英文字母仍只佔 1 個位元組（跟 ASCII 一模一樣），中文常佔 3 個，少數古字或表情佔 4 個。英文檔案因此維持小巧，又能裝下全球文字。這也是網路與檔案儲存的事實標準。</p>
 <p>同一個字在不同編碼下會變成不同的位元組。可用上面的<a href="../../../../../visualizations/character-encoding.html">字符編碼瀏覽器</a>實際看這些差異。</p>
 
-<h3>UTF-8 怎麼標記「這個字佔幾格」</h3>
-<p>UTF-8 靠位元組開頭的 0 / 1 模式來標長度：<strong>首位元組</strong>以 <code>0</code>、<code>110</code>、<code>1110</code> 或 <code>11110</code> 開頭，分別代表 1、2、3、4 個位元組；後面的<strong>接續位元組</strong>一律以 <code>10</code> 開頭。碼位的二進位值填進剩下的 <code>x</code> 裡。</p>
+<h3>電腦怎麼知道「這個字佔幾格」</h3>
+<p>UTF-8 在每個位元組的開頭做記號：</p>
+<ul>
+<li>這個字只佔 1 格：開頭是 <code>0</code></li>
+<li>佔 2 格：第一格開頭 <code>110</code>，後面那一格開頭 <code>10</code></li>
+<li>佔 3 格：第一格開頭 <code>1110</code>，後面兩格開頭 <code>10</code></li>
+<li>佔 4 格：第一格開頭 <code>11110</code>，後面三格開頭 <code>10</code></li>
+</ul>
+<p>開頭的記號叫<strong>首位元組</strong>與<strong>接續位元組</strong>。記號佔掉的位子以外，剩下的 <code>x</code> 用來填碼位的二進位。</p>
 <div class="table-scroll">
 <table>
-<thead><tr><th>位元組數</th><th>碼位範圍</th><th>首位元組模式</th><th>例子</th></tr></thead>
+<thead><tr><th>位元組數</th><th>碼位範圍</th><th>開頭記號</th><th>例子（二進位）</th><th>同一串（hex）</th></tr></thead>
 <tbody>
-<tr><td>1</td><td>U+0000 – U+007F</td><td><code>0xxxxxxx</code></td><td><code>A</code> → <code>01000001</code></td></tr>
-<tr><td>2</td><td>U+0080 – U+07FF</td><td><code>110xxxxx 10xxxxxx</code></td><td><code>é</code> → <code>11000011 10101001</code></td></tr>
-<tr><td>3</td><td>U+0800 – U+FFFF</td><td><code>1110xxxx 10xxxxxx 10xxxxxx</code></td><td><code>中</code> → <code>11100100 10111000 10101101</code></td></tr>
-<tr><td>4</td><td>U+10000 – U+10FFFF</td><td><code>11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</code></td><td><code>🚀</code> → <code>11110000 10011111 10011010 10000000</code></td></tr>
+<tr><td>1</td><td>U+0000 – U+007F</td><td><code>0xxxxxxx</code></td><td><code>A</code> → <code>01000001</code></td><td><code>41</code></td></tr>
+<tr><td>2</td><td>U+0080 – U+07FF</td><td><code>110xxxxx 10xxxxxx</code></td><td><code>é</code> → <code>11000011 10101001</code></td><td><code>C3 A9</code></td></tr>
+<tr><td>3</td><td>U+0800 – U+FFFF</td><td><code>1110xxxx 10xxxxxx 10xxxxxx</code></td><td><code>中</code> → <code>11100100 10111000 10101101</code></td><td><code>E4 B8 AD</code></td></tr>
+<tr><td>4</td><td>U+10000 – U+10FFFF</td><td><code>11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</code></td><td><code>🚀</code> → <code>11110000 10011111 10011010 10000000</code></td><td><code>F0 9F 9A 80</code></td></tr>
 </tbody>
 </table>
 </div>
-<p>兩個直接後果。第一，<strong>UTF-8 包含全部 ASCII</strong>：0x00–0x7F 的寫法完全相同，舊的英文檔本身就是合法的 UTF-8。第二，<strong>可自我同步</strong>：即使從中間開始讀，也能靠開頭模式找到字的邊界。以「中」（U+4E2D）為例，4E2D 的二進位是 <code>0100 111000 101101</code>，填入 3 位元組模板 <code>1110xxxx 10xxxxxx 10xxxxxx</code>，得到 <code>E4 B8 AD</code>。</p>
+<p>表裡的「碼位範圍」也是 <code>U+</code> 加 hex：例如 U+0000–U+007F 就是編號 00 到 7F，正好是全部 ASCII。</p>
+<p>以「中」走一遍。它的碼位是 <code>U+4E2D</code>，也就是 hex <code>4E2D</code>。對照第 4 節的表：<code>4</code>=<code>0100</code>，<code>E</code>=<code>1110</code>，<code>2</code>=<code>0010</code>，<code>D</code>=<code>1101</code>，所以二進位是 <code>0100 1110 0010 1101</code>。「中」落在 3 位元組那一檔，模板是 <code>1110xxxx 10xxxxxx 10xxxxxx</code>。把二進位填進 <code>x</code>，得到 <code>11100100 10111000 10101101</code>；再按每 4 位換成 hex，就是檔案裡實際存的 <code>E4 B8 AD</code>。</p>
+<p>兩個直接後果。第一，<strong>UTF-8 包含全部 ASCII</strong>：hex <code>00</code> 到 <code>7F</code> 的寫法完全相同，舊的英文檔本身就是合法的 UTF-8。第二，每個位元組的開頭都在說「我是一個字的開頭」還是「我接在後面」，所以即使從中間開始讀，也能找到字與字的界線。</p>
 
-<h2>6. 中文分詞</h2>
+<h2>8. 中文分詞</h2>
 <p>英文以空格分隔詞，電腦很容易切分；中文書寫時詞與詞之間沒有空格，例如「我喜歡吃火鍋」要切成「我／喜歡／吃／火鍋」才有意義。<strong>分詞（segmentation）</strong>就是把一串中文字切成一個個詞的過程。常用工具如 <code>jieba</code>，會根據詞典與統計機率來判斷切分位置。分詞結果會直接影響後續的詞頻、搭配、主題模型等所有分析，因此是中文文本處理的第一步。</p>
 
-<h2>7. 詞袋模型（Bag of Words, BoW）</h2>
+<h2>9. 詞袋模型（Bag of Words, BoW）</h2>
 <p>把一篇文本看作一個「袋子」，只統計每個詞出現幾次，完全忽略詞的順序與語法。例如「貓追狗」和「狗追貓」在詞袋模型裡是一樣的：{貓:1, 狗:1, 追:1}。這個簡化看似粗糙，但對許多任務（如比較兩篇文章的主題、作者用詞差異）已經足夠，也是向量空間模型與主題模型的基礎。</p>
 
-<h2>8. 停用詞（stopwords）</h2>
+<h2>10. 停用詞（stopwords）</h2>
 <p><strong>停用詞</strong>指在文本中出現頻率極高、但對區分文本意義幫助不大的詞，例如中文的「的、了、是、在、我、你」、英文的 "the, is, of, a"。做詞頻或主題分析前，常會先把停用詞移除，以免它們蓋過真正有訊息量的詞。停用詞表並無通用標準，應依語料與研究問題調整——例如研究「我」的頻率變化時，「我」就不能當停用詞刪掉。</p>
 
-<h2>9. Zipf 定律</h2>
+<h2>11. Zipf 定律</h2>
 <p><strong>Zipf 定律</strong>：在一段夠長的文本中，把所有詞按出現次數由高到低排列，第 <em>n</em> 名的詞的頻率大約與 <em>n</em> 成反比——也就是說，排名第 1 的詞出現次數約是第 2 名的兩倍、第 3 名的三倍，依此類推。結果是少數幾個詞佔了大部分出現次數，而長長的「尾巴」裡有大量只出現一兩次的罕見詞。這解釋了為什麼停用詞會主導詞頻表，也說明文本資料為何高度不均。</p>
