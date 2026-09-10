@@ -33,7 +33,7 @@ title: CHI3242 第2週講義
 <tr><td>1</td><td>U+0000 – U+007F</td><td><code>0xxxxxxx</code></td><td><code>A</code> → <code>01000001</code></td></tr>
 <tr><td>2</td><td>U+0080 – U+07FF</td><td><code>110xxxxx 10xxxxxx</code></td><td><code>é</code> → <code>11000011 10101001</code></td></tr>
 <tr><td>3</td><td>U+0800 – U+FFFF</td><td><code>1110xxxx 10xxxxxx 10xxxxxx</code></td><td><code>中</code> → <code>11100100 10111000 10101101</code></td></tr>
-<tr><td>4</td><td>U+10000 – U+10FFFF</td><td><code>11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</code></td><td><code>🚀</code> → <code>11110000 10011111 10000000 10010000</code></td></tr>
+<tr><td>4</td><td>U+10000 – U+10FFFF</td><td><code>11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</code></td><td><code>🚀</code> → <code>11110000 10011111 10011010 10000000</code></td></tr>
 </tbody>
 </table>
 <p>這個設計有兩個重要後果。其一，<strong>UTF-8 是 ASCII 的超集</strong>：所有 ASCII 字元（0x00–0x7F）在 UTF-8 裡用完全相同的單一位元組表示，所以任何純 ASCII 文字本身就是合法的 UTF-8，舊系統可無痛相容。其二，<strong>可自我同步</strong>：即使從位元組串流中間開始讀，也能靠首位元組與接續位元組的開頭模式判斷邊界，不會錯位。以「中」（U+4E2D）為例，4E2D 的二進位是 <code>0100 111000 101101</code>，填入 3 位元組模板 <code>1110xxxx 10xxxxxx 10xxxxxx</code> 即得 <code>E4 B8 AD</code>。</p>
