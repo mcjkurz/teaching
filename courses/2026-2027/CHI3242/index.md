@@ -81,7 +81,7 @@ title: CHI3242
 <ol>
 <li>Create a <a href="https://github.com/">GitHub</a> account.</li>
 <li>Collect your API key at <a href="https://keyreg.qhchina.org">keyreg.qhchina.org</a> (class code: chi3242). Do not put the key in a repository or share it with others.</li>
-<li>A classroom with computers will be available. You may also bring your own laptop. If you use your own computer, install <a href="https://www.python.org/downloads/">Python</a>, <a href="https://code.visualstudio.com/">Visual Studio Code (VS Code)</a>, and then OpenCode before the first class. Step-by-step: <a href="setup/opencode/">how to install OpenCode</a>.</li>
+<li>A classroom with computers will be available. You may also bring your own laptop. If you use your own computer, install <a href="https://www.python.org/downloads/">Python</a>, <a href="https://code.visualstudio.com/">Visual Studio Code (VS Code)</a>, and then OpenCode before the first class. Step-by-step: <a href="notes/setup/">how to install OpenCode</a>.</li>
 </ol>
 <p>We will learn agentic coding early in the course and use AI coding assistants in VS Code and OpenCode to write and debug research code.</p>
 </div>
@@ -90,7 +90,7 @@ title: CHI3242
 <ol>
 <li>註冊 <a href="https://github.com/">GitHub</a> 帳號。</li>
 <li>請到 <a href="https://keyreg.qhchina.org">keyreg.qhchina.org</a> 領取你的 API 金鑰（課程代碼：chi3242）。不要把金鑰寫進倉庫，也不要與他人分享。</li>
-<li>課堂備有電腦室。亦可自備手提電腦。若使用個人電腦，請於開課前安裝 <a href="https://www.python.org/downloads/">Python</a>、<a href="https://code.visualstudio.com/">Visual Studio Code（VS Code）</a>，然後安裝 OpenCode。步驟見<a href="setup/opencode/">如何安裝 OpenCode</a>。</li>
+<li>課堂備有電腦室。亦可自備手提電腦。若使用個人電腦，請於開課前安裝 <a href="https://www.python.org/downloads/">Python</a>、<a href="https://code.visualstudio.com/">Visual Studio Code（VS Code）</a>，然後安裝 OpenCode。步驟見<a href="notes/setup/">如何安裝 OpenCode</a>。</li>
 </ol>
 <p>課程初期即講授智能體編程，並在 VS Code 與 OpenCode 中使用人工智能編程助手撰寫與除錯研究代碼。</p>
 </div>
@@ -225,7 +225,7 @@ title: CHI3242
     <tr>
       <td></td>
       <td class="date"><span class="lang-en">16 Sep</span><span class="lang-zh" lang="zh-Hant">9月16日</span></td>
-      <td colspan="3"><a href="#"><span class="lang-en">Assignment 0 (not graded) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">作業0（不計分）截止，上午9:00</span></a></td>
+      <td colspan="3"><a href="assignments/assignment-0/"><span class="lang-en">Assignment 0 (not graded) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">作業0（不計分）截止，上午9:00</span></a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -273,7 +273,7 @@ title: CHI3242
     <tr>
       <td></td>
       <td class="date"><span class="lang-en">7 Oct</span><span class="lang-zh" lang="zh-Hant">10月7日</span></td>
-      <td colspan="3"><a href="#"><span class="lang-en">Assignment 1 due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">作業1截止，上午9:00</span></a></td>
+      <td colspan="3"><a href="assignments/assignment-1/"><span class="lang-en">Assignment 1 due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">作業1截止，上午9:00</span></a></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -326,7 +326,7 @@ title: CHI3242
     <tr>
       <td></td>
       <td class="date"><span class="lang-en">28 Oct</span><span class="lang-zh" lang="zh-Hant">10月28日</span></td>
-      <td colspan="3"><a href="#"><span class="lang-en">Assignment 2 due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">作業2截止，上午9:00</span></a></td>
+      <td colspan="3"><a href="assignments/assignment-2/"><span class="lang-en">Assignment 2 due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">作業2截止，上午9:00</span></a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -387,7 +387,7 @@ title: CHI3242
     <tr>
       <td></td>
       <td class="date"><span class="lang-en">18 Nov</span><span class="lang-zh" lang="zh-Hant">11月18日</span></td>
-      <td colspan="3"><a href="#"><span class="lang-en">Final Project Proposal due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">期末專題計劃書截止，上午9:00</span></a></td>
+      <td colspan="3"><a href="assignments/proposal/"><span class="lang-en">Final Project Proposal due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">期末專題計劃書截止，上午9:00</span></a></td>
     </tr>
   </tbody>
   <tbody class="block-b">

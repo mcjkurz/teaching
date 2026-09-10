@@ -3,11 +3,11 @@ layout: default
 title: CHI3242 Assignment 1
 ---
 
-<p class="updated">Last updated: Aug 30, 2026</p>
-<h1>CHI 3242 Assignment 1</h1>
+<p class="updated i18n-block"><span class="lang-en">Last updated: Aug 30, 2026</span><span class="lang-zh" lang="zh-Hant">最後更新：2026年8月30日</span></p>
+<p class="i18n-block"><a href="../"><span class="lang-en">Assignments</span><span class="lang-zh" lang="zh-Hant">作業</span></a> · <a href="../../"><span class="lang-en">CHI 3242 syllabus</span><span class="lang-zh" lang="zh-Hant">CHI 3242 課程大綱</span></a></p>
+<h1 class="i18n-block"><span class="lang-en">Assignment 1</span><span class="lang-zh" lang="zh-Hant">作業1</span></h1>
 
 <div class="i18n-block">
-<h2>Repository and Text Passport</h2>
 <div class="lang-en">
 <p><strong>Due:</strong> 7 Oct, 9:00 am</p>
 <p>Submit one public GitHub repository URL on Moodle. The repository must include:</p>
