@@ -85,19 +85,19 @@ title: CHI3242 第2週講義
 <ol>
 <li><strong>十進位：</strong>20013</li>
 <li><strong>hex：</strong><code>4E2D</code>（所以寫成 <code>U+4E2D</code>）</li>
-<li><strong>3 個字節：</strong>UTF-8 把這個號碼存成 8 + 8 + 8 個比特。3 字節的模板是 <code>1110xxxx 10xxxxxx 10xxxxxx</code>；把 <code>4E2D</code> 的二進位（<code>0100 1110 0010 1101</code>）填進 <code>x</code>，得到：</li>
+<li><strong>3 個字節：</strong>UTF-8 把這個號碼存成 8 + 8 + 8 個比特。3 字節的模板是 <code><span class="bit-prefix">1110</span><span class="bit-payload">xxxx</span> <span class="bit-prefix">10</span><span class="bit-payload">xxxxxx</span> <span class="bit-prefix">10</span><span class="bit-payload">xxxxxx</span></code>；把 <code>4E2D</code> 的二進位（<code><span class="bit-payload">0100 1110 0010 1101</span></code>）填進 <code>x</code>，得到：</li>
 </ol>
 <div class="table-scroll">
 <table>
 <thead><tr><th></th><th>8 個比特</th><th>hex</th></tr></thead>
 <tbody>
-<tr><td>第 1 字節</td><td><code>11100100</code></td><td><code>E4</code></td></tr>
-<tr><td>第 2 字節</td><td><code>10111000</code></td><td><code>B8</code></td></tr>
-<tr><td>第 3 字節</td><td><code>10101101</code></td><td><code>AD</code></td></tr>
+<tr><td>第 1 字節</td><td><code><span class="bit-prefix">1110</span><span class="bit-payload">0100</span></code></td><td><code>E4</code></td></tr>
+<tr><td>第 2 字節</td><td><code><span class="bit-prefix">10</span><span class="bit-payload">111000</span></code></td><td><code>B8</code></td></tr>
+<tr><td>第 3 字節</td><td><code><span class="bit-prefix">10</span><span class="bit-payload">101101</span></code></td><td><code>AD</code></td></tr>
 </tbody>
 </table>
 </div>
-<p>檔案裡實際存的，就是 <code>E4 B8 AD</code>。</p>
+<p>粗體是開頭記號；<span class="bit-payload">橙色</span>是從碼位填進去的比特。檔案裡實際存的，就是 <code>E4 B8 AD</code>。</p>
 <p>兩個直接後果。第一，<strong>UTF-8 包含全部 ASCII</strong>：hex <code>00</code> 到 <code>7F</code> 的寫法完全相同，舊的英文檔本身就是合法的 UTF-8。第二，每個字節的開頭都在說「我是一個字的開頭」還是「我接在後面」，所以即使從中間開始讀，也能找到字與字的界線。</p>
 
 <h2>7. 中文分詞</h2>
@@ -113,7 +113,7 @@ title: CHI3242 第2週講義
 <p><strong>Zipf 定律</strong>：在一段夠長的文本中，把所有詞按出現次數由高到低排列，第 <em>n</em> 名的詞的頻率大約與 <em>n</em> 成反比——也就是說，排名第 1 的詞出現次數約是第 2 名的兩倍、第 3 名的三倍，依此類推。結果是少數幾個詞佔了大部分出現次數，而長長的「尾巴」裡有大量只出現一兩次的罕見詞。這解釋了為什麼停用詞會主導詞頻表，也說明文本資料為何高度不均。</p>
 
 <h2>11. 課堂練習</h2>
-<p>到 <a href="https://github.com/mcjkurz/qhchina-data/tree/main/corpora">qhchina-data/corpora</a> 選一本小說的 <code>.txt</code>，把檔案網址連同下列提示一起貼進 OpenCode：</p>
+<p>到 <a href="https://github.com/mcjkurz/qhchina-data/tree/main/corpora">qhchina-data/corpora</a> 選一本小說的 <code>.txt</code>，把下面提示裡的 <code>[link]</code> 換成檔案網址，再貼進 OpenCode：</p>
 <div class="prompt">
 <p class="prompt-label">提示</p>
 <pre>Please download this novel as a .txt file [link]
@@ -126,3 +126,4 @@ Then write a .py script that:
 jieba and matplotlib are already installed; do not create a virtual environment.</pre>
 </div>
 <p>完成後，看終端機印出的前 10 個詞，再開 <code>.png</code>。左邊幾根最高的柱，多半就是停用詞；整張圖由高到低迅速落下，就是 Zipf 定律。</p>
+<p>若你用的是 Codespace，做完後請把結果 commit 並 push 到 GitHub。Codespace 被刪掉以後，沒有推上去的檔案就找不回來。</p>
