@@ -30,28 +30,9 @@ title: CHI3242 第2週講義
 </table>
 </div>
 <p>規律很簡單：<em>n</em> 個比特 → 2<sup><em>n</em></sup> 種可能。8 個比特合稱一個<strong>字節（byte，也作位元組）</strong>，共 256 種值（0–255）。檔案在硬碟裡、在網路上移動的，就是這些字節。</p>
+<p>一長串 0 和 1 不好讀，所以也常寫成<strong>十六進位（hex）</strong>：二進位每位只有 0 和 1，hex 每位有 0–9 和 A–F，共十六個符號。同一個數字，兩種寫法而已。</p>
 
-<h2>4. 十六進位：二進位的速記</h2>
-<p>我們平時用的數字是<strong>十進位</strong>：每一位有 0–9，共十個符號。二進位每位只有 0 和 1。一長串 0 和 1 很難看，所以工程師常用<strong>十六進位（hexadecimal，簡稱 hex）</strong>當速記：每 4 個比特合成一個符號。</p>
-<p>4 個比特有 16 種可能，因此需要 16 個符號——0 到 9，再用 A 到 F 接著數（A = 10，F = 15）。</p>
-<div class="table-scroll">
-<table>
-<thead><tr><th>hex</th><th>4 個比特</th><th>hex</th><th>4 個比特</th></tr></thead>
-<tbody>
-<tr><td><code>0</code></td><td><code>0000</code></td><td><code>8</code></td><td><code>1000</code></td></tr>
-<tr><td><code>1</code></td><td><code>0001</code></td><td><code>9</code></td><td><code>1001</code></td></tr>
-<tr><td><code>2</code></td><td><code>0010</code></td><td><code>A</code></td><td><code>1010</code></td></tr>
-<tr><td><code>3</code></td><td><code>0011</code></td><td><code>B</code></td><td><code>1011</code></td></tr>
-<tr><td><code>4</code></td><td><code>0100</code></td><td><code>C</code></td><td><code>1100</code></td></tr>
-<tr><td><code>5</code></td><td><code>0101</code></td><td><code>D</code></td><td><code>1101</code></td></tr>
-<tr><td><code>6</code></td><td><code>0110</code></td><td><code>E</code></td><td><code>1110</code></td></tr>
-<tr><td><code>7</code></td><td><code>0111</code></td><td><code>F</code></td><td><code>1111</code></td></tr>
-</tbody>
-</table>
-</div>
-<p>一個字節正好 8 個比特 = <strong>兩個 hex 符號</strong>。把 <code>01000001</code> 拆成 <code>0100</code> 和 <code>0001</code>，對上表就是 <code>4</code> 和 <code>1</code>，寫成 <code>41</code>。有時會在前面加 <code>0x</code>（寫成 <code>0x41</code>）：<code>0x</code> 只是在說「後面是 hex」，沒有別的意思。<code>65</code>、<code>41</code>、<code>01000001</code> 是<strong>同一個數字</strong>的三種寫法。</p>
-
-<h2>5. ASCII：先夠用英文</h2>
+<h2>4. ASCII：先夠用英文</h2>
 <p>電腦最早要處理的是英文。工程師用 7 個比特（128 種）編了一張小表，叫 <strong>ASCII</strong>：英文字母、數字、常見標點，每個字符對應一個數字。第八個比特補 0，所以每個 ASCII 字正好佔 1 個字節。下表三欄是同一個編號的三種寫法。</p>
 <div class="table-scroll">
 <table>
@@ -66,16 +47,16 @@ title: CHI3242 第2週講義
 </div>
 <p>128 格很快就滿了。中文、日文、表情都不在表裡——ASCII 從來沒打算裝下它們。後來各地各自發明編碼（Big5、GBK……），同一個檔案用錯規則打開，就變成亂碼。</p>
 
-<h2>6. Unicode：一張世界文字的大目錄</h2>
+<h2>5. Unicode：一張世界文字的大目錄</h2>
 <p><strong>Unicode</strong> 的辦法是：做一張幾乎涵蓋全世界文字的大表，每個字符領一個獨一無二的編號。這個編號叫<strong>碼位（code point）</strong>。它只回答「這個字是幾號」，不規定這個號碼在檔案裡要怎麼存。</p>
 <p>碼位習慣寫成 <code>U+</code> 再加上一串 hex：</p>
 <ul>
 <li><code>U+</code> 是標籤，意思是「這是 Unicode 編號」。</li>
-<li>後面的符號是 hex，也就是上一節的寫法。</li>
+<li>後面的符號是 hex，跟二進位是同一個數的另一種寫法。</li>
 </ul>
 <p>例如「A」的編號是十進位 65，hex 寫成 <code>41</code>，所以是 <code>U+0041</code>（前面多兩個 0，只是把位數寫齊）。「中」的編號是十進位 20013，hex 寫成 <code>4E2D</code>，所以是 <code>U+4E2D</code>。看到 <code>U+4E2D</code>，只要讀成：Unicode 表上，「中」的號碼是 <code>4E2D</code>。</p>
 
-<h2>7. UTF-8：把號碼存成字節</h2>
+<h2>6. UTF-8：把號碼存成字節</h2>
 <p><strong>UTF-8</strong> 負責下一步：把碼位寫成字節，才能存檔或上網。它是<strong>變長</strong>的——號碼小就少佔幾格，號碼大就多佔幾格。英文字母仍只佔 1 個字節（跟 ASCII 一模一樣），中文常佔 3 個，少數古字或表情佔 4 個。英文檔案因此維持小巧，又能裝下全球文字。這也是網路與檔案儲存的事實標準。</p>
 <p>同一個字在不同編碼下會變成不同的字節。可用上面的<a href="../../../../../visualizations/character-encoding.html">字符編碼瀏覽器</a>實際看這些差異。</p>
 
@@ -119,23 +100,23 @@ title: CHI3242 第2週講義
 <p>檔案裡實際存的，就是 <code>E4 B8 AD</code>。</p>
 <p>兩個直接後果。第一，<strong>UTF-8 包含全部 ASCII</strong>：hex <code>00</code> 到 <code>7F</code> 的寫法完全相同，舊的英文檔本身就是合法的 UTF-8。第二，每個字節的開頭都在說「我是一個字的開頭」還是「我接在後面」，所以即使從中間開始讀，也能找到字與字的界線。</p>
 
-<h2>8. 中文分詞</h2>
+<h2>7. 中文分詞</h2>
 <p>英文以空格分隔詞，電腦很容易切分；中文書寫時詞與詞之間沒有空格，例如「我喜歡吃火鍋」要切成「我／喜歡／吃／火鍋」才有意義。<strong>分詞（segmentation）</strong>就是把一串中文字切成一個個詞的過程。分詞工具不少，例如 spaCy、HanLP、THUNLP；本課用 <code>jieba</code>，它會根據詞典與統計機率來判斷切分位置。分詞結果會直接影響後續的詞頻、搭配、主題模型等所有分析，因此是中文文本處理的第一步。</p>
 
-<h2>9. 詞袋模型（Bag of Words, BoW）</h2>
+<h2>8. 詞袋模型（Bag of Words, BoW）</h2>
 <p>把一篇文本看作一個「袋子」，只統計每個詞出現幾次，完全忽略詞的順序與語法。例如「貓追狗」和「狗追貓」在詞袋模型裡是一樣的：{貓:1, 狗:1, 追:1}。這個簡化看似粗糙，但對許多任務（如比較兩篇文章的主題、作者用詞差異）已經足夠，也是向量空間模型與主題模型的基礎。</p>
 
-<h2>10. 停用詞（stopwords）</h2>
+<h2>9. 停用詞（stopwords）</h2>
 <p><strong>停用詞</strong>指在文本中出現頻率極高、但對區分文本意義幫助不大的詞，例如中文的「的、了、是、在、我、你」、英文的 "the, is, of, a"。做詞頻或主題分析前，常會先把停用詞移除，以免它們蓋過真正有訊息量的詞。停用詞表並無通用標準，應依語料與研究問題調整——例如研究「我」的頻率變化時，「我」就不能當停用詞刪掉。</p>
 
-<h2>11. Zipf 定律</h2>
+<h2>10. Zipf 定律</h2>
 <p><strong>Zipf 定律</strong>：在一段夠長的文本中，把所有詞按出現次數由高到低排列，第 <em>n</em> 名的詞的頻率大約與 <em>n</em> 成反比——也就是說，排名第 1 的詞出現次數約是第 2 名的兩倍、第 3 名的三倍，依此類推。結果是少數幾個詞佔了大部分出現次數，而長長的「尾巴」裡有大量只出現一兩次的罕見詞。這解釋了為什麼停用詞會主導詞頻表，也說明文本資料為何高度不均。</p>
 
-<h2>12. 課堂練習</h2>
+<h2>11. 課堂練習</h2>
 <p>到 <a href="https://github.com/mcjkurz/qhchina-data/tree/main/corpora">qhchina-data/corpora</a> 選一本小說的 <code>.txt</code>，把檔案網址連同下列提示一起貼進 OpenCode：</p>
 <div class="prompt">
 <p class="prompt-label">提示</p>
-<pre>Please download this novel as a .txt file.
+<pre>Please download this novel as a .txt file [link]
 
 Then write a .py script that:
 - uses jieba to segment the text into words
