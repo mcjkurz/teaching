@@ -218,7 +218,7 @@ title: CHI3242
           <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Thomas S. Mullaney, <em>The Chinese Typewriter</em>, Introduction</li>
         </ul>
       </td>
-      <td class="notes"></td>
+      <td class="notes"><a href="notes/week-02/">Notes</a></td>
     </tr>
   </tbody>
   <tbody class="due">

@@ -8,6 +8,7 @@
         pretokenize: true,   // split on whitespace before BPE
         base: 10,            // number base for display: 2, 10, or 16
         segments: [],        // array of segments; each segment is an array of token ids
+        gaps: [],            // parallel to segments: true if whitespace preceded the segment
         vocab: [],           // array of { id, units, kind }
         idOfUnit: {},        // map from unit-key -> id  (for base vocab)
         merges: [],          // list of { step, pair:[id,id], newId, count }
@@ -126,9 +127,25 @@
         return d.replace(/ /g, '␣');
     }
 
+    // Pre-tokenization: split text into runs of word characters (letters/
+    // digits) and runs of punctuation/symbols. Whitespace is discarded but
+    // remembered as a gap so it can be rendered. Each returned chunk notes
+    // whether whitespace preceded it.
+    function pretokenChunks(text) {
+        var out = [];
+        var re = /(\s+)|([\p{L}\p{N}]+|[^\s\p{L}\p{N}]+)/gu;
+        var m, gap = false;
+        while ((m = re.exec(text)) !== null) {
+            if (m[1]) { gap = true; }            // whitespace -> mark a gap
+            else { out.push({ chunk: m[2], gap: gap }); gap = false; }
+        }
+        return out;
+    }
+
     // ── Init ──────────────────────────────────────────────────────────
     function initFromText() {
         state.segments = [];
+        state.gaps = [];
         state.vocab = [];
         state.idOfUnit = {};
         state.merges = [];
@@ -138,14 +155,15 @@
         var text = el.textInput.value;
         state.pretokenize = el.pretokenToggle.checked;
 
-        // Build a list of "chunks". When pre-tokenizing, each chunk is one
-        // whitespace-delimited word (whitespace discarded, acts as a barrier).
-        // When not pre-tokenizing, the whole text is a single chunk.
-        var chunks;
+        // Build a list of chunks. When pre-tokenizing, split on whitespace
+        // and punctuation (each punctuation run is its own chunk, so merges
+        // never cross a word/punctuation boundary). When not pre-tokenizing,
+        // the whole text is a single chunk.
+        var parts;
         if (state.pretokenize) {
-            chunks = text.split(/\s+/).filter(Boolean);
+            parts = pretokenChunks(text);
         } else {
-            chunks = [text];
+            parts = [{ chunk: text, gap: false }];
         }
 
         // Byte-level BPE starts with all 256 byte values as the base
@@ -160,7 +178,8 @@
             }
         }
 
-        chunks.forEach(function (chunk) {
+        parts.forEach(function (part) {
+            var chunk = part.chunk;
             var segIds = [];
             if (state.mode === 'char') {
                 Array.from(chunk).forEach(function (ch) {
@@ -178,7 +197,10 @@
                     segIds.push(state.idOfUnit['b:' + u8[i]]);
                 }
             }
-            if (segIds.length > 0) state.segments.push(segIds);
+            if (segIds.length > 0) {
+                state.segments.push(segIds);
+                state.gaps.push(part.gap);
+            }
         });
         render();
     }
@@ -404,11 +426,11 @@
         var chipGrid = [];   // chipGrid[segIdx][pos] = chip element
 
         state.segments.forEach(function (seg, segIdx) {
-            if (segIdx > 0 && state.pretokenize) {
+            if (segIdx > 0 && state.pretokenize && state.gaps[segIdx]) {
                 var gap = document.createElement('span');
                 gap.className = 'segment-gap';
                 gap.textContent = '␣';
-                gap.title = 'word boundary — pre-tokenization prevents merges across this gap';
+                gap.title = 'whitespace — pre-tokenization prevents merges across this gap';
                 el.tokenSequence.appendChild(gap);
             }
             var row = [];
@@ -550,10 +572,12 @@
 
     // ── Tokenize new text with the trained merges ─────────────────────
     // Each token is either { id, oov:false } or { oov:true, unit }.
+    // Returns an array of { seg, gap } so the view can render whitespace gaps.
     function tokenizeNewText(text) {
-        var chunks = state.pretokenize ? text.split(/\s+/).filter(Boolean) : [text];
+        var parts = state.pretokenize ? pretokenChunks(text) : [{ chunk: text, gap: false }];
         var result = [];
-        chunks.forEach(function (chunk) {
+        parts.forEach(function (part) {
+            var chunk = part.chunk;
             var seg = [];
             var units = state.mode === 'char' ? Array.from(chunk)
                 : Array.from(new TextEncoder().encode(chunk));
@@ -581,7 +605,7 @@
                 }
                 seg = out;
             });
-            result.push(seg);
+            if (seg.length > 0) result.push({ seg: seg, gap: part.gap });
         });
         return result;
     }
@@ -594,10 +618,10 @@
     function renderNewText() {
         el.newTokenSequence.innerHTML = '';
         var text = el.newTextInput.value;
-        var segments = tokenizeNewText(text);
+        var parts = tokenizeNewText(text);
         var nTokens = 0, nOov = 0, nChars = Array.from(text).length;
 
-        if (segments.length === 0 || segments.every(function (s) { return s.length === 0; })) {
+        if (parts.length === 0 || parts.every(function (p) { return p.seg.length === 0; })) {
             var empty = document.createElement('span');
             empty.className = 'empty-stage';
             empty.textContent = 'Type some text above to tokenize it.';
@@ -606,14 +630,14 @@
             return;
         }
 
-        segments.forEach(function (seg, segIdx) {
-            if (segIdx > 0 && state.pretokenize) {
+        parts.forEach(function (part, idx) {
+            if (idx > 0 && state.pretokenize && part.gap) {
                 var gap = document.createElement('span');
                 gap.className = 'segment-gap';
                 gap.textContent = '␣';
                 el.newTokenSequence.appendChild(gap);
             }
-            seg.forEach(function (item) {
+            part.seg.forEach(function (item) {
                 nTokens++;
                 var chip = document.createElement('span');
                 chip.className = 'token-chip';
