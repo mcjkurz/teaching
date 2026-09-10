@@ -98,6 +98,7 @@ header p { font-size: 0.95rem; color: #666; }
 /* Data table */
 .data-table-wrapper {
     overflow-x: auto; margin-bottom: 1rem; border-radius: 6px; border: 1px solid #ddd;
+    -webkit-overflow-scrolling: touch;
 }
 
 table.feature-table {

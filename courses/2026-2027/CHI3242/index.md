@@ -3,7 +3,7 @@ layout: default
 title: CHI3242
 ---
 
-<p class="updated i18n-block"><span class="lang-en">Last updated: Sep 3, 2026</span><span class="lang-zh" lang="zh-Hant">最後更新：2026年9月3日</span></p>
+<p class="updated i18n-block"><span class="lang-en">Last updated: Sep 10, 2026</span><span class="lang-zh" lang="zh-Hant">最後更新：2026年9月10日</span></p>
 <div class="course-header i18n-block">
 <div class="course-header-info">
 <h1><span class="lang-en">CHI 3242 Course Syllabus</span><span class="lang-zh" lang="zh-Hant">CHI 3242 課程大綱</span></h1>
@@ -81,7 +81,7 @@ title: CHI3242
 <ol>
 <li>Create a <a href="https://github.com/">GitHub</a> account.</li>
 <li>Collect your API key at <a href="https://keyreg.qhchina.org">keyreg.qhchina.org</a> (class code: chi3242). Do not put the key in a repository or share it with others.</li>
-<li>A classroom with computers will be available. You may also bring your own laptop. If you use your own computer, install <a href="https://www.python.org/downloads/">Python</a>, <a href="https://code.visualstudio.com/">Visual Studio Code (VS Code)</a>, and then <a href="https://opencode.ai/">OpenCode</a> before the first class.</li>
+<li>A classroom with computers will be available. You may also bring your own laptop. If you use your own computer, install <a href="https://www.python.org/downloads/">Python</a>, <a href="https://code.visualstudio.com/">Visual Studio Code (VS Code)</a>, and then OpenCode before the first class. Step-by-step: <a href="setup/opencode/">how to install OpenCode</a>.</li>
 </ol>
 <p>We will learn agentic coding early in the course and use AI coding assistants in VS Code and OpenCode to write and debug research code.</p>
 </div>
@@ -90,7 +90,7 @@ title: CHI3242
 <ol>
 <li>註冊 <a href="https://github.com/">GitHub</a> 帳號。</li>
 <li>請到 <a href="https://keyreg.qhchina.org">keyreg.qhchina.org</a> 領取你的 API 金鑰（課程代碼：chi3242）。不要把金鑰寫進倉庫，也不要與他人分享。</li>
-<li>課堂備有電腦室。亦可自備手提電腦。若使用個人電腦，請於開課前安裝 <a href="https://www.python.org/downloads/">Python</a>、<a href="https://code.visualstudio.com/">Visual Studio Code（VS Code）</a>，然後安裝 <a href="https://opencode.ai/">OpenCode</a>。</li>
+<li>課堂備有電腦室。亦可自備手提電腦。若使用個人電腦，請於開課前安裝 <a href="https://www.python.org/downloads/">Python</a>、<a href="https://code.visualstudio.com/">Visual Studio Code（VS Code）</a>，然後安裝 OpenCode。步驟見<a href="setup/opencode/">如何安裝 OpenCode</a>。</li>
 </ol>
 <p>課程初期即講授智能體編程，並在 VS Code 與 OpenCode 中使用人工智能編程助手撰寫與除錯研究代碼。</p>
 </div>

@@ -3,7 +3,7 @@ layout: default
 title: DHG502
 ---
 
-<p class="updated">Last updated: Sep 7, 2026</p>
+<p class="updated">Last updated: Sep 10, 2026</p>
 <div class="course-header">
 <div class="course-header-info">
 <h1>DHG 502 Course Syllabus</h1>
@@ -46,7 +46,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
 <ol>
 <li>Create a <a href="https://github.com/">GitHub</a> account.</li>
 <li>Collect your API key at <a href="https://keyreg.qhchina.org">keyreg.qhchina.org</a> (class code: dhg502). Do not put the key in a repository or share it with others.</li>
-<li>On your laptop, install <a href="https://www.python.org/downloads/">Python</a>, <a href="https://code.visualstudio.com/">Visual Studio Code (VS Code)</a>, and then <a href="https://opencode.ai/">OpenCode</a>.</li>
+<li>On your laptop, install <a href="https://www.python.org/downloads/">Python</a>, <a href="https://code.visualstudio.com/">Visual Studio Code (VS Code)</a>, and then OpenCode. Step-by-step: <a href="setup/opencode/">how to install OpenCode</a>.</li>
 <li>Install or update <a href="https://www.google.com/chrome/">Google Chrome</a> or <a href="https://www.microsoft.com/edge">Microsoft Edge</a> for the image-annotation lab.</li>
 </ol>
 <p>Week 1 sets up the research environment (GitHub, VS Code, OpenCode, and AI coding assistants). Bring a laptop with the software already installed. If you cannot install an item or do not have administrator access, contact the instructor before the first seminar; a browser-based fallback will be provided.</p>

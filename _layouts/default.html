@@ -169,6 +169,14 @@
             -webkit-overflow-scrolling: touch;
         }
         .table-scroll table { margin-bottom: 0; }
+        .table-scroll table:not(.schedule):not(.assessment) {
+            width: max-content;
+            min-width: 100%;
+        }
+        .table-scroll table:not(.schedule):not(.assessment) th,
+        .table-scroll table:not(.schedule):not(.assessment) td {
+            white-space: nowrap;
+        }
         main table.schedule {
             min-width: 760px;
             table-layout: fixed;
