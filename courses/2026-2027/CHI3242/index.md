@@ -3,14 +3,14 @@ layout: default
 title: CHI3242
 ---
 
-<p class="updated i18n-block"><span class="lang-en">Last updated: Sep 10, 2026</span><span class="lang-zh" lang="zh-Hant">最後更新：2026年9月10日</span></p>
+<p class="updated i18n-block"><span class="lang-en">Last updated: Sep 14, 2026</span><span class="lang-zh" lang="zh-Hant">最後更新：2026年9月14日</span></p>
 <div class="course-header i18n-block">
 <div class="course-header-info">
 <h1><span class="lang-en">CHI 3242 Course Syllabus</span><span class="lang-zh" lang="zh-Hant">CHI 3242 課程大綱</span></h1>
 <p><strong>Text Mining for Chinese Humanities</strong><br>
 <strong>中國人文研究中的文本挖掘</strong><br>
 <span class="lang-en">Term 1, 2026–2027</span><span class="lang-zh" lang="zh-Hant">2026–2027 學年第一學期</span></p>
-<p><strong><span class="lang-en">Seminar:</span><span class="lang-zh" lang="zh-Hant">研討課：</span></strong> <span class="lang-en">Thu, 3:30–6:30 pm (LCH 213)</span><span class="lang-zh" lang="zh-Hant">星期四，下午 3:30–6:30（LCH 213）</span></p>
+<p><strong><span class="lang-en">Seminar:</span><span class="lang-zh" lang="zh-Hant">研討課：</span></strong> <span class="lang-en">Thu, 3:30–6:30 pm (LCH 213); 17 Sep cancelled; makeup 21 or 25 Sep, 09:00–11:00, LCH 202 (choose one)</span><span class="lang-zh" lang="zh-Hant">星期四，下午 3:30–6:30（LCH 213）；9月17日停課；補課於 9月21日或 9月25日，09:00–11:00，LCH202（二選一）</span></p>
 <p><strong><span class="lang-en">Instructor:</span><span class="lang-zh" lang="zh-Hant">教師：</span></strong> Maciej Kurzynski 馬傑 (maciej.kurzynski[at]ln.edu.hk)<br>
 <strong><span class="lang-en">Office hours:</span><span class="lang-zh" lang="zh-Hant">辦公室時間：</span></strong> <span class="lang-en">Tue 3:00–5:00 pm and Fri 10:00 am–12:00 pm, HSH G06, or by appointment</span><span class="lang-zh" lang="zh-Hant">星期二下午 3:00–5:00 及星期五上午 10:00–12:00，HSH G06，或另行預約</span><br>
 <strong><span class="lang-en">Language of Instruction:</span><span class="lang-zh" lang="zh-Hant">授課語言：</span></strong> <span class="lang-en">Putonghua（普通話）</span><span class="lang-zh" lang="zh-Hant">普通話</span></p>
@@ -228,13 +228,24 @@ title: CHI3242
       <td colspan="3"><a href="assignments/assignment-0/"><span class="lang-en">Assignment 0 (not graded) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">作業0（不計分）截止，上午9:00</span></a></td>
     </tr>
   </tbody>
+  <tbody class="makeup">
+    <tr>
+      <td></td>
+      <td class="date"><span class="lang-en">17 Sep</span><span class="lang-zh" lang="zh-Hant">9月17日</span></td>
+      <td colspan="3">
+        <span class="lang-en">No class (cancelled). Makeup next week — choose one session: Mon 21 Sep or Fri 25 Sep, 09:00–11:00, LCH 202. The makeup covers Evert / collocations.</span>
+        <span class="lang-zh" lang="zh-Hant">停課。下週補課，請二選一：9月21日（一）或 9月25日（五），09:00–11:00，LCH202。補課內容為 Evert 搭配詞。</span>
+      </td>
+    </tr>
+  </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week">3</td>
-      <td class="date"><span class="lang-en">17 Sep</span><span class="lang-zh" lang="zh-Hant">9月17日</span></td>
-      <td class="topic"><span class="lang-en">Collocations</span><span class="lang-zh" lang="zh-Hant">搭配詞</span></td>
+      <td class="date"><span class="lang-en">21 Sep <small class="makeup-note">(Mon)</small> / 25 Sep <small class="makeup-note">(Fri)</small></span><span class="lang-zh" lang="zh-Hant">9月21日<small class="makeup-note">（一）</small>／9月25日<small class="makeup-note">（五）</small></span></td>
+      <td class="topic"><span class="lang-en">Collocations (makeup)</span><span class="lang-zh" lang="zh-Hant">搭配詞（補課）</span></td>
       <td>
         <ul class="readings">
+          <li><span class="lang-en">Choose one: 21 Sep (Mon) or 25 Sep (Fri), 09:00–11:00, LCH 202</span><span class="lang-zh" lang="zh-Hant">二選一：9月21日（一）或 9月25日（五），09:00–11:00，LCH202</span></li>
           <li><span class="lang-en">Collocation as a method; the contingency table; statistical significance, Fisher's exact test, p value</span><span class="lang-zh" lang="zh-Hant">搭配作為方法；列聯表；統計顯著性、Fisher 精確檢定、p 值</span></li>
           <li>Stefan Evert, “Corpora and Collocations”</li>
           <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Paul Baker, <em>Using Corpora in Discourse Analysis</em> (2006), Chapter 5, “Collocations”</li>
@@ -248,7 +259,7 @@ title: CHI3242
     <tr>
       <td class="week">4</td>
       <td class="date"><span class="lang-en">24 Sep</span><span class="lang-zh" lang="zh-Hant">9月24日</span></td>
-      <td class="topic"><span class="lang-en">What Is a Character?</span><span class="lang-zh" lang="zh-Hant">什麼是「角色」？</span></td>
+      <td class="topic"><span class="lang-en">What Is a Character? (Woloch)</span><span class="lang-zh" lang="zh-Hant">什麼是「角色」？（Woloch）</span></td>
       <td>
         <ul class="readings">
           <li><span class="lang-en">Character, word, space</span><span class="lang-zh" lang="zh-Hant">角色、詞語、空間</span></li>
