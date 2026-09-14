@@ -241,7 +241,7 @@ title: CHI3242
   <tbody class="block-a">
     <tr>
       <td class="week">3</td>
-      <td class="date"><span class="lang-en">21 Sep <small class="makeup-note">(Mon)</small> / 25 Sep <small class="makeup-note">(Fri)</small></span><span class="lang-zh" lang="zh-Hant">9月21日<small class="makeup-note">（一）</small>／9月25日<small class="makeup-note">（五）</small></span></td>
+      <td class="date"><span class="lang-en">21 Sep <small class="makeup-note">(Mon)</small><br>25 Sep <small class="makeup-note">(Fri)</small></span><span class="lang-zh" lang="zh-Hant">9月21日<small class="makeup-note">（一）</small><br>9月25日<small class="makeup-note">（五）</small></span></td>
       <td class="topic"><span class="lang-en">Collocations (makeup)</span><span class="lang-zh" lang="zh-Hant">搭配詞（補課）</span></td>
       <td>
         <ul class="readings">
