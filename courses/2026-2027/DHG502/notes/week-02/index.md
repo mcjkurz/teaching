@@ -33,7 +33,7 @@ title: DHG 502 Week 2 Notes
 <p>A long string of 0s and 1s is hard to read, so the same numbers are often written in <strong>hexadecimal (hex)</strong>: binary uses only 0 and 1 in each place; hex uses 0–9 and A–F, sixteen symbols. Two notations, one number.</p>
 
 <h2>4. ASCII: enough for English, at first</h2>
-<p>Early computers mainly had to handle English. Engineers used 7 bits (128 slots) for a small table called <strong>ASCII</strong>: letters, digits, and common punctuation, each character mapped to a number. The eighth bit is filled with 0, so each ASCII character occupies exactly 1 byte. The three columns below are three writings of the same number.</p>
+<p>Early computers mainly had to handle English. Engineers used 7 bits (128 slots) for a small table called <strong>ASCII</strong> (American Standard Code for Information Interchange): letters, digits, and common punctuation, each character mapped to a number. The American Standards Association published the first version in 1963; a 1967 revision added lowercase letters and is essentially the 128-character table still used today. The eighth bit is filled with 0, so each ASCII character occupies exactly 1 byte. The three columns below are three writings of the same number.</p>
 <div class="table-scroll">
 <table>
 <thead><tr><th>Character</th><th>Decimal</th><th>hex</th><th>Binary</th></tr></thead>
@@ -45,10 +45,10 @@ title: DHG 502 Week 2 Notes
 </tbody>
 </table>
 </div>
-<p>Those 128 slots filled up quickly. Chinese, Japanese, and emoji are not in the table — ASCII was never meant to hold them. Later, different regions invented their own encodings (Big5, GBK, and others). Open the same file with the wrong rule and it becomes garbled text.</p>
+<p>Those 128 slots filled up quickly. Chinese, Japanese, and emoji are not in the table — ASCII was never meant to hold them. Later, different regions invented their own encodings: mainland China issued GB 2312 in 1980, Taiwan’s Institute for Information Industry defined Big5 in 1984, and GBK (1995) extended the mainland set. Open the same file with the wrong rule and it becomes garbled text.</p>
 
 <h2>5. Unicode: a world catalogue of writing</h2>
-<p><strong>Unicode</strong>’s approach is to keep one large table covering almost every writing system, and to give each character a unique number. That number is a <strong>code point</strong>. It only answers “which number is this character?”; it does not say how that number should be stored in a file.</p>
+<p><strong>Unicode</strong>’s approach is to keep one large table covering almost every writing system, and to give each character a unique number. The idea was sketched in 1987 by engineers at Xerox and Apple (Joe Becker coined the name); the Unicode Consortium was founded in 1991 and published Unicode 1.0 the same year. That number is a <strong>code point</strong>. It only answers “which number is this character?”; it does not say how that number should be stored in a file.</p>
 <p>Code points are conventionally written as <code>U+</code> followed by hex:</p>
 <ul>
 <li><code>U+</code> is a label meaning “this is a Unicode number.”</li>
@@ -57,7 +57,7 @@ title: DHG 502 Week 2 Notes
 <p>For example, “A” is decimal 65, hex <code>41</code>, so it is written <code>U+0041</code> (the two extra zeros only pad the width). “中” is decimal 20013, hex <code>4E2D</code>, so it is <code>U+4E2D</code>. Read <code>U+4E2D</code> as: in the Unicode table, the number for “中” is <code>4E2D</code>.</p>
 
 <h2>6. UTF-8: storing the number as bytes</h2>
-<p><strong>UTF-8</strong> does the next step: it writes the code point as bytes so it can be saved to a file or sent over a network. It is <strong>variable-length</strong> — small numbers take fewer bytes, large numbers take more. English letters still occupy 1 byte (identical to ASCII); Chinese characters usually take 3; a few rare characters and many emoji take 4. English files therefore stay compact, while the same encoding can hold writing from anywhere. This is the de facto standard for the web and for file storage.</p>
+<p><strong>UTF-8</strong> does the next step: it writes the code point as bytes so it can be saved to a file or sent over a network. Ken Thompson and Rob Pike designed it in September 1992 for Bell Labs’ Plan 9 operating system, so that old ASCII files would still be valid; it later became the default encoding of the web. It is <strong>variable-length</strong> — small numbers take fewer bytes, large numbers take more. English letters still occupy 1 byte (identical to ASCII); Chinese characters usually take 3; a few rare characters and many emoji take 4. English files therefore stay compact, while the same encoding can hold writing from anywhere.</p>
 <p>The same character becomes different bytes under different encodings. Use the <a href="../../../../../visualizations/character-encoding.html">Character Encoding Explorer</a> above to see those differences.</p>
 
 <h3>How the computer knows “how many bytes this character uses”</h3>
