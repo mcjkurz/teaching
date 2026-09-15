@@ -3,7 +3,7 @@ layout: default
 title: CHI4335
 ---
 
-<p class="updated i18n-block"><span class="lang-en">Last updated: Aug 30, 2026</span><span class="lang-zh" lang="zh-Hant">最後更新：2026年8月30日</span></p>
+<p class="updated i18n-block"><span class="lang-en">Last updated: Sep 15, 2026</span><span class="lang-zh" lang="zh-Hant">最後更新：2026年9月15日</span></p>
 <div class="course-header i18n-block">
 <div class="course-header-info">
 <h1><span class="lang-en">CHI 4335 Course Syllabus</span><span class="lang-zh" lang="zh-Hant">CHI 4335 課程大綱</span></h1>
@@ -239,14 +239,6 @@ title: CHI4335
       <td class="notes"></td>
     </tr>
   </tbody>
-  <tbody class="due">
-    <tr>
-      <td></td>
-      <td></td>
-      <td class="date"><span class="lang-en">21 Sep</span><span class="lang-zh" lang="zh-Hant">9月21日</span></td>
-      <td colspan="3"><span class="lang-en">Comparative essay (Weeks 2 &amp; 3) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第2、3週）截止，上午9:00</span></td>
-    </tr>
-  </tbody>
   <tbody class="block-b">
     <tr>
       <td class="week" rowspan="2">4</td>
@@ -261,6 +253,14 @@ title: CHI4335
       <td class="date"><span class="lang-en">24 Sep</span><span class="lang-zh" lang="zh-Hant">9月24日</span></td>
       <td><ul class="readings"><li>高爾泰：《尋找家園》（節選）</li></ul></td>
       <td class="notes"></td>
+    </tr>
+  </tbody>
+  <tbody class="due">
+    <tr>
+      <td></td>
+      <td></td>
+      <td class="date"><span class="lang-en">25 Sep</span><span class="lang-zh" lang="zh-Hant">9月25日</span></td>
+      <td colspan="3"><span class="lang-en">Comparative essay (Weeks 2 &amp; 3) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第2、3週）截止，上午9:00</span></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -285,14 +285,6 @@ title: CHI4335
       <td class="notes"></td>
     </tr>
   </tbody>
-  <tbody class="due">
-    <tr>
-      <td></td>
-      <td></td>
-      <td class="date"><span class="lang-en">5 Oct</span><span class="lang-zh" lang="zh-Hant">10月5日</span></td>
-      <td colspan="3"><span class="lang-en">Comparative essay (Weeks 4 &amp; 5) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第4、5週）截止，上午9:00</span></td>
-    </tr>
-  </tbody>
   <tbody class="block-b">
     <tr>
       <td class="week" rowspan="2">6</td>
@@ -307,6 +299,14 @@ title: CHI4335
       <td class="date"><span class="lang-en">8 Oct</span><span class="lang-zh" lang="zh-Hant">10月8日</span></td>
       <td><ul class="readings"><li>張翎：《餘震》</li></ul></td>
       <td class="notes"></td>
+    </tr>
+  </tbody>
+  <tbody class="due">
+    <tr>
+      <td></td>
+      <td></td>
+      <td class="date"><span class="lang-en">9 Oct</span><span class="lang-zh" lang="zh-Hant">10月9日</span></td>
+      <td colspan="3"><span class="lang-en">Comparative essay (Weeks 4 &amp; 5) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第4、5週）截止，上午9:00</span></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -346,14 +346,6 @@ title: CHI4335
       <td class="notes"></td>
     </tr>
   </tbody>
-  <tbody class="due">
-    <tr>
-      <td></td>
-      <td></td>
-      <td class="date"><span class="lang-en">26 Oct</span><span class="lang-zh" lang="zh-Hant">10月26日</span></td>
-      <td colspan="3"><span class="lang-en">Comparative essay (Weeks 6, 7, 8) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第6、7、8週）截止，上午9:00</span></td>
-    </tr>
-  </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week" rowspan="2">9</td>
@@ -373,6 +365,14 @@ title: CHI4335
       <td class="date"><span class="lang-en">29 Oct</span><span class="lang-zh" lang="zh-Hant">10月29日</span></td>
       <td><ul class="readings"><li>約翰·赫西：《廣島》（原版）</li></ul></td>
       <td class="notes"></td>
+    </tr>
+  </tbody>
+  <tbody class="due">
+    <tr>
+      <td></td>
+      <td></td>
+      <td class="date"><span class="lang-en">30 Oct</span><span class="lang-zh" lang="zh-Hant">10月30日</span></td>
+      <td colspan="3"><span class="lang-en">Comparative essay (Weeks 6, 7, 8) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第6、7、8週）截止，上午9:00</span></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -396,14 +396,6 @@ title: CHI4335
       <td class="notes"></td>
     </tr>
   </tbody>
-  <tbody class="due">
-    <tr>
-      <td></td>
-      <td></td>
-      <td class="date"><span class="lang-en">9 Nov</span><span class="lang-zh" lang="zh-Hant">11月9日</span></td>
-      <td colspan="3"><span class="lang-en">Comparative essay (Weeks 9 &amp; 10) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第9、10週）截止，上午9:00</span></td>
-    </tr>
-  </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week" rowspan="2">11</td>
@@ -423,6 +415,14 @@ title: CHI4335
       <td class="date"><span class="lang-en">12 Nov</span><span class="lang-zh" lang="zh-Hant">11月12日</span></td>
       <td><ul class="readings"><li>李昂：《殺夫》</li></ul></td>
       <td class="notes"></td>
+    </tr>
+  </tbody>
+  <tbody class="due">
+    <tr>
+      <td></td>
+      <td></td>
+      <td class="date"><span class="lang-en">13 Nov</span><span class="lang-zh" lang="zh-Hant">11月13日</span></td>
+      <td colspan="3"><span class="lang-en">Comparative essay (Weeks 9 &amp; 10) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第9、10週）截止，上午9:00</span></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -446,14 +446,6 @@ title: CHI4335
       <td class="notes"></td>
     </tr>
   </tbody>
-  <tbody class="due">
-    <tr>
-      <td></td>
-      <td></td>
-      <td class="date"><span class="lang-en">23 Nov</span><span class="lang-zh" lang="zh-Hant">11月23日</span></td>
-      <td colspan="3"><span class="lang-en">Comparative essay (Weeks 11 &amp; 12) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第11、12週）截止，上午9:00</span></td>
-    </tr>
-  </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week" rowspan="2">13</td>
@@ -468,6 +460,14 @@ title: CHI4335
       <td class="date"><span class="lang-en">26 Nov</span><span class="lang-zh" lang="zh-Hant">11月26日</span></td>
       <td><ul class="readings"><li>雙雪濤：《平原上的摩西》</li></ul></td>
       <td class="notes"></td>
+    </tr>
+  </tbody>
+  <tbody class="due">
+    <tr>
+      <td></td>
+      <td></td>
+      <td class="date"><span class="lang-en">27 Nov</span><span class="lang-zh" lang="zh-Hant">11月27日</span></td>
+      <td colspan="3"><span class="lang-en">Comparative essay (Weeks 11 &amp; 12) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第11、12週）截止，上午9:00</span></td>
     </tr>
   </tbody>
   <tbody class="due">
@@ -502,3 +502,4 @@ title: CHI4335
 </ol>
 </div>
 </div>
+
