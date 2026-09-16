@@ -3,7 +3,7 @@ layout: default
 title: CHI3242
 ---
 
-<p class="updated i18n-block"><span class="lang-en">Last updated: Sep 14, 2026</span><span class="lang-zh" lang="zh-Hant">最後更新：2026年9月14日</span></p>
+<p class="updated i18n-block"><span class="lang-en">Last updated: Sep 16, 2026</span><span class="lang-zh" lang="zh-Hant">最後更新：2026年9月16日</span></p>
 <div class="course-header i18n-block">
 <div class="course-header-info">
 <h1><span class="lang-en">CHI 3242 Course Syllabus</span><span class="lang-zh" lang="zh-Hant">CHI 3242 課程大綱</span></h1>
@@ -221,13 +221,6 @@ title: CHI3242
       <td class="notes"><a href="notes/week-02/">Notes</a></td>
     </tr>
   </tbody>
-  <tbody class="due">
-    <tr>
-      <td></td>
-      <td class="date"><span class="lang-en">16 Sep</span><span class="lang-zh" lang="zh-Hant">9月16日</span></td>
-      <td colspan="3"><a href="assignments/assignment-0/"><span class="lang-en">Assignment 0 (not graded) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">作業0（不計分）截止，上午9:00</span></a></td>
-    </tr>
-  </tbody>
   <tbody class="makeup">
     <tr>
       <td></td>
@@ -253,6 +246,13 @@ title: CHI3242
         </ul>
       </td>
       <td class="notes"></td>
+    </tr>
+  </tbody>
+  <tbody class="due">
+    <tr>
+      <td></td>
+      <td class="date"><span class="lang-en">23 Sep</span><span class="lang-zh" lang="zh-Hant">9月23日</span></td>
+      <td colspan="3"><a href="assignments/assignment-0/"><span class="lang-en">Assignment 0 (not graded) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">作業0（不計分）截止，上午9:00</span></a></td>
     </tr>
   </tbody>
   <tbody class="block-b">

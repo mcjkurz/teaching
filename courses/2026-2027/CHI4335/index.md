@@ -503,3 +503,16 @@ title: CHI4335
 </div>
 </div>
 
+
+
+
+
+
+
+3. To enhance students’ understanding of plagiarism, a mini-course “Online Tutorial on Plagiarism Awareness” is available on [https://pla.ln.edu.hk/](https://pla.ln.edu.hk/).
+
+3. To enhance students’ understanding of plagiarism, a mini-course “Online Tutorial on Plagiarism Awareness” is available on [https://pla.ln.edu.hk/](https://pla.ln.edu.hk/).
+
+3. To enhance students’ understanding of plagiarism, a mini-course “Online Tutorial on Plagiarism Awareness” is available on [https://pla.ln.edu.hk/](https://pla.ln.edu.hk/).
+
+3. To enhance students’ understanding of plagiarism, a mini-course “Online Tutorial on Plagiarism Awareness” is available on [https://pla.ln.edu.hk/](https://pla.ln.edu.hk/).
