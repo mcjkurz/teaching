@@ -3,7 +3,7 @@ layout: default
 title: DHG502
 ---
 
-<p class="updated">Last updated: Sep 14, 2026</p>
+<p class="updated">Last updated: Sep 16, 2026</p>
 <div class="course-header">
 <div class="course-header-info">
 <h1>DHG 502 Course Syllabus</h1>
@@ -83,7 +83,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
 </ul>
 </div>
 <p><strong>2. Assignments.</strong> Assignment 0 is ungraded. Two graded assignments, a project proposal, and the final project are submitted through Moodle. Instructions are linked in the schedule.</p>
-<p><strong>3. In-class presentation.</strong> Each student presents an academic paper during one of five presentation sessions (Weeks 3, 5, 7, 9, and 11) and leads the discussion. The paper may be in English or Chinese, but the presentation and discussion must be in English.</p>
+<p><strong>3. In-class presentation.</strong> Students work in groups of up to three. Each group presents one academic paper during one of five presentation sessions (Weeks 4, 6, 8, 10, and 12) and leads the discussion. Every group member must speak, and the group receives a shared mark. The paper may be in English or Chinese, but the presentation and discussion must be in English.</p>
 <p><strong>4. Final project.</strong> Students work individually or in groups of up to three, apply one or more course methods to a historical question, and submit a reproducible GitHub repository and an English report. Full requirements and marking criteria are on the <a href="assignments/">assignments page</a>.</p>
 
 <h2>Class Schedule</h2>
@@ -159,8 +159,8 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
   </tbody>
   <tbody class="block-a">
     <tr>
-      <td class="week" rowspan="2">3</td>
-      <td class="date" rowspan="2">21 Sep</td>
+      <td class="week">3</td>
+      <td class="date">21 Sep</td>
       <td class="topic">Building a Corpus</td>
       <td>
         <div class="schedule-section">
@@ -181,16 +181,11 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
       </td>
       <td class="notes"></td>
     </tr>
-    <tr class="presentation">
-      <td class="topic">Presentation</td>
-      <td>An academic paper of your choosing on corpus construction, text mining, or computational argument in historical research</td>
-      <td class="notes"></td>
-    </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
-      <td class="week">4</td>
-      <td class="date">28 Sep</td>
+      <td class="week" rowspan="2">4</td>
+      <td class="date" rowspan="2">28 Sep</td>
       <td class="topic">Collocations</td>
       <td>
         <div class="schedule-section">
@@ -208,11 +203,16 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
       </td>
       <td class="notes"></td>
     </tr>
+    <tr class="presentation">
+      <td class="topic">Presentation</td>
+      <td>One paper chosen by your group on collocations, keyword analysis, or corpus-based text mining in historical research</td>
+      <td class="notes"></td>
+    </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
-      <td class="week" rowspan="2">5</td>
-      <td class="date" rowspan="2">5 Oct</td>
+      <td class="week">5</td>
+      <td class="date">5 Oct</td>
       <td class="topic">Historical Network Analysis</td>
       <td>
         <div class="schedule-section">
@@ -235,11 +235,6 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
       </td>
       <td class="notes"></td>
     </tr>
-    <tr class="presentation">
-      <td class="topic">Presentation</td>
-      <td>An academic paper of your choosing on historical network analysis</td>
-      <td class="notes"></td>
-    </tr>
   </tbody>
   <tbody class="due">
     <tr>
@@ -250,8 +245,8 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
   </tbody>
   <tbody class="block-a">
     <tr>
-      <td class="week">6</td>
-      <td class="date">12 Oct</td>
+      <td class="week" rowspan="2">6</td>
+      <td class="date" rowspan="2">12 Oct</td>
       <td class="topic">OCR, HTR, and Multimodal Transcription</td>
       <td>
         <div class="schedule-section">
@@ -277,6 +272,11 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
       </td>
       <td class="notes"></td>
     </tr>
+    <tr class="presentation">
+      <td class="topic">Presentation</td>
+      <td>One paper chosen by your group on OCR, handwritten text recognition, or the construction and evaluation of transcribed historical corpora</td>
+      <td class="notes"></td>
+    </tr>
   </tbody>
   <tbody class="makeup">
     <tr>
@@ -287,8 +287,8 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
   </tbody>
   <tbody class="block-a">
     <tr>
-      <td class="week" rowspan="2">7</td>
-      <td class="date" rowspan="2">26 Oct</td>
+      <td class="week">7</td>
+      <td class="date">26 Oct</td>
       <td class="topic">Topic Modeling</td>
       <td>
         <div class="schedule-section">
@@ -308,16 +308,11 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
       </td>
       <td class="notes"></td>
     </tr>
-    <tr class="presentation">
-      <td class="topic">Presentation</td>
-      <td>An academic paper of your choosing on topic modeling</td>
-      <td class="notes"></td>
-    </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
-      <td class="week">8</td>
-      <td class="date">2 Nov</td>
+      <td class="week" rowspan="2">8</td>
+      <td class="date" rowspan="2">2 Nov</td>
       <td class="topic">Cultural Heritage and Image Annotation</td>
       <td>
         <div class="schedule-section">
@@ -349,6 +344,11 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
       </td>
       <td class="notes"></td>
     </tr>
+    <tr class="presentation">
+      <td class="topic">Presentation</td>
+      <td>One paper chosen by your group on digital cultural heritage, image annotation, or computational image analysis (“distant viewing”)</td>
+      <td class="notes"></td>
+    </tr>
   </tbody>
   <tbody class="due">
     <tr>
@@ -359,8 +359,8 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
   </tbody>
   <tbody class="block-a">
     <tr>
-      <td class="week" rowspan="2">9</td>
-      <td class="date" rowspan="2">9 Nov</td>
+      <td class="week">9</td>
+      <td class="date">9 Nov</td>
       <td class="topic">Conceptual History and Word Vectors</td>
       <td>
         <div class="schedule-section">
@@ -381,16 +381,11 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
       </td>
       <td class="notes"></td>
     </tr>
-    <tr class="presentation">
-      <td class="topic">Presentation</td>
-      <td>An academic paper of your choosing on word embeddings or computational conceptual history</td>
-      <td class="notes"></td>
-    </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
-      <td class="week">10</td>
-      <td class="date">16 Nov</td>
+      <td class="week" rowspan="2">10</td>
+      <td class="date" rowspan="2">16 Nov</td>
       <td class="topic">Databases and Structured Historical Data</td>
       <td>
         <div class="schedule-section">
@@ -410,6 +405,11 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
       </td>
       <td class="notes"></td>
     </tr>
+    <tr class="presentation">
+      <td class="topic">Presentation</td>
+      <td>One paper chosen by your group on historical databases, data modeling, or research built on structured historical datasets</td>
+      <td class="notes"></td>
+    </tr>
   </tbody>
   <tbody class="due">
     <tr>
@@ -420,8 +420,8 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
   </tbody>
   <tbody class="block-a">
     <tr>
-      <td class="week" rowspan="2">11</td>
-      <td class="date" rowspan="2">23 Nov</td>
+      <td class="week">11</td>
+      <td class="date">23 Nov</td>
       <td class="topic">LLM Workflows for Historical Sources</td>
       <td>
         <div class="schedule-section">
@@ -444,16 +444,11 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
       </td>
       <td class="notes"></td>
     </tr>
-    <tr class="presentation">
-      <td class="topic">Presentation</td>
-      <td>An academic paper of your choosing on large language models, structured extraction, semantic search, or RAG in historical research</td>
-      <td class="notes"></td>
-    </tr>
   </tbody>
   <tbody class="block-a">
     <tr>
-      <td class="week">12</td>
-      <td class="date">30 Nov</td>
+      <td class="week" rowspan="2">12</td>
+      <td class="date" rowspan="2">30 Nov</td>
       <td class="topic">Data Visualization and Reproducibility</td>
       <td>
         <div class="schedule-section">
@@ -472,6 +467,11 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           </ul>
         </div>
       </td>
+      <td class="notes"></td>
+    </tr>
+    <tr class="presentation">
+      <td class="topic">Presentation</td>
+      <td>One paper chosen by your group on data visualization as historical argument, or on reproducibility and verifiability in computational historical research</td>
       <td class="notes"></td>
     </tr>
   </tbody>

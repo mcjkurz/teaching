@@ -3,12 +3,12 @@ layout: default
 title: DHG502 Assignments
 ---
 
-<p class="updated">Last updated: Aug 31, 2026</p>
+<p class="updated">Last updated: Sep 16, 2026</p>
 <h1>DHG 502 Assignments</h1>
 
 <h2>Submission Rules</h2>
 <ul>
-<li>Assignments and the in-class presentation are individual work. The project proposal and final project may be completed individually or in a group of up to three students. You may discuss methods and help classmates troubleshoot, but acknowledge any substantial help.</li>
+<li>Assignments are individual work. The in-class presentation is done in a group of up to three students, as are the project proposal and final project (which may also be completed individually). You may discuss methods and help classmates troubleshoot, but acknowledge any substantial help.</li>
 <li>Submit the requested files and repository URL through Moodle. The Moodle timestamp determines whether work is on time.</li>
 <li>A repository may be public or private. For a private repository, grant the instructor access before the deadline. Do not put your student ID in a public repository.</li>
 <li>Only redistribute sources and data that are public domain, openly licensed, or shared with permission. If material is restricted, provide metadata, stable links, and acquisition instructions instead of uploading the files.</li>
@@ -81,7 +81,7 @@ title: DHG502 Assignments
 </ul>
 
 <h2>In-class Presentation (15%)</h2>
-<p>Give one presentation of approximately 20 minutes during an assigned presentation week. Select an academic paper that uses that week’s method; obtain the instructor’s approval and do not choose a reading already on the syllabus. The paper may be in English or Chinese, but the presentation and discussion must be in English. Explain the research question, historical context, sources/data, method, main findings, and limitations. End with two questions for class discussion. Submit your slides or speaking notes and <code>AI-USE.md</code> on Moodle before class.</p>
+<p>Work in a group of up to three students and give one presentation of approximately 20 minutes during your chosen presentation week. Your group selects a single academic paper that uses that week’s method; obtain the instructor’s approval and do not choose a reading already on the syllabus. The paper may be in English or Chinese, but the presentation and discussion must be in English. Explain the research question, historical context, sources/data, method, main findings, and limitations. End with two questions for class discussion. Every group member must speak, and the group receives a shared mark. Submit your slides or speaking notes and <code>AI-USE.md</code> on Moodle before class.</p>
 
 <h3>Marking criteria</h3>
 <ul>
