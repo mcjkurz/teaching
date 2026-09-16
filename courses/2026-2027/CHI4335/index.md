@@ -260,7 +260,7 @@ title: CHI4335
       <td></td>
       <td></td>
       <td class="date"><span class="lang-en">25 Sep</span><span class="lang-zh" lang="zh-Hant">9月25日</span></td>
-      <td colspan="3"><span class="lang-en">Comparative essay (Weeks 3 &amp; 4) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第3、4週）截止，上午9:00</span></td>
+      <td colspan="3"><span class="lang-en">Comparative essay (Weeks 2, 3, 4) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第2、3、4週）截止，上午9:00</span></td>
     </tr>
   </tbody>
   <tbody class="block-a">
