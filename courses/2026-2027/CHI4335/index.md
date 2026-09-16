@@ -446,6 +446,14 @@ title: CHI4335
       <td class="notes"></td>
     </tr>
   </tbody>
+  <tbody class="due">
+    <tr>
+      <td></td>
+      <td></td>
+      <td class="date"><span class="lang-en">20 Nov</span><span class="lang-zh" lang="zh-Hant">11月20日</span></td>
+      <td colspan="3"><span class="lang-en">Comparative essay (Weeks 11 &amp; 12) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第11、12週）截止，上午9:00</span></td>
+    </tr>
+  </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week" rowspan="2">13</td>
@@ -460,14 +468,6 @@ title: CHI4335
       <td class="date"><span class="lang-en">26 Nov</span><span class="lang-zh" lang="zh-Hant">11月26日</span></td>
       <td><ul class="readings"><li>雙雪濤：《平原上的摩西》</li></ul></td>
       <td class="notes"></td>
-    </tr>
-  </tbody>
-  <tbody class="due">
-    <tr>
-      <td></td>
-      <td></td>
-      <td class="date"><span class="lang-en">27 Nov</span><span class="lang-zh" lang="zh-Hant">11月27日</span></td>
-      <td colspan="3"><span class="lang-en">Comparative essay (Weeks 11, 12, 13) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第11、12、13週）截止，上午9:00</span></td>
     </tr>
   </tbody>
   <tbody class="due">
