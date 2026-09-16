@@ -3,7 +3,7 @@ layout: default
 title: CHI4335
 ---
 
-<p class="updated i18n-block"><span class="lang-en">Last updated: Sep 15, 2026</span><span class="lang-zh" lang="zh-Hant">最後更新：2026年9月15日</span></p>
+<p class="updated i18n-block"><span class="lang-en">Last updated: Sep 16, 2026</span><span class="lang-zh" lang="zh-Hant">最後更新：2026年9月16日</span></p>
 <div class="course-header i18n-block">
 <div class="course-header-info">
 <h1><span class="lang-en">CHI 4335 Course Syllabus</span><span class="lang-zh" lang="zh-Hant">CHI 4335 課程大綱</span></h1>
@@ -260,7 +260,7 @@ title: CHI4335
       <td></td>
       <td></td>
       <td class="date"><span class="lang-en">25 Sep</span><span class="lang-zh" lang="zh-Hant">9月25日</span></td>
-      <td colspan="3"><span class="lang-en">Comparative essay (Weeks 2 &amp; 3) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第2、3週）截止，上午9:00</span></td>
+      <td colspan="3"><span class="lang-en">Comparative essay (Weeks 3 &amp; 4) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第3、4週）截止，上午9:00</span></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -306,7 +306,7 @@ title: CHI4335
       <td></td>
       <td></td>
       <td class="date"><span class="lang-en">9 Oct</span><span class="lang-zh" lang="zh-Hant">10月9日</span></td>
-      <td colspan="3"><span class="lang-en">Comparative essay (Weeks 4 &amp; 5) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第4、5週）截止，上午9:00</span></td>
+      <td colspan="3"><span class="lang-en">Comparative essay (Weeks 5 &amp; 6) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第5、6週）截止，上午9:00</span></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -372,7 +372,7 @@ title: CHI4335
       <td></td>
       <td></td>
       <td class="date"><span class="lang-en">30 Oct</span><span class="lang-zh" lang="zh-Hant">10月30日</span></td>
-      <td colspan="3"><span class="lang-en">Comparative essay (Weeks 6, 7, 8) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第6、7、8週）截止，上午9:00</span></td>
+      <td colspan="3"><span class="lang-en">Comparative essay (Weeks 7, 8, 9) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第7、8、9週）截止，上午9:00</span></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -422,7 +422,7 @@ title: CHI4335
       <td></td>
       <td></td>
       <td class="date"><span class="lang-en">13 Nov</span><span class="lang-zh" lang="zh-Hant">11月13日</span></td>
-      <td colspan="3"><span class="lang-en">Comparative essay (Weeks 9 &amp; 10) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第9、10週）截止，上午9:00</span></td>
+      <td colspan="3"><span class="lang-en">Comparative essay (Weeks 10 &amp; 11) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第10、11週）截止，上午9:00</span></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -467,7 +467,7 @@ title: CHI4335
       <td></td>
       <td></td>
       <td class="date"><span class="lang-en">27 Nov</span><span class="lang-zh" lang="zh-Hant">11月27日</span></td>
-      <td colspan="3"><span class="lang-en">Comparative essay (Weeks 11 &amp; 12) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第11、12週）截止，上午9:00</span></td>
+      <td colspan="3"><span class="lang-en">Comparative essay (Weeks 12 &amp; 13) due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">比較短文（第12、13週）截止，上午9:00</span></td>
     </tr>
   </tbody>
   <tbody class="due">
