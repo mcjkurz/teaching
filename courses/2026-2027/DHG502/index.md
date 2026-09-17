@@ -260,7 +260,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           <strong class="schedule-label">Readings</strong>
           <ul class="readings">
             <li>Maria Levchenko, <a href="https://aclanthology.org/2025.lm4dh-1.7/">“Evaluating LLMs for Historical Document OCR: A Methodological Framework for Digital Humanities”</a> (2025), Introduction and Conclusion</li>
-            <li>Donald Sturgeon, “Unsupervised Extraction of Training Data for Pre-Modern Chinese OCR,” <em>Proceedings of FLAIRS-30</em> (2017)</li>
+            <li>Chung Yan Hon Michael and Donghyeok Choi, <a href="https://doi.org/10.1017/chr.2026.10042">“Fine-Tuning Vision–Language Models as OCR Systems for Low-Resource Languages: A Case Study of Manchu”</a>, <em>Computational Humanities Research</em> 2 (2026): e20</li>
           </ul>
         </div>
         <div class="schedule-section">
