@@ -3,7 +3,7 @@ layout: default
 title: DHG502 Assignments
 ---
 
-<p class="updated">Last updated: Sep 16, 2026</p>
+<p class="updated">Last updated: Sep 17, 2026</p>
 <h1>DHG 502 Assignments</h1>
 
 <h2>Submission Rules</h2>
@@ -17,14 +17,9 @@ title: DHG502 Assignments
 <li>If illness or another serious circumstance may prevent timely submission, request an extension as early as possible and provide documentation when required. Approved extensions carry no penalty. Unapproved late work is handled under the programme’s current late-submission rules.</li>
 </ul>
 
-<h2>Assignment 0 (not graded)</h2>
-<p><strong>Due:</strong> 21 Sep, 9:00 am</p>
-<p>Create a GitHub repository and submit its URL on Moodle. This exercise checks that the basic workflow functions before graded work begins. The repository must include:</p>
-<ul>
-<li><code>README.md</code> with your name, course code, a one-sentence description, and the source citation</li>
-<li><code>data/source.txt</code>, a short historical source saved as UTF-8 plain text</li>
-</ul>
-<p>Do not include your student ID in the repository. The source should be public domain or openly licensed; otherwise, use a short instructor-provided source.</p>
+<h2><a href="assignment-0/">Assignment 0 (not graded)</a></h2>
+<p><strong>Due:</strong> 23 Sep, 9:00 am</p>
+<p>Analyze a historical source with an AI coding assistant and publish the result as a simple page on GitHub Pages. This exercise checks that the basic workflow functions before graded work begins. Full instructions are on the <a href="assignment-0/">Assignment 0 page</a>.</p>
 
 <h2>Assignment 1: From Text to Evidence (15%)</h2>
 <p><strong>Due:</strong> 12 Oct, 9:00 am</p>
