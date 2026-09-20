@@ -185,3 +185,19 @@ table.cmp .bi + .bi { margin: 0; }
 
 .ctlist { min-height: 250px; }
 .ctlist .bi + .bi { margin-top: 14px; }
+
+/* tea experiment */
+.cups { display: flex; gap: 14px; margin: 10px 0 4px; }
+.cup { display: flex; flex-direction: column; align-items: center; width: 92px; }
+.cup svg { width: 88px; height: 68px; }
+.pour { font-size: 16px; font-weight: 700; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; color: #fff; margin-top: 2px; }
+.pour.m { background: var(--tgt); } .pour.t { background: var(--col); }
+
+/* portraits */
+.portrait { position: absolute; margin: 0; text-align: center; font-size: 15px; line-height: 1.3; }
+.portrait img { display: block; width: 100%; border-radius: 10px; box-shadow: 0 4px 18px rgba(20, 30, 60, .22); }
+.portrait figcaption { margin-top: 8px; font-weight: 600; }
+.portrait figcaption span { font-weight: 400; color: var(--mute); }
+.title-portrait { right: 110px; top: 50%; width: 190px; margin-top: -175px; }
+.title-slide .quote { max-width: 760px; }
+.tea-portrait { right: 250px; top: 34px; width: 128px; z-index: 2; }

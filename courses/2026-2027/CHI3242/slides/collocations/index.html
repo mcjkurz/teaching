@@ -14,6 +14,7 @@
   <div class="big-zh">搭配詞</div>
   <div class="big-en">Collocations</div>
   <div class="rule"></div>
+  <figure class="portrait title-portrait" data-step="1"><img src="img/firth.png" alt="J. R. Firth"><figcaption>J. R. Firth<br><span>1890–1960</span></figcaption></figure>
   <div class="quote bi" data-step="1">
     <span class="zh">「觀其伴，而知其詞。」— J. R. Firth (1957)</span>
     <span class="en">“You shall know a word by the company it keeps.”</span>
@@ -167,6 +168,31 @@
   </div>
 </section>
 
+<!-- 10a ─────────── Lady tasting tea -->
+<section class="slide" id="s-tea" data-sec="ct">
+  <h2 class="bi"><span class="zh">Fisher 與「奶茶實驗」</span><span class="en">Fisher and the lady tasting tea (1935)</span></h2>
+  <figure class="portrait tea-portrait" data-step="1"><img src="img/fisher.jpeg" alt="R. A. Fisher"><figcaption>R. A. Fisher<br><span>1890–1962</span></figcaption></figure>
+  <div class="bi sm" data-step="1" style="max-width:800px"><span class="zh">Muriel Bristol 聲稱能分辨奶茶是「先倒牛奶」還是「先倒茶」。Ronald Fisher 設計了實驗來檢驗。</span><span class="en">A lady claims she can tell whether the milk or the tea was poured first. Fisher designs a test.</span></div>
+  <div class="cups" data-step="2">
+    <div class="cup"><svg viewBox="0 0 90 70"><use href="#cup"/></svg><span class="pour m">M</span></div>
+    <div class="cup"><svg viewBox="0 0 90 70"><use href="#cup"/></svg><span class="pour t">T</span></div>
+    <div class="cup"><svg viewBox="0 0 90 70"><use href="#cup"/></svg><span class="pour t">T</span></div>
+    <div class="cup"><svg viewBox="0 0 90 70"><use href="#cup"/></svg><span class="pour m">M</span></div>
+    <div class="cup"><svg viewBox="0 0 90 70"><use href="#cup"/></svg><span class="pour m">M</span></div>
+    <div class="cup"><svg viewBox="0 0 90 70"><use href="#cup"/></svg><span class="pour t">T</span></div>
+    <div class="cup"><svg viewBox="0 0 90 70"><use href="#cup"/></svg><span class="pour m">M</span></div>
+    <div class="cup"><svg viewBox="0 0 90 70"><use href="#cup"/></svg><span class="pour t">T</span></div>
+  </div>
+  <div class="bi xs" data-step="2"><span class="zh">8 杯外觀相同：4 杯<span class="tgt-c">先牛奶 (M)</span>、4 杯<span class="col-c">先茶 (T)</span>，隨機排列；她要指出哪 4 杯是先牛奶。</span><span class="en">8 identical-looking cups, 4 milk-first and 4 tea-first, in random order. She must pick the 4 milk-first cups.</span></div>
+  <div class="two" style="margin-top:12px">
+    <div data-step="3"><div class="ct-title">全部答對 all correct</div><div id="tea-perfect"></div>
+      <div class="eq" style="font-size:22px;margin-top:4px">p = 1 / 70 ≈ <b>0.014</b></div></div>
+    <div data-step="4"><div class="ct-title">答對 3 杯 three correct</div><div id="tea-three"></div>
+      <div class="eq" style="font-size:22px;margin-top:4px">p = 17 / 70 ≈ <b>0.243</b></div></div>
+    <div class="grow bi xs" data-step="4" style="align-self:center"><span class="zh">全對時，靠猜的機率只有 1/70，這張表「太不可能」；答對 3 杯則可能只是運氣。<b>這就是 Fisher 精確檢定。</b></span><span class="en">Guessing all 4 right has probability 1/70, so the table is very unlikely by chance. 3 of 4 could easily be luck. This is Fisher’s exact test.</span></div>
+  </div>
+</section>
+
 <!-- 10 ─────────── Fisher -->
 <section class="slide" id="s-fisher" data-sec="ct">
   <h2 class="bi"><span class="zh">這張表有多「不可能」？</span><span class="en">How unlikely is this table?</span></h2>
@@ -266,6 +292,12 @@
   <div class="callout key bi sm" data-step="3" style="margin-top:6px"><span class="zh">下一步：把每張表變成一個「分數」— Fisher 檢定、互信息、對數似然比。</span><span class="en">Next: turn each table into a score: Fisher’s test, mutual information, log-likelihood.</span></div>
 </section>
 
+<svg width="0" height="0" style="position:absolute"><defs><symbol id="cup" viewBox="0 0 90 70">
+  <ellipse cx="42" cy="60" rx="34" ry="7" fill="#e9e6df" stroke="#b9b3a6" stroke-width="2"/>
+  <path d="M14 22 H70 V36 Q70 56 42 56 Q14 56 14 36 Z" fill="#fff" stroke="#8a6a4f" stroke-width="3"/>
+  <path d="M70 26 Q88 26 84 38 Q80 48 68 46" fill="none" stroke="#8a6a4f" stroke-width="3"/>
+  <ellipse cx="42" cy="22" rx="28" ry="6" fill="#c9905f" stroke="#8a6a4f" stroke-width="3"/>
+</symbol></defs></svg>
 <div id="side"></div>
 <div id="bar"></div>
 <div id="num"></div>

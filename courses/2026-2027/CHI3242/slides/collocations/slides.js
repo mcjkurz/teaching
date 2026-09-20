@@ -305,3 +305,17 @@ HOOKS['s-summary'] = {
     ctable($('#sum-syn', el), syntaxCounts(), L);
   }
 };
+
+/* ---------- 10a. Fisher's lady tasting tea ---------- */
+(function () {
+  let built = false;
+  HOOKS['s-tea'] = {
+    render(step, el) {
+      if (built) return;
+      const L = { rows: [['先牛奶', 'milk first'], ['先茶', 'tea first']], cols: [['她說先牛奶', 'says milk'], ['她說先茶', 'says tea']], mini: true, hl: 'ad' };
+      ctable($('#tea-perfect', el), { a: 4, b: 0, c: 0, d: 4 }, L);
+      ctable($('#tea-three', el), { a: 3, b: 1, c: 1, d: 3 }, L);
+      built = true;
+    }
+  };
+})();
