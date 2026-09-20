@@ -288,3 +288,8 @@ s { text-decoration-color: var(--mute); color: var(--mute); }
 .frac .num .katex, .frac .den .katex { font-size: 1.05em; }
 .fp .katex { font-size: 1.25em; }
 .tex-block { display: block; }
+
+/* recap */
+.recap { margin-top: 12px; }
+.rrow { display: flex; align-items: center; gap: 18px; margin: 12px 0; }
+.rrow i { flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--tgt); color: #fff; font-style: normal; font-weight: 600; font-size: 20px; display: grid; place-items: center; }

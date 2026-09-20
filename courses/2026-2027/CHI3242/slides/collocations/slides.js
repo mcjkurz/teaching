@@ -316,7 +316,7 @@ function syntaxCounts() {
       $('#win-h', el).textContent = h;
       const v = windowCounts(h);
       ctable($('#win-ct', el), v, { rows: [['靠近 w₁＝好', 'near w₁'], ['不靠近', 'not near']], cols: [['w₂＝天氣', 'collocate'], ['其他詞', 'other']], hl: 'a', mini: true, letters: EV });
-      $('#win-sig', el).textContent = `${v.N} tokens · f₁ = count(好) = ${v.nX} · f₂ = count(天氣) = ${v.nY}`;
+      
     },
     key(e) {
       if (e.key === 'ArrowUp') { h = Math.min(6, h + 1); return true; }

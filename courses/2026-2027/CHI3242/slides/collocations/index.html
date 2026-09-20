@@ -153,10 +153,10 @@
         <div class="eq big">\(\mathrm{MI} = \log_2 \dfrac{O}{E}\)</div></div>
       <div data-step="2" style="margin-top:10px"><div class="bi sm"><span class="zh">王婆 ／ 痛苦：</span><span class="en">for our example pair</span></div>
         <div class="eq">\(\mathrm{MI} = \log_2 \dfrac{8}{1.2} = \log_2 6.7 \approx \textcolor{#e0570f}{\mathbf{2.74}}\ \text{bits}\)</div></div>
-      <div class="bi xs" data-step="4" style="margin-top:12px"><span class="zh">來源：Evert, p. 1226。MI 只看效應大小（O 與 E 的比值），<b>不考慮證據多寡</b>——低頻詞對容易得高分（p. 1227）。</span><span class="en">Evert, p. 1226. MI only measures effect size, not how much evidence we have; rare pairs can score very high (p. 1227).</span></div>
+      <div class="bi xs" data-step="4" style="margin-top:12px"><span class="zh">MI 只看比值，不看證據多寡：罕見詞對容易得高分。</span><span class="en">MI only sees the ratio, not how much evidence there is: rare pairs can score very high (Evert, p. 1227).</span></div>
     </div>
     <div style="width:430px" data-step="3">
-      <div class="bi sm"><span class="zh">為什麼取對數？</span><span class="en">Why the logarithm?</span></div>
+      <div class="bi sm"><span class="zh">為什麼取對數？每多一倍 ＝ ＋1</span><span class="en">Why the logarithm? Every doubling adds 1 bit</span></div>
       <table class="cmp" id="mi-table" style="margin-top:6px"></table>
     </div>
   </div>
@@ -167,39 +167,47 @@
   <h2 class="bi"><span class="zh">PPMI：正的點互信息</span><span class="en">PPMI: positive pointwise mutual information</span></h2>
   <div class="two" style="margin-top:4px">
     <div class="grow">
-      <div data-step="1"><div class="bi sm"><span class="zh">負的 MI 表示「彼此排斥」：比偶然更少共現</span><span class="en">Negative MI means repulsion: the words co-occur less than chance</span></div></div>
-      <div data-step="2" style="margin-top:10px"><div class="bi sm"><span class="zh">PPMI：把負值一律設為 0</span><span class="en">PPMI: replace every negative value with 0</span></div>
+      <div data-step="1"><div class="bi sm"><span class="zh">MI 為負：兩詞「互相排斥」，比偶然更少共現</span><span class="en">Negative MI: the words repel each other, co-occurring less than chance</span></div></div>
+      <div data-step="2" style="margin-top:12px"><div class="bi sm"><span class="zh">PPMI：把負值一律設為 0</span><span class="en">PPMI: replace every negative value with 0</span></div>
         <div class="eq big">\(\mathrm{PPMI} = \max\!\left(0,\ \log_2 \dfrac{O}{E}\right)\)</div></div>
-      <div data-step="4" style="margin-top:10px"><div class="bi xs"><span class="zh"><b>為什麼？</b>要可靠地判斷「比偶然更少」，需要很大的語料；低頻詞對的負值大多只是噪音。PPMI 因此常用於詞向量／共現矩陣（分布式語義）。</span><span class="en">Reliably detecting “less than chance” needs a huge corpus; for rare pairs negative values are mostly noise. PPMI is therefore widely used for co-occurrence matrices and word vectors (distributional semantics).</span></div></div>
+      <div data-step="3" style="margin-top:12px"><div class="bi sm"><span class="zh">負值在語料不夠大時不可靠，所以直接忽略；PPMI 常用於詞向量。</span><span class="en">Negative values are unreliable unless the corpus is huge, so they are dropped. PPMI is common in word vectors.</span></div></div>
     </div>
     <div style="width:430px" data-step="1">
       <table class="cmp" id="ppmi-table"></table>
     </div>
   </div>
-  <div class="callout bi xs" data-step="3" style="margin-top:8px"><span class="zh">例：the Iliad 與 must also 的 O ＝ E，所以 MI ＝ PPMI ＝ 0：沒有超出偶然的吸引力。</span><span class="en">Example: for the Iliad and must also, O = E, so MI = PPMI = 0: no attraction beyond chance.</span></div>
 </section>
 
 <!-- 8 ─────────── The problem -->
 <section class="slide" id="s-problem" data-sec="compare">
-  <h2 class="bi"><span class="zh">簡單指標的問題</span><span class="en">A problem with simple measures</span></h2>
+  <h2 class="bi"><span class="zh">簡單指標的問題（一）：兩個詞對</span><span class="en">A problem with simple measures, part 1: two word pairs</span></h2>
   <div data-step="1">
     <div class="eq" style="font-size:24px;margin:0">\(E(\text{coll.} \mid \text{target}) = P(\text{coll.}) \times \big(\text{count}(\text{target}) \times \text{window} \times 2\big)\)</div>
-    <span class="small" style="font-size:16px;margin-left:12px">\(P(\text{coll.}) = \dfrac{\text{count}(\text{coll.})}{N}\) &nbsp;·&nbsp; \(N = 1{,}000{,}000\) · window = 5</span>
+    <span class="small" style="font-size:16px;margin-left:12px">\(N = 1{,}000{,}000\) · window = 5</span>
   </div>
-  <div class="cards" style="margin-top:12px">
+  <div class="cards" style="margin-top:14px">
     <div class="card" data-step="2">
       <h3 class="bi sm"><span class="zh">the Iliad</span><span class="en">《伊利亞特》</span></h3>
-      <div class="nums">count(the) = 100,000<br>count(Iliad) = <b>10</b><br>\(P(\text{the}) = \frac{100{,}000}{1{,}000{,}000} = 0.1\)<br>\(E = 0.1 \times (10 \times 5 \times 2) = \mathbf{10}\)<br>O = <b>10</b></div>
+      <div class="nums">count(the) = 100,000 · count(Iliad) = <b>10</b><br>\(P(\text{the}) = 0.1\)<br>\(E = 0.1 \times (10 \times 5 \times 2) = \mathbf{10}\)<br>O = <b>10</b></div>
     </div>
     <div class="card" data-step="3">
       <h3 class="bi sm"><span class="zh">must also</span><span class="en">「必須」「也」</span></h3>
-      <div class="nums">count(must) = 1,000<br>count(also) = <b>1,000</b><br>\(P(\text{must}) = \frac{1{,}000}{1{,}000{,}000} = 0.001\)<br>\(E = 0.001 \times (1000 \times 5 \times 2) = \mathbf{10}\)<br>O = <b>10</b></div>
+      <div class="nums">count(must) = 1,000 · count(also) = <b>1,000</b><br>\(P(\text{must}) = 0.001\)<br>\(E = 0.001 \times (1000 \times 5 \times 2) = \mathbf{10}\)<br>O = <b>10</b></div>
     </div>
   </div>
-  <div class="callout" data-step="4" style="margin-top:12px">
-    <div class="bi sm"><span class="zh">O 與 E 完全相同，分數也相同！但 Iliad 很罕見，而 must、also 都很常見。</span><span class="en">Identical O and E, identical scores. Yet Iliad is rare, while must and also are both frequent.</span></div>
-  </div>
-  <div class="bi sm" data-step="5" style="margin-top:8px"><span class="zh"><b>O 對 E 忽略了語料中其他的一切</b>，我們還要看兩詞「沒有」共現的情況。</span><span class="en">O vs. E ignores everything else in the corpus. We must also look at when the words do not co-occur.</span></div>
+  <div class="callout" data-step="4" style="margin-top:16px"><div class="bi sm"><span class="zh">兩個詞對的 O 和 E 完全一樣：<b>O ＝ E ＝ 10</b>。</span><span class="en">Both pairs have exactly the same O and E.</span></div></div>
+</section>
+
+<!-- 8b ─────────── The problem, part 2 -->
+<section class="slide" id="s-problem2" data-sec="compare">
+  <h2 class="bi"><span class="zh">簡單指標的問題（二）：分數相同</span><span class="en">A problem with simple measures, part 2: identical scores</span></h2>
+  <table class="cmp" style="margin-top:10px" data-step="1">
+    <thead><tr><th class="bi sm"><span class="zh">詞對</span><span class="en">pair</span></th><th class="num">O</th><th class="num">E</th><th class="num">O / E</th><th class="num">MI</th></tr></thead>
+    <tr><td style="font-size:26px">the Iliad</td><td class="num">10</td><td class="num">10</td><td class="num">1</td><td class="num">0</td></tr>
+    <tr><td style="font-size:26px">must also</td><td class="num">10</td><td class="num">10</td><td class="num">1</td><td class="num">0</td></tr>
+  </table>
+  <div class="callout" data-step="2" style="margin-top:18px"><div class="bi sm"><span class="zh">分數相同，但情況不同：Iliad 很罕見，而 must、also 都很常見。</span><span class="en">Same score, different situations: Iliad is rare, while must and also are both frequent.</span></div></div>
+  <div class="callout key" data-step="3" style="margin-top:10px"><div class="bi sm"><span class="zh"><b>O 與 E 忽略了語料中其他的一切</b>——我們還要看兩詞「沒有」共現的情況。</span><span class="en">O vs. E ignores everything else in the corpus. We also need to look at when the words do not co-occur.</span></div></div>
 </section>
 
 <!-- 9 ─────────── Contingency table -->
@@ -416,7 +424,7 @@
   </div>
   <div class="two" data-step="3" style="align-items:center">
     <div id="win-ct"></div>
-    <div><div class="sig" id="win-sig"></div><div class="defs"><div class="bi xs"><span class="zh"><b>項目</b>：語料中每個詞（不含 w₁ 本身）</span><span class="en"><b>item</b>: every word token except w₁ itself</span></div><div class="bi xs"><span class="zh"><b>第 1 列</b>：落在 w₁ 的視窗內</span><span class="en"><b>row 1</b>: falls inside a span around w₁</span></div><div class="bi xs"><span class="zh"><b>第 1 欄</b>：就是搭配詞 w₂</span><span class="en"><b>column 1</b>: is the collocate w₂</span></div></div></div>
+    <div><div class="defs"><div class="bi xs"><span class="zh"><b>項目</b>：語料中每個詞（不含 w₁ 本身）</span><span class="en"><b>item</b>: every word token except w₁ itself</span></div><div class="bi xs"><span class="zh"><b>第 1 列</b>：落在 w₁ 的視窗內</span><span class="en"><b>row 1</b>: falls inside a span around w₁</span></div><div class="bi xs"><span class="zh"><b>第 1 欄</b>：就是搭配詞 w₂</span><span class="en"><b>column 1</b>: is the collocate w₂</span></div></div></div>
   </div>
 </section>
 
@@ -533,8 +541,21 @@
     <tr data-step="2"><th class="rh bi xs"><span class="zh">(好, 天氣) 的表</span><span class="en">table for (好, 天氣); orange = O₁₁ = O</span></th>
       <td><div id="sum-win"></div></td><td><div id="sum-sen"></div></td><td><div id="sum-syn"></div></td></tr>
   </table>
-  <div class="callout key bi sm" data-step="3" style="margin-top:6px"><span class="zh">下一步：把每張表變成一個「分數」— Fisher 檢定、互信息、對數似然比。</span><span class="en">Next: turn each table into a score: Fisher’s test, mutual information, log-likelihood.</span></div>
 </section>
+
+<!-- 15 ─────────── Recap -->
+<section class="slide" id="s-recap" data-sec="summary">
+  <h2 class="bi"><span class="zh">回顧</span><span class="en">Recap</span></h2>
+  <div class="recap">
+    <div class="rrow" data-step="1"><i>1</i><div class="bi sm"><span class="zh"><b>搭配詞</b>：兩個詞比偶然更常在附近一起出現</span><span class="en">A collocation: two words that occur near each other more often than chance</span></div></div>
+    <div class="rrow" data-step="2"><i>2</i><div class="bi sm"><span class="zh"><b>觀察值 O 對 期望值 E</b>；取對數得 MI，去掉負值得 PPMI</span><span class="en">Observed O vs. expected E; the log gives MI, dropping negatives gives PPMI</span></div></div>
+    <div class="rrow" data-step="3"><i>3</i><div class="bi sm"><span class="zh"><b>列聯表</b>：也記錄「沒有」共現的情況（a, b, c, d）</span><span class="en">Contingency table: also records the cases where the words do not co-occur</span></div></div>
+    <div class="rrow" data-step="4"><i>4</i><div class="bi sm"><span class="zh"><b>Fisher 精確檢定</b>：這張表在「純屬偶然」下有多不可能？</span><span class="en">Fisher’s exact test: how unlikely is this table if it were all chance?</span></div></div>
+    <div class="rrow" data-step="5"><i>5</i><div class="bi sm"><span class="zh"><b>三種「相鄰」</b>：視窗、句子、語法關係 —— 同一張表，不同的「項目」</span><span class="en">Three kinds of “near”: window, sentence, grammatical: same table, different items</span></div></div>
+    <div class="rrow" data-step="6"><i>6</i><div class="bi sm"><span class="zh"><b>下一步</b>：在真實語料上計算，比較不同的指標</span><span class="en">Next: compute these on a real corpus and compare the measures</span></div></div>
+  </div>
+</section>
+
 
 <svg width="0" height="0" style="position:absolute"><defs><symbol id="cup" viewBox="0 0 90 70">
   <ellipse cx="42" cy="60" rx="34" ry="7" fill="#e9e6df" stroke="#b9b3a6" stroke-width="2"/>
