@@ -91,7 +91,7 @@ function drawHorizon(box, els, targets, h) {
 
 /* ---------- 4. observed frequency O: window around 王婆 ---------- */
 (function () {
-  const line = '王婆 半日 的 痛苦 沒有 代價 了 王婆 一生 的 痛苦 也 都 是 沒有 代價'.split(' ');
+  const line = '王婆 半日 的 痛苦 沒有 代價 了 王婆 一生 的 痛苦'.split(' ');
   const X = '王婆', Y = '痛苦', H = 3;
   let built = false, els = [];
   HOOKS['s-observed'] = {
@@ -189,12 +189,12 @@ const X = '好', Y = '天氣';
 const words = s => s.filter(t => !isPunct(t));
 
 /* build the five sentence rows once; later calls only restyle them */
-function lines(host, { badges = false } = {}) {
+function lines(host, { badges = false, tight = false } = {}) {
   if (!host._rows) {
     host._rows = CORPUS.map((sent, si) => {
       const row = document.createElement('div'); row.className = 'line';
       row.innerHTML = `<div class="sid">S${si + 1}</div>`;
-      const toks = document.createElement('div'); toks.className = 'toks sparse';
+      const toks = document.createElement('div'); toks.className = tight ? 'toks' : 'toks sparse';
       const wordEls = [];
       sent.forEach(t => { const c = chip(t); toks.appendChild(c); if (!isPunct(t)) wordEls.push(c); });
       row.appendChild(toks);
@@ -249,7 +249,7 @@ function syntaxCounts() {
       });
       $('#win-h', el).textContent = h;
       const v = windowCounts(h);
-      ctable($('#win-ct', el), v, { rows: [['靠近 好', 'near 好'], ['不靠近', 'not near']], cols: [['天氣', '天氣'], ['其他詞', 'other words']], hl: 'a', mini: true });
+      ctable($('#win-ct', el), v, { rows: [['靠近 好', 'near 好'], ['不靠近', 'not near']], cols: [['天氣', 'Y'], ['其他詞', 'other words']], hl: 'a', mini: true });
       $('#win-sig', el).textContent = `N = ${v.N} · count(好) = ${v.nX} · count(天氣) = ${v.nY}`;
     },
     key(e) {
@@ -263,7 +263,7 @@ function syntaxCounts() {
 /* ---------- 12. sentence approach ---------- */
 HOOKS['s-sentence'] = {
   render(step, el) {
-    const rows = lines($('#sen-lines', el), { badges: true });
+    const rows = lines($('#sen-lines', el), { badges: true, tight: true });
     rows.forEach(r => {
       const x = r.w.includes(X), y = r.w.includes(Y);
       r.wordEls.forEach((e, i) => setCls(e, step >= 1 && r.w[i] === X && 'tgt', step >= 1 && r.w[i] === Y && 'col'));
@@ -278,7 +278,7 @@ HOOKS['s-sentence'] = {
 /* ---------- 13. grammatical approach ---------- */
 HOOKS['s-syntax'] = {
   render(step, el) {
-    const rows = lines($('#syn-lines', el));
+    const rows = lines($('#syn-lines', el), { tight: true });
     rows.forEach((r, si) => {
       r.wordEls.forEach((e, i) => {
         const pair = MODS[si].find(([m, n]) => i === m || i === n);
@@ -293,7 +293,7 @@ HOOKS['s-syntax'] = {
 /* ---------- 14. summary: same table, three ways to count ---------- */
 HOOKS['s-summary'] = {
   render(step, el) {
-    const L = { rows: [['有 好', 'has 好'], ['無 好', 'no 好']], cols: [['天氣', '天氣'], ['其他', 'other']], mini: true, hl: 'a' };
+    const L = { rows: [['有 好', 'has 好'], ['無 好', 'no 好']], cols: [['天氣', 'Y'], ['其他', 'other']], mini: true, hl: 'a' };
     ctable($('#sum-win', el), windowCounts(2), L);
     ctable($('#sum-sen', el), sentenceCounts(), L);
     ctable($('#sum-syn', el), syntaxCounts(), L);

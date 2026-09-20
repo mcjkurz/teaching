@@ -212,7 +212,7 @@
 <section class="slide" id="s-window" data-sec="window">
   <h2 class="bi"><span class="zh">視窗法</span><span class="en">Window approach: Y within k words of X</span></h2>
   <div class="ctrl"><span class="il"><span class="zh">視窗</span><span class="en">horizon</span></span> = <b id="win-h">2</b> &nbsp;<span class="small"><kbd>↑</kbd> <kbd>↓</kbd></span></div>
-  <div id="win-lines" class="lines" style="margin-top:2px"></div>
+  <div id="win-lines" class="lines win" style="margin-top:0"></div>
   <div class="small" style="margin:2px 0 6px">
     <span class="tag tgt" data-step="1">X = 好</span><span class="tag col" data-step="1">Y = 天氣</span><span class="tag win" data-step="2">視窗 window（不跨句 stays within a sentence）</span>
   </div>
@@ -226,7 +226,7 @@
 <!-- 13 ─────────── Sentence -->
 <section class="slide" id="s-sentence" data-sec="sentence">
   <h2 class="bi"><span class="zh">句子法</span><span class="en">Sentence approach: X and Y in the same sentence</span></h2>
-  <div id="sen-lines" class="lines"></div>
+  <div id="sen-lines" class="lines tight"></div>
   <div class="small" style="margin:2px 0 6px"><span class="tag tgt">X = 好</span><span class="tag col">Y = 天氣</span></div>
   <div class="two" data-step="3" style="align-items:center">
     <div id="sen-ct"></div>
@@ -237,7 +237,7 @@
 <!-- 14 ─────────── Grammatical -->
 <section class="slide" id="s-syntax" data-sec="syntax">
   <h2 class="bi"><span class="zh">語法關係法</span><span class="en">Grammatical approach: X and Y in a syntactic relation</span></h2>
-  <div id="syn-lines" class="lines"></div>
+  <div id="syn-lines" class="lines tight"></div>
   <div class="bi xs" data-step="1" style="margin:2px 0 6px"><span class="zh">只計「形容詞 → 名詞」的修飾關係；謂語用法（心情不好）不算。</span><span class="en">Only adjective → noun modifiers count; predicative uses are ignored.</span></div>
   <div class="two" style="align-items:center">
     <div data-step="2"><div class="ct-title">找到的搭配對 pairs found</div><div class="eq" id="syn-list" style="font-size:20px"></div></div>
@@ -263,7 +263,7 @@
     <tr data-step="2"><th class="rh bi xs"><span class="zh">(好, 天氣) 的表</span><span class="en">table for (好, 天氣)</span></th>
       <td><div id="sum-win"></div></td><td><div id="sum-sen"></div></td><td><div id="sum-syn"></div></td></tr>
   </table>
-  <div class="callout key bi sm" data-step="3"><span class="zh">下一步：把每張表變成一個「分數」— Fisher 檢定、互信息、對數似然比。</span><span class="en">Next: turn each table into a score: Fisher’s test, mutual information, log-likelihood.</span></div>
+  <div class="callout key bi sm" data-step="3" style="margin-top:6px"><span class="zh">下一步：把每張表變成一個「分數」— Fisher 檢定、互信息、對數似然比。</span><span class="en">Next: turn each table into a score: Fisher’s test, mutual information, log-likelihood.</span></div>
 </section>
 
 <div id="side"></div>
