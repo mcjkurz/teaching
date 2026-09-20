@@ -87,7 +87,7 @@ kbd { border: 1px solid var(--line); border-bottom-width: 3px; border-radius: 6p
 .toks { display: flex; flex-wrap: wrap; gap: 6px 4px; position: relative; }
 .toks.sparse { row-gap: 40px; padding-top: 16px; padding-bottom: 12px; }
 .lines.tight .toks { padding: 3px 0; }
-.lines.win .toks.sparse { padding-top: 15px; padding-bottom: 10px; }
+.lines.win .toks.sparse { padding-top: 14px; padding-bottom: 5px; }
 .tok { position: relative; display: inline-block; padding: 3px 9px; border-radius: 9px; font-family: var(--cjk), var(--latin); font-size: 30px; line-height: 1.3; border: 2px solid transparent; transition: background .35s, color .35s, border-color .35s, opacity .35s; white-space: nowrap; }
 .tok.punct { padding: 3px 1px; color: var(--mute); }
 .tok.win { background: var(--win-bg); }
