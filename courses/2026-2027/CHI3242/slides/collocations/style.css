@@ -266,3 +266,5 @@ table.ct td.pu { border-color: var(--pur); background: var(--pur-bg); box-shadow
 table.ct td.tot.pu { background: none; box-shadow: none; color: var(--pur); font-weight: 700; }
 #fp3 .n { color: var(--pur); }
 #obs-toks .tok { font-size: 25px; padding: 2px 7px; }
+
+img.fig { display: block; border: 1.5px solid var(--line); border-radius: 10px; background: #fff; }

@@ -393,6 +393,30 @@
   </div>
 </section>
 
+<!-- 12a ─────────── Window: Evert's example -->
+<section class="slide" id="s-window-evert" data-sec="window">
+  <h2 class="bi"><span class="zh">Evert 的原例：視窗法 (hat, roll)</span><span class="en">Evert’s own example: surface cooccurrence, Fig. 58.1 and 58.8</span></h2>
+  <div class="two" style="margin-top:0">
+    <div style="width:690px;flex:none">
+      <img class="fig" data-step="1" src="img/evert-fig58-1-surface.png" alt="Evert Fig. 58.1" style="width:690px">
+      <img class="fig" data-step="2" src="img/evert-fig58-8-surface-table.png" alt="Evert Fig. 58.8" style="width:600px;margin-top:10px">
+    </div>
+    <div class="grow swap" style="min-height:260px">
+      <div data-step="1" data-until="2">
+        <div class="bi xs"><span class="zh"><b>視窗 (L4, R4)</b>：node 詞 hat 左右各 4 個詞，不跨句。</span><span class="en">Span (L4, R4) around the node word hat, limited by sentence boundaries.</span></div>
+        <div class="bi xs"><span class="zh">第 2、3 個視窗各含一個 <i>rolled</i> → <b>O ＝ 2</b></span><span class="en">The 2nd and 3rd span each contain roll → O = 2</span></div>
+        <div class="bi xs"><span class="zh">f₁ ＝ 3（hat）、f₂ ＝ 3（roll）、N ＝ 111 個詞</span><span class="en">f₁ = 3 (hat), f₂ = 3 (roll), N = 111 tokens</span></div>
+      </div>
+      <div data-step="2">
+        <div class="bi xs"><span class="zh"><b>項目</b>＝除 hat 以外的每個詞；<b>第 1 列</b>＝落在 hat 視窗內的詞（20 個）</span><span class="en">Items: every token except hat. Row 1: tokens inside a span around hat (20).</span></div>
+        <div class="bi xs"><span class="zh">O₁₁ ＝ 2 就是 O；第 1 欄和 ＝ f₂ ＝ 3；第 2 列和 ＝ N − f₁ ＝ 108</span><span class="en">O₁₁ = 2 is our O; column 1 sums to f₂ = 3; row 2 sums to N − f₁ = 108</span></div>
+        <div class="bi xs legend"><span class="zh">與我們的小語料完全同一套定義</span><span class="en">Same definitions as our toy corpus</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <!-- 13 ─────────── Sentence -->
 <section class="slide" id="s-sentence" data-sec="sentence">
   <h2 class="bi"><span class="zh">句子法</span><span class="en">Sentence approach: X and Y in the same sentence</span></h2>
@@ -403,6 +427,29 @@
     <div class="defs"><div class="bi xs"><span class="zh"><b>項目</b>：每一個句子</span><span class="en"><b>item</b>: every sentence</span></div><div class="bi xs"><span class="zh"><b>第 1 列</b>：句子含 w₁</span><span class="en"><b>row 1</b>: the sentence contains w₁</span></div><div class="bi xs"><span class="zh"><b>第 1 欄</b>：句子含 w₂</span><span class="en"><b>column 1</b>: the sentence contains w₂</span></div><div class="bi xs legend"><span class="zh">橙色格 <b>O₁₁ ＝ O</b>（共現次數）</span><span class="en">highlighted cell O₁₁ = O, the cooccurrence count</span></div></div>
   </div>
 </section>
+
+<!-- 13a ─────────── Sentence: Evert's example -->
+<section class="slide" id="s-sentence-evert" data-sec="sentence">
+  <h2 class="bi"><span class="zh">Evert 的原例：句子法 (hat, over)</span><span class="en">Evert’s own example: textual cooccurrence, Fig. 58.2 and 58.7</span></h2>
+  <div class="two" style="margin-top:0">
+    <div style="width:640px;flex:none">
+      <img class="fig" data-step="1" src="img/evert-fig58-2-textual.png" alt="Evert Fig. 58.2" style="width:470px">
+      <img class="fig" data-step="2" src="img/evert-fig58-7-textual-table.png" alt="Evert Fig. 58.7" style="width:600px;margin-top:10px">
+    </div>
+    <div class="grow swap" style="min-height:260px">
+      <div data-step="1" data-until="2">
+        <div class="bi xs"><span class="zh"><b>項目</b>＝句子（共 5 句，N ＝ 5）</span><span class="en">Items are sentences; N = 5</span></div>
+        <div class="bi xs"><span class="zh">hat 在 3 句（f₁ ＝ 3），over 在 2 句（f₂ ＝ 2），同句出現 1 次（<b>O ＝ 1</b>）</span><span class="en">hat is in 3 sentences, over in 2, both in 1 sentence</span></div>
+        <div class="bi xs"><span class="zh">最後一句雖有兩個 <i>over</i>，仍只算 <b>1</b> 次</span><span class="en">The last sentence has two overs but counts once</span></div>
+      </div>
+      <div data-step="2">
+        <div class="bi xs"><span class="zh">O₁₁ ＝ 1，O₁₂ ＝ 2，O₂₁ ＝ 1，O₂₂ ＝ 1</span><span class="en">one sentence has both, two only hat, one only over, one neither</span></div>
+        <div class="bi xs"><span class="zh">列和 ＝ f₁ ＝ 3，欄和 ＝ f₂ ＝ 2，總和 ＝ N ＝ 5</span><span class="en">row sum = f₁ = 3, column sum = f₂ = 2, total = N = 5</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <!-- 14 ─────────── Grammatical -->
 <section class="slide" id="s-syntax" data-sec="syntax">
@@ -415,6 +462,32 @@
       <div class="bi xs legend" style="max-width:220px"><span class="zh">橙色格 <b>O₁₁ ＝ O</b></span><span class="en">highlighted cell = cooccurrence count</span></div></div>
   </div>
 </section>
+
+<!-- 14a ─────────── Syntax: Evert's example -->
+<section class="slide" id="s-syntax-evert" data-sec="syntax">
+  <h2 class="bi"><span class="zh">Evert 的原例：語法關係法 (young, gentleman)</span><span class="en">Evert’s own example: syntactic cooccurrence, Fig. 58.3 and 58.6</span></h2>
+  <div class="two" style="margin-top:0">
+    <div style="width:690px;flex:none">
+      <img class="fig" data-step="1" src="img/evert-fig58-3-syntactic.png" alt="Evert Fig. 58.3" style="width:690px">
+      <div class="two" data-step="2" style="margin-top:8px;align-items:center;gap:24px">
+        <div id="synev-ct"></div>
+        <div class="sig" data-step="3" style="font-size:20px">(O, f₁, f₂, N)<br>＝ (1, 3, 3, 9)</div>
+      </div>
+    </div>
+    <div class="grow swap" style="min-height:260px">
+      <div data-step="1" data-until="2">
+        <div class="bi xs"><span class="zh"><b>項目</b>＝每一個「形容詞→名詞」搭配對（pair token），共 <b>9</b> 個（N ＝ 9）</span><span class="en">Items: the 9 adjective → noun pair tokens listed on the right</span></div>
+        <div class="bi xs"><span class="zh">其他所有詞（in, stood, corduroy …）都不算</span><span class="en">All other words are disregarded</span></div>
+      </div>
+      <div data-step="2">
+        <div class="bi xs"><span class="zh">young 修飾 3 個名詞（f₁ ＝ 3），其中 1 個是 gentleman（<b>O ＝ 1</b>）</span><span class="en">young modifies 3 nouns; one of them is gentleman</span></div>
+        <div class="bi xs"><span class="zh">gentleman 被 3 個形容詞修飾（f₂ ＝ 3）：stout, old, young</span><span class="en">gentleman is modified by 3 adjectives: stout, old, young</span></div>
+        <div class="bi xs"><span class="zh">O₂₂ ＝ 4：與 young、gentleman 都無關的 4 對</span><span class="en">4 pairs contain neither word</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <!-- 15 ─────────── Summary -->
 <section class="slide" id="s-summary" data-sec="summary">

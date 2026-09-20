@@ -418,3 +418,15 @@ const comb = (n, k) => { let r = 1; for (let i = 1; i <= k; i++) r = r * (n - k 
   HOOKS['s-mi'] = { render(step, el) { if (!built) { build(document); built = true; } } };
   HOOKS['s-ppmi'] = { render(step, el) { if (!built) { build(document); built = true; } } };
 })();
+
+/* ---------- 14a. Evert's own syntactic example: (young, gentleman), Fig. 58.6 ---------- */
+(function () {
+  let built = false;
+  HOOKS['s-syntax-evert'] = {
+    render(step, el) {
+      if (built) return;
+      ctable($('#synev-ct', el), { a: 1, b: 2, c: 2, d: 4 }, { rows: [['w₁＝young', 'first word'], ['其他形容詞', 'other adjective']], cols: [['w₂＝gentleman', 'second word'], ['其他名詞', 'other noun']], hl: 'a', mini: true, letters: EV });
+      built = true;
+    }
+  };
+})();
