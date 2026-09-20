@@ -235,3 +235,19 @@ sub { font-size: .6em; }
 .defs .legend { color: var(--col); }
 table.ct.mini.showl .letter { display: block; font-size: 11px; top: 2px; left: 6px; }
 table.ct.mini.showl td { height: 48px; }
+
+/* n choose k */
+.chipset { display: flex; flex-wrap: wrap; gap: 10px; margin: 8px 0; }
+.chipset span { font-size: 26px; background: var(--win-bg); border: 2px solid var(--win); border-radius: 10px; padding: 3px 14px; }
+.chipset.big span { font-size: 40px; padding: 6px 20px; background: var(--tgt-bg); border-color: var(--tgt); color: var(--tgt); font-weight: 600; }
+.chipset.same span { background: var(--ok-bg); border-color: var(--ok); color: var(--ok); }
+.slots { display: flex; align-items: center; gap: 12px; margin-top: 6px; }
+.slots > div { display: flex; flex-direction: column; align-items: center; border: 2px solid var(--line); border-radius: 12px; padding: 4px 22px; min-width: 84px; background: #fff; }
+.slots > div b { font-size: 38px; font-weight: 600; } .slots > div span { font-size: 13px; color: var(--mute); }
+.slots > div.res { border-color: var(--col); background: var(--col-bg); }
+.slots > div.res b { color: var(--col); }
+.slots > i { font-style: normal; font-size: 30px; color: var(--mute); }
+
+.chartbox { width: 420px; flex: none; }
+#ball-chart { width: 100%; height: auto; display: block; margin: 4px 0; }
+#ball-chart text { font-family: var(--latin), var(--cjk); font-size: 12px; fill: var(--mute); }
