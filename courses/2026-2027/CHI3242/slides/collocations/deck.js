@@ -6,6 +6,7 @@
  *   The number of steps of a slide is the largest data-step in it.
  * - window.HOOKS[slideId] = { render(step, el), key(e, step, el) } computes / animates content.
  * - → / Space / PageDown: next step (then next slide). ← / PageUp: back.
+ * - Mouse clicks do not navigate, except on the sidebar (jump to a section).
  * - 1–9: jump to a section (or click it in the sidebar). Home / End. F: fullscreen.
  */
 (function () {
@@ -98,8 +99,6 @@
     }
     e.preventDefault();
   });
-  // click: right 2/3 = forward, left 1/3 = back
-  addEventListener('click', e => { (e.clientX < innerWidth / 4) ? prev() : next(); });
   addEventListener('resize', fit);
 
   fit();
