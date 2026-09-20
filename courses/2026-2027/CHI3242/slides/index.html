@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Collocations 搭配詞 — CHI3242</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+
+<!-- 1 ─────────── Title -->
+<section class="slide title-slide" id="s-title">
+  <h1>Collocations</h1>
+  <h2 class="zh">搭配詞</h2>
+  <div class="quote" data-step="1">“You shall know a word by the company it keeps.” — J. R. Firth (1957)</div>
+  <div class="hint">CHI3242 · Text Mining for Chinese Humanities &nbsp;·&nbsp; <kbd>←</kbd> <kbd>→</kbd> to navigate &nbsp;·&nbsp; <kbd>F</kbd> fullscreen</div>
+</section>
+
+<!-- 2 ─────────── What is a collocation? -->
+<section class="slide" id="s-what">
+  <h2>What is a collocation?</h2>
+  <div class="def" data-step="1">A combination of two words that show a <b>tendency to occur near each other</b> in natural language, i.e. to <b>cooccur</b>.
+    <div class="small" style="margin-top:8px">Evert, “Corpora and collocations”, p. 1214</div></div>
+  <div class="lead" data-step="2">Some words are attracted to each other:</div>
+  <div class="pairs" data-step="2">
+    <span class="pair">cow <b>–</b> milk</span><span class="pair">day <b>–</b> night</span><span class="pair">ring <b>–</b> bell</span>
+    <span class="pair">喝 <b>–</b> 茶</span><span class="pair">天氣 <b>–</b> 好</span>
+  </div>
+  <div class="lead" data-step="3">Others are not:</div>
+  <div class="pairs" data-step="3">
+    <span class="pair no">know <b>–</b> glass</span><span class="pair no">door <b>–</b> year</span><span class="pair no">喝 <b>–</b> 桌子</span>
+  </div>
+  <div class="callout" data-step="4">Question: how do we <b>measure</b> “attraction” — and tell it apart from chance?</div>
+</section>
+
+<!-- 3 ─────────── Null hypothesis -->
+<section class="slide" id="s-null">
+  <h2>Random words vs. real language</h2>
+  <div class="lead swap" style="min-height:44px;margin-top:6px">
+    <div data-step="1" data-until="2"><b>Null hypothesis (虛無假說):</b> words are distributed <span class="bad-c">randomly</span>.</div>
+    <div data-step="2"><b>Natural language:</b> words are distributed <span class="ok-c">meaningfully</span>.</div>
+  </div>
+  <div id="shuffle" class="toks shuffle" style="margin-top:22px"></div>
+  <div class="callout" data-step="3">A collocation is a pair that sits together <b>more often than random shuffling would predict</b>.</div>
+</section>
+
+<!-- 4 ─────────── Observed -->
+<section class="slide" id="s-observed">
+  <h2>Observed frequency <span class="zh">觀察值</span> <i>O</i></h2>
+  <div class="lead">How often does word Y appear near target word X?</div>
+  <div id="obs-toks" class="toks" style="margin:20px 0 26px"></div>
+  <div class="swap" style="min-height:120px">
+    <div class="lead" data-step="1" data-until="2"><span class="tag tgt">X</span> target word: <b>王婆</b></div>
+    <div class="lead" data-step="2" data-until="3"><span class="tag win">window</span> 3 words to the left and right of every 王婆 (horizon = 3)</div>
+    <div class="lead" data-step="3"><span class="tag col">Y</span> collocate: <b>痛苦</b> — appears in a window <span class="col-c">2</span> times.<br>
+      <span class="eq big-eq">O(王婆, 痛苦) = <span id="obs-O">2</span></span></div>
+  </div>
+</section>
+
+<!-- 5 ─────────── Expected: balls -->
+<section class="slide" id="s-balls">
+  <h2>Expected frequency <span class="zh">期望值</span> <i>E</i></h2>
+  <div class="lead">What would we see if everything were just chance?</div>
+  <div id="balls" class="balls"></div>
+  <div class="lead" data-step="1"><b>10</b> balls, <span style="color:#dc2626;font-weight:600">5 red</span>: &nbsp;P(red) = 5 / 10 = 0.5</div>
+  <div class="lead" data-step="2">Draw <b>4</b> balls. How many are <span style="color:#dc2626;font-weight:600">red</span>? <span class="small">(this draw: <b id="ball-k">2</b>)</span></div>
+  <div class="callout" data-step="3"><span class="eq big-eq" style="margin:0">E(red | 4) = P(red) × 4 = 0.5 × 4 = 2</span><br>
+    <span class="small">One draw may give 1 or 3 — E is the <i>average</i>. Press <kbd>R</kbd> to draw again. <span id="ball-avg"></span></span></div>
+</section>
+
+<!-- 6 ─────────── Expected for words -->
+<section class="slide" id="s-expected">
+  <h2>Expected frequency for words</h2>
+  <div class="small">Corpus: N = 1,000,000 tokens · count(the) = 100,000 · count(Iliad) = 10 · window = 5 left + 5 right</div>
+  <div class="gridwrap" style="margin-top:22px">
+    <div>
+      <div id="slots" class="grid10"></div>
+      <div class="rowlabel" style="margin-top:8px" data-step="1">100 slots around the 10 “Iliad”s = 10 × 5 × 2</div>
+    </div>
+    <div style="flex:1">
+      <div class="lead" data-step="2" style="margin-top:0">P(the) = 100,000 / 1,000,000 = <b>0.1</b><br><span class="small">each slot is “the” with probability 0.1</span></div>
+      <div class="lead" data-step="3">So about <span class="col-c">10%</span> of the slots should be “the”:</div>
+      <div class="eq" data-step="4">E(the | Iliad) = P(the) × (count(Iliad) × window × 2)<br>= 0.1 × (10 × 5 × 2) = <b>10</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 ─────────── The problem -->
+<section class="slide" id="s-problem">
+  <h2>A problem with simple measures</h2>
+  <div class="cards" style="margin-top:20px">
+    <div class="card" data-step="1">
+      <h3>the Iliad</h3>
+      <p>count(the) = 100,000<br>count(Iliad) = <b>10</b></p>
+      <p>E = 0.1 × (10 × 5 × 2) = <b>10</b></p>
+      <p>O = <b>10</b></p>
+    </div>
+    <div class="card" data-step="2">
+      <h3>must also</h3>
+      <p>count(must) = 1,000<br>count(also) = <b>1,000</b></p>
+      <p>E = 0.001 × (1000 × 5 × 2) = <b>10</b></p>
+      <p>O = <b>10</b></p>
+    </div>
+  </div>
+  <div class="callout" data-step="3">Same O, same E — <b>identical scores</b>. But “Iliad” is rare and always accompanied by “the”; “must” and “also” are both frequent.</div>
+  <div class="lead" data-step="4" style="margin-top:14px">O vs. E ignores <b>everything else</b> in the corpus. We need to look at the cases where the words do <i>not</i> cooccur.</div>
+</section>
+
+<!-- 8 ─────────── Contingency table -->
+<section class="slide" id="s-ct">
+  <h2>Contingency table <span class="zh">列聯表</span></h2>
+  <div class="two" style="margin-top:22px">
+    <div>
+      <table class="ct" id="ct-main">
+        <tr><th></th><th>word Y</th><th>not Y</th></tr>
+        <tr><th>X is near</th><td>a</td><td>b</td></tr>
+        <tr><th>X is not near</th><td>c</td><td>d</td></tr>
+      </table>
+      <div class="small" style="margin-top:14px">X = target word (“center word”) · Y = collocate (“context word”)</div>
+    </div>
+    <div class="grow">
+      <div class="swap" style="min-height:190px">
+        <div class="lead" data-step="1" data-until="2"><span class="col-c">a</span> = times Y appears <b>near</b> X</div>
+        <div class="lead" data-step="2" data-until="3"><span class="col-c">b</span> = times any <i>other</i> word appears near X</div>
+        <div class="lead" data-step="3" data-until="4"><span class="col-c">c</span> = times Y appears <b>away from</b> X</div>
+        <div class="lead" data-step="4"><span class="col-c">d</span> = everything else: all other words, away from X</div>
+      </div>
+      <div class="callout" style="font-size:24px" data-step="4">Now the table also records when the words do <b>not</b> collocate.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 ─────────── Fisher -->
+<section class="slide" id="s-fisher">
+  <h2>How unlikely is this table?</h2>
+  <div class="lead" style="font-size:24px">20 sentences: 10 contain X, 10 contain Y — and <b>8</b> contain both. By chance we would expect a = 5.</div>
+  <div class="fisher">
+    <div class="col"><div class="ct-title">observed</div><div id="f8"></div><div class="pv" data-step="1" id="p8"></div></div>
+    <div class="col" data-step="2"><div class="ct-title">more extreme</div><div id="f9"></div><div class="pv" id="p9"></div></div>
+    <div class="col" data-step="2"><div class="ct-title">most extreme</div><div id="f10"></div><div class="pv" id="p10"></div></div>
+  </div>
+  <div class="callout" data-step="3">Fisher’s exact test: add up the observed table and all more extreme ones<br>
+    p = <b id="p-sum"></b> &lt; 0.05 → <span class="ok-c">statistically significant collocation</span></div>
+</section>
+
+<!-- 10 ─────────── Three ways to say "near" -->
+<section class="slide" id="s-three">
+  <h2>Three ways to define “near”</h2>
+  <div class="lead">Same contingency table — but what do we count?</div>
+  <div class="cards" style="margin-top:14px">
+    <div class="card" data-step="1">
+      <h3>Window</h3><div class="zh">滑動窗口 · surface</div>
+      <p>Y is within <b>k words</b> of X.</p>
+      <div class="toks"><span class="tok">天氣</span><span class="tok win">那麼</span><span class="tok tgt">好</span><span class="tok win">我們</span></div>
+      <p class="small">Count: <b>tokens</b></p>
+    </div>
+    <div class="card" data-step="2">
+      <h3>Sentence</h3><div class="zh">句子 · textual</div>
+      <p>X and Y are in the <b>same sentence</b>.</p>
+      <div class="toks" style="background:var(--win-bg);border-radius:10px;padding:4px"><span class="tok tgt">好</span><span class="tok">天氣</span><span class="tok">…</span><span class="tok col">散步</span></div>
+      <p class="small">Count: <b>sentences</b></p>
+    </div>
+    <div class="card" data-step="3">
+      <h3>Grammatical</h3><div class="zh">語法關係 · syntactic</div>
+      <p>X and Y are in a <b>syntactic relation</b> (e.g. adjective → noun).</p>
+      <div class="toks"><span class="tok pairA">好</span><span class="tok" style="color:var(--mute)">→</span><span class="tok pairB">天氣</span></div>
+      <p class="small">Count: <b>grammatical pairs</b></p>
+    </div>
+  </div>
+</section>
+
+<!-- 11 ─────────── Window -->
+<section class="slide" id="s-window">
+  <h2>Window approach <span class="zh">滑動窗口</span></h2>
+  <div class="ctrl">horizon = <b id="win-h">2</b> &nbsp;<span class="small"><kbd>↑</kbd> <kbd>↓</kbd></span></div>
+  <div class="two" style="margin-top:14px">
+    <div class="grow">
+      <div id="win-lines" class="lines"></div>
+      <div class="small" style="margin-top:14px">
+        <span class="tag tgt" data-step="1">X = 好</span><span class="tag col" data-step="1">Y = 天氣</span><span class="tag win" data-step="2">window (not crossing sentences)</span>
+      </div>
+    </div>
+    <div data-step="3" style="width:400px">
+      <div id="win-ct"></div>
+      <div class="sig" id="win-sig"></div>
+      <div class="small" style="margin-top:10px">Try <kbd>↑</kbd> <kbd>↓</kbd>: a wider window catches more.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 ─────────── Sentence -->
+<section class="slide" id="s-sentence">
+  <h2>Sentence approach <span class="zh">句子</span></h2>
+  <div class="two" style="margin-top:14px">
+    <div class="grow">
+      <div id="sen-lines" class="lines"></div>
+      <div class="small" style="margin-top:14px"><span class="tag tgt">X = 好</span><span class="tag col">Y = 天氣</span> a sentence counts once, however many times the words appear</div>
+    </div>
+    <div data-step="3" style="width:380px">
+      <div id="sen-ct"></div>
+      <div class="small" style="margin-top:12px">Unit = sentence, N = 5. Note: S5 counts, although 好 and 天氣 are far apart.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 ─────────── Grammatical -->
+<section class="slide" id="s-syntax">
+  <h2>Grammatical approach <span class="zh">語法關係</span></h2>
+  <div class="two" style="margin-top:14px">
+    <div class="grow">
+      <div id="syn-lines" class="lines"></div>
+      <div class="small" style="margin-top:14px" data-step="1">Only <b>adjective → noun</b> modifier pairs count; predicative uses (心情不好) are ignored.</div>
+    </div>
+    <div style="width:380px">
+      <div data-step="2"><div class="ct-title">list of pairs found</div><div class="eq" id="syn-list" style="font-size:22px"></div></div>
+      <div data-step="3" style="margin-top:8px"><div id="syn-ct"></div>
+        <div class="small" style="margin-top:12px">Unit = pair. Cleaner, but needs a parser.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 14 ─────────── Summary -->
+<section class="slide" id="s-summary">
+  <h2>Same question, three ways to count</h2>
+  <table class="cmp" style="margin-top:14px">
+    <tr><th></th><th>Window</th><th>Sentence</th><th>Grammatical</th></tr>
+    <tr data-step="1"><th>“near” means</th><td>within k words</td><td>same sentence</td><td>in a syntactic relation</td></tr>
+    <tr data-step="1"><th>unit counted</th><td>tokens</td><td>sentences</td><td>grammatical pairs</td></tr>
+    <tr data-step="1"><th>needs</th><td>a choice of k</td><td>sentence splitting</td><td>a parser</td></tr>
+    <tr data-step="2"><th>table for (好, 天氣)</th>
+      <td><div id="sum-win"></div></td><td><div id="sum-sen"></div></td><td><div id="sum-syn"></div></td></tr>
+  </table>
+  <div class="callout" data-step="3">Next: turn each table into a <b>score</b> — Fisher’s test, mutual information, log-likelihood.</div>
+</section>
+
+<div id="bar"></div>
+<div id="num"></div>
+</div>
+<script src="slides.js"></script>
+<script src="deck.js"></script>
+</body>
+</html>
