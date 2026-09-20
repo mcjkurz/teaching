@@ -6,7 +6,7 @@
  *   The number of steps of a slide is the largest data-step in it.
  * - window.HOOKS[slideId] = { render(step, el), key(e, step, el) } computes / animates content.
  * - → / Space / PageDown: next step (then next slide). ← / PageUp: back.
- * - Mouse clicks do not navigate, except on the sidebar (jump to a section).
+ * - Mouse clicks do not navigate, except on the sidebar (jump to a section) and the ‹ › buttons (bottom right).
  * - 1–9: jump to a section (or click it in the sidebar). Home / End. F: fullscreen.
  */
 (function () {
@@ -30,6 +30,16 @@
     d.addEventListener('click', e => { e.stopPropagation(); go(firstOf(sec.id), 0); });
     side.appendChild(d);
   });
+  // prev / next buttons, bottom right below the section menu
+  const nav = document.createElement('div');
+  nav.id = 'nav';
+  [['‹', 'Previous', () => prev()], ['›', 'Next', () => next()]].forEach(([t, label, fn]) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.textContent = t; b.setAttribute('aria-label', label);
+    b.addEventListener('click', e => { e.stopPropagation(); b.blur(); fn(); });
+    nav.appendChild(b);
+  });
+  stage.appendChild(nav);
   slides.forEach(s => {
     const i = sections.findIndex(x => x.id === s.dataset.sec);
     if (i >= 0) {

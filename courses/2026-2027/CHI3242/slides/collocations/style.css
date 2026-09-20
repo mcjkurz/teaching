@@ -183,6 +183,9 @@ table.cmp .bi + .bi { margin: 0; }
 
 /* chrome */
 #bar { position: absolute; left: 0; bottom: 0; height: 5px; background: var(--tgt); width: 0; transition: width .3s; z-index: 7; }
+#nav { position: absolute; right: 4px; bottom: 14px; width: 56px; display: flex; gap: 4px; z-index: 8; }
+#nav button { flex: 1; height: 30px; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--mute); font: inherit; font-size: 20px; line-height: 1; cursor: pointer; padding: 0; }
+#nav button:hover { background: #e4e9f2; color: var(--ink); }
 #num { position: absolute; left: 72px; bottom: 14px; font-size: 13px; color: var(--mute); z-index: 5; }
 
 .ctlist { min-height: 250px; }
