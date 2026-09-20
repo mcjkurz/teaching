@@ -122,6 +122,43 @@
     <div class="eq big" style="margin:0">O / E = 8 / 1.2 ≈ <b class="col-c">6.7</b></div>
     <div class="bi" style="margin-top:8px"><span class="zh">實際共現次數是偶然預期的 6.7 倍 → 王婆與痛苦互相「吸引」</span><span class="en">They co-occur 6.7 times more often than chance predicts: the two words attract each other.</span></div>
   </div>
+  <div class="bi sm" data-step="4" style="margin-top:12px"><span class="zh">再取對數，就得到<b>互信息 MI</b>（下一頁）。</span><span class="en">Taking the logarithm of this ratio gives mutual information (next slide).</span></div>
+</section>
+
+
+<!-- 7a ─────────── MI -->
+<section class="slide" id="s-mi" data-sec="compare">
+  <h2 class="bi"><span class="zh">互信息 MI</span><span class="en">Mutual information (pointwise): the log of O / E</span></h2>
+  <div class="two" style="margin-top:4px">
+    <div class="grow">
+      <div data-step="1"><div class="bi sm"><span class="zh">對 O/E 取以 2 為底的對數</span><span class="en">Take the base-2 logarithm of O / E</span></div>
+        <div class="eq big">MI = log<sub>2</sub>( O / E )</div></div>
+      <div data-step="2" style="margin-top:10px"><div class="bi sm"><span class="zh">王婆 ／ 痛苦：</span><span class="en">for our example pair</span></div>
+        <div class="eq">MI = log<sub>2</sub>(8 / 1.2) = log<sub>2</sub> 6.7 ≈ <b class="col-c" id="mi-val"></b> bits</div></div>
+      <div class="bi xs" data-step="4" style="margin-top:12px"><span class="zh">來源：Evert, p. 1226。MI 只看效應大小（O 與 E 的比值），<b>不考慮證據多寡</b>——低頻詞對容易得高分（p. 1227）。</span><span class="en">Evert, p. 1226. MI only measures effect size, not how much evidence we have; rare pairs can score very high (p. 1227).</span></div>
+    </div>
+    <div style="width:430px" data-step="3">
+      <div class="bi sm"><span class="zh">為什麼取對數？</span><span class="en">Why the logarithm?</span></div>
+      <table class="cmp" id="mi-table" style="margin-top:6px"></table>
+    </div>
+  </div>
+</section>
+
+<!-- 7b ─────────── PPMI -->
+<section class="slide" id="s-ppmi" data-sec="compare">
+  <h2 class="bi"><span class="zh">PPMI：正的點互信息</span><span class="en">PPMI: positive pointwise mutual information</span></h2>
+  <div class="two" style="margin-top:4px">
+    <div class="grow">
+      <div data-step="1"><div class="bi sm"><span class="zh">負的 MI 表示「彼此排斥」：比偶然更少共現</span><span class="en">Negative MI means repulsion: the words co-occur less than chance</span></div></div>
+      <div data-step="2" style="margin-top:10px"><div class="bi sm"><span class="zh">PPMI：把負值一律設為 0</span><span class="en">PPMI: replace every negative value with 0</span></div>
+        <div class="eq big">PPMI = max( 0, log<sub>2</sub>( O / E ) )</div></div>
+      <div data-step="4" style="margin-top:10px"><div class="bi xs"><span class="zh"><b>為什麼？</b>要可靠地判斷「比偶然更少」，需要很大的語料；低頻詞對的負值大多只是噪音。PPMI 因此常用於詞向量／共現矩陣（分布式語義）。</span><span class="en">Reliably detecting “less than chance” needs a huge corpus; for rare pairs negative values are mostly noise. PPMI is therefore widely used for co-occurrence matrices and word vectors (distributional semantics).</span></div></div>
+    </div>
+    <div style="width:430px" data-step="1">
+      <table class="cmp" id="ppmi-table"></table>
+    </div>
+  </div>
+  <div class="callout bi xs" data-step="3" style="margin-top:8px"><span class="zh">例：the Iliad 與 must also 的 O ＝ E，所以 MI ＝ PPMI ＝ 0：沒有超出偶然的吸引力。</span><span class="en">Example: for the Iliad and must also, O = E, so MI = PPMI = 0: no attraction beyond chance.</span></div>
 </section>
 
 <!-- 8 ─────────── The problem -->
@@ -146,24 +183,24 @@
 
 <!-- 9 ─────────── Contingency table -->
 <section class="slide" id="s-ct" data-sec="ct">
-  <h2 class="bi"><span class="zh">列聯表</span><span class="en">Contingency table</span></h2>
+  <h2 class="bi"><span class="zh">列聯表</span><span class="en">Contingency table: two events, X and Y</span></h2>
   <div class="two" style="margin-top:14px">
     <div>
       <table class="ct" id="ct-main">
-        <tr><th></th><th><span class="z">詞 Y</span><span class="e">word Y</span></th><th><span class="z">非 Y</span><span class="e">not Y</span></th></tr>
-        <tr><th class="rh"><span class="z">X 在附近</span><span class="e">X is near</span></th><td>a</td><td>b</td></tr>
-        <tr><th class="rh"><span class="z">X 不在附近</span><span class="e">X is not near</span></th><td>c</td><td>d</td></tr>
+        <tr><th></th><th><span class="z">Y 發生</span><span class="e">Y occurs</span></th><th><span class="z">Y 不發生</span><span class="e">Y does not</span></th></tr>
+        <tr><th class="rh"><span class="z">X 發生</span><span class="e">X occurs</span></th><td>a</td><td>b</td></tr>
+        <tr><th class="rh"><span class="z">X 不發生</span><span class="e">X does not</span></th><td>c</td><td>d</td></tr>
       </table>
-      <div class="bi xs" style="margin-top:10px"><span class="zh">X ＝ 目標詞（中心詞）　Y ＝ 搭配詞（語境詞）</span><span class="en">X = target (“center”) word, Y = collocate (“context”) word</span></div>
+      <div class="bi xs" style="margin-top:10px"><span class="zh">每個個案恰好落入四格之一</span><span class="en">every case falls into exactly one cell</span></div>
     </div>
     <div class="grow">
       <div class="ctlist">
-        <div class="bi sm" data-step="1"><span class="zh"><span class="col-c">a</span> ＝ Y 出現在 X <b>附近</b>的次數</span><span class="en">times Y appears near X</span></div>
-        <div class="bi sm" data-step="2"><span class="zh"><span class="col-c">b</span> ＝ X 附近出現<b>其他</b>詞的次數</span><span class="en">times any other word appears near X</span></div>
-        <div class="bi sm" data-step="3"><span class="zh"><span class="col-c">c</span> ＝ Y 出現在 X <b>之外</b>的次數</span><span class="en">times Y appears away from X</span></div>
-        <div class="bi sm" data-step="4"><span class="zh"><span class="col-c">d</span> ＝ 其餘的一切：其他詞，且不在 X 附近</span><span class="en">everything else: other words, away from X</span></div>
+        <div class="bi sm" data-step="1"><span class="zh"><span class="col-c">a</span> ＝ X 和 Y <b>都</b>發生的個案數</span><span class="en">cases where both X and Y occur</span></div>
+        <div class="bi sm" data-step="2"><span class="zh"><span class="col-c">b</span> ＝ 只有 X 發生（Y 沒有）</span><span class="en">X occurs, Y does not</span></div>
+        <div class="bi sm" data-step="3"><span class="zh"><span class="col-c">c</span> ＝ 只有 Y 發生（X 沒有）</span><span class="en">Y occurs, X does not</span></div>
+        <div class="bi sm" data-step="4"><span class="zh"><span class="col-c">d</span> ＝ 兩者<b>都沒有</b>發生</span><span class="en">neither X nor Y occurs</span></div>
       </div>
-      <div class="callout key bi sm" data-step="4"><span class="zh">現在表格也記錄了兩詞「沒有」搭配的情況。</span><span class="en">The table now also records when the words do not collocate.</span></div>
+      <div class="callout key bi sm" data-step="4"><span class="zh">X、Y 可以是任何事件；表格也記錄了「都沒有」的情況。詞語只是其中一例（下一頁）。</span><span class="en">X and Y can be any events, and the table also records when neither happens. Words are just one example (next slide).</span></div>
     </div>
   </div>
 </section>
@@ -275,7 +312,7 @@
 <!-- 10 ─────────── Fisher -->
 <section class="slide" id="s-fisher" data-sec="ct">
   <h2 class="bi"><span class="zh">這張表有多「不可能」？</span><span class="en">How unlikely is this table?</span></h2>
-  <div class="bi sm"><span class="zh">20 個句子：10 句含 X，10 句含 Y，其中 <b>8</b> 句兩者皆有。若純屬偶然，預期 a ＝ 5。</span><span class="en">20 sentences; 10 contain X, 10 contain Y, 8 contain both. By chance we expect a = 5.</span></div>
+  <div class="bi sm"><span class="zh">20 個個案：10 個有 X，10 個有 Y，其中 <b>8</b> 個兩者皆有。若純屬偶然，預期 a ＝ 5。</span><span class="en">20 cases; 10 have X, 10 have Y, 8 have both. By chance we expect a = 5.</span></div>
   <div class="fisher">
     <div class="col"><div class="ct-title">觀察到 observed</div><div id="f8"></div><div class="pv" data-step="1" id="p8"></div></div>
     <div class="col" data-step="2"><div class="ct-title">更極端 more extreme</div><div id="f9"></div><div class="pv" id="p9"></div></div>
@@ -290,7 +327,7 @@
 <!-- 11 ─────────── Three ways to say "near" -->
 <section class="slide" id="s-three" data-sec="three">
   <h2 class="bi"><span class="zh">三種定義「相鄰」的方法</span><span class="en">Three ways to define “near”</span></h2>
-  <div class="bi sm"><span class="zh">同一張列聯表，但我們數的單位不同</span><span class="en">Same contingency table, but we count different units</span></div>
+  <div class="bi sm"><span class="zh">Evert：先決定什麼是一個<b>共現項目 (item)</b>，再問每個項目是否含 w₁、是否含 w₂</span><span class="en">Evert: first define what an item is, then ask whether each item contains w₁ and whether it contains w₂</span></div>
   <div class="cards" style="margin-top:16px">
     <div class="card" data-step="1">
       <h3 class="bi"><span class="zh">視窗法</span><span class="en">Window (surface)</span></h3>
@@ -323,8 +360,7 @@
   </div>
   <div class="two" data-step="3" style="align-items:center">
     <div id="win-ct"></div>
-    <div><div class="sig" id="win-sig"></div>
-      <div class="bi xs" style="margin-top:6px"><span class="zh">按 <kbd>↑</kbd> <kbd>↓</kbd> 調整視窗：視窗越大，抓到越多。</span><span class="en">Press ↑ ↓: a wider window catches more.</span></div></div>
+    <div><div class="sig" id="win-sig"></div><div class="defs"><div class="bi xs"><span class="zh"><b>項目</b>：語料中每個詞（不含 w₁ 本身）</span><span class="en"><b>item</b>: every word token except w₁ itself</span></div><div class="bi xs"><span class="zh"><b>第 1 列</b>：落在 w₁ 的視窗內</span><span class="en"><b>row 1</b>: falls inside a span around w₁</span></div><div class="bi xs"><span class="zh"><b>第 1 欄</b>：就是搭配詞 w₂</span><span class="en"><b>column 1</b>: is the collocate w₂</span></div><div class="bi xs legend"><span class="zh">橙色格 <b>O₁₁ ＝ O</b>（共現次數）</span><span class="en">highlighted cell O₁₁ = O, the cooccurrence count</span></div></div></div>
   </div>
 </section>
 
@@ -335,7 +371,7 @@
   <div class="small" style="margin:2px 0 6px"><span class="tag tgt">X = 好</span><span class="tag col">Y = 天氣</span></div>
   <div class="two" data-step="3" style="align-items:center">
     <div id="sen-ct"></div>
-    <div class="bi xs" style="max-width:420px"><span class="zh">單位＝句子，N ＝ 5。一個句子只算一次；S5 也算，儘管「好」與「天氣」相距很遠。</span><span class="en">Unit = sentence. S5 counts even though 好 and 天氣 are far apart.</span></div>
+    <div class="defs"><div class="bi xs"><span class="zh"><b>項目</b>：每一個句子</span><span class="en"><b>item</b>: every sentence</span></div><div class="bi xs"><span class="zh"><b>第 1 列</b>：句子含 w₁</span><span class="en"><b>row 1</b>: the sentence contains w₁</span></div><div class="bi xs"><span class="zh"><b>第 1 欄</b>：句子含 w₂</span><span class="en"><b>column 1</b>: the sentence contains w₂</span></div><div class="bi xs legend"><span class="zh">橙色格 <b>O₁₁ ＝ O</b>（共現次數）</span><span class="en">highlighted cell O₁₁ = O, the cooccurrence count</span></div></div>
   </div>
 </section>
 
@@ -345,9 +381,9 @@
   <div id="syn-lines" class="lines tight"></div>
   <div class="bi xs" data-step="1" style="margin:2px 0 6px"><span class="zh">只計「形容詞 → 名詞」的修飾關係；謂語用法（心情不好）不算。</span><span class="en">Only adjective → noun modifiers count; predicative uses are ignored.</span></div>
   <div class="two" style="align-items:center">
-    <div data-step="2"><div class="ct-title">找到的搭配對 pairs found</div><div class="eq" id="syn-list" style="font-size:18px;white-space:nowrap;padding:8px 14px"></div></div>
+    <div data-step="2"><div class="ct-title">找到的搭配對 pairs found</div><div class="eq" id="syn-list" style="font-size:18px;white-space:nowrap;padding:8px 14px"></div><div class="defs"><div class="bi xs"><span class="zh"><b>項目</b>：每一個「形容詞→名詞」搭配對</span><span class="en"><b>item</b>: every adjective → noun pair token</span></div><div class="bi xs"><span class="zh"><b>第 1 列</b>：第一個詞是 w₁</span><span class="en"><b>row 1</b>: the first word is w₁</span></div><div class="bi xs"><span class="zh"><b>第 1 欄</b>：第二個詞是 w₂</span><span class="en"><b>column 1</b>: the second word is w₂</span></div></div></div>
     <div data-step="3" class="two" style="align-items:center"><div id="syn-ct"></div>
-      <div class="bi xs" style="max-width:260px"><span class="zh">單位＝搭配對。更乾淨，但需要句法分析器。</span><span class="en">Unit = pair. Cleaner, but needs a parser.</span></div></div>
+      <div class="bi xs legend" style="max-width:220px"><span class="zh">橙色格 <b>O₁₁ ＝ O</b></span><span class="en">highlighted cell = cooccurrence count</span></div></div>
   </div>
 </section>
 
@@ -365,7 +401,7 @@
       <td class="bi xs"><span class="zh">詞</span><span class="en">tokens</span></td><td class="bi xs"><span class="zh">句子</span><span class="en">sentences</span></td><td class="bi xs"><span class="zh">搭配對</span><span class="en">pairs</span></td></tr>
     <tr data-step="1"><th class="rh bi xs"><span class="zh">需要</span><span class="en">needs</span></th>
       <td class="bi xs"><span class="zh">選定 k</span><span class="en">a choice of k</span></td><td class="bi xs"><span class="zh">分句</span><span class="en">sentence splitting</span></td><td class="bi xs"><span class="zh">句法分析器</span><span class="en">a parser</span></td></tr>
-    <tr data-step="2"><th class="rh bi xs"><span class="zh">(好, 天氣) 的表</span><span class="en">table for (好, 天氣)</span></th>
+    <tr data-step="2"><th class="rh bi xs"><span class="zh">(好, 天氣) 的表</span><span class="en">table for (好, 天氣); orange = O₁₁ = O</span></th>
       <td><div id="sum-win"></div></td><td><div id="sum-sen"></div></td><td><div id="sum-syn"></div></td></tr>
   </table>
   <div class="callout key bi sm" data-step="3" style="margin-top:6px"><span class="zh">下一步：把每張表變成一個「分數」— Fisher 檢定、互信息、對數似然比。</span><span class="en">Next: turn each table into a score: Fisher’s test, mutual information, log-likelihood.</span></div>

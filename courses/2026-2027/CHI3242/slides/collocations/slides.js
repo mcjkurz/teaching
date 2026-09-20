@@ -4,7 +4,7 @@ window.SECTIONS = [
   { id: 'intro',    zh: '搭配詞',     en: 'Collocations' },
   { id: 'observed', zh: '觀察值',     en: 'Observed frequency' },
   { id: 'expected', zh: '期望值',     en: 'Expected frequency' },
-  { id: 'compare',  zh: '觀察 vs. 期望', en: 'Observed vs. expected' },
+  { id: 'compare',  zh: '觀察 vs. 期望 · MI', en: 'Observed vs. expected, MI' },
   { id: 'ct',       zh: '列聯表',     en: 'Contingency table' },
   { id: 'three',    zh: '三種「相鄰」', en: 'Three kinds of “near”' },
   { id: 'window',   zh: '視窗法',     en: 'Window approach' },
@@ -20,6 +20,7 @@ const chip = (t, cls = '') => {
   s.textContent = t;
   return s;
 };
+const EV = { a: 'O₁₁', b: 'O₁₂', c: 'O₂₁', d: 'O₂₂' };   // Evert's cell names
 const bi = ([z, e]) => `<span class="z">${z}</span><span class="e">${e}</span>`;
 
 /* ---------- horizon graphic: distance labels above tokens + bracket below ---------- */
@@ -39,14 +40,14 @@ function drawHorizon(box, els, targets, h) {
     }
     // two brackets per target: left and right half, each starting at the middle of the target word
     const mid = els[t].offsetLeft + els[t].offsetWidth / 2;
-    [[lo, t], [t, hi]].forEach(([from, to]) => {
+    [[lo, t, true], [t, hi, false]].forEach(([from, to, isLeft]) => {
       if (from === to) return;
       const rows = new Map();
       for (let i = from; i <= to; i++) { const k = els[i].offsetTop; (rows.get(k) || rows.set(k, []).get(k)).push(i); }
       rows.forEach((group, top) => {
         const a = els[group[0]], b = els[group[group.length - 1]];
         let x0 = a.offsetLeft, x1 = b.offsetLeft + b.offsetWidth;
-        if (group.includes(t)) { if (from === lo) x1 = mid - 2; else x0 = mid + 2; }
+        if (group.includes(t)) { if (isLeft) x1 = mid - 2; else x0 = mid + 2; }
         let level = 0;
         used.forEach(u => { if (u.top === top && !(u.hi < x0 || u.lo > x1)) level = Math.max(level, u.level + 1); });
         used.push({ top, lo: x0, hi: x1, level });
@@ -146,9 +147,9 @@ function drawHorizon(box, els, targets, h) {
 })();
 
 /* ---------- helper: contingency table (labels are [zh, en] pairs) ---------- */
-function ctable(host, v, { rows, cols, hl = '', mini = false, hideLetters = false }) {
-  const cell = (k) => `<td class="${hl.includes(k) ? 'hl' : ''}"><span class="letter">${k}</span>${v[k]}</td>`;
-  host.innerHTML = `<table class="ct${mini ? ' mini' : ''}">
+function ctable(host, v, { rows, cols, hl = '', mini = false, letters = null }) {
+  const cell = (k) => `<td class="${hl.includes(k) ? 'hl' : ''}"><span class="letter">${letters ? letters[k] : k}</span>${v[k]}</td>`;
+  host.innerHTML = `<table class="ct${mini ? ' mini' : ''}${letters ? ' showl' : ''}">
     <tr><th></th><th>${bi(cols[0])}</th><th>${bi(cols[1])}</th></tr>
     <tr><th class="rh">${bi(rows[0])}</th>${cell('a')}${cell('b')}</tr>
     <tr><th class="rh">${bi(rows[1])}</th>${cell('c')}${cell('d')}</tr>
@@ -174,7 +175,7 @@ HOOKS['s-ct'] = {
       if (built) return;
       [8, 9, 10].forEach(a => {
         const v = { a, b: R - a, c: C - a, d: N - R - C + a };
-        ctable($(`#f${a}`, el), v, { rows: [['有 X', 'has X'], ['無 X', 'no X']], cols: [['有 Y', 'has Y'], ['無 Y', 'no Y']], mini: true, hl: 'a' });
+        ctable($(`#f${a}`, el), v, { rows: [['有 X', 'has X'], ['無 X', 'no X']], cols: [['有 Y', 'has Y'], ['無 Y', 'no Y']], mini: true });
         $(`#p${a}`, el).textContent = `p = ${P(a).toFixed(4)}`;
       });
       $('#p-sum', el).textContent = (P(8) + P(9) + P(10)).toFixed(4);
@@ -255,8 +256,8 @@ function syntaxCounts() {
       });
       $('#win-h', el).textContent = h;
       const v = windowCounts(h);
-      ctable($('#win-ct', el), v, { rows: [['靠近 好', 'near 好'], ['不靠近', 'not near']], cols: [['天氣', 'Y'], ['其他詞', 'other words']], hl: 'a', mini: true });
-      $('#win-sig', el).textContent = `N = ${v.N} · count(好) = ${v.nX} · count(天氣) = ${v.nY}`;
+      ctable($('#win-ct', el), v, { rows: [['靠近 w₁＝好', 'near w₁'], ['不靠近', 'not near']], cols: [['w₂＝天氣', 'collocate'], ['其他詞', 'other']], hl: 'a', mini: true, letters: EV });
+      $('#win-sig', el).textContent = `${v.N} tokens · f₁ = count(好) = ${v.nX} · f₂ = count(天氣) = ${v.nY}`;
     },
     key(e) {
       if (e.key === 'ArrowUp') { h = Math.min(6, h + 1); return true; }
@@ -277,7 +278,7 @@ HOOKS['s-sentence'] = {
       r.badge.textContent = x && y ? '兩者皆有 both' : x ? '只有 X only' : '皆無 neither';
       r.badge.style.opacity = step >= 2 ? 1 : 0;
     });
-    ctable($('#sen-ct', el), sentenceCounts(), { rows: [['句子含 好', 'has 好'], ['不含 好', 'no 好']], cols: [['含 天氣', 'has 天氣'], ['不含', 'no 天氣']], hl: 'a', mini: true });
+    ctable($('#sen-ct', el), sentenceCounts(), { rows: [['含 w₁＝好', 'contains w₁'], ['不含 w₁', 'no w₁']], cols: [['含 w₂＝天氣', 'contains w₂'], ['不含 w₂', 'no w₂']], hl: 'a', mini: true, letters: EV });
   }
 };
 
@@ -292,7 +293,7 @@ HOOKS['s-syntax'] = {
       });
     });
     $('#syn-list', el).textContent = MODS.flatMap((ms, si) => ms.map(([m, n]) => { const w = words(CORPUS[si]); return `(${w[m]}, ${w[n]})`; })).join('  ');
-    ctable($('#syn-ct', el), syntaxCounts(), { rows: [['修飾語 好', 'modifier 好'], ['其他修飾語', 'other modifier']], cols: [['名詞 天氣', 'noun 天氣'], ['其他名詞', 'other noun']], hl: 'a', mini: true });
+    ctable($('#syn-ct', el), syntaxCounts(), { rows: [['w₁＝好', 'first word'], ['其他修飾語', 'other']], cols: [['w₂＝天氣', 'second word'], ['其他名詞', 'other']], hl: 'a', mini: true, letters: EV });
   }
 };
 
@@ -312,7 +313,7 @@ HOOKS['s-summary'] = {
   HOOKS['s-tea'] = {
     render(step, el) {
       if (built) return;
-      const L = { rows: [['先牛奶', 'milk first'], ['先茶', 'tea first']], cols: [['她說先牛奶', 'says milk'], ['她說先茶', 'says tea']], mini: true, hl: 'ad' };
+      const L = { rows: [['先牛奶', 'milk first'], ['先茶', 'tea first']], cols: [['她說先牛奶', 'says milk'], ['她說先茶', 'says tea']], mini: true };
       ctable($('#tea-perfect', el), { a: 4, b: 0, c: 0, d: 4 }, L);
       ctable($('#tea-three', el), { a: 3, b: 1, c: 1, d: 3 }, L);
       built = true;
@@ -333,7 +334,7 @@ const comb = (n, k) => { let r = 1; for (let i = 1; i <= k; i++) r = r * (n - k 
   HOOKS['s-examples'] = {
     render(step, el) {
       if (built) return;
-      const opt = { mini: true, hl: 'a' };
+      const opt = { mini: true };
       ctable($('#ex-smoke', el), { a: 30, b: 70, c: 10, d: 190 }, { ...opt, rows: [['吸煙者', 'smoker'], ['非吸煙者', 'non-smoker']], cols: [['肺癌', 'cancer'], ['無', 'none']] });
       ctable($('#ex-hand', el), { a: 9, b: 43, c: 4, d: 44 }, { ...opt, rows: [['男', 'male'], ['女', 'female']], cols: [['左手', 'left'], ['右手', 'right']] });
       ctable($('#ex-words', el), sentenceCounts(), { ...opt, rows: [['有 好', 'has 好'], ['無 好', 'no 好']], cols: [['有 天氣', 'has 天氣'], ['無', 'no']] });
@@ -380,4 +381,25 @@ const comb = (n, k) => { let r = 1; for (let i = 1; i <= k; i++) r = r * (n - k 
       $('#fm-plug', el).innerHTML = `C(10,8) · C(10,2) / C(20,10) = ${comb(10, 8)} · ${comb(10, 2)} / ${den.toLocaleString()} = ${num.toLocaleString()} / ${den.toLocaleString()} ≈ <b>${(num / den).toFixed(4)}</b>`;
     }
   };
+})();
+
+/* ---------- 7a / 7b. MI and PPMI ---------- */
+(function () {
+  const ratios = [[1 / 4, '1/4'], [1 / 2, '1/2'], [1, '1'], [2, '2'], [4, '4'], [8, '8']];
+  const meaning = { '-2': ['遠少於偶然', 'far less than chance'], '-1': ['少於偶然', 'less than chance'], 0: ['如偶然', 'as expected'], 1: ['多一倍', 'twice as often'], 2: ['4 倍', '4× as often'], 3: ['8 倍', '8× as often'] };
+  const cls = m => m < 0 ? 'neg' : m === 0 ? 'zer' : 'pos';
+  const fmt = m => (m > 0 ? '+' : m < 0 ? '−' : '') + Math.abs(m);
+  const mi = r => Math.log2(r);
+  let built = false;
+  const build = el => {
+    $('#mi-val', el) && ($('#mi-val', el).textContent = mi(8 / 1.2).toFixed(2));
+    $('#mi-table', el) && ($('#mi-table', el).innerHTML =
+      `<thead><tr><th class="num">O / E</th><th class="num">MI (bits)</th><th class="bi xs"><span class="zh">意思</span><span class="en">meaning</span></th></tr></thead>` +
+      ratios.map(([r, l]) => { const m = mi(r); const [z, e] = meaning[m]; return `<tr class="${cls(m)}"><td class="num">${l}</td><td class="num"><b>${fmt(m)}</b></td><td class="bi xs"><span class="zh">${z}</span><span class="en">${e}</span></td></tr>`; }).join(''));
+    $('#ppmi-table', el) && ($('#ppmi-table', el).innerHTML =
+      `<thead><tr><th class="num">O / E</th><th class="num">MI</th><th class="num">PPMI</th></tr></thead>` +
+      ratios.map(([r, l]) => { const m = mi(r); const p = Math.max(0, m); return `<tr class="${cls(m)}"><td class="num">${l}</td><td class="num">${fmt(m)}</td><td class="num ${p === 0 ? 'zero' : ''}"><b>${p}</b></td></tr>`; }).join(''));
+  };
+  HOOKS['s-mi'] = { render(step, el) { if (!built) { build(document); built = true; } } };
+  HOOKS['s-ppmi'] = { render(step, el) { if (!built) { build(document); built = true; } } };
 })();

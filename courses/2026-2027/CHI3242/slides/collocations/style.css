@@ -119,7 +119,7 @@ kbd { border: 1px solid var(--line); border-bottom-width: 3px; border-radius: 6p
 .ball { width: 64px; height: 64px; border-radius: 50%; background: #cfd4dc; transition: transform .35s, box-shadow .35s, opacity .35s; }
 .ball.red { background: #d92d20; }
 .balls.picking .ball { opacity: .28; }
-.balls.picking .ball.picked { opacity: 1; transform: translateY(-14px); box-shadow: 0 0 0 4px var(--tgt); }
+.balls.picking .ball.picked { opacity: 1; box-shadow: 0 0 0 4px var(--tgt); }
 .red-c { color: #d92d20; font-weight: 600; }
 
 /* contingency table */
@@ -223,3 +223,15 @@ table.ct.mini.tight td { min-width: 60px; height: 46px; font-size: 22px; }
 table.ct.mini.tight .z { font-size: 13px; } table.ct.mini.tight .e { font-size: 11px; }
 .pairs6 { display: grid; grid-template-columns: repeat(3, auto); gap: 10px; margin-top: 10px; justify-content: start; }
 .pairs6 span { font-size: 28px; background: var(--win-bg); border: 2px solid var(--win); border-radius: 10px; padding: 4px 16px; text-align: center; }
+
+table.cmp td.num, table.cmp th.num { text-align: center; font-size: 22px; font-variant-numeric: tabular-nums; }
+table.cmp td.zero { color: #b6bcc8; }
+table.cmp tr.neg td { background: #fdf3f2; }
+table.cmp tr.zer td { background: var(--panel); }
+table.cmp tr.pos td { background: #f1f8f3; }
+sub { font-size: .6em; }
+
+.defs { margin-top: 8px; } .defs .bi + .bi { margin-top: 7px; }
+.defs .legend { color: var(--col); }
+table.ct.mini.showl .letter { display: block; font-size: 11px; top: 2px; left: 6px; }
+table.ct.mini.showl td { height: 54px; }
