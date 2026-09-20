@@ -98,7 +98,7 @@ function drawHorizon(box, els, targets, h) {
 
 /* ---------- 4. observed frequency O: window around 王婆 ---------- */
 (function () {
-  const line = '王婆 半日 的 痛苦 沒有 代價 了 王婆 一生 的 痛苦'.split(' ');
+  const line = '王婆 半日 的 痛苦 沒有 代價 了 王婆 一生 的 痛苦 也 都 是 沒有 代價'.split(' ');
   const X = '王婆', Y = '痛苦', H = 3;
   let built = false, els = [];
   HOOKS['s-observed'] = {
@@ -372,23 +372,26 @@ const comb = (n, k) => { let r = 1; for (let i = 1; i <= k; i++) r = r * (n - k 
 /* ---------- 9c. Fisher / hypergeometric formula, part by part ---------- */
 (function () {
   const ids = ['fa', 'fb', 'fc', 'fd', 'ra', 'rc', 'ca', 'cb', 'fn'];
-  const letters = { fa: 'a', fb: 'b', fc: 'c', fd: 'd', ra: 'a+b', rc: 'c+d', ca: 'a+c', cb: 'b+d', fn: 'n' };
+  const letters = { fa: 'a', fb: 'b', fc: 'c', fd: 'd', ra: 'a+b', rc: 'c+d', ca: 'a+c', cb: 'b+d', fn: 'N' };
   const nums = { fa: 8, fb: 2, fc: 2, fd: 8, ra: 10, rc: 10, ca: 10, cb: 10, fn: 20 };
-  const plan = {
-    1: { rd: ['fa'], bl: ['fa', 'fb', 'ra'] },
-    2: { rd: ['fc'], bl: ['fc', 'fd', 'rc'] },
-    3: { rd: ['fa', 'fc', 'ca'], bl: ['fa', 'fb', 'fc', 'fd', 'fn'] }
+  const all = ['fa', 'fb', 'fc', 'fd', 'fn'];
+  const plan = {                       // rd = red (Y items), bl = blue (row), pu = purple (all N items)
+    1: { pu: all },
+    2: { rd: ['fa'], bl: ['fa', 'fb', 'ra'] },
+    3: { rd: ['fc'], bl: ['fc', 'fd', 'rc'] },
+    4: { rd: ['fa', 'fc', 'ca'], pu: all }
   };
   HOOKS['s-formula'] = {
     render(step, el) {
-      const p = plan[step] || { rd: [], bl: [] };
+      const p = Object.assign({ rd: [], bl: [], pu: [] }, plan[step] || {});
       ids.forEach(id => {
         const td = $('#' + id, el);
-        td.textContent = step >= 4 ? nums[id] : letters[id];
+        td.textContent = step >= 5 ? nums[id] : letters[id];
         td.classList.toggle('rd', p.rd.includes(id));
         td.classList.toggle('bl', p.bl.includes(id) && !p.rd.includes(id));
+        td.classList.toggle('pu', p.pu.includes(id) && !p.rd.includes(id));
       });
-      [1, 2, 3].forEach(k => $('#fp' + k, el).classList.toggle('act', step === k));
+      [2, 3, 4].forEach(k => $('#fp' + (k - 1), el).classList.toggle('act', step === k));
       const num = comb(10, 8) * comb(10, 2), den = comb(20, 10);
       $('#fm-plug', el).innerHTML = `C(10,8) · C(10,2) / C(20,10) = ${comb(10, 8)} · ${comb(10, 2)} / ${den.toLocaleString()} = ${num.toLocaleString()} / ${den.toLocaleString()} ≈ <b>${(num / den).toFixed(4)}</b>`;
     }

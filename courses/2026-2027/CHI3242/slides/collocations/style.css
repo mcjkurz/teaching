@@ -1,4 +1,6 @@
 :root {
+  --pur: #7c3aed;      /* N, the total number of items */
+  --pur-bg: #f3ecff;
   --bg: #ffffff;
   --ink: #1b2333;
   --mute: #6a7386;
@@ -251,3 +253,16 @@ table.ct.mini.showl td { height: 48px; }
 .chartbox { width: 420px; flex: none; }
 #ball-chart { width: 100%; height: auto; display: block; margin: 4px 0; }
 #ball-chart text { font-family: var(--latin), var(--cjk); font-size: 12px; fill: var(--mute); }
+
+.pl.s { font-size: 26px; gap: 8px; }
+.pl.s .frac .num { padding: 2px 10px 3px; } .pl.s .frac .den { padding: 3px 10px 0; }
+.pl.s .bn { font-size: 26px; }
+.chipset.big { flex-wrap: nowrap; flex: none; margin: 0; }
+.chipset.big span { font-size: 30px; padding: 3px 14px; }
+.slots > div { padding: 2px 18px; min-width: 76px; } .slots > div b { font-size: 32px; }
+
+.pur-c { color: var(--pur); }
+table.ct td.pu { border-color: var(--pur); background: var(--pur-bg); box-shadow: 0 0 0 2px var(--pur) inset; }
+table.ct td.tot.pu { background: none; box-shadow: none; color: var(--pur); font-weight: 700; }
+#fp3 .n { color: var(--pur); }
+#obs-toks .tok { font-size: 25px; padding: 2px 7px; }

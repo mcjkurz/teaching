@@ -254,10 +254,10 @@
   </div>
   <div data-step="2" style="margin-top:8px">
     <div class="bi sm"><span class="zh">用階乘寫：4! ＝ 4×3×2×1；除以 (4−3)! ＝ 1! 就把多餘的「×1」去掉</span><span class="en">In factorial notation: divide 4! by (4−3)! to cut off the unneeded “×1”</span></div>
-    <div class="pl" style="margin-top:4px"><span class="frac"><span class="num">4!</span><span class="den">(4 − 3)!</span></span><span>＝</span><span class="frac"><span class="num">4 × 3 × 2 × 1</span><span class="den">1</span></span><span>＝ <b>24</b></span>
+    <div class="pl s" style="margin-top:4px"><span class="frac"><span class="num">4!</span><span class="den">(4 − 3)!</span></span><span>＝</span><span class="frac"><span class="num">4 × 3 × 2 × 1</span><span class="den">1</span></span><span>＝ <b>24</b></span>
       <span class="small" style="font-size:18px;margin-left:16px">一般式 general: n! / (n−k)!</span></div>
   </div>
-  <div class="callout" data-step="3" style="margin-top:12px"><div class="bi sm"><span class="zh">但 ABC 與 CBA 在這 24 種裡被算成「不同」；我們只在乎選了<b>哪三個字母</b>。→ 下一頁</span><span class="en">But ABC and CBA count as different here; we only care which three letters were chosen. Next slide.</span></div></div>
+  <div class="callout" data-step="3" style="margin-top:12px"><div class="bi sm"><span class="zh">但 ABC 與 CBA 被算成「不同」；我們只在乎選了<b>哪三個字母</b>。→ 下一頁</span><span class="en">But ABC and CBA count as different here; we only care which three letters were chosen. Next slide.</span></div></div>
 </section>
 
 <!-- 9b2 ─────────── n choose k, part 2: order does not matter -->
@@ -269,15 +269,15 @@
   </div>
   <div data-step="2" style="margin-top:10px">
     <div class="bi sm"><span class="zh">每一組都被算了 3! 次，所以再除以 <b>3!</b>：</span><span class="en">Every set is counted 3! times, so divide by 3! once more:</span></div>
-    <div class="pl" style="margin-top:4px"><span class="frac"><span class="num">4!</span><span class="den">(4 − 3)!</span></span><span>÷ 3! ＝</span>
+    <div class="pl s" style="margin-top:4px"><span class="frac"><span class="num">4!</span><span class="den">(4 − 3)!</span></span><span>÷ 3! ＝</span>
       <span class="frac"><span class="num">4!</span><span class="den">3! · (4 − 3)!</span></span><span>＝</span><span class="frac"><span class="num">24</span><span class="den">6 · 1</span></span><span>＝ <b>4</b></span></div>
   </div>
-  <div data-step="3" style="margin-top:6px">
-    <div class="chipset"><span>ABC</span><span>ABD</span><span>ACD</span><span>BCD</span></div>
-    <div class="bi xs" style="margin-top:4px"><span class="zh">4 種選法：等於「不選」哪一個字母（4 選 1）</span><span class="en">4 ways: equivalently, which single letter is left out</span></div>
+  <div class="two" data-step="3" style="margin-top:2px;align-items:center;gap:24px">
+    <div class="chipset" style="flex:none"><span>ABC</span><span>ABD</span><span>ACD</span><span>BCD</span></div>
+    <div class="bi xs"><span class="zh">4 種選法：等於「不選」哪一個字母</span><span class="en">4 ways: equivalently, which single letter is left out</span></div>
   </div>
   <div class="callout key" data-step="4" style="margin-top:10px">
-    <div class="pl"><span data-binom="n|k"></span><span>＝</span><span class="frac"><span class="num">n!</span><span class="den">k! (n − k)!</span></span>
+    <div class="pl s"><span data-binom="n|k"></span><span>＝</span><span class="frac"><span class="num">n!</span><span class="den">k! (n − k)!</span></span>
       <span class="small" style="font-size:18px;margin-left:12px">= [ n! / (n−k)! ] ÷ k!</span></div>
     <div class="bi xs" style="margin-top:6px"><span class="zh">奶茶實驗：C(8,4) ＝ 8!/(4!·4!) ＝ <b>70</b> 種選法，只有 1 種全對 → p ＝ 1/70。</span><span class="en">Tea experiment: C(8,4) = 70 ways to pick the 4 milk-first cups; only 1 is fully correct, so p = 1/70.</span></div>
   </div>
@@ -317,20 +317,21 @@
         <tr><th></th><th><span class="z">有 Y</span><span class="e">has Y</span></th><th><span class="z">無 Y</span><span class="e">no Y</span></th><th></th></tr>
         <tr><th class="rh"><span class="z">有 X</span><span class="e">has X</span></th><td id="fa">a</td><td id="fb">b</td><td class="tot" id="ra">a+b</td></tr>
         <tr><th class="rh"><span class="z">無 X</span><span class="e">no X</span></th><td id="fc">c</td><td id="fd">d</td><td class="tot" id="rc">c+d</td></tr>
-        <tr><th></th><td class="tot" id="ca">a+c</td><td class="tot" id="cb">b+d</td><td class="tot" id="fn">n</td></tr>
+        <tr><th></th><td class="tot" id="ca">a+c</td><td class="tot" id="cb">b+d</td><td class="tot" id="fn">N</td></tr>
       </table>
     </div>
     <div class="grow">
-      <div class="pl" style="margin:6px 0 10px"><span>p ＝</span>
-        <span class="frac">
-          <span class="num"><span class="fp" id="fp1" data-step="1" data-binom="a+b|a"></span><span class="fp" id="fp2" data-step="2" data-binom="c+d|c"></span></span>
-          <span class="den"><span class="fp" id="fp3" data-step="3" data-binom="n|a+c"></span></span>
+      <div class="pl" style="margin:6px 0 10px"><span data-step="2">p ＝</span>
+        <span class="frac" style="min-width:150px">
+          <span class="num"><span class="fp" id="fp1" data-step="2" data-binom="a+b|a"></span><span class="fp" id="fp2" data-step="3" data-binom="c+d|c"></span></span>
+          <span class="den"><span class="fp" id="fp3" data-step="4" data-binom="N|a+c"></span></span>
         </span></div>
       <div class="swap" style="min-height:150px">
-        <div class="bi sm" data-step="1" data-until="2"><span class="zh"><b>分子 ①</b>：「有 X」這一列有 <span class="tgt-c">a+b</span> 個項目，其中 <span class="col-c">a</span> 個有 Y —— 從 a+b 個中選出 a 個。</span><span class="en">Numerator ①: the “has X” row holds a+b items; choose the a of them that have Y.</span></div>
-        <div class="bi sm" data-step="2" data-until="3"><span class="zh"><b>分子 ②</b>：「無 X」那一列有 <span class="tgt-c">c+d</span> 個項目，其中 <span class="col-c">c</span> 個有 Y。兩列的選法<b>相乘</b>。</span><span class="en">Numerator ②: the other row holds c+d items, c of which have Y. The two choices are independent, so we multiply.</span></div>
-        <div class="bi sm" data-step="3" data-until="4"><span class="zh"><b>分母</b>：全部 <span class="tgt-c">n</span> 個項目中，任意挑 <span class="col-c">a+c</span> 個當作「有 Y」的所有可能。</span><span class="en">Denominator: all ways to choose which a+c of the n items have Y, ignoring the rows.</span></div>
-        <div data-step="4"><div class="bi sm"><span class="zh">代入 a=8, b=2, c=2, d=8（n=20）：</span><span class="en">Plug in the numbers:</span></div>
+        <div class="bi sm" data-step="1" data-until="2"><span class="zh"><span class="pur-c"><b>N ＝ a + b + c + d</b></span>：表中所有個案（項目）的總數。</span><span class="en">N is the total number of items in the table.</span></div>
+        <div class="bi sm" data-step="2" data-until="3"><span class="zh"><b>分子 ①</b>：「有 X」這一列有 <span class="tgt-c">a+b</span> 個項目，其中 <span class="col-c">a</span> 個有 Y —— 從 a+b 個中選出 a 個。</span><span class="en">Numerator ①: the “has X” row holds a+b items; choose the a of them that have Y.</span></div>
+        <div class="bi sm" data-step="3" data-until="4"><span class="zh"><b>分子 ②</b>：「無 X」那一列有 <span class="tgt-c">c+d</span> 個項目，其中 <span class="col-c">c</span> 個有 Y。兩列的選法<b>相乘</b>。</span><span class="en">Numerator ②: the other row holds c+d items, c of which have Y. The two choices are independent, so we multiply.</span></div>
+        <div class="bi sm" data-step="4" data-until="5"><span class="zh"><b>分母</b>：全部 <span class="pur-c">N</span> 個項目中，任意挑 <span class="col-c">a+c</span> 個當作「有 Y」的所有可能。</span><span class="en">Denominator: all ways to choose which a+c of the N items have Y, ignoring the rows.</span></div>
+        <div data-step="5"><div class="bi sm"><span class="zh">代入 a=8, b=2, c=2, d=8（N=20）：</span><span class="en">Plug in the numbers:</span></div>
           <div class="eq" id="fm-plug" style="font-size:24px"></div></div>
       </div>
     </div>
