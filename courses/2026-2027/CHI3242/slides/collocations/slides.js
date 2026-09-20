@@ -37,20 +37,26 @@ function drawHorizon(box, els, targets, h) {
       const d = i - t, old = els[i].getAttribute('data-d');
       if (old === null || Math.abs(d) < Math.abs(+old)) els[i].setAttribute('data-d', d > 0 ? '+' + d : '−' + (-d));
     }
-    // one bracket per visual row the window spans
-    const rows = new Map();
-    for (let i = lo; i <= hi; i++) { const k = els[i].offsetTop; (rows.get(k) || rows.set(k, []).get(k)).push(els[i]); }
-    rows.forEach((group, top) => {
-      const a = group[0], b = group[group.length - 1];
-      let level = 0;
-      used.forEach(u => { if (u.top === top && !(u.hi < a.offsetLeft || u.lo > b.offsetLeft + b.offsetWidth)) level = Math.max(level, u.level + 1); });
-      used.push({ top, lo: a.offsetLeft, hi: b.offsetLeft + b.offsetWidth, level });
-      const br = document.createElement('div');
-      br.className = 'hz';
-      br.style.left = a.offsetLeft + 'px';
-      br.style.width = (b.offsetLeft + b.offsetWidth - a.offsetLeft) + 'px';
-      br.style.top = (top + a.offsetHeight + 3 + level * 8) + 'px';
-      box.appendChild(br);
+    // two brackets per target: left and right half, each starting at the middle of the target word
+    const mid = els[t].offsetLeft + els[t].offsetWidth / 2;
+    [[lo, t], [t, hi]].forEach(([from, to]) => {
+      if (from === to) return;
+      const rows = new Map();
+      for (let i = from; i <= to; i++) { const k = els[i].offsetTop; (rows.get(k) || rows.set(k, []).get(k)).push(i); }
+      rows.forEach((group, top) => {
+        const a = els[group[0]], b = els[group[group.length - 1]];
+        let x0 = a.offsetLeft, x1 = b.offsetLeft + b.offsetWidth;
+        if (group.includes(t)) { if (from === lo) x1 = mid - 2; else x0 = mid + 2; }
+        let level = 0;
+        used.forEach(u => { if (u.top === top && !(u.hi < x0 || u.lo > x1)) level = Math.max(level, u.level + 1); });
+        used.push({ top, lo: x0, hi: x1, level });
+        const br = document.createElement('div');
+        br.className = 'hz';
+        br.style.left = x0 + 'px';
+        br.style.width = (x1 - x0) + 'px';
+        br.style.top = (top + a.offsetHeight + 3 + level * 8) + 'px';
+        box.appendChild(br);
+      });
     });
   });
 }
