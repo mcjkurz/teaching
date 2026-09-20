@@ -233,7 +233,7 @@ HOOKS['s-ct'] = {
       if (built) return;
       [8, 9, 10].forEach(a => {
         const v = { a, b: R - a, c: C - a, d: N - R - C + a };
-        ctable($(`#f${a}`, el), v, { rows: [['有 X', 'has X'], ['無 X', 'no X']], cols: [['有 Y', 'has Y'], ['無 Y', 'no Y']], mini: true });
+        ctable($(`#f${a}`, el), v, { rows: [['女', 'woman'], ['男', 'man']], cols: [['讀書', 'studying'], ['不讀書', 'not studying']], mini: true });
         $(`#p${a}`, el).textContent = `\\(p = ${P(a).toFixed(4)}\\)`;
       });
       $('#p-sum', el).textContent = `\\(p = ${(P(8) + P(9) + P(10)).toFixed(4)} < 0.05\\)`;
