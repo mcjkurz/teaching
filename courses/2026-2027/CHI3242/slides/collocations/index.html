@@ -79,7 +79,7 @@
 <section class="slide" id="s-balls" data-sec="expected">
   <h2 class="bi"><span class="zh">期望值 <i>E</i></span><span class="en">Expected frequency: what would we see if it were all chance?</span></h2>
   <div id="balls" class="balls"></div>
-  <div class="bi" data-step="1"><span class="zh">10 顆球，其中 <span class="red-c">5 顆紅球</span>：\(P(\text{紅}) = \frac{5}{10} = 0.5\)</span><span class="en">10 balls, 5 of them red</span></div>
+  <div class="bi" data-step="1"><span class="zh">10 顆球，其中 <span class="red-c">5 顆紅球</span>：\(P(\text{紅}) = 5/10 = 0.5\)</span><span class="en">10 balls, 5 of them red</span></div>
   <div class="bi" data-step="2"><span class="zh">抽出 <b>4</b> 顆，預期有幾顆<span class="red-c">紅球</span>？（這一次：<b id="ball-k">2</b>）</span><span class="en">Draw 4 balls. How many should be red?</span></div>
   <div class="callout key" data-step="3">
     <div class="eq" style="margin:0;font-size:28px">\(E(\text{紅} \mid 4) = P(\text{紅}) \times 4 = 0.5 \times 4 = \mathbf{2}\)</div>
@@ -281,7 +281,7 @@
         <span data-step="8">＝</span><span class="frac" data-step="8"><span class="num">\(24\)</span><span class="den">\(2\)</span></span><span data-step="8">＝ <b>12</b></span>
       </div>
     </div>
-    <div class="bi xs" data-step="9" style="margin-top:4px"><span class="zh">一般式：\(\dfrac{n!}{(n-k)!}\)　（除以 \((n-k)!\) 去掉多餘的 \(2 \times 1\)）</span><span class="en">General form \(\frac{n!}{(n-k)!}\): dividing by \((n-k)!\) cuts off the unneeded factors</span></div>
+    <div class="bi xs" data-step="9" style="margin-top:4px"><span class="zh">一般式：\(n!/(n-k)!\)　（除以 \((n-k)!\) 去掉多餘的 \(2 \times 1\)）</span><span class="en">General form \(n!/(n-k)!\): dividing by \((n-k)!\) cuts off the unneeded factors</span></div>
   </div>
   <div class="callout" data-step="10" style="margin-top:12px"><div class="bi sm"><span class="zh">但 AB 與 BA 被算成「不同」；我們只在乎選了<b>哪兩個字母</b>。→ 下一頁</span><span class="en">But AB and BA count as different; we only care which two letters were chosen. Next slide.</span></div></div>
 </section>
@@ -306,7 +306,7 @@
   <div class="callout key" data-step="6" style="margin-top:12px">
     <div class="pl s"><span>\(\dbinom{\textcolor{#1f5fd6}{n}}{\textcolor{#e0570f}{k}} = \dfrac{n!}{k!\,(n-k)!}\)</span>
       <span class="small" style="font-size:18px;margin-left:12px">\(= \dfrac{n!}{(n-k)!} \div k!\)</span></div>
-    <div class="bi xs" style="margin-top:6px"><span class="zh">奶茶實驗：\(\binom{8}{4} = \dfrac{8!}{4!\,4!} = 70\) 種選法，只有 1 種全對 → \(p = \frac{1}{70}\)。</span><span class="en">Tea experiment: \(\binom{8}{4} = 70\) ways to pick the 4 milk-first cups; only 1 is fully correct, so \(p = \frac{1}{70}\).</span></div>
+    <div class="bi xs" style="margin-top:6px"><span class="zh">奶茶實驗：\(\binom{8}{4} = \dfrac{8!}{4!\,4!} = 70\) 種選法，只有 1 種全對 → \(p = 1/70\)。</span><span class="en">Tea experiment: \(\binom{8}{4} = 70\) ways to pick the 4 milk-first cups; only 1 is fully correct, so \(p = 1/70\).</span></div>
   </div>
 </section>
 
