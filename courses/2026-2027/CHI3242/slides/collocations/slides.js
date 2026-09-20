@@ -319,3 +319,65 @@ HOOKS['s-summary'] = {
     }
   };
 })();
+
+/* ---------- binomial-coefficient markup: <span data-binom="top|bottom"> ---------- */
+document.querySelectorAll('[data-binom]').forEach(e => {
+  const [n, k] = e.dataset.binom.split('|');
+  e.innerHTML = `<span class="bn"><span class="p">(</span><span class="st"><span class="n">${n}</span><span class="k">${k}</span></span><span class="p">)</span></span>`;
+});
+const comb = (n, k) => { let r = 1; for (let i = 1; i <= k; i++) r = r * (n - k + i) / i; return Math.round(r); };
+
+/* ---------- 9a. examples of contingency tables ---------- */
+(function () {
+  let built = false;
+  HOOKS['s-examples'] = {
+    render(step, el) {
+      if (built) return;
+      const opt = { mini: true, hl: 'a' };
+      ctable($('#ex-smoke', el), { a: 30, b: 70, c: 10, d: 190 }, { ...opt, rows: [['吸煙者', 'smoker'], ['非吸煙者', 'non-smoker']], cols: [['肺癌', 'cancer'], ['無', 'none']] });
+      ctable($('#ex-hand', el), { a: 9, b: 43, c: 4, d: 44 }, { ...opt, rows: [['男', 'male'], ['女', 'female']], cols: [['左手', 'left'], ['右手', 'right']] });
+      ctable($('#ex-words', el), sentenceCounts(), { ...opt, rows: [['有 好', 'has 好'], ['無 好', 'no 好']], cols: [['有 天氣', 'has 天氣'], ['無', 'no']] });
+      el.querySelectorAll('table.ct').forEach(t => t.classList.add('tight'));
+      built = true;
+    }
+  };
+})();
+
+/* ---------- 9b. n choose k ---------- */
+(function () {
+  let built = false;
+  HOOKS['s-choose'] = {
+    render(step, el) {
+      if (built) return;
+      const L = ['A', 'B', 'C', 'D'], box = $('#ch-pairs', el);
+      for (let i = 0; i < 4; i++) for (let j = i + 1; j < 4; j++) { const s = document.createElement('span'); s.textContent = L[i] + L[j]; box.appendChild(s); }
+      built = true;
+    }
+  };
+})();
+
+/* ---------- 9c. Fisher / hypergeometric formula, part by part ---------- */
+(function () {
+  const ids = ['fa', 'fb', 'fc', 'fd', 'ra', 'rc', 'ca', 'cb', 'fn'];
+  const letters = { fa: 'a', fb: 'b', fc: 'c', fd: 'd', ra: 'a+b', rc: 'c+d', ca: 'a+c', cb: 'b+d', fn: 'n' };
+  const nums = { fa: 8, fb: 2, fc: 2, fd: 8, ra: 10, rc: 10, ca: 10, cb: 10, fn: 20 };
+  const plan = {
+    1: { rd: ['fa'], bl: ['fa', 'fb', 'ra'] },
+    2: { rd: ['fc'], bl: ['fc', 'fd', 'rc'] },
+    3: { rd: ['fa', 'fc', 'ca'], bl: ['fa', 'fb', 'fc', 'fd', 'fn'] }
+  };
+  HOOKS['s-formula'] = {
+    render(step, el) {
+      const p = plan[step] || { rd: [], bl: [] };
+      ids.forEach(id => {
+        const td = $('#' + id, el);
+        td.textContent = step >= 4 ? nums[id] : letters[id];
+        td.classList.toggle('rd', p.rd.includes(id));
+        td.classList.toggle('bl', p.bl.includes(id) && !p.rd.includes(id));
+      });
+      [1, 2, 3].forEach(k => $('#fp' + k, el).classList.toggle('act', step === k));
+      const num = comb(10, 8) * comb(10, 2), den = comb(20, 10);
+      $('#fm-plug', el).innerHTML = `C(10,8) · C(10,2) / C(20,10) = ${comb(10, 8)} · ${comb(10, 2)} / ${den.toLocaleString()} = ${num.toLocaleString()} / ${den.toLocaleString()} ≈ <b>${(num / den).toFixed(4)}</b>`;
+    }
+  };
+})();

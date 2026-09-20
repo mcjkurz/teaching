@@ -201,3 +201,25 @@ table.cmp .bi + .bi { margin: 0; }
 .title-portrait { right: 110px; top: 50%; width: 190px; margin-top: -175px; }
 .title-slide .quote { max-width: 760px; }
 .tea-portrait { right: 250px; top: 34px; width: 128px; z-index: 2; }
+
+/* binomial coefficients and fractions */
+.pl { display: flex; align-items: center; gap: 12px; font-size: 34px; font-family: var(--latin); }
+.bn { display: inline-flex; align-items: center; }
+.bn .p { font-size: 74px; font-weight: 200; line-height: 1; transform: scaleX(.8); color: var(--mute); }
+.bn .st { display: flex; flex-direction: column; align-items: center; line-height: 1.1; margin: 0 -3px; font-size: .92em; }
+.bn .n { color: var(--tgt); } .bn .k { color: var(--col); }
+.frac { display: inline-flex; flex-direction: column; align-items: center; }
+.frac .num { padding: 4px 12px 6px; border-bottom: 3px solid var(--ink); display: flex; align-items: center; gap: 2px; }
+.frac .den { padding: 6px 12px 2px; display: flex; }
+.fp { border-radius: 12px; padding: 0 6px; transition: box-shadow .3s, background .3s; display: inline-flex; }
+.fp.act { box-shadow: 0 0 0 3px var(--win); background: var(--win-bg); }
+table.ct.fm td { min-width: 96px; height: 62px; font-size: 30px; }
+table.ct td.tot { border: none; background: none; font-size: 24px; color: var(--mute); font-weight: 500; min-width: 84px; box-shadow: none; }
+table.ct td.bl { border-color: #4a86e8; background: #eaf1fe; box-shadow: 0 0 0 2px #4a86e8 inset; }
+table.ct td.rd { border-color: #e03a2f; background: #fdeceb; box-shadow: 0 0 0 2px #e03a2f inset; }
+table.ct td.tot.bl { background: none; box-shadow: none; color: #2f6fd8; font-weight: 700; }
+table.ct td.tot.rd { background: none; box-shadow: none; color: #d02a20; font-weight: 700; }
+table.ct.mini.tight td { min-width: 60px; height: 46px; font-size: 22px; }
+table.ct.mini.tight .z { font-size: 13px; } table.ct.mini.tight .e { font-size: 11px; }
+.pairs6 { display: grid; grid-template-columns: repeat(3, auto); gap: 10px; margin-top: 10px; justify-content: start; }
+.pairs6 span { font-size: 28px; background: var(--win-bg); border: 2px solid var(--win); border-radius: 10px; padding: 4px 16px; text-align: center; }

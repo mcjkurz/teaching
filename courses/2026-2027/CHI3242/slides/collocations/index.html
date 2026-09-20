@@ -168,6 +168,56 @@
   </div>
 </section>
 
+<!-- 9a ─────────── Examples of contingency tables -->
+<section class="slide" id="s-examples" data-sec="ct">
+  <h2 class="bi"><span class="zh">列聯表無處不在</span><span class="en">Contingency tables are everywhere</span></h2>
+  <div class="bi sm"><span class="zh">兩個「是／否」的性質，各自分成兩類，數一數各格有多少個案</span><span class="en">Two yes/no properties, cross-tabulated: how many cases fall in each cell?</span></div>
+  <div class="cards" style="margin-top:14px">
+    <div class="card" data-step="1">
+      <h3 class="bi sm"><span class="zh">吸煙 × 肺癌</span><span class="en">Smoking × lung cancer</span></h3>
+      <div id="ex-smoke" style="margin-top:6px"></div>
+      <div class="bi xs" style="margin-top:6px"><span class="zh">吸煙者患肺癌的比例是否更高？</span><span class="en">Are smokers more likely to have cancer?</span></div>
+      <div class="small" style="font-size:13px">示意數字 illustrative</div>
+    </div>
+    <div class="card" data-step="2">
+      <h3 class="bi sm"><span class="zh">慣用手 × 性別</span><span class="en">Handedness × sex</span></h3>
+      <div id="ex-hand" style="margin-top:6px"></div>
+      <div class="bi xs" style="margin-top:6px"><span class="zh">左撇子的比例是否因性別而異？</span><span class="en">Does the share of left-handers differ by sex?</span></div>
+      <div class="small" style="font-size:13px">教科書例子 textbook example</div>
+    </div>
+    <div class="card" data-step="3">
+      <h3 class="bi sm"><span class="zh">好 × 天氣（句子）</span><span class="en">Two words × sentences</span></h3>
+      <div id="ex-words" style="margin-top:6px"></div>
+      <div class="bi xs" style="margin-top:6px"><span class="zh">兩個詞是否傾向出現在同一個句子？</span><span class="en">Do the two words tend to share sentences?</span></div>
+      <div class="small" style="font-size:13px">本課的小語料 our toy corpus</div>
+    </div>
+  </div>
+  <div class="callout key bi sm" data-step="4"><span class="zh">結構完全相同：問題都是——兩個性質<b>互相獨立</b>嗎？搭配詞的判斷也是如此。</span><span class="en">Same structure every time: are the two properties independent? Collocations are no different.</span></div>
+</section>
+
+<!-- 9b ─────────── n choose k -->
+<section class="slide" id="s-choose" data-sec="ct">
+  <h2 class="bi"><span class="zh">預備知識：n 選 k</span><span class="en">Background: “n choose k”</span></h2>
+  <div class="two" style="margin-top:6px">
+    <div class="grow">
+      <div class="bi" data-step="1"><span class="zh">從 <b>n</b> 個東西中，選出 <b>k</b> 個（不計順序），有幾種選法？</span><span class="en">In how many ways can we pick k items out of n, when order does not matter?</span></div>
+      <div class="pl" data-step="1" style="margin:12px 0"><span data-binom="n|k"></span><span style="font-size:30px">＝</span>
+        <span class="frac"><span class="num">n!</span><span class="den">k! (n − k)!</span></span></div>
+      <div class="bi sm" data-step="3"><span class="zh">n! ＝ n × (n−1) × … × 2 × 1（階乘）。例：4 選 2：</span><span class="en">n! (factorial) = n × (n−1) × … × 1. Example: 4 choose 2:</span></div>
+      <div class="pl" data-step="3" style="margin:8px 0"><span data-binom="4|2"></span><span style="font-size:30px">＝</span>
+        <span class="frac"><span class="num">4!</span><span class="den">2! · 2!</span></span><span style="font-size:30px">＝</span>
+        <span class="frac"><span class="num">24</span><span class="den">2 · 2</span></span><span style="font-size:30px">＝ <b>6</b></span></div>
+    </div>
+    <div style="width:340px">
+      <div class="bi sm" data-step="2"><span class="zh">列出來：從 A B C D 選 2 個</span><span class="en">List them: choose 2 of A B C D</span></div>
+      <div class="pairs6" data-step="2" id="ch-pairs"></div>
+    </div>
+  </div>
+  <div class="callout key" data-step="4">
+    <div class="bi sm"><span class="zh">奶茶實驗：8 杯選 4 杯「先牛奶」，共有 C(8,4) ＝ <b>70</b> 種可能；只有 1 種全對 → p ＝ 1/70。</span><span class="en">Tea experiment: choosing which 4 of 8 cups are milk-first gives C(8,4) = 70 possibilities; only 1 is fully correct, so p = 1/70.</span></div>
+  </div>
+</section>
+
 <!-- 10a ─────────── Lady tasting tea -->
 <section class="slide" id="s-tea" data-sec="ct">
   <h2 class="bi"><span class="zh">Fisher 與「奶茶實驗」</span><span class="en">Fisher and the lady tasting tea (1935)</span></h2>
@@ -186,10 +236,39 @@
   <div class="bi xs" data-step="2"><span class="zh">8 杯外觀相同：4 杯<span class="tgt-c">先牛奶 (M)</span>、4 杯<span class="col-c">先茶 (T)</span>，隨機排列；她要指出哪 4 杯是先牛奶。</span><span class="en">8 identical-looking cups, 4 milk-first and 4 tea-first, in random order. She must pick the 4 milk-first cups.</span></div>
   <div class="two" style="margin-top:12px">
     <div data-step="3"><div class="ct-title">全部答對 all correct</div><div id="tea-perfect"></div>
-      <div class="eq" style="font-size:22px;margin-top:4px">p = 1 / 70 ≈ <b>0.014</b></div></div>
+      <div class="eq" style="font-size:22px;margin-top:4px">p = 1 / C(8,4) = 1 / 70 ≈ <b>0.014</b></div></div>
     <div data-step="4"><div class="ct-title">答對 3 杯 three correct</div><div id="tea-three"></div>
       <div class="eq" style="font-size:22px;margin-top:4px">p = 17 / 70 ≈ <b>0.243</b></div></div>
     <div class="grow bi xs" data-step="4" style="align-self:center"><span class="zh">全對時，靠猜的機率只有 1/70，這張表「太不可能」；答對 3 杯則可能只是運氣。<b>這就是 Fisher 精確檢定。</b></span><span class="en">Guessing all 4 right has probability 1/70, so the table is very unlikely by chance. 3 of 4 could easily be luck. This is Fisher’s exact test.</span></div>
+  </div>
+</section>
+
+<!-- 9c ─────────── Fisher formula, step by step -->
+<section class="slide" id="s-formula" data-sec="ct">
+  <h2 class="bi"><span class="zh">一張表的機率怎麼算？</span><span class="en">How likely is one particular table? (hypergeometric distribution)</span></h2>
+  <div class="two" style="margin-top:4px">
+    <div>
+      <table class="ct fm" id="fm-ct">
+        <tr><th></th><th><span class="z">有 Y</span><span class="e">has Y</span></th><th><span class="z">無 Y</span><span class="e">no Y</span></th><th></th></tr>
+        <tr><th class="rh"><span class="z">有 X</span><span class="e">has X</span></th><td id="fa">a</td><td id="fb">b</td><td class="tot" id="ra">a+b</td></tr>
+        <tr><th class="rh"><span class="z">無 X</span><span class="e">no X</span></th><td id="fc">c</td><td id="fd">d</td><td class="tot" id="rc">c+d</td></tr>
+        <tr><th></th><td class="tot" id="ca">a+c</td><td class="tot" id="cb">b+d</td><td class="tot" id="fn">n</td></tr>
+      </table>
+    </div>
+    <div class="grow">
+      <div class="pl" style="margin:6px 0 10px"><span>p ＝</span>
+        <span class="frac">
+          <span class="num"><span class="fp" id="fp1" data-step="1" data-binom="a+b|a"></span><span class="fp" id="fp2" data-step="2" data-binom="c+d|c"></span></span>
+          <span class="den"><span class="fp" id="fp3" data-step="3" data-binom="n|a+c"></span></span>
+        </span></div>
+      <div class="swap" style="min-height:150px">
+        <div class="bi sm" data-step="1" data-until="2"><span class="zh"><b>分子 ①</b>：「有 X」這一列有 <span class="tgt-c">a+b</span> 個項目，其中 <span class="col-c">a</span> 個有 Y —— 從 a+b 個中選出 a 個。</span><span class="en">Numerator ①: the “has X” row holds a+b items; choose the a of them that have Y.</span></div>
+        <div class="bi sm" data-step="2" data-until="3"><span class="zh"><b>分子 ②</b>：「無 X」那一列有 <span class="tgt-c">c+d</span> 個項目，其中 <span class="col-c">c</span> 個有 Y。兩列的選法<b>相乘</b>。</span><span class="en">Numerator ②: the other row holds c+d items, c of which have Y. The two choices are independent, so we multiply.</span></div>
+        <div class="bi sm" data-step="3" data-until="4"><span class="zh"><b>分母</b>：全部 <span class="tgt-c">n</span> 個項目中，任意挑 <span class="col-c">a+c</span> 個當作「有 Y」的所有可能。</span><span class="en">Denominator: all ways to choose which a+c of the n items have Y, ignoring the rows.</span></div>
+        <div data-step="4"><div class="bi sm"><span class="zh">代入 a=8, b=2, c=2, d=8（n=20）：</span><span class="en">Plug in the numbers:</span></div>
+          <div class="eq" id="fm-plug" style="font-size:24px"></div></div>
+      </div>
+    </div>
   </div>
 </section>
 
