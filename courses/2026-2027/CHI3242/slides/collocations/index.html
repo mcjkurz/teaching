@@ -181,21 +181,24 @@
 <!-- 8 ─────────── The problem -->
 <section class="slide" id="s-problem" data-sec="compare">
   <h2 class="bi"><span class="zh">簡單指標的問題</span><span class="en">A problem with simple measures</span></h2>
-  <div class="small" style="margin:-4px 0 8px">N = 1,000,000 · window = 5 + 5</div>
-  <div class="cards">
-    <div class="card" data-step="1">
-      <h3 class="bi sm"><span class="zh">the Iliad</span><span class="en">《伊利亞特》</span></h3>
-      <div class="nums">count(the) = 100,000<br>count(Iliad) = <b>10</b><br>E = 0.1 × (10×5×2) = <b>10</b><br>O = <b>10</b></div>
-    </div>
+  <div data-step="1">
+    <div class="eq" style="font-size:24px;margin:0">E(collocate | target) = P(collocate) × ( count(target) × window × 2 )</div>
+    <span class="small" style="font-size:16px;margin-left:12px">P(collocate) = count(collocate) / N &nbsp;·&nbsp; N = 1,000,000 · window = 5</span>
+  </div>
+  <div class="cards" style="margin-top:12px">
     <div class="card" data-step="2">
+      <h3 class="bi sm"><span class="zh">the Iliad</span><span class="en">《伊利亞特》</span></h3>
+      <div class="nums">count(the) = 100,000<br>count(Iliad) = <b>10</b><br>P(the) = 100,000 / 1,000,000 = 0.1<br>E = 0.1 × (10 × 5 × 2) = <b>10</b><br>O = <b>10</b></div>
+    </div>
+    <div class="card" data-step="3">
       <h3 class="bi sm"><span class="zh">must also</span><span class="en">「必須」「也」</span></h3>
-      <div class="nums">count(must) = 1,000<br>count(also) = <b>1,000</b><br>E = 0.001 × (1000×5×2) = <b>10</b><br>O = <b>10</b></div>
+      <div class="nums">count(must) = 1,000<br>count(also) = <b>1,000</b><br>P(must) = 1,000 / 1,000,000 = 0.001<br>E = 0.001 × (1000 × 5 × 2) = <b>10</b><br>O = <b>10</b></div>
     </div>
   </div>
-  <div class="callout" data-step="3">
+  <div class="callout" data-step="4" style="margin-top:12px">
     <div class="bi sm"><span class="zh">O 與 E 完全相同，分數也相同！但 Iliad 很罕見，而 must、also 都很常見。</span><span class="en">Identical O and E, identical scores. Yet Iliad is rare, while must and also are both frequent.</span></div>
   </div>
-  <div class="bi sm" data-step="4" style="margin-top:10px"><span class="zh"><b>O 對 E 忽略了語料中其他的一切</b>，我們還要看兩詞「沒有」共現的情況。</span><span class="en">O vs. E ignores everything else in the corpus. We must also look at when the words do not co-occur.</span></div>
+  <div class="bi sm" data-step="5" style="margin-top:8px"><span class="zh"><b>O 對 E 忽略了語料中其他的一切</b>，我們還要看兩詞「沒有」共現的情況。</span><span class="en">O vs. E ignores everything else in the corpus. We must also look at when the words do not co-occur.</span></div>
 </section>
 
 <!-- 9 ─────────── Contingency table -->
@@ -256,19 +259,30 @@
     <div class="chipset big"><span>A</span><span>B</span><span>C</span><span>D</span></div>
     <div class="bi sm"><span class="zh">從 4 個字母中選 <b>2</b> 個；先假設<b>順序算不同</b>（AB ≠ BA）。</span><span class="en">Pick 2 of 4 letters; for now the order counts (AB ≠ BA).</span></div>
   </div>
-  <div data-step="1" style="margin-top:10px">
-    <div class="bi sm"><span class="zh"><b>放回</b>（可重複使用同一字母）：每個位置都有 4 種選擇</span><span class="en">With replacement (a letter may be used again): 4 choices for every position</span></div>
-    <div class="slots"><div><b>4</b><span>1st</span></div><i>×</i><div><b>4</b><span>2nd</span></div><i>＝</i><div class="res"><b>16</b><span class="zh">AA, AB, AC, …</span></div></div>
-  </div>
-  <div data-step="2" style="margin-top:10px">
-    <div class="bi sm"><span class="zh"><b>不放回</b>（每個字母最多用一次）：第 2 個位置只剩 3 種選擇</span><span class="en">Without replacement (each letter at most once): only 3 choices are left for the 2nd position</span></div>
-    <div style="display:flex;align-items:center;gap:36px">
-      <div class="slots"><div><b>4</b><span>1st</span></div><i>×</i><div><b>3</b><span>2nd</span></div><i>＝</i><div class="res"><b>12</b><span class="zh">AB, AC, AD, BA, …</span></div></div>
-      <div class="pl s"><span>＝</span><span class="frac"><span class="num">4!</span><span class="den">(4 − 2)!</span></span><span>＝</span><span class="frac"><span class="num">24</span><span class="den">2</span></span><span>＝ <b>12</b></span></div>
+  <div style="margin-top:8px">
+    <div class="bi sm" data-step="1"><span class="zh"><b>放回</b>（可重複使用同一字母）：每個位置都有 4 種選擇</span><span class="en">With replacement (a letter may be used again): 4 choices for every position</span></div>
+    <div class="slots">
+      <div data-step="1"><b>4</b><span>1st</span></div>
+      <i data-step="2">×</i><div data-step="2"><b>4</b><span>2nd</span></div>
+      <i data-step="3">＝</i><div class="res" data-step="3"><b>16</b><span class="zh">AA, AB, AC, …</span></div>
     </div>
-    <div class="bi xs" style="margin-top:4px"><span class="zh">一般式：n! / (n−k)!　（除以 (n−k)! 去掉多餘的 2×1）</span><span class="en">General form n! / (n−k)!: dividing by (n−k)! cuts off the unneeded factors</span></div>
   </div>
-  <div class="callout" data-step="3" style="margin-top:12px"><div class="bi sm"><span class="zh">但 AB 與 BA 被算成「不同」；我們只在乎選了<b>哪兩個字母</b>。→ 下一頁</span><span class="en">But AB and BA count as different; we only care which two letters were chosen. Next slide.</span></div></div>
+  <div style="margin-top:10px">
+    <div class="bi sm" data-step="4"><span class="zh"><b>不放回</b>（每個字母最多用一次）：第 2 個位置只剩 3 種選擇</span><span class="en">Without replacement (each letter at most once): only 3 choices are left for the 2nd position</span></div>
+    <div style="display:flex;align-items:center;gap:0">
+      <div class="slots">
+        <div data-step="4"><b>4</b><span>1st</span></div>
+        <i data-step="5">×</i><div data-step="5"><b>3</b><span>2nd</span></div>
+        <i data-step="6">＝</i><div class="res" data-step="6"><b>12</b><span class="zh">AB, AC, AD, BA, …</span></div>
+      </div>
+      <div class="pl s" style="margin-left:36px">
+        <span data-step="7">＝</span><span class="frac" data-step="7"><span class="num">4!</span><span class="den">(4 − 2)!</span></span>
+        <span data-step="8">＝</span><span class="frac" data-step="8"><span class="num">24</span><span class="den">2</span></span><span data-step="8">＝ <b>12</b></span>
+      </div>
+    </div>
+    <div class="bi xs" data-step="9" style="margin-top:4px"><span class="zh">一般式：n! / (n−k)!　（除以 (n−k)! 去掉多餘的 2×1）</span><span class="en">General form n! / (n−k)!: dividing by (n−k)! cuts off the unneeded factors</span></div>
+  </div>
+  <div class="callout" data-step="10" style="margin-top:12px"><div class="bi sm"><span class="zh">但 AB 與 BA 被算成「不同」；我們只在乎選了<b>哪兩個字母</b>。→ 下一頁</span><span class="en">But AB and BA count as different; we only care which two letters were chosen. Next slide.</span></div></div>
 </section>
 
 <!-- 9b2 ─────────── n choose k, part 2: order does not matter -->
@@ -281,12 +295,14 @@
       <div class="grp"><span>BC</span><span>CB</span></div><div class="grp"><span>BD</span><span>DB</span></div><div class="grp"><span>CD</span><span>DC</span></div>
     </div>
   </div>
-  <div data-step="2" style="margin-top:10px">
-    <div class="bi sm"><span class="zh">所以再除以 <b>2!</b>：12 ÷ 2 ＝ <b>6</b> 種選法</span><span class="en">So divide by 2! once more: 12 ÷ 2 = 6 different choices</span></div>
-    <div class="pl s" style="margin-top:4px"><span class="frac"><span class="num">4!</span><span class="den">(4 − 2)!</span></span><span>÷ 2! ＝</span>
-      <span class="frac"><span class="num">4!</span><span class="den">2! · (4 − 2)!</span></span><span>＝</span><span class="frac"><span class="num">24</span><span class="den">2 · 2</span></span><span>＝ <b>6</b></span></div>
+  <div style="margin-top:10px">
+    <div class="bi sm" data-step="2"><span class="zh">所以再除以 <b>2!</b>：12 ÷ 2 ＝ <b>6</b> 種選法</span><span class="en">So divide by 2! once more: 12 ÷ 2 = 6 different choices</span></div>
+    <div class="pl s" style="margin-top:4px">
+      <span class="frac"><span class="num">4!</span><span class="den">(4 − 2)!</span></span><span data-step="3">÷ 2!</span>
+      <span data-step="4">＝</span><span class="frac" data-step="4"><span class="num">4!</span><span class="den">2! · (4 − 2)!</span></span>
+      <span data-step="5">＝</span><span class="frac" data-step="5"><span class="num">24</span><span class="den">2 · 2</span></span><span data-step="5">＝ <b>6</b></span></div>
   </div>
-  <div class="callout key" data-step="3" style="margin-top:12px">
+  <div class="callout key" data-step="6" style="margin-top:12px">
     <div class="pl s"><span data-binom="n|k"></span><span>＝</span><span class="frac"><span class="num">n!</span><span class="den">k! (n − k)!</span></span>
       <span class="small" style="font-size:18px;margin-left:12px">= [ n! / (n−k)! ] ÷ k!</span></div>
     <div class="bi xs" style="margin-top:6px"><span class="zh">奶茶實驗：C(8,4) ＝ 8!/(4!·4!) ＝ <b>70</b> 種選法，只有 1 種全對 → p ＝ 1/70。</span><span class="en">Tea experiment: C(8,4) = 70 ways to pick the 4 milk-first cups; only 1 is fully correct, so p = 1/70.</span></div>
@@ -322,7 +338,7 @@
 <section class="slide" id="s-formula" data-sec="ct">
   <h2 class="bi"><span class="zh">一張表的機率怎麼算？</span><span class="en">How likely is one particular table? (hypergeometric distribution)</span></h2>
   <div class="two" style="margin-top:4px">
-    <div>
+    <div id="fm-wrap" style="position:relative;flex:none">
       <table class="ct fm" id="fm-ct">
         <tr><th></th><th><span class="z">有 Y</span><span class="e">has Y</span></th><th><span class="z">無 Y</span><span class="e">no Y</span></th><th></th></tr>
         <tr><th class="rh"><span class="z">有 X</span><span class="e">has X</span></th><td id="fa">a</td><td id="fb">b</td><td class="tot" id="ra">a+b</td></tr>

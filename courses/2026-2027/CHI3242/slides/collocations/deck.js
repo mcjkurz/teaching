@@ -26,7 +26,7 @@
   sections.forEach((sec, i) => {
     const d = document.createElement('div');
     d.className = 'item'; d.dataset.sec = sec.id;
-    d.innerHTML = `<span class="n">${i + 1}</span><span class="zh">${sec.zh}</span><span class="en">${sec.en}</span>`;
+    d.innerHTML = `${i + 1}<span class="tip"><span class="zh">${sec.zh}</span><span class="en">${sec.en}</span></span>`;
     d.addEventListener('click', e => { e.stopPropagation(); go(firstOf(sec.id), 0); });
     side.appendChild(d);
   });

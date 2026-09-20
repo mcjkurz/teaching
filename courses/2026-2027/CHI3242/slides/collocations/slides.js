@@ -382,24 +382,38 @@ const comb = (n, k) => { let r = 1; for (let i = 1; i <= k; i++) r = r * (n - k 
   const ids = ['fa', 'fb', 'fc', 'fd', 'ra', 'rc', 'ca', 'cb', 'fn'];
   const letters = { fa: 'a', fb: 'b', fc: 'c', fd: 'd', ra: 'a+b', rc: 'c+d', ca: 'a+c', cb: 'b+d', fn: 'N' };
   const nums = { fa: 8, fb: 2, fc: 2, fd: 8, ra: 10, rc: 10, ca: 10, cb: 10, fn: 20 };
-  const all = ['fa', 'fb', 'fc', 'fd', 'fn'];
-  const plan = {                       // rd = red (Y items), bl = blue (row), pu = purple (all N items)
-    1: { pu: all },
-    2: { rd: ['fa'], bl: ['fa', 'fb', 'ra'] },
-    3: { rd: ['fc'], bl: ['fc', 'fd', 'rc'] },
-    4: { rd: ['fa', 'fc', 'ca'], pu: all }
+  const all = ['fa', 'fb', 'fc', 'fd'];
+  // outer rectangle = the group we choose from (blue: a row, purple: all N items);
+  // inner red rectangle = the part we choose (the items that have Y)
+  const plan = {
+    1: { outer: ['pu', all], tot: { fn: 'pu' } },
+    2: { outer: ['bl', ['fa', 'fb']], inner: ['fa'], tot: { ra: 'bl' } },
+    3: { outer: ['bl', ['fc', 'fd']], inner: ['fc'], tot: { rc: 'bl' } },
+    4: { outer: ['pu', all], inner: ['fa', 'fc'], tot: { fn: 'pu', ca: 'rd' } }
   };
   HOOKS['s-formula'] = {
     render(step, el) {
-      const p = Object.assign({ rd: [], bl: [], pu: [] }, plan[step] || {});
+      const p = plan[step] || {};
+      const wrap = $('#fm-wrap', el), k = wrap.getBoundingClientRect().width / wrap.offsetWidth || 1;
       ids.forEach(id => {
         const td = $('#' + id, el);
         td.textContent = step >= 5 ? nums[id] : letters[id];
-        td.classList.toggle('rd', p.rd.includes(id));
-        td.classList.toggle('bl', p.bl.includes(id) && !p.rd.includes(id));
-        td.classList.toggle('pu', p.pu.includes(id) && !p.rd.includes(id));
+        td.classList.remove('rd', 'bl', 'pu');
+        const t = p.tot && p.tot[id]; if (t) td.classList.add(t);
       });
-      [2, 3, 4].forEach(k => $('#fp' + (k - 1), el).classList.toggle('act', step === k));
+      wrap.querySelectorAll('.rect').forEach(r => r.remove());
+      const box = (cls, list, pad) => {
+        const rs = list.map(id => $('#' + id, el).getBoundingClientRect()), w = wrap.getBoundingClientRect();
+        const x0 = Math.min(...rs.map(r => r.left)), y0 = Math.min(...rs.map(r => r.top));
+        const x1 = Math.max(...rs.map(r => r.right)), y1 = Math.max(...rs.map(r => r.bottom));
+        const d = document.createElement('div'); d.className = 'rect ' + cls;
+        d.style.left = ((x0 - w.left) / k - pad) + 'px'; d.style.top = ((y0 - w.top) / k - pad) + 'px';
+        d.style.width = ((x1 - x0) / k + 2 * pad) + 'px'; d.style.height = ((y1 - y0) / k + 2 * pad) + 'px';
+        wrap.appendChild(d);
+      };
+      if (p.outer) box(p.outer[0], p.outer[1], 7);
+      if (p.inner) box('rd', p.inner, 1);
+      [2, 3, 4].forEach(n => $('#fp' + (n - 1), el).classList.toggle('act', step === n));
       const num = comb(10, 8) * comb(10, 2), den = comb(20, 10);
       $('#fm-plug', el).innerHTML = `C(10,8) · C(10,2) / C(20,10) = ${comb(10, 8)} · ${comb(10, 2)} / ${den.toLocaleString()} = ${num.toLocaleString()} / ${den.toLocaleString()} ≈ <b>${(num / den).toFixed(4)}</b>`;
     }
