@@ -265,6 +265,7 @@ table.ct.mini.showl td { height: 48px; }
 table.ct td.pu { border-color: var(--pur); background: var(--pur-bg); box-shadow: 0 0 0 2px var(--pur) inset; }
 table.ct td.tot.pu { background: none; box-shadow: none; color: var(--pur); font-weight: 700; }
 #fp3 .n { color: var(--pur); }
-#obs-toks .tok { font-size: 25px; padding: 2px 7px; }
+#obs-toks .tok { font-size: 23px; padding: 2px 6px; }
+#obs-toks { gap: 6px 3px; }
 
 img.fig { display: block; border: 1.5px solid var(--line); border-radius: 10px; background: #fff; }
