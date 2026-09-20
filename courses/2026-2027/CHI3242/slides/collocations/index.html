@@ -156,11 +156,11 @@
       <div class="bi xs" style="margin-top:10px"><span class="zh">X ＝ 目標詞（中心詞）　Y ＝ 搭配詞（語境詞）</span><span class="en">X = target (“center”) word, Y = collocate (“context”) word</span></div>
     </div>
     <div class="grow">
-      <div class="swap" style="min-height:120px">
-        <div class="bi" data-step="1" data-until="2"><span class="zh"><span class="col-c">a</span> ＝ Y 出現在 X <b>附近</b>的次數</span><span class="en">times Y appears near X</span></div>
-        <div class="bi" data-step="2" data-until="3"><span class="zh"><span class="col-c">b</span> ＝ X 附近出現<b>其他</b>詞的次數</span><span class="en">times any other word appears near X</span></div>
-        <div class="bi" data-step="3" data-until="4"><span class="zh"><span class="col-c">c</span> ＝ Y 出現在 X <b>之外</b>的次數</span><span class="en">times Y appears away from X</span></div>
-        <div class="bi" data-step="4"><span class="zh"><span class="col-c">d</span> ＝ 其餘的一切：其他詞，且不在 X 附近</span><span class="en">everything else: other words, away from X</span></div>
+      <div class="ctlist">
+        <div class="bi sm" data-step="1"><span class="zh"><span class="col-c">a</span> ＝ Y 出現在 X <b>附近</b>的次數</span><span class="en">times Y appears near X</span></div>
+        <div class="bi sm" data-step="2"><span class="zh"><span class="col-c">b</span> ＝ X 附近出現<b>其他</b>詞的次數</span><span class="en">times any other word appears near X</span></div>
+        <div class="bi sm" data-step="3"><span class="zh"><span class="col-c">c</span> ＝ Y 出現在 X <b>之外</b>的次數</span><span class="en">times Y appears away from X</span></div>
+        <div class="bi sm" data-step="4"><span class="zh"><span class="col-c">d</span> ＝ 其餘的一切：其他詞，且不在 X 附近</span><span class="en">everything else: other words, away from X</span></div>
       </div>
       <div class="callout key bi sm" data-step="4"><span class="zh">現在表格也記錄了兩詞「沒有」搭配的情況。</span><span class="en">The table now also records when the words do not collocate.</span></div>
     </div>
@@ -240,7 +240,7 @@
   <div id="syn-lines" class="lines tight"></div>
   <div class="bi xs" data-step="1" style="margin:2px 0 6px"><span class="zh">只計「形容詞 → 名詞」的修飾關係；謂語用法（心情不好）不算。</span><span class="en">Only adjective → noun modifiers count; predicative uses are ignored.</span></div>
   <div class="two" style="align-items:center">
-    <div data-step="2"><div class="ct-title">找到的搭配對 pairs found</div><div class="eq" id="syn-list" style="font-size:20px"></div></div>
+    <div data-step="2"><div class="ct-title">找到的搭配對 pairs found</div><div class="eq" id="syn-list" style="font-size:18px;white-space:nowrap;padding:8px 14px"></div></div>
     <div data-step="3" class="two" style="align-items:center"><div id="syn-ct"></div>
       <div class="bi xs" style="max-width:260px"><span class="zh">單位＝搭配對。更乾淨，但需要句法分析器。</span><span class="en">Unit = pair. Cleaner, but needs a parser.</span></div></div>
   </div>
