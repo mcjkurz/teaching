@@ -293,3 +293,7 @@ s { text-decoration-color: var(--mute); color: var(--mute); }
 .recap { margin-top: 12px; }
 .rrow { display: flex; align-items: center; gap: 18px; margin: 12px 0; }
 .rrow i { flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--tgt); color: #fff; font-style: normal; font-weight: 600; font-size: 20px; display: grid; place-items: center; }
+
+.logex { margin: 10px 0 0; font-size: 22px; line-height: 2; }
+#log-chart { width: 100%; height: auto; display: block; }
+#log-chart text { font-family: var(--latin), var(--cjk); font-size: 14px; fill: var(--mute); }

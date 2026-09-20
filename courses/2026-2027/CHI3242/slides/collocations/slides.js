@@ -482,3 +482,38 @@ const comb = (n, k) => { let r = 1; for (let i = 1; i <= k; i++) r = r * (n - k 
 
 /* render all static LaTeX once */
 texify(document.getElementById('stage'));
+
+/* ---------- 7a0. graph of log2 ---------- */
+(function () {
+  const NS = 'http://www.w3.org/2000/svg';
+  const el_ = (tag, attrs, text) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; return e; };
+  let drawn = null;
+  HOOKS['s-log'] = {
+    render(step, el) {
+      const svg = $('#log-chart', el), showPts = step >= 3;
+      if (drawn === showPts) return;
+      drawn = showPts;
+      svg.innerHTML = '';
+      const L = 56, R = 540, T = 40, B = 300, xmax = 8, ymin = -3, ymax = 3;
+      const X = x => L + (R - L) * x / xmax, Y = y => B - (B - T) * (y - ymin) / (ymax - ymin);
+      for (let y = ymin; y <= ymax; y++) {
+        svg.appendChild(el_('line', { x1: L, x2: R, y1: Y(y), y2: Y(y), stroke: y === 0 ? '#6a7386' : '#e3e6ec', 'stroke-width': y === 0 ? 2 : 1 }));
+        svg.appendChild(el_('text', { x: L - 10, y: Y(y) + 5, 'text-anchor': 'end' }, y > 0 ? '+' + y : y < 0 ? '\u2212' + (-y) : '0'));
+      }
+      [0, 1, 2, 4, 8].forEach(x => {
+        svg.appendChild(el_('line', { x1: X(x), x2: X(x), y1: T, y2: B, stroke: x === 1 ? '#f4b400' : '#eef0f4', 'stroke-width': x === 1 ? 2 : 1, 'stroke-dasharray': x === 1 ? '5 4' : '' }));
+        svg.appendChild(el_('text', { x: X(x), y: B + 20, 'text-anchor': 'middle' }, x));
+      });
+      svg.appendChild(el_('text', { x: (L + R) / 2, y: B + 40, 'text-anchor': 'middle' }, 'O / E (ratio)'));
+      svg.appendChild(el_('text', { x: L, y: 16, 'text-anchor': 'start', style: 'font-weight:600;fill:#1b2333' }, 'log\u2082(O / E)  =  MI (bits)'));
+      const pts = [];
+      for (let x = 0.125; x <= xmax + 1e-9; x += 0.05) pts.push(`${X(x)},${Y(Math.log2(x))}`);
+      svg.appendChild(el_('polyline', { points: pts.join(' '), fill: 'none', stroke: '#1f5fd6', 'stroke-width': 3.5, 'stroke-linejoin': 'round' }));
+      if (showPts) [[0.25, -2], [0.5, -1], [1, 0], [2, 1], [4, 2], [8, 3]].forEach(([x, y]) => {
+        const c = x === 1 ? '#e0570f' : '#1f5fd6';
+        svg.appendChild(el_('circle', { cx: X(x), cy: Y(y), r: 6, fill: c, stroke: '#fff', 'stroke-width': 2 }));
+        svg.appendChild(el_('text', { x: X(x) + (x === 8 ? -4 : 10), y: Y(y) + 24, 'text-anchor': x === 8 ? 'end' : 'start', style: 'font-weight:600;fill:' + c }, `${x < 1 ? '1/' + 1 / x : x} \u2192 ${y > 0 ? '+' + y : y < 0 ? '\u2212' + (-y) : '0'}`));
+      });
+    }
+  };
+})();

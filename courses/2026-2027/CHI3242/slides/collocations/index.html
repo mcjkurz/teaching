@@ -123,7 +123,7 @@
     </div>
     <div class="grow" data-step="4">
       <div class="bi sm"><span class="zh">③ 期望值 ＝ 機率 × 位置數</span><span class="en">expected = probability × slots</span></div>
-      <div class="eq big">\(E = 0.001 \times 1{,}200 = \textcolor{#1f5fd6}{\mathbf{1.2}}\)</div>
+      <div class="eq big">\(E = 0.001 \times 1{,}200 = \mathbf{1.2}\)</div>
       <div class="bi sm" style="margin-top:6px"><span class="zh">純屬偶然，只預期出現約 1.2 次</span><span class="en">by chance alone we expect only about 1.2 co-occurrences</span></div>
     </div>
   </div>
@@ -140,9 +140,30 @@
     <div class="eq big" style="margin:0">\(\dfrac{O}{E} = \dfrac{8}{1.2} \approx \textcolor{#e0570f}{\mathbf{6.7}}\)</div>
     <div class="bi" style="margin-top:8px"><span class="zh">實際共現次數是偶然預期的 6.7 倍 → 王婆與痛苦互相「吸引」</span><span class="en">They co-occur 6.7 times more often than chance predicts: the two words attract each other.</span></div>
   </div>
-  <div class="bi sm" data-step="4" style="margin-top:12px"><span class="zh">再取對數，就得到<b>互信息 MI</b>（下一頁）。</span><span class="en">Taking the logarithm of this ratio gives mutual information (next slide).</span></div>
+  <div class="bi sm" data-step="4" style="margin-top:12px"><span class="zh">再取對數，就得到<b>互信息 MI</b>（先看什麼是對數）。</span><span class="en">Taking the logarithm of this ratio gives mutual information (first, what is a logarithm?).</span></div>
 </section>
 
+
+<!-- 7a0 ─────────── What is log2? -->
+<section class="slide" id="s-log" data-sec="compare">
+  <h2 class="bi"><span class="zh">預備知識：對數 log₂</span><span class="en">Background: the base-2 logarithm</span></h2>
+  <div class="two" style="margin-top:4px">
+    <div style="width:400px;flex:none">
+      <div class="bi sm" data-step="1"><span class="zh">log₂ x ＝ 2 的幾次方會等於 x？</span><span class="en">log₂ x is the power you raise 2 to in order to get x</span></div>
+      <div class="logex" data-step="1">
+        <div>\(2^{3} = 8 \;\Rightarrow\; \log_2 8 = \mathbf{3}\)</div>
+        <div>\(2^{0} = 1 \;\Rightarrow\; \log_2 1 = \mathbf{0}\)</div>
+        <div>\(2^{-1} = \tfrac{1}{2} \;\Rightarrow\; \log_2 \tfrac{1}{2} = \mathbf{-1}\)</div>
+      </div>
+      <div class="callout key" data-step="3" style="margin-top:14px">
+        <div class="bi xs"><span class="zh">比值 <b>×2</b> → 分數 <b>＋1</b><br>比值 <b>÷2</b> → 分數 <b>−1</b><br>比值 ＝ 1（O ＝ E）→ 分數 <b>0</b></span><span class="en">ratio doubles: +1 · ratio halves: −1 · ratio 1 (O = E): 0</span></div>
+      </div>
+    </div>
+    <div class="grow" data-step="2">
+      <svg id="log-chart" viewBox="0 0 560 340"></svg>
+    </div>
+  </div>
+</section>
 
 <!-- 7a ─────────── MI -->
 <section class="slide" id="s-mi" data-sec="compare">
@@ -263,40 +284,63 @@
 
 <!-- 9b ─────────── n choose k, part 1: ordered picks -->
 <section class="slide" id="s-choose" data-sec="ct">
-  <h2 class="bi"><span class="zh">n 選 k（一）：先數有順序的選法</span><span class="en">Background “n choose k”, part 1: count ordered picks first (k = 2)</span></h2>
+  <h2 class="bi"><span class="zh">n 選 k（一）：放回 vs. 不放回</span><span class="en">Background “n choose k”, part 1: with vs. without replacement</span></h2>
   <div class="two" style="align-items:center;margin-top:0">
     <div class="chipset big"><span>A</span><span>B</span><span>C</span><span>D</span></div>
-    <div class="bi sm"><span class="zh">從 4 個字母中選 <b>2</b> 個；先假設<b>順序算不同</b>（AB ≠ BA）。</span><span class="en">Pick 2 of 4 letters; for now the order counts (AB ≠ BA).</span></div>
+    <div class="bi sm"><span class="zh">從這 4 個字母中，依序選出 <b>4</b> 個。順序算不同。</span><span class="en">Pick 4 letters one after another from these 4. The order counts.</span></div>
   </div>
   <div style="margin-top:8px">
-    <div class="bi sm" data-step="1"><span class="zh"><b>放回</b>（可重複使用同一字母）：每個位置都有 4 種選擇</span><span class="en">With replacement (a letter may be used again): 4 choices for every position</span></div>
+    <div class="bi sm" data-step="1"><span class="zh"><b>放回</b>（同一字母可再選）：每次都有 4 種選擇</span><span class="en">With replacement (a letter may be chosen again): 4 choices every time</span></div>
     <div class="slots">
       <div data-step="1"><b>4</b><span>1st</span></div>
       <i data-step="2">×</i><div data-step="2"><b>4</b><span>2nd</span></div>
-      <i data-step="3">＝</i><div class="res" data-step="3"><b>16</b><span class="zh">AA, AB, AC, …</span></div>
+      <i data-step="3">×</i><div data-step="3"><b>4</b><span>3rd</span></div>
+      <i data-step="4">×</i><div data-step="4"><b>4</b><span>4th</span></div>
+      <i data-step="5">＝</i><div class="res" data-step="5"><b>256</b><span>\(4^4\)</span></div>
     </div>
   </div>
   <div style="margin-top:10px">
-    <div class="bi sm" data-step="4"><span class="zh"><b>不放回</b>（每個字母最多用一次）：第 2 個位置只剩 3 種選擇</span><span class="en">Without replacement (each letter at most once): only 3 choices are left for the 2nd position</span></div>
-    <div style="display:flex;align-items:center;gap:0">
-      <div class="slots">
-        <div data-step="4"><b>4</b><span>1st</span></div>
-        <i data-step="5">×</i><div data-step="5"><b>3</b><span>2nd</span></div>
-        <i data-step="6">＝</i><div class="res" data-step="6"><b>12</b><span class="zh">AB, AC, AD, BA, …</span></div>
-      </div>
-      <div class="pl s" style="margin-left:36px">
-        <span data-step="7">＝</span><span class="frac" data-step="7"><span class="num">\(4!\)</span><span class="den">\((4-2)!\)</span></span>
-        <span data-step="8">＝</span><span class="frac" data-step="8"><span class="num">\(24\)</span><span class="den">\(2\)</span></span><span data-step="8">＝ <b>12</b></span>
-      </div>
+    <div class="bi sm" data-step="6"><span class="zh"><b>不放回</b>（每個字母只能用一次）：每選一個，選擇就少一個</span><span class="en">Without replacement (each letter only once): one fewer choice after every pick</span></div>
+    <div class="slots">
+      <div data-step="6"><b>4</b><span>1st</span></div>
+      <i data-step="7">×</i><div data-step="7"><b>3</b><span>2nd</span></div>
+      <i data-step="8">×</i><div data-step="8"><b>2</b><span>3rd</span></div>
+      <i data-step="9">×</i><div data-step="9"><b>1</b><span>4th</span></div>
+      <i data-step="10">＝</i><div class="res" data-step="10"><b>24</b><span>\(4!\)</span></div>
     </div>
-    <div class="bi xs" data-step="9" style="margin-top:4px"><span class="zh">一般式：\(n!/(n-k)!\)　（除以 \((n-k)!\) 去掉多餘的 \(2 \times 1\)）</span><span class="en">General form \(n!/(n-k)!\): dividing by \((n-k)!\) cuts off the unneeded factors</span></div>
   </div>
-  <div class="callout" data-step="10" style="margin-top:12px"><div class="bi sm"><span class="zh">但 AB 與 BA 被算成「不同」；我們只在乎選了<b>哪兩個字母</b>。→ 下一頁</span><span class="en">But AB and BA count as different; we only care which two letters were chosen. Next slide.</span></div></div>
+  <div class="callout" data-step="11" style="margin-top:12px"><div class="bi sm"><span class="zh"><b>階乘</b>：\(4! = 4 \times 3 \times 2 \times 1 = 24\)，就是把 4 個字母全部排一遍的方法數。</span><span class="en">Factorial: \(4! = 4 \times 3 \times 2 \times 1 = 24\) is the number of ways to line up all 4 letters.</span></div></div>
+</section>
+
+<!-- 9b1 ─────────── n choose k, part 2: only k picks -->
+<section class="slide" id="s-choose1b" data-sec="ct">
+  <h2 class="bi"><span class="zh">n 選 k（二）：只選 2 個（不放回）</span><span class="en">Background “n choose k”, part 2: only pick 2, without replacement</span></h2>
+  <div class="two" style="align-items:center;margin-top:0">
+    <div class="chipset big"><span>A</span><span>B</span><span>C</span><span>D</span></div>
+    <div class="bi sm"><span class="zh">現在只選 <b>2</b> 個，不放回；順序仍然算不同（AB ≠ BA）。</span><span class="en">Now pick only 2, without replacement; the order still counts (AB ≠ BA).</span></div>
+  </div>
+  <div style="margin-top:10px">
+    <div class="bi sm" data-step="1"><span class="zh">第 1 個有 4 種選擇，第 2 個剩 3 種：</span><span class="en">4 choices for the 1st pick, 3 left for the 2nd:</span></div>
+    <div class="slots">
+      <div data-step="1"><b>4</b><span>1st</span></div>
+      <i data-step="2">×</i><div data-step="2"><b>3</b><span>2nd</span></div>
+      <i data-step="3">＝</i><div class="res" data-step="3"><b>12</b><span class="zh">AB, AC, AD, BA, …</span></div>
+    </div>
+  </div>
+  <div style="margin-top:12px">
+    <div class="bi sm" data-step="4"><span class="zh">用階乘寫：4! 除以 (4−2)!，去掉多餘的 ×2×1</span><span class="en">In factorial notation: divide 4! by (4−2)! to cut off the unneeded “×2×1”</span></div>
+    <div class="pl s" style="margin-top:6px">
+      <span data-step="4">\(\dfrac{4!}{(4-2)!}\)</span>
+      <span data-step="5">＝</span><span class="frac" data-step="5"><span class="num">\(4 \times 3 \times \cancel{2 \times 1}\)</span><span class="den">\(\cancel{2 \times 1}\)</span></span>
+      <span data-step="6">＝ <b>12</b></span></div>
+    <div class="bi xs" data-step="7" style="margin-top:6px"><span class="zh">一般式：從 n 個中選 k 個（有順序）＝ \(\dfrac{n!}{(n-k)!}\)</span><span class="en">General form: ordered picks of k out of n</span></div>
+  </div>
+  <div class="callout" data-step="8" style="margin-top:12px"><div class="bi sm"><span class="zh">但 AB 與 BA 被算成「不同」；我們只在乎選了<b>哪兩個字母</b>。→ 下一頁</span><span class="en">But AB and BA count as different; we only care which two letters were chosen. Next slide.</span></div></div>
 </section>
 
 <!-- 9b2 ─────────── n choose k, part 2: order does not matter -->
 <section class="slide" id="s-choose2" data-sec="ct">
-  <h2 class="bi"><span class="zh">n 選 k（二）：不計順序，除以 k!</span><span class="en">Background “n choose k”, part 2: order should not matter</span></h2>
+  <h2 class="bi"><span class="zh">n 選 k（三）：不計順序，除以 k!</span><span class="en">Background “n choose k”, part 3: order should not matter</span></h2>
   <div data-step="1">
     <div class="bi sm"><span class="zh">12 種有順序的選法中，每一組字母都出現了 2! ＝ 2×1 ＝ 2 次（AB 與 BA 是同一組）：</span><span class="en">In the 12 ordered picks, every set of letters appears 2! = 2 times (AB and BA are the same set):</span></div>
     <div class="chipset same">
