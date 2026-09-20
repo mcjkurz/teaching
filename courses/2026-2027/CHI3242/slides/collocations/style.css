@@ -234,4 +234,4 @@ sub { font-size: .6em; }
 .defs { margin-top: 8px; } .defs .bi + .bi { margin-top: 7px; }
 .defs .legend { color: var(--col); }
 table.ct.mini.showl .letter { display: block; font-size: 11px; top: 2px; left: 6px; }
-table.ct.mini.showl td { height: 54px; }
+table.ct.mini.showl td { height: 48px; }
