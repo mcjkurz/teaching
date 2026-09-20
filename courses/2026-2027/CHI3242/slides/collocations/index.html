@@ -16,7 +16,7 @@
   <div class="rule"></div>
   <figure class="portrait title-portrait" data-step="1"><img src="img/firth.png" alt="J. R. Firth"><figcaption>J. R. Firth<br><span>1890–1960</span></figcaption></figure>
   <div class="quote bi" data-step="1">
-    <span class="zh">「觀其伴，而知其詞。」— J. R. Firth (1957)</span>
+    <span class="zh">「觀其伴，知其義。」— J. R. Firth (1957)</span>
     <span class="en">“You shall know a word by the company it keeps.”</span>
   </div>
   <div class="hint">CHI3242 文本挖掘 Text Mining for Chinese Humanities &nbsp;·&nbsp; <kbd>←</kbd> <kbd>→</kbd> navigate &nbsp;·&nbsp; <kbd>1</kbd>–<kbd>9</kbd> sections &nbsp;·&nbsp; <kbd>F</kbd> fullscreen</div>
@@ -78,19 +78,27 @@
 <section class="slide" id="s-balls" data-sec="expected">
   <h2 class="bi"><span class="zh">期望值 <i>E</i></span><span class="en">Expected frequency: what would we see if it were all chance?</span></h2>
   <div id="balls" class="balls"></div>
-  <div class="two">
-    <div class="grow">
-      <div class="bi" data-step="1"><span class="zh">10 顆球，其中 <span class="red-c">5 顆紅球</span>：P(紅) ＝ 5 / 10 ＝ 0.5</span><span class="en">10 balls, 5 of them red</span></div>
-      <div class="bi" data-step="2"><span class="zh">抽出 <b>4</b> 顆，預期有幾顆<span class="red-c">紅球</span>？（這一次：<b id="ball-k">2</b>）</span><span class="en">Draw 4 balls. How many should be red?</span></div>
-      <div class="callout key" data-step="3">
-        <div class="eq" style="margin:0;font-size:26px">E(紅 | 4) = P(紅) × 4 = 0.5 × 4 = <b>2</b></div>
-        <div class="bi xs" style="margin-top:8px"><span class="zh">單次可能是 1 或 3 顆；期望值是「平均」：抽得越多，平均越接近 2。</span><span class="en">One draw may give 1 or 3. E is the average: the more we draw, the closer we get to 2.</span></div>
-      </div>
+  <div class="bi" data-step="1"><span class="zh">10 顆球，其中 <span class="red-c">5 顆紅球</span>：P(紅) ＝ 5 / 10 ＝ 0.5</span><span class="en">10 balls, 5 of them red</span></div>
+  <div class="bi" data-step="2"><span class="zh">抽出 <b>4</b> 顆，預期有幾顆<span class="red-c">紅球</span>？（這一次：<b id="ball-k">2</b>）</span><span class="en">Draw 4 balls. How many should be red?</span></div>
+  <div class="callout key" data-step="3">
+    <div class="eq" style="margin:0;font-size:28px">E(紅 | 4) = P(紅) × 4 = 0.5 × 4 = <b>2</b></div>
+    <div class="bi sm" style="margin-top:8px"><span class="zh">單次可能是 1 或 3 顆；期望值是「平均」：抽得越多，平均越接近 2。</span><span class="en">One draw may give 1 or 3. E is the average: the more we draw, the closer we get to 2.</span></div>
+  </div>
+</section>
+
+<!-- 5b ─────────── Random draws: running average -->
+<section class="slide" id="s-balls2" data-sec="expected">
+  <h2 class="bi"><span class="zh">隨機抽取：平均會靠近期望值</span><span class="en">Random draws: the running average approaches E</span></h2>
+  <div id="balls2" class="balls" style="margin:12px 0 6px"></div>
+  <div class="two" style="align-items:flex-start">
+    <div style="width:640px;flex:none">
+      <div class="bi xs"><span class="zh">平均紅球數 vs. 抽取次數</span><span class="en">running average of red balls vs. number of draws</span></div>
+      <svg id="ball-chart" viewBox="0 0 640 290"></svg>
     </div>
-    <div class="chartbox" data-step="2">
-      <div class="bi xs"><span class="zh">平均紅球數 vs. 抽取次數</span><span class="en">running average vs. number of draws</span></div>
-      <svg id="ball-chart" viewBox="0 0 400 232"></svg>
-      <div class="bi xs"><span class="zh">按 <kbd>R</kbd> 抽一次　<kbd>T</kbd> 連抽 10 次　<kbd>C</kbd> 清除</span><span class="en">R: draw once · T: draw 10 times · C: clear</span></div>
+    <div class="grow">
+      <div class="bi sm"><span class="zh">這一次：<b class="red-c" id="ball-k2">2</b> 顆紅球</span><span class="en">this draw</span></div>
+      <div class="bi sm" style="margin-top:10px"><span class="zh">已抽 <b id="ball-n">0</b> 次；平均 <b class="col-c" id="ball-avg">–</b></span><span class="en">draws so far · running average</span></div>
+      <div class="bi xs" style="margin-top:16px"><span class="zh"><kbd>R</kbd> 抽一次<br><kbd>T</kbd> 連抽 10 次<br><kbd>C</kbd> 清除</span><span class="en">R: draw once · T: draw 10 times · C: clear</span></div>
     </div>
   </div>
 </section>
@@ -243,40 +251,42 @@
 
 <!-- 9b ─────────── n choose k, part 1: ordered picks -->
 <section class="slide" id="s-choose" data-sec="ct">
-  <h2 class="bi"><span class="zh">n 選 k（一）：先數有順序的選法</span><span class="en">Background “n choose k”, part 1: count ordered picks first</span></h2>
+  <h2 class="bi"><span class="zh">n 選 k（一）：先數有順序的選法</span><span class="en">Background “n choose k”, part 1: count ordered picks first (k = 2)</span></h2>
   <div class="two" style="align-items:center;margin-top:0">
     <div class="chipset big"><span>A</span><span>B</span><span>C</span><span>D</span></div>
-    <div class="bi sm"><span class="zh">從 4 個字母中選 <b>3</b> 個；每個最多用一次（不放回），順序暫時算不同。</span><span class="en">Pick 3 of 4 letters, each used at most once (no replacement). For now, order counts.</span></div>
+    <div class="bi sm"><span class="zh">從 4 個字母中選 <b>2</b> 個；先假設<b>順序算不同</b>（AB ≠ BA）。</span><span class="en">Pick 2 of 4 letters; for now the order counts (AB ≠ BA).</span></div>
   </div>
   <div data-step="1" style="margin-top:10px">
-    <div class="bi sm"><span class="zh">第 1 個位置有 4 種選擇，第 2 個剩 3 種，第 3 個剩 2 種：</span><span class="en">4 choices for the 1st pick, 3 left for the 2nd, 2 left for the 3rd:</span></div>
-    <div class="slots"><div><b>4</b><span>1st</span></div><i>×</i><div><b>3</b><span>2nd</span></div><i>×</i><div><b>2</b><span>3rd</span></div><i>＝</i><div class="res"><b>24</b><span class="zh">有順序的選法</span></div></div>
+    <div class="bi sm"><span class="zh"><b>放回</b>（可重複使用同一字母）：每個位置都有 4 種選擇</span><span class="en">With replacement (a letter may be used again): 4 choices for every position</span></div>
+    <div class="slots"><div><b>4</b><span>1st</span></div><i>×</i><div><b>4</b><span>2nd</span></div><i>＝</i><div class="res"><b>16</b><span class="zh">AA, AB, AC, …</span></div></div>
   </div>
-  <div data-step="2" style="margin-top:8px">
-    <div class="bi sm"><span class="zh">用階乘寫：4! ＝ 4×3×2×1；除以 (4−3)! ＝ 1! 就把多餘的「×1」去掉</span><span class="en">In factorial notation: divide 4! by (4−3)! to cut off the unneeded “×1”</span></div>
-    <div class="pl s" style="margin-top:4px"><span class="frac"><span class="num">4!</span><span class="den">(4 − 3)!</span></span><span>＝</span><span class="frac"><span class="num">4 × 3 × 2 × 1</span><span class="den">1</span></span><span>＝ <b>24</b></span>
-      <span class="small" style="font-size:18px;margin-left:16px">一般式 general: n! / (n−k)!</span></div>
+  <div data-step="2" style="margin-top:10px">
+    <div class="bi sm"><span class="zh"><b>不放回</b>（每個字母最多用一次）：第 2 個位置只剩 3 種選擇</span><span class="en">Without replacement (each letter at most once): only 3 choices are left for the 2nd position</span></div>
+    <div style="display:flex;align-items:center;gap:36px">
+      <div class="slots"><div><b>4</b><span>1st</span></div><i>×</i><div><b>3</b><span>2nd</span></div><i>＝</i><div class="res"><b>12</b><span class="zh">AB, AC, AD, BA, …</span></div></div>
+      <div class="pl s"><span>＝</span><span class="frac"><span class="num">4!</span><span class="den">(4 − 2)!</span></span><span>＝</span><span class="frac"><span class="num">24</span><span class="den">2</span></span><span>＝ <b>12</b></span></div>
+    </div>
+    <div class="bi xs" style="margin-top:4px"><span class="zh">一般式：n! / (n−k)!　（除以 (n−k)! 去掉多餘的 2×1）</span><span class="en">General form n! / (n−k)!: dividing by (n−k)! cuts off the unneeded factors</span></div>
   </div>
-  <div class="callout" data-step="3" style="margin-top:12px"><div class="bi sm"><span class="zh">但 ABC 與 CBA 被算成「不同」；我們只在乎選了<b>哪三個字母</b>。→ 下一頁</span><span class="en">But ABC and CBA count as different here; we only care which three letters were chosen. Next slide.</span></div></div>
+  <div class="callout" data-step="3" style="margin-top:12px"><div class="bi sm"><span class="zh">但 AB 與 BA 被算成「不同」；我們只在乎選了<b>哪兩個字母</b>。→ 下一頁</span><span class="en">But AB and BA count as different; we only care which two letters were chosen. Next slide.</span></div></div>
 </section>
 
 <!-- 9b2 ─────────── n choose k, part 2: order does not matter -->
 <section class="slide" id="s-choose2" data-sec="ct">
   <h2 class="bi"><span class="zh">n 選 k（二）：不計順序，除以 k!</span><span class="en">Background “n choose k”, part 2: order should not matter</span></h2>
   <div data-step="1">
-    <div class="bi sm"><span class="zh">同一組 {A, B, C} 在 24 種裡被重複算了幾次？它有 3! ＝ 3×2×1 ＝ 6 種排列：</span><span class="en">How many of the 24 ordered picks are the same set {A, B, C}? All 3! = 6 orderings:</span></div>
-    <div class="chipset same"><span>ABC</span><span>ACB</span><span>BAC</span><span>BCA</span><span>CAB</span><span>CBA</span></div>
+    <div class="bi sm"><span class="zh">12 種有順序的選法中，每一組字母都出現了 2! ＝ 2×1 ＝ 2 次（AB 與 BA 是同一組）：</span><span class="en">In the 12 ordered picks, every set of letters appears 2! = 2 times (AB and BA are the same set):</span></div>
+    <div class="chipset same">
+      <div class="grp"><span>AB</span><span>BA</span></div><div class="grp"><span>AC</span><span>CA</span></div><div class="grp"><span>AD</span><span>DA</span></div>
+      <div class="grp"><span>BC</span><span>CB</span></div><div class="grp"><span>BD</span><span>DB</span></div><div class="grp"><span>CD</span><span>DC</span></div>
+    </div>
   </div>
   <div data-step="2" style="margin-top:10px">
-    <div class="bi sm"><span class="zh">每一組都被算了 3! 次，所以再除以 <b>3!</b>：</span><span class="en">Every set is counted 3! times, so divide by 3! once more:</span></div>
-    <div class="pl s" style="margin-top:4px"><span class="frac"><span class="num">4!</span><span class="den">(4 − 3)!</span></span><span>÷ 3! ＝</span>
-      <span class="frac"><span class="num">4!</span><span class="den">3! · (4 − 3)!</span></span><span>＝</span><span class="frac"><span class="num">24</span><span class="den">6 · 1</span></span><span>＝ <b>4</b></span></div>
+    <div class="bi sm"><span class="zh">所以再除以 <b>2!</b>：12 ÷ 2 ＝ <b>6</b> 種選法</span><span class="en">So divide by 2! once more: 12 ÷ 2 = 6 different choices</span></div>
+    <div class="pl s" style="margin-top:4px"><span class="frac"><span class="num">4!</span><span class="den">(4 − 2)!</span></span><span>÷ 2! ＝</span>
+      <span class="frac"><span class="num">4!</span><span class="den">2! · (4 − 2)!</span></span><span>＝</span><span class="frac"><span class="num">24</span><span class="den">2 · 2</span></span><span>＝ <b>6</b></span></div>
   </div>
-  <div class="two" data-step="3" style="margin-top:2px;align-items:center;gap:24px">
-    <div class="chipset" style="flex:none"><span>ABC</span><span>ABD</span><span>ACD</span><span>BCD</span></div>
-    <div class="bi xs"><span class="zh">4 種選法：等於「不選」哪一個字母</span><span class="en">4 ways: equivalently, which single letter is left out</span></div>
-  </div>
-  <div class="callout key" data-step="4" style="margin-top:10px">
+  <div class="callout key" data-step="3" style="margin-top:12px">
     <div class="pl s"><span data-binom="n|k"></span><span>＝</span><span class="frac"><span class="num">n!</span><span class="den">k! (n − k)!</span></span>
       <span class="small" style="font-size:18px;margin-left:12px">= [ n! / (n−k)! ] ÷ k!</span></div>
     <div class="bi xs" style="margin-top:6px"><span class="zh">奶茶實驗：C(8,4) ＝ 8!/(4!·4!) ＝ <b>70</b> 種選法，只有 1 種全對 → p ＝ 1/70。</span><span class="en">Tea experiment: C(8,4) = 70 ways to pick the 4 milk-first cups; only 1 is fully correct, so p = 1/70.</span></div>

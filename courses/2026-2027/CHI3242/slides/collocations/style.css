@@ -252,7 +252,7 @@ table.ct.mini.showl td { height: 48px; }
 
 .chartbox { width: 420px; flex: none; }
 #ball-chart { width: 100%; height: auto; display: block; margin: 4px 0; }
-#ball-chart text { font-family: var(--latin), var(--cjk); font-size: 12px; fill: var(--mute); }
+#ball-chart text { font-family: var(--latin), var(--cjk); font-size: 15px; fill: var(--mute); }
 
 .pl.s { font-size: 26px; gap: 8px; }
 .pl.s .frac .num { padding: 2px 10px 3px; } .pl.s .frac .den { padding: 3px 10px 0; }
@@ -269,3 +269,8 @@ table.ct td.tot.pu { background: none; box-shadow: none; color: var(--pur); font
 #obs-toks { gap: 6px 3px; }
 
 img.fig { display: block; border: 1.5px solid var(--line); border-radius: 10px; background: #fff; }
+
+.chipset .grp { display: flex; gap: 4px; padding: 4px; border: 2px dashed var(--ok); border-radius: 12px; }
+.chipset .grp span { font-size: 24px; padding: 2px 12px; }
+.chipset.same { gap: 12px; }
+s { text-decoration-color: var(--mute); color: var(--mute); }

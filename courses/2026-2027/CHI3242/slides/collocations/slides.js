@@ -121,47 +121,55 @@ function drawHorizon(box, els, targets, h) {
   };
 })();
 
-/* ---------- 5. expected value: drawing balls + running-average chart ---------- */
+/* ---------- 5. expected value: drawing balls (+ running-average chart on the next slide) ---------- */
 (function () {
   const reds = [0, 2, 3, 6, 9];
-  let balls = [], built = false, picked = [2, 4, 6, 7];
+  let picked = [2, 4, 6, 7];
   let draws = 0, sum = 0, avgs = [];          // avgs[i] = mean number of red balls after i+1 draws
   const redOf = i => reds.includes(i);
   const redCount = () => picked.filter(redOf).length;
   const draw = () => { picked = [...Array(10).keys()].sort(() => Math.random() - .5).slice(0, 4); draws++; sum += redCount(); avgs.push(sum / draws); };
   const NS = 'http://www.w3.org/2000/svg';
   const svgEl = (tag, attrs, text) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; return e; };
+  function showBalls(box, picking) {
+    if (!box.children.length) for (let i = 0; i < 10; i++) { const b = document.createElement('div'); b.className = 'ball' + (redOf(i) ? ' red' : ''); box.appendChild(b); }
+    box.classList.toggle('picking', picking);
+    [...box.children].forEach((b, i) => b.classList.toggle('picked', picking && picked.includes(i)));
+  }
   function chart(svg) {
     svg.innerHTML = '';
-    const L = 42, R = 392, T = 12, B = 196, W = R - L, H = B - T;
+    const L = 48, R = 626, T = 14, B = 250, W = R - L, H = B - T;
     const xmax = Math.max(10, Math.ceil(avgs.length / 10) * 10), ymax = 4;
     const X = i => L + W * i / xmax, Y = v => B - H * v / ymax;
     for (let v = 0; v <= ymax; v++) {                       // horizontal grid + y labels
       svg.appendChild(svgEl('line', { x1: L, x2: R, y1: Y(v), y2: Y(v), stroke: '#e3e6ec', 'stroke-width': 1 }));
-      svg.appendChild(svgEl('text', { x: L - 8, y: Y(v) + 4, 'text-anchor': 'end' }, v));
+      svg.appendChild(svgEl('text', { x: L - 10, y: Y(v) + 5, 'text-anchor': 'end' }, v));
     }
-    [0, xmax / 2, xmax].forEach(i => svg.appendChild(svgEl('text', { x: X(i), y: B + 16, 'text-anchor': 'middle' }, i)));
-    svg.appendChild(svgEl('text', { x: (L + R) / 2, y: B + 32, 'text-anchor': 'middle' }, '抽取次數 draws'));
+    [0, xmax / 2, xmax].forEach(i => svg.appendChild(svgEl('text', { x: X(i), y: B + 20, 'text-anchor': 'middle' }, i)));
+    svg.appendChild(svgEl('text', { x: (L + R) / 2, y: B + 40, 'text-anchor': 'middle' }, '抽取次數 draws'));
     svg.appendChild(svgEl('line', { x1: L, x2: R, y1: Y(2), y2: Y(2), stroke: '#1f5fd6', 'stroke-width': 2, 'stroke-dasharray': '6 4' }));
-    svg.appendChild(svgEl('text', { x: R, y: Y(2) - 6, 'text-anchor': 'end', style: 'fill:#1f5fd6;font-weight:600' }, 'E = 2'));
+    svg.appendChild(svgEl('text', { x: R, y: Y(2) - 8, 'text-anchor': 'end', style: 'fill:#1f5fd6;font-weight:600' }, 'E = 2'));
     if (!avgs.length) return;
     svg.appendChild(svgEl('polyline', { points: avgs.map((v, i) => `${X(i + 1)},${Y(v)}`).join(' '), fill: 'none', stroke: '#e0570f', 'stroke-width': 2.5, 'stroke-linejoin': 'round' }));
     if (avgs.length <= 40) avgs.forEach((v, i) => svg.appendChild(svgEl('circle', { cx: X(i + 1), cy: Y(v), r: 3.5, fill: '#e0570f' })));
     const last = avgs[avgs.length - 1];
     svg.appendChild(svgEl('circle', { cx: X(avgs.length), cy: Y(last), r: 6, fill: '#e0570f', stroke: '#fff', 'stroke-width': 2 }));
-    svg.appendChild(svgEl('text', { x: Math.min(X(avgs.length), R - 30), y: Y(last) - 12, 'text-anchor': 'middle', style: 'fill:#e0570f;font-weight:600' }, last.toFixed(2)));
   }
   HOOKS['s-balls'] = {
     render(step, el) {
-      const box = $('#balls', el);
-      if (!built) { for (let i = 0; i < 10; i++) { const b = document.createElement('div'); b.className = 'ball' + (redOf(i) ? ' red' : ''); box.appendChild(b); balls.push(b); } built = true; }
-      box.classList.toggle('picking', step >= 2);
-      balls.forEach((b, i) => b.classList.toggle('picked', step >= 2 && picked.includes(i)));
+      showBalls($('#balls', el), step >= 2);
       $('#ball-k', el).textContent = redCount();
+    }
+  };
+  HOOKS['s-balls2'] = {
+    render(step, el) {
+      showBalls($('#balls2', el), true);
+      $('#ball-k2', el).textContent = redCount();
+      $('#ball-n', el).textContent = draws;
+      $('#ball-avg', el).textContent = draws ? (sum / draws).toFixed(2) : '–';
       chart($('#ball-chart', el));
     },
-    key(e, step) {
-      if (step < 2) return false;
+    key(e) {
       const k = e.key.toLowerCase();
       if (k === 'r') { draw(); return true; }
       if (k === 't') { for (let i = 0; i < 10; i++) draw(); return true; }
