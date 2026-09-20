@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>搭配詞 Collocations — CHI3242</title>
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -69,7 +70,7 @@
     <div class="bi" data-step="2" data-until="3"><span class="zh"><span class="tag win">視窗</span> 每個「王婆」的左右各 3 個詞（horizon = 3）</span><span class="en">Window: 3 words to the left and right of every 王婆. The numbers show the distance.</span></div>
     <div data-step="3">
       <div class="bi"><span class="zh"><span class="tag col">Y</span> 搭配詞：<b>痛苦</b>，在視窗內出現 <span class="col-c">2</span> 次</span><span class="en">Collocate: 痛苦 appears twice inside a window (in this excerpt)</span></div>
-      <div class="eq big">O(王婆, 痛苦) = <span id="obs-O">2</span></div>
+      <div class="eq big">\(O(\text{王婆}, \text{痛苦}) =\) <span id="obs-O">2</span></div>
     </div>
   </div>
 </section>
@@ -78,10 +79,10 @@
 <section class="slide" id="s-balls" data-sec="expected">
   <h2 class="bi"><span class="zh">期望值 <i>E</i></span><span class="en">Expected frequency: what would we see if it were all chance?</span></h2>
   <div id="balls" class="balls"></div>
-  <div class="bi" data-step="1"><span class="zh">10 顆球，其中 <span class="red-c">5 顆紅球</span>：P(紅) ＝ 5 / 10 ＝ 0.5</span><span class="en">10 balls, 5 of them red</span></div>
+  <div class="bi" data-step="1"><span class="zh">10 顆球，其中 <span class="red-c">5 顆紅球</span>：\(P(\text{紅}) = \frac{5}{10} = 0.5\)</span><span class="en">10 balls, 5 of them red</span></div>
   <div class="bi" data-step="2"><span class="zh">抽出 <b>4</b> 顆，預期有幾顆<span class="red-c">紅球</span>？（這一次：<b id="ball-k">2</b>）</span><span class="en">Draw 4 balls. How many should be red?</span></div>
   <div class="callout key" data-step="3">
-    <div class="eq" style="margin:0;font-size:28px">E(紅 | 4) = P(紅) × 4 = 0.5 × 4 = <b>2</b></div>
+    <div class="eq" style="margin:0;font-size:28px">\(E(\text{紅} \mid 4) = P(\text{紅}) \times 4 = 0.5 \times 4 = \mathbf{2}\)</div>
     <div class="bi sm" style="margin-top:8px"><span class="zh">單次可能是 1 或 3 顆；期望值是「平均」：抽得越多，平均越接近 2。</span><span class="en">One draw may give 1 or 3. E is the average: the more we draw, the closer we get to 2.</span></div>
   </div>
 </section>
@@ -116,13 +117,13 @@
   <div class="two" style="margin-top:8px">
     <div class="grow">
       <div data-step="2"><div class="bi sm"><span class="zh">① 隨機抽一個詞，剛好是「痛苦」的機率</span><span class="en">chance that a random word is 痛苦</span></div>
-        <div class="eq">P(痛苦) = 50 / 50,000 = 0.001</div></div>
+        <div class="eq">\(P(\text{痛苦}) = \frac{50}{50{,}000} = 0.001\)</div></div>
       <div data-step="3"><div class="bi sm"><span class="zh">② 「王婆」周圍有多少個位置？</span><span class="en">how many slots around all 王婆?</span></div>
-        <div class="eq">200 × 3 × 2 = 1,200</div></div>
+        <div class="eq">\(200 \times 3 \times 2 = 1{,}200\)</div></div>
     </div>
     <div class="grow" data-step="4">
       <div class="bi sm"><span class="zh">③ 期望值 ＝ 機率 × 位置數</span><span class="en">expected = probability × slots</span></div>
-      <div class="eq big">E = 0.001 × 1,200 = <b class="tgt-c">1.2</b></div>
+      <div class="eq big">\(E = 0.001 \times 1{,}200 = \textcolor{#1f5fd6}{\mathbf{1.2}}\)</div>
       <div class="bi sm" style="margin-top:6px"><span class="zh">純屬偶然，只預期出現約 1.2 次</span><span class="en">by chance alone we expect only about 1.2 co-occurrences</span></div>
     </div>
   </div>
@@ -136,7 +137,7 @@
     <div class="barrow" data-step="2"><div class="bi sm"><span class="zh">觀察值 <b>O</b></span><span class="en">observed in the corpus (illustrative)</span></div><div class="bar o">8</div></div>
   </div>
   <div class="callout key" data-step="3">
-    <div class="eq big" style="margin:0">O / E = 8 / 1.2 ≈ <b class="col-c">6.7</b></div>
+    <div class="eq big" style="margin:0">\(\dfrac{O}{E} = \dfrac{8}{1.2} \approx \textcolor{#e0570f}{\mathbf{6.7}}\)</div>
     <div class="bi" style="margin-top:8px"><span class="zh">實際共現次數是偶然預期的 6.7 倍 → 王婆與痛苦互相「吸引」</span><span class="en">They co-occur 6.7 times more often than chance predicts: the two words attract each other.</span></div>
   </div>
   <div class="bi sm" data-step="4" style="margin-top:12px"><span class="zh">再取對數，就得到<b>互信息 MI</b>（下一頁）。</span><span class="en">Taking the logarithm of this ratio gives mutual information (next slide).</span></div>
@@ -149,9 +150,9 @@
   <div class="two" style="margin-top:4px">
     <div class="grow">
       <div data-step="1"><div class="bi sm"><span class="zh">對 O/E 取以 2 為底的對數</span><span class="en">Take the base-2 logarithm of O / E</span></div>
-        <div class="eq big">MI = log<sub>2</sub>( O / E )</div></div>
+        <div class="eq big">\(\mathrm{MI} = \log_2 \dfrac{O}{E}\)</div></div>
       <div data-step="2" style="margin-top:10px"><div class="bi sm"><span class="zh">王婆 ／ 痛苦：</span><span class="en">for our example pair</span></div>
-        <div class="eq">MI = log<sub>2</sub>(8 / 1.2) = log<sub>2</sub> 6.7 ≈ <b class="col-c" id="mi-val"></b> bits</div></div>
+        <div class="eq">\(\mathrm{MI} = \log_2 \dfrac{8}{1.2} = \log_2 6.7 \approx \textcolor{#e0570f}{\mathbf{2.74}}\ \text{bits}\)</div></div>
       <div class="bi xs" data-step="4" style="margin-top:12px"><span class="zh">來源：Evert, p. 1226。MI 只看效應大小（O 與 E 的比值），<b>不考慮證據多寡</b>——低頻詞對容易得高分（p. 1227）。</span><span class="en">Evert, p. 1226. MI only measures effect size, not how much evidence we have; rare pairs can score very high (p. 1227).</span></div>
     </div>
     <div style="width:430px" data-step="3">
@@ -168,7 +169,7 @@
     <div class="grow">
       <div data-step="1"><div class="bi sm"><span class="zh">負的 MI 表示「彼此排斥」：比偶然更少共現</span><span class="en">Negative MI means repulsion: the words co-occur less than chance</span></div></div>
       <div data-step="2" style="margin-top:10px"><div class="bi sm"><span class="zh">PPMI：把負值一律設為 0</span><span class="en">PPMI: replace every negative value with 0</span></div>
-        <div class="eq big">PPMI = max( 0, log<sub>2</sub>( O / E ) )</div></div>
+        <div class="eq big">\(\mathrm{PPMI} = \max\!\left(0,\ \log_2 \dfrac{O}{E}\right)\)</div></div>
       <div data-step="4" style="margin-top:10px"><div class="bi xs"><span class="zh"><b>為什麼？</b>要可靠地判斷「比偶然更少」，需要很大的語料；低頻詞對的負值大多只是噪音。PPMI 因此常用於詞向量／共現矩陣（分布式語義）。</span><span class="en">Reliably detecting “less than chance” needs a huge corpus; for rare pairs negative values are mostly noise. PPMI is therefore widely used for co-occurrence matrices and word vectors (distributional semantics).</span></div></div>
     </div>
     <div style="width:430px" data-step="1">
@@ -182,17 +183,17 @@
 <section class="slide" id="s-problem" data-sec="compare">
   <h2 class="bi"><span class="zh">簡單指標的問題</span><span class="en">A problem with simple measures</span></h2>
   <div data-step="1">
-    <div class="eq" style="font-size:24px;margin:0">E(collocate | target) = P(collocate) × ( count(target) × window × 2 )</div>
-    <span class="small" style="font-size:16px;margin-left:12px">P(collocate) = count(collocate) / N &nbsp;·&nbsp; N = 1,000,000 · window = 5</span>
+    <div class="eq" style="font-size:24px;margin:0">\(E(\text{coll.} \mid \text{target}) = P(\text{coll.}) \times \big(\text{count}(\text{target}) \times \text{window} \times 2\big)\)</div>
+    <span class="small" style="font-size:16px;margin-left:12px">\(P(\text{coll.}) = \dfrac{\text{count}(\text{coll.})}{N}\) &nbsp;·&nbsp; \(N = 1{,}000{,}000\) · window = 5</span>
   </div>
   <div class="cards" style="margin-top:12px">
     <div class="card" data-step="2">
       <h3 class="bi sm"><span class="zh">the Iliad</span><span class="en">《伊利亞特》</span></h3>
-      <div class="nums">count(the) = 100,000<br>count(Iliad) = <b>10</b><br>P(the) = 100,000 / 1,000,000 = 0.1<br>E = 0.1 × (10 × 5 × 2) = <b>10</b><br>O = <b>10</b></div>
+      <div class="nums">count(the) = 100,000<br>count(Iliad) = <b>10</b><br>\(P(\text{the}) = \frac{100{,}000}{1{,}000{,}000} = 0.1\)<br>\(E = 0.1 \times (10 \times 5 \times 2) = \mathbf{10}\)<br>O = <b>10</b></div>
     </div>
     <div class="card" data-step="3">
       <h3 class="bi sm"><span class="zh">must also</span><span class="en">「必須」「也」</span></h3>
-      <div class="nums">count(must) = 1,000<br>count(also) = <b>1,000</b><br>P(must) = 1,000 / 1,000,000 = 0.001<br>E = 0.001 × (1000 × 5 × 2) = <b>10</b><br>O = <b>10</b></div>
+      <div class="nums">count(must) = 1,000<br>count(also) = <b>1,000</b><br>\(P(\text{must}) = \frac{1{,}000}{1{,}000{,}000} = 0.001\)<br>\(E = 0.001 \times (1000 \times 5 \times 2) = \mathbf{10}\)<br>O = <b>10</b></div>
     </div>
   </div>
   <div class="callout" data-step="4" style="margin-top:12px">
@@ -276,11 +277,11 @@
         <i data-step="6">＝</i><div class="res" data-step="6"><b>12</b><span class="zh">AB, AC, AD, BA, …</span></div>
       </div>
       <div class="pl s" style="margin-left:36px">
-        <span data-step="7">＝</span><span class="frac" data-step="7"><span class="num">4!</span><span class="den">(4 − 2)!</span></span>
-        <span data-step="8">＝</span><span class="frac" data-step="8"><span class="num">24</span><span class="den">2</span></span><span data-step="8">＝ <b>12</b></span>
+        <span data-step="7">＝</span><span class="frac" data-step="7"><span class="num">\(4!\)</span><span class="den">\((4-2)!\)</span></span>
+        <span data-step="8">＝</span><span class="frac" data-step="8"><span class="num">\(24\)</span><span class="den">\(2\)</span></span><span data-step="8">＝ <b>12</b></span>
       </div>
     </div>
-    <div class="bi xs" data-step="9" style="margin-top:4px"><span class="zh">一般式：n! / (n−k)!　（除以 (n−k)! 去掉多餘的 2×1）</span><span class="en">General form n! / (n−k)!: dividing by (n−k)! cuts off the unneeded factors</span></div>
+    <div class="bi xs" data-step="9" style="margin-top:4px"><span class="zh">一般式：\(\dfrac{n!}{(n-k)!}\)　（除以 \((n-k)!\) 去掉多餘的 \(2 \times 1\)）</span><span class="en">General form \(\frac{n!}{(n-k)!}\): dividing by \((n-k)!\) cuts off the unneeded factors</span></div>
   </div>
   <div class="callout" data-step="10" style="margin-top:12px"><div class="bi sm"><span class="zh">但 AB 與 BA 被算成「不同」；我們只在乎選了<b>哪兩個字母</b>。→ 下一頁</span><span class="en">But AB and BA count as different; we only care which two letters were chosen. Next slide.</span></div></div>
 </section>
@@ -298,14 +299,14 @@
   <div style="margin-top:10px">
     <div class="bi sm" data-step="2"><span class="zh">所以再除以 <b>2!</b>：12 ÷ 2 ＝ <b>6</b> 種選法</span><span class="en">So divide by 2! once more: 12 ÷ 2 = 6 different choices</span></div>
     <div class="pl s" style="margin-top:4px">
-      <span class="frac"><span class="num">4!</span><span class="den">(4 − 2)!</span></span><span data-step="3">÷ 2!</span>
-      <span data-step="4">＝</span><span class="frac" data-step="4"><span class="num">4!</span><span class="den">2! · (4 − 2)!</span></span>
-      <span data-step="5">＝</span><span class="frac" data-step="5"><span class="num">24</span><span class="den">2 · 2</span></span><span data-step="5">＝ <b>6</b></span></div>
+      <span class="frac"><span class="num">\(4!\)</span><span class="den">\((4-2)!\)</span></span><span data-step="3">\(\div\, 2!\)</span>
+      <span data-step="4">＝</span><span class="frac" data-step="4"><span class="num">\(4!\)</span><span class="den">\(2!\,(4-2)!\)</span></span>
+      <span data-step="5">＝</span><span class="frac" data-step="5"><span class="num">\(24\)</span><span class="den">\(2 \cdot 2\)</span></span><span data-step="5">＝ <b>6</b></span></div>
   </div>
   <div class="callout key" data-step="6" style="margin-top:12px">
-    <div class="pl s"><span data-binom="n|k"></span><span>＝</span><span class="frac"><span class="num">n!</span><span class="den">k! (n − k)!</span></span>
-      <span class="small" style="font-size:18px;margin-left:12px">= [ n! / (n−k)! ] ÷ k!</span></div>
-    <div class="bi xs" style="margin-top:6px"><span class="zh">奶茶實驗：C(8,4) ＝ 8!/(4!·4!) ＝ <b>70</b> 種選法，只有 1 種全對 → p ＝ 1/70。</span><span class="en">Tea experiment: C(8,4) = 70 ways to pick the 4 milk-first cups; only 1 is fully correct, so p = 1/70.</span></div>
+    <div class="pl s"><span>\(\dbinom{\textcolor{#1f5fd6}{n}}{\textcolor{#e0570f}{k}} = \dfrac{n!}{k!\,(n-k)!}\)</span>
+      <span class="small" style="font-size:18px;margin-left:12px">\(= \dfrac{n!}{(n-k)!} \div k!\)</span></div>
+    <div class="bi xs" style="margin-top:6px"><span class="zh">奶茶實驗：\(\binom{8}{4} = \dfrac{8!}{4!\,4!} = 70\) 種選法，只有 1 種全對 → \(p = \frac{1}{70}\)。</span><span class="en">Tea experiment: \(\binom{8}{4} = 70\) ways to pick the 4 milk-first cups; only 1 is fully correct, so \(p = \frac{1}{70}\).</span></div>
   </div>
 </section>
 
@@ -327,9 +328,9 @@
   <div class="bi xs" data-step="2"><span class="zh">8 杯外觀相同：4 杯<span class="tgt-c">先牛奶 (M)</span>、4 杯<span class="col-c">先茶 (T)</span>，隨機排列；她要指出哪 4 杯是先牛奶。</span><span class="en">8 identical-looking cups, 4 milk-first and 4 tea-first, in random order. She must pick the 4 milk-first cups.</span></div>
   <div class="two" style="margin-top:12px">
     <div data-step="3"><div class="ct-title">全部答對 all correct</div><div id="tea-perfect"></div>
-      <div class="eq" style="font-size:22px;margin-top:4px">p = 1 / C(8,4) = 1 / 70 ≈ <b>0.014</b></div></div>
+      <div class="eq" style="font-size:22px;margin-top:4px">\(p = \dfrac{1}{\binom{8}{4}} = \dfrac{1}{70} \approx \mathbf{0.014}\)</div></div>
     <div data-step="4"><div class="ct-title">答對 3 杯 three correct</div><div id="tea-three"></div>
-      <div class="eq" style="font-size:22px;margin-top:4px">p = 17 / 70 ≈ <b>0.243</b></div></div>
+      <div class="eq" style="font-size:22px;margin-top:4px">\(p = \dfrac{17}{70} \approx \mathbf{0.243}\)</div></div>
     <div class="grow bi xs" data-step="4" style="align-self:center"><span class="zh">全對時，靠猜的機率只有 1/70，這張表「太不可能」；答對 3 杯則可能只是運氣。<b>這就是 Fisher 精確檢定。</b></span><span class="en">Guessing all 4 right has probability 1/70, so the table is very unlikely by chance. 3 of 4 could easily be luck. This is Fisher’s exact test.</span></div>
   </div>
 </section>
@@ -347,17 +348,17 @@
       </table>
     </div>
     <div class="grow">
-      <div class="pl" style="margin:6px 0 10px"><span data-step="2">p ＝</span>
+      <div class="pl" style="margin:6px 0 10px"><span data-step="2">\(p =\)</span>
         <span class="frac" data-step="2" style="min-width:150px">
-          <span class="num"><span class="fp" id="fp1" data-step="2" data-binom="a+b|a"></span><span class="fp" id="fp2" data-step="3" data-binom="c+d|c"></span></span>
-          <span class="den"><span class="fp" id="fp3" data-step="4" data-binom="N|a+c"></span></span>
+          <span class="num"><span class="fp" id="fp1" data-step="2">\(\dbinom{\textcolor{#1f5fd6}{a+b}}{\textcolor{#e0570f}{a}}\)</span><span class="fp" id="fp2" data-step="3">\(\dbinom{\textcolor{#1f5fd6}{c+d}}{\textcolor{#e0570f}{c}}\)</span></span>
+          <span class="den"><span class="fp" id="fp3" data-step="4">\(\dbinom{\textcolor{#7c3aed}{N}}{\textcolor{#e0570f}{a+c}}\)</span></span>
         </span></div>
       <div class="swap" style="min-height:150px">
-        <div class="bi sm" data-step="1" data-until="2"><span class="zh"><span class="pur-c"><b>N ＝ a + b + c + d</b></span>：表中所有個案（項目）的總數。</span><span class="en">N is the total number of items in the table.</span></div>
-        <div class="bi sm" data-step="2" data-until="3"><span class="zh"><b>分子 ①</b>：「有 X」這一列有 <span class="tgt-c">a+b</span> 個項目，其中 <span class="col-c">a</span> 個有 Y —— 從 a+b 個中選出 a 個。</span><span class="en">Numerator ①: the “has X” row holds a+b items; choose the a of them that have Y.</span></div>
-        <div class="bi sm" data-step="3" data-until="4"><span class="zh"><b>分子 ②</b>：「無 X」那一列有 <span class="tgt-c">c+d</span> 個項目，其中 <span class="col-c">c</span> 個有 Y。兩列的選法<b>相乘</b>。</span><span class="en">Numerator ②: the other row holds c+d items, c of which have Y. The two choices are independent, so we multiply.</span></div>
-        <div class="bi sm" data-step="4" data-until="5"><span class="zh"><b>分母</b>：全部 <span class="pur-c">N</span> 個項目中，任意挑 <span class="col-c">a+c</span> 個當作「有 Y」的所有可能。</span><span class="en">Denominator: all ways to choose which a+c of the N items have Y, ignoring the rows.</span></div>
-        <div data-step="5"><div class="bi sm"><span class="zh">代入 a=8, b=2, c=2, d=8（N=20）：</span><span class="en">Plug in the numbers:</span></div>
+        <div class="bi sm" data-step="1" data-until="2"><span class="zh">\(\textcolor{#7c3aed}{N} = a + b + c + d\)：表中所有個案（項目）的總數。</span><span class="en">\(\textcolor{#7c3aed}{N}\) is the total number of items in the table.</span></div>
+        <div class="bi sm" data-step="2" data-until="3"><span class="zh"><b>分子 ①</b>：「有 X」這一列有 \(\textcolor{#1f5fd6}{a+b}\) 個項目，其中 \(\textcolor{#e0570f}{a}\) 個有 Y —— 從 \(a+b\) 個中選出 \(a\) 個。</span><span class="en">Numerator ①: the “has X” row holds \(\textcolor{#1f5fd6}{a+b}\) items; choose the \(\textcolor{#e0570f}{a}\) of them that have Y.</span></div>
+        <div class="bi sm" data-step="3" data-until="4"><span class="zh"><b>分子 ②</b>：「無 X」那一列有 \(\textcolor{#1f5fd6}{c+d}\) 個項目，其中 \(\textcolor{#e0570f}{c}\) 個有 Y。兩列的選法<b>相乘</b>。</span><span class="en">Numerator ②: the other row holds \(\textcolor{#1f5fd6}{c+d}\) items, \(\textcolor{#e0570f}{c}\) of which have Y. The two choices are independent, so we multiply.</span></div>
+        <div class="bi sm" data-step="4" data-until="5"><span class="zh"><b>分母</b>：全部 \(\textcolor{#7c3aed}{N}\) 個項目中，任意挑 \(\textcolor{#e0570f}{a+c}\) 個當作「有 Y」的所有可能。</span><span class="en">Denominator: all ways to choose which \(\textcolor{#e0570f}{a+c}\) of the \(\textcolor{#7c3aed}{N}\) items have Y, ignoring the rows.</span></div>
+        <div data-step="5"><div class="bi sm"><span class="zh">代入 \(a=8,\ b=2,\ c=2,\ d=8\)（\(N=20\)）：</span><span class="en">Plug in the numbers:</span></div>
           <div class="eq" id="fm-plug" style="font-size:24px"></div></div>
       </div>
     </div>
@@ -375,7 +376,7 @@
   </div>
   <div class="callout key" data-step="3">
     <div class="bi sm"><span class="zh">Fisher 精確檢定：把觀察到的表與所有更極端的表的機率相加</span><span class="en">Fisher’s exact test sums the observed table and all more extreme ones</span></div>
-    <div class="eq" style="margin-top:6px">p = <b id="p-sum"></b> &lt; 0.05 → <span class="ok-c">顯著 significant</span></div>
+    <div class="eq" style="margin-top:6px"><span id="p-sum"></span> → <span class="ok-c">顯著 significant</span></div>
   </div>
 </section>
 
@@ -545,6 +546,7 @@
 <div id="bar"></div>
 <div id="num"></div>
 </div>
+<script src="vendor/katex/katex.min.js"></script>
 <script src="slides.js"></script>
 <script src="deck.js"></script>
 </body>

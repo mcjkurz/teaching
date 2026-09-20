@@ -280,3 +280,11 @@ s { text-decoration-color: var(--mute); color: var(--mute); }
 /* rectangles drawn over the table on the formula slide */
 .rect { position: absolute; border: 4px solid; border-radius: 14px; pointer-events: none; animation: hz-in .35s ease both; }
 .rect.bl { border-color: #4a86e8; } .rect.rd { border-color: #e03a2f; } .rect.pu { border-color: var(--pur); }
+
+/* KaTeX */
+.tex .katex { font-size: 1.12em; }
+.eq .tex .katex { font-size: 1.02em; }
+.nums .tex .katex { font-size: 1em; }
+.frac .num .katex, .frac .den .katex { font-size: 1.05em; }
+.fp .katex { font-size: 1.25em; }
+.tex-block { display: block; }

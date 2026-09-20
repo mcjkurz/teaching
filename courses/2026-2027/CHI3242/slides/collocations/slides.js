@@ -21,6 +21,31 @@ const chip = (t, cls = '') => {
   return s;
 };
 const EV = { a: 'O₁₁', b: 'O₁₂', c: 'O₂₁', d: 'O₂₂' };   // Evert's cell names
+
+/* ---------- LaTeX: write \( inline \) or \[ display \] anywhere in the text; KaTeX is bundled in vendor/ ---------- */
+function texify(root) {
+  const re = /\\\((.+?)\\\)|\\\[(.+?)\\\]/gs;
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  const nodes = [];
+  while (walker.nextNode()) if (/\\[(\[]/.test(walker.currentNode.nodeValue)) nodes.push(walker.currentNode);
+  nodes.forEach(n => {
+    const txt = n.nodeValue, frag = document.createDocumentFragment();
+    let last = 0, m;
+    re.lastIndex = 0;
+    while ((m = re.exec(txt))) {
+      if (m.index > last) frag.appendChild(document.createTextNode(txt.slice(last, m.index)));
+      const span = document.createElement('span');
+      span.className = m[2] != null ? 'tex tex-block' : 'tex';
+      try { katex.render((m[1] ?? m[2]).trim(), span, { throwOnError: false, strict: false, displayMode: false }); }
+      catch (e) { span.textContent = m[0]; }
+      frag.appendChild(span);
+      last = re.lastIndex;
+    }
+    if (last < txt.length) frag.appendChild(document.createTextNode(txt.slice(last)));
+    n.parentNode.replaceChild(frag, n);
+  });
+}
+const BLUE = '\\textcolor{#1f5fd6}', RED = '\\textcolor{#e0570f}', PUR = '\\textcolor{#7c3aed}';
 const bi = ([z, e]) => `<span class="z">${z}</span><span class="e">${e}</span>`;
 
 /* ---------- horizon graphic: distance labels above tokens + bracket below ---------- */
@@ -209,9 +234,10 @@ HOOKS['s-ct'] = {
       [8, 9, 10].forEach(a => {
         const v = { a, b: R - a, c: C - a, d: N - R - C + a };
         ctable($(`#f${a}`, el), v, { rows: [['有 X', 'has X'], ['無 X', 'no X']], cols: [['有 Y', 'has Y'], ['無 Y', 'no Y']], mini: true });
-        $(`#p${a}`, el).textContent = `p = ${P(a).toFixed(4)}`;
+        $(`#p${a}`, el).textContent = `\\(p = ${P(a).toFixed(4)}\\)`;
       });
-      $('#p-sum', el).textContent = (P(8) + P(9) + P(10)).toFixed(4);
+      $('#p-sum', el).textContent = `\\(p = ${(P(8) + P(9) + P(10)).toFixed(4)} < 0.05\\)`;
+      texify(el);
       built = true;
     }
   };
@@ -415,7 +441,8 @@ const comb = (n, k) => { let r = 1; for (let i = 1; i <= k; i++) r = r * (n - k 
       if (p.inner) box('rd', p.inner, 1);
       [2, 3, 4].forEach(n => $('#fp' + (n - 1), el).classList.toggle('act', step === n));
       const num = comb(10, 8) * comb(10, 2), den = comb(20, 10);
-      $('#fm-plug', el).innerHTML = `C(10,8) · C(10,2) / C(20,10) = ${comb(10, 8)} · ${comb(10, 2)} / ${den.toLocaleString()} = ${num.toLocaleString()} / ${den.toLocaleString()} ≈ <b>${(num / den).toFixed(4)}</b>`;
+      $('#fm-plug', el).textContent = `\\(\\dfrac{\\binom{10}{8}\\binom{10}{2}}{\\binom{20}{10}} = \\dfrac{${comb(10, 8)} \\cdot ${comb(10, 2)}}{${den.toLocaleString('en').replace(/,/g, '{,}')}} = \\dfrac{${num.toLocaleString('en').replace(/,/g, '{,}')}}{${den.toLocaleString('en').replace(/,/g, '{,}')}} \\approx \\mathbf{${(num / den).toFixed(4)}}\\)`;
+      texify($('#fm-plug', el));
     }
   };
 })();
@@ -452,3 +479,6 @@ const comb = (n, k) => { let r = 1; for (let i = 1; i <= k; i++) r = r * (n - k 
     }
   };
 })();
+
+/* render all static LaTeX once */
+texify(document.getElementById('stage'));
