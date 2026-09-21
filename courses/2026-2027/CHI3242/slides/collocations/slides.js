@@ -153,7 +153,12 @@ function drawHorizon(box, els, targets, h) {
   let draws = 0, sum = 0, avgs = [];          // avgs[i] = mean number of red balls after i+1 draws
   const redOf = i => reds.includes(i);
   const redCount = () => picked.filter(redOf).length;
-  const draw = () => { picked = [...Array(10).keys()].sort(() => Math.random() - .5).slice(0, 4); draws++; sum += redCount(); avgs.push(sum / draws); };
+  const pick4 = () => {                       // partial Fisher-Yates: 4 distinct balls, every subset equally likely
+    const a = [...Array(10).keys()];
+    for (let i = 0; i < 4; i++) { const j = i + Math.floor(Math.random() * (10 - i)); [a[i], a[j]] = [a[j], a[i]]; }
+    return a.slice(0, 4);
+  };
+  const draw = () => { picked = pick4(); draws++; sum += redCount(); avgs.push(sum / draws); };
   const NS = 'http://www.w3.org/2000/svg';
   const svgEl = (tag, attrs, text) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; return e; };
   function showBalls(box, picking) {
