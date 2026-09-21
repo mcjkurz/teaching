@@ -188,7 +188,7 @@ table.cmp .bi + .bi { margin: 0; }
 #nav button { flex: 1; height: 30px; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--mute); font: inherit; font-size: 20px; line-height: 1; cursor: pointer; padding: 0; }
 #nav button:hover { background: #e4e9f2; color: var(--ink); }
 /* practice rows: label left, equation right */
-.prac .prow { display: flex; align-items: center; gap: 24px; min-height: 66px; }
+.prac .prow { display: flex; align-items: center; gap: 24px; min-height: 50px; }
 .prac .prow .bi { width: 430px; flex: none; margin: 0; }
 .prac .prow .eq { margin: 0; }
 #num { position: absolute; left: 72px; bottom: 14px; font-size: 13px; color: var(--mute); z-index: 5; }
