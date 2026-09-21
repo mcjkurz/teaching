@@ -81,3 +81,5 @@ mark { background: #ffe066; color: inherit; border-radius: 2px; box-shadow: 0 0 
 .reference table { border-collapse: collapse; width: 100%; }
 .reference td { padding: 0.35rem 0.5rem; border-bottom: 1px solid #eee; vertical-align: top; }
 .reference td:first-child { white-space: nowrap; }
+
+.inv { font-family: Menlo, Consolas, monospace; font-size: 0.6rem; background: #c62828; color: white; border-radius: 3px; padding: 0 0.25rem; margin: 0 1px; vertical-align: middle; }
