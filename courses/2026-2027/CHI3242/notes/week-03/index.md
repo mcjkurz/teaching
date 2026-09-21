@@ -27,7 +27,14 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
 <li>X 周圍有多少個位置：\(\text{count}(X) \times \text{視窗大小} \times 2\)（左右兩邊）。</li>
 <li>\(E = P(Y) \times \text{位置數}\)。</li>
 </ol>
-<p>例（數字為示意）：\(N = 50{,}000\)，count(王婆) \(= 200\)，count(痛苦) \(= 50\)，視窗 3 + 3。</p>
+<p>例（數字為示意）：</p>
+<ul>
+<li>語料總詞數：\(N = 50{,}000\)</li>
+<li>目標詞：count(王婆) \(= 200\)</li>
+<li>搭配詞：count(痛苦) \(= 50\)</li>
+<li>視窗：3 + 3</li>
+</ul>
+<p>計算：</p>
 <ul>
 <li>機率：\(P(\text{痛苦}) = \dfrac{50}{50{,}000} = 0.001\)</li>
 <li>位置數：\(200 \times 3 \times 2 = 1{,}200\)</li>
@@ -59,7 +66,11 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
 <h2>4. 簡單指標的問題</h2>
 <p>Evert 舉了一個例子（語料約 100 萬個雙詞組）。她<strong>沒有用視窗</strong>，而是只看<strong>雙詞組（bigram）</strong>：兩個詞緊鄰，搭配詞 Y 就是目標詞 X 前面的那個詞。每個目標詞前面只有一個位置，所以位置數就是 count(X)，E 的算法變成：</p>
 <p>\[E = P(Y) \times \text{count}(X)\]</p>
-<p>比較兩個詞對（Y 是前一個詞，X 是後一個詞；\(N = 1{,}000{,}000\)）。\(E = P(Y) \times \text{count}(X)\)，例如 the Iliad：\(0.1 \times 10 = 1\)；must also：\(0.001 \times 1000 = 1\)。</p>
+<p>比較兩個詞對（Y 是前一個詞，X 是後一個詞；\(N = 1{,}000{,}000\)）：</p>
+<ul>
+<li>the Iliad：\(E = 0.1 \times 10 = 1\)</li>
+<li>must also：\(E = 0.001 \times 1{,}000 = 1\)</li>
+</ul>
 <div class="table-scroll">
 <table>
 <thead><tr><th>詞對</th><th>count(Y)</th><th>count(X)</th><th>\(P(Y)\)</th><th>\(E\)</th><th>\(O\)</th></tr></thead>
@@ -95,7 +106,19 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
 <h3>一張表的機率</h3>
 <p>固定各行各列的總數，一張特定的表（a, b, c, d）在「純屬偶然」下的機率是：</p>
 <p>\[p = \frac{\dbinom{a+b}{a}\dbinom{c+d}{c}}{\dbinom{N}{a+c}}\qquad (N = a+b+c+d)\]</p>
-<p>檢定要把這張表<strong>和所有更極端的表</strong>的機率加起來。例：20 位學生（10 女 10 男），10 位有讀書，其中 8 位是女生（示意數字）。8、9、10 位女生讀書的三張表機率加起來 \(p \approx 0.0115 &lt; 0.05\)，所以性別與讀書的關聯<strong>顯著</strong>。</p>
+<p>檢定要把這張表<strong>和所有更極端的表</strong>的機率加起來。</p>
+<p>例（數字為示意）：20 位學生（10 女、10 男），其中 10 位有讀書，8 位是女生。「更極端」是指有讀書的女生更多（9 位、10 位）。三張表如下（每行每列的總數都固定）：</p>
+<div class="table-scroll">
+<table>
+<thead><tr><th>有讀書的女生</th><th>女生（讀 / 不讀）</th><th>男生（讀 / 不讀）</th><th>這張表的機率</th></tr></thead>
+<tbody>
+<tr><td>8 位（實際）</td><td>8 / 2</td><td>2 / 8</td><td>\(\dfrac{2025}{184756} \approx 0.0110\)</td></tr>
+<tr><td>9 位</td><td>9 / 1</td><td>1 / 9</td><td>\(\dfrac{100}{184756} \approx 0.0005\)</td></tr>
+<tr><td>10 位</td><td>10 / 0</td><td>0 / 10</td><td>\(\dfrac{1}{184756} \approx 0.000005\)</td></tr>
+</tbody>
+</table>
+</div>
+<p>三張表機率加起來：\(p = \dfrac{2126}{184756} \approx 0.0115 &lt; 0.05\)，所以性別與讀書的關聯<strong>顯著</strong>。</p>
 <h3>回到 the Iliad / must also</h3>
 <p>兩個詞對的 \(O\) 和 \(E\) 一樣，現在看完整的列聯表。每一項是一個雙詞組（共 1,000,000 個）；列＝前一個詞，欄＝後一個詞。</p>
 <p><strong>the Iliad</strong>（\(a = 10\)，count(the) = 100,000，count(Iliad) = 10）</p>
@@ -137,7 +160,13 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
 </tbody>
 </table>
 </div>
-<p>例：在小語料中找（好, 天氣）。視窗法數視窗內的詞；句子法數同時含「好」和「天氣」的句子（一個句子有兩個也只算 1 次）；語法關係法只數「形容詞→名詞」的修飾關係，「心情不好」這種謂語用法不算。各方法的 \(O\) 就是各自列聯表的 \(a\)。前面 Evert 的 the Iliad 例子用的是最小的視窗：只看緊鄰的前一個詞。</p>
+<p>例：在小語料中找（好, 天氣）。</p>
+<ul>
+<li><strong>視窗法</strong>：數視窗內的詞。</li>
+<li><strong>句子法</strong>：數同時含「好」和「天氣」的句子（一個句子有兩個也只算 1 次）。</li>
+<li><strong>語法關係法</strong>：只數「形容詞→名詞」的修飾關係，「心情不好」這種謂語用法不算。</li>
+</ul>
+<p>各方法的 \(O\) 就是各自列聯表的 \(a\)。前面 Evert 的 the Iliad 例子用的是最小的視窗：只看緊鄰的前一個詞。</p>
 
 <h2>8. 回顧</h2>
 <ol>
