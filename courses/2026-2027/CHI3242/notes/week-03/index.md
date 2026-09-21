@@ -59,13 +59,13 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
 <h2>4. 簡單指標的問題</h2>
 <p>Evert 舉了一個例子（語料約 100 萬個雙詞組）。她<strong>沒有用視窗</strong>，而是只看<strong>雙詞組（bigram）</strong>：兩個詞緊鄰，搭配詞 Y 就是目標詞 X 前面的那個詞。每個目標詞前面只有一個位置，所以位置數就是 count(X)，E 的算法變成：</p>
 <p>\[E = P(Y) \times \text{count}(X)\]</p>
-<p>比較兩個詞對，\(N = 1{,}000{,}000\)：</p>
+<p>比較兩個詞對（Y 是前一個詞，X 是後一個詞；\(N = 1{,}000{,}000\)）。\(E = P(Y) \times \text{count}(X)\)，例如 the Iliad：\(0.1 \times 10 = 1\)；must also：\(0.001 \times 1000 = 1\)。</p>
 <div class="table-scroll">
 <table>
-<thead><tr><th>詞對</th><th>搭配詞 Y 的次數</th><th>目標詞 X 的次數</th><th>\(P(Y)\)</th><th>\(E\)</th><th>\(O\)</th></tr></thead>
+<thead><tr><th>詞對</th><th>count(Y)</th><th>count(X)</th><th>\(P(Y)\)</th><th>\(E\)</th><th>\(O\)</th></tr></thead>
 <tbody>
-<tr><td>the Iliad</td><td>count(the) = 100,000</td><td>count(Iliad) = 10</td><td>0.1</td><td>\(0.1 \times 10 = 1\)</td><td>10</td></tr>
-<tr><td>must also</td><td>count(must) = 1,000</td><td>count(also) = 1,000</td><td>0.001</td><td>\(0.001 \times 1000 = 1\)</td><td>10</td></tr>
+<tr><td>the Iliad</td><td>100,000</td><td>10</td><td>0.1</td><td>1</td><td>10</td></tr>
+<tr><td>must also</td><td>1,000</td><td>1,000</td><td>0.001</td><td>1</td><td>10</td></tr>
 </tbody>
 </table>
 </div>

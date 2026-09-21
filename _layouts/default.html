@@ -164,21 +164,31 @@
             text-align: center;
             white-space: nowrap;
         }
+        /* Wide tables: cells wrap like normal text, and the wrapper scrolls sideways
+           only when the columns cannot fit (typically on a phone). */
         .table-scroll {
             width: 100%;
             overflow-x: auto;
             margin-bottom: 1.5rem;
             -webkit-overflow-scrolling: touch;
+            /* soft edge shadows appear only while there is more to scroll */
+            background:
+                linear-gradient(to right, #fff 30%, rgba(255,255,255,0)) left center,
+                linear-gradient(to left, #fff 30%, rgba(255,255,255,0)) right center,
+                radial-gradient(farthest-side at 0 50%, rgba(0,0,0,.18), rgba(0,0,0,0)) left center,
+                radial-gradient(farthest-side at 100% 50%, rgba(0,0,0,.18), rgba(0,0,0,0)) right center;
+            background-repeat: no-repeat;
+            background-size: 2rem 100%, 2rem 100%, 0.7rem 100%, 0.7rem 100%;
+            background-attachment: local, local, scroll, scroll;
         }
         .table-scroll table { margin-bottom: 0; }
-        .table-scroll table:not(.schedule):not(.assessment) {
-            width: max-content;
-            min-width: 100%;
-        }
+        .table-scroll table:not(.schedule):not(.assessment) { width: 100%; }
         .table-scroll table:not(.schedule):not(.assessment) th,
         .table-scroll table:not(.schedule):not(.assessment) td {
-            white-space: nowrap;
+            min-width: 4.5em;
+            overflow-wrap: break-word;
         }
+        .table-scroll table:not(.schedule):not(.assessment) code { white-space: nowrap; }
         main table.schedule {
             min-width: 760px;
             table-layout: fixed;
@@ -261,6 +271,7 @@
             main h1 { font-size: 1.5rem; }
             .course-header { flex-direction: column; }
             .course-header-image { max-width: none; width: 100%; }
+            main th, main td { padding: 0.4rem 0.5rem; }
         }
         .page-list { list-style: none; margin-left: 0; }
         .page-list li {
