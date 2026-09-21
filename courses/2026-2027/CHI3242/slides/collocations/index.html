@@ -228,20 +228,20 @@
 <section class="slide" id="s-problem" data-sec="compare">
   <h2 class="bi"><span class="zh">簡單指標的問題（一）：兩個詞對</span><span class="en">A problem with simple measures, part 1: two word pairs</span></h2>
   <div data-step="1">
-    <div class="eq" style="font-size:24px;margin:0">\(E(\text{coll.} \mid \text{target}) = P(\text{coll.}) \times \big(\text{count}(\text{target}) \times \text{window} \times 2\big)\)</div>
-    <span class="small" style="font-size:16px;margin-left:12px">\(N = 1{,}000{,}000\) · window = 5</span>
+    <div class="eq" style="font-size:24px;margin:0">\(E(\text{coll.} \mid \text{target}) = P(\text{coll.}) \times \big(\text{count}(\text{target}) \times \text{slots}\big)\)</div>
+    <span class="small" style="font-size:16px;margin-left:12px">\(N = 1{,}000{,}000\) · smallest window: only the word right before the target, so slots = 1 (a bigram; Evert, p. 1230)</span>
   </div>
   <div class="cards" style="margin-top:14px">
     <div class="card" data-step="2">
       <h3 class="bi sm"><span class="zh">the Iliad</span><span class="en">《伊利亞特》</span></h3>
-      <div class="nums">count(the) = 100,000<br>count(Iliad) = <b>10</b><br>\(P(\text{the}) = \frac{100{,}000}{1{,}000{,}000} = 0.1\)<br>\(E = 0.1 \times (10 \times 5 \times 2) = \mathbf{10}\)<br>O = <b>10</b></div>
+      <div class="nums">count(the) = 100,000<br>count(Iliad) = <b>10</b><br>\(P(\text{the}) = \frac{100{,}000}{1{,}000{,}000} = 0.1\)<br>\(E = 0.1 \times (10 \times 1) = \mathbf{1}\)<br>O = <b>10</b></div>
     </div>
     <div class="card" data-step="3">
       <h3 class="bi sm"><span class="zh">must also</span><span class="en">「必須」「也」</span></h3>
-      <div class="nums">count(must) = 1,000<br>count(also) = <b>1,000</b><br>\(P(\text{must}) = \frac{1{,}000}{1{,}000{,}000} = 0.001\)<br>\(E = 0.001 \times (1000 \times 5 \times 2) = \mathbf{10}\)<br>O = <b>10</b></div>
+      <div class="nums">count(must) = 1,000<br>count(also) = <b>1,000</b><br>\(P(\text{must}) = \frac{1{,}000}{1{,}000{,}000} = 0.001\)<br>\(E = 0.001 \times (1000 \times 1) = \mathbf{1}\)<br>O = <b>10</b></div>
     </div>
   </div>
-  <div class="callout" data-step="4" style="margin-top:16px"><div class="bi sm"><span class="zh">兩個詞對的 O 和 E 完全一樣：<b>O ＝ E ＝ 10</b>。</span><span class="en">Both pairs have exactly the same O and E.</span></div></div>
+  <div class="callout" data-step="4" style="margin-top:16px"><div class="bi sm"><span class="zh">兩個詞對的 O 和 E 完全一樣：<b>O ＝ 10，E ＝ 1</b>。</span><span class="en">Both pairs have exactly the same O and E.</span></div></div>
 </section>
 
 <!-- 8b ─────────── The problem, part 2 -->
@@ -249,8 +249,8 @@
   <h2 class="bi"><span class="zh">簡單指標的問題（二）：分數相同</span><span class="en">A problem with simple measures, part 2: identical scores</span></h2>
   <table class="cmp" style="margin-top:10px" data-step="1">
     <thead><tr><th class="bi sm"><span class="zh">詞對</span><span class="en">pair</span></th><th class="num">O</th><th class="num">E</th><th class="num">O / E</th><th class="num">MI</th></tr></thead>
-    <tr><td style="font-size:26px">the Iliad</td><td class="num">10</td><td class="num">10</td><td class="num">1</td><td class="num">0</td></tr>
-    <tr><td style="font-size:26px">must also</td><td class="num">10</td><td class="num">10</td><td class="num">1</td><td class="num">0</td></tr>
+    <tr><td style="font-size:26px">the Iliad</td><td class="num">10</td><td class="num">1</td><td class="num">10</td><td class="num">3.32</td></tr>
+    <tr><td style="font-size:26px">must also</td><td class="num">10</td><td class="num">1</td><td class="num">10</td><td class="num">3.32</td></tr>
   </table>
   <div class="callout" data-step="2" style="margin-top:18px"><div class="bi sm"><span class="zh">分數相同，但情況不同：Iliad 很罕見，而 must、also 都很常見。</span><span class="en">Same score, different situations: Iliad is rare, while must and also are both frequent.</span></div></div>
   <div class="callout key" data-step="3" style="margin-top:10px"><div class="bi sm"><span class="zh"><b>O 與 E 忽略了語料中其他的一切</b>——我們還要看兩詞「沒有」共現的情況。</span><span class="en">O vs. E ignores everything else in the corpus. We also need to look at when the words do not co-occur.</span></div></div>
@@ -455,6 +455,20 @@
   <div class="callout key" data-step="3" style="margin-top:8px">
     <div class="bi sm"><span class="zh">Fisher 精確檢定：把觀察到的表與所有更極端的表的機率相加</span><span class="en">Fisher’s exact test sums the observed table and all more extreme ones</span></div>
     <div class="eq" style="margin-top:6px"><span id="p-sum"></span> → <span class="ok-c">顯著 significant</span></div>
+  </div>
+</section>
+
+<!-- 10b ─────────── Back to the Iliad / must also -->
+<section class="slide" id="s-fisher-iliad" data-sec="ct">
+  <h2 class="bi"><span class="zh">回到 the Iliad ／ must also</span><span class="en">Back to Evert’s example: what does Fisher’s test say?</span></h2>
+  <div class="bi sm"><span class="zh">兩者：<b>O ＝ 10，E ＝ 1，O/E ＝ 10，MI ＝ 3.32</b> —— 簡單指標分不出來。現在看完整的列聯表：</span><span class="en">Both have O = 10, E = 1, O/E = 10, MI = 3.32, so the simple measures cannot separate them. Now the full contingency tables (N = 1,000,000 bigrams):</span></div>
+  <div class="fisher" style="margin-top:8px;gap:60px;justify-content:center">
+    <div class="col" data-step="1"><div class="ct-title">the Iliad　(f₁ = 100,000 · f₂ = 10)</div><div id="il-a"></div><div class="pv" data-step="3" id="il-pa"></div></div>
+    <div class="col" data-step="2"><div class="ct-title">must also　(f₁ = f₂ = 1,000)</div><div id="il-b"></div><div class="pv" data-step="3" id="il-pb"></div></div>
+  </div>
+  <div class="callout key" data-step="4" style="margin-top:12px">
+    <div class="bi sm"><span class="zh">the Iliad 的 <b>c ＝ 0</b>：每個 Iliad 前面都是 the，O ＝ 10 已是最大可能值；must also 的 c ＝ 990：also 大多沒有 must 在前。</span><span class="en">For the Iliad c = 0: every Iliad is preceded by the, so 10 is the maximum possible O. For must also, c = 990: most alsos have no must before them.</span></div>
+    <div class="bi sm" style="margin-top:6px"><span class="zh">兩者都「顯著」，但 the Iliad 的 p 小 1000 倍 → 用 p 值<b>排序</b>，the Iliad 排在前面。</span><span class="en">Both are significant, but the Iliad’s p is 1000 times smaller. Ranking by p-value puts the Iliad first, which O/E and MI cannot do.</span></div>
   </div>
 </section>
 

@@ -243,6 +243,25 @@ HOOKS['s-ct'] = {
   };
 })();
 
+/* ---------- 9c. back to Evert's the Iliad / must also ---------- */
+(function () {
+  let built = false;
+  HOOKS['s-fisher-iliad'] = {
+    render(step, el) {
+      if (built) return;
+      const f = n => n.toLocaleString('en-US');
+      const opt = { mini: true, hl: 'a', rows: [['w₁', 'w₁'], ['非 w₁', 'not w₁']], cols: [['w₂', 'w₂'], ['非 w₂', 'not w₂']] };
+      const fmt = v => Object.fromEntries(Object.entries(v).map(([k, x]) => [k, f(x)]));
+      ctable($('#il-a', el), fmt({ a: 10, b: 99990, c: 0, d: 900000 }), { ...opt, rows: [['the', 'the'], ['非 the', 'not the']], cols: [['Iliad', 'Iliad'], ['非 Iliad', 'not Iliad']] });
+      ctable($('#il-b', el), fmt({ a: 10, b: 990, c: 990, d: 998010 }), { ...opt, rows: [['must', 'must'], ['非 must', 'not must']], cols: [['also', 'also'], ['非 also', 'not also']] });
+      $('#il-pa', el).textContent = '\\(p \\approx 1 \\times 10^{-10}\\)';
+      $('#il-pb', el).textContent = '\\(p \\approx 1 \\times 10^{-7}\\)';
+      texify(el);
+      built = true;
+    }
+  };
+})();
+
 /* ---------- toy corpus for the three approaches ---------- */
 const CORPUS = [
   '今天 是 好 天氣 ， 我們 去 公園 散步 。',
