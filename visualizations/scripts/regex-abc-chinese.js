@@ -36,7 +36,10 @@ const LESSONS = [
         explain: `
             <p>The pipe <code>|</code> means "or". Wrap the choices in parentheses to limit their reach:
             <code>(元春|迎春|探春|惜春)</code> matches the name of any of the four Jia sisters.</p>
-            <p>Each alternative can be as long as you like, and you can list as many as you need.</p>`,
+            <p>Each alternative is a whole sequence, not a single character: <code>元春|迎春</code> means
+            "元春 or 迎春". Parentheses are only needed when the choice sits inside a longer pattern:
+            <code>賈(元|迎)春</code> is 賈元春 or 賈迎春, whereas <code>賈元|迎春</code> would mean
+            "賈元 or 迎春".</p>`,
         task: 'Match the names <b>寶玉</b>, <b>黛玉</b> and <b>寶釵</b> wherever they appear in these chapter titles.',
         lines: [T3, T6, T8, T22],
         reference: '(寶玉|黛玉|寶釵)',
