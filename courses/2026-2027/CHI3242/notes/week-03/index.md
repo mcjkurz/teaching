@@ -26,7 +26,14 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
 <li>X 周圍的位置數：\(\text{count}(X) \times \text{視窗大小} \times 2\)（左右兩邊）。</li>
 <li>\(E = P(Y) \times \text{位置數}\)。</li>
 </ol>
-<p>例（數字為示意）：\(N = 50{,}000\)，count(王婆) \(= 200\)，count(痛苦) \(= 50\)，視窗 3 + 3。\(P(\text{痛苦}) = \dfrac{50}{50{,}000} = 0.001\)；位置數 \(= 200 \times 3 \times 2 = 1{,}200\)；\(E = 0.001 \times 1{,}200 = 1.2\)。若實際 \(O = 8\)，則 \(O/E = \dfrac{8}{1.2} \approx 6.7\)：共現次數是偶然預期的 6.7 倍。</p>
+<p>例（數字為示意）：</p>
+<ul>
+<li>語料總詞數 \(N = 50{,}000\)，count(王婆) \(= 200\)，count(痛苦) \(= 50\)，視窗 3 + 3。</li>
+<li>機率：\(P(\text{痛苦}) = \dfrac{50}{50{,}000} = 0.001\)</li>
+<li>位置數：\(200 \times 3 \times 2 = 1{,}200\)</li>
+<li>期望值：\(E = 0.001 \times 1{,}200 = 1.2\)</li>
+<li>若實際觀察值 \(O = 8\)，則 \(\dfrac{O}{E} = \dfrac{8}{1.2} \approx 6.7\)：共現次數是偶然預期的 6.7 倍。</li>
+</ul>
 
 <h2>3. 互信息 MI 與 PPMI</h2>
 <p>把 \(O/E\) 取以 2 為底的對數，就得到（點）<strong>互信息 MI</strong>：\[\mathrm{MI} = \log_2 \frac{O}{E}\]<strong>對數</strong> \(\log_2 x\) 就是「2 的幾次方等於 \(x\)」：比值每多一倍，MI 加 1；比值每少一半，MI 減 1；\(O = E\) 時 \(\mathrm{MI} = 0\)。上例 \(\mathrm{MI} = \log_2 6.7 \approx 2.74\)。</p>
