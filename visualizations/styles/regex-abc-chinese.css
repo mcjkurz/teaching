@@ -5,9 +5,9 @@
 }
 .copybox-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #2a6fdb; font-weight: 600; }
 .copybox code { font-size: 1.05rem; background: white; border: 1px solid #ddd; padding: 0.15rem 0.5rem; user-select: all; }
-.copy-btn { padding: 0.25rem 0.7rem; border: 1px solid #ccc; background: white; border-radius: 4px; cursor: pointer; font-size: 0.8rem; }
+.copy-btn { min-width: 4.5rem; text-align: center; padding: 0.25rem 0.7rem; border: 1px solid #ccc; background: white; border-radius: 4px; cursor: pointer; font-size: 0.8rem; }
 .copy-btn:hover { background: #f3f3f3; }
-.copybox-note { font-size: 0.8rem; color: #777; }
+.copybox-note { flex-basis: 100%; font-size: 0.8rem; color: #777; }
 .after { margin: 0 0 1rem; padding: 0.6rem 0.9rem; background: #eef6ff; border-left: 3px solid #2a6fdb; border-radius: 0 4px 4px 0; font-size: 0.9rem; }
 
 .steps { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
@@ -85,3 +85,4 @@ mark { background: #ffe066; color: inherit; border-radius: 2px; box-shadow: 0 0 
 .inv { font-family: Menlo, Consolas, monospace; font-size: 0.6rem; background: #c62828; color: white; border-radius: 3px; padding: 0 0.25rem; margin: 0 1px; vertical-align: middle; }
 .step.extra { border-style: dashed; }
 .extras-label { align-self: center; font-size: 0.75rem; color: #999; margin: 0 0.2rem 0 0.6rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.sample.idle .badge { color: #bbb; }

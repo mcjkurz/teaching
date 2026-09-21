@@ -1,4 +1,4 @@
-// Regex ABCs for Chinese: ten core lessons plus four extras on real and realistic text.
+// Regex ABCs for Chinese: eleven core lessons plus four extras on real and realistic text.
 // Sources: 《紅樓夢》 (misc/紅樓夢.txt), 《明史》 (misc/明史.txt), a Tang poem, and a few
 // invented lines in the style of contemporary (simplified) Chinese social media and news.
 // Each lesson has sample lines, a reference regex (used to compute the expected
@@ -12,8 +12,12 @@ const T1 = '第一回\u3000甄士隱夢幻識通靈\u3000賈雨村風塵懷閨�
 const T3 = '第三回\u3000賈雨村夤緣復舊職\u3000林黛玉拋父進京都';
 const T5 = '第五回\u3000遊幻境指迷十二釵\u3000飲仙醪曲演紅樓夢';
 const T6 = '第六回\u3000賈寶玉初試雲雨情\u3000劉姥姥一進榮國府';
+const T53 = '第五十三回\u3000寧國府除夕祭宗祠\u3000國府元宵開夜宴';
+const T59 = '第五十九回\u3000柳葉渚邊嗔鶯吒\u3000燕絳雲軒裏召將飛符';
+const T80 = '第八十回\u3000懦弱迎春腸回九曲姣怯香菱病入膏肓';
 const T10 = '第十回\u3000金寡婦貪利權受辱\u3000張太醫論病細窮源';
 const T14 = '第十四回\u3000林如海捐館揚州城\u3000賈寶玉路謁北靜王';
+const T19 = '第十九回\u3000情切切良宵花解語\u3000意綿綿靜日玉生香';
 const T23 = '第二十三回\u3000西廂記妙詞通戲語\u3000牡丹亭艷曲警芳心';
 const T120 = '第一百二十回\u3000甄士隱詳說太虛情\u3000賈雨村歸結紅樓夢';
 
@@ -184,7 +188,24 @@ const LESSONS = [
         solution: '[^\\u3000]+$',
     },
     {
-        title: '10. Escaping and digits: \\[ \\d',
+        title: '10. Whitespace and the whole couplet: \\s',
+        explain: `
+            <p><code>\\s</code> matches any whitespace character: a space, a tab, a line break, and also the
+            <b>ideographic space</b> (U+3000) used in Chinese typesetting. You do not have to type
+            <code>\\u3000</code> to match it.</p>
+            <p>Patterns can be chained: <code>[0-9]{3}\\s[0-9]{4}</code> matches a phone number like
+            "555 1234". Chinese couplets follow the same logic: two halves of equal length with a separator
+            between them.</p>`,
+        task: 'Match the whole <b>couplet</b> of each chapter title: both halves and the space between them, but not 第…回. Careful: real titles are not perfectly regular.',
+        lines: [T1, T19, T53, T59, T80],
+        reference: '[\\u4e00-\\u9fff]{7,9}\\s[\\u4e00-\\u9fff]{7,9}',
+        mode: 'exact',
+        hint: 'A Chinese run, then \\s, then another run. Most halves have 8 characters, but a few have 7 or 9, so use a range like {7,9}.',
+        solution: '[\\u4e00-\\u9fff]{7,9}\\s[\\u4e00-\\u9fff]{7,9}',
+        after: 'A stricter pattern with {8}\\s{8} finds 117 of the 120 titles and silently misses the rest: 第五十三回 has halves of 8+7 characters, 第五十九回 of 7+9. And 第八十回 has no separator at all in this e-text (it is printed as one run of 16 characters), so no reasonable pattern matches it. With real data always look at the exceptions.',
+    },
+    {
+        title: '11. Escaping and digits: \\[ \\d',
         explain: `
             <p>Some characters have a special meaning in regexes: <code>[ ] ( ) { } . * + ? ^ $ | \\</code>.
             To match one literally, put a backslash in front: <code>\\(</code> is a real opening parenthesis,
@@ -205,7 +226,7 @@ const LESSONS = [
         after: 'Handy for cleaning: replacing this pattern with nothing removes every footnote marker from the 《明史》 file, which has 188 of them.',
     },
     {
-        title: '11. Extra: invisible characters',
+        title: '12. Extra: invisible characters',
         extra: true,
         explain: `
             <p>Not every character in a text is a visible one. Digitised texts often hide
@@ -227,7 +248,7 @@ const LESSONS = [
         after: 'Now you can see them: 災之 and 陛下言 look like ordinary words but contain up to four hidden characters, so a search for "災之" finds nothing and a word segmenter sees garbage. Checking the character classes of a corpus before analysis is a good habit.',
     },
     {
-        title: '12. Extra: simplified vs traditional',
+        title: '13. Extra: simplified vs traditional',
         extra: true,
         explain: `
             <p>Simplified and traditional forms of the same character are <b>different code points</b>:
@@ -247,7 +268,7 @@ const LESSONS = [
         after: 'With plain 張 the last line would have been missed entirely, without any error. Tools such as OpenCC convert between the two systems, but converting is not always one-to-one (e.g. 發 and 髮 are both 发 in simplified).',
     },
     {
-        title: '13. Extra: full-width characters',
+        title: '14. Extra: full-width characters',
         extra: true,
         explain: `
             <p>Chinese typing often produces <b>full-width</b> forms of ASCII characters: ２０２４ instead of 2024,
@@ -268,7 +289,7 @@ const LESSONS = [
         after: 'The last line is the half-width version: no match at all, although a human reads the same thing. Normalising full-width to half-width (Unicode NFKC) is a standard first step in cleaning Chinese text. Also note that ： ， ！ were matched: they are full-width forms of : , ! so they are not in the CJK range either.',
     },
     {
-        title: '14. Extra: any Han character, \\p{Script=Han}',
+        title: '15. Extra: any Han character, \\p{Script=Han}',
         extra: true,
         explain: `
             <p>The block 4E00–9FFF does not contain every Chinese character. Rarer ones, such as characters
@@ -387,16 +408,22 @@ function update() {
     const { re, error } = buildRegex($('regexInput').value);
     const refRe = new RegExp(l.reference, 'gu');
 
+    const idle = $('regexInput').value === '';
     let allCorrect = true;
     $('samples').innerHTML = l.lines.map(text => {
         const got = findMatches(re, text);
         const want = findMatches(refRe, text);
         const ok = sameMatches(l.mode, got, want, text.length);
         if (!ok) allCorrect = false;
-        return `<div class="sample ${ok ? 'ok' : 'bad'}">
-            <span class="badge">${ok ? '✓' : '✗'}</span>
+        // Before anything is typed, no line is judged: a line that should have no matches would look "correct".
+        const state = idle ? 'idle' : ok ? 'ok' : 'bad';
+        const badge = idle ? '·' : ok ? '✓' : '✗';
+        const none = want.length === 0 ? 'no match expected' : '';
+        const count = idle ? none : `${got.length} match${got.length === 1 ? '' : 'es'}${none ? ' · ' + none : ''}`;
+        return `<div class="sample ${state}">
+            <span class="badge">${badge}</span>
             <span class="text">${highlight(text, got)}</span>
-            <span class="count">${got.length} match${got.length === 1 ? '' : 'es'}</span>
+            <span class="count">${count}</span>
         </div>`;
     }).join('');
 
