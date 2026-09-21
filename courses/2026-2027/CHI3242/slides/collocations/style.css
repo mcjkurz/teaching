@@ -169,9 +169,10 @@ table.cmp thead th { border-bottom: 2px solid var(--ink); }
 table.cmp th.rh { width: 190px; }
 table.cmp .bi + .bi { margin: 0; }
 
-/* sidebar: slim strip of section numbers, name on hover */
-#side { position: absolute; right: 0; top: 0; bottom: 0; width: 64px; background: var(--panel); border-left: 1px solid var(--line); z-index: 6; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px; transition: opacity .3s; }
-#side.hide { opacity: 0; pointer-events: none; }
+/* sidebar: slim strip of section numbers, invisible until the mouse is over the right edge; name on hover */
+#side { position: absolute; right: 0; top: 0; bottom: 0; width: 64px; background: var(--panel); border-left: 1px solid var(--line); z-index: 6; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px; opacity: 0; transition: opacity .25s; }
+#side:hover, #stage:has(#nav:hover) #side { opacity: 1; }
+#side.hide { opacity: 0 !important; pointer-events: none; }
 #side .item { position: relative; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; cursor: pointer; font-size: 16px; font-weight: 600; color: var(--mute); border: 2px solid transparent; transition: background .2s, color .2s; }
 #side .item:hover { background: #e4e9f2; color: var(--ink); }
 #side .item.done { color: var(--ink); }
@@ -186,6 +187,10 @@ table.cmp .bi + .bi { margin: 0; }
 #nav { position: absolute; right: 4px; bottom: 14px; width: 56px; display: flex; gap: 4px; z-index: 8; }
 #nav button { flex: 1; height: 30px; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--mute); font: inherit; font-size: 20px; line-height: 1; cursor: pointer; padding: 0; }
 #nav button:hover { background: #e4e9f2; color: var(--ink); }
+/* practice rows: label left, equation right */
+.prac .prow { display: flex; align-items: center; gap: 24px; min-height: 66px; }
+.prac .prow .bi { width: 430px; flex: none; margin: 0; }
+.prac .prow .eq { margin: 0; }
 #num { position: absolute; left: 72px; bottom: 14px; font-size: 13px; color: var(--mute); z-index: 5; }
 
 .ctlist { min-height: 250px; }
