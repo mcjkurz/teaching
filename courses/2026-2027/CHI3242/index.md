@@ -245,7 +245,7 @@ title: CHI3242
           <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> J. R. Firth, “A Synopsis of Linguistic Theory” (1957), the “company it keeps” passage</li>
         </ul>
       </td>
-      <td class="notes"></td>
+      <td class="notes"><a href="notes/week-03/">Notes</a><br><a href="slides/collocations/">Slides</a></td>
     </tr>
   </tbody>
   <tbody class="due">
