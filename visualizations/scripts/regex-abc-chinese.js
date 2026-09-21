@@ -10,7 +10,7 @@ const LESSONS = [
         explain: `
             <p>The simplest regex is just the text you are looking for. Chinese characters
             are ordinary characters: no escaping, no special syntax.</p>
-            <p>The pattern <code>賈</code> matches every 賈 in the text.</p>`,
+            <p>For example, the pattern <code>林</code> would match every 林 in a text.</p>`,
         task: 'Match every occurrence of the surname <b>賈</b>.',
         lines: [
             '賈寶玉、林黛玉、薛寶釵',
@@ -25,11 +25,12 @@ const LESSONS = [
     {
         title: '2. The CJK range',
         explain: `
-            <p>You can not write "any Chinese character" character by character, so we use a
-            <b>character class</b> with a <b>range</b>: <code>[\\u4e00-\\u9fff]</code>.
-            <code>\\u4e00</code> is the first common CJK character (一) and <code>\\u9fff</code>
-            the last one; everything in between is matched.</p>
-            <p>Add <code>+</code> to mean "one or more in a row", so a whole run of Chinese is a single match.</p>`,
+            <p>You can not list every Chinese character by hand, so we use a <b>character class</b>
+            with a <b>range</b>. In <code>[a-e]</code> the dash means "everything from a to e";
+            <code>[0-9]</code> is any digit.</p>
+            <p>The same works for Unicode code points, written as <code>\\uXXXX</code>. The common CJK block
+            runs from <code>\\u4e00</code> (一) to <code>\\u9fff</code>.</p>
+            <p>A quantifier after a class repeats it: <code>[0-9]+</code> is "one or more digits in a row".</p>`,
         task: 'Match every <b>run of Chinese characters</b>, but leave out the numbers, Latin letters and punctuation.',
         lines: [
             '紅樓夢 Hong Lou Meng, 1791',
@@ -47,9 +48,9 @@ const LESSONS = [
             <p>Chinese has no spaces between words, so patterns often say <em>how many</em> characters
             may follow. Quantifiers do that:</p>
             <p><code>?</code> zero or one &nbsp; <code>+</code> one or more &nbsp;
-            <code>{2}</code> exactly two &nbsp; <code>{1,2}</code> one or two</p>
-            <p>Chinese given names are usually one or two characters, so a surname plus a given name is
-            <code>張[\\u4e00-\\u9fff]{1,2}</code>.</p>`,
+            <code>{2}</code> exactly two &nbsp; <code>{2,4}</code> two to four</p>
+            <p>For example, <code>[a-z]{2,4}</code> matches a lowercase word of two to four letters.
+            Chinese given names are usually one or two characters long.</p>`,
         task: 'Match every person with the surname <b>張</b> followed by a one- or two-character given name. Do not match the "、" or the other people.',
         lines: [
             '張道士、張華、張金哥',
@@ -64,10 +65,10 @@ const LESSONS = [
     {
         title: '4. Choosing characters: [ ] and |',
         explain: `
-            <p>Square brackets also work with a list of characters. <code>[林薛]</code> matches
-            either 林 or 薛, and <code>[一二三四五六七八九十百]</code> matches one Chinese numeral.
-            (Ranges like <code>\\u4e00-\\u9fff</code> are not useful for numerals because they are scattered in the code chart.)</p>
-            <p>For longer alternatives use <code>|</code>: <code>(黛玉|寶釵)</code>.</p>`,
+            <p>Square brackets also work with a list of characters. <code>[甲乙丙]</code> matches
+            one of those three, and <code>[abc]+</code> matches a run made only of a's, b's and c's.
+            (Ranges are not useful for numerals like 一二三, since their code points are scattered.)</p>
+            <p>For longer alternatives use <code>|</code>: <code>(黛玉|寶釵)</code> matches either name.</p>`,
         task: 'Match the chapter numbers such as <b>第一回</b>, <b>第十二回</b>, <b>第一百二十回</b>.',
         lines: [
             '第一回 甄士隱夢幻識通靈',
@@ -84,9 +85,9 @@ const LESSONS = [
         title: '5. Everything except Chinese: [^ ]',
         explain: `
             <p>A caret right after the opening bracket <b>negates</b> the class:
-            <code>[^\\u4e00-\\u9fff]</code> matches any single character that is <em>not</em> a
-            common CJK character. This is the classic way to find punctuation, spaces, digits and
-            Latin letters in Chinese text (for example, to strip them before counting words).</p>
+            <code>[^0-9]</code> matches any single character that is <em>not</em> a digit.
+            Combined with the CJK range from lesson 2, this is the classic way to find punctuation,
+            spaces, digits and Latin letters in Chinese text (for example, to strip them before counting words).</p>
             <p>Note that Chinese punctuation such as 「，。！」 lives outside of the 4E00–9FFF range.</p>`,
         task: 'Match every character that is <b>not</b> a Chinese character: punctuation, spaces, digits and letters.',
         lines: [

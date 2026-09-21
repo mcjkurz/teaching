@@ -42,18 +42,18 @@
                 <div class="hint" id="hint" hidden></div>
             </section>
 
-            <section class="reference">
-                <h3>Cheat sheet</h3>
+            <details class="reference">
+                <summary>Cheat sheet (spoilers!)</summary>
                 <table>
-                    <tr><td><code>[一-鿿]</code></td><td>any common CJK character (Unicode range 4E00–9FFF)</td></tr>
-                    <tr><td><code>[㐀-䶿]</code></td><td>CJK Extension A (rarer characters)</td></tr>
+                    <tr><td><code>[\u4e00-\u9fff]</code></td><td>any common CJK character (Unicode range 4E00–9FFF)</td></tr>
+                    <tr><td><code>[\u3400-\u4dbf]</code></td><td>CJK Extension A (rarer characters)</td></tr>
                     <tr><td><code>\p{Script=Han}</code></td><td>any Han character, all extensions (works because this page uses the <code>u</code> flag)</td></tr>
                     <tr><td><code>[一二三]</code></td><td>one character out of a set</td></tr>
-                    <tr><td><code>[^一-鿿]</code></td><td>one character that is <em>not</em> in the range</td></tr>
+                    <tr><td><code>[^\u4e00-\u9fff]</code></td><td>one character that is <em>not</em> in the range</td></tr>
                     <tr><td><code>X+</code> <code>X*</code> <code>X?</code> <code>X{1,2}</code></td><td>repeat X: 1 or more / 0 or more / optional / between 1 and 2 times</td></tr>
                     <tr><td><code>(林|薛)</code></td><td>either 林 or 薛</td></tr>
                 </table>
-            </section>
+            </details>
         </main>
     </div>
     <script src="scripts/regex-abc-chinese.js"></script>
