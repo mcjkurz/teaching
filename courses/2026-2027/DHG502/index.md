@@ -159,7 +159,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
         <div class="schedule-section">
           <strong class="schedule-label">Class content</strong>
           <ul class="readings">
-            <li>Research questions, selection and sampling; regex (<a href="https://regexone.com/">RegexOne</a>); tokenization; cleaning; stopwords; transformation logs</li>
+            <li>Research questions, selection and sampling; regex (<a href="https://regexone.com/">RegexOne</a>, <a href="../../../visualizations/regex-abc-chinese.html">Regex ABCs for Chinese</a>); tokenization; cleaning; stopwords; transformation logs</li>
             <li>Brief demonstration: the <a href="https://ctext.org/">Chinese Text Project</a> as a digital source and corpus platform</li>
           </ul>
         </div>

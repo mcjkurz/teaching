@@ -211,7 +211,7 @@ title: CHI559
       <td class="topic">從詞語到語料庫</td>
       <td>
         <ul class="readings">
-          <li>正則表達式（regex）（<a href="https://regexone.com/">https://regexone.com/</a>）</li>
+          <li>正則表達式（regex）（<a href="https://regexone.com/">https://regexone.com/</a>）；<a href="../../../visualizations/regex-abc-chinese.html">中文正則表達式入門（Regex ABCs for Chinese）</a></li>
           <li>比較兩個語料庫的用詞</li>
           <li>弗朗哥·莫萊蒂：〈世界文學猜想〉，節選自《世界文學理論讀本》；Franco Moretti, “Conjectures on World Literature,” in <em>Distant Reading</em></li>
         </ul>

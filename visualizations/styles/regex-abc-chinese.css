@@ -1,4 +1,16 @@
-.steps { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+.copybox {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 0.6rem;
+    background: #f6f8fb; border: 1px solid #dde4ee; border-radius: 4px;
+    padding: 0.6rem 0.9rem; margin-bottom: 1.2rem;
+}
+.copybox-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #2a6fdb; font-weight: 600; }
+.copybox code { font-size: 1.05rem; background: white; border: 1px solid #ddd; padding: 0.15rem 0.5rem; user-select: all; }
+.copy-btn { padding: 0.25rem 0.7rem; border: 1px solid #ccc; background: white; border-radius: 4px; cursor: pointer; font-size: 0.8rem; }
+.copy-btn:hover { background: #f3f3f3; }
+.copybox-note { font-size: 0.8rem; color: #777; }
+.after { margin: 0 0 1rem; padding: 0.6rem 0.9rem; background: #eef6ff; border-left: 3px solid #2a6fdb; border-radius: 0 4px 4px 0; font-size: 0.9rem; }
+
+.steps { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
 .step {
     width: 2.2rem; height: 2.2rem; border-radius: 50%;
     border: 1px solid #ccc; background: white; color: #555;

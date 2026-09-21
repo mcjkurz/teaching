@@ -11,10 +11,17 @@
     <div class="container">
         <header>
             <h1>Regex ABCs for Chinese</h1>
-            <p>A five-step interactive introduction to regular expressions for CJK text, with examples from 《紅樓夢》. Inspired by RegexOne.</p>
+            <p>A ten-step interactive introduction to regular expressions for CJK text, with real examples from 《紅樓夢》. Inspired by RegexOne.</p>
         </header>
 
         <main>
+            <div class="copybox">
+                <span class="copybox-label">CJK range</span>
+                <code>[\u4e00-\u9fff]</code>
+                <button class="copy-btn" data-copy="[\u4e00-\u9fff]">Copy</button>
+                <span class="copybox-note">Paste it into the regex box. It matches one common Chinese character.</span>
+            </div>
+
             <nav class="steps" id="steps"></nav>
 
             <section class="lesson">
@@ -30,6 +37,7 @@
                     <span class="slash">/g</span>
                 </div>
                 <div class="status" id="status"></div>
+                <div class="after" id="after" hidden></div>
 
                 <div class="samples" id="samples"></div>
 
@@ -48,9 +56,11 @@
                     <tr><td><code>[\u4e00-\u9fff]</code></td><td>any common CJK character (Unicode range 4E00–9FFF)</td></tr>
                     <tr><td><code>[\u3400-\u4dbf]</code></td><td>CJK Extension A (rarer characters)</td></tr>
                     <tr><td><code>\p{Script=Han}</code></td><td>any Han character, all extensions (works because this page uses the <code>u</code> flag)</td></tr>
+                    <tr><td><code>^</code> <code>$</code></td><td>start / end of the line</td></tr>
+                    <tr><td><code>\u3000</code></td><td>ideographic (full-width) space</td></tr>
                     <tr><td><code>[一二三]</code></td><td>one character out of a set</td></tr>
                     <tr><td><code>[^\u4e00-\u9fff]</code></td><td>one character that is <em>not</em> in the range</td></tr>
-                    <tr><td><code>X+</code> <code>X*</code> <code>X?</code> <code>X{1,2}</code></td><td>repeat X: 1 or more / 0 or more / optional / between 1 and 2 times</td></tr>
+                    <tr><td><code>X+</code> <code>X*</code> <code>X?</code> <code>X{1,2}</code> <code>X{10,}</code></td><td>repeat X: 1 or more / 0 or more / optional / 1 to 2 times / 10 or more times</td></tr>
                     <tr><td><code>(林|薛)</code></td><td>either 林 or 薛</td></tr>
                 </table>
             </details>

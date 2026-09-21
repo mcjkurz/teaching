@@ -294,7 +294,7 @@ title: CHI3242
       <td class="topic"><span class="lang-en">From Words to Corpora</span><span class="lang-zh" lang="zh-Hant">從詞語到語料庫</span></td>
       <td>
         <ul class="readings">
-          <li><span class="lang-en">Regular expressions (regex) (<a href="https://regexone.com/">https://regexone.com/</a>)</span><span class="lang-zh" lang="zh-Hant">正則表達式（regex）（<a href="https://regexone.com/">https://regexone.com/</a>）</span></li>
+          <li><span class="lang-en">Regular expressions (regex) (<a href="https://regexone.com/">https://regexone.com/</a>); <a href="../../../visualizations/regex-abc-chinese.html">Regex ABCs for Chinese</a></span><span class="lang-zh" lang="zh-Hant">正則表達式（regex）（<a href="https://regexone.com/">https://regexone.com/</a>）；<a href="../../../visualizations/regex-abc-chinese.html">中文正則表達式入門（Regex ABCs for Chinese）</a></span></li>
           <li><span class="lang-en">Comparing the word usage of two corpora</span><span class="lang-zh" lang="zh-Hant">比較兩個語料庫的用詞</span></li>
           <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Adam Kilgarriff, “Comparing Corpora,” <em>International Journal of Corpus Linguistics</em> (2001)</li>
         </ul>
