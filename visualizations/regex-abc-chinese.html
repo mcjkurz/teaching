@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regex ABCs for Chinese</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/regex-abc-chinese.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Regex ABCs for Chinese</h1>
+            <p>A five-step interactive introduction to regular expressions for CJK text, with examples from 《紅樓夢》. Inspired by RegexOne.</p>
+        </header>
+
+        <main>
+            <nav class="steps" id="steps"></nav>
+
+            <section class="lesson">
+                <h2 id="lessonTitle"></h2>
+                <div class="explain" id="lessonExplain"></div>
+
+                <div class="task" id="task"></div>
+
+                <label class="regex-label" for="regexInput">Your regex</label>
+                <div class="regex-row">
+                    <span class="slash">/</span>
+                    <input type="text" id="regexInput" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="type a pattern…">
+                    <span class="slash">/g</span>
+                </div>
+                <div class="status" id="status"></div>
+
+                <div class="samples" id="samples"></div>
+
+                <div class="actions">
+                    <button id="prevBtn">← Previous</button>
+                    <button id="hintBtn">Show hint</button>
+                    <button id="solutionBtn">Show solution</button>
+                    <button id="nextBtn" class="primary">Next →</button>
+                </div>
+                <div class="hint" id="hint" hidden></div>
+            </section>
+
+            <section class="reference">
+                <h3>Cheat sheet</h3>
+                <table>
+                    <tr><td><code>[一-鿿]</code></td><td>any common CJK character (Unicode range 4E00–9FFF)</td></tr>
+                    <tr><td><code>[㐀-䶿]</code></td><td>CJK Extension A (rarer characters)</td></tr>
+                    <tr><td><code>\p{Script=Han}</code></td><td>any Han character, all extensions (works because this page uses the <code>u</code> flag)</td></tr>
+                    <tr><td><code>[一二三]</code></td><td>one character out of a set</td></tr>
+                    <tr><td><code>[^一-鿿]</code></td><td>one character that is <em>not</em> in the range</td></tr>
+                    <tr><td><code>X+</code> <code>X*</code> <code>X?</code> <code>X{1,2}</code></td><td>repeat X: 1 or more / 0 or more / optional / between 1 and 2 times</td></tr>
+                    <tr><td><code>(林|薛)</code></td><td>either 林 or 薛</td></tr>
+                </table>
+            </section>
+        </main>
+    </div>
+    <script src="scripts/regex-abc-chinese.js"></script>
+</body>
+</html>

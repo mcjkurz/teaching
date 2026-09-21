@@ -1,0 +1,71 @@
+.steps { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+.step {
+    width: 2.2rem; height: 2.2rem; border-radius: 50%;
+    border: 1px solid #ccc; background: white; color: #555;
+    font-size: 0.95rem; cursor: pointer;
+}
+.step.active { border-color: #2a6fdb; color: #2a6fdb; font-weight: 600; }
+.step.done { background: #e6f4ea; border-color: #4caf50; color: #2e7d32; }
+
+.lesson h2 { font-size: 1.3rem; font-weight: 500; margin-bottom: 0.75rem; }
+.explain { margin-bottom: 1rem; }
+.explain p { margin-bottom: 0.5rem; }
+code {
+    font-family: Menlo, Consolas, monospace; background: #f3f3f3;
+    padding: 0.05rem 0.3rem; border-radius: 3px; font-size: 0.9em;
+}
+.task {
+    background: #f6f8fb; border-left: 3px solid #2a6fdb;
+    padding: 0.6rem 0.9rem; margin-bottom: 1.2rem;
+}
+.task-label {
+    font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;
+    color: #2a6fdb; margin-right: 0.4rem; font-weight: 600;
+}
+
+.regex-label { display: block; font-size: 0.8rem; color: #666; margin-bottom: 0.25rem; }
+.regex-row {
+    display: flex; align-items: center; gap: 0.4rem;
+    border: 1px solid #bbb; border-radius: 4px; padding: 0.3rem 0.6rem;
+}
+.regex-row:focus-within { border-color: #2a6fdb; box-shadow: 0 0 0 2px rgba(42,111,219,0.15); }
+.slash { font-family: Menlo, Consolas, monospace; color: #999; font-size: 1.1rem; }
+#regexInput {
+    flex: 1; border: none; outline: none; font-size: 1.1rem;
+    font-family: Menlo, Consolas, "PingFang TC", "Noto Sans CJK TC", monospace;
+    padding: 0.3rem 0;
+}
+
+.status { margin: 0.6rem 0 1rem; font-size: 0.85rem; color: #666; min-height: 1.3rem; }
+.status.error { color: #c62828; }
+.status.success { color: #2e7d32; font-weight: 600; }
+
+.samples { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.2rem; }
+.sample {
+    display: flex; align-items: center; gap: 0.7rem;
+    border: 1px solid #e0e0e0; border-radius: 4px; padding: 0.5rem 0.8rem;
+    font-size: 1.25rem; white-space: pre-wrap;
+}
+.sample.ok { border-color: #a5d6a7; background: #fafffa; }
+.sample .text { flex: 1; line-height: 1.8; }
+.sample .badge { font-size: 0.9rem; color: #c62828; width: 1.2rem; }
+.sample.ok .badge { color: #2e7d32; }
+.sample .count { font-size: 0.75rem; color: #999; }
+mark { background: #ffe066; color: inherit; border-radius: 2px; box-shadow: 0 0 0 1px #e6b800; }
+
+.actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.actions button {
+    padding: 0.45rem 0.9rem; border: 1px solid #ccc; background: white;
+    border-radius: 4px; cursor: pointer; font-size: 0.9rem;
+}
+.actions button:hover:not(:disabled) { background: #f3f3f3; }
+.actions button:disabled { opacity: 0.4; cursor: default; }
+.actions .primary { background: #2a6fdb; border-color: #2a6fdb; color: white; margin-left: auto; }
+.actions .primary:hover:not(:disabled) { background: #1f5ab5; }
+.hint { margin-top: 0.8rem; padding: 0.5rem 0.8rem; background: #fff8e1; border-radius: 4px; }
+
+.reference { margin-top: 2.5rem; border-top: 1px solid #e0e0e0; padding-top: 1rem; }
+.reference h3 { font-weight: 500; margin-bottom: 0.5rem; }
+.reference table { border-collapse: collapse; width: 100%; }
+.reference td { padding: 0.35rem 0.5rem; border-bottom: 1px solid #eee; vertical-align: top; }
+.reference td:first-child { white-space: nowrap; }
