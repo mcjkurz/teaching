@@ -228,17 +228,17 @@
 <section class="slide" id="s-problem" data-sec="compare">
   <h2 class="bi"><span class="zh">簡單指標的問題（一）：兩個詞對</span><span class="en">A problem with simple measures, part 1: two word pairs</span></h2>
   <div data-step="1">
-    <div class="eq" style="font-size:24px;margin:0">\(E(\text{coll.} \mid \text{target}) = P(\text{coll.}) \times \big(\text{count}(\text{target}) \times \text{slots}\big)\)</div>
-    <span class="small" style="font-size:16px;margin-left:12px">\(N = 1{,}000{,}000\) · smallest window: only the word right before the target, so slots = 1 (a bigram; Evert, p. 1230)</span>
+    <div class="eq" style="font-size:24px;margin:0">\(E(\text{coll.} \mid \text{target}) = P(\text{coll.}) \times \text{count}(\text{target})\)</div>
+    <div class="bi xs" style="margin-top:6px"><span class="zh">\(N = 1{,}000{,}000\)。Evert 這裡數的是<b>雙詞組</b>（bigram）：搭配詞就是緊鄰在目標詞前面的那個詞。每個目標詞前面只有 1 個位置，所以「位置數」就是 count(target)，不必再乘視窗大小。</span><span class="en">Evert counts bigrams: the collocate is the word right before the target. Each target has exactly one such slot, so the number of slots is just count(target); no window size to multiply by.</span></div>
   </div>
   <div class="cards" style="margin-top:14px">
     <div class="card" data-step="2">
       <h3 class="bi sm"><span class="zh">the Iliad</span><span class="en">《伊利亞特》</span></h3>
-      <div class="nums">count(the) = 100,000<br>count(Iliad) = <b>10</b><br>\(P(\text{the}) = \frac{100{,}000}{1{,}000{,}000} = 0.1\)<br>\(E = 0.1 \times (10 \times 1) = \mathbf{1}\)<br>O = <b>10</b></div>
+      <div class="nums">count(the) = 100,000<br>count(Iliad) = <b>10</b><br>\(P(\text{the}) = \frac{100{,}000}{1{,}000{,}000} = 0.1\)<br>\(E = 0.1 \times 10 = \mathbf{1}\)<br>O = <b>10</b></div>
     </div>
     <div class="card" data-step="3">
       <h3 class="bi sm"><span class="zh">must also</span><span class="en">「必須」「也」</span></h3>
-      <div class="nums">count(must) = 1,000<br>count(also) = <b>1,000</b><br>\(P(\text{must}) = \frac{1{,}000}{1{,}000{,}000} = 0.001\)<br>\(E = 0.001 \times (1000 \times 1) = \mathbf{1}\)<br>O = <b>10</b></div>
+      <div class="nums">count(must) = 1,000<br>count(also) = <b>1,000</b><br>\(P(\text{must}) = \frac{1{,}000}{1{,}000{,}000} = 0.001\)<br>\(E = 0.001 \times 1000 = \mathbf{1}\)<br>O = <b>10</b></div>
     </div>
   </div>
   <div class="callout" data-step="4" style="margin-top:16px"><div class="bi sm"><span class="zh">兩個詞對的 O 和 E 完全一樣：<b>O ＝ 10，E ＝ 1</b>。</span><span class="en">Both pairs have exactly the same O and E.</span></div></div>
