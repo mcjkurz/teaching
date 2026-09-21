@@ -144,6 +144,31 @@
 </section>
 
 
+<!-- 7-practice ─────────── Practice: E and O/E -->
+<section class="slide" id="s-oe-practice" data-sec="compare">
+  <h2 class="bi"><span class="zh">練習：自己算 E 和 O/E</span><span class="en">Practice: compute E and O / E yourself</span></h2>
+  <div class="cards" data-step="1" style="margin-top:6px">
+    <div class="card"><div class="bi sm"><span class="zh">語料總詞數 <b>N</b></span><span class="en">total tokens</span></div><div class="nums"><b>20,000</b></div></div>
+    <div class="card"><div class="bi sm"><span class="zh">count(<span class="tgt-c">喝</span>)</span><span class="en">times 喝 occurs</span></div><div class="nums"><b>100</b></div></div>
+    <div class="card"><div class="bi sm"><span class="zh">count(<span class="col-c">茶</span>)</span><span class="en">times 茶 occurs</span></div><div class="nums"><b>40</b></div></div>
+    <div class="card"><div class="bi sm"><span class="zh">視窗</span><span class="en">window</span></div><div class="nums"><b>4 + 4</b></div></div>
+    <div class="card"><div class="bi sm"><span class="zh">觀察值 <b>O</b></span><span class="en">observed (喝, 茶)</span></div><div class="nums"><b>12</b></div></div>
+  </div>
+  <div class="small" data-step="1" style="margin:6px 0 0">示意數字 illustrative numbers</div>
+  <div class="callout key bi" data-step="2" style="margin-top:14px"><span class="zh">請計算：① P(茶)　② 「喝」周圍的位置數　③ E　④ O / E。O 是否高於偶然？</span><span class="en">Compute: P(茶), the number of slots around 喝, E, and O / E. Is O above chance?</span></div>
+  <div class="two" data-step="3" style="margin-top:10px">
+    <div class="grow">
+      <div class="eq">\(P(\text{茶}) = \dfrac{40}{20{,}000} = 0.002\)</div><br>
+      <div class="eq">\(100 \times 4 \times 2 = 800\)</div>
+    </div>
+    <div class="grow">
+      <div class="eq">\(E = 0.002 \times 800 = \mathbf{1.6}\)</div><br>
+      <div class="eq">\(\dfrac{O}{E} = \dfrac{12}{1.6} = \textcolor{#e0570f}{\mathbf{7.5}}\)</div>
+    </div>
+  </div>
+</section>
+
+
 <!-- 7a0 ─────────── What is log2? -->
 <section class="slide" id="s-log" data-sec="compare">
   <h2 class="bi"><span class="zh">預備知識：對數 log₂</span><span class="en">Background: the base-2 logarithm</span></h2>
