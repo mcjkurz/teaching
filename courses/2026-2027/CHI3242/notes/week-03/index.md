@@ -53,10 +53,10 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
 <p><strong>PPMI</strong>（正的點互信息）：把負值一律設為 0：\[\mathrm{PPMI} = \max\!\left(0,\ \log_2 \frac{O}{E}\right)\]負值表示兩詞互相「排斥」，但語料不夠大時不可靠。PPMI 常用於詞向量。</p>
 
 <h2>4. 簡單指標的問題</h2>
-<p>Evert 舉了一個例子（語料約 100 萬詞）：<em>the Iliad</em> 與 <em>must also</em> 都出現 \(O = 10\) 次，期望值都是 \(E = 1\)（\(E = \dfrac{f_1 \times f_2}{N}\)）。所以 \(O/E = 10\)、\(\mathrm{MI} = 3.32\)，兩者分數完全一樣。</p>
+<p>Evert 舉了一個例子（語料約 100 萬詞）：<em>the Iliad</em> 與 <em>must also</em> 都出現 \(O = 10\) 次，期望值都是 \(E = 1\)（只看緊鄰的前一個詞，即視窗只有 1 格：\(E = P(\text{the}) \times \text{count}(\text{Iliad}) \times 1 = \dfrac{\text{count}(\text{the}) \times \text{count}(\text{Iliad})}{N}\)）。所以 \(O/E = 10\)、\(\mathrm{MI} = 3.32\)，兩者分數完全一樣。</p>
 <div class="table-scroll">
 <table>
-<thead><tr><th>詞對</th><th>\(f_1\)</th><th>\(f_2\)</th><th>\(O\)</th><th>\(E\)</th><th>\(O/E\)</th><th>MI</th></tr></thead>
+<thead><tr><th>詞對</th><th>前一詞的次數</th><th>後一詞的次數</th><th>\(O\)</th><th>\(E\)</th><th>\(O/E\)</th><th>MI</th></tr></thead>
 <tbody>
 <tr><td>the Iliad</td><td>100,000</td><td>10</td><td>10</td><td>1</td><td>10</td><td>3.32</td></tr>
 <tr><td>must also</td><td>1,000</td><td>1,000</td><td>10</td><td>1</td><td>10</td><td>3.32</td></tr>
@@ -91,17 +91,17 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
 <p>兩個詞對的完整列聯表（N = 1,000,000 個雙詞組）：</p>
 <div class="table-scroll">
 <table>
-<thead><tr><th></th><th>the Iliad：\(w_2\) = Iliad</th><th>\(w_2\) ≠ Iliad</th><th>must also：\(w_2\) = also</th><th>\(w_2\) ≠ also</th></tr></thead>
+<thead><tr><th></th><th>the Iliad：後一詞是 Iliad</th><th>不是 Iliad</th><th>must also：後一詞是 also</th><th>不是 also</th></tr></thead>
 <tbody>
-<tr><th>\(w_1\)（the / must）</th><td>10</td><td>99,990</td><td>10</td><td>990</td></tr>
-<tr><th>非 \(w_1\)</th><td><strong>0</strong></td><td>900,000</td><td><strong>990</strong></td><td>998,010</td></tr>
+<tr><th>前一詞是 the / must</th><td>10</td><td>99,990</td><td>10</td><td>990</td></tr>
+<tr><th>前一詞不是 the / must</th><td><strong>0</strong></td><td>900,000</td><td><strong>990</strong></td><td>998,010</td></tr>
 </tbody>
 </table>
 </div>
 <p>兩者的 \(O\) 相同，但 <em>the Iliad</em> 的 \(c = 0\)（每個 Iliad 前面都是 the），<em>must also</em> 的 \(c = 990\)。Fisher 檢定給出 \(p \approx 1 \times 10^{-10}\)（the Iliad）與 \(p \approx 1 \times 10^{-7}\)（must also）。兩者都「顯著」，但 the Iliad 的 \(p\) 小 1000 倍。實際用法是把 \(p\) 值當作分數來<strong>排序</strong>：the Iliad 排在前面，而 \(O/E\) 和 MI 做不到這一點。</p>
 
 <h2>7. 三種「相鄰」的定義</h2>
-<p>Evert：先決定什麼是一個<strong>共現項目（item）</strong>，再問每個項目是否含 \(w_1\)、是否含 \(w_2\)。同一張列聯表，只是「項目」不同：</p>
+<p>Evert：先決定什麼是一個<strong>共現項目（item）</strong>，再問每個項目是否含 \(w_1\)、是否含 \(w_2\)。（記號：\(w_1\) 是目標詞 X，\(w_2\) 是搭配詞 Y。）同一張列聯表，只是「項目」不同：</p>
 <div class="table-scroll">
 <table>
 <thead><tr><th></th><th>視窗法</th><th>句子法</th><th>語法關係法</th></tr></thead>

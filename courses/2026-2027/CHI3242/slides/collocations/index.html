@@ -463,8 +463,8 @@
   <h2 class="bi"><span class="zh">回到 the Iliad ／ must also</span><span class="en">Back to Evert’s example: what does Fisher’s test say?</span></h2>
   <div class="bi sm"><span class="zh">兩者：<b>O ＝ 10，E ＝ 1，O/E ＝ 10，MI ＝ 3.32</b> —— 簡單指標分不出來。現在看完整的列聯表：</span><span class="en">Both have O = 10, E = 1, O/E = 10, MI = 3.32, so the simple measures cannot separate them. Now the full contingency tables (N = 1,000,000 bigrams):</span></div>
   <div class="fisher" style="margin-top:8px;gap:60px;justify-content:center">
-    <div class="col" data-step="1"><div class="ct-title">the Iliad　(f₁ = 100,000 · f₂ = 10)</div><div id="il-a"></div><div class="pv" data-step="3" id="il-pa"></div></div>
-    <div class="col" data-step="2"><div class="ct-title">must also　(f₁ = f₂ = 1,000)</div><div id="il-b"></div><div class="pv" data-step="3" id="il-pb"></div></div>
+    <div class="col" data-step="1"><div class="ct-title">the Iliad　(count(the) = 100,000 · count(Iliad) = 10)</div><div id="il-a"></div><div class="pv" data-step="3" id="il-pa"></div></div>
+    <div class="col" data-step="2"><div class="ct-title">must also　(count(must) = count(also) = 1,000)</div><div id="il-b"></div><div class="pv" data-step="3" id="il-pb"></div></div>
   </div>
   <div class="callout key" data-step="4" style="margin-top:12px">
     <div class="bi sm"><span class="zh">the Iliad 的 <b>c ＝ 0</b>：每個 Iliad 前面都是 the，O ＝ 10 已是最大可能值；must also 的 c ＝ 990：also 大多沒有 must 在前。</span><span class="en">For the Iliad c = 0: every Iliad is preceded by the, so 10 is the maximum possible O. For must also, c = 990: most alsos have no must before them.</span></div>
@@ -476,6 +476,7 @@
 <section class="slide" id="s-three" data-sec="three">
   <h2 class="bi"><span class="zh">三種定義「相鄰」的方法</span><span class="en">Three ways to define “near”</span></h2>
   <div class="bi sm"><span class="zh">Evert：先決定什麼是一個<b>共現項目 (item)</b>，再問每個項目是否含 w₁、是否含 w₂</span><span class="en">Evert: first define what an item is, then ask whether each item contains w₁ and whether it contains w₂</span></div>
+  <div class="bi xs" style="margin-top:6px"><span class="zh">記號（Evert）：<b>w₁</b> ＝ 目標詞 X，<b>w₂</b> ＝ 搭配詞 Y；<b>f₁</b> ＝ count(w₁)，<b>f₂</b> ＝ count(w₂)，<b>N</b> ＝ 項目總數。O、E 的定義不變。</span><span class="en">Notation from here on (Evert): w₁ = target X, w₂ = collocate Y; f₁ = count(w₁), f₂ = count(w₂), N = total number of items.</span></div>
   <div class="cards" style="margin-top:16px">
     <div class="card" data-step="1">
       <h3 class="bi"><span class="zh">視窗法</span><span class="en">Window (surface)</span></h3>
