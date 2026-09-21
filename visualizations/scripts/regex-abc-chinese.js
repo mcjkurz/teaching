@@ -1,4 +1,4 @@
-// Regex ABCs for Chinese: twelve interactive lessons on real and realistic text.
+// Regex ABCs for Chinese: ten core lessons plus four extras on real and realistic text.
 // Sources: 《紅樓夢》 (misc/紅樓夢.txt), 《明史》 (misc/明史.txt), a Tang poem, and a few
 // invented lines in the style of contemporary (simplified) Chinese social media and news.
 // Each lesson has sample lines, a reference regex (used to compute the expected
@@ -44,8 +44,8 @@ const LESSONS = [
         lines: [
             '洪武二十五年九月，立為皇太孫。',
             '洪武三年，封燕王。十三年，之藩北平。',
-            '○在京凡本府在京屬衛，曾經永樂十八年調守北京者',
-            '○萬全都司宣德五年，分直隸及山西等處衛所添設。',
+            '曾經永樂十八年調守北京者，各注其下曰「調北京」',
+            '萬全都司宣德五年，分直隸及山西等處衛所添設。',
         ],
         reference: '(洪武|永樂|宣德)',
         mode: 'exact',
@@ -64,7 +64,7 @@ const LESSONS = [
         task: 'Match every <b>run of characters from the CJK block</b> 4E00–9FFF. Brackets, punctuation, digits, Latin letters and other symbols end a run.',
         lines: [
             '《紅樓夢》曹雪芹',
-            '《二○一六年十月七日版》',
+            '《史記·天官書》有客星之名，而不詳其形狀。',
             '本清朝作品在全世界都屬於公有領域，因為作者逝世已經超過100年。',
             '#今天也要加油# 周末去了趟深圳湾公园，风景真好！',
             '牀前明月光，疑是地上霜。',
@@ -73,7 +73,7 @@ const LESSONS = [
         mode: 'exact',
         hint: 'Put the range inside square brackets and add + after them.',
         solution: '[\\u4e00-\\u9fff]+',
-        after: 'Two lessons in one. (1) The block covers simplified and traditional alike, and old poems as well as hashtags. (2) The date line was cut into two pieces: the "○" in 二○一六 is U+25CB, a geometric symbol that this e-text uses as a zero, and it is not in the 4E00–9FFF block. The proper ideographic zero 〇 (U+3007) is not in the block either. You will meet both again in lessons 6 and 12.',
+        after: 'The block covers simplified and traditional characters alike, and old poems as well as hashtags. Digits, Latin letters, punctuation and symbols end a run.',
     },
     {
         title: '4. At least n: {n,}',
@@ -104,19 +104,18 @@ const LESSONS = [
             <p>For example <code>colou?r</code> matches both "color" and "colour", and
             <code>[a-z]{2,4}</code> matches a lowercase word of two to four letters.</p>
             <p>Chinese given names are usually one or two characters long.</p>`,
-        task: 'Match every person with the surname <b>張</b> together with a one- or two-character given name. Lines from the 《明史》, plus a line of colleagues.',
+        task: 'Match every person with the surname <b>張</b> together with a one- or two-character given name. Lines from the 《明史》.',
         lines: [
             '侍郎桂萼、張璁，少詹事方獻夫署三法司',
             '遼東巡按御史劉臺以論張居正逮下獄，削籍。',
             '夫福壽力戰死之，蠻子海牙遁歸張士誠，康茂才降。',
             '米脂賊張獻忠聚眾應之。',
-            '今天的会议由张伟、张丽和张军主持。',
+            '張溥《宋史紀事本末》一百九卷',
         ],
         reference: '張[\\u4e00-\\u9fff]{1,2}',
         mode: 'exact',
         hint: 'Surname, then the CJK range, then {1,2}. Careful: the dot . would also match "，".',
         solution: '張[\\u4e00-\\u9fff]{1,2}',
-        after: 'The last line has three 张 and none of them matched. That is not a bug: simplified 张 (U+5F20) and traditional 張 (U+5F35) are two different characters. Searching a mixed corpus means searching for both, e.g. [張张].',
     },
     {
         title: '6. A list of characters: [ ]',
@@ -125,13 +124,12 @@ const LESSONS = [
             one of those three, and <code>[abc]+</code> matches a run made only of a's, b's and c's.</p>
             <p>Ranges are not useful for numerals like 一二三, since their code points are scattered
             all over the code chart, so you spell them out.</p>`,
-        task: 'These are the volume headings of the 《明史》. Match each <b>volume number</b> in full: 卷十二, 卷一百〇一, …',
-        lines: ['卷十二', '卷一百〇一', '卷二百〇五', '卷三百〇九'],
-        reference: '卷[一二三四五六七八九十百〇]+',
+        task: 'These are the volume headings of the 《明史》. Match each <b>volume number</b> in full: 卷九, 卷十二, 卷一百, …',
+        lines: ['卷九', '卷十二', '卷二十九', '卷一百'],
+        reference: '卷[一二三四五六七八九十百]+',
         mode: 'exact',
-        hint: '卷, then a class of numerals with +. Do not forget the zero: 〇 (U+3007) is the proper Chinese zero, and 零 is not used here.',
-        solution: '卷[一二三四五六七八九十百〇]+',
-        after: 'In Chinese numerals the zero in 一百〇一 is a genuine numeral, and it is one you can easily forget. It is also not in the 4E00–9FFF block, so a numeral range would never have caught it.',
+        hint: '卷, then a class of numerals with +.',
+        solution: '卷[一二三四五六七八九十百]+',
     },
     {
         title: '7. Everything except…: [^ ]',
@@ -207,7 +205,8 @@ const LESSONS = [
         after: 'Handy for cleaning: replacing this pattern with nothing removes every footnote marker from the 《明史》 file, which has 188 of them.',
     },
     {
-        title: '11. Invisible characters',
+        title: '11. Extra: invisible characters',
+        extra: true,
         explain: `
             <p>Not every character in a text is a visible one. Digitised texts often hide
             <b>zero-width spaces</b> (U+200B) and <b>private-use characters</b> (U+E000–U+F8FF): code points that
@@ -228,7 +227,49 @@ const LESSONS = [
         after: 'Now you can see them: 災之 and 陛下言 look like ordinary words but contain up to four hidden characters, so a search for "災之" finds nothing and a word segmenter sees garbage. Checking the character classes of a corpus before analysis is a good habit.',
     },
     {
-        title: '12. Any Han character: \\p{Script=Han}',
+        title: '12. Extra: simplified vs traditional',
+        extra: true,
+        explain: `
+            <p>Simplified and traditional forms of the same character are <b>different code points</b>:
+            張 is U+5F35, but 张 is U+5F20. A regex for one will never match the other.</p>
+            <p>When a corpus mixes both (a common situation with web text), list both variants in a class:
+            <code>[鳥鸟]</code> matches 鳥 or 鸟.</p>`,
+        task: 'Match every person with the surname <b>張 or 张</b> and a one- or two-character given name.',
+        lines: [
+            '遼東巡按御史劉臺以論張居正逮下獄，削籍。',
+            '米脂賊張獻忠聚眾應之。',
+            '会议名单：张伟、张丽、张军。',
+        ],
+        reference: '[張张][\\u4e00-\\u9fff]{1,2}',
+        mode: 'exact',
+        hint: 'Put both surnames in one class, then the same range and {1,2} as before.',
+        solution: '[張张][\\u4e00-\\u9fff]{1,2}',
+        after: 'With plain 張 the last line would have been missed entirely, without any error. Tools such as OpenCC convert between the two systems, but converting is not always one-to-one (e.g. 發 and 髮 are both 发 in simplified).',
+    },
+    {
+        title: '13. Extra: full-width characters',
+        extra: true,
+        explain: `
+            <p>Chinese typing often produces <b>full-width</b> forms of ASCII characters: ２０２４ instead of 2024,
+            ＧＤＰ instead of GDP. They occupy the same width as a Chinese character, but they are different code points:
+            <code>\\d</code> and <code>[0-9]</code> will <em>not</em> match ２０２４.</p>
+            <p>The full-width block runs from <code>\\uff01</code> to <code>\\uff5e</code> and mirrors ASCII
+            (which starts at 0x21). This block also holds the Chinese comma ，, the question mark ？ and the exclamation mark ！.</p>`,
+        task: 'Match every <b>run of full-width characters</b>: letters, digits and signs. Notice which punctuation is caught as well.',
+        lines: [
+            '２０２４年第一季度ＧＤＰ同比增长５．３％',
+            '价格：９９元，包邮！',
+            '2024年第一季度GDP同比增长5.3%',
+        ],
+        reference: '[\\uff01-\\uff5e]+',
+        mode: 'exact',
+        hint: 'A class with a range from \\uff01 to \\uff5e, then +.',
+        solution: '[\\uff01-\\uff5e]+',
+        after: 'The last line is the half-width version: no match at all, although a human reads the same thing. Normalising full-width to half-width (Unicode NFKC) is a standard first step in cleaning Chinese text. Also note that ： ， ！ were matched: they are full-width forms of : , ! so they are not in the CJK range either.',
+    },
+    {
+        title: '14. Extra: any Han character, \\p{Script=Han}',
+        extra: true,
         explain: `
             <p>The block 4E00–9FFF does not contain every Chinese character. Rarer ones, such as characters
             used only in personal names, live in <b>Extension A</b> (<code>\\u3400–\\u4dbf</code>) and in
@@ -236,7 +277,7 @@ const LESSONS = [
             <p>A <b>Unicode property</b> covers them all at once: <code>\\p{Script=Han}</code> matches any
             Han character, wherever it sits in the code chart. (Other examples: <code>\\p{Script=Greek}</code>,
             <code>\\p{Script=Hiragana}</code>.) It needs the Unicode flag, which this page has turned on for you.</p>`,
-        task: 'Match every <b>run of Han characters</b>, using the Unicode property instead of the range. Note what happens to the two zeros.',
+        task: 'Match every <b>run of Han characters</b> using the Unicode property instead of the range. Look at what happens on each line.',
         lines: [
             '卷二百〇五',
             '賈㻞、賈珖、賈珩、賈瓔、賈菖、賈菱等各有執事',
@@ -246,7 +287,7 @@ const LESSONS = [
         mode: 'exact',
         hint: 'Replace the range by \\p{Script=Han}, and keep the +.',
         solution: '\\p{Script=Han}+',
-        after: 'Three different things: 〇 (U+3007) and 㻞 (U+3EDE, Extension A) are Han characters that the plain range misses, and the property catches them. The circle ○ (U+25CB) is only a symbol, so it still breaks the run. A common cleaning step is to normalise ○ to 〇 before analysis.',
+        after: 'Three lookalike problems in one. 〇 (U+3007, the proper ideographic zero in 卷二百〇五) and 㻞 (U+3EDE, Extension A) are Han characters that the plain range would miss. The circle ○ in 二○一六 (U+25CB) looks like a zero but is only a geometric symbol, so it still breaks the run. Some e-texts (like this 紅樓夢 file) use ○, others (like the 《明史》 file) use both, so normalising ○ to 〇 is a common cleaning step.',
     },
 ];
 
@@ -316,9 +357,11 @@ function highlight(text, matches) {
 function renderSteps() {
     $('steps').innerHTML = LESSONS.map((l, i) => {
         const cls = ['step'];
+        if (l.extra) cls.push('extra');
         if (i === state.current) cls.push('active');
         if (state.solved[i]) cls.push('done');
-        return `<button class="${cls.join(' ')}" data-i="${i}">${state.solved[i] ? '✓' : i + 1}</button>`;
+        const divider = l.extra && !LESSONS[i - 1].extra ? '<span class="extras-label">Extras: pitfalls</span>' : '';
+        return `${divider}<button class="${cls.join(' ')}" data-i="${i}" title="${l.title.replace(/"/g, '&quot;')}">${state.solved[i] ? '✓' : i + 1}</button>`;
     }).join('');
 }
 
