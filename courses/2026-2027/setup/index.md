@@ -79,13 +79,13 @@ main .callout-warn {
 <h2>Before you start</h2>
 <ol>
 <li>Create a <a href="https://github.com/">GitHub</a> account — needed for all three options.</li>
-<li>Get your key at <a href="https://keyreg.qhchina.org">keyreg.qhchina.org</a> (class code: <code>chi3242</code> or <code>dhg502</code>). Keep it private.</li>
+<li>Get your key at <a href="https://keyreg.qhchina.org">keyreg.qhchina.org</a> using the class code from your syllabus. Keep it private.</li>
 </ol>
 
 <h2 id="codespaces">Browser: GitHub Codespaces</h2>
 <p>Runs in the browser. Nothing installed on your computer.</p>
 <ol>
-<li>Use the template <a href="https://github.com/mcjkurz/qh-starter">qh-starter</a> → <strong>Use this template</strong> → create your own repo (name it e.g. <code>chi3242</code> or <code>dhg502</code>).</li>
+<li>Use the template <a href="https://github.com/mcjkurz/qh-starter">qh-starter</a> → <strong>Use this template</strong> → create your own repository.</li>
 <li>Open it → green <strong>Code</strong> button → <strong>Codespaces</strong> → <strong>Create codespace on main</strong>. First start takes a few minutes.</li>
 </ol>
 
@@ -174,13 +174,13 @@ main .callout-warn {
 <h2>開始前</h2>
 <ol>
 <li>註冊 <a href="https://github.com/">GitHub</a> 帳號——三種方案都需要。</li>
-<li>到 <a href="https://keyreg.qhchina.org">keyreg.qhchina.org</a> 領取金鑰（課程代碼：<code>chi3242</code> 或 <code>dhg502</code>）。請妥善保管。</li>
+<li>到 <a href="https://keyreg.qhchina.org">keyreg.qhchina.org</a> 領取金鑰，課程代碼見課程大綱。請妥善保管。</li>
 </ol>
 
 <h2 id="codespaces-zh">瀏覽器：GitHub Codespaces</h2>
 <p>在瀏覽器裡運行，電腦上不必安裝任何東西。</p>
 <ol>
-<li>用模板 <a href="https://github.com/mcjkurz/qh-starter">qh-starter</a> → <strong>Use this template</strong> → 建立自己的倉庫（例如命名為 <code>chi3242</code> 或 <code>dhg502</code>）。</li>
+<li>用模板 <a href="https://github.com/mcjkurz/qh-starter">qh-starter</a> → <strong>Use this template</strong> → 建立自己的倉庫。</li>
 <li>打開倉庫 → 綠色 <strong>Code</strong> 按鈕 → <strong>Codespaces</strong> → <strong>Create codespace on main</strong>。首次啟動需數分鐘。</li>
 </ol>
 
