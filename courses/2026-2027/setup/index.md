@@ -4,19 +4,6 @@ title: Set Up an AI Coding Agent
 ---
 
 <style>
-main .option-nav { display: flex; gap: 0.6rem; flex-wrap: wrap; margin: 0 0 1.5rem; }
-main .option-nav a {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  border-radius: 999px;
-  background: #eef3f8;
-  border: 1px solid #c5d4e4;
-  color: #0066cc;
-  font-weight: 600;
-  font-size: 0.95rem;
-  text-decoration: none;
-}
-main .option-nav a:hover { background: #e3ecf5; }
 main .pick-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -55,13 +42,6 @@ main .callout-warn {
 <p>Pick the setup that fits your computer. Each one ends the same way: an AI coding agent (OpenCode or GitHub Copilot) connected to your OpenRouter key.</p>
 
 <p class="callout-warn"><strong>Most important, whichever setup you choose:</strong> commit and push your work to your GitHub repository at the end of every session. That is what preserves it — anything left only in a Codespace or on a school computer will eventually be lost. You can ask your agent to commit and push for you.</p>
-
-<nav class="option-nav">
-<a href="#codespaces">Codespaces</a>
-<a href="#copilot-school">Copilot (school computer)</a>
-<a href="#opencode">OpenCode Desktop App</a>
-<a href="#copilot-own">Copilot (own computer)</a>
-</nav>
 
 <div class="pick-grid">
 <div class="pick-card">
@@ -153,13 +133,6 @@ main .callout-warn {
 <p>請依你的電腦情況選擇適合的方案。每一種最後的結果都一樣：人工智能編程助手（OpenCode 或 GitHub Copilot）連上你的 OpenRouter 金鑰。</p>
 
 <p class="callout-warn"><strong>不論選哪一種方案，最重要的是：</strong>每次做完都要把成果 commit 並 push 到你的 GitHub 倉庫。只有這樣才能保存下來——只留在 Codespace 或學校電腦上的檔案，最後都會消失。可以直接請助手幫你 commit 和 push。</p>
-
-<nav class="option-nav">
-<a href="#codespaces-zh">Codespaces</a>
-<a href="#copilot-school-zh">Copilot（學校電腦）</a>
-<a href="#opencode-zh">OpenCode 桌面版</a>
-<a href="#copilot-own-zh">Copilot（自己的電腦）</a>
-</nav>
 
 <div class="pick-grid">
 <div class="pick-card">
