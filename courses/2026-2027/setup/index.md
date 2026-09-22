@@ -50,7 +50,7 @@ main .callout-warn {
 
 <p><strong>Which agent?</strong> <strong>OpenCode</strong> and <strong>GitHub Copilot</strong> both write and run code for you. OpenCode works in a terminal window; Copilot sits in a chat panel inside VS Code.</p>
 
-<p><strong>Where do you work?</strong> In your browser, using GitHub Codespaces, where nothing is installed on the machine in front of you. Or on your own computer, using software you install once.</p>
+<p><strong>Where do you work?</strong> In your browser, using GitHub Codespaces, where nothing is installed on the computer you are using. Or on your own computer, using software you install once.</p>
 
 <p>The options below are combinations of those two. Whichever you pick, you end up in the same place: an agent connected to your OpenRouter key.</p>
 
@@ -170,14 +170,14 @@ main .callout-warn {
 
 <p><strong>用哪個助手？</strong><strong>OpenCode</strong> 和 <strong>GitHub Copilot</strong> 都能幫你撰寫和執行代碼。OpenCode 在終端機視窗裡運行；Copilot 則在 VS Code 的聊天面板裡。</p>
 
-<p><strong>在哪裡工作？</strong>在瀏覽器裡用 GitHub Codespaces，你眼前這台電腦不必安裝任何東西；或在自己的電腦上，安裝一次軟件即可。</p>
+<p><strong>在哪裡工作？</strong>在瀏覽器裡使用 GitHub Codespaces，所用的電腦無須安裝任何軟件；或在自己的電腦上安裝一次，日後直接使用。</p>
 
 <p>下面的選項就是這兩者的組合。無論選哪一種，最後都會走到同一個結果：助手連上你的 OpenRouter 金鑰。</p>
 
 <div class="pick-grid">
 <div class="pick-card">
 <h3>學校電腦室</h3>
-<p>這類電腦不讓你安裝需要管理員密碼的軟件，也不會預先裝好任何工具。</p>
+<p>這類電腦通常不允許安裝需要管理員密碼的軟件，也不會預先裝好任何工具。</p>
 <p><a href="#codespaces-zh">Codespaces</a>：在瀏覽器裡，不需要安裝任何東西，OpenCode 或 Copilot 皆可使用。</p>
 <p><a href="#copilot-school-zh">VS Code + Copilot</a>：在編輯器裡操作，需要使用者安裝。</p>
 </div>
