@@ -89,6 +89,8 @@ main .callout-warn {
 
 <p class="callout-warn"><strong>When you're done:</strong> commit and push your work (you can ask the agent to do this for you), then delete the Codespace (<a href="https://github.com/codespaces">github.com/codespaces</a> → <strong>...</strong> → <strong>Delete</strong>). Anything you didn't push is lost when the Codespace is deleted, and an idle Codespace keeps using your free monthly hours until you delete it.</p>
 
+<p><strong>Worth doing:</strong> apply for <a href="https://education.github.com">GitHub Education</a> with your university email. Verified students get up to 180 Codespaces core-hours per month, far more than the standard free allowance.</p>
+
 <h2 id="copilot-school">VS Code + Copilot (school computer)</h2>
 <p>For a lab computer where you can't install anything system-wide. No terminal needed.</p>
 <ol>
@@ -179,6 +181,8 @@ main .callout-warn {
 </ol>
 
 <p class="callout-warn"><strong>做完後：</strong>先 commit、push（可以直接請助手幫你做），再刪除 Codespace（<a href="https://github.com/codespaces">github.com/codespaces</a> → <strong>...</strong> → <strong>Delete</strong>）。尚未推送的內容，Codespace 一刪就找不回來；閒置的 Codespace 也會持續消耗每月免費時數，直到被刪除。</p>
+
+<p><strong>建議一做：</strong>用你的大學電郵申請 <a href="https://education.github.com">GitHub Education</a>。通過驗證的學生每月最多可用 180 個 Codespaces core hours，遠多於一般免費額度。</p>
 
 <h2 id="copilot-school-zh">VS Code + Copilot（學校電腦）</h2>
 <p>適用於無法安裝系統層級軟件的電腦室機器。不需要終端機。</p>
