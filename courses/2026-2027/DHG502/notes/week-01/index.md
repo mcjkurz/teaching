@@ -22,10 +22,10 @@ title: DHG 502 Week 1 Notes
 </ol>
 <p>Then continue with your chosen path:</p>
 <ul>
-<li><strong>(a) Local:</strong> install <a href="https://www.python.org/downloads/">Python</a>, <a href="https://code.visualstudio.com/">VS Code</a>, <a href="../../setup/opencode/">OpenCode</a>, and <a href="https://www.google.com/chrome/">Chrome</a> or <a href="https://www.microsoft.com/edge">Edge</a>. Clone the <code>dhg502</code> repo and open it in VS Code (<strong>File → Open Folder</strong>).</li>
+<li><strong>(a) Local:</strong> install <a href="https://www.python.org/downloads/">Python</a>, <a href="https://code.visualstudio.com/">VS Code</a>, <a href="../../../setup/">OpenCode</a>, and <a href="https://www.google.com/chrome/">Chrome</a> or <a href="https://www.microsoft.com/edge">Edge</a>. Clone the <code>dhg502</code> repo and open it in VS Code (<strong>File → Open Folder</strong>).</li>
 <li><strong>(b) Browser:</strong> in your new repo, click <strong>Code → Codespaces → Create codespace</strong>. First startup takes a few minutes; everything runs in the browser.</li>
 </ul>
-<p>On a local install, open a new terminal (or reload your shell settings) before typing <code>opencode</code>. See <a href="../../setup/opencode/">how to install OpenCode</a>.</p>
+<p>On a local install, open a new terminal (or reload your shell settings) before typing <code>opencode</code>. See <a href="../../../setup/">how to set up an AI coding agent</a>.</p>
 
 <h2>2. Connect OpenCode</h2>
 <ol>

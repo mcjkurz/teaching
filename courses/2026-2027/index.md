@@ -11,10 +11,6 @@ title: 2026–2027
     <span class="description">Text Mining for Chinese Humanities</span>
   </li>
   <li>
-    <a href="{{ '/courses/2026-2027/CHI559/' | relative_url }}">CHI559</a>
-    <span class="description">環球中國研究中的數字人文</span>
-  </li>
-  <li>
     <a href="{{ '/courses/2026-2027/DHG502/' | relative_url }}">DHG502</a>
     <span class="description">Digital Approaches in Historical Research</span>
   </li>

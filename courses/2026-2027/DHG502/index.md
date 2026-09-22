@@ -46,10 +46,10 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
 <ol>
 <li>Create a <a href="https://github.com/">GitHub</a> account.</li>
 <li>Collect your API key at <a href="https://keyreg.qhchina.org">keyreg.qhchina.org</a> (class code: dhg502). Do not put the key in a repository or share it with others.</li>
-<li>On your laptop, install <a href="https://www.python.org/downloads/">Python</a>, <a href="https://code.visualstudio.com/">Visual Studio Code (VS Code)</a>, and then OpenCode. Step-by-step: <a href="setup/opencode/">how to install OpenCode</a>. If you cannot install locally, use GitHub Codespaces instead (same page, section 5): create a new repository from the course template and work in the browser.</li>
+<li>On your laptop, install <a href="https://www.python.org/downloads/">Python</a>, <a href="https://code.visualstudio.com/">Visual Studio Code (VS Code)</a>, and then OpenCode. Step-by-step: <a href="../setup/">how to set up an AI coding agent</a>. If you cannot install locally, use GitHub Codespaces instead (same page, Scenario A): create a new repository from the course template and work in the browser.</li>
 <li>Install or update <a href="https://www.google.com/chrome/">Google Chrome</a> or <a href="https://www.microsoft.com/edge">Microsoft Edge</a> for the image-annotation lab.</li>
 </ol>
-<p>Week 1 sets up the research environment (GitHub, VS Code, OpenCode, and AI coding assistants). Bring a laptop with the software already installed, or use GitHub Codespaces in the browser if you cannot install locally — see <a href="setup/opencode/#5-github-codespaces-browser-no-local-install">section 5 of the OpenCode install page</a>.</p>
+<p>Week 1 sets up the research environment (GitHub, VS Code, OpenCode, and AI coding assistants). Bring a laptop with the software already installed, or use GitHub Codespaces in the browser if you cannot install locally — see <a href="../setup/#a-github-codespaces-browser-nothing-installed">Scenario A of the setup page</a>.</p>
 
 <h2>Assessment</h2>
 <p>Students’ progress towards the learning outcomes will be measured by means of:</p>
