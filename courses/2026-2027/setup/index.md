@@ -52,7 +52,7 @@ main .callout-warn {
 <div class="i18n-block">
 <div class="lang-en">
 
-<p>Three ways to connect an AI coding agent (OpenCode or GitHub Copilot) to your OpenRouter key. Pick the one that fits your computer.</p>
+<p>Pick the setup that fits your computer. Each one ends the same way: an AI coding agent (OpenCode or GitHub Copilot) connected to your OpenRouter key.</p>
 
 <nav class="option-nav">
 <a href="#codespaces">1.a Codespaces</a>
@@ -78,7 +78,7 @@ main .callout-warn {
 
 <h2>Before you start</h2>
 <ol>
-<li>Create a <a href="https://github.com/">GitHub</a> account — needed for all three options.</li>
+<li>Create a <a href="https://github.com/">GitHub</a> account — needed in every case.</li>
 <li>Get your <strong>OpenRouter API key</strong> at <a href="https://keyreg.qhchina.org">keyreg.qhchina.org</a> using the class code from your syllabus. Keep it private.</li>
 </ol>
 
@@ -147,7 +147,7 @@ main .callout-warn {
 </div>
 <div class="lang-zh" lang="zh-Hant">
 
-<p>三種把人工智能編程助手（OpenCode 或 GitHub Copilot）連上你的 OpenRouter 金鑰的方法，依你的電腦情況任選一種。</p>
+<p>請依你的電腦情況選擇適合的方案。每一種最後的結果都一樣：人工智能編程助手（OpenCode 或 GitHub Copilot）連上你的 OpenRouter 金鑰。</p>
 
 <nav class="option-nav">
 <a href="#codespaces-zh">1.a Codespaces</a>
@@ -173,7 +173,7 @@ main .callout-warn {
 
 <h2>開始前</h2>
 <ol>
-<li>註冊 <a href="https://github.com/">GitHub</a> 帳號——三種方案都需要。</li>
+<li>註冊 <a href="https://github.com/">GitHub</a> 帳號——每一種方案都需要。</li>
 <li>到 <a href="https://keyreg.qhchina.org">keyreg.qhchina.org</a> 領取你的 <strong>OpenRouter API 金鑰</strong>，課程代碼見課程大綱。請妥善保管。</li>
 </ol>
 
