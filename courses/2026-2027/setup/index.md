@@ -69,7 +69,7 @@ main .callout-warn {
 <div class="pick-card">
 <h3>Your own computer (Mac or Windows)</h3>
 <p>Full control to install software.</p>
-<p>Easiest: install the <a href="#opencode">OpenCode Desktop App</a> — one download, no terminal, works the same on Mac and Windows.</p>
+<p>Easiest: install the <a href="#opencode">OpenCode Desktop App</a> — one download, no terminal, works the same on Mac and Windows. Prefer working inside VS Code instead? Use <a href="#copilot">VS Code + Copilot</a>.</p>
 </div>
 </div>
 
@@ -129,8 +129,6 @@ main .callout-warn {
 <li>Pick your model in the Chat model picker.</li>
 </ol>
 
-<p>Syllabus: <a href="../CHI3242/">CHI 3242</a> · <a href="../DHG502/">DHG 502</a></p>
-
 </div>
 <div class="lang-zh" lang="zh-Hant">
 
@@ -151,7 +149,7 @@ main .callout-warn {
 <div class="pick-card">
 <h3>自己的電腦（Mac 或 Windows）</h3>
 <p>可自由安裝軟件。</p>
-<p>最簡單：安裝 <a href="#opencode-zh">OpenCode 桌面版</a>——單一下載檔，不需終端機，Mac 和 Windows 做法相同。</p>
+<p>最簡單：安裝 <a href="#opencode-zh">OpenCode 桌面版</a>——單一下載檔，不需終端機，Mac 和 Windows 做法相同。比較想在 VS Code 裡操作？用 <a href="#copilot-zh">VS Code + Copilot</a>。</p>
 </div>
 </div>
 
@@ -210,8 +208,6 @@ main .callout-warn {
 <li><strong>加入金鑰：</strong>按聊天輸入框下方的模型選擇器 → <strong>Other Models</strong> → 設定（齒輪）圖示 → <strong>Add Models</strong> → <strong>OpenRouter</strong> → 貼上金鑰。</li>
 <li>在模型選擇器中選定模型。</li>
 </ol>
-
-<p>課程大綱：<a href="../CHI3242/">CHI 3242</a> · <a href="../DHG502/">DHG 502</a></p>
 
 </div>
 </div>
