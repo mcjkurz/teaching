@@ -48,13 +48,13 @@ main .callout-warn {
 <h3>School or lab computer</h3>
 <p>No admin rights, nothing pre-installed.</p>
 <p><a href="#codespaces">Codespaces</a> — in the browser, nothing to install.</p>
-<p><a href="#copilot-school">VS Code + Copilot</a> — in an editor, needs a user install.</p>
+<p><a href="#copilot-school">VS Code + Copilot</a> (recommended) — in an editor, needs a user install.</p>
 </div>
 <div class="pick-card">
 <h3>Your own computer (Mac or Windows)</h3>
 <p>Full control to install software.</p>
 <p><a href="#opencode">OpenCode Desktop App</a> — one download, no terminal, same on Mac and Windows.</p>
-<p><a href="#copilot-own">VS Code + Copilot</a> — if you prefer working in an editor.</p>
+<p><a href="#copilot-own">VS Code + Copilot</a> (recommended) — in an editor, standard install.</p>
 <p><a href="#codespaces">Codespaces</a> — works here too, if you would rather not install anything.</p>
 </div>
 </div>
@@ -138,15 +138,15 @@ main .callout-warn {
 <div class="pick-card">
 <h3>學校電腦室</h3>
 <p>無管理員權限，也沒有預裝軟件。</p>
-<p><a href="#codespaces-zh">Codespaces</a>——在瀏覽器裡，不需要安裝任何東西。</p>
-<p><a href="#copilot-school-zh">VS Code + Copilot</a>——在編輯器裡操作，需要使用者安裝。</p>
+<p><a href="#codespaces-zh">Codespaces</a>：在瀏覽器裡，不需要安裝任何東西。</p>
+<p><a href="#copilot-school-zh">VS Code + Copilot</a>（推薦）：在編輯器裡操作，需要使用者安裝。</p>
 </div>
 <div class="pick-card">
 <h3>自己的電腦（Mac 或 Windows）</h3>
 <p>可自由安裝軟件。</p>
-<p><a href="#opencode-zh">OpenCode 桌面版</a>——單一下載檔，不需終端機，Mac 和 Windows 做法相同。</p>
-<p><a href="#copilot-own-zh">VS Code + Copilot</a>——若比較想在編輯器裡操作。</p>
-<p><a href="#codespaces-zh">Codespaces</a>——同樣適用，若不想在電腦上安裝任何東西。</p>
+<p><a href="#opencode-zh">OpenCode 桌面版</a>：單一下載檔，不需終端機，Mac 和 Windows 做法相同。</p>
+<p><a href="#copilot-own-zh">VS Code + Copilot</a>（推薦）：在編輯器裡操作，用標準安裝即可。</p>
+<p><a href="#codespaces-zh">Codespaces</a>：同樣適用，若不想在電腦上安裝任何東西。</p>
 </div>
 </div>
 
