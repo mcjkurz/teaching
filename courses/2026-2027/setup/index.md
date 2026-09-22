@@ -100,7 +100,7 @@ main .callout-warn {
 
 <h3>Using Copilot</h3>
 <ol>
-<li>Open the Chat panel — already signed in with your GitHub account.</li>
+<li>Click the chat icon near the top of the window to open the Chat panel — it's already signed in with your GitHub account, no extra sign-in needed.</li>
 <li>Click the model picker at the bottom of the chat box → <strong>Other Models</strong></li>
 <li>Settings (gear) icon → <strong>Add Models</strong> → <strong>OpenRouter</strong> → paste key</li>
 <li>Pick your model in the Chat model picker.</li>
@@ -114,15 +114,20 @@ main .callout-warn {
 <li>Go to <a href="https://opencode.ai/download">opencode.ai/download</a> and download the version for your computer (macOS — Apple Silicon or Intel; or Windows).</li>
 <li>Install it: on macOS, open the <code>.dmg</code> and drag <strong>OpenCode</strong> into <strong>Applications</strong>. On Windows, run the downloaded installer.</li>
 <li>Open OpenCode and open your course folder (clone it with Git, or download it as a ZIP from GitHub and unzip it).</li>
-<li>Go to <strong>Settings</strong> → <strong>Connect provider</strong> → find <strong>OpenRouter</strong> → <strong>Connect</strong> → paste your API key.</li>
+<li>Open <strong>Settings</strong> (look for a gear icon) → <strong>Connect provider</strong> → find <strong>OpenRouter</strong> in the list → click <strong>Connect</strong> → paste your API key.</li>
 <li>If OpenRouter doesn't show up in the model list right away, quit and reopen OpenCode. Then pick <strong>GLM-5.3-Flash</strong>.</li>
 </ol>
 
 <h2 id="copilot-school">VS Code + Copilot (school computer)</h2>
 <p>For a lab computer where you can't install anything system-wide. No terminal needed.</p>
 <ol>
-<li><strong>Install VS Code</strong> (user installer, no admin needed): go to <a href="https://code.visualstudio.com/">code.visualstudio.com</a> and download the <strong>User Installer</strong> — not the System Installer. On macOS, download the <code>.zip</code> and run it straight from Downloads if you can't write to <strong>Applications</strong>.</li>
-<li><strong>Activate Copilot (first time):</strong> open the Chat panel (install the <strong>GitHub Copilot Chat</strong> extension first if you don't see it) → <strong>Sign in to GitHub</strong>. No paid subscription needed — your OpenRouter key pays for the model.</li>
+<li><strong>Install VS Code</strong> (no admin needed) from <a href="https://code.visualstudio.com/">code.visualstudio.com</a>:
+<ul>
+<li><strong>Windows:</strong> download the <strong>User Installer</strong> — not the System Installer.</li>
+<li><strong>macOS:</strong> download the <code>.dmg</code>, open it, and drag <strong>Visual Studio Code.app</strong> into <strong>Applications</strong>. If you can't write to <strong>Applications</strong>, you can run it directly from the opened <code>.dmg</code> window instead.</li>
+</ul>
+</li>
+<li><strong>Activate Copilot (first time):</strong> click the chat icon near the top of the window to open the Chat panel. If you don't see it, open the Extensions view (the square-icon button in the left sidebar), search for <strong>GitHub Copilot Chat</strong>, click <strong>Install</strong>, then look for the chat icon again. In the Chat panel, click <strong>Sign in to GitHub</strong> and follow the prompts in your browser. No paid subscription needed — your OpenRouter key pays for the model.</li>
 <li><strong>Add your key:</strong> click the model picker at the bottom of the chat box → <strong>Other Models</strong> → settings (gear) icon → <strong>Add Models</strong> → <strong>OpenRouter</strong> → paste key.</li>
 <li>Pick your model in the Chat model picker.</li>
 </ol>
@@ -130,8 +135,13 @@ main .callout-warn {
 <h2 id="copilot-own">VS Code + Copilot (your own computer)</h2>
 <p>For your own Mac or Windows computer. No terminal needed.</p>
 <ol>
-<li><strong>Install VS Code:</strong> go to <a href="https://code.visualstudio.com/">code.visualstudio.com</a> and download it. On Windows, the standard <strong>System Installer</strong> is fine — it's your own computer, so admin rights aren't a problem. On macOS, download the <code>.zip</code> and drag <strong>Visual Studio Code.app</strong> into <strong>Applications</strong>.</li>
-<li><strong>Activate Copilot (first time):</strong> open the Chat panel (install the <strong>GitHub Copilot Chat</strong> extension first if you don't see it) → <strong>Sign in to GitHub</strong>. No paid subscription needed — your OpenRouter key pays for the model.</li>
+<li><strong>Install VS Code</strong> from <a href="https://code.visualstudio.com/">code.visualstudio.com</a>:
+<ul>
+<li><strong>Windows:</strong> download the standard <strong>System Installer</strong> — fine here since it's your own computer.</li>
+<li><strong>macOS:</strong> download the <code>.dmg</code>, open it, and drag <strong>Visual Studio Code.app</strong> into <strong>Applications</strong>.</li>
+</ul>
+</li>
+<li><strong>Activate Copilot (first time):</strong> click the chat icon near the top of the window to open the Chat panel. If you don't see it, open the Extensions view (the square-icon button in the left sidebar), search for <strong>GitHub Copilot Chat</strong>, click <strong>Install</strong>, then look for the chat icon again. In the Chat panel, click <strong>Sign in to GitHub</strong> and follow the prompts in your browser. No paid subscription needed — your OpenRouter key pays for the model.</li>
 <li><strong>Add your key:</strong> click the model picker at the bottom of the chat box → <strong>Other Models</strong> → settings (gear) icon → <strong>Add Models</strong> → <strong>OpenRouter</strong> → paste key.</li>
 <li>Pick your model in the Chat model picker.</li>
 </ol>
@@ -187,7 +197,7 @@ main .callout-warn {
 
 <h3>使用 Copilot</h3>
 <ol>
-<li>打開 Chat 面板——已用你的 GitHub 帳號登入。</li>
+<li>按視窗上方的聊天圖示，打開 Chat 面板——已用你的 GitHub 帳號登入，不需要再另外登入。</li>
 <li>按聊天輸入框下方的模型選擇器 → <strong>Other Models</strong></li>
 <li>設定（齒輪）圖示 → <strong>Add Models</strong> → <strong>OpenRouter</strong> → 貼上金鑰</li>
 <li>在模型選擇器中選定模型。</li>
@@ -201,15 +211,20 @@ main .callout-warn {
 <li>前往 <a href="https://opencode.ai/download">opencode.ai/download</a>，下載適合你電腦的版本（macOS——Apple Silicon 或 Intel；或 Windows）。</li>
 <li>安裝：macOS 打開 <code>.dmg</code>，把 <strong>OpenCode</strong> 拖進 <strong>Applications</strong>；Windows 執行下載好的安裝程式。</li>
 <li>打開 OpenCode，開啟你的課程資料夾（用 Git clone，或從 GitHub 下載 ZIP 並解壓）。</li>
-<li>進入 <strong>Settings</strong> → <strong>Connect provider</strong> → 找到 <strong>OpenRouter</strong> → <strong>Connect</strong> → 貼上你的 API 金鑰。</li>
+<li>打開 <strong>Settings</strong>（通常是齒輪圖示）→ <strong>Connect provider</strong> → 在列表中找到 <strong>OpenRouter</strong> → 按 <strong>Connect</strong> → 貼上你的 API 金鑰。</li>
 <li>若模型列表沒有立即出現 OpenRouter，重新啟動 OpenCode 即可。然後選擇 <strong>GLM-5.3-Flash</strong>。</li>
 </ol>
 
 <h2 id="copilot-school-zh">VS Code + Copilot（學校電腦）</h2>
 <p>適用於無法安裝系統層級軟件的電腦室機器。不需要終端機。</p>
 <ol>
-<li><strong>安裝 VS Code</strong>（使用者安裝，不需管理員權限）：在 <a href="https://code.visualstudio.com/">code.visualstudio.com</a> 下載 <strong>User Installer</strong>——不要 System Installer。macOS 下載 <code>.zip</code>，若無法寫入 <strong>Applications</strong>，可直接從下載資料夾執行。</li>
-<li><strong>啟用 Copilot（僅首次）：</strong>打開 Chat 面板（若看不到，先安裝 <strong>GitHub Copilot Chat</strong> 擴充功能）→ <strong>Sign in to GitHub</strong>。不需要付費訂閱——模型費用由你的 OpenRouter 金鑰支付。</li>
+<li><strong>安裝 VS Code</strong>（不需管理員權限），在 <a href="https://code.visualstudio.com/">code.visualstudio.com</a> 下載：
+<ul>
+<li><strong>Windows：</strong>下載 <strong>User Installer</strong>——不要 System Installer。</li>
+<li><strong>macOS：</strong>下載 <code>.dmg</code>，打開後把 <strong>Visual Studio Code.app</strong> 拖進 <strong>Applications</strong>。若無法寫入 <strong>Applications</strong>，可直接在打開的 <code>.dmg</code> 視窗裡執行。</li>
+</ul>
+</li>
+<li><strong>啟用 Copilot（僅首次）：</strong>按 VS Code 視窗上方的聊天圖示，打開 Chat 面板。若看不到，先打開左側邊欄的擴充功能檢視（方形圖示的按鈕），搜尋 <strong>GitHub Copilot Chat</strong>，按 <strong>Install</strong> 安裝，再回頭找聊天圖示。在 Chat 面板按 <strong>Sign in to GitHub</strong>，依瀏覽器提示完成登入。不需要付費訂閱——模型費用由你的 OpenRouter 金鑰支付。</li>
 <li><strong>加入金鑰：</strong>按聊天輸入框下方的模型選擇器 → <strong>Other Models</strong> → 設定（齒輪）圖示 → <strong>Add Models</strong> → <strong>OpenRouter</strong> → 貼上金鑰。</li>
 <li>在模型選擇器中選定模型。</li>
 </ol>
@@ -217,8 +232,13 @@ main .callout-warn {
 <h2 id="copilot-own-zh">VS Code + Copilot（自己的電腦）</h2>
 <p>適用於自己的 Mac 或 Windows 電腦。不需要終端機。</p>
 <ol>
-<li><strong>安裝 VS Code：</strong>在 <a href="https://code.visualstudio.com/">code.visualstudio.com</a> 下載。Windows 上直接用標準的 <strong>System Installer</strong> 即可——是自己的電腦，不必擔心管理員權限。macOS 下載 <code>.zip</code>，把 <strong>Visual Studio Code.app</strong> 拖進 <strong>Applications</strong>。</li>
-<li><strong>啟用 Copilot（僅首次）：</strong>打開 Chat 面板（若看不到，先安裝 <strong>GitHub Copilot Chat</strong> 擴充功能）→ <strong>Sign in to GitHub</strong>。不需要付費訂閱——模型費用由你的 OpenRouter 金鑰支付。</li>
+<li><strong>安裝 VS Code</strong>，在 <a href="https://code.visualstudio.com/">code.visualstudio.com</a> 下載：
+<ul>
+<li><strong>Windows：</strong>直接下載標準的 <strong>System Installer</strong> 即可——是自己的電腦，不必擔心管理員權限。</li>
+<li><strong>macOS：</strong>下載 <code>.dmg</code>，打開後把 <strong>Visual Studio Code.app</strong> 拖進 <strong>Applications</strong>。</li>
+</ul>
+</li>
+<li><strong>啟用 Copilot（僅首次）：</strong>按 VS Code 視窗上方的聊天圖示，打開 Chat 面板。若看不到，先打開左側邊欄的擴充功能檢視（方形圖示的按鈕），搜尋 <strong>GitHub Copilot Chat</strong>，按 <strong>Install</strong> 安裝，再回頭找聊天圖示。在 Chat 面板按 <strong>Sign in to GitHub</strong>，依瀏覽器提示完成登入。不需要付費訂閱——模型費用由你的 OpenRouter 金鑰支付。</li>
 <li><strong>加入金鑰：</strong>按聊天輸入框下方的模型選擇器 → <strong>Other Models</strong> → 設定（齒輪）圖示 → <strong>Add Models</strong> → <strong>OpenRouter</strong> → 貼上金鑰。</li>
 <li>在模型選擇器中選定模型。</li>
 </ol>
