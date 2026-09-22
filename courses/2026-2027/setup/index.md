@@ -72,11 +72,9 @@ main .callout-warn {
 <h3>Your own computer (Mac or Windows)</h3>
 <p>Full control to install software.</p>
 <p><strong>a)</strong> Install the <a href="#opencode">OpenCode Desktop App</a> — one download, no terminal, works the same on Mac and Windows.</p>
-<p><strong>b)</strong> <a href="#copilot-own">VS Code + Copilot</a> (needs installing software too).</p>
+<p><strong>b)</strong> <a href="#copilot-own">VS Code + Copilot</a> (needs installing software).</p>
 </div>
 </div>
-
-<p>A lab computer will not already have anything installed — don't assume otherwise.</p>
 
 <h2>Before you start</h2>
 <ol>
@@ -103,17 +101,17 @@ main .callout-warn {
 <li>Click the chat icon near the top of the window to open the Chat panel — it's already signed in with your GitHub account, no extra sign-in needed.</li>
 <li>Click the model picker at the bottom of the chat box → <strong>Other Models</strong></li>
 <li>Settings (gear) icon → <strong>Add Models</strong> → <strong>OpenRouter</strong> → paste key</li>
-<li>Pick your model in the Chat model picker.</li>
+<li>Pick <strong>GLM-5.3-Flash</strong> in the Chat model picker.</li>
 </ol>
 
-<p class="callout-warn"><strong>When you're done:</strong> commit, push, then delete the Codespace (<a href="https://github.com/codespaces">github.com/codespaces</a> → <strong>...</strong> → <strong>Delete</strong>). Idle Codespaces burn your free monthly hours until removed.</p>
+<p class="callout-warn"><strong>When you're done:</strong> commit, push, then delete the Codespace (<a href="https://github.com/codespaces">github.com/codespaces</a> → <strong>...</strong> → <strong>Delete</strong>). An idle Codespace keeps using your free monthly hours until you delete it.</p>
 
 <h2 id="opencode">OpenCode Desktop App</h2>
 <p>A standalone app for your own computer — no terminal, no Git Bash, no Node.js. Works the same way on Mac and Windows.</p>
 <ol>
 <li>Go to <a href="https://opencode.ai/download">opencode.ai/download</a> and download the version for your computer (macOS — Apple Silicon or Intel; or Windows).</li>
 <li>Install it: on macOS, open the <code>.dmg</code> and drag <strong>OpenCode</strong> into <strong>Applications</strong>. On Windows, run the downloaded installer.</li>
-<li>Open OpenCode and open your course folder (clone it with Git, or download it as a ZIP from GitHub and unzip it).</li>
+<li>Open OpenCode, then open your course folder (clone it with Git, or download it as a ZIP from GitHub and unzip it).</li>
 <li>Open <strong>Settings</strong> (look for a gear icon) → <strong>Connect provider</strong> → find <strong>OpenRouter</strong> in the list → click <strong>Connect</strong> → paste your API key.</li>
 <li>If OpenRouter doesn't show up in the model list right away, quit and reopen OpenCode. Then pick <strong>GLM-5.3-Flash</strong>.</li>
 </ol>
@@ -129,7 +127,7 @@ main .callout-warn {
 </li>
 <li><strong>Activate Copilot (first time):</strong> click the chat icon near the top of the window to open the Chat panel. If you don't see it, open the Extensions view (the square-icon button in the left sidebar), search for <strong>GitHub Copilot Chat</strong>, click <strong>Install</strong>, then look for the chat icon again. In the Chat panel, click <strong>Sign in to GitHub</strong> and follow the prompts in your browser. No paid subscription needed — your OpenRouter key pays for the model.</li>
 <li><strong>Add your key:</strong> click the model picker at the bottom of the chat box → <strong>Other Models</strong> → settings (gear) icon → <strong>Add Models</strong> → <strong>OpenRouter</strong> → paste key.</li>
-<li>Pick your model in the Chat model picker.</li>
+<li>Pick <strong>GLM-5.3-Flash</strong> in the Chat model picker.</li>
 </ol>
 
 <h2 id="copilot-own">VS Code + Copilot (your own computer)</h2>
@@ -143,7 +141,7 @@ main .callout-warn {
 </li>
 <li><strong>Activate Copilot (first time):</strong> click the chat icon near the top of the window to open the Chat panel. If you don't see it, open the Extensions view (the square-icon button in the left sidebar), search for <strong>GitHub Copilot Chat</strong>, click <strong>Install</strong>, then look for the chat icon again. In the Chat panel, click <strong>Sign in to GitHub</strong> and follow the prompts in your browser. No paid subscription needed — your OpenRouter key pays for the model.</li>
 <li><strong>Add your key:</strong> click the model picker at the bottom of the chat box → <strong>Other Models</strong> → settings (gear) icon → <strong>Add Models</strong> → <strong>OpenRouter</strong> → paste key.</li>
-<li>Pick your model in the Chat model picker.</li>
+<li>Pick <strong>GLM-5.3-Flash</strong> in the Chat model picker.</li>
 </ol>
 
 </div>
@@ -162,18 +160,16 @@ main .callout-warn {
 <div class="pick-card">
 <h3>學校電腦室</h3>
 <p>無管理員權限，也沒有預裝軟件。</p>
-<p><strong>a)</strong> 在瀏覽器（不需要安裝任何東西）：用 <a href="#codespaces-zh">Codespaces</a>。</p>
-<p><strong>b)</strong> 在編輯器操作（需要使用者安裝）：用 <a href="#copilot-school-zh">VS Code + Copilot</a>。</p>
+<p><strong>a)</strong> 在瀏覽器裡（不需要安裝任何東西）：用 <a href="#codespaces-zh">Codespaces</a>。</p>
+<p><strong>b)</strong> 在編輯器裡操作（需要使用者安裝）：用 <a href="#copilot-school-zh">VS Code + Copilot</a>。</p>
 </div>
 <div class="pick-card">
 <h3>自己的電腦（Mac 或 Windows）</h3>
 <p>可自由安裝軟件。</p>
 <p><strong>a)</strong> 安裝 <a href="#opencode-zh">OpenCode 桌面版</a>——單一下載檔，不需終端機，Mac 和 Windows 做法相同。</p>
-<p><strong>b)</strong> <a href="#copilot-own-zh">VS Code + Copilot</a>（也需要安裝軟件）。</p>
+<p><strong>b)</strong> <a href="#copilot-own-zh">VS Code + Copilot</a>（需要安裝軟件）。</p>
 </div>
 </div>
-
-<p>電腦室機器不會預裝任何東西——不要假設已經有。</p>
 
 <h2>開始前</h2>
 <ol>
@@ -200,7 +196,7 @@ main .callout-warn {
 <li>按視窗上方的聊天圖示，打開 Chat 面板——已用你的 GitHub 帳號登入，不需要再另外登入。</li>
 <li>按聊天輸入框下方的模型選擇器 → <strong>Other Models</strong></li>
 <li>設定（齒輪）圖示 → <strong>Add Models</strong> → <strong>OpenRouter</strong> → 貼上金鑰</li>
-<li>在模型選擇器中選定模型。</li>
+<li>在模型選擇器中選擇 <strong>GLM-5.3-Flash</strong>。</li>
 </ol>
 
 <p class="callout-warn"><strong>做完後：</strong>先 commit、push，再刪除 Codespace（<a href="https://github.com/codespaces">github.com/codespaces</a> → <strong>...</strong> → <strong>Delete</strong>）。閒置的 Codespace 會持續消耗每月免費時數，直到被刪除。</p>
@@ -226,7 +222,7 @@ main .callout-warn {
 </li>
 <li><strong>啟用 Copilot（僅首次）：</strong>按 VS Code 視窗上方的聊天圖示，打開 Chat 面板。若看不到，先打開左側邊欄的擴充功能檢視（方形圖示的按鈕），搜尋 <strong>GitHub Copilot Chat</strong>，按 <strong>Install</strong> 安裝，再回頭找聊天圖示。在 Chat 面板按 <strong>Sign in to GitHub</strong>，依瀏覽器提示完成登入。不需要付費訂閱——模型費用由你的 OpenRouter 金鑰支付。</li>
 <li><strong>加入金鑰：</strong>按聊天輸入框下方的模型選擇器 → <strong>Other Models</strong> → 設定（齒輪）圖示 → <strong>Add Models</strong> → <strong>OpenRouter</strong> → 貼上金鑰。</li>
-<li>在模型選擇器中選定模型。</li>
+<li>在模型選擇器中選擇 <strong>GLM-5.3-Flash</strong>。</li>
 </ol>
 
 <h2 id="copilot-own-zh">VS Code + Copilot（自己的電腦）</h2>
@@ -240,7 +236,7 @@ main .callout-warn {
 </li>
 <li><strong>啟用 Copilot（僅首次）：</strong>按 VS Code 視窗上方的聊天圖示，打開 Chat 面板。若看不到，先打開左側邊欄的擴充功能檢視（方形圖示的按鈕），搜尋 <strong>GitHub Copilot Chat</strong>，按 <strong>Install</strong> 安裝，再回頭找聊天圖示。在 Chat 面板按 <strong>Sign in to GitHub</strong>，依瀏覽器提示完成登入。不需要付費訂閱——模型費用由你的 OpenRouter 金鑰支付。</li>
 <li><strong>加入金鑰：</strong>按聊天輸入框下方的模型選擇器 → <strong>Other Models</strong> → 設定（齒輪）圖示 → <strong>Add Models</strong> → <strong>OpenRouter</strong> → 貼上金鑰。</li>
-<li>在模型選擇器中選定模型。</li>
+<li>在模型選擇器中選擇 <strong>GLM-5.3-Flash</strong>。</li>
 </ol>
 
 </div>
