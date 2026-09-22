@@ -64,12 +64,14 @@ main .callout-warn {
 <div class="pick-card">
 <h3>School or lab computer</h3>
 <p>No admin rights, nothing pre-installed.</p>
-<p>Use <a href="#codespaces">Codespaces</a> — nothing to install. Or, if you'd rather work in an editor, install VS Code (user install, no admin needed) and use <a href="#copilot">VS Code + Copilot</a>.</p>
+<p><strong>a)</strong> In the browser (nothing to install): use <a href="#codespaces">Codespaces</a>.</p>
+<p><strong>b)</strong> In an editor (needs a user install): use <a href="#copilot">VS Code + Copilot</a>.</p>
 </div>
 <div class="pick-card">
 <h3>Your own computer (Mac or Windows)</h3>
 <p>Full control to install software.</p>
-<p>Easiest: install the <a href="#opencode">OpenCode Desktop App</a> — one download, no terminal, works the same on Mac and Windows. Prefer working inside VS Code instead? Use <a href="#copilot">VS Code + Copilot</a>.</p>
+<p><strong>a)</strong> Install the <a href="#opencode">OpenCode Desktop App</a> — one download, no terminal, works the same on Mac and Windows.</p>
+<p><strong>b)</strong> <a href="#copilot">VS Code + Copilot</a> (needs installing software too).</p>
 </div>
 </div>
 
@@ -144,12 +146,14 @@ main .callout-warn {
 <div class="pick-card">
 <h3>學校電腦室</h3>
 <p>無管理員權限，也沒有預裝軟件。</p>
-<p>用 <a href="#codespaces-zh">Codespaces</a>——不必安裝任何東西。若比較想在編輯器裡操作，可安裝 VS Code（使用者安裝，不需管理員權限），再用 <a href="#copilot-zh">VS Code + Copilot</a>。</p>
+<p><strong>a)</strong> 在瀏覽器（不需要安裝任何東西）：用 <a href="#codespaces-zh">Codespaces</a>。</p>
+<p><strong>b)</strong> 在編輯器操作（需要使用者安裝）：用 <a href="#copilot-zh">VS Code + Copilot</a>。</p>
 </div>
 <div class="pick-card">
 <h3>自己的電腦（Mac 或 Windows）</h3>
 <p>可自由安裝軟件。</p>
-<p>最簡單：安裝 <a href="#opencode-zh">OpenCode 桌面版</a>——單一下載檔，不需終端機，Mac 和 Windows 做法相同。比較想在 VS Code 裡操作？用 <a href="#copilot-zh">VS Code + Copilot</a>。</p>
+<p><strong>a)</strong> 安裝 <a href="#opencode-zh">OpenCode 桌面版</a>——單一下載檔，不需終端機，Mac 和 Windows 做法相同。</p>
+<p><strong>b)</strong> <a href="#copilot-zh">VS Code + Copilot</a>（也需要安裝軟件）。</p>
 </div>
 </div>
 
