@@ -82,6 +82,8 @@ main .callout-warn {
 <li>Open your new repository → green <strong>Code</strong> button → <strong>Codespaces</strong> → <strong>Create codespace on main</strong>. The first start takes a few minutes.</li>
 </ol>
 
+<p>You can also use a repository of your own instead of the template — create one with a <code>README.md</code> so it isn't empty, then open a Codespace on it the same way. One difference: the template's Codespace comes with OpenCode already installed, and your own will not, so you would first need to install it there yourself by running <code>curl -fsSL https://opencode.ai/install | bash</code> in its terminal.</p>
+
 <h3>Using OpenCode</h3>
 <ol>
 <li>In the terminal at the bottom of the window, type <code>opencode</code> and press Enter.</li>
@@ -190,6 +192,8 @@ main .callout-warn {
 <li>Codespace 必須建立在 GitHub 倉庫上，所以請先建立倉庫：前往模板 <a href="https://github.com/mcjkurz/qh-starter">qh-starter</a>，按綠色的 <strong>Use this template</strong> 按鈕，建立自己的倉庫。</li>
 <li>打開你新建的倉庫 → 綠色 <strong>Code</strong> 按鈕 → <strong>Codespaces</strong> → <strong>Create codespace on main</strong>。首次啟動需數分鐘。</li>
 </ol>
+
+<p>你也可以不用模板，改用自己新建的倉庫——建立時加一個 <code>README.md</code>，倉庫才不是空的，然後用同樣方式開 Codespace。差別在於：模板的 Codespace 已經裝好 OpenCode，自己建的則沒有，需要先在它的終端機裡執行 <code>curl -fsSL https://opencode.ai/install | bash</code> 自行安裝。</p>
 
 <h3>使用 OpenCode</h3>
 <ol>
