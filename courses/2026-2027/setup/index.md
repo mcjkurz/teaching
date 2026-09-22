@@ -54,7 +54,7 @@ main .callout-warn {
 <div class="pick-card">
 <h3>School or lab computer</h3>
 <p>These machines will not let you install software that asks for an administrator password, and nothing is set up for you in advance.</p>
-<p><a href="#codespaces">Codespaces</a> — in the browser, nothing to install.</p>
+<p><a href="#codespaces">Codespaces</a> — in the browser, nothing to install. Works with OpenCode or Copilot.</p>
 <p><a href="#copilot-school">VS Code + Copilot</a> — in an editor, needs a user install.</p>
 </div>
 <div class="pick-card">
@@ -63,7 +63,7 @@ main .callout-warn {
 <p class="pick-sub">Windows &amp; Mac</p>
 <p><a href="#opencode">OpenCode Desktop App</a> — one download, no terminal.</p>
 <p><a href="#copilot-own">VS Code + Copilot</a> — in an editor, standard install.</p>
-<p><a href="#codespaces">Codespaces</a> — in the browser, nothing to install.</p>
+<p><a href="#codespaces">Codespaces</a> — in the browser, nothing to install. Works with OpenCode or Copilot.</p>
 <p class="pick-sub">Mac only</p>
 <p><a href="#opencode-vscode">VS Code + OpenCode</a> — run the agent in VS Code's terminal.</p>
 </div>
@@ -82,16 +82,19 @@ main .callout-warn {
 <li>Open your new repository → green <strong>Code</strong> button → <strong>Codespaces</strong> → <strong>Create codespace on main</strong>. The first start takes a few minutes.</li>
 </ol>
 
-<p>You can also use a repository of your own instead of the template — create one with a <code>README.md</code> so it isn't empty, then open a Codespace on it the same way. One difference: the template's Codespace comes with OpenCode already installed, and your own will not, so you would first need to install it there yourself by running <code>curl -fsSL https://opencode.ai/install | bash</code> in its terminal.</p>
+<p>You can also use a repository of your own instead of the template — create one with a <code>README.md</code> so it isn't empty, then open a Codespace on it the same way. One difference: the template's Codespace comes with OpenCode already installed, and your own will not. To install it there, paste this line into the Codespace terminal and press Enter:</p>
+<pre>curl -fsSL https://opencode.ai/install | bash</pre>
 
-<h3>Using OpenCode</h3>
+<p>Once the Codespace is running, pick one agent — both work the same way in the browser, and you can switch later.</p>
+
+<h3 id="codespaces-opencode">Using OpenCode</h3>
 <ol>
 <li>In the terminal at the bottom of the window, type <code>opencode</code> and press Enter.</li>
 <li>Type <code>/connect</code>, select <strong>OpenRouter</strong>, and paste your API key.</li>
 <li>Type <code>/models</code> and select <strong>GLM-5.3-Flash</strong>.</li>
 </ol>
 
-<h3>Using Copilot</h3>
+<h3 id="codespaces-copilot">Using Copilot</h3>
 <ol>
 <li>Click the chat icon near the top of the window to open the Chat panel — it's already signed in with your GitHub account, no extra sign-in needed.</li>
 <li>Click the model picker at the bottom of the chat box → <strong>Other Models</strong></li>
@@ -165,7 +168,7 @@ main .callout-warn {
 <div class="pick-card">
 <h3>學校電腦室</h3>
 <p>這類電腦不讓你安裝需要管理員密碼的軟件，也不會預先裝好任何工具。</p>
-<p><a href="#codespaces-zh">Codespaces</a>：在瀏覽器裡，不需要安裝任何東西。</p>
+<p><a href="#codespaces-zh">Codespaces</a>：在瀏覽器裡，不需要安裝任何東西，OpenCode 或 Copilot 皆可使用。</p>
 <p><a href="#copilot-school-zh">VS Code + Copilot</a>：在編輯器裡操作，需要使用者安裝。</p>
 </div>
 <div class="pick-card">
@@ -174,7 +177,7 @@ main .callout-warn {
 <p class="pick-sub">Windows 與 Mac</p>
 <p><a href="#opencode-zh">OpenCode 桌面版</a>：單一下載檔，不需終端機。</p>
 <p><a href="#copilot-own-zh">VS Code + Copilot</a>：在編輯器裡操作，用標準安裝即可。</p>
-<p><a href="#codespaces-zh">Codespaces</a>：在瀏覽器裡，不需要安裝任何東西。</p>
+<p><a href="#codespaces-zh">Codespaces</a>：在瀏覽器裡，不需要安裝任何東西，OpenCode 或 Copilot 皆可使用。</p>
 <p class="pick-sub">僅限 Mac</p>
 <p><a href="#opencode-vscode-zh">VS Code + OpenCode</a>：在 VS Code 的終端機裡執行助手。</p>
 </div>
@@ -193,16 +196,19 @@ main .callout-warn {
 <li>打開你新建的倉庫 → 綠色 <strong>Code</strong> 按鈕 → <strong>Codespaces</strong> → <strong>Create codespace on main</strong>。首次啟動需數分鐘。</li>
 </ol>
 
-<p>你也可以不用模板，改用自己新建的倉庫——建立時加一個 <code>README.md</code>，倉庫才不是空的，然後用同樣方式開 Codespace。差別在於：模板的 Codespace 已經裝好 OpenCode，自己建的則沒有，需要先在它的終端機裡執行 <code>curl -fsSL https://opencode.ai/install | bash</code> 自行安裝。</p>
+<p>你也可以不用模板，改用自己新建的倉庫——建立時加一個 <code>README.md</code>，倉庫才不是空的，然後用同樣方式開 Codespace。差別在於：模板的 Codespace 已經裝好 OpenCode，自己建的則沒有。要自行安裝，請把下面這行貼進 Codespace 的終端機，按 Enter：</p>
+<pre>curl -fsSL https://opencode.ai/install | bash</pre>
 
-<h3>使用 OpenCode</h3>
+<p>Codespace 啟動後，選一個助手即可——兩個在瀏覽器裡都能用，之後也可以隨時換。</p>
+
+<h3 id="codespaces-opencode-zh">使用 OpenCode</h3>
 <ol>
 <li>在視窗下方的終端機輸入 <code>opencode</code>，按 Enter。</li>
 <li>輸入 <code>/connect</code>，選擇 <strong>OpenRouter</strong>，貼上你的 API 金鑰。</li>
 <li>輸入 <code>/models</code>，選擇 <strong>GLM-5.3-Flash</strong>。</li>
 </ol>
 
-<h3>使用 Copilot</h3>
+<h3 id="codespaces-copilot-zh">使用 Copilot</h3>
 <ol>
 <li>按視窗上方的聊天圖示，打開 Chat 面板——已用你的 GitHub 帳號登入，不需要再另外登入。</li>
 <li>按聊天輸入框下方的模型選擇器 → <strong>Other Models</strong></li>
