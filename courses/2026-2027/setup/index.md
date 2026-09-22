@@ -17,7 +17,8 @@ main .pick-card {
   padding: 1rem 1.15rem;
   background: #fafbfc;
 }
-main .pick-card h3 { margin: 0 0 0.4rem; font-size: 1.05rem; }
+main h3 { font-weight: 600; }
+main .pick-card h3 { margin: 0 0 0.4rem; font-size: 1.05rem; font-weight: 600; }
 main .pick-card p { margin: 0 0 0.5rem; font-size: 0.95rem; color: #444; }
 main .pick-card p:last-child { margin-bottom: 0; font-size: 0.95rem; }
 main .callout-warn {
@@ -46,13 +47,13 @@ main .callout-warn {
 <div class="pick-grid">
 <div class="pick-card">
 <h3>School or lab computer</h3>
-<p>No admin rights, nothing pre-installed.</p>
+<p>These machines will not let you install software that asks for an administrator password, and nothing is set up for you in advance.</p>
 <p><a href="#codespaces">Codespaces</a> — in the browser, nothing to install.</p>
 <p><a href="#copilot-school">VS Code + Copilot</a> (recommended) — in an editor, needs a user install.</p>
 </div>
 <div class="pick-card">
 <h3>Your own computer (Mac or Windows)</h3>
-<p>Full control to install software.</p>
+<p>You can install whatever you need.</p>
 <p><a href="#opencode">OpenCode Desktop App</a> — one download, no terminal, same on Mac and Windows.</p>
 <p><a href="#copilot-own">VS Code + Copilot</a> (recommended) — in an editor, standard install.</p>
 <p><a href="#codespaces">Codespaces</a> — works here too, if you would rather not install anything.</p>
@@ -139,13 +140,13 @@ main .callout-warn {
 <div class="pick-grid">
 <div class="pick-card">
 <h3>學校電腦室</h3>
-<p>無管理員權限，也沒有預裝軟件。</p>
+<p>這類電腦不讓你安裝需要管理員密碼的軟件，也不會預先裝好任何工具。</p>
 <p><a href="#codespaces-zh">Codespaces</a>：在瀏覽器裡，不需要安裝任何東西。</p>
 <p><a href="#copilot-school-zh">VS Code + Copilot</a>（推薦）：在編輯器裡操作，需要使用者安裝。</p>
 </div>
 <div class="pick-card">
 <h3>自己的電腦（Mac 或 Windows）</h3>
-<p>可自由安裝軟件。</p>
+<p>你可以自由安裝需要的軟件。</p>
 <p><a href="#opencode-zh">OpenCode 桌面版</a>：單一下載檔，不需終端機，Mac 和 Windows 做法相同。</p>
 <p><a href="#copilot-own-zh">VS Code + Copilot</a>（推薦）：在編輯器裡操作，用標準安裝即可。</p>
 <p><a href="#codespaces-zh">Codespaces</a>：同樣適用，若不想在電腦上安裝任何東西。</p>
