@@ -20,6 +20,12 @@ main .pick-card {
 main h3 { font-weight: 600; }
 main .pick-card h3 { margin: 0 0 0.4rem; font-size: 1.05rem; font-weight: 600; }
 main .pick-card p { margin: 0 0 0.5rem; font-size: 0.95rem; color: #444; }
+main .pick-card .pick-sub {
+  margin: 0.9rem 0 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #777;
+}
 main .pick-card p:last-child { margin-bottom: 0; font-size: 0.95rem; }
 main .callout-warn {
   border-left: 4px solid #cc8800;
@@ -54,10 +60,12 @@ main .callout-warn {
 <div class="pick-card">
 <h3>Your own computer (Mac or Windows)</h3>
 <p>You can install whatever you need.</p>
-<p><a href="#opencode">OpenCode Desktop App</a> — one download, no terminal, same on Mac and Windows.</p>
-<p><a href="#opencode-vscode">VS Code + OpenCode</a> — run the agent in VS Code's terminal (Mac).</p>
+<p class="pick-sub">Windows &amp; Mac</p>
+<p><a href="#opencode">OpenCode Desktop App</a> — one download, no terminal.</p>
 <p><a href="#copilot-own">VS Code + Copilot</a> — in an editor, standard install.</p>
-<p><a href="#codespaces">Codespaces</a> — works here too, if you would rather not install anything.</p>
+<p><a href="#codespaces">Codespaces</a> — in the browser, nothing to install.</p>
+<p class="pick-sub">Mac only</p>
+<p><a href="#opencode-vscode">VS Code + OpenCode</a> — run the agent in VS Code's terminal.</p>
 </div>
 </div>
 
@@ -161,10 +169,12 @@ main .callout-warn {
 <div class="pick-card">
 <h3>自己的電腦（Mac 或 Windows）</h3>
 <p>你可以自由安裝需要的軟件。</p>
-<p><a href="#opencode-zh">OpenCode 桌面版</a>：單一下載檔，不需終端機，Mac 和 Windows 做法相同。</p>
-<p><a href="#opencode-vscode-zh">VS Code + OpenCode</a>：在 VS Code 的終端機裡執行助手（Mac）。</p>
+<p class="pick-sub">Windows 與 Mac</p>
+<p><a href="#opencode-zh">OpenCode 桌面版</a>：單一下載檔，不需終端機。</p>
 <p><a href="#copilot-own-zh">VS Code + Copilot</a>：在編輯器裡操作，用標準安裝即可。</p>
-<p><a href="#codespaces-zh">Codespaces</a>：同樣適用，若不想在電腦上安裝任何東西。</p>
+<p><a href="#codespaces-zh">Codespaces</a>：在瀏覽器裡，不需要安裝任何東西。</p>
+<p class="pick-sub">僅限 Mac</p>
+<p><a href="#opencode-vscode-zh">VS Code + OpenCode</a>：在 VS Code 的終端機裡執行助手。</p>
 </div>
 </div>
 
