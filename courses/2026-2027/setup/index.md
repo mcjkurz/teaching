@@ -55,6 +55,7 @@ main .callout-warn {
 <h3>Your own computer (Mac or Windows)</h3>
 <p>You can install whatever you need.</p>
 <p><a href="#opencode">OpenCode Desktop App</a> — one download, no terminal, same on Mac and Windows.</p>
+<p><a href="#opencode-vscode">VS Code + OpenCode</a> — run the agent in VS Code's terminal (Mac).</p>
 <p><a href="#copilot-own">VS Code + Copilot</a> — in an editor, standard install.</p>
 <p><a href="#codespaces">Codespaces</a> — works here too, if you would rather not install anything.</p>
 </div>
@@ -116,6 +117,19 @@ main .callout-warn {
 <li>If OpenRouter doesn't show up in the model list right away, quit and reopen OpenCode. Then pick <strong>GLM-5.3-Flash</strong>.</li>
 </ol>
 
+<h2 id="opencode-vscode">VS Code + OpenCode (Mac)</h2>
+<p>Runs OpenCode inside VS Code's own terminal, so your files and the agent are in the same window.</p>
+<p class="callout-warn">On Windows, use the <a href="#opencode">OpenCode Desktop App</a> instead. The terminal install needs Node.js and extra tools, and takes much longer to set up.</p>
+<ol>
+<li><strong>Install VS Code</strong> from <a href="https://code.visualstudio.com/Download">https://code.visualstudio.com/Download</a>: download the <code>.dmg</code>, open it, and drag <strong>Visual Studio Code.app</strong> into <strong>Applications</strong>.</li>
+<li>In VS Code, open the folder you want to work in (<strong>File → Open Folder</strong>), then open a terminal with <strong>Terminal → New Terminal</strong>.</li>
+<li>Install OpenCode: paste this line into the terminal and press Enter.
+<pre>curl -fsSL https://opencode.ai/install | bash</pre></li>
+<li>Close that terminal and open a new one (<strong>Terminal → New Terminal</strong>) so it picks up the new command. If you skip this, typing <code>opencode</code> will say <em>command not found</em> — the install worked, the old terminal just hasn't noticed it yet.</li>
+<li>Type <code>opencode</code> and press Enter. Then type <code>/connect</code>, select <strong>OpenRouter</strong>, and paste your API key.</li>
+<li>Type <code>/models</code> and select <strong>GLM-5.3-Flash</strong>.</li>
+</ol>
+
 <h2 id="copilot-own">VS Code + Copilot (your own computer)</h2>
 <p>For your own Mac or Windows computer. No terminal needed.</p>
 <ol>
@@ -148,6 +162,7 @@ main .callout-warn {
 <h3>自己的電腦（Mac 或 Windows）</h3>
 <p>你可以自由安裝需要的軟件。</p>
 <p><a href="#opencode-zh">OpenCode 桌面版</a>：單一下載檔，不需終端機，Mac 和 Windows 做法相同。</p>
+<p><a href="#opencode-vscode-zh">VS Code + OpenCode</a>：在 VS Code 的終端機裡執行助手（Mac）。</p>
 <p><a href="#copilot-own-zh">VS Code + Copilot</a>：在編輯器裡操作，用標準安裝即可。</p>
 <p><a href="#codespaces-zh">Codespaces</a>：同樣適用，若不想在電腦上安裝任何東西。</p>
 </div>
@@ -207,6 +222,19 @@ main .callout-warn {
 <li>打開 OpenCode，開啟你要使用的資料夾——課程資料夾，或你為作業新建的任何資料夾皆可。</li>
 <li>打開 <strong>Settings</strong>（通常是齒輪圖示）→ <strong>Connect provider</strong> → 在列表中找到 <strong>OpenRouter</strong> → 按 <strong>Connect</strong> → 貼上你的 API 金鑰。</li>
 <li>若模型列表沒有立即出現 OpenRouter，重新啟動 OpenCode 即可。然後選擇 <strong>GLM-5.3-Flash</strong>。</li>
+</ol>
+
+<h2 id="opencode-vscode-zh">VS Code + OpenCode（Mac）</h2>
+<p>在 VS Code 內建的終端機裡執行 OpenCode，檔案和助手都在同一個視窗裡。</p>
+<p class="callout-warn">Windows 請改用 <a href="#opencode-zh">OpenCode 桌面版</a>。終端機安裝需要 Node.js 等額外工具，設定起來慢很多。</p>
+<ol>
+<li><strong>安裝 VS Code</strong>：在 <a href="https://code.visualstudio.com/Download">https://code.visualstudio.com/Download</a> 下載 <code>.dmg</code>，打開後把 <strong>Visual Studio Code.app</strong> 拖進 <strong>Applications</strong>。</li>
+<li>在 VS Code 開啟你要使用的資料夾（<strong>File → Open Folder</strong>），再選 <strong>Terminal → New Terminal</strong> 打開終端機。</li>
+<li>安裝 OpenCode：把下面這行貼進終端機，按 Enter。
+<pre>curl -fsSL https://opencode.ai/install | bash</pre></li>
+<li>關掉這個終端機，再開一個新的（<strong>Terminal → New Terminal</strong>），新指令才會生效。若略過這一步，輸入 <code>opencode</code> 多半會看到 <em>command not found</em>——安裝其實成功了，只是舊的終端機還沒讀到。</li>
+<li>輸入 <code>opencode</code> 按 Enter。接著輸入 <code>/connect</code>，選擇 <strong>OpenRouter</strong>，貼上你的 API 金鑰。</li>
+<li>輸入 <code>/models</code>，選擇 <strong>GLM-5.3-Flash</strong>。</li>
 </ol>
 
 <h2 id="copilot-own-zh">VS Code + Copilot（自己的電腦）</h2>
