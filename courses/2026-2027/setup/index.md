@@ -55,24 +55,24 @@ main .callout-warn {
 <p>Three ways to connect an AI coding agent (OpenCode or GitHub Copilot) to your OpenRouter key. Pick the one that fits your computer.</p>
 
 <nav class="option-nav">
-<a href="#codespaces">Browser (Codespaces)</a>
-<a href="#opencode">OpenCode Desktop App</a>
-<a href="#copilot-school">Copilot (school computer)</a>
-<a href="#copilot-own">Copilot (own computer)</a>
+<a href="#codespaces">1.a Codespaces</a>
+<a href="#copilot-school">1.b Copilot (school)</a>
+<a href="#opencode">2.a OpenCode Desktop</a>
+<a href="#copilot-own">2.b Copilot (own computer)</a>
 </nav>
 
 <div class="pick-grid">
 <div class="pick-card">
-<h3>School or lab computer</h3>
+<h3>1. School or lab computer</h3>
 <p>No admin rights, nothing pre-installed.</p>
-<p><strong>a)</strong> In the browser (nothing to install): use <a href="#codespaces">Codespaces</a>.</p>
-<p><strong>b)</strong> In an editor (needs a user install): use <a href="#copilot-school">VS Code + Copilot</a>.</p>
+<p><strong>1.a</strong> In the browser (nothing to install): use <a href="#codespaces">Codespaces</a>.</p>
+<p><strong>1.b</strong> In an editor (needs a user install): use <a href="#copilot-school">VS Code + Copilot</a>.</p>
 </div>
 <div class="pick-card">
-<h3>Your own computer (Mac or Windows)</h3>
+<h3>2. Your own computer (Mac or Windows)</h3>
 <p>Full control to install software.</p>
-<p><strong>a)</strong> Install the <a href="#opencode">OpenCode Desktop App</a> — one download, no terminal, works the same on Mac and Windows.</p>
-<p><strong>b)</strong> <a href="#copilot-own">VS Code + Copilot</a> (needs installing software).</p>
+<p><strong>2.a</strong> Install the <a href="#opencode">OpenCode Desktop App</a> — one download, no terminal, works the same on Mac and Windows.</p>
+<p><strong>2.b</strong> <a href="#copilot-own">VS Code + Copilot</a> (needs installing software).</p>
 </div>
 </div>
 
@@ -82,7 +82,7 @@ main .callout-warn {
 <li>Get your <strong>OpenRouter API key</strong> at <a href="https://keyreg.qhchina.org">keyreg.qhchina.org</a> using the class code from your syllabus. Keep it private.</li>
 </ol>
 
-<h2 id="codespaces">Browser: GitHub Codespaces</h2>
+<h2 id="codespaces">1.a — Browser: GitHub Codespaces</h2>
 <p>Runs in the browser. Nothing installed on your computer.</p>
 <ol>
 <li>Go to the template <a href="https://github.com/mcjkurz/qh-starter">qh-starter</a>, click the green <strong>Use this template</strong> button, and create your own repository.</li>
@@ -106,17 +106,7 @@ main .callout-warn {
 
 <p class="callout-warn"><strong>When you're done:</strong> commit and push your work (you can ask the agent to do this for you), then delete the Codespace (<a href="https://github.com/codespaces">github.com/codespaces</a> → <strong>...</strong> → <strong>Delete</strong>). Anything you didn't push is lost when the Codespace is deleted, and an idle Codespace keeps using your free monthly hours until you delete it.</p>
 
-<h2 id="opencode">OpenCode Desktop App</h2>
-<p>A standalone app for your own computer — no terminal, no Git Bash, no Node.js. Works the same way on Mac and Windows.</p>
-<ol>
-<li>Go to <a href="https://opencode.ai/download">https://opencode.ai/download</a> and download the version for your computer (on a Mac, the Apple menu → <strong>About This Mac</strong> tells you whether you have an Apple Silicon or an Intel chip).</li>
-<li>Install it: on macOS, open the <code>.dmg</code> and drag <strong>OpenCode</strong> into <strong>Applications</strong>. On Windows, run the downloaded installer.</li>
-<li>Open OpenCode, then open your course folder. If it isn't on your computer yet, get it from your GitHub repository first (green <strong>Code</strong> button → <strong>Download ZIP</strong>, then unzip it).</li>
-<li>Open <strong>Settings</strong> (look for a gear icon) → <strong>Connect provider</strong> → find <strong>OpenRouter</strong> in the list → click <strong>Connect</strong> → paste your API key.</li>
-<li>If OpenRouter doesn't show up in the model list right away, quit and reopen OpenCode. Then pick <strong>GLM-5.3-Flash</strong>.</li>
-</ol>
-
-<h2 id="copilot-school">VS Code + Copilot (school computer)</h2>
+<h2 id="copilot-school">1.b — VS Code + Copilot (school computer)</h2>
 <p>For a lab computer where you can't install anything system-wide. No terminal needed.</p>
 <ol>
 <li><strong>Install VS Code</strong> (no admin needed) from <a href="https://code.visualstudio.com/Download">https://code.visualstudio.com/Download</a>:
@@ -130,7 +120,17 @@ main .callout-warn {
 <li>Pick <strong>GLM-5.3-Flash</strong> in the Chat model picker.</li>
 </ol>
 
-<h2 id="copilot-own">VS Code + Copilot (your own computer)</h2>
+<h2 id="opencode">2.a — OpenCode Desktop App</h2>
+<p>A standalone app for your own computer — no terminal, no Git Bash, no Node.js. Works the same way on Mac and Windows.</p>
+<ol>
+<li>Go to <a href="https://opencode.ai/download">https://opencode.ai/download</a> and download the version for your computer (on a Mac, the Apple menu → <strong>About This Mac</strong> tells you whether you have an Apple Silicon or an Intel chip).</li>
+<li>Install it: on macOS, open the <code>.dmg</code> and drag <strong>OpenCode</strong> into <strong>Applications</strong>. On Windows, run the downloaded installer.</li>
+<li>Open OpenCode, then open your course folder. If it isn't on your computer yet, get it from your GitHub repository first (green <strong>Code</strong> button → <strong>Download ZIP</strong>, then unzip it).</li>
+<li>Open <strong>Settings</strong> (look for a gear icon) → <strong>Connect provider</strong> → find <strong>OpenRouter</strong> in the list → click <strong>Connect</strong> → paste your API key.</li>
+<li>If OpenRouter doesn't show up in the model list right away, quit and reopen OpenCode. Then pick <strong>GLM-5.3-Flash</strong>.</li>
+</ol>
+
+<h2 id="copilot-own">2.b — VS Code + Copilot (your own computer)</h2>
 <p>For your own Mac or Windows computer. No terminal needed.</p>
 <ol>
 <li><strong>Install VS Code</strong> from <a href="https://code.visualstudio.com/Download">https://code.visualstudio.com/Download</a>:
@@ -150,24 +150,24 @@ main .callout-warn {
 <p>三種把人工智能編程助手（OpenCode 或 GitHub Copilot）連上你的 OpenRouter 金鑰的方法，依你的電腦情況任選一種。</p>
 
 <nav class="option-nav">
-<a href="#codespaces-zh">瀏覽器（Codespaces）</a>
-<a href="#opencode-zh">OpenCode 桌面版</a>
-<a href="#copilot-school-zh">Copilot（學校電腦）</a>
-<a href="#copilot-own-zh">Copilot（自己的電腦）</a>
+<a href="#codespaces-zh">1.a Codespaces</a>
+<a href="#copilot-school-zh">1.b Copilot（學校電腦）</a>
+<a href="#opencode-zh">2.a OpenCode 桌面版</a>
+<a href="#copilot-own-zh">2.b Copilot（自己的電腦）</a>
 </nav>
 
 <div class="pick-grid">
 <div class="pick-card">
-<h3>學校電腦室</h3>
+<h3>1. 學校電腦室</h3>
 <p>無管理員權限，也沒有預裝軟件。</p>
-<p><strong>a)</strong> 在瀏覽器裡（不需要安裝任何東西）：用 <a href="#codespaces-zh">Codespaces</a>。</p>
-<p><strong>b)</strong> 在編輯器裡操作（需要使用者安裝）：用 <a href="#copilot-school-zh">VS Code + Copilot</a>。</p>
+<p><strong>1.a</strong> 在瀏覽器裡（不需要安裝任何東西）：用 <a href="#codespaces-zh">Codespaces</a>。</p>
+<p><strong>1.b</strong> 在編輯器裡操作（需要使用者安裝）：用 <a href="#copilot-school-zh">VS Code + Copilot</a>。</p>
 </div>
 <div class="pick-card">
-<h3>自己的電腦（Mac 或 Windows）</h3>
+<h3>2. 自己的電腦（Mac 或 Windows）</h3>
 <p>可自由安裝軟件。</p>
-<p><strong>a)</strong> 安裝 <a href="#opencode-zh">OpenCode 桌面版</a>——單一下載檔，不需終端機，Mac 和 Windows 做法相同。</p>
-<p><strong>b)</strong> <a href="#copilot-own-zh">VS Code + Copilot</a>（需要安裝軟件）。</p>
+<p><strong>2.a</strong> 安裝 <a href="#opencode-zh">OpenCode 桌面版</a>——單一下載檔，不需終端機，Mac 和 Windows 做法相同。</p>
+<p><strong>2.b</strong> <a href="#copilot-own-zh">VS Code + Copilot</a>（需要安裝軟件）。</p>
 </div>
 </div>
 
@@ -177,7 +177,7 @@ main .callout-warn {
 <li>到 <a href="https://keyreg.qhchina.org">keyreg.qhchina.org</a> 領取你的 <strong>OpenRouter API 金鑰</strong>，課程代碼見課程大綱。請妥善保管。</li>
 </ol>
 
-<h2 id="codespaces-zh">瀏覽器：GitHub Codespaces</h2>
+<h2 id="codespaces-zh">1.a — 瀏覽器：GitHub Codespaces</h2>
 <p>在瀏覽器裡運行，電腦上不必安裝任何東西。</p>
 <ol>
 <li>前往模板 <a href="https://github.com/mcjkurz/qh-starter">qh-starter</a>，按綠色的 <strong>Use this template</strong> 按鈕，建立自己的倉庫。</li>
@@ -201,17 +201,7 @@ main .callout-warn {
 
 <p class="callout-warn"><strong>做完後：</strong>先 commit、push（可以直接請助手幫你做），再刪除 Codespace（<a href="https://github.com/codespaces">github.com/codespaces</a> → <strong>...</strong> → <strong>Delete</strong>）。尚未推送的內容，Codespace 一刪就找不回來；閒置的 Codespace 也會持續消耗每月免費時數，直到被刪除。</p>
 
-<h2 id="opencode-zh">OpenCode 桌面版</h2>
-<p>一個裝在自己電腦上的獨立應用程式——不需終端機、不需 Git Bash、不需 Node.js。Mac 與 Windows 做法完全相同。</p>
-<ol>
-<li>前往 <a href="https://opencode.ai/download">https://opencode.ai/download</a>，下載適合你電腦的版本（Mac 可在蘋果選單 → <strong>關於這台 Mac</strong> 查看是 Apple Silicon 還是 Intel 晶片）。</li>
-<li>安裝：macOS 打開 <code>.dmg</code>，把 <strong>OpenCode</strong> 拖進 <strong>Applications</strong>；Windows 執行下載好的安裝程式。</li>
-<li>打開 OpenCode，開啟你的課程資料夾。若電腦上還沒有，先從你的 GitHub 倉庫取得（綠色 <strong>Code</strong> 按鈕 → <strong>Download ZIP</strong>，再解壓）。</li>
-<li>打開 <strong>Settings</strong>（通常是齒輪圖示）→ <strong>Connect provider</strong> → 在列表中找到 <strong>OpenRouter</strong> → 按 <strong>Connect</strong> → 貼上你的 API 金鑰。</li>
-<li>若模型列表沒有立即出現 OpenRouter，重新啟動 OpenCode 即可。然後選擇 <strong>GLM-5.3-Flash</strong>。</li>
-</ol>
-
-<h2 id="copilot-school-zh">VS Code + Copilot（學校電腦）</h2>
+<h2 id="copilot-school-zh">1.b — VS Code + Copilot（學校電腦）</h2>
 <p>適用於無法安裝系統層級軟件的電腦室機器。不需要終端機。</p>
 <ol>
 <li><strong>安裝 VS Code</strong>（不需管理員權限），在 <a href="https://code.visualstudio.com/Download">https://code.visualstudio.com/Download</a> 下載：
@@ -225,7 +215,17 @@ main .callout-warn {
 <li>在模型選擇器中選擇 <strong>GLM-5.3-Flash</strong>。</li>
 </ol>
 
-<h2 id="copilot-own-zh">VS Code + Copilot（自己的電腦）</h2>
+<h2 id="opencode-zh">2.a — OpenCode 桌面版</h2>
+<p>一個裝在自己電腦上的獨立應用程式——不需終端機、不需 Git Bash、不需 Node.js。Mac 與 Windows 做法完全相同。</p>
+<ol>
+<li>前往 <a href="https://opencode.ai/download">https://opencode.ai/download</a>，下載適合你電腦的版本（Mac 可在蘋果選單 → <strong>關於這台 Mac</strong> 查看是 Apple Silicon 還是 Intel 晶片）。</li>
+<li>安裝：macOS 打開 <code>.dmg</code>，把 <strong>OpenCode</strong> 拖進 <strong>Applications</strong>；Windows 執行下載好的安裝程式。</li>
+<li>打開 OpenCode，開啟你的課程資料夾。若電腦上還沒有，先從你的 GitHub 倉庫取得（綠色 <strong>Code</strong> 按鈕 → <strong>Download ZIP</strong>，再解壓）。</li>
+<li>打開 <strong>Settings</strong>（通常是齒輪圖示）→ <strong>Connect provider</strong> → 在列表中找到 <strong>OpenRouter</strong> → 按 <strong>Connect</strong> → 貼上你的 API 金鑰。</li>
+<li>若模型列表沒有立即出現 OpenRouter，重新啟動 OpenCode 即可。然後選擇 <strong>GLM-5.3-Flash</strong>。</li>
+</ol>
+
+<h2 id="copilot-own-zh">2.b — VS Code + Copilot（自己的電腦）</h2>
 <p>適用於自己的 Mac 或 Windows 電腦。不需要終端機。</p>
 <ol>
 <li><strong>安裝 VS Code</strong>，在 <a href="https://code.visualstudio.com/Download">https://code.visualstudio.com/Download</a> 下載：
