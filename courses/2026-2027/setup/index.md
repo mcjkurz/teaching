@@ -119,7 +119,7 @@ main .callout-warn {
 <h2 id="copilot-school">VS Code + Copilot (school computer)</h2>
 <p>For a lab computer where you can't install anything system-wide. No terminal needed.</p>
 <ol>
-<li><strong>Install VS Code</strong> (no admin needed) from <a href="https://code.visualstudio.com/">code.visualstudio.com</a>:
+<li><strong>Install VS Code</strong> (no admin needed) from <a href="https://code.visualstudio.com/Download">code.visualstudio.com</a>:
 <ul>
 <li><strong>Windows:</strong> download the <strong>User Installer</strong> — not the System Installer.</li>
 <li><strong>macOS:</strong> download the <code>.dmg</code>, open it, and drag <strong>Visual Studio Code.app</strong> into <strong>Applications</strong>. If you can't write to <strong>Applications</strong>, you can run it directly from the opened <code>.dmg</code> window instead.</li>
@@ -133,7 +133,7 @@ main .callout-warn {
 <h2 id="copilot-own">VS Code + Copilot (your own computer)</h2>
 <p>For your own Mac or Windows computer. No terminal needed.</p>
 <ol>
-<li><strong>Install VS Code</strong> from <a href="https://code.visualstudio.com/">code.visualstudio.com</a>:
+<li><strong>Install VS Code</strong> from <a href="https://code.visualstudio.com/Download">code.visualstudio.com</a>:
 <ul>
 <li><strong>Windows:</strong> download the standard <strong>System Installer</strong> — fine here since it's your own computer.</li>
 <li><strong>macOS:</strong> download the <code>.dmg</code>, open it, and drag <strong>Visual Studio Code.app</strong> into <strong>Applications</strong>.</li>
@@ -214,7 +214,7 @@ main .callout-warn {
 <h2 id="copilot-school-zh">VS Code + Copilot（學校電腦）</h2>
 <p>適用於無法安裝系統層級軟件的電腦室機器。不需要終端機。</p>
 <ol>
-<li><strong>安裝 VS Code</strong>（不需管理員權限），在 <a href="https://code.visualstudio.com/">code.visualstudio.com</a> 下載：
+<li><strong>安裝 VS Code</strong>（不需管理員權限），在 <a href="https://code.visualstudio.com/Download">code.visualstudio.com</a> 下載：
 <ul>
 <li><strong>Windows：</strong>下載 <strong>User Installer</strong>——不要 System Installer。</li>
 <li><strong>macOS：</strong>下載 <code>.dmg</code>，打開後把 <strong>Visual Studio Code.app</strong> 拖進 <strong>Applications</strong>。若無法寫入 <strong>Applications</strong>，可直接在打開的 <code>.dmg</code> 視窗裡執行。</li>
@@ -228,7 +228,7 @@ main .callout-warn {
 <h2 id="copilot-own-zh">VS Code + Copilot（自己的電腦）</h2>
 <p>適用於自己的 Mac 或 Windows 電腦。不需要終端機。</p>
 <ol>
-<li><strong>安裝 VS Code</strong>，在 <a href="https://code.visualstudio.com/">code.visualstudio.com</a> 下載：
+<li><strong>安裝 VS Code</strong>，在 <a href="https://code.visualstudio.com/Download">code.visualstudio.com</a> 下載：
 <ul>
 <li><strong>Windows：</strong>直接下載標準的 <strong>System Installer</strong> 即可——是自己的電腦，不必擔心管理員權限。</li>
 <li><strong>macOS：</strong>下載 <code>.dmg</code>，打開後把 <strong>Visual Studio Code.app</strong> 拖進 <strong>Applications</strong>。</li>

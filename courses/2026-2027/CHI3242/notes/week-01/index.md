@@ -91,7 +91,7 @@ git push</pre>
 <p>上面走的是瀏覽器裡的 Codespace。若你比較喜歡在自己的電腦上做，練習內容完全一樣，只是環境改成本機。</p>
 <ol>
 <li>先完成第 1 節的前三步：GitHub 帳號、API 金鑰、用模板建立自己的倉庫。</li>
-<li>安裝 <a href="https://www.python.org/downloads/">Python</a> 與 <a href="https://code.visualstudio.com/">VS Code</a>。</li>
+<li>安裝 <a href="https://www.python.org/downloads/">Python</a> 與 <a href="https://code.visualstudio.com/Download">VS Code</a>。</li>
 <li>依<a href="../../../setup/#opencode-zh">這頁說明</a>安裝 OpenCode（裝完後要開一個新終端機，或重新讀取 shell 設定，指令才找得到）。</li>
 <li>把倉庫下載下來：在 GitHub 倉庫頁按綠色 <strong>Code</strong>，複製網址，在 VS Code 終端機執行 <code>git clone 網址</code>；也可以按 <strong>Download ZIP</strong> 下載並解壓。</li>
 <li>在 VS Code 選 <strong>File → Open Folder</strong>，打開這個資料夾。</li>
