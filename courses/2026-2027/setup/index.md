@@ -59,7 +59,7 @@ main .callout-warn {
 <h3>School or lab computer</h3>
 <p>These machines will not let you install software that asks for an administrator password, and nothing is set up for you in advance.</p>
 <p><a href="#codespaces">Codespaces</a>: in the browser, nothing to install. Works with OpenCode or Copilot.</p>
-<p><a href="#copilot-school">VS Code + Copilot</a>: in an editor, needs a user install.</p>
+<p><a href="#copilot-school">VS Code + Copilot</a>: in an editor, needs a user install. No Git, so you upload your files to GitHub by hand.</p>
 </div>
 <div class="pick-card">
 <h3>Your own computer (Mac or Windows)</h3>
@@ -73,7 +73,7 @@ main .callout-warn {
 </div>
 </div>
 
-<p class="callout-warn"><strong>Most important, whichever setup you choose:</strong> commit and push your work to your GitHub repository at the end of every session. That is what preserves it. Anything left only in a Codespace or on a school computer will eventually be lost. You can ask your agent to commit and push for you.</p>
+<p class="callout-warn"><strong>Most important, whichever setup you choose:</strong> commit and push your work to your GitHub repository at the end of every session. That is what preserves it. Anything left only in a Codespace or on a school computer will eventually be lost. You can ask your agent to commit and push for you. (Exception: VS Code + Copilot on a school computer has no Git, so there you upload your files by hand instead — see that section below.)</p>
 
 <h2>Before you start</h2>
 <ol>
@@ -103,8 +103,8 @@ main .callout-warn {
 <h3 id="codespaces-copilot">Using Copilot</h3>
 <ol>
 <li>Click the chat icon near the top of the window to open the Chat panel. It is already signed in with your GitHub account, so no extra sign-in is needed.</li>
-<li>Click the model picker at the bottom of the chat box → <strong>Other Models</strong></li>
-<li>Settings (gear) icon → <strong>Add Models</strong> → <strong>OpenRouter</strong> → paste key</li>
+<li>Click the model picker at the bottom of the chat box → <strong>Other Models</strong>.</li>
+<li>Settings (gear) icon → <strong>Add Models</strong> → <strong>OpenRouter</strong> → paste key.</li>
 <li>Pick <strong>GLM-5.3-Flash</strong> in the Chat model picker.</li>
 </ol>
 
@@ -125,6 +125,8 @@ main .callout-warn {
 <li><strong>Add your key:</strong> click the model picker at the bottom of the chat box → <strong>Other Models</strong> → settings (gear) icon → <strong>Add Models</strong> → <strong>OpenRouter</strong> → paste key.</li>
 <li>Pick <strong>GLM-5.3-Flash</strong> in the Chat model picker.</li>
 </ol>
+
+<p class="callout-warn"><strong>No Git on this computer, so save your work by hand:</strong> lab computers don't have Git installed, and installing it normally needs an administrator password you won't have. That means you can't ask the agent to "commit and push" here — there is no Git for it to use. Instead, at the end of every session, upload your files yourself: go to your repository on <a href="https://github.com/">github.com</a>, click <strong>Add file</strong> → <strong>Upload files</strong>, then drag in the file(s) or folder(s) you changed (or your whole project folder) and click <strong>Commit changes</strong>. Do this before you log off — anything left only on the school computer is lost once you close VS Code or someone else logs in.</p>
 
 <h2 id="opencode">OpenCode Desktop App</h2>
 <p>A standalone app for your own computer, with no terminal, no Git Bash and no Node.js. Works the same way on Mac and Windows.</p>
@@ -179,7 +181,7 @@ main .callout-warn {
 <h3>學校電腦室</h3>
 <p>這類電腦通常不允許安裝需要管理員密碼的軟件，也不會預先裝好任何工具。</p>
 <p><a href="#codespaces-zh">Codespaces</a>：在瀏覽器裡，不需要安裝任何東西，OpenCode 或 Copilot 皆可使用。</p>
-<p><a href="#copilot-school-zh">VS Code + Copilot</a>：在編輯器裡操作，需要使用者安裝。</p>
+<p><a href="#copilot-school-zh">VS Code + Copilot</a>：在編輯器裡操作，需要使用者安裝。沒有 Git，須自行手動上傳檔案到 GitHub。</p>
 </div>
 <div class="pick-card">
 <h3>自己的電腦（Mac 或 Windows）</h3>
@@ -193,7 +195,7 @@ main .callout-warn {
 </div>
 </div>
 
-<p class="callout-warn"><strong>不論選哪一種方案，最重要的是：</strong>每次做完都要把成果 commit 並 push 到你的 GitHub 倉庫。只有這樣才能保存下來。只留在 Codespace 或學校電腦上的檔案，最後都會消失。可以直接請助手幫你 commit 和 push。</p>
+<p class="callout-warn"><strong>不論選哪一種方案，最重要的是：</strong>每次做完都要把成果 commit 並 push 到你的 GitHub 倉庫。只有這樣才能保存下來。只留在 Codespace 或學校電腦上的檔案，最後都會消失。可以直接請助手幫你 commit 和 push。（例外：學校電腦上的 VS Code + Copilot 沒有 Git，須改為手動上傳檔案——見下面該節。）</p>
 
 <h2>開始前</h2>
 <ol>
@@ -223,8 +225,8 @@ main .callout-warn {
 <h3 id="codespaces-copilot-zh">使用 Copilot</h3>
 <ol>
 <li>按視窗上方的聊天圖示，打開 Chat 面板。它已用你的 GitHub 帳號登入，不需要再另外登入。</li>
-<li>按聊天輸入框下方的模型選擇器 → <strong>Other Models</strong></li>
-<li>設定（齒輪）圖示 → <strong>Add Models</strong> → <strong>OpenRouter</strong> → 貼上金鑰</li>
+<li>按聊天輸入框下方的模型選擇器 → <strong>Other Models</strong>。</li>
+<li>設定（齒輪）圖示 → <strong>Add Models</strong> → <strong>OpenRouter</strong> → 貼上金鑰。</li>
 <li>在模型選擇器中選擇 <strong>GLM-5.3-Flash</strong>。</li>
 </ol>
 
@@ -245,6 +247,8 @@ main .callout-warn {
 <li><strong>加入金鑰：</strong>按聊天輸入框下方的模型選擇器 → <strong>Other Models</strong> → 設定（齒輪）圖示 → <strong>Add Models</strong> → <strong>OpenRouter</strong> → 貼上金鑰。</li>
 <li>在模型選擇器中選擇 <strong>GLM-5.3-Flash</strong>。</li>
 </ol>
+
+<p class="callout-warn"><strong>這台電腦沒有 Git，要自己手動保存成果：</strong>電腦室的機器通常沒裝 Git，而安裝 Git 一般需要管理員密碼，你不會有這個權限。這表示你沒辦法請助手幫你「commit and push」，因為根本沒有 Git 可用。改為在每次做完後，自己上傳檔案：到 <a href="https://github.com/">github.com</a> 上你的倉庫，按 <strong>Add file</strong> → <strong>Upload files</strong>，把改動過的檔案或資料夾（或整個專案資料夾）拖進去，再按 <strong>Commit changes</strong>。請在登出前完成這一步——只留在學校電腦上的內容，一旦關閉 VS Code 或換人登入就會遺失。</p>
 
 <h2 id="opencode-zh">OpenCode 桌面版</h2>
 <p>一個裝在自己電腦上的獨立應用程式，不需終端機、不需 Git Bash、不需 Node.js。Mac 與 Windows 做法完全相同。</p>
