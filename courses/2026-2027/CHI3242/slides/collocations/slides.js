@@ -48,6 +48,34 @@ function texify(root) {
 const BLUE = '\\textcolor{#1f5fd6}', RED = '\\textcolor{#e0570f}', PUR = '\\textcolor{#7c3aed}';
 const bi = ([z, e]) => `<span class="z">${z}</span><span class="e">${e}</span>`;
 
+/* ---------- shared: Fisher's exact test (hypergeometric), reused by the window / sentence / grammatical example slides ---------- */
+function logFact(n) { let s = 0; for (let i = 2; i <= n; i++) s += Math.log(i); return s; }
+function logComb(n, k) { return logFact(n) - logFact(k) - logFact(n - k); }
+function hyperTerm(R1, R2, C1, N, x) { return Math.exp(logComb(R1, x) + logComb(R2, C1 - x) - logComb(N, C1)); }
+// one-tailed p-value (probability of a table at least as "attractive" as this one, margins fixed)
+function fisherP({ a, b, c, d }) {
+  const R1 = a + b, R2 = c + d, C1 = a + c, N = R1 + R2;
+  let p = 0;
+  for (let x = a; x <= Math.min(R1, C1); x++) p += hyperTerm(R1, R2, C1, N, x);
+  return p;
+}
+// LaTeX + verdict for "this table's" p-value, plugging in a, b, c, d
+function fisherEqTex({ a, b, c, d }) {
+  const R1 = a + b, R2 = c + d, C1 = a + c, N = R1 + R2;
+  const p = fisherP({ a, b, c, d });
+  const more = Math.min(R1, C1) > a;
+  const verdict = p < 0.05
+    ? '<b class="ok-c">→ 顯著 significant</b>'
+    : '<b class="bad-c">→ 未達顯著 not significant</b>';
+  return `\\(p = \\dfrac{\\binom{${R1}}{${a}}\\binom{${R2}}{${c}}}{\\binom{${N}}{${C1}}}${more ? ' + \\cdots' : ''} = \\mathbf{${p.toFixed(4)}}\\)&nbsp;&nbsp;${verdict}`;
+}
+function renderFisherP(sel, el, v) {
+  const node = $(sel, el);
+  if (!node) return;
+  node.innerHTML = fisherEqTex(v);
+  texify(node);
+}
+
 /* ---------- horizon graphic: distance labels above tokens + bracket below ---------- */
 function clearHorizon(box, els) {
   box.querySelectorAll('.hz').forEach(n => n.remove());
@@ -340,7 +368,7 @@ function syntaxCounts() {
       $('#win-h', el).textContent = h;
       const v = windowCounts(h);
       ctable($('#win-ct', el), v, { rows: [['靠近 w₁＝好', 'near w₁'], ['不靠近', 'not near']], cols: [['w₂＝天氣', 'collocate'], ['其他詞', 'other']], hl: 'a', mini: true, letters: EV });
-      
+      renderFisherP('#win-p', el, v);
     },
     key(e) {
       if (e.key === 'ArrowUp') { h = Math.min(6, h + 1); return true; }
@@ -361,7 +389,9 @@ HOOKS['s-sentence'] = {
       r.badge.textContent = x && y ? '兩者皆有 both' : x ? '只有 X only' : '皆無 neither';
       r.badge.style.opacity = step >= 2 ? 1 : 0;
     });
-    ctable($('#sen-ct', el), sentenceCounts(), { rows: [['含 w₁＝好', 'contains w₁'], ['不含 w₁', 'no w₁']], cols: [['含 w₂＝天氣', 'contains w₂'], ['不含 w₂', 'no w₂']], hl: 'a', mini: true, letters: EV });
+    const v = sentenceCounts();
+    ctable($('#sen-ct', el), v, { rows: [['含 w₁＝好', 'contains w₁'], ['不含 w₁', 'no w₁']], cols: [['含 w₂＝天氣', 'contains w₂'], ['不含 w₂', 'no w₂']], hl: 'a', mini: true, letters: EV });
+    renderFisherP('#sen-p', el, v);
   }
 };
 
@@ -376,7 +406,9 @@ HOOKS['s-syntax'] = {
       });
     });
     $('#syn-list', el).textContent = MODS.flatMap((ms, si) => ms.map(([m, n]) => { const w = words(CORPUS[si]); return `(${w[m]}, ${w[n]})`; })).join('  ');
-    ctable($('#syn-ct', el), syntaxCounts(), { rows: [['w₁＝好', 'first word'], ['其他修飾語', 'other']], cols: [['w₂＝天氣', 'second word'], ['其他名詞', 'other']], hl: 'a', mini: true, letters: EV });
+    const v = syntaxCounts();
+    ctable($('#syn-ct', el), v, { rows: [['w₁＝好', 'first word'], ['其他修飾語', 'other']], cols: [['w₂＝天氣', 'second word'], ['其他名詞', 'other']], hl: 'a', mini: true, letters: EV });
+    renderFisherP('#syn-p', el, v);
   }
 };
 
@@ -498,7 +530,34 @@ const comb = (n, k) => { let r = 1; for (let i = 1; i <= k; i++) r = r * (n - k 
   HOOKS['s-syntax-evert'] = {
     render(step, el) {
       if (built) return;
-      ctable($('#synev-ct', el), { a: 1, b: 2, c: 2, d: 4 }, { rows: [['w₁＝young', 'first word'], ['其他形容詞', 'other adjective']], cols: [['w₂＝gentleman', 'second word'], ['其他名詞', 'other noun']], hl: 'a', mini: true, letters: EV });
+      const v = { a: 1, b: 2, c: 2, d: 4 };
+      ctable($('#synev-ct', el), v, { rows: [['w₁＝young', 'first word'], ['其他形容詞', 'other adjective']], cols: [['w₂＝gentleman', 'second word'], ['其他名詞', 'other noun']], hl: 'a', mini: true, letters: EV });
+      renderFisherP('#synev-p', el, v);
+      built = true;
+    }
+  };
+})();
+
+/* ---------- 12a / 13a. p-value for Evert's own window and sentence examples (numbers taken from the slide text) ---------- */
+(function () {
+  let built = false;
+  // hat/roll: O = a = 2; row 1 (items inside hat's spans) = a+b = 20; column 1 (all "roll") = a+c = f₂ = 3;
+  // total items (every token except hat itself) = N − f₁ = 108
+  HOOKS['s-window-evert'] = {
+    render(step, el) {
+      if (built) return;
+      renderFisherP('#winev-p', el, { a: 2, b: 18, c: 1, d: 87 });
+      built = true;
+    }
+  };
+})();
+(function () {
+  let built = false;
+  // hat/over: O₁₁ = 1, O₁₂ = 2, O₂₁ = 1, O₂₂ = 1 (given directly in the slide text; N = 5 sentences)
+  HOOKS['s-sentence-evert'] = {
+    render(step, el) {
+      if (built) return;
+      renderFisherP('#senev-p', el, { a: 1, b: 2, c: 1, d: 1 });
       built = true;
     }
   };

@@ -512,6 +512,10 @@
     <div id="win-ct"></div>
     <div><div class="defs"><div class="bi xs"><span class="zh"><b>項目</b>：語料中每個詞（不含 w₁ 本身）</span><span class="en"><b>item</b>: every word token except w₁ itself</span></div><div class="bi xs"><span class="zh"><b>第 1 列</b>：落在 w₁ 的視窗內</span><span class="en"><b>row 1</b>: falls inside a span around w₁</span></div><div class="bi xs"><span class="zh"><b>第 1 欄</b>：就是搭配詞 w₂</span><span class="en"><b>column 1</b>: is the collocate w₂</span></div></div></div>
   </div>
+  <div class="callout key" data-step="4" style="margin-top:10px">
+    <div class="bi sm"><span class="zh">用 Fisher 精確檢定計算這張表的 p 值</span><span class="en">Fisher's exact test: the p-value for this table</span></div>
+    <div class="eq" id="win-p" style="margin-top:6px;font-size:22px"></div>
+  </div>
 </section>
 
 <!-- 12a ─────────── Window: Evert's example -->
@@ -522,16 +526,22 @@
       <img class="fig" data-step="1" src="img/evert-fig58-1-surface.png" alt="Evert Fig. 58.1" style="width:690px">
       <img class="fig" data-step="2" src="img/evert-fig58-8-surface-table.png" alt="Evert Fig. 58.8" style="width:600px;margin-top:10px">
     </div>
-    <div class="grow swap" style="min-height:260px">
-      <div data-step="1" data-until="2">
-        <div class="bi xs"><span class="zh"><b>視窗 (L4, R4)</b>：node 詞 hat 左右各 4 個詞，不跨句。</span><span class="en">Span (L4, R4) around the node word hat, limited by sentence boundaries.</span></div>
-        <div class="bi xs"><span class="zh">第 2、3 個視窗各含一個 <i>rolled</i> → <b>O ＝ 2</b></span><span class="en">The 2nd and 3rd span each contain roll → O = 2</span></div>
-        <div class="bi xs"><span class="zh">f₁ ＝ 3（hat）、f₂ ＝ 3（roll）、N ＝ 111 個詞</span><span class="en">f₁ = 3 (hat), f₂ = 3 (roll), N = 111 tokens</span></div>
+    <div class="grow" style="min-height:260px">
+      <div class="swap" style="min-height:190px">
+        <div data-step="1" data-until="2">
+          <div class="bi xs"><span class="zh"><b>視窗 (L4, R4)</b>：node 詞 hat 左右各 4 個詞，不跨句。</span><span class="en">Span (L4, R4) around the node word hat, limited by sentence boundaries.</span></div>
+          <div class="bi xs"><span class="zh">第 2、3 個視窗各含一個 <i>rolled</i> → <b>O ＝ 2</b></span><span class="en">The 2nd and 3rd span each contain roll → O = 2</span></div>
+          <div class="bi xs"><span class="zh">f₁ ＝ 3（hat）、f₂ ＝ 3（roll）、N ＝ 111 個詞</span><span class="en">f₁ = 3 (hat), f₂ = 3 (roll), N = 111 tokens</span></div>
+        </div>
+        <div data-step="2">
+          <div class="bi xs"><span class="zh"><b>項目</b>＝除 hat 以外的每個詞；<b>第 1 列</b>＝落在 hat 視窗內的詞（20 個）</span><span class="en">Items: every token except hat. Row 1: tokens inside a span around hat (20).</span></div>
+          <div class="bi xs"><span class="zh">O₁₁ ＝ 2 就是 O；第 1 欄和 ＝ f₂ ＝ 3；第 2 列和 ＝ N − f₁ ＝ 108</span><span class="en">O₁₁ = 2 is our O; column 1 sums to f₂ = 3; row 2 sums to N − f₁ = 108</span></div>
+          <div class="bi xs legend"><span class="zh">與我們的小語料完全同一套定義</span><span class="en">Same definitions as our toy corpus</span></div>
+        </div>
       </div>
-      <div data-step="2">
-        <div class="bi xs"><span class="zh"><b>項目</b>＝除 hat 以外的每個詞；<b>第 1 列</b>＝落在 hat 視窗內的詞（20 個）</span><span class="en">Items: every token except hat. Row 1: tokens inside a span around hat (20).</span></div>
-        <div class="bi xs"><span class="zh">O₁₁ ＝ 2 就是 O；第 1 欄和 ＝ f₂ ＝ 3；第 2 列和 ＝ N − f₁ ＝ 108</span><span class="en">O₁₁ = 2 is our O; column 1 sums to f₂ = 3; row 2 sums to N − f₁ = 108</span></div>
-        <div class="bi xs legend"><span class="zh">與我們的小語料完全同一套定義</span><span class="en">Same definitions as our toy corpus</span></div>
+      <div class="callout key" data-step="3" style="margin-top:14px">
+        <div class="bi sm"><span class="zh">Fisher 精確檢定的 p 值</span><span class="en">Fisher's exact test p-value</span></div>
+        <div class="eq" id="winev-p" style="margin-top:6px;font-size:20px"></div>
       </div>
     </div>
   </div>
@@ -547,6 +557,10 @@
     <div id="sen-ct"></div>
     <div class="defs"><div class="bi xs"><span class="zh"><b>項目</b>：每一個句子</span><span class="en"><b>item</b>: every sentence</span></div><div class="bi xs"><span class="zh"><b>第 1 列</b>：句子含 w₁</span><span class="en"><b>row 1</b>: the sentence contains w₁</span></div><div class="bi xs"><span class="zh"><b>第 1 欄</b>：句子含 w₂</span><span class="en"><b>column 1</b>: the sentence contains w₂</span></div><div class="bi xs legend"><span class="zh">橙色格 <b>O₁₁ ＝ O</b>（共現次數）</span><span class="en">highlighted cell O₁₁ = O, the cooccurrence count</span></div></div>
   </div>
+  <div class="callout key" data-step="4" style="margin-top:10px">
+    <div class="bi sm"><span class="zh">用 Fisher 精確檢定計算這張表的 p 值</span><span class="en">Fisher's exact test: the p-value for this table</span></div>
+    <div class="eq" id="sen-p" style="margin-top:6px;font-size:22px"></div>
+  </div>
 </section>
 
 <!-- 13a ─────────── Sentence: Evert's example -->
@@ -557,15 +571,21 @@
       <img class="fig" data-step="1" src="img/evert-fig58-2-textual.png" alt="Evert Fig. 58.2" style="width:470px">
       <img class="fig" data-step="2" src="img/evert-fig58-7-textual-table.png" alt="Evert Fig. 58.7" style="width:600px;margin-top:10px">
     </div>
-    <div class="grow swap" style="min-height:260px">
-      <div data-step="1" data-until="2">
-        <div class="bi xs"><span class="zh"><b>項目</b>＝句子（共 5 句，N ＝ 5）</span><span class="en">Items are sentences; N = 5</span></div>
-        <div class="bi xs"><span class="zh">hat 在 3 句（f₁ ＝ 3），over 在 2 句（f₂ ＝ 2），同句出現 1 次（<b>O ＝ 1</b>）</span><span class="en">hat is in 3 sentences, over in 2, both in 1 sentence</span></div>
-        <div class="bi xs"><span class="zh">最後一句雖有兩個 <i>over</i>，仍只算 <b>1</b> 次</span><span class="en">The last sentence has two overs but counts once</span></div>
+    <div class="grow" style="min-height:260px">
+      <div class="swap" style="min-height:190px">
+        <div data-step="1" data-until="2">
+          <div class="bi xs"><span class="zh"><b>項目</b>＝句子（共 5 句，N ＝ 5）</span><span class="en">Items are sentences; N = 5</span></div>
+          <div class="bi xs"><span class="zh">hat 在 3 句（f₁ ＝ 3），over 在 2 句（f₂ ＝ 2），同句出現 1 次（<b>O ＝ 1</b>）</span><span class="en">hat is in 3 sentences, over in 2, both in 1 sentence</span></div>
+          <div class="bi xs"><span class="zh">最後一句雖有兩個 <i>over</i>，仍只算 <b>1</b> 次</span><span class="en">The last sentence has two overs but counts once</span></div>
+        </div>
+        <div data-step="2">
+          <div class="bi xs"><span class="zh">O₁₁ ＝ 1，O₁₂ ＝ 2，O₂₁ ＝ 1，O₂₂ ＝ 1</span><span class="en">one sentence has both, two only hat, one only over, one neither</span></div>
+          <div class="bi xs"><span class="zh">列和 ＝ f₁ ＝ 3，欄和 ＝ f₂ ＝ 2，總和 ＝ N ＝ 5</span><span class="en">row sum = f₁ = 3, column sum = f₂ = 2, total = N = 5</span></div>
+        </div>
       </div>
-      <div data-step="2">
-        <div class="bi xs"><span class="zh">O₁₁ ＝ 1，O₁₂ ＝ 2，O₂₁ ＝ 1，O₂₂ ＝ 1</span><span class="en">one sentence has both, two only hat, one only over, one neither</span></div>
-        <div class="bi xs"><span class="zh">列和 ＝ f₁ ＝ 3，欄和 ＝ f₂ ＝ 2，總和 ＝ N ＝ 5</span><span class="en">row sum = f₁ = 3, column sum = f₂ = 2, total = N = 5</span></div>
+      <div class="callout key" data-step="3" style="margin-top:14px">
+        <div class="bi sm"><span class="zh">Fisher 精確檢定的 p 值</span><span class="en">Fisher's exact test p-value</span></div>
+        <div class="eq" id="senev-p" style="margin-top:6px;font-size:20px"></div>
       </div>
     </div>
   </div>
@@ -582,6 +602,10 @@
     <div data-step="3" class="two" style="align-items:center"><div id="syn-ct"></div>
       <div class="bi xs legend" style="max-width:220px"><span class="zh">橙色格 <b>O₁₁ ＝ O</b></span><span class="en">highlighted cell = cooccurrence count</span></div></div>
   </div>
+  <div class="callout key" data-step="4" style="margin-top:10px">
+    <div class="bi sm"><span class="zh">用 Fisher 精確檢定計算這張表的 p 值</span><span class="en">Fisher's exact test: the p-value for this table</span></div>
+    <div class="eq" id="syn-p" style="margin-top:6px;font-size:22px"></div>
+  </div>
 </section>
 
 <!-- 14a ─────────── Syntax: Evert's example -->
@@ -595,15 +619,21 @@
         <div class="sig" data-step="3" style="font-size:20px">(O, f₁, f₂, N)<br>＝ (1, 3, 3, 9)</div>
       </div>
     </div>
-    <div class="grow swap" style="min-height:260px">
-      <div data-step="1" data-until="2">
-        <div class="bi xs"><span class="zh"><b>項目</b>＝每一個「形容詞→名詞」搭配對（pair token），共 <b>9</b> 個（N ＝ 9）</span><span class="en">Items: the 9 adjective → noun pair tokens listed on the right</span></div>
-        <div class="bi xs"><span class="zh">其他所有詞（in, stood, corduroy …）都不算</span><span class="en">All other words are disregarded</span></div>
+    <div class="grow" style="min-height:260px">
+      <div class="swap" style="min-height:190px">
+        <div data-step="1" data-until="2">
+          <div class="bi xs"><span class="zh"><b>項目</b>＝每一個「形容詞→名詞」搭配對（pair token），共 <b>9</b> 個（N ＝ 9）</span><span class="en">Items: the 9 adjective → noun pair tokens listed on the right</span></div>
+          <div class="bi xs"><span class="zh">其他所有詞（in, stood, corduroy …）都不算</span><span class="en">All other words are disregarded</span></div>
+        </div>
+        <div data-step="2">
+          <div class="bi xs"><span class="zh">young 修飾 3 個名詞（f₁ ＝ 3），其中 1 個是 gentleman（<b>O ＝ 1</b>）</span><span class="en">young modifies 3 nouns; one of them is gentleman</span></div>
+          <div class="bi xs"><span class="zh">gentleman 被 3 個形容詞修飾（f₂ ＝ 3）：stout, old, young</span><span class="en">gentleman is modified by 3 adjectives: stout, old, young</span></div>
+          <div class="bi xs"><span class="zh">O₂₂ ＝ 4：與 young、gentleman 都無關的 4 對</span><span class="en">4 pairs contain neither word</span></div>
+        </div>
       </div>
-      <div data-step="2">
-        <div class="bi xs"><span class="zh">young 修飾 3 個名詞（f₁ ＝ 3），其中 1 個是 gentleman（<b>O ＝ 1</b>）</span><span class="en">young modifies 3 nouns; one of them is gentleman</span></div>
-        <div class="bi xs"><span class="zh">gentleman 被 3 個形容詞修飾（f₂ ＝ 3）：stout, old, young</span><span class="en">gentleman is modified by 3 adjectives: stout, old, young</span></div>
-        <div class="bi xs"><span class="zh">O₂₂ ＝ 4：與 young、gentleman 都無關的 4 對</span><span class="en">4 pairs contain neither word</span></div>
+      <div class="callout key" data-step="4" style="margin-top:14px">
+        <div class="bi sm"><span class="zh">Fisher 精確檢定的 p 值</span><span class="en">Fisher's exact test p-value</span></div>
+        <div class="eq" id="synev-p" style="margin-top:6px;font-size:20px"></div>
       </div>
     </div>
   </div>
