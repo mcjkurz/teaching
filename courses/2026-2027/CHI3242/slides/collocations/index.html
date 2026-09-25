@@ -510,11 +510,11 @@
   </div>
   <div class="two" data-step="3" style="align-items:center">
     <div id="win-ct"></div>
-    <div><div class="defs"><div class="bi xs"><span class="zh"><b>項目</b>：語料中每個詞（不含 w₁ 本身）</span><span class="en"><b>item</b>: every word token except w₁ itself</span></div><div class="bi xs"><span class="zh"><b>第 1 列</b>：落在 w₁ 的視窗內</span><span class="en"><b>row 1</b>: falls inside a span around w₁</span></div><div class="bi xs"><span class="zh"><b>第 1 欄</b>：就是搭配詞 w₂</span><span class="en"><b>column 1</b>: is the collocate w₂</span></div></div></div>
-  </div>
-  <div class="callout key" data-step="4" style="margin-top:10px">
-    <div class="bi sm"><span class="zh">用 Fisher 精確檢定計算這張表的 p 值</span><span class="en">Fisher's exact test: the p-value for this table</span></div>
-    <div class="eq" id="win-p" style="margin-top:6px;font-size:22px"></div>
+    <div style="max-width:380px"><div class="defs"><div class="bi xs"><span class="zh"><b>項目</b>：語料中每個詞（不含 w₁ 本身）</span><span class="en"><b>item</b>: every word token except w₁ itself</span></div><div class="bi xs"><span class="zh"><b>第 1 列</b>：落在 w₁ 的視窗內</span><span class="en"><b>row 1</b>: falls inside a span around w₁</span></div><div class="bi xs"><span class="zh"><b>第 1 欄</b>：就是搭配詞 w₂</span><span class="en"><b>column 1</b>: is the collocate w₂</span></div></div></div>
+    <div data-step="4">
+      <div class="bi xs"><span class="zh">Fisher 精確檢定 p 值</span><span class="en">Fisher's exact test p-value</span></div>
+      <div class="eq" id="win-p" style="margin-top:4px;font-size:16px;padding:6px 10px;line-height:1.4"></div>
+    </div>
   </div>
 </section>
 
@@ -539,9 +539,9 @@
           <div class="bi xs legend"><span class="zh">與我們的小語料完全同一套定義</span><span class="en">Same definitions as our toy corpus</span></div>
         </div>
       </div>
-      <div class="callout key" data-step="3" style="margin-top:14px">
-        <div class="bi sm"><span class="zh">Fisher 精確檢定的 p 值</span><span class="en">Fisher's exact test p-value</span></div>
-        <div class="eq" id="winev-p" style="margin-top:6px;font-size:20px"></div>
+      <div data-step="3" style="margin-top:8px">
+        <div class="bi xs"><span class="zh">Fisher 精確檢定 p 值</span><span class="en">Fisher's exact test p-value</span></div>
+        <div class="eq" id="winev-p" style="margin-top:4px;font-size:16px;padding:6px 10px;line-height:1.4"></div>
       </div>
     </div>
   </div>
@@ -555,11 +555,11 @@
   <div class="small" style="margin:2px 0 6px"><span class="tag tgt">X = 好</span><span class="tag col">Y = 天氣</span></div>
   <div class="two" data-step="3" style="align-items:center">
     <div id="sen-ct"></div>
-    <div class="defs"><div class="bi xs"><span class="zh"><b>項目</b>：每一個句子</span><span class="en"><b>item</b>: every sentence</span></div><div class="bi xs"><span class="zh"><b>第 1 列</b>：句子含 w₁</span><span class="en"><b>row 1</b>: the sentence contains w₁</span></div><div class="bi xs"><span class="zh"><b>第 1 欄</b>：句子含 w₂</span><span class="en"><b>column 1</b>: the sentence contains w₂</span></div><div class="bi xs legend"><span class="zh">橙色格 <b>O₁₁ ＝ O</b>（共現次數）</span><span class="en">highlighted cell O₁₁ = O, the cooccurrence count</span></div></div>
-  </div>
-  <div class="callout key" data-step="4" style="margin-top:10px">
-    <div class="bi sm"><span class="zh">用 Fisher 精確檢定計算這張表的 p 值</span><span class="en">Fisher's exact test: the p-value for this table</span></div>
-    <div class="eq" id="sen-p" style="margin-top:6px;font-size:22px"></div>
+    <div class="defs" style="max-width:380px"><div class="bi xs"><span class="zh"><b>項目</b>：每一個句子</span><span class="en"><b>item</b>: every sentence</span></div><div class="bi xs"><span class="zh"><b>第 1 列</b>：句子含 w₁</span><span class="en"><b>row 1</b>: the sentence contains w₁</span></div><div class="bi xs"><span class="zh"><b>第 1 欄</b>：句子含 w₂</span><span class="en"><b>column 1</b>: the sentence contains w₂</span></div><div class="bi xs legend"><span class="zh">橙色格 <b>O₁₁ ＝ O</b>（共現次數）</span><span class="en">highlighted cell O₁₁ = O, the cooccurrence count</span></div></div>
+    <div data-step="4">
+      <div class="bi xs"><span class="zh">Fisher 精確檢定 p 值</span><span class="en">Fisher's exact test p-value</span></div>
+      <div class="eq" id="sen-p" style="margin-top:4px;font-size:16px;padding:6px 10px;line-height:1.4"></div>
+    </div>
   </div>
 </section>
 
@@ -583,9 +583,9 @@
           <div class="bi xs"><span class="zh">列和 ＝ f₁ ＝ 3，欄和 ＝ f₂ ＝ 2，總和 ＝ N ＝ 5</span><span class="en">row sum = f₁ = 3, column sum = f₂ = 2, total = N = 5</span></div>
         </div>
       </div>
-      <div class="callout key" data-step="3" style="margin-top:14px">
-        <div class="bi sm"><span class="zh">Fisher 精確檢定的 p 值</span><span class="en">Fisher's exact test p-value</span></div>
-        <div class="eq" id="senev-p" style="margin-top:6px;font-size:20px"></div>
+      <div data-step="3" style="margin-top:8px">
+        <div class="bi xs"><span class="zh">Fisher 精確檢定 p 值</span><span class="en">Fisher's exact test p-value</span></div>
+        <div class="eq" id="senev-p" style="margin-top:4px;font-size:16px;padding:6px 10px;line-height:1.4"></div>
       </div>
     </div>
   </div>
@@ -600,11 +600,12 @@
   <div class="two" style="align-items:center">
     <div data-step="2"><div class="ct-title">找到的搭配對 pairs found</div><div class="eq" id="syn-list" style="font-size:18px;white-space:nowrap;padding:8px 14px"></div><div class="defs"><div class="bi xs"><span class="zh"><b>項目</b>：每一個「形容詞→名詞」搭配對</span><span class="en"><b>item</b>: every adjective → noun pair token</span></div><div class="bi xs"><span class="zh"><b>第 1 列</b>：第一個詞是 w₁</span><span class="en"><b>row 1</b>: the first word is w₁</span></div><div class="bi xs"><span class="zh"><b>第 1 欄</b>：第二個詞是 w₂</span><span class="en"><b>column 1</b>: the second word is w₂</span></div></div></div>
     <div data-step="3" class="two" style="align-items:center"><div id="syn-ct"></div>
-      <div class="bi xs legend" style="max-width:220px"><span class="zh">橙色格 <b>O₁₁ ＝ O</b></span><span class="en">highlighted cell = cooccurrence count</span></div></div>
-  </div>
-  <div class="callout key" data-step="4" style="margin-top:10px">
-    <div class="bi sm"><span class="zh">用 Fisher 精確檢定計算這張表的 p 值</span><span class="en">Fisher's exact test: the p-value for this table</span></div>
-    <div class="eq" id="syn-p" style="margin-top:6px;font-size:22px"></div>
+      <div class="bi xs legend" style="max-width:220px"><span class="zh">橙色格 <b>O₁₁ ＝ O</b></span><span class="en">highlighted cell = cooccurrence count</span></div>
+      <div data-step="4">
+        <div class="bi xs"><span class="zh">Fisher 精確檢定 p 值</span><span class="en">Fisher's exact test p-value</span></div>
+        <div class="eq" id="syn-p" style="margin-top:4px;font-size:16px;padding:6px 10px;line-height:1.4"></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -631,9 +632,9 @@
           <div class="bi xs"><span class="zh">O₂₂ ＝ 4：與 young、gentleman 都無關的 4 對</span><span class="en">4 pairs contain neither word</span></div>
         </div>
       </div>
-      <div class="callout key" data-step="4" style="margin-top:14px">
-        <div class="bi sm"><span class="zh">Fisher 精確檢定的 p 值</span><span class="en">Fisher's exact test p-value</span></div>
-        <div class="eq" id="synev-p" style="margin-top:6px;font-size:20px"></div>
+      <div data-step="4" style="margin-top:8px">
+        <div class="bi xs"><span class="zh">Fisher 精確檢定 p 值</span><span class="en">Fisher's exact test p-value</span></div>
+        <div class="eq" id="synev-p" style="margin-top:4px;font-size:16px;padding:6px 10px;line-height:1.4"></div>
       </div>
     </div>
   </div>
