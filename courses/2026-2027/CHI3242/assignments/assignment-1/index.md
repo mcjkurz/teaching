@@ -16,7 +16,7 @@ title: CHI3242 Assignment 1
 <ul>
 <li><code>README.md</code> (a short description of what you are analyzing: corpus title(s), author(s), and source URL(s). This repository is public, so please do not include your name or student ID.)</li>
 <li><code>data/</code> (the corpus, as plain-text UTF-8 file(s))</li>
-<li><code>analysis.py</code> or <code>analysis.ipynb</code> (segments the text into sentences and words with jieba, then calls <code>find_collocates</code> to compute collocates for your target character's name)</li>
+<li><code>analysis.py</code> (segments the text into sentences and words with jieba, then calls <code>find_collocates</code> to compute collocates for your target character's name)</li>
 <li><code>output/collocates_*.csv</code> (one CSV per run; see the method requirements below)</li>
 <li><code>output/results.html</code> (a single page showing all your collocation tables together, for easy comparison)</li>
 <li><code>report.md</code> <strong>and</strong> <code>report.pdf</code> (the same short essay-report in both formats), <strong>2,500–3,000 characters</strong>. Submit the PDF separately on Moodle as well.</li>
@@ -30,7 +30,8 @@ title: CHI3242 Assignment 1
 <li>Keep only statistically significant collocates: set <code>max_p</code> to 0.05 in the <code>filters</code> argument, so that every collocate in your final table has a p-value below 0.05</li>
 <li>Explore your results <strong>iteratively</strong>: run <code>find_collocates</code> more than once with different settings before settling on your final interpretation. Try at least two window sizes (e.g. <code>horizon=5</code> and <code>horizon=10</code>) with <code>method="window"</code>, and also try <code>method="sentence"</code> (co-occurrence within the same sentence, no horizon needed), and compare what each setting turns up. Save each run to its own CSV, and build a simple HTML page that puts all the tables together so you can browse and compare them easily. Your report should reflect this process of exploration, not just the output of a single run.</li>
 </ul>
-<p>The <strong>report</strong> (2,500–3,000 characters) should read as a short, well-argued essay rather than a checklist. Introduce your corpus and its scale: which novel(s) you used, where they came from, and roughly how many characters or tokens they contain. Briefly describe how you processed the text (segmentation tool, cleaning steps, and any normalization such as traditional-to-simplified conversion). Explain your method and statistical setup: how the contingency table is built, what a p-value from Fisher's exact test tells you, and why you chose the test direction (alternative) you did. Present your main results, with a small table or visualization if it helps, and then interpret them. Why is this character surrounded by these particular words, and not others? What does that distribution suggest about "character-space"? Close with a brief methodological reflection: what would a different window size, target word, or corpus have changed, and what are the limits of reading a literary character through collocations alone?</p>
+<p>The <strong>report</strong> (2,500–3,000 characters) should read as a short, well-argued essay rather than a checklist. Introduce your corpus and its scale: which novel(s) you used, where they came from, and roughly how many characters or tokens they contain. Briefly describe how you processed the text (segmentation tool, cleaning steps, and any normalization such as traditional-to-simplified conversion). Explain your method and statistical setup: how the contingency table is built, what a p-value from Fisher's exact test tells you, and why you chose the test direction (alternative) you did. Present your main results, with a small table or visualization if it helps, and then interpret them. Why is this character surrounded by these particular words, and not others? What does that distribution suggest about "character-space"? Close with a brief methodological reflection: what would a different window size, target word, or corpus have changed, and what are the limits of reading a literary character through collocations alone? This should not be a purely technical report: throughout, bring your findings back into conversation with Woloch's argument about character-space, and say what your results do, or do not, support about his theory.</p>
+<p>You are encouraged to use AI to help you write the report, but the report must be your own individual work and analysis. A report that is fully AI-generated will receive <strong>0 points</strong>. If there is any doubt, the instructor may ask you individually to explain your workflow, to confirm that you understand your own analysis.</p>
 <p>Once your analysis is finished, <strong>commit</strong> and <strong>push</strong> the results (scripts, data, CSVs, the HTML page, and the report in both <code>.md</code> and <code>.pdf</code>) to your repository, and upload the same PDF to Moodle.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
@@ -41,7 +42,7 @@ title: CHI3242 Assignment 1
 <ul>
 <li><code>README.md</code>（簡述你分析的對象：語料書名、作者、來源網址。這是公開倉庫，請不要寫上姓名或學號。）</li>
 <li><code>data/</code>（語料的純文字 UTF-8 檔案）</li>
-<li><code>analysis.py</code> 或 <code>analysis.ipynb</code>（用 jieba 將文本分句、分詞，再呼叫 <code>find_collocates</code> 計算目標角色姓名的搭配詞）</li>
+<li><code>analysis.py</code>（用 jieba 將文本分句、分詞，再呼叫 <code>find_collocates</code> 計算目標角色姓名的搭配詞）</li>
 <li><code>output/collocates_*.csv</code>（每次執行存一個 CSV，見下方方法要求）</li>
 <li><code>output/results.html</code>（一個把所有搭配詞表整合在一起的頁面，方便互相比較）</li>
 <li><code>report.md</code> <strong>與</strong> <code>report.pdf</code>（同一篇短文報告的兩種格式），<strong>2,500–3,000字</strong>。PDF 另外也要在 Moodle 提交。</li>
@@ -55,7 +56,8 @@ title: CHI3242 Assignment 1
 <li>只保留統計上顯著的搭配詞：在 <code>filters</code> 參數中把 <code>max_p</code> 設為0.05，確保最終結果表中每一個搭配詞的 p 值都小於0.05</li>
 <li><strong>反覆、逐步</strong>地探索你的結果：在定案之前不要只跑一次 <code>find_collocates</code>，至少嘗試兩種視窗大小（例如 <code>horizon=5</code> 與 <code>horizon=10</code>，用 <code>method="window"</code>），也試試 <code>method="sentence"</code>（以同一句為單位計算共現，不需要 horizon），比較不同設定會找出哪些不同的搭配詞。把每次結果分別存成 CSV，再整理成一個簡單的 HTML 頁面，方便一次瀏覽、比較。報告應反映這個反覆探索的過程，而非只呈現一次執行的結果。</li>
 </ul>
-<p><strong>報告</strong>（2,500–3,000字）應該讀起來像一篇論證清楚的短文，而不是條列式的檢查清單。請先簡介你的語料及其規模：用了哪部（或哪些）小說、來源為何，以及大致的字數或詞數。再簡述你的資料處理流程（分詞工具、清理步驟，以及是否做過繁簡轉換之類的正規化處理）。接著說明你的方法與統計設置：列聯表是如何建立的、Fisher精確檢定的p值告訴我們什麼，以及你為什麼選擇這樣的檢定方向（alternative）。呈現你的主要結果，若有幫助也可以附上簡單的表格或可視化，然後對結果進行詮釋。為什麼這個角色身邊圍繞著這些詞，而不是別的詞？這樣的分佈對「人物空間」這個概念有什麼啟示？結尾可以簡短反思方法本身的限制：換一個視窗大小、目標詞或語料，結果會有什麼不同？只憑搭配詞來理解一個文學角色，又有哪些做不到的地方？</p>
+<p><strong>報告</strong>（2,500–3,000字）應該讀起來像一篇論證清楚的短文，而不是條列式的檢查清單。請先簡介你的語料及其規模：用了哪部（或哪些）小說、來源為何，以及大致的字數或詞數。再簡述你的資料處理流程（分詞工具、清理步驟，以及是否做過繁簡轉換之類的正規化處理）。接著說明你的方法與統計設置：列聯表是如何建立的、Fisher精確檢定的p值告訴我們什麼，以及你為什麼選擇這樣的檢定方向（alternative）。呈現你的主要結果，若有幫助也可以附上簡單的表格或可視化，然後對結果進行詮釋。為什麼這個角色身邊圍繞著這些詞，而不是別的詞？這樣的分佈對「人物空間」這個概念有什麼啟示？結尾可以簡短反思方法本身的限制：換一個視窗大小、目標詞或語料，結果會有什麼不同？只憑搭配詞來理解一個文學角色，又有哪些做不到的地方？這不應該只是一篇技術報告：全篇都要把你的發現拉回 Woloch 關於人物空間的論點，說明你的結果支持、或不支持他的理論的哪些部分。</p>
+<p>你可以使用人工智能協助寫報告，但報告必須是你自己的個人成果與分析。若報告完全由人工智能生成，將獲得<strong>0分</strong>。如有疑慮，教師可能會個別要求學生解釋自己的工作流程，以確認你確實理解自己的分析。</p>
 <p>完成分析後，請把結果（腳本、語料、CSV、HTML 頁面，以及 <code>.md</code> 與 <code>.pdf</code> 兩種格式的報告）<strong>commit</strong> 並 <strong>push</strong> 到你的倉庫，並把同一份 PDF 上傳到 Moodle。</p>
 </div>
 </div>
