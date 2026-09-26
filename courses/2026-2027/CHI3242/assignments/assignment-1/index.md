@@ -17,7 +17,8 @@ title: CHI3242 Assignment 1
 <li><code>README.md</code> (name, student ID, corpus description: title(s), author(s), source URL(s))</li>
 <li><code>data/</code> (the corpus, as plain-text UTF-8 file(s))</li>
 <li><code>analysis.py</code> or <code>analysis.ipynb</code> (segments the text into sentences and words with jieba, then calls <code>find_collocates</code> to compute collocates for your target character's name)</li>
-<li><code>output/collocates.csv</code> (the collocates table for your chosen target word)</li>
+<li><code>output/collocates_*.csv</code> (one CSV per run — see the method requirements below)</li>
+<li><code>output/results.html</code> (a single page showing all your collocation tables together, for easy comparison)</li>
 <li><code>report.md</code> — a short essay-report, <strong>2,500–3,000 characters</strong></li>
 </ul>
 <p><strong>Method requirements:</strong></p>
@@ -27,10 +28,10 @@ title: CHI3242 Assignment 1
 <li>Remove stopwords using <code>load_stopwords()</code> from qhchina</li>
 <li>Focus on two-character words: set <code>min_word_length</code> to at least 2 in the <code>filters</code> argument</li>
 <li>Keep only statistically significant collocates: set <code>max_p</code> to 0.05 in the <code>filters</code> argument, so that every collocate in your final table has a p-value below 0.05</li>
-<li>Explore your results <strong>iteratively</strong>: try more than one target word, window size, or filter setting before settling on a final version. Your report should reflect this process of exploration, not just the output of a single run.</li>
+<li>Explore your results <strong>iteratively</strong>: run <code>find_collocates</code> more than once with different settings before settling on your final interpretation — try at least two window sizes (e.g. <code>horizon=5</code> and <code>horizon=10</code>) with <code>method="window"</code>, and also try <code>method="sentence"</code> (co-occurrence within the same sentence, no horizon needed), and compare what each setting turns up. Save each run to its own CSV, and build a simple HTML page that puts all the tables together so you can browse and compare them easily. Your report should reflect this process of exploration, not just the output of a single run.</li>
 </ul>
 <p>The <strong>report</strong> (<code>report.md</code>, 2,500–3,000 characters) should read as a short, well-argued essay rather than a checklist. Introduce your corpus and its scale — which novel(s) you used, where they came from, and roughly how many characters or tokens they contain; briefly describe how you processed the text (segmentation tool, cleaning steps, and any normalization such as traditional-to-simplified conversion); explain your method and statistical setup — how the contingency table is built, what a p-value from Fisher's exact test tells you, and why you chose the test direction (alternative) you did; present your main results, with a small table or visualization if it helps; and then interpret them. Why is this character surrounded by these particular words, and not others? What does that distribution suggest about "character-space"? Close with a brief methodological reflection — what would a different window size, target word, or corpus have changed, and what are the limits of reading a literary character through collocations alone?</p>
-<p>Once your analysis is finished, <strong>commit</strong> and <strong>push</strong> the results (script, data, CSV, and report) to your repository.</p>
+<p>Once your analysis is finished, <strong>commit</strong> and <strong>push</strong> the results (scripts, data, CSVs, the HTML page, and the report) to your repository.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
 <p><strong>截止：</strong>10月9日 上午9:00</p>
@@ -41,7 +42,8 @@ title: CHI3242 Assignment 1
 <li><code>README.md</code>（姓名、學號、語料說明：書名、作者、來源網址）</li>
 <li><code>data/</code>（語料的純文字 UTF-8 檔案）</li>
 <li><code>analysis.py</code> 或 <code>analysis.ipynb</code>（用 jieba 將文本分句、分詞，再呼叫 <code>find_collocates</code> 計算目標角色姓名的搭配詞）</li>
-<li><code>output/collocates.csv</code>（你所選目標詞的搭配詞結果表）</li>
+<li><code>output/collocates_*.csv</code>（每次執行存一個 CSV——見下方方法要求）</li>
+<li><code>output/results.html</code>（一個把所有搭配詞表整合在一起的頁面，方便互相比較）</li>
 <li><code>report.md</code>——一篇短文報告，<strong>2,500–3,000字</strong></li>
 </ul>
 <p><strong>方法要求：</strong></p>
@@ -51,10 +53,10 @@ title: CHI3242 Assignment 1
 <li>用 qhchina 的 <code>load_stopwords()</code> 移除停用詞</li>
 <li>聚焦於雙字詞：在 <code>filters</code> 參數中把 <code>min_word_length</code> 設為至少2</li>
 <li>只保留統計上顯著的搭配詞：在 <code>filters</code> 參數中把 <code>max_p</code> 設為0.05，確保最終結果表中每一個搭配詞的 p 值都小於0.05</li>
-<li><strong>反覆、逐步</strong>地探索你的結果：在定案之前，嘗試不止一個目標詞、視窗大小或過濾設定。報告應反映這個反覆探索的過程，而非只呈現一次執行的結果。</li>
+<li><strong>反覆、逐步</strong>地探索你的結果：在定案之前不要只跑一次 <code>find_collocates</code>——至少嘗試兩種視窗大小（例如 <code>horizon=5</code> 與 <code>horizon=10</code>，用 <code>method="window"</code>），也試試 <code>method="sentence"</code>（以同一句為單位計算共現，不需要 horizon），比較不同設定會找出哪些不同的搭配詞。把每次結果分別存成 CSV，再整理成一個簡單的 HTML 頁面，方便一次瀏覽、比較。報告應反映這個反覆探索的過程，而非只呈現一次執行的結果。</li>
 </ul>
 <p><strong>報告</strong>（<code>report.md</code>，2,500–3,000字）應該讀起來像一篇論證清楚的短文，而不是條列式的檢查清單。請先簡介你的語料及其規模——用了哪部（或哪些）小說、來源為何，以及大致的字數或詞數；再簡述你的資料處理流程（分詞工具、清理步驟，以及是否做過繁簡轉換之類的正規化處理）；接著說明你的方法與統計設置——列聯表是如何建立的、Fisher精確檢定的p值告訴我們什麼，以及你為什麼選擇這樣的檢定方向（alternative）；呈現你的主要結果，若有幫助也可以附上簡單的表格或可視化；然後對結果進行詮釋。為什麼這個角色身邊圍繞著這些詞，而不是別的詞？這樣的分佈對「人物空間」這個概念有什麼啟示？結尾可以簡短反思方法本身的限制——換一個視窗大小、目標詞或語料，結果會有什麼不同？只憑搭配詞來理解一個文學角色，又有哪些做不到的地方？</p>
-<p>完成分析後，請把結果（腳本、語料、CSV、報告）<strong>commit</strong> 並 <strong>push</strong> 到你的倉庫。</p>
+<p>完成分析後，請把結果（腳本、語料、CSV、HTML 頁面、報告）<strong>commit</strong> 並 <strong>push</strong> 到你的倉庫。</p>
 </div>
 </div>
 
@@ -71,7 +73,7 @@ title: CHI3242 Assignment 1
 <div class="prompt">
 <p class="prompt-label">Prompt 1 · 提示1</p>
 <pre>My corpus is in data/novel.txt (UTF-8 plain text).
-jieba and qhchina are already installed; please install opencc if it isn't already. Do not create a virtual environment.
+jieba, qhchina, and opencc are not installed yet; please install them (do not create a virtual environment).
 
 Write a Python script (segment.py) that:
 - loads data/novel.txt
