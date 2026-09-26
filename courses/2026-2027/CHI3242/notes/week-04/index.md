@@ -23,42 +23,46 @@ title: CHI3242 第4週講義
 <p>選一部較長的小說，取得其 <code>.txt</code> 檔案（例如 <a href="https://github.com/mcjkurz/qhchina-data/tree/main/corpora">qhchina-data/corpora</a>）。</p>
 
 <h3>步驟二：建立倉庫</h3>
-<p>前往模板倉庫 <a href="https://github.com/mcjkurz/qh-starter">https://github.com/mcjkurz/qh-starter</a>，按 <strong>Use this template</strong> 建立自己的倉庫，把小說 <code>.txt</code> 檔放進倉庫裡（例如 <code>data/novel.txt</code>）。</p>
+<p>兩種做法皆可：</p>
+<ol>
+<li><strong>用 Codespace：</strong>在 GitHub 上建立一個新的空倉庫（勾選「Add a README file」即可，不需要用範本），進入倉庫後按 <strong>Code → Codespaces → Create codespace</strong>，再把小說 <code>.txt</code> 檔放進去（例如存成 <code>data/novel.txt</code>）。</li>
+<li><strong>用自己的電腦：</strong>先在電腦上新建一個空資料夾，用 VS Code 打開，把小說 <code>.txt</code> 檔放進去（例如 <code>data/novel.txt</code>），並在裡面完成後面的分析工作；完成後再到 GitHub 建立一個新的空倉庫（同樣勾選「Add a README file」），依照頁面上的指示把這個資料夾接上該倉庫，然後 commit 並 push。</li>
+</ol>
 
 <h3>步驟三：交給編程助手</h3>
 <p>把下列提示依序複製貼進 OpenCode，記得依你的檔名與角色姓名調整內容。</p>
 
 <div class="prompt">
 <p class="prompt-label">提示 1　分句與分詞</p>
-<pre>data/novel.txt 是這部小說的 .txt 檔（UTF-8）。
-jieba 和 qhchina 已經安裝好；如果還沒安裝 opencc，請幫我安裝。不要建立虛擬環境。
+<pre>data/novel.txt is this novel's .txt file (UTF-8).
+jieba and qhchina are already installed; please install opencc if it isn't already. Do not create a virtual environment.
 
-請寫一個 Python 腳本（segment.py），完成以下工作：
-- 讀入 data/novel.txt
-- 如果文本包含繁體字，先用 opencc 把整篇文本轉換成簡體（jieba 的詞典是為簡體訓練的，繁體會讓分詞品質變差）
-- 用中文句末標點（。！？）把文本切成一個個句子
-- 用 jieba 把每個句子切成詞，並移除標點符號
-- 把結果存成 sentences.json（一個「詞列表的列表」），這樣之後不用每次都重新分詞</pre>
+Write a Python script (segment.py) that:
+- loads data/novel.txt
+- if the text contains traditional characters, first converts the whole text to simplified with opencc (jieba's dictionary is trained on simplified Chinese, so segmenting traditional text directly gives worse results)
+- splits the text into sentences using Chinese sentence-ending punctuation (。！？)
+- tokenizes each sentence into words with jieba, removing punctuation marks
+- saves the result as sentences.json (a list of lists of word tokens), so I can reuse it without re-segmenting every time</pre>
 </div>
 <p>若文本被轉換成簡體，記得下一步的目標角色姓名也要用簡體字（例如原文是「賈寶玉」，之後 <code>target_words</code> 要寫「贾宝玉」，否則會完全找不到搭配詞）。</p>
 
 <div class="prompt">
 <p class="prompt-label">提示 2　尋找搭配詞</p>
-<pre>請用剛剛產生的 sentences.json，寫一個 Python 腳本（collocates.py），完成以下工作：
-- 讀入 sentences.json
-- 從 qhchina.analytics.collocations 匯入 find_collocates，從 qhchina 匯入 load_stopwords
-- 呼叫 load_stopwords() 取得中文停用詞
-- 呼叫 find_collocates，target_words 設為「[角色姓名]」，method="window"，horizon=5，
-  filters={"min_word_length": 2, "stopwords": stopwords, "max_p": 0.05}（只保留 p 值小於0.05、達到統計顯著的搭配詞）
-- 把結果依 obs_local 由高到低排序
-- 把完整結果存成 output/collocates.csv
-- 在終端機印出前 30 行</pre>
+<pre>Using sentences.json from before, write a Python script (collocates.py) that:
+- loads sentences.json
+- imports find_collocates from qhchina.analytics.collocations and load_stopwords from qhchina
+- calls load_stopwords() to get a set of Chinese stopwords
+- calls find_collocates on the sentences, with target_words="[CHARACTER NAME]", method="window", horizon=5,
+  and filters={"min_word_length": 2, "stopwords": stopwords, "max_p": 0.05}
+- sorts the resulting dataframe by obs_local, descending
+- saves the full result to output/collocates.csv
+- prints the top 30 rows to the terminal</pre>
 </div>
 
 <div class="prompt">
 <p class="prompt-label">提示 3　換一個視窗大小或角色再跑一次</p>
-<pre>請把 horizon 改成 10 再跑一次，另外也對「[另一個角色姓名]」跑一次（horizon 仍用 5）。
-把三次結果分別存成不同的 CSV（例如 output/collocates_5.csv、output/collocates_10.csv、output/collocates_other.csv），方便我互相比較。</pre>
+<pre>Rerun collocates.py with horizon=10 instead of 5, and also with a second target word, "[ANOTHER CHARACTER NAME]" (keep horizon=5 for that one).
+Save each version to a separate CSV (e.g. output/collocates_5.csv, output/collocates_10.csv, output/collocates_other.csv) so I can compare them side by side.</pre>
 </div>
 
 <h3>步驟四：觀察與詮釋</h3>
