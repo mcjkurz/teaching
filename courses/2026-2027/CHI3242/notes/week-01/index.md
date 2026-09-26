@@ -40,7 +40,7 @@ In the root folder, create a Python script (.py) that:
 第八十五回  贾存周报升郎中任　薛文起复惹放流刑
 第一一八回  记微嫌舅兄欺弱女　惊谜语妻妾谏痴人
 
-- tokenizes each chapter with jieba
+- tokenizes each chapter with jieba, removing punctuation marks
 - finds the 300 most common words in the novel
 - calculates a z-score for each of those word frequencies in each chapter
 - projects the chapter vectors into 3D with PCA

@@ -3,7 +3,20 @@ layout: default
 title: CHI3242
 ---
 
-<p class="updated i18n-block"><span class="lang-en">Last updated: Sep 16, 2026</span><span class="lang-zh" lang="zh-Hant">最後更新：2026年9月16日</span></p>
+<style>
+.setup-callout {
+  margin: 0 0 1.25rem;
+  padding: 0.85rem 1.1rem;
+  border: 1px solid #b7d3f2;
+  border-left: 4px solid #0066cc;
+  border-radius: 6px;
+  background: #eef5ff;
+}
+.setup-callout p { margin: 0; font-size: 1.05rem; }
+.setup-callout a { font-weight: 700; }
+</style>
+
+<p class="updated i18n-block"><span class="lang-en">Last updated: Sep 26, 2026</span><span class="lang-zh" lang="zh-Hant">最後更新：2026年9月26日</span></p>
 <div class="course-header i18n-block">
 <div class="course-header-info">
 <h1><span class="lang-en">CHI 3242 Course Syllabus</span><span class="lang-zh" lang="zh-Hant">CHI 3242 課程大綱</span></h1>
@@ -17,6 +30,15 @@ title: CHI3242
 </div>
 <div class="course-header-image">
 <img src="cover.png" alt="Illustration for Text Mining for Chinese Humanities">
+</div>
+</div>
+
+<div class="setup-callout i18n-block">
+<div class="lang-en">
+<p>🛠️ New to agentic coding? Start here: <a href="../setup/">How to Set Up an AI Coding Agent</a> — please complete this before the first seminar.</p>
+</div>
+<div class="lang-zh" lang="zh-Hant">
+<p>🛠️ 初次接觸智能體編程？請先看：<a href="../setup/">如何安裝人工智能編程助手</a>——請於第一次研討課之前完成。</p>
 </div>
 </div>
 
@@ -81,7 +103,7 @@ title: CHI3242
 <ol>
 <li>Create a <a href="https://github.com/">GitHub</a> account.</li>
 <li>Collect your API key at <a href="https://keyreg.qhchina.org">keyreg.qhchina.org</a> (class code: chi3242). Do not put the key in a repository or share it with others.</li>
-<li>A classroom with computers will be available. You may also bring your own laptop. If you use your own computer, install <a href="https://www.python.org/downloads/">Python</a>, <a href="https://code.visualstudio.com/Download">Visual Studio Code (VS Code)</a>, and then OpenCode before the first class. Step-by-step: <a href="../setup/">how to set up an AI coding agent</a>. If you cannot install locally, use GitHub Codespaces instead (<a href="../setup/">same page</a>).</li>
+<li>A classroom with computers will be available. You may also bring your own laptop. If you use your own computer, install <a href="https://www.python.org/downloads/">Python</a>, <a href="https://code.visualstudio.com/Download">Visual Studio Code (VS Code)</a>, and then OpenCode before the first class (or use GitHub Codespaces instead, if you cannot install locally). <strong>👉 Step-by-step guide: <a href="../setup/">How to Set Up an AI Coding Agent</a>.</strong></li>
 </ol>
 <p>We will learn agentic coding early in the course and use AI coding assistants in VS Code and OpenCode to write and debug research code.</p>
 </div>
@@ -90,7 +112,7 @@ title: CHI3242
 <ol>
 <li>註冊 <a href="https://github.com/">GitHub</a> 帳號。</li>
 <li>請到 <a href="https://keyreg.qhchina.org">keyreg.qhchina.org</a> 領取你的 API 金鑰（課程代碼：chi3242）。不要把金鑰寫進倉庫，也不要與他人分享。</li>
-<li>課堂備有電腦室。亦可自備手提電腦。若使用個人電腦，請於開課前安裝 <a href="https://www.python.org/downloads/">Python</a>、<a href="https://code.visualstudio.com/Download">Visual Studio Code（VS Code）</a>，然後安裝 OpenCode。步驟見<a href="../setup/">如何安裝人工智能編程助手</a>。若無法本機安裝，可改用 GitHub Codespaces（<a href="../setup/">同一頁說明</a>）。</li>
+<li>課堂備有電腦室。亦可自備手提電腦。若使用個人電腦，請於開課前安裝 <a href="https://www.python.org/downloads/">Python</a>、<a href="https://code.visualstudio.com/Download">Visual Studio Code（VS Code）</a>，然後安裝 OpenCode（若無法本機安裝，可改用 GitHub Codespaces）。<strong>👉 詳細步驟：<a href="../setup/">如何安裝人工智能編程助手</a>。</strong></li>
 </ol>
 <p>課程初期即講授智能體編程，並在 VS Code 與 OpenCode 中使用人工智能編程助手撰寫與除錯研究代碼。</p>
 </div>
@@ -268,7 +290,7 @@ title: CHI3242
           <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Andrew Piper, <em>Enumerations</em>, chapter on characterization</li>
         </ul>
       </td>
-      <td class="notes"></td>
+      <td class="notes"><a href="notes/week-04/">Notes</a></td>
     </tr>
   </tbody>
   <tbody class="block-a">

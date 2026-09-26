@@ -3,35 +3,105 @@ layout: default
 title: CHI3242 Assignment 1
 ---
 
-<p class="updated i18n-block"><span class="lang-en">Last updated: Aug 30, 2026</span><span class="lang-zh" lang="zh-Hant">最後更新：2026年8月30日</span></p>
+<p class="updated i18n-block"><span class="lang-en">Last updated: Sep 26, 2026</span><span class="lang-zh" lang="zh-Hant">最後更新：2026年9月26日</span></p>
 <p class="i18n-block"><a href="../"><span class="lang-en">Assignments</span><span class="lang-zh" lang="zh-Hant">作業</span></a> · <a href="../../"><span class="lang-en">CHI 3242 syllabus</span><span class="lang-zh" lang="zh-Hant">CHI 3242 課程大綱</span></a></p>
-<h1 class="i18n-block"><span class="lang-en">Assignment 1</span><span class="lang-zh" lang="zh-Hant">作業1</span></h1>
+<h1 class="i18n-block"><span class="lang-en">Assignment 1: Operationalizing Character-Space with Collocations</span><span class="lang-zh" lang="zh-Hant">作業1：以搭配詞操作化「人物空間」</span></h1>
 
 <div class="i18n-block">
 <div class="lang-en">
 <p><strong>Due:</strong> 7 Oct, 9:00 am</p>
+<p>Build a corpus of your choice — one long novel, or a set of novels/stories — and use the collocation methods learned in class to examine how a particular character is represented in the text.</p>
+<p>Woloch describes a <strong>character-space</strong>: the specific, delimited position a character occupies in a narrative, at the intersection of an "implied person" and the amount of narrative attention the discourse actually allocates to that person. This assignment asks you to think with — and against — this concept: <em>Is it possible to operationalize "character-space" with the help of statistical methods? What is a character-space, from the perspective of collocations?</em> A character's collocational profile — the words that co-occur with their name more often than chance would predict — is one way of tracing what a narrative routes through that character: actions, relationships, attributes, and thematic associations.</p>
 <p>Submit one public GitHub repository URL on Moodle. The repository must include:</p>
 <ul>
-<li><code>README.md</code> (name, student ID, book metadata, source URL)</li>
-<li><code>data/novel.txt</code> (plain text, UTF-8)</li>
-<li><code>analysis.py</code> or <code>analysis.ipynb</code> (read UTF-8 file, segment Chinese text, remove stopwords)</li>
-<li><code>output/stats.txt</code> (encoding, character count, token count, unique types)</li>
-<li><code>output/top20.csv</code> (top-20 content words as <code>word,count</code>)</li>
-<li><code>figures/wordcloud.png</code></li>
-<li><code>report.md</code> (500-800 Chinese characters of interpretation)</li>
+<li><code>README.md</code> (name, student ID, corpus description: title(s), author(s), source URL(s))</li>
+<li><code>data/</code> (the corpus, as plain-text UTF-8 file(s))</li>
+<li><code>analysis.py</code> or <code>analysis.ipynb</code> (segments the text into sentences and words with jieba, then calls <code>find_collocates</code> to compute collocates for your target character's name)</li>
+<li><code>output/collocates.csv</code> (the collocates table for your chosen target word)</li>
+<li><code>report.md</code> — a short essay-report, <strong>no longer than 2,000 characters</strong></li>
 </ul>
+<p><strong>Method requirements:</strong></p>
+<ul>
+<li>Use <code>find_collocates</code> from qhchina (<code>qhchina.analytics.collocations.find_collocates</code>), providing the arguments learned in class (target word(s), method/horizon, filters, etc.)</li>
+<li>If your corpus contains traditional characters, convert it to simplified with <code>opencc</code> <strong>before</strong> splitting it into sentences and running jieba — jieba's dictionary is trained on simplified Chinese, so segmenting traditional text directly gives noticeably worse results</li>
+<li>Remove stopwords using <code>load_stopwords()</code> from qhchina</li>
+<li>Focus on two-character words: set <code>min_word_length</code> to at least 2 in the <code>filters</code> argument</li>
+<li>Keep only statistically significant collocates: set <code>max_p</code> to 0.05 in the <code>filters</code> argument, so that every collocate in your final table has a p-value below 0.05</li>
+<li>Explore your results <strong>iteratively</strong>: try more than one target word, window size, or filter setting before settling on a final version. Your report should reflect this process of exploration, not just the output of a single run.</li>
+</ul>
+<p><strong>The report (<code>report.md</code>, ≤ 2,000 characters)</strong> should explain your methods, present your findings, and interpret the results. Why is this character surrounded by these particular words, and not others? What does the distribution of collocates tell us — about the character, about how the novel constructs that character, and about the possibilities and limits of using collocations to study "character-space"?</p>
+<p>Once your analysis is finished, <strong>commit</strong> and <strong>push</strong> the results (script, data, CSV, and report) to your repository.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
 <p><strong>截止：</strong>10月7日 上午9:00</p>
+<p>請自選語料建立一個語料庫——可以是一部長篇小說，也可以是多部小說或短篇——然後運用課堂所學的搭配詞方法，考察文本如何再現某一個特定角色。</p>
+<p>Woloch所謂的<strong>人物空間（character-space）</strong>，指的是一個角色在敘事中所佔據的具體且有限的位置——它是「被暗示的人」（一個假設具有完整心理與存在的人）與敘事話語實際分配給這個人的注意力、篇幅，二者交會之後的產物。這次作業要你思考（並質疑）這個概念：<em>「人物空間」能否用統計方法操作化？從搭配詞的角度看，什麼是「人物空間」？</em>一個角色的搭配詞側寫——那些比隨機預期更常與該角色名字共現的詞——正是一種追蹤敘事話語如何透過這個角色運作的方式：他/她的行動、關係、屬性與主題聯繫。</p>
 <p>於 Moodle 提交一個公開 GitHub 倉庫網址。倉庫須包含：</p>
 <ul>
-<li><code>README.md</code>（姓名、學號、書籍資訊、來源網址）</li>
-<li><code>data/novel.txt</code>（純文字，UTF-8）</li>
-<li><code>analysis.py</code> 或 <code>analysis.ipynb</code>（以 UTF-8 讀檔、中文分詞、去停用詞）</li>
-<li><code>output/stats.txt</code>（encoding、字元數、詞數、詞種數）</li>
-<li><code>output/top20.csv</code>（前20個高頻實詞，格式 <code>word,count</code>）</li>
-<li><code>figures/wordcloud.png</code></li>
-<li><code>report.md</code>（中文500-800字短評）</li>
+<li><code>README.md</code>（姓名、學號、語料說明：書名、作者、來源網址）</li>
+<li><code>data/</code>（語料的純文字 UTF-8 檔案）</li>
+<li><code>analysis.py</code> 或 <code>analysis.ipynb</code>（用 jieba 將文本分句、分詞，再呼叫 <code>find_collocates</code> 計算目標角色姓名的搭配詞）</li>
+<li><code>output/collocates.csv</code>（你所選目標詞的搭配詞結果表）</li>
+<li><code>report.md</code>——一篇短文報告，<strong>不超過2,000字</strong></li>
 </ul>
+<p><strong>方法要求：</strong></p>
+<ul>
+<li>使用 qhchina 的 <code>find_collocates</code>（<code>qhchina.analytics.collocations.find_collocates</code>），並提供課堂所學的正確參數（目標詞、method／horizon、filters 等）</li>
+<li>若你的語料是繁體字，請在分句、分詞<strong>之前</strong>先用 <code>opencc</code> 轉換成簡體——jieba 的詞典是為簡體訓練的，直接對繁體文本分詞，效果會明顯變差</li>
+<li>用 qhchina 的 <code>load_stopwords()</code> 移除停用詞</li>
+<li>聚焦於雙字詞：在 <code>filters</code> 參數中把 <code>min_word_length</code> 設為至少2</li>
+<li>只保留統計上顯著的搭配詞：在 <code>filters</code> 參數中把 <code>max_p</code> 設為0.05，確保最終結果表中每一個搭配詞的 p 值都小於0.05</li>
+<li><strong>反覆、逐步</strong>地探索你的結果：在定案之前，嘗試不止一個目標詞、視窗大小或過濾設定。報告應反映這個反覆探索的過程，而非只呈現一次執行的結果。</li>
+</ul>
+<p><strong>報告（<code>report.md</code>，不超過2,000字）</strong>須說明你的方法、呈現你的發現，並詮釋結果。為什麼這個角色身邊圍繞著這些詞，而不是別的詞？搭配詞的分佈告訴我們什麼——關於這個角色、關於小說如何建構這個角色，以及運用搭配詞研究「人物空間」的可能性與限制？</p>
+<p>完成分析後，請把結果（腳本、語料、CSV、報告）<strong>commit</strong> 並 <strong>push</strong> 到你的倉庫。</p>
 </div>
+</div>
+
+<div class="i18n-block">
+<h2><span class="lang-en">Example Prompts</span><span class="lang-zh" lang="zh-Hant">提示範例</span></h2>
+<div class="lang-en">
+<p>Copy these into OpenCode (or your agent) one at a time, adapting file names and target words as needed. Check the output after each step before moving to the next.</p>
+</div>
+<div class="lang-zh" lang="zh-Hant">
+<p>請把下列提示逐一複製進 OpenCode（或你使用的編程助手），依需要調整檔名與目標詞。每一步完成後先檢查輸出，再進行下一步。</p>
+</div>
+</div>
+
+<div class="prompt">
+<p class="prompt-label">Prompt 1 · 提示1</p>
+<pre>My corpus is in data/novel.txt (UTF-8 plain text).
+jieba and qhchina are already installed; please install opencc if it isn't already. Do not create a virtual environment.
+
+Write a Python script (segment.py) that:
+- loads data/novel.txt
+- if the text contains traditional characters, first converts the whole text to simplified with opencc (jieba's dictionary is trained on simplified Chinese, so segmenting traditional text directly gives worse results)
+- splits the text into sentences using Chinese sentence-ending punctuation (。！？)
+- tokenizes each sentence into words with jieba, removing punctuation marks
+- saves the result as sentences.json (a list of lists of word tokens), so I can reuse it without re-segmenting every time</pre>
+</div>
+<p class="i18n-block"><span class="lang-en">If your text was converted to simplified, remember to also use the simplified form of your target character's name in the next step (e.g. 賈寶玉 → 贾宝玉), or <code>find_collocates</code> will not find it at all.</span><span class="lang-zh" lang="zh-Hant">若文本被轉換成簡體，記得下一步的目標角色姓名也要用簡體字（例如「賈寶玉」→「贾宝玉」），否則 <code>find_collocates</code> 會完全找不到這個詞。</span></p>
+
+<div class="prompt">
+<p class="prompt-label">Prompt 2 · 提示2</p>
+<pre>Using sentences.json from before, write a Python script (collocates.py) that:
+- loads sentences.json
+- imports find_collocates from qhchina.analytics.collocations and load_stopwords from qhchina
+- calls load_stopwords() to get a set of Chinese stopwords
+- calls find_collocates on the sentences, with target_words="[CHARACTER NAME]", method="window", horizon=5,
+  and filters={"min_word_length": 2, "stopwords": stopwords, "max_p": 0.05}
+- sorts the resulting dataframe by obs_local, descending
+- saves the full result to output/collocates.csv
+- prints the top 30 rows to the terminal</pre>
+</div>
+
+<div class="prompt">
+<p class="prompt-label">Prompt 3 · 提示3</p>
+<pre>Rerun collocates.py with horizon=10 instead of 5, and also with a second target word or a rival character, "[ANOTHER NAME]".
+Save each version to a separate CSV (e.g. output/collocates_horizon5.csv, output/collocates_horizon10.csv, output/collocates_other.csv) so I can compare them side by side.</pre>
+</div>
+
+<div class="prompt">
+<p class="prompt-label">Prompt 4 · 提示4</p>
+<pre>Commit all changes with the message "assignment 1", then push to GitHub.</pre>
 </div>

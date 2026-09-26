@@ -3,7 +3,7 @@ layout: default
 title: CHI4335
 ---
 
-<p class="updated i18n-block"><span class="lang-en">Last updated: Sep 16, 2026</span><span class="lang-zh" lang="zh-Hant">最後更新：2026年9月16日</span></p>
+<p class="updated i18n-block"><span class="lang-en">Last updated: Sep 26, 2026</span><span class="lang-zh" lang="zh-Hant">最後更新：2026年9月26日</span></p>
 <div class="course-header i18n-block">
 <div class="course-header-info">
 <h1><span class="lang-en">CHI 4335 Course Syllabus</span><span class="lang-zh" lang="zh-Hant">CHI 4335 課程大綱</span></h1>
@@ -229,7 +229,7 @@ title: CHI4335
       <td class="date"><span class="lang-en">15 Sep</span><span class="lang-zh" lang="zh-Hant">9月15日</span></td>
       <td class="topic" rowspan="2"><span class="lang-en">Writing the Shoah</span><span class="lang-zh" lang="zh-Hant">書寫大屠殺</span></td>
       <td><ul class="readings"><li>房春光：〈寫還是不寫，這是個問題：納粹大屠殺早期見證文學的書寫語境〉，《外國文學》2020年第3期，頁154–164</li></ul></td>
-      <td class="notes"></td>
+      <td class="notes"><a href="notes/week-03/">Notes</a></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
@@ -245,7 +245,7 @@ title: CHI4335
       <td class="date"><span class="lang-en">22 Sep</span><span class="lang-zh" lang="zh-Hant">9月22日</span></td>
       <td class="topic" rowspan="2"><span class="lang-en">Spiritual Resistance in a Labor Camp</span><span class="lang-zh" lang="zh-Hant">勞改營中的精神抵抗</span></td>
       <td><ul class="readings"><li>Tzvetan Todorov, “The Life of the Mind,” in <em>Facing the Extreme</em>, pp. 91–118</li></ul></td>
-      <td class="notes"></td>
+      <td class="notes"><a href="notes/week-04/">Notes</a></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>

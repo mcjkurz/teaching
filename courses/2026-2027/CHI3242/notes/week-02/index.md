@@ -102,6 +102,7 @@ title: CHI3242 第2週講義
 
 <h2>7. 中文分詞</h2>
 <p>英文以空格分隔詞，電腦很容易切分；中文書寫時詞與詞之間沒有空格，例如「我喜歡吃火鍋」要切成「我／喜歡／吃／火鍋」才有意義。<strong>分詞（segmentation）</strong>就是把一串中文字切成一個個詞的過程。分詞工具不少，例如 spaCy、HanLP、THUNLP；本課用 <code>jieba</code>，它會根據詞典與統計機率來判斷切分位置。分詞結果會直接影響後續的詞頻、搭配、主題模型等所有分析，因此是中文文本處理的第一步。</p>
+<p><strong>注意：</strong><code>jieba</code> 的詞典是為簡體中文訓練的，直接拿繁體文本去跑，切分品質會明顯變差。若你的文本是繁體（例如台灣、香港出版的小說），請先用 <code>opencc</code> 套件把文本轉換成簡體，再分句、再用 <code>jieba</code> 分詞。</p>
 
 <h2>8. 詞袋模型（Bag of Words, BoW）</h2>
 <p>把一篇文本看作一個「袋子」，只統計每個詞出現幾次，完全忽略詞的順序與語法。例如「貓追狗」和「狗追貓」在詞袋模型裡是一樣的：{貓:1, 狗:1, 追:1}。這個簡化看似粗糙，但對許多任務（如比較兩篇文章的主題、作者用詞差異）已經足夠，也是向量空間模型與主題模型的基礎。</p>
@@ -119,7 +120,7 @@ title: CHI3242 第2週講義
 <pre>Please download this novel as a .txt file [link]
 
 Then write a .py script that:
-- uses jieba to segment the text into words
+- uses jieba to segment the text into words, removing punctuation marks
 - prints the 10 most frequent words
 - saves a simple png bar chart of the 100 most frequent words (columns only, no labels or annotations)
 
