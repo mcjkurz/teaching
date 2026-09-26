@@ -16,7 +16,7 @@ title: CHI3242 Assignment 1
 <ul>
 <li><code>README.md</code> (a short description of what you are analyzing: corpus title(s), author(s), and source URL(s). This repository is public, so please do not include your name or student ID.)</li>
 <li><code>data/</code> (the corpus, as plain-text UTF-8 file(s))</li>
-<li><code>analysis.py</code> (segments the text into sentences and words with jieba, then calls <code>find_collocates</code> to compute collocates for your target character's name)</li>
+<li>Python script(s) (<code>.py</code>) used to process the text and run the collocation analysis</li>
 <li><code>output/collocates_*.csv</code> (one CSV per run; see the method requirements below)</li>
 <li><code>output/results.html</code> (a single page showing all your collocation tables together, for easy comparison)</li>
 <li><code>report.md</code> <strong>and</strong> <code>report.pdf</code> (the same short essay-report in both formats), <strong>2,500–3,000 characters</strong>. Submit the PDF separately on Moodle as well.</li>
@@ -42,7 +42,7 @@ title: CHI3242 Assignment 1
 <ul>
 <li><code>README.md</code>（簡述你分析的對象：語料書名、作者、來源網址。這是公開倉庫，請不要寫上姓名或學號。）</li>
 <li><code>data/</code>（語料的純文字 UTF-8 檔案）</li>
-<li><code>analysis.py</code>（用 jieba 將文本分句、分詞，再呼叫 <code>find_collocates</code> 計算目標角色姓名的搭配詞）</li>
+<li>用於處理文本與執行搭配詞分析的 Python 腳本（<code>.py</code> 檔案）</li>
 <li><code>output/collocates_*.csv</code>（每次執行存一個 CSV，見下方方法要求）</li>
 <li><code>output/results.html</code>（一個把所有搭配詞表整合在一起的頁面，方便互相比較）</li>
 <li><code>report.md</code> <strong>與</strong> <code>report.pdf</code>（同一篇短文報告的兩種格式），<strong>2,500–3,000字</strong>。PDF 另外也要在 Moodle 提交。</li>
