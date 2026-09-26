@@ -32,13 +32,13 @@ title: CHI3242 第4週講義
 <p class="zh">「我的闡釋方法首先建立在我將要提出並不斷回顧的兩個新的敘事學範疇的結合之上：人物空間（即個體人格與敘事整體中特定空間和位置之間獨特而充滿張力的相遇）和人物系統（將多個不同的人物空間——即對人物形象的不同配置和處理——安排成一個統一的敘事結構）。」</p>
 <p class="en">"My interpretive method rests above all in the combination of two new narratological categories which I will formulate and continually return to: the character-space (that particular and charged encounter between an individual human personality and a determined space and position within the narrative as a whole) and the character-system (the arrangement of multiple and differentiated character-spaces—differentiated configurations and manipulations of the human figure—into a unified narrative structure)."</p>
 </blockquote>
-<p><strong>人物空間（character-space）：</strong>一個角色在敘事作品中所佔據的具體、有限的位置。它不是角色「本身」的心理深度，而是「被暗示的人」（an implied person，一個假設具有完整生命與內在世界的人）與敘事話語實際分配給這個人的篇幅、視角、關注度——這兩者交會之後的產物。同一個「被暗示的人」，若被分配到大量、連續、深入的篇幅，就有寬闊的人物空間（如主角）；若只在他人視角中偶爾閃現、被簡化為一個功能或類型，人物空間就十分狹小（如許多次要人物）。</p>
+<p><strong>人物空間（character-space）：</strong>一個角色在敘事作品中所佔據的具體、有限的位置。它不是角色「本身」的心理深度，而是「被暗示的人」（an implied person，一個假設具有完整生命與內在世界的人）與敘事話語實際分配給這個人的篇幅、視角、關注度，這兩者交會之後的產物。同一個「被暗示的人」，若被分配到大量、連續、深入的篇幅，就有寬闊的人物空間（如主角）；若只在他人視角中偶爾閃現、被簡化為一個功能或類型，人物空間就十分狹小（如許多次要人物）。</p>
 <p><strong>人物系統（character-system）：</strong>小說中所有人物並非各自獨立存在，而是共同組成一個分佈不均的系統，彼此競爭同一份有限的敘事資源（篇幅、視角、情節功能）。這個系統時時刻刻都在重新分配注意力：</p>
 <blockquote class="woloch-quote">
 <p class="zh">「每一刻都凸顯一些角色，而忽略——乃至削弱，甚至吝於筆墨——另一些角色。」</p>
 <p class="en">"Each moment magnifies some characters while turning away from—and thus diminishing or even stinting—others."</p>
 </blockquote>
-<p>主角的空間之所以龐大，正是以壓縮、切割其他人物的空間為代價；次要人物往往被功能化——化為主角故事線上的一個工具、一個背景、一種類型。Woloch特別指出：次要人物常常「暗示」比文本實際給予的空間更豐富的內在生命，這種「被暗示的深度」與「被分配的有限空間」之間的落差，正是人物系統的結構性張力所在，也是小說形式的核心動力之一。</p>
+<p>主角的空間之所以龐大，正是以壓縮、切割其他人物的空間為代價；次要人物往往被功能化，化為主角故事線上的一個工具、一個背景、一種類型。Woloch特別指出：次要人物常常「暗示」比文本實際給予的空間更豐富的內在生命，這種「被暗示的深度」與「被分配的有限空間」之間的落差，正是人物系統的結構性張力所在，也是小說形式的核心動力之一。</p>
 
 <h3>次要人物：小說裡的「無產階級」</h3>
 <p>Woloch進一步把這種結構性的不平等，和十九世紀現實主義小說對階級與勞動的興趣連在一起：</p>
@@ -46,7 +46,7 @@ title: CHI3242 第4週講義
 <p class="zh">「十九世紀小說通過全知視角和非對稱的人物系統來安排敘事，這種形式結構能夠生動地展現異化勞動的運作方式，以及支撐這種勞動的階級結構。從根本的形式地位來看（這些次要人物自身受到限制，卻為他人服務），他們就像小說中的無產階級；現實主義小說對階級意識和社會不平等的高度關注，充分運用了這種形式手法。」</p>
 <p class="en">"The nineteenth-century novel's configuration of narrative work—within the context of omniscient, asymmetric character-systems—creates a formal structure that can imaginatively comprehend the dynamics of alienated labor, and the class structure that underlies this labor. In terms of their essential formal position (the subordinate beings who are delimited in themselves while performing a function for someone else), minor characters are the proletariat of the novel; and the realist novel—with its intense class-consciousness and attention toward social inequality—makes much use of such formal processes."</p>
 </blockquote>
-<p>也就是說，人物系統的不對稱分配不只是一個敘事技巧問題，也可以是一種意識形態的形式——小說如何透過「誰得到篇幅、誰只是工具」來想像整個社會的階級結構。</p>
+<p>也就是說，人物系統的不對稱分配不只是一個敘事技巧問題，也可以是一種意識形態的形式：小說如何透過「誰得到篇幅、誰只是工具」來想像整個社會的階級結構。</p>
 
 <h3>敘事無法公平：作者的偏心</h3>
 <p>這種不對稱幾乎是敘事本身無法避免的。Woloch在論證中引用了韋恩·布斯（Wayne Booth）的說法：</p>
@@ -57,8 +57,8 @@ title: CHI3242 第4週講義
 <p>換言之，Woloch把「這個角色有多重要」的印象式判斷，重新表述為一個關於<strong>敘事資源分配</strong>的結構問題：誰得到篇幅？誰的視角被採用？誰的內在生命被展開，誰的則被壓縮成幾句話、一個標籤？</p>
 
 <h2>2. 能否用統計方法操作化「人物空間」？</h2>
-<p>人物空間本質上談的是「文本給了這個角色多少注意力、透過這個角色運作了多少敘事資源」。詞頻本身只能告訴我們一個名字出現多少次，卻無法告訴我們：這個角色被<strong>什麼樣</strong>的詞語包圍——動作、情感、身體描寫、社會關係、地點……而這些詞語的分佈，正是敘事話語透過這個角色所展開的內容。</p>
-<p>這就是<strong>搭配詞（collocation）</strong>可以介入的地方：計算哪些詞比隨機預期更常出現在一個角色姓名周圍，等於在描繪這個角色的「語言環境」（verbal environment）——某種意義上，這正是人物空間在文本表層留下的痕跡。這不等於Woloch原本的理論（他談的是敘事結構與篇幅分配，而搭配詞談的是詞語共現），但可以作為一種操作化的起點，讓我們用統計方法去追問：這個角色的「空間」裡，究竟被填進了什麼？</p>
+<p>人物空間本質上談的是「文本給了這個角色多少注意力、透過這個角色運作了多少敘事資源」。詞頻本身只能告訴我們一個名字出現多少次，卻無法告訴我們：這個角色被<strong>什麼樣</strong>的詞語包圍，動作、情感、身體描寫、社會關係、地點……而這些詞語的分佈，正是敘事話語透過這個角色所展開的內容。</p>
+<p>這就是<strong>搭配詞（collocation）</strong>可以介入的地方：計算哪些詞比隨機預期更常出現在一個角色姓名周圍，等於在描繪這個角色的「語言環境」（verbal environment）。某種意義上，這正是人物空間在文本表層留下的痕跡。這不等於Woloch原本的理論（他談的是敘事結構與篇幅分配，而搭配詞談的是詞語共現），但可以作為一種操作化的起點，讓我們用統計方法去追問：這個角色的「空間」裡，究竟被填進了什麼？</p>
 
 <h2>3. 課堂練習：用搭配詞觀察一個角色的「空間」</h2>
 
@@ -126,7 +126,7 @@ Save this result as output/collocates_sentence.csv.</pre>
 <li>把 <code>horizon=5</code> 和 <code>horizon=10</code> 的結果相比，排序有明顯變化嗎？為什麼？</li>
 <li>把 <code>method="window"</code> 和 <code>method="sentence"</code> 的結果相比：兩者對「鄰近」的定義不同（視窗大小 vs. 同一句），排出來的搭配詞有系統性的差異嗎？哪一種方法看起來更貼近你想研究的問題？</li>
 <li>把你選的角色和另一個角色（或另一個詞）相比，兩份搭配詞表看起來有系統性的不同嗎？哪一個角色的搭配詞更集中在少數幾類，哪一個更分散？</li>
-<li>留在表中的搭配詞，p值是否都小於0.05？這代表什麼——它們與目標詞共現的頻率，在統計上顯著高於隨機預期，而不太可能只是偶然。</li>
+<li>留在表中的搭配詞，p值是否都小於0.05？這代表什麼：它們與目標詞共現的頻率，在統計上顯著高於隨機預期，而不太可能只是偶然。</li>
 <li>回到 Woloch 的說法：這份搭配詞表能不能告訴我們一些關於「人物空間」的線索？它能呈現的，和它<strong>不能</strong>呈現的，分別是什麼？</li>
 </ul>
 

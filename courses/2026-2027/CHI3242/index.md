@@ -35,10 +35,10 @@ title: CHI3242
 
 <div class="setup-callout i18n-block">
 <div class="lang-en">
-<p>🛠️ New to agentic coding? Start here: <a href="../setup/">How to Set Up an AI Coding Agent</a> — please complete this before the first seminar.</p>
+<p>🛠️ New to agentic coding? Start here: <a href="../setup/">How to Set Up an AI Coding Agent</a>. Please complete this before the first seminar.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
-<p>🛠️ 初次接觸智能體編程？請先看：<a href="../setup/">如何安裝人工智能編程助手</a>——請於第一次研討課之前完成。</p>
+<p>🛠️ 初次接觸智能體編程？請先看：<a href="../setup/">如何安裝人工智能編程助手</a>。請於第一次研討課之前完成。</p>
 </div>
 </div>
 
