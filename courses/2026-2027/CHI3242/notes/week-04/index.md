@@ -44,7 +44,7 @@ title: CHI3242 第4週講義
 <p>兩種做法皆可：</p>
 <ol>
 <li><strong>用 Codespace：</strong>在 GitHub 上建立一個新的空倉庫（勾選「Add a README file」即可，不需要用範本），進入倉庫後按 <strong>Code → Codespaces → Create codespace</strong>，再把小說 <code>.txt</code> 檔放進去（例如存成 <code>data/novel.txt</code>）。</li>
-<li><strong>用自己的電腦：</strong>先到 GitHub 建立一個全新的空倉庫（<strong>不要</strong>勾選「Add a README file」，倉庫留空，之後 push 才不會衝突），然後把它 clone 到電腦上，用 VS Code 打開，把小說 <code>.txt</code> 檔放進去（例如 <code>data/novel.txt</code>），在裡面完成後面的分析工作，完成後 commit 並 push。</li>
+<li><strong>用自己的電腦：</strong>先到 GitHub 建立一個全新的空倉庫，然後把它 clone 到電腦上，用 VS Code 打開，把小說 <code>.txt</code> 檔放進去（例如 <code>data/novel.txt</code>），在裡面完成後面的分析工作，完成後 commit 並 push。</li>
 </ol>
 
 <h3>步驟三：交給編程助手</h3>
