@@ -44,7 +44,7 @@ title: CHI3242 第4週講義
 <p>兩種做法皆可：</p>
 <ol>
 <li><strong>用 Codespace：</strong>在 GitHub 上建立一個新的空倉庫（勾選「Add a README file」即可，不需要用範本），進入倉庫後按 <strong>Code → Codespaces → Create codespace</strong>，再把小說 <code>.txt</code> 檔放進去（例如存成 <code>data/novel.txt</code>）。</li>
-<li><strong>用自己的電腦：</strong>先在電腦上新建一個空資料夾，用 VS Code 打開，把小說 <code>.txt</code> 檔放進去（例如 <code>data/novel.txt</code>），並在裡面完成後面的分析工作；完成後再到 GitHub 建立一個新的空倉庫（同樣勾選「Add a README file」），依照頁面上的指示把這個資料夾接上該倉庫，然後 commit 並 push。</li>
+<li><strong>用自己的電腦：</strong>先到 GitHub 建立一個全新的空倉庫（<strong>不要</strong>勾選「Add a README file」，倉庫留空，之後 push 才不會衝突），然後把它 clone 到電腦上，用 VS Code 打開，把小說 <code>.txt</code> 檔放進去（例如 <code>data/novel.txt</code>），在裡面完成後面的分析工作，完成後 commit 並 push。</li>
 </ol>
 
 <h3>步驟三：交給編程助手</h3>
@@ -74,7 +74,7 @@ Run it three times: once with method="window" and horizon=5, once with method="w
 
 <div class="prompt">
 <p class="prompt-label">提示 3　整理成一個 HTML 頁面</p>
-<pre>Write a Python script (make_report.py) that reads the three CSV files I just saved in output/ and builds a single page, output/results.html, with a dropdown that lets me switch between the three tables, so I can compare them without opening each CSV separately. Plain HTML and a bit of JavaScript is fine; no need for a web framework.</pre>
+<pre>Write a Python script (make_report.py) that reads the three CSV files I just saved in output/ and builds a single page, output/results.html, with a dropdown that lets me switch between the three tables, so I can compare them without opening each CSV separately.</pre>
 </div>
 
 <h3>步驟四：觀察與詮釋</h3>
@@ -87,7 +87,7 @@ Run it three times: once with method="window" and horizon=5, once with method="w
 <li>回到 Woloch 的說法：這份搭配詞表能不能告訴我們一些關於「人物空間」的線索？它能呈現的，和它<strong>不能</strong>呈現的，分別是什麼？</li>
 </ul>
 
-<p>若你用的是 Codespace，做完後請把 <code>segment.py</code>、<code>collocates.py</code>、<code>make_report.py</code>、<code>sentences.txt</code> 與 <code>output/</code> 資料夾 commit 並 push 到 GitHub。</p>
+<p>完成後，請把 <code>segment.py</code>、<code>collocates.py</code>、<code>make_report.py</code>、<code>sentences.txt</code> 與 <code>output/</code> 資料夾 commit 並 push 到 GitHub：直接請編程助手幫你 commit 並 push 即可；若在自己的電腦上工作，記得先告訴它你的倉庫網址。</p>
 
 <h2>閱讀</h2>
 <ul>
