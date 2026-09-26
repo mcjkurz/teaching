@@ -5,7 +5,7 @@ title: DHG 502 Week 3 Notes
 
 <p class="updated">Last updated: Sep 26, 2026</p>
 <p><a href="../../">DHG 502 syllabus</a></p>
-<h1>Week 3 — Building a Corpus: Regular Expressions (Regex)</h1>
+<h1>Week 3: Building a Corpus, Regular Expressions (Regex)</h1>
 
 <h2>1. What is a regular expression?</h2>
 <p>A <strong>regular expression (regex)</strong> is a small pattern language for describing the <em>shape</em> of text, rather than one exact string. Instead of searching for the literal word "1898," you can search for "any four digits," and instead of removing one specific footnote marker, you can remove "any bracketed number." Regex lets a computer find, extract, or clean text based on structure, which is exactly what most historical source-to-data work requires: pulling dates, names, or chapter headings out of OCR'd text; stripping page numbers and footnote markers; splitting a long file into consistent units (chapters, entries, records).</p>
@@ -19,7 +19,7 @@ title: DHG 502 Week 3 Notes
 <tbody>
 <tr><td><code>abc</code></td><td>literal characters: matches exactly "abc"</td><td><code>cat</code> matches "cat" in "concatenate"</td></tr>
 <tr><td><code>.</code></td><td>any single character (except a newline)</td><td><code>c.t</code> matches "cat," "cot," "c_t"</td></tr>
-<tr><td><code>[abc]</code></td><td>a character class — one character out of the set</td><td><code>[aeiou]</code> matches any single vowel</td></tr>
+<tr><td><code>[abc]</code></td><td>a character class: one character out of the set</td><td><code>[aeiou]</code> matches any single vowel</td></tr>
 <tr><td><code>[a-z]</code>, <code>[0-9]</code></td><td>a range inside a character class</td><td><code>[A-Za-z]</code> matches any English letter</td></tr>
 <tr><td><code>[^abc]</code></td><td>negation: any character <em>not</em> in the set</td><td><code>[^0-9]</code> matches anything that is not a digit</td></tr>
 <tr><td><code>\d</code>, <code>\w</code>, <code>\s</code></td><td>shorthand classes: digit, "word" character (letter/digit/underscore), whitespace</td><td><code>\d{4}</code> matches a 4-digit year</td></tr>

@@ -24,7 +24,7 @@ title: CHI3242 Assignment 1
 <p><strong>Method requirements:</strong></p>
 <ul>
 <li>Use <code>find_collocates</code> from qhchina (<code>qhchina.analytics.collocations.find_collocates</code>), providing the arguments learned in class (target word(s), method/horizon, filters, etc.)</li>
-<li>If your corpus contains traditional characters, convert it to simplified with <code>opencc</code> <strong>before</strong> splitting it into sentences and running jieba. jieba's dictionary is trained on simplified Chinese, so segmenting traditional text directly gives noticeably worse results.</li>
+<li>Convert your corpus to simplified with <code>opencc</code> <strong>before</strong> splitting it into sentences and running jieba (jieba works better with simplified characters; converting text that is already simplified is harmless)</li>
 <li>Remove stopwords using <code>load_stopwords()</code> from qhchina</li>
 <li>Focus on two-character words: set <code>min_word_length</code> to at least 2 in the <code>filters</code> argument</li>
 <li>Keep only statistically significant collocates: set <code>max_p</code> to 0.05 in the <code>filters</code> argument, so that every collocate in your final table has a p-value below 0.05</li>
@@ -49,7 +49,7 @@ title: CHI3242 Assignment 1
 <p><strong>方法要求：</strong></p>
 <ul>
 <li>使用 qhchina 的 <code>find_collocates</code>（<code>qhchina.analytics.collocations.find_collocates</code>），並提供課堂所學的正確參數（目標詞、method／horizon、filters 等）</li>
-<li>若你的語料是繁體字，請在分句、分詞<strong>之前</strong>先用 <code>opencc</code> 轉換成簡體。jieba 的詞典是為簡體訓練的，直接對繁體文本分詞，效果會明顯變差。</li>
+<li>在分句、分詞<strong>之前</strong>，先用 <code>opencc</code> 把語料轉換成簡體（jieba 對簡體字的效果較好；若語料本來就是簡體，轉換也不會有任何影響）</li>
 <li>用 qhchina 的 <code>load_stopwords()</code> 移除停用詞</li>
 <li>聚焦於雙字詞：在 <code>filters</code> 參數中把 <code>min_word_length</code> 設為至少2</li>
 <li>只保留統計上顯著的搭配詞：在 <code>filters</code> 參數中把 <code>max_p</code> 設為0.05，確保最終結果表中每一個搭配詞的 p 值都小於0.05</li>
