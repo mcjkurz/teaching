@@ -48,7 +48,7 @@ title: CHI3242 第4週講義
 </ol>
 
 <h3>步驟三：交給編程助手</h3>
-<p>把下列提示依序複製貼進 OpenCode，記得依你的檔名與角色姓名調整內容。</p>
+<p>把下列提示依序複製貼進 OpenCode，記得依你的檔名與角色姓名調整內容。完整參數說明見 <a href="https://www.qhchina.org/docs/collocations/find-collocates/">find_collocates() 文件</a>與 <a href="https://www.qhchina.org/docs/helpers/load-stopwords/">load_stopwords() 文件</a>。</p>
 
 <div class="prompt">
 <p class="prompt-label">提示 1　分句與分詞</p>
@@ -57,7 +57,7 @@ Please install jieba, qhchina, and opencc.
 
 Write a Python script (segment.py) that:
 - loads data/novel.txt
-- converts the whole text to simplified with opencc (jieba works better with simplified characters)
+- converts the whole text to simplified Chinese characters with opencc (jieba works better with simplified characters)
 - splits the text into sentences using Chinese sentence-ending punctuation (。！？)
 - tokenizes each sentence into words with jieba, removing punctuation marks
 - keeps only sentences with at least 5 words
@@ -67,21 +67,14 @@ Write a Python script (segment.py) that:
 
 <div class="prompt">
 <p class="prompt-label">提示 2　搭配詞分析</p>
-<pre>Using sentences.txt from before, write a Python script (collocates.py) that:
-- loads sentences.txt and splits each line on whitespace to recover the list of word tokens for that sentence
-- imports find_collocates from qhchina.analytics.collocations and load_stopwords from qhchina
-- calls load_stopwords() to get a set of Chinese stopwords
-- runs find_collocates on the sentences three times, for target_words="[CHARACTER NAME]", each time with filters={"min_word_length": 2, "stopwords": stopwords, "max_p": 0.05}:
-  1. method="window", horizon=5
-  2. method="window", horizon=10
-  3. method="sentence" (no horizon needed)
-- for each run, sorts the resulting dataframe by obs_local descending, and saves it to its own CSV: output/collocates_horizon5.csv, output/collocates_horizon10.csv, output/collocates_sentence.csv
-- prints the top 20 rows of each to the terminal</pre>
+<pre>Using sentences.txt from before, write a Python script (collocates.py) that finds collocates for the target word "TARGET WORD" with find_collocates from qhchina.analytics.collocations. Remove stopwords with load_stopwords() from qhchina, keep only collocates with at least 2 characters, and only keep the ones with a p-value below 0.05.
+
+Run it three times: once with method="window" and horizon=5, once with method="window" and horizon=10, and once with method="sentence". Sort each result by obs_local from high to low, save each one to its own CSV in output/ (name the files so I can tell which run is which), and print the top 20 rows of each to the terminal.</pre>
 </div>
 
 <div class="prompt">
 <p class="prompt-label">提示 3　整理成一個 HTML 頁面</p>
-<pre>Write a Python script (make_report.py) that reads the three CSV files in output/ (collocates_horizon5.csv, collocates_horizon10.csv, collocates_sentence.csv) and builds a single page, output/results.html, that displays each table (with a heading naming which run it is) one after another on the same page, so I can scroll through and compare them side by side without opening each CSV separately. Plain HTML tables generated with pandas' to_html are fine; no need for a web framework.</pre>
+<pre>Write a Python script (make_report.py) that reads the three CSV files I just saved in output/ and builds a single page, output/results.html, with a dropdown that lets me switch between the three tables, so I can compare them without opening each CSV separately. Plain HTML and a bit of JavaScript is fine; no need for a web framework.</pre>
 </div>
 
 <h3>步驟四：觀察與詮釋</h3>
@@ -101,4 +94,5 @@ Write a Python script (segment.py) that:
 <li>Alex Woloch, <em>The One vs. the Many</em>, pp. 12–42。</li>
 <li>Franco Moretti, <a href="https://litlab.stanford.edu/LiteraryLabPamphlet2.pdf">“Network Theory, Plot Analysis”</a>（Stanford Literary Lab Pamphlet 2）。</li>
 <li>（選讀）Andrew Piper, <em>Enumerations</em>, chapter on characterization。</li>
+<li>qhchina 文件：<a href="https://www.qhchina.org/docs/collocations/find-collocates/">find_collocates()</a>、<a href="https://www.qhchina.org/docs/helpers/load-stopwords/">load_stopwords()</a>。</li>
 </ul>
