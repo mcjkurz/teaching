@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>搭配詞 Collocations — DHG 502</title>
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+
+<!-- 1 ─────────── Title -->
+<section class="slide full title-slide" id="s-title">
+  <div class="big-zh">搭配詞</div>
+  <div class="big-en">Collocations</div>
+  <div class="rule"></div>
+  <figure class="portrait title-portrait" data-step="1"><img src="img/firth.png" alt="J. R. Firth"><figcaption>J. R. Firth<br><span>1890–1960</span></figcaption></figure>
+  <div class="quote bi" data-step="1">
+    <span class="zh">「觀其伴，知其義。」— J. R. Firth (1957)</span>
+    <span class="en">“You shall know a word by the company it keeps.”</span>
+  </div>
+  <div class="hint">DHG 502 Digital Approaches in Historical Research &nbsp;·&nbsp; <kbd>←</kbd> <kbd>→</kbd> navigate &nbsp;·&nbsp; <kbd>1</kbd>–<kbd>9</kbd> sections &nbsp;·&nbsp; <kbd>F</kbd> fullscreen</div>
+</section>
+
+<!-- 2 ─────────── What is a collocation? -->
+<section class="slide" id="s-what" data-sec="intro">
+  <h2 class="bi"><span class="zh">什麼是搭配詞？</span><span class="en">What is a collocation?</span></h2>
+  <div class="def" data-step="1">
+    <div class="bi">
+      <span class="zh">兩個詞傾向於在自然語言中彼此靠近出現，稱為「共現」（cooccur）。</span>
+      <span class="en">A combination of two words that tend to occur near each other in natural language, i.e. to cooccur.</span>
+    </div>
+    <div class="src">Evert, “Corpora and collocations”, p. 1214</div>
+  </div>
+  <div class="pairrow" data-step="2">
+    <div class="bi sm"><span class="zh">有些詞互相「吸引」</span><span class="en">Some words attract each other</span></div>
+    <div class="pairs"><span class="pair">cow <b>–</b> milk</span><span class="pair">day <b>–</b> night</span><span class="pair">ring <b>–</b> bell</span><span class="pair">喝 <b>–</b> 茶</span><span class="pair">天氣 <b>–</b> 好</span></div>
+  </div>
+  <div class="pairrow" data-step="3">
+    <div class="bi sm"><span class="zh">有些則不然</span><span class="en">Others do not</span></div>
+    <div class="pairs"><span class="pair no">know <b>–</b> glass</span><span class="pair no">door <b>–</b> year</span><span class="pair no">喝 <b>–</b> 桌子</span></div>
+  </div>
+  <div class="callout key bi" data-step="4">
+    <span class="zh">問題：如何「測量」這種吸引力，並與偶然區分開？</span>
+    <span class="en">How do we measure attraction, and tell it apart from chance?</span>
+  </div>
+</section>
+
+<!-- 3 ─────────── Null hypothesis -->
+<section class="slide" id="s-null" data-sec="intro">
+  <h2 class="bi"><span class="zh">隨機的詞 vs. 真實的語言</span><span class="en">Random words vs. real language</span></h2>
+  <div class="swap" style="min-height:76px">
+    <div class="bi" data-step="1" data-until="2"><span class="zh"><b>虛無假說</b>：詞語是<span class="bad-c">隨機</span>分布的</span><span class="en">Null hypothesis: words are distributed randomly</span></div>
+    <div class="bi" data-step="2"><span class="zh"><b>自然語言</b>：詞語的分布是<span class="ok-c">有意義</span>的</span><span class="en">Natural language: words are distributed meaningfully</span></div>
+  </div>
+  <div id="shuffle" class="toks shuffle" style="margin-top:12px"></div>
+  <div class="callout key bi" data-step="3">
+    <span class="zh">搭配詞 ＝ 相鄰出現的頻率<b>高於隨機打亂所預期</b>的詞對</span>
+    <span class="en">A collocation is a pair that sits together more often than random shuffling would predict.</span>
+  </div>
+</section>
+
+<!-- 4 ─────────── Observed -->
+<section class="slide" id="s-observed" data-sec="observed">
+  <h2 class="bi"><span class="zh">觀察值 <i>O</i></span><span class="en">Observed frequency: how often does Y appear near the target word X?</span></h2>
+  <div id="obs-toks" class="toks sparse" style="margin:14px 0 8px"></div>
+  <div class="swap" style="min-height:130px">
+    <div class="bi" data-step="1" data-until="2"><span class="zh"><span class="tag tgt">X</span> 目標詞：<b>王婆</b></span><span class="en">Target word</span></div>
+    <div class="bi" data-step="2" data-until="3"><span class="zh"><span class="tag win">視窗</span> 每個「王婆」的左右各 3 個詞（horizon = 3）</span><span class="en">Window: 3 words to the left and right of every 王婆. The numbers show the distance.</span></div>
+    <div data-step="3">
+      <div class="bi"><span class="zh"><span class="tag col">Y</span> 搭配詞：<b>痛苦</b>，在視窗內出現 <span class="col-c">2</span> 次</span><span class="en">Collocate: 痛苦 appears twice inside a window (in this excerpt)</span></div>
+      <div class="eq big">\(O(\text{王婆}, \text{痛苦}) =\) <span id="obs-O">2</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 ─────────── Expected: balls -->
+<section class="slide" id="s-balls" data-sec="expected">
+  <h2 class="bi"><span class="zh">期望值 <i>E</i></span><span class="en">Expected frequency: what would we see if it were all chance?</span></h2>
+  <div id="balls" class="balls"></div>
+  <div class="bi" data-step="1"><span class="zh">10 顆球，其中 <span class="red-c">5 顆紅球</span>：\(P(\text{紅}) = 5/10 = 0.5\)</span><span class="en">10 balls, 5 of them red</span></div>
+  <div class="bi" data-step="2"><span class="zh">抽出 <b>4</b> 顆，預期有幾顆<span class="red-c">紅球</span>？（這一次：<b id="ball-k">2</b>）</span><span class="en">Draw 4 balls. How many should be red?</span></div>
+  <div class="callout key" data-step="3">
+    <div class="eq" style="margin:0;font-size:28px">\(E(\text{紅} \mid 4) = P(\text{紅}) \times 4 = 0.5 \times 4 = \mathbf{2}\)</div>
+    <div class="bi sm" style="margin-top:8px"><span class="zh">單次可能是 1 或 3 顆；期望值是「平均」：抽得越多，平均越接近 2。</span><span class="en">One draw may give 1 or 3. E is the average: the more we draw, the closer we get to 2.</span></div>
+  </div>
+</section>
+
+<!-- 5b ─────────── Random draws: running average -->
+<section class="slide" id="s-balls2" data-sec="expected">
+  <h2 class="bi"><span class="zh">隨機抽取：平均會靠近期望值</span><span class="en">Random draws: the running average approaches E</span></h2>
+  <div id="balls2" class="balls" style="margin:12px 0 6px"></div>
+  <div class="two" style="align-items:flex-start">
+    <div style="width:640px;flex:none">
+      <div class="bi xs"><span class="zh">平均紅球數 vs. 抽取次數</span><span class="en">running average of red balls vs. number of draws</span></div>
+      <svg id="ball-chart" viewBox="0 0 640 290"></svg>
+    </div>
+    <div class="grow">
+      <div class="bi sm"><span class="zh">這一次：<b class="red-c" id="ball-k2">2</b> 顆紅球</span><span class="en">this draw</span></div>
+      <div class="bi sm" style="margin-top:10px"><span class="zh">已抽 <b id="ball-n">0</b> 次；平均 <b class="col-c" id="ball-avg">–</b></span><span class="en">draws so far · running average</span></div>
+      <div class="bi xs" style="margin-top:16px"><span class="zh"><kbd>R</kbd> 抽一次<br><kbd>T</kbd> 連抽 10 次<br><kbd>C</kbd> 清除</span><span class="en">R: draw once · T: draw 10 times · C: clear</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 ─────────── Expected for 王婆 / 痛苦 -->
+<section class="slide" id="s-wexp" data-sec="expected">
+  <h2 class="bi"><span class="zh">期望值：王婆 ／ 痛苦</span><span class="en">Expected frequency of the pair (王婆, 痛苦) by chance</span></h2>
+  <div class="cards" data-step="1" style="margin-top:6px">
+    <div class="card"><div class="bi sm"><span class="zh">語料總詞數 <b>N</b></span><span class="en">total tokens</span></div><div class="nums"><b>50,000</b></div></div>
+    <div class="card"><div class="bi sm"><span class="zh">count(<span class="tgt-c">王婆</span>)</span><span class="en">times 王婆 occurs</span></div><div class="nums"><b>200</b></div></div>
+    <div class="card"><div class="bi sm"><span class="zh">count(<span class="col-c">痛苦</span>)</span><span class="en">times 痛苦 occurs</span></div><div class="nums"><b>50</b></div></div>
+    <div class="card"><div class="bi sm"><span class="zh">視窗</span><span class="en">window</span></div><div class="nums"><b>3 + 3</b></div></div>
+  </div>
+  <div class="small" data-step="1" style="margin:6px 0 0">示意數字 illustrative numbers, not counted from the novel</div>
+  <div class="two" style="margin-top:8px">
+    <div class="grow">
+      <div data-step="2"><div class="bi sm"><span class="zh">① 隨機抽一個詞，剛好是「痛苦」的機率</span><span class="en">chance that a random word is 痛苦</span></div>
+        <div class="eq">\(P(\text{痛苦}) = \frac{50}{50{,}000} = 0.001\)</div></div>
+      <div data-step="3"><div class="bi sm"><span class="zh">② 「王婆」周圍有多少個位置？</span><span class="en">how many slots around all 王婆?</span></div>
+        <div class="eq">\(200 \times 3 \times 2 = 1{,}200\)</div></div>
+    </div>
+    <div class="grow" data-step="4">
+      <div class="bi sm"><span class="zh">③ 期望值 ＝ 機率 × 位置數</span><span class="en">expected = probability × slots</span></div>
+      <div class="eq big">\(E = 0.001 \times 1{,}200 = \mathbf{1.2}\)</div>
+      <div class="bi sm" style="margin-top:6px"><span class="zh">純屬偶然，只預期出現約 1.2 次</span><span class="en">by chance alone we expect only about 1.2 co-occurrences</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 ─────────── Observed vs expected -->
+<section class="slide" id="s-oe" data-sec="compare">
+  <h2 class="bi"><span class="zh">觀察值 vs. 期望值</span><span class="en">Observed vs. expected for (王婆, 痛苦)</span></h2>
+  <div class="bars">
+    <div class="barrow" data-step="1"><div class="bi sm"><span class="zh">期望值 <b>E</b></span><span class="en">expected by chance</span></div><div class="bar e">1.2</div></div>
+    <div class="barrow" data-step="2"><div class="bi sm"><span class="zh">觀察值 <b>O</b></span><span class="en">observed in the corpus (illustrative)</span></div><div class="bar o">8</div></div>
+  </div>
+  <div class="callout key" data-step="3">
+    <div class="eq big" style="margin:0">\(\dfrac{O}{E} = \dfrac{8}{1.2} \approx \textcolor{#e0570f}{\mathbf{6.7}}\)</div>
+    <div class="bi" style="margin-top:8px"><span class="zh">實際共現次數是偶然預期的 6.7 倍 → 王婆與痛苦互相「吸引」</span><span class="en">They co-occur 6.7 times more often than chance predicts: the two words attract each other.</span></div>
+  </div>
+  <div class="bi sm" data-step="4" style="margin-top:12px"><span class="zh">接下來：先做一個練習，再用<b>對數</b>把 O/E 變成<b>互信息 MI</b>。</span><span class="en">Next: a practice example, then the logarithm of this ratio gives mutual information (MI).</span></div>
+</section>
+
+
+<!-- 7-practice ─────────── Practice: E and O/E -->
+<section class="slide" id="s-oe-practice" data-sec="compare">
+  <h2 class="bi"><span class="zh">練習：自己算 E 和 O/E</span><span class="en">Practice: compute E and O / E yourself</span></h2>
+  <div class="cards" data-step="1" style="margin-top:6px">
+    <div class="card"><div class="bi sm"><span class="zh">語料總詞數 <b>N</b></span><span class="en">total tokens</span></div><div class="nums"><b>20,000</b></div></div>
+    <div class="card"><div class="bi sm"><span class="zh">count(<span class="tgt-c">喝</span>)</span><span class="en">times 喝 occurs</span></div><div class="nums"><b>100</b></div></div>
+    <div class="card"><div class="bi sm"><span class="zh">count(<span class="col-c">茶</span>)</span><span class="en">times 茶 occurs</span></div><div class="nums"><b>40</b></div></div>
+    <div class="card"><div class="bi sm"><span class="zh">視窗</span><span class="en">window</span></div><div class="nums"><b>4 + 4</b></div></div>
+    <div class="card"><div class="bi sm"><span class="zh">觀察值 <b>O</b></span><span class="en">observed (喝, 茶)</span></div><div class="nums"><b>12</b></div></div>
+  </div>
+  <div class="small" data-step="1" style="margin:6px 0 0">示意數字 illustrative numbers</div>
+  <div class="prac" style="margin-top:4px">
+    <div class="prow"><div class="bi sm" data-step="2"><span class="zh">① 隨機抽一個詞，剛好是「茶」的機率</span><span class="en">chance that a random word is 茶</span></div>
+      <div class="eq" data-step="3">\(P(\text{茶}) = \dfrac{40}{20{,}000} = \mathbf{0.002}\)</div></div>
+    <div class="prow"><div class="bi sm" data-step="4"><span class="zh">② 「喝」周圍有多少個位置？</span><span class="en">how many slots around all 喝?</span></div>
+      <div class="eq" data-step="5">\(100 \times 4 \times 2 = \mathbf{800}\)</div></div>
+    <div class="prow"><div class="bi sm" data-step="6"><span class="zh">③ 期望值 ＝ 機率 × 位置數</span><span class="en">expected = probability × slots</span></div>
+      <div class="eq" data-step="7">\(E = 0.002 \times 800 = \mathbf{1.6}\)</div></div>
+    <div class="prow"><div class="bi sm" data-step="8"><span class="zh">④ 觀察值 ÷ 期望值</span><span class="en">observed / expected</span></div>
+      <div class="eq" data-step="9">\(\dfrac{O}{E} = \dfrac{12}{1.6} = \textcolor{#e0570f}{\mathbf{7.5}}\)</div></div>
+  </div>
+  <div class="callout key bi sm" data-step="10" style="margin-top:4px"><span class="zh">O 遠高於偶然預期 → 喝與茶互相「吸引」</span><span class="en">O is far above chance: 喝 and 茶 attract each other.</span></div>
+</section>
+
+
+<!-- 7a0 ─────────── What is log2? -->
+<section class="slide" id="s-log" data-sec="compare">
+  <h2 class="bi"><span class="zh">預備知識：對數 log₂</span><span class="en">Background: the base-2 logarithm</span></h2>
+  <div class="two" style="margin-top:4px">
+    <div style="width:400px;flex:none">
+      <div class="bi sm" data-step="1"><span class="zh">log₂ x ＝ 2 的幾次方會等於 x？</span><span class="en">log₂ x is the power you raise 2 to in order to get x</span></div>
+      <div class="logex" data-step="1">
+        <div>\(2^{3} = 8 \;\Rightarrow\; \log_2 8 = \mathbf{3}\)</div>
+        <div>\(2^{0} = 1 \;\Rightarrow\; \log_2 1 = \mathbf{0}\)</div>
+        <div>\(2^{-1} = \tfrac{1}{2} \;\Rightarrow\; \log_2 \tfrac{1}{2} = \mathbf{-1}\)</div>
+      </div>
+      <div class="callout key" data-step="3" style="margin-top:14px">
+        <div class="bi xs"><span class="zh">比值 <b>×2</b> → 分數 <b>＋1</b><br>比值 <b>÷2</b> → 分數 <b>−1</b><br>比值 ＝ 1（O ＝ E）→ 分數 <b>0</b></span><span class="en">ratio doubles: +1 · ratio halves: −1 · ratio 1 (O = E): 0</span></div>
+      </div>
+    </div>
+    <div class="grow" data-step="2">
+      <svg id="log-chart" viewBox="0 0 560 340"></svg>
+    </div>
+  </div>
+</section>
+
+<!-- 7a ─────────── MI -->
+<section class="slide" id="s-mi" data-sec="compare">
+  <h2 class="bi"><span class="zh">互信息 MI</span><span class="en">Mutual information (pointwise): the log of O / E</span></h2>
+  <div class="two" style="margin-top:4px">
+    <div class="grow">
+      <div data-step="1"><div class="bi sm"><span class="zh">對 O/E 取以 2 為底的對數</span><span class="en">Take the base-2 logarithm of O / E</span></div>
+        <div class="eq big">\(\mathrm{MI} = \log_2 \dfrac{O}{E}\)</div></div>
+      <div data-step="2" style="margin-top:10px"><div class="bi sm"><span class="zh">王婆 ／ 痛苦：</span><span class="en">for our example pair</span></div>
+        <div class="eq">\(\mathrm{MI} = \log_2 \dfrac{8}{1.2} = \log_2 6.7 \approx \textcolor{#e0570f}{\mathbf{2.74}}\ \text{bits}\)</div></div>
+      <div class="bi xs" data-step="4" style="margin-top:12px"><span class="zh">MI 只看比值，不看證據多寡：罕見詞對容易得高分。</span><span class="en">MI only sees the ratio, not how much evidence there is: rare pairs can score very high (Evert, p. 1227).</span></div>
+    </div>
+    <div style="width:430px" data-step="3">
+      <div class="bi sm"><span class="zh">為什麼取對數？每多一倍 ＝ ＋1</span><span class="en">Why the logarithm? Every doubling adds 1 bit</span></div>
+      <table class="cmp" id="mi-table" style="margin-top:6px"></table>
+    </div>
+  </div>
+</section>
+
+<!-- 7b ─────────── PPMI -->
+<section class="slide" id="s-ppmi" data-sec="compare">
+  <h2 class="bi"><span class="zh">PPMI：正的點互信息</span><span class="en">PPMI: positive pointwise mutual information</span></h2>
+  <div class="two" style="margin-top:4px">
+    <div class="grow">
+      <div data-step="1"><div class="bi sm"><span class="zh">MI 為負：兩詞「互相排斥」，比偶然更少共現</span><span class="en">Negative MI: the words repel each other, co-occurring less than chance</span></div></div>
+      <div data-step="2" style="margin-top:12px"><div class="bi sm"><span class="zh">PPMI：把負值一律設為 0</span><span class="en">PPMI: replace every negative value with 0</span></div>
+        <div class="eq big">\(\mathrm{PPMI} = \max\!\left(0,\ \log_2 \dfrac{O}{E}\right)\)</div></div>
+      <div data-step="3" style="margin-top:12px"><div class="bi sm"><span class="zh">負值在語料不夠大時不可靠，所以直接忽略；PPMI 常用於詞向量。</span><span class="en">Negative values are unreliable unless the corpus is huge, so they are dropped. PPMI is common in word vectors.</span></div></div>
+    </div>
+    <div style="width:430px" data-step="1">
+      <table class="cmp" id="ppmi-table"></table>
+    </div>
+  </div>
+</section>
+
+<!-- 8 ─────────── The problem -->
+<section class="slide" id="s-problem" data-sec="compare">
+  <h2 class="bi"><span class="zh">簡單指標的問題（一）：兩個詞對</span><span class="en">A problem with simple measures, part 1: two word pairs</span></h2>
+  <div data-step="1">
+    <div class="eq" style="font-size:24px;margin:0">\(E(\text{coll.} \mid \text{target}) = P(\text{coll.}) \times \text{count}(\text{target})\)</div>
+    <div class="bi xs" style="margin-top:6px"><span class="zh">\(N = 1{,}000{,}000\)。Evert 在這個例子沒有用視窗，而是數<b>雙詞組</b>（bigram）：搭配詞 Y 就是緊鄰在目標詞 X 前面的那個詞。每個 X 前面只有 1 個位置，所以位置數就是 count(X)。</span><span class="en">N = 1,000,000. Evert does not use a window here but counts bigrams: the collocate Y is the word right before the target X. Each X has exactly one such slot, so the number of slots is just count(X).</span></div>
+  </div>
+  <div class="cards" style="margin-top:14px">
+    <div class="card" data-step="2">
+      <h3 class="bi sm"><span class="zh">the Iliad</span><span class="en">《伊利亞特》</span></h3>
+      <div class="nums">搭配詞 Y ＝ the：count = 100,000<br>目標詞 X ＝ Iliad：count = <b>10</b><br>\(P(\text{the}) = \frac{100{,}000}{1{,}000{,}000} = 0.1\)<br>\(E = 0.1 \times 10 = \mathbf{1}\)<br>O = <b>10</b></div>
+    </div>
+    <div class="card" data-step="3">
+      <h3 class="bi sm"><span class="zh">must also</span><span class="en">「必須」「也」</span></h3>
+      <div class="nums">搭配詞 Y ＝ must：count = 1,000<br>目標詞 X ＝ also：count = <b>1,000</b><br>\(P(\text{must}) = \frac{1{,}000}{1{,}000{,}000} = 0.001\)<br>\(E = 0.001 \times 1000 = \mathbf{1}\)<br>O = <b>10</b></div>
+    </div>
+  </div>
+  <div class="callout" data-step="4" style="margin-top:16px"><div class="bi sm"><span class="zh">兩個詞對的 O 和 E 完全一樣：<b>O ＝ 10，E ＝ 1</b>。</span><span class="en">Both pairs have exactly the same O and E.</span></div></div>
+</section>
+
+<!-- 8b ─────────── The problem, part 2 -->
+<section class="slide" id="s-problem2" data-sec="compare">
+  <h2 class="bi"><span class="zh">簡單指標的問題（二）：分數相同</span><span class="en">A problem with simple measures, part 2: identical scores</span></h2>
+  <table class="cmp" style="margin-top:10px" data-step="1">
+    <thead><tr><th class="bi sm"><span class="zh">詞對</span><span class="en">pair</span></th><th class="num">O</th><th class="num">E</th><th class="num">O / E</th><th class="num">MI</th></tr></thead>
+    <tr><td style="font-size:26px">the Iliad</td><td class="num">10</td><td class="num">1</td><td class="num">10</td><td class="num">3.32</td></tr>
+    <tr><td style="font-size:26px">must also</td><td class="num">10</td><td class="num">1</td><td class="num">10</td><td class="num">3.32</td></tr>
+  </table>
+  <div class="callout" data-step="2" style="margin-top:18px"><div class="bi sm"><span class="zh">分數相同，但情況不同：Iliad 只出現 10 次，而且每一次前面都是 the（O ＝ 10 已是最大可能值）；must、also 各出現 1,000 次，本來可以共現多得多。</span><span class="en">Same score, different situations: Iliad occurs only 10 times and every one follows “the” (O = 10 is the maximum possible), while must and also occur 1,000 times each and could have co-occurred far more.</span></div></div>
+  <div class="callout key" data-step="3" style="margin-top:10px"><div class="bi sm"><span class="zh"><b>O 與 E 忽略了語料中其他的一切</b>——我們還要看兩詞「沒有」共現的情況。</span><span class="en">O vs. E ignores everything else in the corpus. We also need to look at when the words do not co-occur.</span></div></div>
+</section>
+
+<!-- 9 ─────────── Contingency table -->
+<section class="slide" id="s-ct" data-sec="ct">
+  <h2 class="bi"><span class="zh">列聯表</span><span class="en">Contingency table: two events, X and Y</span></h2>
+  <div class="two" style="margin-top:14px">
+    <div>
+      <table class="ct" id="ct-main">
+        <tr><th></th><th><span class="z">Y 發生</span><span class="e">Y occurs</span></th><th><span class="z">Y 不發生</span><span class="e">Y does not</span></th></tr>
+        <tr><th class="rh"><span class="z">X 發生</span><span class="e">X occurs</span></th><td>a</td><td>b</td></tr>
+        <tr><th class="rh"><span class="z">X 不發生</span><span class="e">X does not</span></th><td>c</td><td>d</td></tr>
+      </table>
+      <div class="bi xs" style="margin-top:10px"><span class="zh">每個個案恰好落入四格之一</span><span class="en">every case falls into exactly one cell</span></div>
+    </div>
+    <div class="grow">
+      <div class="ctlist">
+        <div class="bi sm" data-step="1"><span class="zh"><span class="col-c">a</span> ＝ X 和 Y <b>都</b>發生的個案數</span><span class="en">cases where both X and Y occur</span></div>
+        <div class="bi sm" data-step="2"><span class="zh"><span class="col-c">b</span> ＝ 只有 X 發生（Y 沒有）</span><span class="en">X occurs, Y does not</span></div>
+        <div class="bi sm" data-step="3"><span class="zh"><span class="col-c">c</span> ＝ 只有 Y 發生（X 沒有）</span><span class="en">Y occurs, X does not</span></div>
+        <div class="bi sm" data-step="4"><span class="zh"><span class="col-c">d</span> ＝ 兩者<b>都沒有</b>發生</span><span class="en">neither X nor Y occurs</span></div>
+      </div>
+      <div class="callout key bi sm" data-step="5"><span class="zh">X、Y 可以是任何事件；表格也記錄了「都沒有」的情況。詞語只是其中一例（下一頁）。</span><span class="en">X and Y can be any events, and the table also records when neither happens. Words are just one example (next slide).</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 9a ─────────── Examples of contingency tables -->
+<section class="slide" id="s-examples" data-sec="ct">
+  <h2 class="bi"><span class="zh">列聯表無處不在</span><span class="en">Contingency tables are everywhere</span></h2>
+  <div class="bi sm"><span class="zh">兩個「是／否」的性質，各自分成兩類，數一數各格有多少個案</span><span class="en">Two yes/no properties, cross-tabulated: how many cases fall in each cell?</span></div>
+  <div class="cards" style="margin-top:14px">
+    <div class="card" data-step="1">
+      <h3 class="bi sm"><span class="zh">吸煙 × 肺癌</span><span class="en">Smoking × lung cancer</span></h3>
+      <div id="ex-smoke" style="margin-top:6px"></div>
+      <div class="bi xs" style="margin-top:6px"><span class="zh">吸煙者患肺癌的比例是否更高？</span><span class="en">Are smokers more likely to have cancer?</span></div>
+      <div class="small" style="font-size:13px">示意數字 illustrative</div>
+    </div>
+    <div class="card" data-step="2">
+      <h3 class="bi sm"><span class="zh">慣用手 × 性別</span><span class="en">Handedness × sex</span></h3>
+      <div id="ex-hand" style="margin-top:6px"></div>
+      <div class="bi xs" style="margin-top:6px"><span class="zh">左撇子的比例是否因性別而異？</span><span class="en">Does the share of left-handers differ by sex?</span></div>
+      <div class="small" style="font-size:13px">教科書例子 textbook example</div>
+    </div>
+    <div class="card" data-step="3">
+      <h3 class="bi sm"><span class="zh">好 × 天氣（句子）</span><span class="en">Two words × sentences</span></h3>
+      <div id="ex-words" style="margin-top:6px"></div>
+      <div class="bi xs" style="margin-top:6px"><span class="zh">兩個詞是否傾向出現在同一個句子？</span><span class="en">Do the two words tend to share sentences?</span></div>
+      <div class="small" style="font-size:13px">本課的小語料 our toy corpus</div>
+    </div>
+  </div>
+  <div class="callout key bi sm" data-step="4"><span class="zh">結構完全相同：問題都是——兩個性質<b>互相獨立</b>嗎？搭配詞的判斷也是如此。</span><span class="en">Same structure every time: are the two properties independent? Collocations are no different.</span></div>
+</section>
+
+<!-- 9b ─────────── n choose k, part 1: ordered picks -->
+<section class="slide" id="s-choose" data-sec="ct">
+  <h2 class="bi"><span class="zh">n 選 k（一）：放回 vs. 不放回</span><span class="en">Background “n choose k”, part 1: with vs. without replacement</span></h2>
+  <div class="two" style="align-items:center;margin-top:0">
+    <div class="chipset big"><span>A</span><span>B</span><span>C</span><span>D</span></div>
+    <div class="bi sm"><span class="zh">從這 4 個字母中，依序選出 <b>4</b> 個。順序算不同。</span><span class="en">Pick 4 letters one after another from these 4. The order counts.</span></div>
+  </div>
+  <div style="margin-top:8px">
+    <div class="bi sm" data-step="1"><span class="zh"><b>放回</b>（同一字母可再選）：每次都有 4 種選擇</span><span class="en">With replacement (a letter may be chosen again): 4 choices every time</span></div>
+    <div class="slots">
+      <div data-step="1"><b>4</b><span>1st</span></div>
+      <i data-step="2">×</i><div data-step="2"><b>4</b><span>2nd</span></div>
+      <i data-step="3">×</i><div data-step="3"><b>4</b><span>3rd</span></div>
+      <i data-step="4">×</i><div data-step="4"><b>4</b><span>4th</span></div>
+      <i data-step="5">＝</i><div class="res" data-step="5"><b>256</b><span>\(4^4\)</span></div>
+    </div>
+  </div>
+  <div style="margin-top:10px">
+    <div class="bi sm" data-step="6"><span class="zh"><b>不放回</b>（每個字母只能用一次）：每選一個，選擇就少一個</span><span class="en">Without replacement (each letter only once): one fewer choice after every pick</span></div>
+    <div class="slots">
+      <div data-step="6"><b>4</b><span>1st</span></div>
+      <i data-step="7">×</i><div data-step="7"><b>3</b><span>2nd</span></div>
+      <i data-step="8">×</i><div data-step="8"><b>2</b><span>3rd</span></div>
+      <i data-step="9">×</i><div data-step="9"><b>1</b><span>4th</span></div>
+      <i data-step="10">＝</i><div class="res" data-step="10"><b>24</b><span>\(4!\)</span></div>
+    </div>
+  </div>
+  <div class="callout" data-step="11" style="margin-top:12px"><div class="bi sm"><span class="zh"><b>階乘</b>：\(4! = 4 \times 3 \times 2 \times 1 = 24\)，就是把 4 個字母全部排一遍的方法數。</span><span class="en">Factorial: \(4! = 4 \times 3 \times 2 \times 1 = 24\) is the number of ways to line up all 4 letters.</span></div></div>
+</section>
+
+<!-- 9b1 ─────────── n choose k, part 2: only k picks -->
+<section class="slide" id="s-choose1b" data-sec="ct">
+  <h2 class="bi"><span class="zh">n 選 k（二）：只選 2 個（不放回）</span><span class="en">Background “n choose k”, part 2: only pick 2, without replacement</span></h2>
+  <div class="two" style="align-items:center;margin-top:0">
+    <div class="chipset big"><span>A</span><span>B</span><span>C</span><span>D</span></div>
+    <div class="bi sm"><span class="zh">現在只選 <b>2</b> 個，不放回；順序仍然算不同（AB ≠ BA）。</span><span class="en">Now pick only 2, without replacement; the order still counts (AB ≠ BA).</span></div>
+  </div>
+  <div style="margin-top:10px">
+    <div class="bi sm" data-step="1"><span class="zh">第 1 個有 4 種選擇，第 2 個剩 3 種：</span><span class="en">4 choices for the 1st pick, 3 left for the 2nd:</span></div>
+    <div class="slots">
+      <div data-step="1"><b>4</b><span>1st</span></div>
+      <i data-step="2">×</i><div data-step="2"><b>3</b><span>2nd</span></div>
+      <i data-step="3">＝</i><div class="res" data-step="3"><b>12</b><span class="zh">AB, AC, AD, BA, …</span></div>
+    </div>
+  </div>
+  <div style="margin-top:12px">
+    <div class="bi sm" data-step="4"><span class="zh">用階乘寫：4! 除以 (4−2)!，去掉多餘的 ×2×1</span><span class="en">In factorial notation: divide 4! by (4−2)! to cut off the unneeded “×2×1”</span></div>
+    <div class="pl s" style="margin-top:6px">
+      <span data-step="4">\(\dfrac{4!}{(4-2)!}\)</span>
+      <span data-step="5">＝</span><span class="frac" data-step="5"><span class="num">\(4 \times 3 \times \cancel{2 \times 1}\)</span><span class="den">\(\cancel{2 \times 1}\)</span></span>
+      <span data-step="6">＝ <b>12</b></span></div>
+    <div class="bi xs" data-step="7" style="margin-top:6px"><span class="zh">一般式：從 n 個中選 k 個（有順序）＝ \(\dfrac{n!}{(n-k)!}\)</span><span class="en">General form: ordered picks of k out of n</span></div>
+  </div>
+  <div class="callout" data-step="8" style="margin-top:12px"><div class="bi sm"><span class="zh">但 AB 與 BA 被算成「不同」；我們只在乎選了<b>哪兩個字母</b>。→ 下一頁</span><span class="en">But AB and BA count as different; we only care which two letters were chosen. Next slide.</span></div></div>
+</section>
+
+<!-- 9b2 ─────────── n choose k, part 2: order does not matter -->
+<section class="slide" id="s-choose2" data-sec="ct">
+  <h2 class="bi"><span class="zh">n 選 k（三）：不計順序，除以 k!</span><span class="en">Background “n choose k”, part 3: order should not matter</span></h2>
+  <div data-step="1">
+    <div class="bi sm"><span class="zh">12 種有順序的選法中，每一組字母都出現了 2! ＝ 2×1 ＝ 2 次（AB 與 BA 是同一組）：</span><span class="en">In the 12 ordered picks, every set of letters appears 2! = 2 times (AB and BA are the same set):</span></div>
+    <div class="chipset same">
+      <div class="grp"><span>AB</span><span>BA</span></div><div class="grp"><span>AC</span><span>CA</span></div><div class="grp"><span>AD</span><span>DA</span></div>
+      <div class="grp"><span>BC</span><span>CB</span></div><div class="grp"><span>BD</span><span>DB</span></div><div class="grp"><span>CD</span><span>DC</span></div>
+    </div>
+  </div>
+  <div style="margin-top:10px">
+    <div class="bi sm" data-step="2"><span class="zh">所以再除以 <b>2!</b>：12 ÷ 2 ＝ <b>6</b> 種選法</span><span class="en">So divide by 2! once more: 12 ÷ 2 = 6 different choices</span></div>
+    <div class="pl s" style="margin-top:4px">
+      <span class="frac" data-step="2"><span class="num">\(4!\)</span><span class="den">\((4-2)!\)</span></span><span data-step="3">\(\div\, 2!\)</span>
+      <span data-step="4">＝</span><span class="frac" data-step="4"><span class="num">\(4!\)</span><span class="den">\(2!\,(4-2)!\)</span></span>
+      <span data-step="5">＝</span><span class="frac" data-step="5"><span class="num">\(24\)</span><span class="den">\(2 \cdot 2\)</span></span><span data-step="5">＝ <b>6</b></span></div>
+  </div>
+  <div class="callout key" data-step="6" style="margin-top:12px">
+    <div class="pl s"><span>\(\dbinom{\textcolor{#1f5fd6}{n}}{\textcolor{#e0570f}{k}} = \dfrac{n!}{k!\,(n-k)!}\)</span>
+      <span class="small" style="font-size:18px;margin-left:12px">\(= \dfrac{n!}{(n-k)!} \div k!\)</span></div>
+    <div class="bi xs" style="margin-top:6px"><span class="zh">下一頁的奶茶實驗：\(\binom{8}{4} = \dfrac{8!}{4!\,4!} = 70\) 種選法，只有 1 種全對 → \(p = 1/70\)。</span><span class="en">Tea experiment (next slide): \(\binom{8}{4} = 70\) ways to pick the 4 milk-first cups; only 1 is fully correct, so \(p = 1/70\).</span></div>
+  </div>
+</section>
+
+<!-- 10a ─────────── Lady tasting tea -->
+<section class="slide" id="s-tea" data-sec="ct">
+  <h2 class="bi"><span class="zh">Fisher 與「奶茶實驗」</span><span class="en">Fisher and the lady tasting tea (1935)</span></h2>
+  <figure class="portrait tea-portrait" data-step="1"><img src="img/fisher.jpeg" alt="R. A. Fisher"><figcaption>R. A. Fisher<br><span>1890–1962</span></figcaption></figure>
+  <div class="bi sm" data-step="1" style="max-width:800px"><span class="zh">Muriel Bristol 聲稱能分辨奶茶是「先倒牛奶」還是「先倒茶」。Ronald Fisher 設計了實驗來檢驗。</span><span class="en">A lady claims she can tell whether the milk or the tea was poured first. Fisher designs a test.</span></div>
+  <div class="cups" data-step="2">
+    <div class="cup"><svg viewBox="0 0 90 70"><use href="#cup"/></svg><span class="pour m">M</span></div>
+    <div class="cup"><svg viewBox="0 0 90 70"><use href="#cup"/></svg><span class="pour t">T</span></div>
+    <div class="cup"><svg viewBox="0 0 90 70"><use href="#cup"/></svg><span class="pour t">T</span></div>
+    <div class="cup"><svg viewBox="0 0 90 70"><use href="#cup"/></svg><span class="pour m">M</span></div>
+    <div class="cup"><svg viewBox="0 0 90 70"><use href="#cup"/></svg><span class="pour m">M</span></div>
+    <div class="cup"><svg viewBox="0 0 90 70"><use href="#cup"/></svg><span class="pour t">T</span></div>
+    <div class="cup"><svg viewBox="0 0 90 70"><use href="#cup"/></svg><span class="pour m">M</span></div>
+    <div class="cup"><svg viewBox="0 0 90 70"><use href="#cup"/></svg><span class="pour t">T</span></div>
+  </div>
+  <div class="bi xs" data-step="2"><span class="zh">8 杯外觀相同：4 杯<span class="tgt-c">先牛奶 (M)</span>、4 杯<span class="col-c">先茶 (T)</span>，隨機排列；她要指出哪 4 杯是先牛奶。</span><span class="en">8 identical-looking cups, 4 milk-first and 4 tea-first, in random order. She must pick the 4 milk-first cups.</span></div>
+  <div class="two" style="margin-top:12px">
+    <div data-step="3"><div class="ct-title">全部答對 all correct</div><div id="tea-perfect"></div>
+      <div class="eq" style="font-size:22px;margin-top:4px">\(p = \dfrac{1}{\binom{8}{4}} = \dfrac{1}{70} \approx \mathbf{0.014}\)</div></div>
+    <div data-step="4"><div class="ct-title">答對 3 杯 three correct</div><div id="tea-three"></div>
+      <div class="eq" style="font-size:22px;margin-top:4px">\(p = \dfrac{17}{70} \approx \mathbf{0.243}\)</div></div>
+    <div class="grow bi xs" data-step="4" style="align-self:center"><span class="zh">全對時，靠猜的機率只有 1/70，這張表「太不可能」；答對 3 杯則可能只是運氣。<b>這就是 Fisher 精確檢定。</b></span><span class="en">Guessing all 4 right has probability 1/70, so the table is very unlikely by chance. 3 of 4 could easily be luck. This is Fisher’s exact test.</span></div>
+  </div>
+</section>
+
+<!-- 9c ─────────── Fisher formula, step by step -->
+<section class="slide" id="s-formula" data-sec="ct">
+  <h2 class="bi"><span class="zh">一張表的機率怎麼算？</span><span class="en">How likely is one particular table? (hypergeometric distribution)</span></h2>
+  <div class="two" style="margin-top:4px">
+    <div id="fm-wrap" style="position:relative;flex:none">
+      <table class="ct fm" id="fm-ct">
+        <tr><th></th><th><span class="z">有 Y</span><span class="e">has Y</span></th><th><span class="z">無 Y</span><span class="e">no Y</span></th><th></th></tr>
+        <tr><th class="rh"><span class="z">有 X</span><span class="e">has X</span></th><td id="fa">a</td><td id="fb">b</td><td class="tot" id="ra">a+b</td></tr>
+        <tr><th class="rh"><span class="z">無 X</span><span class="e">no X</span></th><td id="fc">c</td><td id="fd">d</td><td class="tot" id="rc">c+d</td></tr>
+        <tr><th></th><td class="tot" id="ca">a+c</td><td class="tot" id="cb">b+d</td><td class="tot" id="fn">N</td></tr>
+      </table>
+    </div>
+    <div class="grow">
+      <div class="pl" style="margin:6px 0 10px"><span data-step="2">\(p =\)</span>
+        <span class="frac" data-step="2" style="min-width:150px">
+          <span class="num"><span class="fp" id="fp1" data-step="2">\(\dbinom{\textcolor{#1f5fd6}{a+b}}{\textcolor{#e0570f}{a}}\)</span><span class="fp" id="fp2" data-step="3">\(\dbinom{\textcolor{#1f5fd6}{c+d}}{\textcolor{#e0570f}{c}}\)</span></span>
+          <span class="den"><span class="fp" id="fp3" data-step="4">\(\dbinom{\textcolor{#7c3aed}{N}}{\textcolor{#e0570f}{a+c}}\)</span></span>
+        </span></div>
+      <div class="swap" style="min-height:150px">
+        <div class="bi sm" data-step="1" data-until="2"><span class="zh">\(\textcolor{#7c3aed}{N} = a + b + c + d\)：表中所有個案（項目）的總數。</span><span class="en">\(\textcolor{#7c3aed}{N}\) is the total number of items in the table.</span></div>
+        <div class="bi sm" data-step="2" data-until="3"><span class="zh"><b>分子 ①</b>：「有 X」這一列有 \(\textcolor{#1f5fd6}{a+b}\) 個項目，其中 \(\textcolor{#e0570f}{a}\) 個有 Y —— 從 \(a+b\) 個中選出 \(a\) 個。</span><span class="en">Numerator ①: the “has X” row holds \(\textcolor{#1f5fd6}{a+b}\) items; choose the \(\textcolor{#e0570f}{a}\) of them that have Y.</span></div>
+        <div class="bi sm" data-step="3" data-until="4"><span class="zh"><b>分子 ②</b>：「無 X」那一列有 \(\textcolor{#1f5fd6}{c+d}\) 個項目，其中 \(\textcolor{#e0570f}{c}\) 個有 Y。兩列的選法<b>相乘</b>。</span><span class="en">Numerator ②: the other row holds \(\textcolor{#1f5fd6}{c+d}\) items, \(\textcolor{#e0570f}{c}\) of which have Y. The two choices are independent, so we multiply.</span></div>
+        <div class="bi sm" data-step="4" data-until="5"><span class="zh"><b>分母</b>：全部 \(\textcolor{#7c3aed}{N}\) 個項目中，任意挑 \(\textcolor{#e0570f}{a+c}\) 個當作「有 Y」的所有可能。</span><span class="en">Denominator: all ways to choose which \(\textcolor{#e0570f}{a+c}\) of the \(\textcolor{#7c3aed}{N}\) items have Y, ignoring the rows.</span></div>
+        <div data-step="5"><div class="bi sm"><span class="zh">代入 \(a=8,\ b=2,\ c=2,\ d=8\)（\(N=20\)）：</span><span class="en">Plug in the numbers:</span></div>
+          <div class="eq" id="fm-plug" style="font-size:24px"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 ─────────── Fisher -->
+<section class="slide" id="s-fisher" data-sec="ct">
+  <h2 class="bi"><span class="zh">這張表有多「不可能」？</span><span class="en">How unlikely is this table?</span></h2>
+  <div class="bi sm"><span class="zh">20 位學生：10 位女生、10 位男生；其中 10 位有在讀書，而讀書的人裡有 <b>8</b> 位是女生。性別與讀書有關嗎？</span><span class="en">20 students: 10 women, 10 men; 10 are studying, and 8 of those are women. Is studying related to sex? (illustrative numbers)</span></div>
+  <div class="bi xs" style="margin-top:4px"><span class="zh">若兩者無關，純屬偶然，預期讀書的女生只有 5 位。</span><span class="en">If they were unrelated, we would expect only 5 studying women.</span></div>
+  <div class="fisher" style="margin-top:4px">
+    <div class="col"><div class="ct-title">觀察到的表 observed table</div><div id="f8"></div><div class="pv" data-step="1" id="p8"></div></div>
+    <div class="col" data-step="2"><div class="ct-title">更極端 more extreme</div><div id="f9"></div><div class="pv" id="p9"></div></div>
+    <div class="col" data-step="2"><div class="ct-title">最極端 most extreme</div><div id="f10"></div><div class="pv" id="p10"></div></div>
+  </div>
+  <div class="callout key" data-step="3" style="margin-top:8px">
+    <div class="bi sm"><span class="zh">Fisher 精確檢定：把觀察到的表與所有更極端的表的機率相加</span><span class="en">Fisher’s exact test sums the observed table and all more extreme ones</span></div>
+    <div class="eq" style="margin-top:6px"><span id="p-sum"></span> → <span class="ok-c">顯著 significant</span></div>
+  </div>
+</section>
+
+<!-- 10b ─────────── Back to the Iliad / must also -->
+<section class="slide" id="s-fisher-iliad" data-sec="ct">
+  <h2 class="bi"><span class="zh">回到 the Iliad ／ must also</span><span class="en">Back to Evert’s example: what does Fisher’s test say?</span></h2>
+  <div class="bi sm"><span class="zh">兩者：<b>O ＝ 10，E ＝ 1，O/E ＝ 10，MI ＝ 3.32</b> —— 簡單指標分不出來。</span><span class="en">Both have O = 10, E = 1, O/E = 10, MI = 3.32: the simple measures cannot separate them.</span></div>
+  <div class="bi xs" style="margin-top:4px"><span class="zh">完整的列聯表：每一項是一個雙詞組（共 1,000,000 個）；<b>列</b> ＝ 前一個詞是不是 the / must，<b>欄</b> ＝ 後一個詞是不是 Iliad / also。</span><span class="en">Full contingency tables: every item is a bigram (1,000,000 in total); row = is the first word the / must, column = is the second word Iliad / also.</span></div>
+  <div class="fisher" style="margin-top:8px;gap:60px;justify-content:center">
+    <div class="col" data-step="1"><div class="ct-title">the Iliad　(count(the) = 100,000 · count(Iliad) = 10)</div><div id="il-a"></div><div class="pv" data-step="3" id="il-pa"></div></div>
+    <div class="col" data-step="2"><div class="ct-title">must also　(count(must) = count(also) = 1,000)</div><div id="il-b"></div><div class="pv" data-step="3" id="il-pb"></div></div>
+  </div>
+  <div class="callout key" data-step="4" style="margin-top:12px">
+    <div class="bi xs"><span class="zh">the Iliad 的 <b>c ＝ 0</b>：每個 Iliad 前面都是 the。must also 的 c ＝ 990：also 大多沒有 must 在前。</span><span class="en">For the Iliad c = 0: every Iliad follows “the”. For must also c = 990: most alsos have no must before them.</span></div>
+    <div class="bi xs" style="margin-top:6px"><span class="zh">兩者都「顯著」，但 the Iliad 的 p 小 1000 倍 → 用 p 值<b>排序</b>，the Iliad 排在前面。</span><span class="en">Both are significant, but the Iliad’s p is 1000 times smaller. Ranking by p-value puts the Iliad first, which O/E and MI cannot do.</span></div>
+  </div>
+</section>
+
+<!-- A1 ─────────── Two different questions -->
+<section class="slide" id="s-twoq" data-sec="assoc">
+  <h2 class="bi"><span class="zh">兩個不同的問題</span><span class="en">Two different questions we can ask about a word pair</span></h2>
+  <div class="cards" style="margin-top:10px">
+    <div class="card qcard sig" data-step="1">
+      <h3 class="bi"><span class="zh">顯著性</span><span class="en">Statistical significance</span></h3>
+      <div class="bi sm" style="margin-top:10px"><span class="zh">「這會不會只是偶然？」</span><span class="en">“Could this be chance? How sure are we that the attraction is real?”</span></div>
+      <div class="bi xs" style="margin-top:12px"><span class="zh">取決於：關聯的強度 <b>＋ 證據的多寡</b>（語料越大，越「顯著」）</span><span class="en">Depends on the strength of the pattern and on how much evidence we have: a bigger corpus gives more significant results.</span></div>
+      <div class="meas"><span>Fisher <i>p</i></span><span>log-likelihood G²</span><span>t-score</span></div>
+    </div>
+    <div class="card qcard str" data-step="2">
+      <h3 class="bi"><span class="zh">關聯強度（效應量）</span><span class="en">Strength of association (effect size)</span></h3>
+      <div class="bi sm" style="margin-top:10px"><span class="zh">「兩個詞綁得有多緊？」</span><span class="en">“How tightly are the two words tied together?”</span></div>
+      <div class="bi xs" style="margin-top:12px"><span class="zh">取決於：比例本身；<b>與語料大小無關</b></span><span class="en">Depends only on proportions, not on the size of the corpus.</span></div>
+      <div class="meas"><span>O / E</span><span>MI</span><span>Dice · logDice</span></div>
+    </div>
+  </div>
+  <div class="callout key" data-step="3">
+    <div class="bi sm"><span class="zh">Evert 把兩者都叫作「關聯測量」(association measures)，但它們回答的是不同的問題：<b>顯著</b>不等於<b>強</b>。</span><span class="en">Evert calls both kinds “association measures”, but they answer different questions. A significant collocation is not necessarily a strong one.</span></div>
+  </div>
+</section>
+
+<!-- A2 ─────────── Coins -->
+<section class="slide" id="s-coins" data-sec="assoc">
+  <h2 class="bi"><span class="zh">類比：兩枚不公平的硬幣</span><span class="en">An analogy: two unfair coins</span></h2>
+  <div class="cards" style="margin-top:10px">
+    <div class="card" data-step="1">
+      <h3 class="bi sm"><span class="zh">硬幣 A</span><span class="en">Coin A: few flips</span></h3>
+      <div class="nums">擲 <b>10</b> 次，正面 <b>9</b> 次 · 10 flips, 9 heads</div>
+      <div class="propbar"><span style="width:90%">90%</span></div>
+      <div class="kv" data-step="3"><span class="str-c">強度 strength</span><b>90% 正面 heads</b><span class="small">→ 非常偏 very biased</span></div>
+      <div class="kv" data-step="4"><span class="sig-c">顯著性 significance</span><b>\(p \approx 0.011\)</b><span class="small">→ 勉強 just about</span></div>
+    </div>
+    <div class="card" data-step="2">
+      <h3 class="bi sm"><span class="zh">硬幣 B</span><span class="en">Coin B: many flips</span></h3>
+      <div class="nums">擲 <b>100,000</b> 次，正面 <b>51,000</b> 次 · 100,000 flips, 51,000 heads</div>
+      <div class="propbar"><span style="width:51%">51%</span></div>
+      <div class="kv" data-step="3"><span class="str-c">強度 strength</span><b>51% 正面 heads</b><span class="small">→ 幾乎公平 almost fair</span></div>
+      <div class="kv" data-step="4"><span class="sig-c">顯著性 significance</span><b>\(p \approx 10^{-10}\)</b><span class="small">→ 極其確定 near certain</span></div>
+    </div>
+  </div>
+  <div class="callout key" data-step="5">
+    <div class="bi sm"><span class="zh">B 更「顯著」（我們幾乎確定它不公平），但 A 偏得更「強」。<b>p 值衡量的是把握，不是大小。</b></span><span class="en">Coin B is more significant: we are almost certain it is unfair. Coin A is more strongly biased. A p-value measures how sure we are, not how big the effect is.</span></div>
+    <div class="bi xs" style="margin-top:6px"><span class="zh">搭配詞也一樣：高頻詞對像硬幣 B，罕見詞對像硬幣 A。</span><span class="en">Same with collocations: frequent pairs behave like coin B, rare pairs like coin A.</span></div>
+  </div>
+</section>
+
+<!-- A3 ─────────── Scaling the corpus -->
+<section class="slide" id="s-scale" data-sec="assoc">
+  <h2 class="bi"><span class="zh">同樣的比例，更大的語料</span><span class="en">Same proportions, bigger corpus: what changes?</span></h2>
+  <div class="bi xs"><span class="zh">回到「喝 ／ 茶」（視窗 4 + 4）。把語料放大，但每個詞的比例保持不變。</span><span class="en">Back to (喝, 茶) with a 4 + 4 window. We make the corpus bigger while every proportion stays the same. Values computed from the full contingency table, as in qhchina.</span></div>
+  <table class="cmp scale" style="margin-top:12px">
+    <thead>
+      <tr class="grp"><th colspan="3"></th><th colspan="3" class="str-c">強度 strength</th><th colspan="2" class="sig-c">顯著性 significance</th></tr>
+      <tr><th class="num">N</th><th class="num">O</th><th class="num">E</th>
+        <th class="num str-h">O / E</th><th class="num str-h">MI</th><th class="num str-h">logDice</th>
+        <th class="num sig-h">G²</th><th class="num sig-h">Fisher <i>p</i></th></tr>
+    </thead>
+    <tr data-step="1"><td class="num">5,000</td><td class="num">3</td><td class="num">0.40</td><td class="num">7.46</td><td class="num">2.90</td><td class="num">8.87</td><td class="num">7.7</td><td class="num">0.006</td></tr>
+    <tr data-step="1"><td class="num">10,000</td><td class="num">6</td><td class="num">0.80</td><td class="num">7.46</td><td class="num">2.90</td><td class="num">8.87</td><td class="num">15.4</td><td class="num">0.0001</td></tr>
+    <tr data-step="1" class="here"><td class="num">20,000</td><td class="num">12</td><td class="num">1.61</td><td class="num">7.46</td><td class="num">2.90</td><td class="num">8.87</td><td class="num">30.7</td><td class="num">\(3 \times 10^{-8}\)</td></tr>
+    <tr data-step="2"><td class="num">200,000</td><td class="num">120</td><td class="num">16.1</td><td class="num">7.46</td><td class="num">2.90</td><td class="num">8.87</td><td class="num">307</td><td class="num">\(10^{-68}\)</td></tr>
+    <tr data-step="2"><td class="num">2,000,000</td><td class="num">1,200</td><td class="num">161</td><td class="num">7.46</td><td class="num">2.90</td><td class="num">8.87</td><td class="num">3,070</td><td class="num">\(10^{-669}\)</td></tr>
+  </table>
+  <div class="two" style="margin-top:14px;gap:22px">
+    <div class="callout grow str-b" data-step="3"><div class="bi xs"><span class="zh"><b>強度</b>完全不變：詞對之間的關係沒有改變。</span><span class="en">Strength does not move: the relationship between the words is the same.</span></div></div>
+    <div class="callout grow sig-b" data-step="3"><div class="bi xs"><span class="zh"><b>顯著性</b>一直上升：證據越多，把握越大。</span><span class="en">Significance keeps growing: more evidence, more certainty.</span></div></div>
+  </div>
+  <div class="bi xs" data-step="4" style="margin-top:10px"><span class="zh">在數百萬詞的語料裡，幾乎所有詞對都「顯著」。只看 p 值，無法知道哪些搭配真正重要。</span><span class="en">In a corpus of millions of words, almost every pair is “significant”. The p-value alone cannot tell you which collocations matter.</span></div>
+</section>
+
+<!-- A4 ─────────── Log-likelihood -->
+<section class="slide" id="s-ll" data-sec="assoc">
+  <h2 class="bi"><span class="zh">顯著性測量：對數似然比 G²</span><span class="en">A significance measure: log-likelihood (G²)</span></h2>
+  <div class="two" style="margin-top:6px;align-items:flex-start">
+    <div style="flex:none">
+      <div data-step="1"><div class="ct-title">觀察值 observed O</div><div id="ll-obs"></div></div>
+      <div data-step="2" style="margin-top:6px"><div class="ct-title">期望值 expected E（若兩詞無關 if unrelated）</div><div id="ll-exp"></div></div>
+    </div>
+    <div class="grow">
+      <div data-step="3">
+        <div class="bi sm"><span class="zh">四格都比較：觀察值偏離期望值多少？</span><span class="en">Compare all four cells: how far is the observed table from the expected one?</span></div>
+        <div class="eq big">\(G^2 = 2 \sum_{\text{4 cells}} O \cdot \ln \dfrac{O}{E}\)</div>
+      </div>
+      <div data-step="4" style="margin-top:4px">
+        <div class="eq">\(G^2(\text{喝}, \text{茶}) \approx \mathbf{30.7}\)</div>
+        <div class="bi xs" style="margin-top:4px"><span class="zh">\(O \cdot \ln(O/E)\)：偏離越大、<b>次數越多</b>，分數越高。</span><span class="en">Each cell contributes O · ln(O/E): bigger when O is far from E and when the counts are large.</span></div>
+      </div>
+      <div class="callout key" data-step="5" style="margin-top:12px">
+        <div class="bi xs"><span class="zh">讀法：G² &gt; <b>3.84</b> ≈ p &lt; 0.05；G² &gt; <b>10.83</b> ≈ p &lt; 0.001。30.7 → 非常顯著。</span><span class="en">How to read it: G² above 3.84 corresponds to p &lt; 0.05, above 10.83 to p &lt; 0.001. So 30.7 is highly significant.</span></div>
+        <div class="bi xs" style="margin-top:6px"><span class="zh">它是 Fisher 檢定的快速近似（Dunning 1993），回答的是同一個問題：<b>有多確定</b>，而不是<b>有多強</b>。</span><span class="en">It is a fast approximation to Fisher’s test (Dunning 1993) and answers the same question: how sure, not how strong.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- A5 ─────────── Dice and logDice -->
+<section class="slide" id="s-logdice" data-sec="assoc">
+  <h2 class="bi"><span class="zh">強度測量：Dice 與 logDice</span><span class="en">A strength measure: Dice and logDice</span></h2>
+  <div class="two" style="margin-top:6px">
+    <div class="grow">
+      <div data-step="1">
+        <div class="bi sm"><span class="zh">兩詞的出現機會中，有多少比例是「在一起」的？</span><span class="en">Of all the chances the two words had, what share did they spend together?</span></div>
+        <div class="eq big">\(\text{Dice} = \dfrac{2 \cdot O}{\textcolor{#1f5fd6}{R_1} + \textcolor{#e0570f}{C_1}}\)</div>
+        <div class="bi xs"><span class="zh">\(\textcolor{#1f5fd6}{R_1}\)：「喝」周圍的位置數（第 1 列）；\(\textcolor{#e0570f}{C_1}\)：「茶」出現的次數（第 1 欄）。值介於 0 與 1 之間。</span><span class="en">R₁: slots around 喝 (row 1); C₁: occurrences of 茶 (column 1). Always between 0 and 1.</span></div>
+      </div>
+      <div data-step="2" style="margin-top:12px">
+        <div class="bi sm"><span class="zh">logDice（Rychlý 2008）：取 log₂ 再加 14</span><span class="en">logDice (Rychlý 2008): take log₂ and add 14</span></div>
+        <div class="eq">\(\text{logDice} = 14 + \log_2 \text{Dice}\)</div>
+      </div>
+    </div>
+    <div style="width:430px;flex:none">
+      <div data-step="3">
+        <div class="bi sm"><span class="zh">喝 ／ 茶：</span><span class="en">for (喝, 茶)</span></div>
+        <div class="eq" style="font-size:22px">\(\text{Dice} = \dfrac{2 \times 12}{800 + 40} \approx 0.029\)</div>
+        <div class="eq" style="font-size:22px">\(\text{logDice} = 14 + \log_2 0.029 \approx \mathbf{8.87}\)</div>
+      </div>
+      <div class="callout key" data-step="4" style="margin-top:10px">
+        <div class="bi xs"><span class="zh">最高 14（兩詞總是一起出現）；每少 1 分 ＝ 強度減半。</span><span class="en">Maximum 14 (the words always occur together); each point lower means half as strong.</span></div>
+        <div class="bi xs" style="margin-top:6px"><span class="zh">公式裡<b>沒有 N</b>：不受語料大小影響，可以跨語料比較。</span><span class="en">N does not appear in the formula, so logDice ignores corpus size and can be compared across corpora.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- A6 ─────────── the Iliad / must also, once more -->
+<section class="slide" id="s-disagree" data-sec="assoc">
+  <h2 class="bi"><span class="zh">再看 the Iliad ／ must also：測量會「意見不一」</span><span class="en">the Iliad vs. must also, once more: the measures disagree</span></h2>
+  <table class="cmp scale" style="margin-top:12px" data-step="1">
+    <thead>
+      <tr><th></th><th class="num">O</th><th class="num">E</th>
+        <th class="num str-h">MI</th><th class="num str-h">logDice</th>
+        <th class="num sig-h">G²</th><th class="num sig-h">Fisher <i>p</i></th></tr>
+    </thead>
+    <tr><td style="font-size:24px">the Iliad</td><td class="num">10</td><td class="num">1</td><td class="num">3.32</td><td class="num">1.71</td><td class="num"><b class="sig-c">46.1</b></td><td class="num"><b class="sig-c">\(1 \times 10^{-10}\)</b></td></tr>
+    <tr><td style="font-size:24px">must also</td><td class="num">10</td><td class="num">1</td><td class="num">3.32</td><td class="num"><b class="str-c">7.36</b></td><td class="num">28.2</td><td class="num">\(1 \times 10^{-7}\)</td></tr>
+  </table>
+  <div class="two" style="margin-top:14px;gap:22px">
+    <div class="callout grow sig-b" data-step="2"><div class="bi xs"><span class="zh"><b>顯著性</b>選 the Iliad：每一個 Iliad 前面都是 the，證據非常一致。</span><span class="en">Significance prefers the Iliad: every single Iliad follows “the”, so the evidence is very consistent.</span></div></div>
+    <div class="callout grow str-b" data-step="3"><div class="bi xs"><span class="zh"><b>logDice</b> 選 must also：the 出現 100,000 次，只有 10 次在 Iliad 前面；從 the 的角度看，這個關係很弱。</span><span class="en">logDice prefers must also: “the” occurs 100,000 times and only 10 of those are before Iliad. From the point of view of “the”, the tie is weak.</span></div></div>
+  </div>
+  <div class="callout key" data-step="4" style="margin-top:10px"><div class="bi sm"><span class="zh">沒有「唯一正確」的測量；先想清楚你的研究問題要的是哪一種。</span><span class="en">There is no single correct measure. Decide which question your research needs answered.</span></div></div>
+</section>
+
+<!-- A7 ─────────── In practice -->
+<section class="slide" id="s-practice" data-sec="assoc">
+  <h2 class="bi"><span class="zh">實際操作：先篩選，再排序</span><span class="en">In practice: filter by significance, rank by strength</span></h2>
+  <div class="two" style="margin-top:6px;gap:30px">
+    <pre class="code" data-step="1"><span class="k">from</span> qhchina.analytics <span class="k">import</span> find_collocates
+
+df = find_collocates(
+    sentences,
+    target_words=<span class="s">"王婆"</span>,
+    horizon=<span class="n">5</span>,
+    measures=[<span class="s">"log_likelihood"</span>, <span class="s">"logDice"</span>],
+    correction=<span class="s">"fdr_bh"</span>,
+    filters={<span class="s">"max_adjusted_p"</span>: <span class="n">0.05</span>,
+             <span class="s">"min_obs_local"</span>: <span class="n">3</span>},
+    sort_by=<span class="s">"log_dice"</span>,
+)</pre>
+    <div class="grow recap" style="margin-top:0">
+      <div class="rrow" data-step="2"><i class="sig-bg">1</i><div class="bi xs"><span class="zh"><b>篩選</b>：只保留顯著的詞對（p 值或 G²）</span><span class="en">Filter: keep only pairs that are unlikely to be chance (p-value or G²)</span></div></div>
+      <div class="rrow" data-step="3"><i class="sig-bg">2</i><div class="bi xs"><span class="zh"><b>校正</b>：同時檢定上千個詞，總會有一些「偶然顯著」→ <code>correction</code></span><span class="en">Correct: testing thousands of candidates makes some look significant by luck, hence the correction</span></div></div>
+      <div class="rrow" data-step="4"><i class="str-bg">3</i><div class="bi xs"><span class="zh"><b>排序</b>：用強度（logDice）排列留下的詞對</span><span class="en">Rank: order the remaining pairs by strength (logDice)</span></div></div>
+      <div class="rrow" data-step="5"><i>4</i><div class="bi xs"><span class="zh"><b>回到文本</b>：用 KWIC 閱讀例句；數字只指出方向，解釋要靠文本</span><span class="en">Read: go back to the passages (KWIC). The numbers point; the texts explain.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 ─────────── Three ways to say "near" -->
+<section class="slide" id="s-three" data-sec="three">
+  <h2 class="bi"><span class="zh">三種定義「相鄰」的方法</span><span class="en">Three ways to define “near”</span></h2>
+  <div class="bi sm"><span class="zh">Evert：先決定什麼是一個<b>共現項目 (item)</b>，再問每個項目是否含 w₁、是否含 w₂</span><span class="en">Evert: first define what an item is, then ask whether each item contains w₁ and whether it contains w₂</span></div>
+  <div class="bi xs" style="margin-top:6px"><span class="zh">記號（Evert）：<b>w₁</b> ＝ 目標詞 X，<b>w₂</b> ＝ 搭配詞 Y；<b>f₁</b> ＝ count(w₁)，<b>f₂</b> ＝ count(w₂)，<b>N</b> ＝ 項目總數。O、E 的定義不變。</span><span class="en">Notation from here on (Evert): w₁ = target X, w₂ = collocate Y; f₁ = count(w₁), f₂ = count(w₂), N = total number of items.</span></div>
+  <div class="cards" style="margin-top:16px">
+    <div class="card" data-step="1">
+      <h3 class="bi"><span class="zh">視窗法</span><span class="en">Window (surface)</span></h3>
+      <div class="bi sm" style="margin:10px 0"><span class="zh">Y 在 X 左右 <b>k 個詞</b>之內</span><span class="en">Y is within k words of X</span></div>
+      <div class="toks"><span class="tok">天氣</span><span class="tok win">那麼</span><span class="tok tgt">好</span><span class="tok win">我們</span></div>
+      <div class="bi xs" style="margin-top:10px"><span class="zh">計數單位：<b>詞</b></span><span class="en">unit: tokens</span></div>
+    </div>
+    <div class="card" data-step="2">
+      <h3 class="bi"><span class="zh">句子法</span><span class="en">Sentence (textual)</span></h3>
+      <div class="bi sm" style="margin:10px 0"><span class="zh">X 與 Y 在<b>同一個句子</b>裡</span><span class="en">X and Y are in the same sentence</span></div>
+      <div class="toks" style="background:var(--win-bg);border-radius:10px;padding:3px"><span class="tok tgt">好</span><span class="tok">天氣</span><span class="tok">…</span><span class="tok col">散步</span></div>
+      <div class="bi xs" style="margin-top:10px"><span class="zh">計數單位：<b>句子</b></span><span class="en">unit: sentences</span></div>
+    </div>
+    <div class="card" data-step="3">
+      <h3 class="bi"><span class="zh">語法關係法</span><span class="en">Grammatical (syntactic)</span></h3>
+      <div class="bi sm" style="margin:10px 0"><span class="zh">X 與 Y 有<b>語法關係</b>（如：形容詞→名詞）</span><span class="en">X and Y stand in a syntactic relation</span></div>
+      <div class="toks"><span class="tok pairA">好</span><span class="tok" style="color:var(--mute)">→</span><span class="tok pairB">天氣</span></div>
+      <div class="bi xs" style="margin-top:10px"><span class="zh">計數單位：<b>語法搭配對</b></span><span class="en">unit: grammatical pairs</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 ─────────── Window -->
+<section class="slide" id="s-window" data-sec="window">
+  <h2 class="bi"><span class="zh">視窗法</span><span class="en">Window approach: Y within k words of X</span></h2>
+  <div class="ctrl"><span class="il"><span class="zh">視窗</span><span class="en">horizon</span></span> = <b id="win-h">2</b> &nbsp;<span class="small"><kbd>↑</kbd> <kbd>↓</kbd></span></div>
+  <div id="win-lines" class="lines win" style="margin-top:0"></div>
+  <div class="small" style="margin:2px 0 6px">
+    <span class="tag tgt" data-step="1">X = 好</span><span class="tag col" data-step="1">Y = 天氣</span><span class="tag" data-step="3" style="background:var(--col-bg);color:var(--col);border:2px solid var(--col)">橙色 O₁₁ ＝ O</span><span class="tag win" data-step="2">視窗 window（不跨句 stays within a sentence）</span>
+  </div>
+  <div class="two" data-step="3" style="align-items:center">
+    <div id="win-ct"></div>
+    <div style="max-width:380px"><div class="defs"><div class="bi xs"><span class="zh"><b>項目</b>：語料中每個詞（不含 w₁ 本身）</span><span class="en"><b>item</b>: every word token except w₁ itself</span></div><div class="bi xs"><span class="zh"><b>第 1 列</b>：落在 w₁ 的視窗內</span><span class="en"><b>row 1</b>: falls inside a span around w₁</span></div><div class="bi xs"><span class="zh"><b>第 1 欄</b>：就是搭配詞 w₂</span><span class="en"><b>column 1</b>: is the collocate w₂</span></div></div></div>
+    <div data-step="4">
+      <div class="bi xs"><span class="zh">Fisher 精確檢定 p 值</span><span class="en">Fisher's exact test p-value</span></div>
+      <div class="eq" id="win-p" style="margin-top:4px;font-size:16px;padding:6px 10px;line-height:1.4"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 12a ─────────── Window: Evert's example -->
+<section class="slide" id="s-window-evert" data-sec="window">
+  <h2 class="bi"><span class="zh">Evert 的原例：視窗法 (hat, roll)</span><span class="en">Evert’s own example: surface cooccurrence, Fig. 58.1 and 58.8</span></h2>
+  <div class="two" style="margin-top:0">
+    <div style="width:690px;flex:none">
+      <img class="fig" data-step="1" src="img/evert-fig58-1-surface.png" alt="Evert Fig. 58.1" style="width:690px">
+      <img class="fig" data-step="2" src="img/evert-fig58-8-surface-table.png" alt="Evert Fig. 58.8" style="width:600px;margin-top:10px">
+    </div>
+    <div class="grow" style="min-height:260px">
+      <div class="swap" style="min-height:190px">
+        <div data-step="1" data-until="2">
+          <div class="bi xs"><span class="zh"><b>視窗 (L4, R4)</b>：node 詞 hat 左右各 4 個詞，不跨句。</span><span class="en">Span (L4, R4) around the node word hat, limited by sentence boundaries.</span></div>
+          <div class="bi xs"><span class="zh">第 2、3 個視窗各含一個 <i>rolled</i> → <b>O ＝ 2</b></span><span class="en">The 2nd and 3rd span each contain roll → O = 2</span></div>
+          <div class="bi xs"><span class="zh">f₁ ＝ 3（hat）、f₂ ＝ 3（roll）、N ＝ 111 個詞</span><span class="en">f₁ = 3 (hat), f₂ = 3 (roll), N = 111 tokens</span></div>
+        </div>
+        <div data-step="2">
+          <div class="bi xs"><span class="zh"><b>項目</b>＝除 hat 以外的每個詞；<b>第 1 列</b>＝落在 hat 視窗內的詞（20 個）</span><span class="en">Items: every token except hat. Row 1: tokens inside a span around hat (20).</span></div>
+          <div class="bi xs"><span class="zh">O₁₁ ＝ 2 就是 O；第 1 欄和 ＝ f₂ ＝ 3；第 2 列和 ＝ N − f₁ ＝ 108</span><span class="en">O₁₁ = 2 is our O; column 1 sums to f₂ = 3; row 2 sums to N − f₁ = 108</span></div>
+          <div class="bi xs legend"><span class="zh">與我們的小語料完全同一套定義</span><span class="en">Same definitions as our toy corpus</span></div>
+        </div>
+      </div>
+      <div data-step="3" style="margin-top:8px">
+        <div class="bi xs"><span class="zh">Fisher 精確檢定 p 值</span><span class="en">Fisher's exact test p-value</span></div>
+        <div class="eq" id="winev-p" style="margin-top:4px;font-size:16px;padding:6px 10px;line-height:1.4"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 13 ─────────── Sentence -->
+<section class="slide" id="s-sentence" data-sec="sentence">
+  <h2 class="bi"><span class="zh">句子法</span><span class="en">Sentence approach: X and Y in the same sentence</span></h2>
+  <div id="sen-lines" class="lines tight"></div>
+  <div class="small" style="margin:2px 0 6px"><span class="tag tgt">X = 好</span><span class="tag col">Y = 天氣</span></div>
+  <div class="two" data-step="3" style="align-items:center">
+    <div id="sen-ct"></div>
+    <div class="defs" style="max-width:380px"><div class="bi xs"><span class="zh"><b>項目</b>：每一個句子</span><span class="en"><b>item</b>: every sentence</span></div><div class="bi xs"><span class="zh"><b>第 1 列</b>：句子含 w₁</span><span class="en"><b>row 1</b>: the sentence contains w₁</span></div><div class="bi xs"><span class="zh"><b>第 1 欄</b>：句子含 w₂</span><span class="en"><b>column 1</b>: the sentence contains w₂</span></div><div class="bi xs legend"><span class="zh">橙色格 <b>O₁₁ ＝ O</b>（共現次數）</span><span class="en">highlighted cell O₁₁ = O, the cooccurrence count</span></div></div>
+    <div data-step="4">
+      <div class="bi xs"><span class="zh">Fisher 精確檢定 p 值</span><span class="en">Fisher's exact test p-value</span></div>
+      <div class="eq" id="sen-p" style="margin-top:4px;font-size:16px;padding:6px 10px;line-height:1.4"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 13a ─────────── Sentence: Evert's example -->
+<section class="slide" id="s-sentence-evert" data-sec="sentence">
+  <h2 class="bi"><span class="zh">Evert 的原例：句子法 (hat, over)</span><span class="en">Evert’s own example: textual cooccurrence, Fig. 58.2 and 58.7</span></h2>
+  <div class="two" style="margin-top:0">
+    <div style="width:640px;flex:none">
+      <img class="fig" data-step="1" src="img/evert-fig58-2-textual.png" alt="Evert Fig. 58.2" style="width:470px">
+      <img class="fig" data-step="2" src="img/evert-fig58-7-textual-table.png" alt="Evert Fig. 58.7" style="width:600px;margin-top:10px">
+    </div>
+    <div class="grow" style="min-height:260px">
+      <div class="swap" style="min-height:190px">
+        <div data-step="1" data-until="2">
+          <div class="bi xs"><span class="zh"><b>項目</b>＝句子（共 5 句，N ＝ 5）</span><span class="en">Items are sentences; N = 5</span></div>
+          <div class="bi xs"><span class="zh">hat 在 3 句（f₁ ＝ 3），over 在 2 句（f₂ ＝ 2），同句出現 1 次（<b>O ＝ 1</b>）</span><span class="en">hat is in 3 sentences, over in 2, both in 1 sentence</span></div>
+          <div class="bi xs"><span class="zh">最後一句雖有兩個 <i>over</i>，仍只算 <b>1</b> 次</span><span class="en">The last sentence has two overs but counts once</span></div>
+        </div>
+        <div data-step="2">
+          <div class="bi xs"><span class="zh">O₁₁ ＝ 1，O₁₂ ＝ 2，O₂₁ ＝ 1，O₂₂ ＝ 1</span><span class="en">one sentence has both, two only hat, one only over, one neither</span></div>
+          <div class="bi xs"><span class="zh">列和 ＝ f₁ ＝ 3，欄和 ＝ f₂ ＝ 2，總和 ＝ N ＝ 5</span><span class="en">row sum = f₁ = 3, column sum = f₂ = 2, total = N = 5</span></div>
+        </div>
+      </div>
+      <div data-step="3" style="margin-top:8px">
+        <div class="bi xs"><span class="zh">Fisher 精確檢定 p 值</span><span class="en">Fisher's exact test p-value</span></div>
+        <div class="eq" id="senev-p" style="margin-top:4px;font-size:16px;padding:6px 10px;line-height:1.4"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 14 ─────────── Grammatical -->
+<section class="slide" id="s-syntax" data-sec="syntax">
+  <h2 class="bi"><span class="zh">語法關係法</span><span class="en">Grammatical approach: X and Y in a syntactic relation</span></h2>
+  <div id="syn-lines" class="lines tight"></div>
+  <div class="bi xs" data-step="1" style="margin:2px 0 6px"><span class="zh">只計「形容詞 → 名詞」的修飾關係；謂語用法（心情不好）不算。</span><span class="en">Only adjective → noun modifiers count; predicative uses are ignored.</span></div>
+  <div class="two" style="align-items:center">
+    <div data-step="2"><div class="ct-title">找到的搭配對 pairs found</div><div class="eq" id="syn-list" style="font-size:18px;white-space:nowrap;padding:8px 14px"></div><div class="defs"><div class="bi xs"><span class="zh"><b>項目</b>：每一個「形容詞→名詞」搭配對</span><span class="en"><b>item</b>: every adjective → noun pair token</span></div><div class="bi xs"><span class="zh"><b>第 1 列</b>：第一個詞是 w₁</span><span class="en"><b>row 1</b>: the first word is w₁</span></div><div class="bi xs"><span class="zh"><b>第 1 欄</b>：第二個詞是 w₂</span><span class="en"><b>column 1</b>: the second word is w₂</span></div></div></div>
+    <div data-step="3" class="two" style="align-items:center"><div id="syn-ct"></div>
+      <div class="bi xs legend" style="max-width:220px"><span class="zh">橙色格 <b>O₁₁ ＝ O</b></span><span class="en">highlighted cell = cooccurrence count</span></div>
+      <div data-step="4">
+        <div class="bi xs"><span class="zh">Fisher 精確檢定 p 值</span><span class="en">Fisher's exact test p-value</span></div>
+        <div class="eq" id="syn-p" style="margin-top:4px;font-size:16px;padding:6px 10px;line-height:1.4"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 14a ─────────── Syntax: Evert's example -->
+<section class="slide" id="s-syntax-evert" data-sec="syntax">
+  <h2 class="bi"><span class="zh">Evert 的原例：語法關係法 (young, gentleman)</span><span class="en">Evert’s own example: syntactic cooccurrence, Fig. 58.3 and 58.6</span></h2>
+  <div class="two" style="margin-top:0">
+    <div style="width:690px;flex:none">
+      <img class="fig" data-step="1" src="img/evert-fig58-3-syntactic.png" alt="Evert Fig. 58.3" style="width:690px">
+      <div class="two" data-step="2" style="margin-top:8px;align-items:center;gap:24px">
+        <div id="synev-ct"></div>
+        <div class="sig" data-step="3" style="font-size:20px">(O, f₁, f₂, N)<br>＝ (1, 3, 3, 9)</div>
+      </div>
+    </div>
+    <div class="grow" style="min-height:260px">
+      <div class="swap" style="min-height:190px">
+        <div data-step="1" data-until="2">
+          <div class="bi xs"><span class="zh"><b>項目</b>＝每一個「形容詞→名詞」搭配對（pair token），共 <b>9</b> 個（N ＝ 9）</span><span class="en">Items: the 9 adjective → noun pair tokens listed on the right</span></div>
+          <div class="bi xs"><span class="zh">其他所有詞（in, stood, corduroy …）都不算</span><span class="en">All other words are disregarded</span></div>
+        </div>
+        <div data-step="2">
+          <div class="bi xs"><span class="zh">young 修飾 3 個名詞（f₁ ＝ 3），其中 1 個是 gentleman（<b>O ＝ 1</b>）</span><span class="en">young modifies 3 nouns; one of them is gentleman</span></div>
+          <div class="bi xs"><span class="zh">gentleman 被 3 個形容詞修飾（f₂ ＝ 3）：stout, old, young</span><span class="en">gentleman is modified by 3 adjectives: stout, old, young</span></div>
+          <div class="bi xs"><span class="zh">O₂₂ ＝ 4：與 young、gentleman 都無關的 4 對</span><span class="en">4 pairs contain neither word</span></div>
+        </div>
+      </div>
+      <div data-step="4" style="margin-top:8px">
+        <div class="bi xs"><span class="zh">Fisher 精確檢定 p 值</span><span class="en">Fisher's exact test p-value</span></div>
+        <div class="eq" id="synev-p" style="margin-top:4px;font-size:16px;padding:6px 10px;line-height:1.4"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 15 ─────────── Summary -->
+<section class="slide" id="s-summary" data-sec="summary">
+  <h2 class="bi"><span class="zh">同一個問題，三種數法</span><span class="en">Same question, three ways of counting</span></h2>
+  <table class="cmp">
+    <thead><tr><th class="rh"></th>
+      <th class="bi sm"><span class="zh">視窗法</span><span class="en">Window</span></th>
+      <th class="bi sm"><span class="zh">句子法</span><span class="en">Sentence</span></th>
+      <th class="bi sm"><span class="zh">語法關係法</span><span class="en">Grammatical</span></th></tr></thead>
+    <tr data-step="1"><th class="rh bi xs"><span class="zh">「相鄰」是指</span><span class="en">“near” means</span></th>
+      <td class="bi xs"><span class="zh">k 個詞之內</span><span class="en">within k words</span></td><td class="bi xs"><span class="zh">同一個句子</span><span class="en">same sentence</span></td><td class="bi xs"><span class="zh">有語法關係</span><span class="en">syntactic relation</span></td></tr>
+    <tr data-step="1"><th class="rh bi xs"><span class="zh">計數單位</span><span class="en">unit counted</span></th>
+      <td class="bi xs"><span class="zh">詞</span><span class="en">tokens</span></td><td class="bi xs"><span class="zh">句子</span><span class="en">sentences</span></td><td class="bi xs"><span class="zh">搭配對</span><span class="en">pairs</span></td></tr>
+    <tr data-step="1"><th class="rh bi xs"><span class="zh">需要</span><span class="en">needs</span></th>
+      <td class="bi xs"><span class="zh">選定 k</span><span class="en">a choice of k</span></td><td class="bi xs"><span class="zh">分句</span><span class="en">sentence splitting</span></td><td class="bi xs"><span class="zh">句法分析器</span><span class="en">a parser</span></td></tr>
+    <tr data-step="2"><th class="rh bi xs"><span class="zh">(好, 天氣) 的表</span><span class="en">table for (好, 天氣); orange = O₁₁ = O</span></th>
+      <td><div id="sum-win"></div></td><td><div id="sum-sen"></div></td><td><div id="sum-syn"></div></td></tr>
+  </table>
+</section>
+
+<!-- 15 ─────────── Recap -->
+<section class="slide" id="s-recap" data-sec="summary">
+  <h2 class="bi"><span class="zh">回顧</span><span class="en">Recap</span></h2>
+  <div class="recap">
+    <div class="rrow" data-step="1"><i>1</i><div class="bi sm"><span class="zh"><b>搭配詞</b>：兩個詞比偶然更常在附近一起出現</span><span class="en">A collocation: two words that occur near each other more often than chance</span></div></div>
+    <div class="rrow" data-step="2"><i>2</i><div class="bi sm"><span class="zh"><b>觀察值 O 對 期望值 E</b>；取對數得 MI，去掉負值得 PPMI</span><span class="en">Observed O vs. expected E; the log gives MI, dropping negatives gives PPMI</span></div></div>
+    <div class="rrow" data-step="3"><i>3</i><div class="bi sm"><span class="zh"><b>列聯表</b>：也記錄「沒有」共現的情況（a, b, c, d）</span><span class="en">Contingency table: also records the cases where the words do not co-occur</span></div></div>
+    <div class="rrow" data-step="4"><i>4</i><div class="bi sm"><span class="zh"><b>Fisher 精確檢定</b>：這張表在「純屬偶然」下有多不可能？</span><span class="en">Fisher’s exact test: how unlikely is this table if it were all chance?</span></div></div>
+    <div class="rrow" data-step="5"><i>5</i><div class="bi sm"><span class="zh"><b>顯著性 ≠ 強度</b>：p 值、G² 問「有多確定」；MI、logDice 問「有多強」</span><span class="en">Significance is not strength: p and G² ask how sure we are, MI and logDice ask how strong the tie is</span></div></div>
+    <div class="rrow" data-step="6"><i>6</i><div class="bi sm"><span class="zh"><b>三種「相鄰」</b>：視窗、句子、語法關係 —— 同一張表，不同的「項目」</span><span class="en">Three kinds of “near”: window, sentence, grammatical: same table, different items</span></div></div>
+    <div class="rrow" data-step="7"><i>7</i><div class="bi sm"><span class="zh"><b>下一步</b>：在真實語料上計算，比較不同的指標</span><span class="en">Next: compute these on a real corpus and compare the measures</span></div></div>
+  </div>
+</section>
+
+
+<svg width="0" height="0" style="position:absolute"><defs><symbol id="cup" viewBox="0 0 90 70">
+  <ellipse cx="42" cy="60" rx="34" ry="7" fill="#e9e6df" stroke="#b9b3a6" stroke-width="2"/>
+  <path d="M14 22 H70 V36 Q70 56 42 56 Q14 56 14 36 Z" fill="#fff" stroke="#8a6a4f" stroke-width="3"/>
+  <path d="M70 26 Q88 26 84 38 Q80 48 68 46" fill="none" stroke="#8a6a4f" stroke-width="3"/>
+  <ellipse cx="42" cy="22" rx="28" ry="6" fill="#c9905f" stroke="#8a6a4f" stroke-width="3"/>
+</symbol></defs></svg>
+<div id="side"></div>
+<div id="bar"></div>
+<div id="num"></div>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="slides.js"></script>
+<script src="deck.js"></script>
+</body>
+</html>
