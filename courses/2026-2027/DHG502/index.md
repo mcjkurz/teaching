@@ -3,7 +3,7 @@ layout: default
 title: DHG502
 ---
 
-<p class="updated">Last updated: Sep 26, 2026</p>
+<p class="updated">Last updated: Sep 28, 2026</p>
 <div class="course-header">
 <div class="course-header-info">
 <h1>DHG 502 Course Syllabus</h1>
@@ -201,7 +201,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           </ul>
         </div>
       </td>
-      <td class="notes"><a href="slides/collocations/">Slides</a></td>
+      <td class="notes"><a href="notes/week-04/">Notes</a><br><a href="slides/collocations/">Slides</a></td>
     </tr>
     <tr class="presentation">
       <td class="topic">Presentation</td>
@@ -240,7 +240,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
     <tr>
       <td></td>
       <td class="date">12 Oct</td>
-      <td colspan="3"><a href="assignments/">Assignment 1 due, 9:00 am</a></td>
+      <td colspan="3"><a href="assignments/assignment-1/">Assignment 1 due, 9:00 am</a></td>
     </tr>
   </tbody>
   <tbody class="block-a">

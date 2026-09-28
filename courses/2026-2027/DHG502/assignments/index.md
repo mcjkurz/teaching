@@ -3,7 +3,7 @@ layout: default
 title: DHG502 Assignments
 ---
 
-<p class="updated">Last updated: Sep 17, 2026</p>
+<p class="updated">Last updated: Sep 28, 2026</p>
 <h1>DHG 502 Assignments</h1>
 
 <h2>Submission Rules</h2>
@@ -21,29 +21,9 @@ title: DHG502 Assignments
 <p><strong>Due:</strong> 23 Sep, 9:00 am</p>
 <p>Analyze a historical source with an AI coding assistant and publish the result as a simple page on GitHub Pages. This exercise checks that the basic workflow functions before graded work begins. Full instructions are on the <a href="assignment-0/">Assignment 0 page</a>.</p>
 
-<h2>Assignment 1: From Text to Evidence (15%)</h2>
+<h2><a href="assignment-1/">Assignment 1: The Company Words Keep in the <em>Mingshi</em> (15%)</a></h2>
 <p><strong>Due:</strong> 12 Oct, 9:00 am</p>
-<p>Use a small historical text to create, inspect, and interpret a reproducible word-frequency analysis. Submit the repository URL on Moodle. The repository must include:</p>
-<ul>
-<li><code>README.md</code> with your name, research question, source metadata and rights, source URL, and exact instructions for running the analysis</li>
-<li><code>data/source.txt</code> (plain text, UTF-8)</li>
-<li><code>analysis.py</code> or <code>analysis.ipynb</code>, which reads the source, tokenizes it, removes clearly documented stopwords, and creates all required outputs</li>
-<li><code>output/stats.txt</code> (encoding, character count, token count, and unique type count)</li>
-<li><code>output/top20.csv</code> (top-20 content words as <code>word,count</code>)</li>
-<li><code>figures/top20.png</code> (a readable bar chart with title, labels, and source note)</li>
-<li><code>report.md</code> (800–1,200 words in English) explaining the question, source selection, preprocessing decisions, findings, close reading of examples, and limitations</li>
-<li><code>AI-USE.md</code> following the course-wide requirements above</li>
-<li><code>requirements.txt</code> if the analysis needs packages that are not part of the Python standard library</li>
-</ul>
-
-<h3>Marking criteria</h3>
-<ul>
-<li><strong>Source and data documentation (20%):</strong> complete citation, provenance, rights, encoding, and transparent preprocessing decisions</li>
-<li><strong>Method and code (25%):</strong> correct, readable workflow that creates the required outputs</li>
-<li><strong>Outputs and visualization (15%):</strong> accurate statistics, valid CSV, and an effective, properly labelled chart</li>
-<li><strong>Historical interpretation (30%):</strong> a focused argument connecting aggregate patterns to specific passages and acknowledging uncertainty</li>
-<li><strong>Reproducibility and AI disclosure (10%):</strong> usable instructions, dependencies, organized repository, and complete <code>AI-USE.md</code></li>
-</ul>
+<p>Use collocation analysis to examine how the <em>Mingshi</em> 明史 represents one person, group, institution, or concept. Compare significance and strength measures across several window settings, read the passages behind the numbers, and submit a reproducible repository with an 800–1,200-word report. Full instructions and marking criteria are on the <a href="assignment-1/">Assignment 1 page</a>.</p>
 
 <h2>Assignment 2: From Historical Sources to Structured Data (15%)</h2>
 <p><strong>Due:</strong> 9 Nov, 9:00 am</p>
