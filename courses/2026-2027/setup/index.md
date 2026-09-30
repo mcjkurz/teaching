@@ -37,7 +37,7 @@ main .callout-warn {
 }
 </style>
 
-<p class="updated i18n-block"><span class="lang-en">Last updated: Sep 22, 2026</span><span class="lang-zh" lang="zh-Hant">最後更新：2026年9月22日</span></p>
+<p class="updated i18n-block"><span class="lang-en">Last updated: Sep 30, 2026</span><span class="lang-zh" lang="zh-Hant">最後更新：2026年9月30日</span></p>
 
 <div class="i18n-block">
 <h1><span class="lang-en">Set Up an AI Coding Agent</span><span class="lang-zh" lang="zh-Hant">安裝人工智能編程助手</span></h1>
@@ -52,14 +52,15 @@ main .callout-warn {
 
 <p><strong>Where do you work?</strong> In your browser, using GitHub Codespaces, where nothing is installed on the computer you are using. Or on your own computer, using software you install once.</p>
 
+<p>On a <strong>school or lab computer</strong>, use Codespaces: those machines usually don't let you install Python, Git or other software, and everything a Codespace needs is already inside it. On your own computer you can choose freely.</p>
+
 <p>The options below are combinations of those two. Whichever you pick, you end up in the same place: an agent connected to your OpenRouter key.</p>
 
 <div class="pick-grid">
 <div class="pick-card">
 <h3>School or lab computer</h3>
-<p>These machines will not let you install software that asks for an administrator password, and nothing is set up for you in advance.</p>
+<p>These machines often block installing software (Python, Git, VS Code and so on), and nothing is set up for you in advance. Use Codespaces: you only need a web browser and your GitHub account.</p>
 <p><a href="#codespaces">Codespaces</a>: in the browser, nothing to install. Works with OpenCode or Copilot.</p>
-<p><a href="#copilot-school">VS Code + Copilot</a>: in an editor, needs a user install. No Git, so you upload your files to GitHub by hand.</p>
 </div>
 <div class="pick-card">
 <h3>Your own computer (Mac or Windows)</h3>
@@ -73,7 +74,7 @@ main .callout-warn {
 </div>
 </div>
 
-<p class="callout-warn"><strong>Most important, whichever setup you choose:</strong> commit and push your work to your GitHub repository at the end of every session. That is what preserves it. Anything left only in a Codespace or on a school computer will eventually be lost. You can ask your agent to commit and push for you. (Exception: VS Code + Copilot on a school computer has no Git, so there you upload your files by hand instead — see that section below.)</p>
+<p class="callout-warn"><strong>Most important, whichever setup you choose:</strong> commit and push your work to your GitHub repository at the end of every session. That is what preserves it. Anything left only in a Codespace or on a school computer will eventually be lost. You can ask your agent to commit and push for you.</p>
 
 <h2>Before you start</h2>
 <ol>
@@ -82,7 +83,7 @@ main .callout-warn {
 </ol>
 
 <h2 id="codespaces">Browser: GitHub Codespaces</h2>
-<p>Runs in the browser, so it works on any computer, whether a school machine or your own. Nothing is installed.</p>
+<p>A Codespace is a computer that runs on GitHub's servers and that you use through your browser. Because the work happens there, nothing is installed on the computer in front of you, and Python and Git are already set up inside it. That makes it the right choice for school and lab computers, and it works just as well on your own.</p>
 <ol>
 <li>A Codespace runs on a GitHub repository, so make one first: go to the template <a href="https://github.com/mcjkurz/qh-starter">qh-starter</a>, click the green <strong>Use this template</strong> button, and create your own repository.</li>
 <li>Open your new repository → green <strong>Code</strong> button → <strong>Codespaces</strong> → <strong>Create codespace on main</strong>. The first start takes a few minutes.</li>
@@ -111,22 +112,6 @@ main .callout-warn {
 <p class="callout-warn"><strong>When you're done:</strong> commit and push your work (you can ask the agent to do this for you), then delete the Codespace (<a href="https://github.com/codespaces">github.com/codespaces</a> → <strong>...</strong> → <strong>Delete</strong>). Anything you didn't push is lost when the Codespace is deleted, and an idle Codespace keeps using your free monthly hours until you delete it.</p>
 
 <p><strong>Worth doing:</strong> apply for <a href="https://education.github.com">GitHub Education</a> with your university email. Verified students get up to 180 Codespaces core-hours per month, far more than the standard free allowance.</p>
-
-<h2 id="copilot-school">VS Code + Copilot (school computer)</h2>
-<p>For a lab computer where you can't install anything system-wide. No terminal needed.</p>
-<ol>
-<li><strong>Install VS Code</strong> (no admin needed) from <a href="https://code.visualstudio.com/Download">https://code.visualstudio.com/Download</a>:
-<ul>
-<li><strong>Windows:</strong> download the <strong>User Installer</strong>, not the System Installer.</li>
-<li><strong>macOS:</strong> download the <code>.dmg</code>, open it, and drag <strong>Visual Studio Code.app</strong> into <strong>Applications</strong>. If you can't write to <strong>Applications</strong>, you can run it directly from the opened <code>.dmg</code> window instead.</li>
-</ul>
-</li>
-<li><strong>Activate Copilot (first time):</strong> click the chat icon near the top of the window to open the Chat panel. If you don't see it, open the Extensions view (the square-icon button in the left sidebar), search for <strong>GitHub Copilot Chat</strong>, click <strong>Install</strong>, then look for the chat icon again. In the Chat panel, click <strong>Sign in to GitHub</strong> and follow the prompts in your browser. No paid subscription is needed, because your OpenRouter key pays for the model.</li>
-<li><strong>Add your key:</strong> click the model picker at the bottom of the chat box → <strong>Other Models</strong> → settings (gear) icon → <strong>Add Models</strong> → <strong>OpenRouter</strong> → paste key.</li>
-<li>Pick <strong>GLM-5.3-Flash</strong> in the Chat model picker.</li>
-</ol>
-
-<p class="callout-warn"><strong>No Git on this computer, so save your work by hand:</strong> lab computers don't have Git installed, and installing it normally needs an administrator password you won't have. That means you can't ask the agent to "commit and push" here — there is no Git for it to use. Instead, at the end of every session, upload your files yourself: go to your repository on <a href="https://github.com/">github.com</a>, click <strong>Add file</strong> → <strong>Upload files</strong>, then drag in the file(s) or folder(s) you changed (or your whole project folder) and click <strong>Commit changes</strong>. Do this before you log off — anything left only on the school computer is lost once you close VS Code or someone else logs in.</p>
 
 <h2 id="opencode">OpenCode Desktop App</h2>
 <p>A standalone app for your own computer, with no terminal, no Git Bash and no Node.js. Works the same way on Mac and Windows.</p>
@@ -174,14 +159,15 @@ main .callout-warn {
 
 <p><strong>在哪裡工作？</strong>在瀏覽器裡使用 GitHub Codespaces，所用的電腦無須安裝任何軟件；或在自己的電腦上安裝一次，日後直接使用。</p>
 
+<p>在<strong>學校電腦室</strong>請使用 Codespaces：這類電腦通常無法安裝 Python、Git 等軟件，而 Codespace 所需的一切都已在裡面準備好。用自己的電腦則可自由選擇。</p>
+
 <p>下面的選項就是這兩者的組合。無論選哪一種，最後都會走到同一個結果：助手連上你的 OpenRouter 金鑰。</p>
 
 <div class="pick-grid">
 <div class="pick-card">
 <h3>學校電腦室</h3>
-<p>這類電腦通常不允許安裝需要管理員密碼的軟件，也不會預先裝好任何工具。</p>
+<p>這類電腦常常無法安裝軟件（Python、Git、VS Code 等），也不會預先裝好任何工具。請使用 Codespaces：只需要網頁瀏覽器和你的 GitHub 帳號。</p>
 <p><a href="#codespaces-zh">Codespaces</a>：在瀏覽器裡，不需要安裝任何東西，OpenCode 或 Copilot 皆可使用。</p>
-<p><a href="#copilot-school-zh">VS Code + Copilot</a>：在編輯器裡操作，需要使用者安裝。沒有 Git，須自行手動上傳檔案到 GitHub。</p>
 </div>
 <div class="pick-card">
 <h3>自己的電腦（Mac 或 Windows）</h3>
@@ -195,7 +181,7 @@ main .callout-warn {
 </div>
 </div>
 
-<p class="callout-warn"><strong>不論選哪一種方案，最重要的是：</strong>每次做完都要把成果 commit 並 push 到你的 GitHub 倉庫。只有這樣才能保存下來。只留在 Codespace 或學校電腦上的檔案，最後都會消失。可以直接請助手幫你 commit 和 push。（例外：學校電腦上的 VS Code + Copilot 沒有 Git，須改為手動上傳檔案——見下面該節。）</p>
+<p class="callout-warn"><strong>不論選哪一種方案，最重要的是：</strong>每次做完都要把成果 commit 並 push 到你的 GitHub 倉庫。只有這樣才能保存下來。只留在 Codespace 或學校電腦上的檔案，最後都會消失。可以直接請助手幫你 commit 和 push。</p>
 
 <h2>開始前</h2>
 <ol>
@@ -204,7 +190,7 @@ main .callout-warn {
 </ol>
 
 <h2 id="codespaces-zh">瀏覽器：GitHub Codespaces</h2>
-<p>在瀏覽器裡運行，所以任何電腦都適用，學校的機器或自己的電腦皆可，不必安裝任何東西。</p>
+<p>Codespace 是運行在 GitHub 伺服器上的一台電腦，你透過瀏覽器來使用它。因為工作都在那邊進行，你面前的電腦不必安裝任何東西，Python 和 Git 也已在裡面準備好。所以它最適合學校電腦室的機器，用在自己的電腦上同樣好用。</p>
 <ol>
 <li>Codespace 必須建立在 GitHub 倉庫上，所以請先建立倉庫：前往模板 <a href="https://github.com/mcjkurz/qh-starter">qh-starter</a>，按綠色的 <strong>Use this template</strong> 按鈕，建立自己的倉庫。</li>
 <li>打開你新建的倉庫 → 綠色 <strong>Code</strong> 按鈕 → <strong>Codespaces</strong> → <strong>Create codespace on main</strong>。首次啟動需數分鐘。</li>
@@ -233,22 +219,6 @@ main .callout-warn {
 <p class="callout-warn"><strong>做完後：</strong>先 commit、push（可以直接請助手幫你做），再刪除 Codespace（<a href="https://github.com/codespaces">github.com/codespaces</a> → <strong>...</strong> → <strong>Delete</strong>）。尚未推送的內容，Codespace 一刪就找不回來；閒置的 Codespace 也會持續消耗每月免費時數，直到被刪除。</p>
 
 <p><strong>建議一做：</strong>用你的大學電郵申請 <a href="https://education.github.com">GitHub Education</a>。通過驗證的學生每月最多可用 180 個 Codespaces core hours，遠多於一般免費額度。</p>
-
-<h2 id="copilot-school-zh">VS Code + Copilot（學校電腦）</h2>
-<p>適用於無法安裝系統層級軟件的電腦室機器。不需要終端機。</p>
-<ol>
-<li><strong>安裝 VS Code</strong>（不需管理員權限），在 <a href="https://code.visualstudio.com/Download">https://code.visualstudio.com/Download</a> 下載：
-<ul>
-<li><strong>Windows：</strong>下載 <strong>User Installer</strong>，不要 System Installer。</li>
-<li><strong>macOS：</strong>下載 <code>.dmg</code>，打開後把 <strong>Visual Studio Code.app</strong> 拖進 <strong>Applications</strong>。若無法寫入 <strong>Applications</strong>，可直接在打開的 <code>.dmg</code> 視窗裡執行。</li>
-</ul>
-</li>
-<li><strong>啟用 Copilot（僅首次）：</strong>按 VS Code 視窗上方的聊天圖示，打開 Chat 面板。若看不到，先打開左側邊欄的擴充功能檢視（方形圖示的按鈕），搜尋 <strong>GitHub Copilot Chat</strong>，按 <strong>Install</strong> 安裝，再回頭找聊天圖示。在 Chat 面板按 <strong>Sign in to GitHub</strong>，依瀏覽器提示完成登入。不需要付費訂閱，模型費用由你的 OpenRouter 金鑰支付。</li>
-<li><strong>加入金鑰：</strong>按聊天輸入框下方的模型選擇器 → <strong>Other Models</strong> → 設定（齒輪）圖示 → <strong>Add Models</strong> → <strong>OpenRouter</strong> → 貼上金鑰。</li>
-<li>在模型選擇器中選擇 <strong>GLM-5.3-Flash</strong>。</li>
-</ol>
-
-<p class="callout-warn"><strong>這台電腦沒有 Git，要自己手動保存成果：</strong>電腦室的機器通常沒裝 Git，而安裝 Git 一般需要管理員密碼，你不會有這個權限。這表示你沒辦法請助手幫你「commit and push」，因為根本沒有 Git 可用。改為在每次做完後，自己上傳檔案：到 <a href="https://github.com/">github.com</a> 上你的倉庫，按 <strong>Add file</strong> → <strong>Upload files</strong>，把改動過的檔案或資料夾（或整個專案資料夾）拖進去，再按 <strong>Commit changes</strong>。請在登出前完成這一步——只留在學校電腦上的內容，一旦關閉 VS Code 或換人登入就會遺失。</p>
 
 <h2 id="opencode-zh">OpenCode 桌面版</h2>
 <p>一個裝在自己電腦上的獨立應用程式，不需終端機、不需 Git Bash、不需 Node.js。Mac 與 Windows 做法完全相同。</p>
