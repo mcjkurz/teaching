@@ -96,6 +96,32 @@
     apply();
   }
 
+  // click the slide counter to type a slide number
+  const numEl = document.getElementById('num');
+  let editing = false;
+  numEl.addEventListener('click', e => {
+    e.stopPropagation();
+    if (editing) return;
+    editing = true;
+    const inp = document.createElement('input');
+    inp.type = 'text'; inp.inputMode = 'numeric'; inp.value = String(cur + 1); inp.setAttribute('aria-label', 'Go to slide');
+    numEl.textContent = '';
+    numEl.appendChild(inp);
+    numEl.appendChild(document.createTextNode(` / ${String(slides.length).padStart(2, '0')}`));
+    inp.focus(); inp.select();
+    const done = ok => {
+      if (!editing) return;
+      editing = false;
+      const v = parseInt(inp.value, 10);
+      if (ok && v >= 1 && v <= slides.length) go(v - 1, 0); else apply();
+    };
+    inp.addEventListener('keydown', ev => {
+      ev.stopPropagation();
+      if (ev.key === 'Enter') done(true); else if (ev.key === 'Escape') done(false);
+    });
+    inp.addEventListener('blur', () => done(false));
+  });
+
   addEventListener('keydown', e => {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
     const h = hooks[slides[cur].id];
