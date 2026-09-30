@@ -37,14 +37,25 @@
   });
   stage.appendChild(nav);
 
-  // kicker on every sectioned slide (unless it opts out)
+  // kicker on every sectioned slide; inside a case study it also names the case ("2.1 Case studies: Parallelism")
+  let curCase = null;
   slides.forEach(s => {
+    if (s.dataset.case) curCase = { sec: s.dataset.sec, n: s.dataset.caseN, title: s.dataset.case };
+    else if (curCase && curCase.sec !== s.dataset.sec) curCase = null;
     const i = sections.findIndex(x => x.id === s.dataset.sec);
-    if (i >= 0 && !s.classList.contains('nokicker')) {
+    if (i < 0) return;
+    const inCase = curCase && curCase.sec === s.dataset.sec && !s.dataset.case;
+    const n = inCase ? curCase.n : String(i + 1).padStart(2, '0');
+    const name = inCase ? `${sections[i].name}: ${curCase.title}` : sections[i].name;
+    const html = `<span class="n">${n}</span><span>${name}</span>`;
+    if (!s.classList.contains('nokicker')) {
       const k = document.createElement('div');
       k.className = 'kicker';
-      k.innerHTML = `<span class="n">${String(i + 1).padStart(2, '0')}</span><span>${sections[i].name}</span>`;
+      k.innerHTML = html;
       s.insertBefore(k, s.firstChild);
+    } else if (inCase) {
+      const k = s.querySelector('.kicker');
+      if (k) k.innerHTML = html;
     }
   });
 

@@ -347,7 +347,7 @@
 </section>
 
 <!-- ═════════════ Case study 2.1 opener -->
-<section class="slide divider nokicker" id="s-cs-parallel" data-sec="cases">
+<section class="slide divider nokicker" id="s-cs-parallel" data-sec="cases" data-case-n="2.1" data-case="Parallelism">
   <div class="big-n">2.1</div>
   <h2><em>Parallelism</em></h2>
 </section>
@@ -526,7 +526,7 @@
   <img class="fig-wide" src="img/kq-attn-couplets.png" alt="Attention of the [CLS] token in a parallel and a non-parallel couplet, per head">
   <div class="row" style="gap:40px;margin-top:14px;max-width:1040px">
     <p class="body" data-step="1" style="font-size:18px;flex:1"><b>How to read it.</b> Each row is one attention head. Each column is a character of the couplet, first line then second line. Brighter means more attention from [CLS].</p>
-    <p class="body" data-step="2" style="font-size:18px;flex:1"><b>Left, a parallel couplet:</b> the two lines show a mirrored pattern, as if matching characters were asked the same question. <b>Right, a non-parallel couplet:</b> the pattern is not mirrored.</p>
+    <p class="body" data-step="2" style="font-size:18px;flex:1"><b>Left, a parallel couplet:</b> the two lines show a mirrored pattern: matching characters offer similar keys, so they answer [CLS]’s query alike. <b>Right, a non-parallel couplet:</b> the pattern is not mirrored.</p>
   </div>
   <div class="src">Kurzynski, Xu, and Feng, “The Game of Keys and Queries,” <i>IJHAC</i> 19.2 (2025), Fig. 2.</div>
 </section>
@@ -537,7 +537,7 @@
   <img class="fig-wide" src="img/kq-attn-corr.png" alt="Correlation between attention to first-line and second-line characters, by head, parallel vs non-parallel couplets">
   <div class="row" style="gap:40px;margin-top:14px;max-width:1040px">
     <p class="body" data-step="1" style="font-size:18px;flex:1"><b>The test.</b> In each head, do line one and line two get attention in the same pattern? One dot is one couplet; 1.0 means an identical pattern.</p>
-    <p class="body" data-step="2" style="font-size:18px;flex:1"><b>The result.</b> Across 5,178 test couplets, <span class="c-green">parallel couplets</span> score higher than <span class="c-blue">non-parallel ones</span> in every head: matching characters pose similar “questions” to [CLS].</p>
+    <p class="body" data-step="2" style="font-size:18px;flex:1"><b>The result.</b> Across 5,178 test couplets, <span class="c-green">parallel couplets</span> score higher than <span class="c-blue">non-parallel ones</span> in every head: matching characters offer similar keys as answers to [CLS]’s query.</p>
   </div>
   <div class="src">Kurzynski, Xu, and Feng, “The Game of Keys and Queries,” <i>IJHAC</i> 19.2 (2025), Fig. 3.</div>
 </section>
@@ -646,7 +646,7 @@
 </section>
 
 <!-- ═════════════ Case study 2.2 opener -->
-<section class="slide divider nokicker" id="s-cs-body" data-sec="cases">
+<section class="slide divider nokicker" id="s-cs-body" data-sec="cases" data-case-n="2.2" data-case="Body words">
   <div class="big-n">2.2</div>
   <h2>Body <em>words</em></h2>
 </section>
@@ -818,7 +818,7 @@
 </section>
 
 <!-- ═════════════ Case study 2.3 opener -->
-<section class="slide divider nokicker" id="s-cs-predict" data-sec="cases">
+<section class="slide divider nokicker" id="s-cs-predict" data-sec="cases" data-case-n="2.3" data-case="Prediction">
   <div class="big-n">2.3</div>
   <h2><em>Prediction</em></h2>
 </section>
