@@ -433,8 +433,9 @@ svg.net.mini { width: 100%; height: auto; margin-top: 8px; } svg.net.mini .ge { 
 #s-central-def svg.net.mini { height: 175px; } #s-central-def .card { padding: 12px 20px; }
 
 .brief { background: var(--panel); border-radius: 10px; padding: 8px 16px; margin: 4px 0 8px; }
-.brief .zh { display: block; font-size: 17px; line-height: 1.35; font-weight: 400; }
-.brief .en { display: block; font-size: 13px; line-height: 1.3; color: var(--mute); margin-top: 3px; }
+.brief .en { display: block; order: -1; font-size: 18px; line-height: 1.4; color: var(--ink); }
+.brief .zh { display: block; font-size: 14px; line-height: 1.35; font-weight: 400; color: var(--mute); margin-top: 4px; }
+.brief { display: flex; flex-direction: column; }
 #num { pointer-events: auto; cursor: pointer; } #num:hover { color: var(--ink); }
 #num input { width: 3.2ch; font: inherit; color: var(--ink); background: transparent; border: none; border-bottom: 1px solid var(--mute); padding: 0; text-align: right; outline: none; }
 
@@ -467,3 +468,8 @@ h2.bi > .en { font-size: 36px; }
 .callout.bi > .en, .callout > .bi > .en { font-size: 24px; }
 table.tbl.sm { font-size: 17px; } table.tbl.sm td, table.tbl.sm th { padding: 4px 12px; }
 .tl { margin-top: 8px; } .tle { margin: 7px 0; }
+
+/* period images, placed below the text so they never overlap it */
+.banner { margin: 16px 0 0; }
+.banner img { display: block; width: 100%; height: 190px; object-fit: cover; border-radius: 10px; border: 1.5px solid var(--line); }
+.banner figcaption { font-size: 12px; color: var(--mute); margin-top: 4px; }
