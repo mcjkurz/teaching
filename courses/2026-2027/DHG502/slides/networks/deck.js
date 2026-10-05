@@ -8,6 +8,7 @@
  * - → / Space / PageDown: next step (then next slide). ← / PageUp: back.
  * - Mouse clicks do not navigate, except on the sidebar (jump to a section) and the ‹ › buttons (bottom right).
  * - Click the slide counter (or press G) to type a slide number.
+ * - T (or the 中文 button): show / hide the Chinese text.
  * - 1–9: jump to a section (or click it in the sidebar). Home / End. F: fullscreen.
  */
 (function () {
@@ -41,6 +42,19 @@
     nav.appendChild(b);
   });
   stage.appendChild(nav);
+  // language switch: English only by default; click (or press T) to show the Chinese as well
+  const lang = document.createElement('button');
+  lang.id = 'lang'; lang.type = 'button';
+  const setLang = en => {
+    document.body.classList.toggle('lang-en', en);
+    lang.textContent = en ? '中文 off' : '中文 on';
+    try { localStorage.setItem('dh-lang', en ? 'en' : 'both'); } catch (_) {}
+  };
+  let pref = 'en';
+  try { pref = localStorage.getItem('dh-lang') || 'en'; } catch (_) {}
+  lang.addEventListener('click', e => { e.stopPropagation(); lang.blur(); setLang(!document.body.classList.contains('lang-en')); });
+  setLang(pref === 'en');
+  stage.appendChild(lang);
   slides.forEach(s => {
     const i = sections.findIndex(x => x.id === s.dataset.sec);
     if (i >= 0) {
@@ -120,6 +134,7 @@
 
   addEventListener('keydown', e => {
     if (e.metaKey || e.ctrlKey || e.altKey || (e.target && /^(INPUT|TEXTAREA)$/.test(e.target.tagName))) return;
+    if (e.key === 't' || e.key === 'T') { lang.click(); e.preventDefault(); return; }
     if (e.key === 'g' || e.key === 'G') { editNum(); e.preventDefault(); return; }
     const h = hooks[slides[cur].id];
     if (h && h.key && h.key(e, step, slides[cur])) { e.preventDefault(); apply(); return; }

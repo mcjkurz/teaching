@@ -304,9 +304,9 @@ HOOKS['s-clust'] = {
     });
     const L = localC(pick);
     box.innerHTML = `<div class="kv"><span>${NODES[pick].zh}</span><b>k = ${L.k}</b></div>
-      <div class="kv"><span>鄰居之間可能的邊 <em class="en">possible edges among neighbours</em></span><b>${L.pairs}</b></div>
-      <div class="kv"><span>實際存在的邊 <em class="en">actual</em></span><b class="col-c">${L.links}</b></div>
-      <div class="kv"><span>局部聚類係數 <em class="en">local clustering</em></span><b class="tgt-c">C = ${L.links} / ${L.pairs} = ${fmt(L.c)}</b></div>`;
+      <div class="kv"><span><span class="zh-s">鄰居之間可能的邊</span> <em class="en">possible edges among neighbours</em></span><b>${L.pairs}</b></div>
+      <div class="kv"><span><span class="zh-s">實際存在的邊</span> <em class="en">actual</em></span><b class="col-c">${L.links}</b></div>
+      <div class="kv"><span><span class="zh-s">局部聚類係數</span> <em class="en">local clustering</em></span><b class="tgt-c">C = ${L.links} / ${L.pairs} = ${fmt(L.c)}</b></div>`;
   }
 };
 
@@ -320,7 +320,7 @@ HOOKS['s-comm'] = {
     EDGES.forEach(([a, b], i) => { if (step >= 1 && part[a] !== part[b]) g.edges[i].classList.add('dim'); });
     const nc = new Set(part).size;
     $('#q-val', el).textContent = fmt(modularity(part), 3);
-    $('#q-lab', el).innerHTML = step >= 2 ? `演算法找出 ${nc} 個社群 <em class="en">algorithm finds ${nc} communities</em>` : `按我們事先貼的標籤分組 <em class="en">grouped by labels we assigned</em>`;
+    $('#q-lab', el).innerHTML = step >= 2 ? `<span class="zh-s">演算法找出 ${nc} 個社群</span> <em class="en">algorithm finds ${nc} communities</em>` : `<span class="zh-s">按我們事先貼的標籤分組</span> <em class="en">grouped by labels we assigned</em>`;
     $('#q-attr', el).textContent = fmt(modularity(attrComm), 3);
     $('#q-alg', el).textContent = fmt(modularity(greedyComm), 3);
   }
