@@ -214,24 +214,24 @@
   <div class="cards" style="margin-top:12px">
     <div class="card" data-step="1">
       <h3 class="bi"><span class="zh">度中心性</span><span class="en">Degree</span></h3>
-      <div class="bi sm" style="margin:10px 0"><span class="zh">直接連接的數量</span><span class="en">How many direct connections</span></div>
-      <div class="bi xs"><span class="zh">例：通信對象最多的學者</span><span class="en">The scholar with the most correspondents</span></div>
-      <div class="ex">誰最<b>活躍</b> who is busiest</div>
+      <div class="bi sm" style="margin:6px 0"><span class="zh">直接連接的數量</span><span class="en">How many direct connections</span></div>
+      <svg class="net mini" data-m="degree" viewBox="0 0 640 430"></svg>
+      <div class="ex">誰最<b>活躍</b> who is busiest · <span class="topn" data-m="degree"></span></div>
     </div>
     <div class="card" data-step="2">
       <h3 class="bi"><span class="zh">中介中心性</span><span class="en">Betweenness</span></h3>
-      <div class="bi sm" style="margin:10px 0"><span class="zh">有多常位於其他人的最短路徑上</span><span class="en">How often a node lies on shortest paths between others</span></div>
-      <div class="bi xs"><span class="zh">例：連接兩個派系的人</span><span class="en">The one connecting two factions</span></div>
-      <div class="ex">誰是<b>橋樑</b> who is the bridge</div>
+      <div class="bi sm" style="margin:6px 0"><span class="zh">位於他人最短路徑上的頻率</span><span class="en">How often a node lies on shortest paths</span></div>
+      <svg class="net mini" data-m="betweenness" viewBox="0 0 640 430"></svg>
+      <div class="ex">誰是<b>橋樑</b> who is the bridge · <span class="topn" data-m="betweenness"></span></div>
     </div>
     <div class="card" data-step="3">
       <h3 class="bi"><span class="zh">接近中心性</span><span class="en">Closeness</span></h3>
-      <div class="bi sm" style="margin:10px 0"><span class="zh">到所有人平均有多近</span><span class="en">How near a node is to everyone else</span></div>
-      <div class="bi xs"><span class="zh">例：位於貿易路線中心的城市</span><span class="en">A city at the centre of trade routes</span></div>
-      <div class="ex">誰<b>最快到達</b>全網 who reaches all fastest</div>
+      <div class="bi sm" style="margin:6px 0"><span class="zh">到所有人平均有多近</span><span class="en">How near a node is to everyone else</span></div>
+      <svg class="net mini" data-m="closeness" viewBox="0 0 640 430"></svg>
+      <div class="ex">誰<b>最快到達</b> reaches all fastest · <span class="topn" data-m="closeness"></span></div>
     </div>
   </div>
-  <div class="bi xs" style="margin-top:16px" data-step="4"><span class="zh">進階：<b>特徵向量中心性</b>與 <b>PageRank</b> —— 連到「重要的人」比連到「很多人」更算數。</span><span class="en">Advanced: eigenvector centrality and PageRank weigh the importance of the neighbours too (links to important nodes count for more).</span></div>
+  <div class="bi xs" style="margin-top:10px" data-step="4"><span class="zh">進階：<b>特徵向量中心性</b>與 <b>PageRank</b> —— 連到「重要的人」比連到「很多人」更算數。</span><span class="en">Advanced: eigenvector centrality and PageRank weigh the importance of the neighbours too (links to important nodes count for more).</span></div>
 </section>
 
 <section class="slide" id="s-central" data-sec="measures">
@@ -312,6 +312,41 @@
     <div class="card" data-step="5"><h3 class="bi sm"><span class="zh">Kamada–Kawai</span><span class="en">Kamada–Kawai</span></h3><div class="bi xs"><span class="zh">另一種力導向；節點分布更均勻。</span><span class="en">A force-directed variant with more even spacing.</span></div></div>
     <div class="card" data-step="6"><h3 class="bi sm"><span class="zh">譜版面</span><span class="en">Spectral</span></h3><div class="bi xs"><span class="zh">用特徵值定位；常能顯示群集。</span><span class="en">Uses eigenvalues; often reveals clusters.</span></div></div>
     <div class="card" data-step="7" style="border-style:dashed"><h3 class="bi sm"><span class="zh">時間／地圖</span><span class="en">Timeline / geographic</span></h3><div class="bi xs"><span class="zh">以時間或地理座標定位：位置<b>有</b>意義。</span><span class="en">Positions given by time or geography: here position is meaningful.</span></div></div>
+  </div>
+</section>
+
+<section class="slide" id="s-moreno" data-sec="layout">
+  <h2 class="bi"><span class="zh">圖的起源：莫雷諾的社會關係圖</span><span class="en">The origins: Moreno’s sociograms (1934)</span></h2>
+  <div class="two">
+    <div class="figbox" data-step="1"><img class="fig tall" style="max-height:470px" src="img/moreno-groups.png" alt="Moreno sociograms of school classes"><div class="figcap">Moreno 1934, <i>Who Shall Survive?</i>: “Evolution of groups”, the same school class in 1st, 2nd and 3rd grade</div></div>
+    <div class="grow">
+      <div class="bi sm" data-step="2"><span class="zh">Moreno 與 Jennings（1930 年代）：用<b>圖</b>表示學童之間「誰選了誰」。</span><span class="en">Moreno and Jennings, 1930s: drawing who chose whom among school children.</span></div>
+      <div class="bi sm" style="margin-top:12px" data-step="3"><span class="zh">三角形＝男孩，圓形＝女孩；<b>箭頭</b>＝選擇。</span><span class="en">Triangles are boys, circles are girls; arrows are choices.</span></div>
+      <div class="bi sm" style="margin-top:12px" data-step="4"><span class="zh">最早的社會網絡圖之一 —— 位置是<b>手工安排</b>的。</span><span class="en">Among the earliest network diagrams in the social sciences, with positions arranged by hand.</span></div>
+      <div class="callout key bi" data-step="5" style="margin-top:14px"><span class="zh">他想要<b>「精確地」</b>看出一個群體的結構。</span><span class="en">He wanted to see the structure of a group “precisely”.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-moreno-k" data-sec="layout">
+  <h2 class="bi"><span class="zh">圖之外，也有數字</span><span class="en">Beyond the picture: counting structures</span></h2>
+  <div class="two">
+    <div class="figbox" data-step="1"><img class="fig tall" style="max-height:470px;max-width:640px" src="img/moreno-kindergarten.png" alt="Moreno kindergarten sociogram and tables"><div class="figcap" style="max-width:640px">Moreno 1934: sociogram of a kindergarten (15 boys, 18 girls) with tables of choices and structures</div></div>
+    <div class="grow">
+      <div class="bi sm" data-step="2"><span class="zh">他已經在數：<b>孤立者、互選的一對、三角形、鏈</b>。</span><span class="en">He already counts isolated children, mutual pairs, triangles and chains.</span></div>
+      <div class="bi sm" style="margin-top:12px" data-step="3"><span class="zh">「星」＝被很多人選擇的中心 —— 今天叫<b>度中心性</b>。</span><span class="en">“Stars”, centres of attraction, are what we now call high degree.</span></div>
+      <div class="bi xs" style="margin-top:12px" data-step="4"><span class="zh">表格按年級比較：孤立者與互選對的比例，隨年級變化。</span><span class="en">Tables compare grades: shares of isolates and mutual pairs change with grade.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-moreno-layout" data-sec="layout">
+  <h2 class="bi"><span class="zh">新版面，新發現</span><span class="en">A new layout reveals new structure</span></h2>
+  <img class="fig wide" src="img/moreno-layout.png" alt="Moreno original layout vs force-directed layout" data-step="1" style="max-height:370px">
+  <div class="figcap" data-step="1" style="max-width:none">Left: Moreno’s original layout. Right: the same kind of data in an attraction–repulsion (force-directed) layout. Image from the lecture video “Introduction to Social Network Analysis [2/5]: The Origins”.</div>
+  <div class="two3" style="margin-top:8px">
+    <div class="callout" data-step="2"><div class="bi xs"><span class="zh">左：男孩與女孩<b>各佔一側</b>，版面由分類決定。</span><span class="en">Left: boys and girls are placed apart, so the layout is dictated by the category.</span></div></div>
+    <div class="callout key" data-step="3"><div class="bi xs"><span class="zh">右：由<b>連結本身</b>決定位置，浮現出群集與橋接者。</span><span class="en">Right: ties decide positions, and clusters and bridges emerge.</span></div></div>
   </div>
 </section>
 
@@ -449,10 +484,10 @@
       <svg viewBox="0 0 330 150" width="330" height="150" class="net">
         <g class="ge hot"><line x1="40" y1="30" x2="100" y2="40"/><line x1="40" y1="75" x2="100" y2="40"/><line x1="40" y1="75" x2="100" y2="105"/><line x1="40" y1="120" x2="100" y2="105"/><line x1="190" y1="40" x2="250" y2="30"/><line x1="190" y1="105" x2="250" y2="120"/></g>
         <g class="cl"><circle cx="40" cy="30" r="11"/><circle cx="40" cy="75" r="11"/><circle cx="40" cy="120" r="11"/><circle cx="250" cy="30" r="11"/><circle cx="250" cy="120" r="11"/></g>
-        <g class="cl2b"><circle cx="100" cy="40" r="13"/><circle cx="100" cy="105" r="13"/><circle cx="190" cy="40" r="13"/></g>
-        <g class="cl-t" style="font-size:13px" text-anchor="middle"><text x="100" y="45">蘇軾</text><text x="100" y="110">東坡</text><text x="190" y="45">子瞻</text></g>
+        <g class="cl2b"><circle cx="100" cy="40" r="17"/><circle cx="100" cy="105" r="17"/><circle cx="190" cy="40" r="17"/><circle cx="190" cy="105" r="17"/></g>
+        <g class="cl-t" style="font-size:13px" text-anchor="middle"><text x="100" y="45">蘇軾</text><text x="100" y="110">東坡</text><text x="190" y="45">子瞻</text><text x="190" y="110">文忠</text></g>
       </svg>
-      <div class="bi xs"><span class="zh">一個人被拆成<b>三個小節點</b>，每個都只有一兩個鄰居</span><span class="en">One person split into three small, weakly connected nodes</span></div>
+      <div class="bi xs"><span class="zh">一個人被拆成<b>四個小節點</b>，每個都只有一兩個鄰居</span><span class="en">One person split into four small, weakly connected nodes</span></div>
     </div>
     <div class="idcol" data-step="3">
       <div class="ct-title">對應後 after resolution</div>
@@ -499,13 +534,14 @@
 <section class="slide" id="s-faction-q" data-sec="case">
   <h2 class="bi"><span class="zh">黨籍名單裡真的有「黨」嗎？</span><span class="en">Is there a faction in this list?</span></h2>
   <div class="bi sm"><span class="zh">De Weerdt, Ho, Wagner, Qiao &amp; Chu (<i>Journal of Chinese History</i>, 2020)</span><span class="en">Large-scale network analysis of Song faction lists</span></div>
+  <div class="def" data-step="1" style="margin:6px 0 8px"><div class="bi xs"><span class="zh"><b>黨籍名單</b>：朝廷開列的官員名單，把他們指為結黨的「朋黨」，並加以貶謫、禁用。有的由朝廷頒布（如 1104 年元祐黨籍碑，309 人），有的是私人編成。</span><span class="en">A faction list names officials accused of forming a “faction” (<i>pengdang</i>) and punished by demotion, exile or bans from office. Some lists were promulgated by the court (the 1104 Yuanyou list, 309 names); others were privately compiled.</span></div></div>
   <div class="lists">
-    <div class="lcard" data-step="1"><b>元祐黨籍</b><span class="yr">c. 1104</span><span class="cnt">309 人 names</span></div>
-    <div class="lcard" data-step="2"><b>紹興名單</b><span class="yr">c. 1142</span><span class="cnt">（較小 smaller）</span></div>
-    <div class="lcard" data-step="3"><b>慶元黨禁</b><span class="yr">c. 1198</span><span class="cnt">59 人 names</span></div>
+    <div class="lcard" data-step="2"><b>元祐黨籍</b><span class="yr">c. 1104</span><span class="cnt">309 人 names</span></div>
+    <div class="lcard" data-step="3"><b>紹興名單</b><span class="yr">c. 1142</span><span class="cnt">（較小 smaller）</span></div>
+    <div class="lcard" data-step="4"><b>慶元黨禁</b><span class="yr">c. 1198</span><span class="cnt">59 人 names</span></div>
   </div>
-  <div class="bi sm" style="margin-top:6px" data-step="4"><span class="zh">問題：名單上的人，在<b>當時人眼中</b>真的彼此相連嗎？還是「黨」只是名單製造出來的？</span><span class="en">Question: were the people on these lists actually seen as connected by their contemporaries, or is “faction” an artefact of the list?</span></div>
-  <div class="callout key bi" data-step="5">
+  <div class="bi sm" style="margin-top:6px" data-step="5"><span class="zh">問題：名單上的人，在<b>當時人眼中</b>真的彼此相連嗎？還是「黨」只是名單製造出來的？</span><span class="en">Question: were the people on these lists actually seen as connected by their contemporaries, or is “faction” an artefact of the list?</span></div>
+  <div class="callout key bi" data-step="6">
     <span class="zh">把一個老問題，改成<b>可檢驗的</b>問題：同時代文集裡，名單上的人是否更常被一起提到？</span>
     <span class="en">An old debate becomes a testable question: are listees mentioned together in contemporary writings?</span>
   </div>

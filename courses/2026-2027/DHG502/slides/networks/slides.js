@@ -244,6 +244,25 @@ HOOKS['s-global'] = {
   }
 };
 
+/* ---------- 3a. three small pictures: same network, redder = more central ---------- */
+HOOKS['s-central-def'] = {
+  render(step, el) {
+    const M = { degree, betweenness, closeness };
+    el.querySelectorAll('svg.mini').forEach(svg => {
+      const g = buildGraph(svg), v = M[svg.dataset.m], max = Math.max(...v), min = Math.min(...v);
+      g.reset();
+      const top = topK(v, 1)[0];
+      g.nodes.forEach((n, i) => {
+        const t = (v[i] - min) / (max - min || 1);
+        const c = [0, 1, 2].map(k => Math.round([253, 232, 228][k] + ([192, 22, 12][k] - [253, 232, 228][k]) * t));
+        n.c.setAttribute('r', 24); n.c.style.fill = `rgb(${c})`; n.c.style.stroke = i === top ? '#7a0c05' : '#b8c0cf';
+        n.c.style.strokeWidth = i === top ? 5 : 2; n.t.style.display = 'none';
+      });
+      $('.topn[data-m="' + svg.dataset.m + '"]', el).innerHTML = `<b style="color:#c0160c">${NODES[top].zh}</b>`;
+    });
+  }
+};
+
 /* ---------- 3. centrality: degree / betweenness / closeness ---------- */
 HOOKS['s-central'] = {
   render(step, el) {

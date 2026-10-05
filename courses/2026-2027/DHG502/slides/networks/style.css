@@ -429,3 +429,5 @@ svg.net .gn { cursor: pointer; }
 .tle { display: flex; gap: 20px; align-items: baseline; margin: 10px 0; }
 .tle > b { flex: none; width: 90px; font-size: 24px; color: var(--tgt); }
 .stat .n { font-size: 44px; }
+svg.net.mini { width: 100%; height: auto; margin-top: 8px; } svg.net.mini .ge { stroke-width: 3.5; }
+#s-central-def svg.net.mini { height: 175px; } #s-central-def .card { padding: 12px 20px; }
