@@ -7,6 +7,7 @@
  * - window.HOOKS[slideId] = { render(step, el), key(e, step, el) } computes / animates content.
  * - → / Space / PageDown: next step (then next slide). ← / PageUp: back.
  * - Mouse clicks do not navigate, except on the sidebar (jump to a section) and the ‹ › buttons (bottom right).
+ * - Click the slide counter (or press G) to type a slide number.
  * - 1–9: jump to a section (or click it in the sidebar). Home / End. F: fullscreen.
  */
 (function () {
@@ -92,8 +93,34 @@
     apply();
   }
 
+  // click the slide counter (or press G) to type a slide number
+  let editing = false;
+  function editNum() {
+    if (editing) return;
+    editing = true;
+    const inp = document.createElement('input');
+    inp.type = 'text'; inp.inputMode = 'numeric'; inp.value = String(cur + 1); inp.setAttribute('aria-label', 'Go to slide');
+    num.textContent = '';
+    num.appendChild(inp);
+    num.appendChild(document.createTextNode(` / ${slides.length}`));
+    inp.focus(); inp.select();
+    const done = ok => {
+      if (!editing) return;
+      editing = false;
+      const v = parseInt(inp.value, 10);
+      if (ok && v >= 1 && v <= slides.length) go(v - 1, 0); else apply();
+    };
+    inp.addEventListener('keydown', ev => {
+      ev.stopPropagation();
+      if (ev.key === 'Enter') done(true); else if (ev.key === 'Escape') done(false);
+    });
+    inp.addEventListener('blur', () => done(false));
+  }
+  num.addEventListener('click', e => { e.stopPropagation(); editNum(); });
+
   addEventListener('keydown', e => {
-    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.metaKey || e.ctrlKey || e.altKey || (e.target && /^(INPUT|TEXTAREA)$/.test(e.target.tagName))) return;
+    if (e.key === 'g' || e.key === 'G') { editNum(); e.preventDefault(); return; }
     const h = hooks[slides[cur].id];
     if (h && h.key && h.key(e, step, slides[cur])) { e.preventDefault(); apply(); return; }
     if (/^[1-9]$/.test(e.key) && sections[+e.key - 1]) { go(firstOf(sections[+e.key - 1].id), 0); e.preventDefault(); return; }
