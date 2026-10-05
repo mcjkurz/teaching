@@ -228,8 +228,8 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           <ul class="readings">
             <li>Scott B. Weingart, “Demystifying Networks, Parts I &amp; II”</li>
             <li>Ruth Ahnert, Sebastian E. Ahnert, Catherine Nicole Coleman, and Scott B. Weingart, <em>The Network Turn: Changing Perspectives in the Humanities</em> (Cambridge Elements, 2020; open access)</li>
-            <li>Hilde De Weerdt, Brent Ho, Allon Wagner, Qiao Jiyan, and Chu Mingkin, “Is There a Faction in This List?,” <em>Journal of Chinese History</em> (2016)</li>
-            <li>(optional) Henrike Rudolph and Song Chen, eds., “Beyond Guanxi: Chinese Historical Networks,” <em>Journal of Historical Network Research</em> 4 (2020)</li>
+            <li>Hilde De Weerdt, Brent Ho, Allon Wagner, Qiao Jiyan, and Chu Mingkin, “Is There a Faction in This List?,” <em>Journal of Chinese History</em> 4 (2020)</li>
+            <li>(optional) Henrike Rudolph and Song Chen, eds., “Beyond Guanxi: Chinese Historical Networks,” <em>Journal of Historical Network Research</em> 5 (2021)</li>
           </ul>
         </div>
       </td>
