@@ -36,6 +36,42 @@ const NODES = [
 ];
 const EDGE_IDS = ['WA-LH', 'WA-ZD', 'WA-ZG', 'LH-ZD', 'WA-OY', 'ZG-OY', 'OY-SS', 'OY-HQ', 'SS-SZ', 'SS-HT', 'SZ-HT', 'SS-ZD',
   'SS-SM', 'SZ-SM', 'SM-FC', 'SM-HQ', 'SM-CY', 'FC-HQ', 'FC-CY'];
+/* historical notes shown on hover (toy slide); dates and roles are standard, the edges are simplified */
+const BIO = {
+  WA: ['1021–1086 · 撫州臨川', '宰相，神宗支持下推行「新法」（熙寧變法，1069 起）。', 'Chief councilor under Emperor Shenzong; architect of the New Policies (from 1069).'],
+  LH: ['1032–1111 · 泉州晉江', '王安石的得力助手，後與王安石失和。', 'Wang Anshi’s key lieutenant, later estranged from him.'],
+  ZD: ['1035–1106 · 建州浦城', '支持新法；哲宗朝（1094 起）為宰相，打擊元祐舊臣。', 'New Policies supporter; chief councilor under Zhezong from 1094, purged Yuanyou figures.'],
+  ZG: ['1019–1083 · 建昌軍南豐', '古文家，歐陽修的門生，王安石的朋友。', 'Prose master, protégé of Ouyang Xiu and friend of Wang Anshi.'],
+  OY: ['1007–1072 · 吉州廬陵', '文壇領袖與政治家，提拔王安石、蘇軾、曾鞏等人。', 'Literary leader and statesman who promoted Wang Anshi, Su Shi, Zeng Gong and others.'],
+  SS: ['1037–1101 · 眉州眉山', '詩人、官員；批評新法的某些措施，亦不見容於舊黨，屢遭貶謫。', 'Poet-official critical of parts of the New Policies, yet unwelcome among the conservatives; repeatedly exiled.'],
+  SZ: ['1039–1112 · 眉州眉山', '蘇軾之弟，元祐年間任高官。', 'Su Shi’s younger brother; held high office in the Yuanyou years.'],
+  HT: ['1045–1105 · 洪州分寧', '詩人、書法家，「蘇門四學士」之一。', 'Poet and calligrapher, one of the “Four Scholars of the Su Gate”.'],
+  SM: ['1019–1086 · 陝州夏縣', '反對新法；主編《資治通鑑》；1085 年起主持元祐更化。', 'Opposed the New Policies; compiled the Zizhi tongjian; led the reversal from 1085.'],
+  FC: ['1027–1101 · 蘇州吳縣', '范仲淹之子，元祐年間任宰相。', 'Son of Fan Zhongyan; chief councilor in the Yuanyou years.'],
+  CY: ['1033–1107 · 河南洛陽', '理學家；元祐年間入朝為哲宗講書。', 'Neo-Confucian thinker; tutor to Emperor Zhezong in the Yuanyou period.'],
+  HQ: ['1008–1075 · 相州安陽', '仁宗、英宗、神宗朝重臣；反對青苗法。', 'Senior statesman across three reigns; opposed the Green Sprouts loans.']
+};
+const EDGE_NOTE = {
+  'WA-LH': ['提拔與共事，後來失和', 'Patron and aide, later estranged'],
+  'WA-ZD': ['新法同盟', 'Allies in the New Policies'],
+  'WA-ZG': ['朋友（同鄉）', 'Friends from the same region'],
+  'LH-ZD': ['新法派同僚', 'Colleagues in the reform camp'],
+  'WA-OY': ['歐陽修曾推薦王安石', 'Ouyang Xiu recommended Wang Anshi'],
+  'ZG-OY': ['師生', 'Mentor and protégé'],
+  'OY-SS': ['師生（歐陽修賞識蘇軾）', 'Mentor and protégé'],
+  'OY-HQ': ['仁宗朝同朝為官', 'Contemporaries at the Renzong court'],
+  'SS-SZ': ['兄弟', 'Brothers'],
+  'SS-HT': ['師生', 'Master and disciple'],
+  'SZ-HT': ['蘇軾交遊圈', 'Within Su Shi’s circle'],
+  'SS-ZD': ['早年友人，後成政敵', 'Early friends, later rivals'],
+  'SS-SM': ['元祐年間同朝', 'At court together in the Yuanyou years'],
+  'SZ-SM': ['元祐年間同朝', 'At court together in the Yuanyou years'],
+  'SM-FC': ['元祐盟友', 'Allies in the Yuanyou government'],
+  'SM-HQ': ['同為反對新法的元老', 'Senior opponents of the New Policies'],
+  'SM-CY': ['司馬光推薦程頤（1086）', 'Sima Guang recommended Cheng Yi (1086)'],
+  'FC-HQ': ['同為舊法派', 'Fellow opponents of the reforms'],
+  'FC-CY': ['元祐年間同朝', 'Court colleagues in the Yuanyou years']
+};
 const idx = Object.fromEntries(NODES.map((n, i) => [n.id, i]));
 const EDGES = EDGE_IDS.map(s => s.split('-').map(k => idx[k]));
 const N = NODES.length;
@@ -115,7 +151,9 @@ const attrComm = NODES.map(n => ({ new: 0, old: 1, other: 2 }[n.g]));
 function buildGraph(svg, pos = NODES) {
   if (svg.__g) return svg.__g;
   const g = { svg, edges: [], nodes: [] };
+  g.hits = [];
   EDGES.forEach(([a, b]) => { const l = svgEl('line', { class: 'ge' }); svg.appendChild(l); g.edges.push(l); });
+  EDGES.forEach(() => { const h = svgEl('line', { class: 'gh' }); svg.appendChild(h); g.hits.push(h); });
   NODES.forEach((n, i) => {
     const grp = svgEl('g', { class: 'gn' });
     const c = svgEl('circle', { r: 16 }), t = svgEl('text', { 'text-anchor': 'middle' }, n.zh);
@@ -124,7 +162,7 @@ function buildGraph(svg, pos = NODES) {
   });
   g.pos = pos.map(p => ({ x: p.x, y: p.y }));
   g.place = () => {
-    EDGES.forEach(([a, b], i) => { const l = g.edges[i]; l.setAttribute('x1', g.pos[a].x); l.setAttribute('y1', g.pos[a].y); l.setAttribute('x2', g.pos[b].x); l.setAttribute('y2', g.pos[b].y); });
+    EDGES.forEach(([a, b], i) => { const l = g.edges[i]; l.setAttribute('x1', g.pos[a].x); l.setAttribute('y1', g.pos[a].y); l.setAttribute('x2', g.pos[b].x); l.setAttribute('y2', g.pos[b].y); const h = g.hits[i]; ['x1','y1','x2','y2'].forEach(k => h.setAttribute(k, l.getAttribute(k))); });
     g.nodes.forEach((n, i) => { n.c.setAttribute('cx', g.pos[i].x); n.c.setAttribute('cy', g.pos[i].y); n.t.setAttribute('x', g.pos[i].x); });
     g.nodes.forEach((n, i) => n.t.setAttribute('y', g.pos[i].y + (+n.c.getAttribute('r')) + 17));
   };
@@ -162,11 +200,31 @@ HOOKS['s-cooc2'] = {
 HOOKS['s-toy'] = {
   render(step, el) {
     const g = buildGraph($('#g-toy', el)); g.reset();
+    const info = $('#toy-info', el);
+    if (!g.wired) {
+      g.wired = true;
+      const dflt = '<div class="bi xs"><span class="zh">把滑鼠移到<b>節點</b>或<b>邊</b>上，看歷史背景。</span><span class="en">Hover over a node or an edge for historical background.</span></div>';
+      info.innerHTML = dflt;
+      g.nodes.forEach((n, i) => {
+        n.grp.addEventListener('mouseenter', () => {
+          const [d, zh, en] = BIO[NODES[i].id];
+          info.innerHTML = `<div class="bi xs"><span class="zh"><b>${NODES[i].zh}</b> <span class="small">${d}</span><br>${zh}</span><span class="en">${en}</span></div>`;
+          g.edges.forEach((e, k) => e.classList.toggle('hot', EDGES[k].includes(i)));
+        });
+        n.grp.addEventListener('mouseleave', () => { info.innerHTML = dflt; g.edges.forEach(e => e.classList.remove('hot')); });
+      });
+      g.hits.forEach((h, k) => {
+        const [a, b] = EDGES[k], [zh, en] = EDGE_NOTE[EDGE_IDS[k]];
+        h.addEventListener('mouseenter', () => {
+          info.innerHTML = `<div class="bi xs"><span class="zh"><b>${NODES[a].zh} — ${NODES[b].zh}</b><br>${zh}</span><span class="en">${en}</span></div>`;
+          g.edges[k].classList.add('hot');
+        });
+        h.addEventListener('mouseleave', () => { info.innerHTML = dflt; g.edges[k].classList.remove('hot'); });
+      });
+    }
     g.nodes.forEach((n, i) => {
-      n.c.style.fill = step >= 2 ? '#fff' : ''; n.c.style.stroke = '';
       if (step >= 2) { n.c.style.stroke = GROUP_COL[NODES[i].g]; n.c.style.fill = GROUP_COL[NODES[i].g]; }
     });
-    g.edges.forEach(e => e.classList.toggle('dim', false));
     $('#toy-legend', el).style.opacity = step >= 2 ? 1 : 0;
   }
 };

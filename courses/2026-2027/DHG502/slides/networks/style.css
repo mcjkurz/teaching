@@ -422,3 +422,10 @@ g.cl2b circle { fill: var(--tgt-bg); stroke: var(--tgt); stroke-width: 2.5; }
 img.fig.wide { width: 100%; max-height: 400px; object-fit: contain; }
 .figcap { font-size: 13px; color: var(--mute); margin-top: 4px; max-width: 560px; }
 .two > .figbox + .grow { padding-top: 6px; }
+
+svg.net .gh { stroke: transparent; stroke-width: 16; pointer-events: stroke; }
+svg.net .gn { cursor: pointer; }
+.tl { margin-top: 14px; border-left: 4px solid var(--tgt); padding-left: 22px; }
+.tle { display: flex; gap: 20px; align-items: baseline; margin: 10px 0; }
+.tle > b { flex: none; width: 90px; font-size: 24px; color: var(--tgt); }
+.stat .n { font-size: 44px; }

@@ -35,8 +35,8 @@
   <ul class="reads" data-step="5">
     <li>Scott B. Weingart, “Demystifying Networks, Parts I &amp; II” <span class="role">概念 · concepts</span></li>
     <li>Ahnert, Ahnert, Coleman &amp; Weingart, <em>The Network Turn</em> (2020) <span class="role">方法論 · methodology</span></li>
-    <li>De Weerdt, Ho, Wagner, Qiao &amp; Chu, “Is There a Faction in This List?” (2016/2020) <span class="role">個案 · case study</span></li>
-    <li class="opt">(optional) Rudolph &amp; Chen, eds., “Beyond Guanxi: Chinese Historical Networks” (2020)</li>
+    <li>De Weerdt, Ho, Wagner, Qiao &amp; Chu, “Is There a Faction in This List?” (2020) <span class="role">個案 · case study</span></li>
+    <li class="opt">(optional) Rudolph &amp; Chen, eds., “Beyond Guanxi: Chinese Historical Networks,” <em>JHNR</em> 5 (2021)</li>
   </ul>
 </section>
 
@@ -71,14 +71,14 @@
   </div>
   <div class="bi sm" data-step="2"><span class="zh">歷史研究中的節點類型：</span><span class="en">Node types in historical research:</span></div>
   <div class="chips" data-step="2"><span>人物 people</span><span>地點 places</span><span>機構 institutions</span><span>事件 events</span><span>文本 texts</span><span>作品 works</span></div>
-  <div class="bi sm" style="margin-top:16px" data-step="3"><span class="zh">節點有<b>屬性</b>（attributes）：</span><span class="en">Nodes carry attributes:</span></div>
-  <table class="tbl" data-step="3">
+  <div class="bi sm" style="margin-top:8px" data-step="3"><span class="zh">節點有<b>屬性</b>（attributes）：</span><span class="en">Nodes carry attributes:</span></div>
+  <table class="tbl sm" data-step="3">
     <thead><tr><th>節點 node</th><th>生年 born</th><th>卒年 died</th><th>籍貫 native place</th><th>官職 office</th></tr></thead>
     <tr><td><b>王安石</b></td><td>1021</td><td>1086</td><td>撫州臨川</td><td>宰相</td></tr>
     <tr><td><b>司馬光</b></td><td>1019</td><td>1086</td><td>陝州夏縣</td><td>宰相</td></tr>
     <tr><td><b>蘇軾</b></td><td>1037</td><td>1101</td><td>眉州眉山</td><td>翰林學士</td></tr>
   </table>
-  <div class="callout key bi" data-step="4">
+  <div class="callout key bi" data-step="4" style="margin-top:8px">
     <span class="zh">屬性讓我們之後能問：<b>相連的人是否也共享籍貫、官職？</b></span>
     <span class="en">Attributes let us ask later: do connected people also share a native place or an office?</span>
   </div>
@@ -137,6 +137,18 @@
   </div>
 </section>
 
+<section class="slide" id="s-toy-bg" data-sec="basics">
+  <h2 class="bi"><span class="zh">背景：北宋的新法與舊法之爭</span><span class="en">Background for our example: reform and opposition in Northern Song</span></h2>
+  <div class="tl">
+    <div class="tle" data-step="1"><b>1069</b><div class="bi xs"><span class="zh">神宗任用<b>王安石</b>，推行新法（青苗法、免役法等）。</span><span class="en">Emperor Shenzong backs Wang Anshi’s New Policies.</span></div></div>
+    <div class="tle" data-step="2"><b>1070s</b><div class="bi xs"><span class="zh"><b>司馬光</b>、<b>韓琦</b>等反對；司馬光退居洛陽，編《資治通鑑》。</span><span class="en">Sima Guang, Han Qi and others oppose; Sima Guang retires to Luoyang to write the Zizhi tongjian.</span></div></div>
+    <div class="tle" data-step="3"><b>1085–86</b><div class="bi xs"><span class="zh">神宗去世，司馬光主政，廢除多數新法：<b>元祐更化</b>。</span><span class="en">Shenzong dies; Sima Guang returns and reverses most reforms (the Yuanyou period).</span></div></div>
+    <div class="tle" data-step="4"><b>1094–</b><div class="bi xs"><span class="zh">哲宗親政，起用<b>章惇</b>等新法派，元祐舊臣遭貶。</span><span class="en">Zhezong takes over; Zhang Dun and reformers return, Yuanyou officials are banished.</span></div></div>
+    <div class="tle" data-step="5"><b>1104</b><div class="bi xs"><span class="zh">徽宗朝頒布<b>元祐黨籍碑</b>：309 人的名單 —— 正是 De Weerdt 等人的研究對象。</span><span class="en">Huizong’s reign issues the Yuanyou faction list of 309 names, the subject of De Weerdt et al.</span></div></div>
+  </div>
+  <div class="callout key bi" data-step="6"><span class="zh">「新法」「舊法」是<b>後人與當時人貼的標籤</b>；蘇軾、歐陽修等人很難歸類。</span><span class="en">“New” and “old” are labels; people like Su Shi and Ouyang Xiu are hard to classify.</span></div>
+</section>
+
 <section class="slide" id="s-toy" data-sec="basics">
   <h2 class="bi"><span class="zh">一張小網絡</span><span class="en">A small network to work with</span></h2>
   <div class="two">
@@ -152,10 +164,8 @@
         <div><i style="background:#1f5fd6"></i><span class="bi xs"><span class="zh">舊法一系</span><span class="en">associated with the opposition</span></span></div>
         <div><i style="background:#8a93a6"></i><span class="bi xs"><span class="zh">其他／難以歸類</span><span class="en">other / hard to classify</span></span></div>
       </div>
-      <div class="callout bi" data-step="3" style="margin-top:20px">
-        <span class="zh">接下來幾頁，我們都用這張圖<b>量一量</b>。</span>
-        <span class="en">We will measure this one network for the next several slides.</span>
-      </div>
+      <div class="callout key" data-step="3" id="toy-box" style="margin-top:14px;min-height:112px"><div id="toy-info"></div></div>
+      <div class="bi xs" data-step="4" style="margin-top:8px"><span class="zh">接下來幾頁，我們都用這張圖<b>量一量</b>。</span><span class="en">We will measure this network on the next slides.</span></div>
     </div>
   </div>
 </section>
@@ -194,7 +204,7 @@
       <div class="stat" data-step="2"><div class="n" id="gm-d"></div><div class="bi xs"><span class="zh"><b>密度</b> = 實際的邊 ÷ 可能的邊（<span id="gm-max"></span>）</span><span class="en">Density: actual edges ÷ possible edges</span></div></div>
       <div class="stat" data-step="3"><div class="n" id="gm-p"></div><div class="bi xs"><span class="zh"><b>平均路徑長度</b>：任兩人之間平均隔幾步</span><span class="en">Average path length: steps between two nodes</span></div></div>
       <div class="stat" data-step="4"><div class="n" id="gm-diam"></div><div class="bi xs"><span class="zh"><b>直徑</b>：最遠的兩人（橘色路徑）</span><span class="en">Diameter: the longest shortest path (orange)</span></div></div>
-      <div class="bi xs" style="margin-top:14px" data-step="5"><span class="zh">注意：網絡越大，密度通常越低 —— 所以<b>不同規模的網絡不能直接比密度</b>。</span><span class="en">Large networks tend to be sparser, so densities of different-sized networks cannot be compared directly.</span></div>
+      <div class="bi xs" style="margin-top:6px" data-step="5"><span class="zh">網絡越大，密度通常越低：<b>不同規模不能直接比</b>。</span><span class="en">Larger networks are sparser: sizes must be accounted for.</span></div>
     </div>
   </div>
 </section>
@@ -282,11 +292,11 @@
     </div>
     <div class="grow">
       <div class="bi sm" data-step="1"><span class="zh"><b>模組度 Q</b>：群內的邊，比「隨機連接」所預期的多多少？</span><span class="en">Modularity Q: how many more edges fall within groups than chance would give?</span></div>
-      <div class="stat" style="margin-top:12px" data-step="1"><div class="n" id="q-val"></div><div class="bi xs" id="q-lab"></div></div>
+      <div class="stat" style="margin-top:4px" data-step="1"><div class="n" id="q-val"></div><div class="bi xs" id="q-lab"></div></div>
       <div class="bi xs" style="margin-top:12px" data-step="2"><span class="zh">已知標籤 Q = <b id="q-attr"></b>；演算法 Q = <b id="q-alg"></b>（越高，分群越清楚）</span><span class="en">Our labels vs. the algorithm: higher Q means a cleaner split</span></div>
       <div class="callout key bi" data-step="3" style="margin-top:14px">
-        <span class="zh">社群由<b>結構</b>算出，不是史料說的。與標籤不吻合之處，才有意思。</span>
-        <span class="en">Communities come from structure, not sources. Where they differ from our labels, it gets interesting.</span>
+        <span class="zh">社群由<b>結構</b>算出；與標籤不吻合之處才有意思。</span>
+        <span class="en">Structure, not sources, defines communities.</span>
       </div>
     </div>
   </div>
@@ -322,7 +332,7 @@
       <div class="callout" data-step="2" style="margin-top:14px">
         <div class="bi xs"><span class="zh">位置的意義只在<b>相對的遠近</b>；x、y 軸本身沒有意義。看起來在「中間」，不代表中心。</span><span class="en">Only relative closeness means anything; axes carry no meaning. “Centre of the picture” is not “central”.</span></div>
       </div>
-      <div class="bi xs" style="margin-top:12px" data-step="2"><span class="zh">結論要靠<b>指標與史料</b>，不要靠圖的「感覺」。</span><span class="en">Rest conclusions on measures and sources, not on how the picture feels.</span></div>
+      
     </div>
   </div>
 </section>
@@ -567,8 +577,8 @@
     <tr data-step="3"><td><b>Bol</b> 婺州</td><td>士人</td><td>親屬、學術關係</td><td>從親族到同僚？</td></tr>
     <tr data-step="4"><td><b>Chao et al.</b> 梁啟超、陳獨秀</td><td>30 個詞</td><td>詞語共現</td><td>兩人的建國構想有多相似？</td></tr>
     <tr data-step="5"><td><b>Armand &amp; Henriot</b> 民國</td><td>人物</td><td>傳記中的共現</td><td>共現＝關係嗎？</td></tr>
-    <tr data-step="6"><td><b>Levine</b> 留蘇／歐革命者</td><td>人物</td><td>共同經歷</td><td>誰是樞紐？</td></tr>
-    <tr data-step="7"><td><b>ECPO</b> 民國期刊</td><td>人、文章、廣告、機構</td><td>出現於</td><td>雙模網絡</td></tr>
+    <tr data-step="6"><td><b>Levine</b> 留蘇／歐革命者</td><td>人物</td><td>人際關係（SRL 資料集）</td><td>誰是樞紐？</td></tr>
+    <tr data-step="7"><td><b>ECPO</b> 民國期刊</td><td>人、文章、廣告、機構、圖像</td><td>人與刊載內容的關聯</td><td>雙模網絡</td></tr>
   </table>
   <div class="callout key bi" data-step="8"><span class="zh">注意：節點不一定是人，邊不一定是「友誼」。</span><span class="en">Nodes need not be people; edges need not be friendship.</span></div>
 </section>
@@ -666,10 +676,10 @@
 <section class="slide" id="s-bg-ecpo" data-sec="cases">
   <h2 class="bi"><span class="zh">雙模網絡的實例</span><span class="en">A two-mode network in practice</span></h2>
   <div class="two">
-    <div class="figbox" data-step="1"><img class="fig tall" style="max-height:500px" src="img/ecpo-ego.png" alt="Two-mode ego network of Song Qingling"><div class="figcap">Arnold &amp; Rudolph 2021, Fig. 2: two-mode ego network of Song Qingling in ECPO</div></div>
+    <div class="figbox" data-step="1"><img class="fig tall" style="max-height:440px" src="img/ecpo-ego.png" alt="Two-mode ego network of Song Qingling"><div class="figcap">Arnold &amp; Rudolph 2021, Fig. 2: two-mode ego network of Song Qingling in ECPO</div></div>
     <div class="grow">
       <div class="bi sm" data-step="2"><span class="zh">節點有<b>多種</b>：人物（藍）、文章（紫）、廣告（淺綠）、機構（深綠）、圖像（橘）。</span><span class="en">Several node types: persons, articles, advertisements, organisations, images.</span></div>
-      <div class="bi sm" style="margin-top:12px" data-step="3"><span class="zh">邊＝「出現於同一篇／同一頁」。</span><span class="en">Edges: appears in the same article or page.</span></div>
+      <div class="bi sm" style="margin-top:12px" data-step="3"><span class="zh">邊只連接<b>不同類型</b>的節點（例如人物 ↔ 文章）。</span><span class="en">Edges link nodes of different types (e.g. person ↔ article).</span></div>
       <div class="callout key bi" data-step="4" style="margin-top:14px"><span class="zh">多模網絡很豐富，但多數演算法只為<b>單模</b>設計；要把它投影成單模，或選用專門的方法。</span><span class="en">Rich, but most algorithms assume one mode: project to one mode or use methods built for multimodal data.</span></div>
     </div>
   </div>
