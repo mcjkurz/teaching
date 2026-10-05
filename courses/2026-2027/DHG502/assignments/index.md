@@ -3,7 +3,7 @@ layout: default
 title: DHG502 Assignments
 ---
 
-<p class="updated">Last updated: Sep 28, 2026</p>
+<p class="updated">Last updated: Oct 6, 2026</p>
 <h1>DHG 502 Assignments</h1>
 
 <h2>Submission Rules</h2>
@@ -21,9 +21,9 @@ title: DHG502 Assignments
 <p><strong>Due:</strong> 23 Sep, 9:00 am</p>
 <p>Analyze a historical source with an AI coding assistant and publish the result as a simple page on GitHub Pages. This exercise checks that the basic workflow functions before graded work begins. Full instructions are on the <a href="assignment-0/">Assignment 0 page</a>.</p>
 
-<h2><a href="assignment-1/">Assignment 1: The Company Words Keep in the <em>Mingshi</em> (15%)</a></h2>
+<h2><a href="assignment-1/">Assignment 1: The Company Words Keep in Official Histories (15%)</a></h2>
 <p><strong>Due:</strong> 12 Oct, 9:00 am</p>
-<p>Use collocation analysis to examine how the <em>Mingshi</em> 明史 represents one person, group, institution, or concept. Compare significance and strength measures across several window settings, read the passages behind the numbers, and submit a reproducible repository with an 800–1,200-word report. Full instructions and marking criteria are on the <a href="assignment-1/">Assignment 1 page</a>.</p>
+<p>Use collocation analysis to examine how an official history represents one person, group, institution, or concept. Choose the settings that fit your source, compare a significance measure with a strength measure, read the passages behind the numbers, and submit a reproducible repository with a 1,000–1,500-word report. Do not put your name or student ID in the repository. Full instructions are on the <a href="assignment-1/">Assignment 1 page</a>.</p>
 
 <h2>Assignment 2: From Historical Sources to Structured Data (15%)</h2>
 <p><strong>Due:</strong> 9 Nov, 9:00 am</p>

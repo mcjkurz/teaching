@@ -3,61 +3,52 @@ layout: default
 title: DHG502 Assignment 1
 ---
 
-<p class="updated">Last updated: Sep 28, 2026</p>
+<p class="updated">Last updated: Oct 6, 2026</p>
 <p><a href="../">Assignments</a> · <a href="../../">DHG 502 syllabus</a></p>
 <h1>Assignment 1: The Company Words Keep in Official Histories (15%)</h1>
 
 <p><strong>Due:</strong> 12 Oct, 9:00 am</p>
-<p>Use the collocation methods learned in class to examine how an official history represents one person, group, institution, or concept. You may use any official history (正史), premodern or modern, whole or in part: for example the <em>Shiji</em> 史記, the <em>Mingshi</em> 明史, the <em>Draft History of Qing</em> 清史稿, or a modern official history. You may also compare two official histories, for example to see how the words around the same target change from one to the other. If your target has several forms (a name and its alternative names, titles, or variant terms), you may merge them into one target with <code>pooled=True</code> in <code>find_collocates</code>.</p>
-<p>Official histories are not neutral records. Their compilers decided who received a biography, in which category, and in what words. This assignment asks: <em>What can collocations tell us about the way an official history frames the people and groups it describes?</em> The words that cooccur with a name or a term more often than chance would predict are one way of tracing what the compilers attached to it: actions, offices, places, relationships, and moral judgments. Choose your own target; examples are 魏忠賢, 張居正, 宦官, 倭, 流賊, or 巡撫.</p>
+<p>Use the collocation methods from class to examine how an official history (正史) represents one person, group, institution, or concept. The history may be premodern or modern, whole or in part. You may also compare two histories. Official histories are not neutral records: their compilers chose who to include and in what words. Ask what the words around your target suggest about that framing.</p>
 
-<p>On Moodle, submit the URL of your GitHub repository and a PDF of your report. Everything else lives in the repository, which must include:</p>
+<p>On Moodle, submit the URL of your GitHub repository and a PDF of your report. Do not put your name or student ID anywhere in the repository. The repository must include:</p>
 <ul>
-<li><code>README.md</code> with your name, research question, the source(s) and their metadata and rights, the source URL(s), and exact instructions for running the analysis (do not put your student ID in a public repository)</li>
-<li><code>data/</code> with the source(s) as plain-text UTF-8 file(s); if you use only part of a text, say which part and how you selected it</li>
-<li><code>userdict.txt</code>, the jieba user dictionary you used</li>
-<li>Python script(s) (<code>.py</code>) that process the text and run the collocation analysis</li>
-<li><code>output/collocates_*.csv</code> (one CSV per run; see the method requirements below)</li>
-<li><code>output/results.html</code> (a single page showing all your collocation tables together, for easy comparison)</li>
-<li><code>output/kwic.html</code> (concordance lines for the collocates you discuss)</li>
-<li><code>report.md</code>, the same report as the PDF you submit on Moodle, <strong>800–1,200 words in English</strong></li>
+<li><code>README.md</code> with your research question, the source(s) (citation, where you got them, rights, and URL), and exact instructions for running the analysis</li>
+<li><code>data/</code> with the source(s) as plain-text UTF-8; if you use only part of a text, say which part and how you selected it</li>
+<li>Python script(s) that prepare the text and run the analysis</li>
+<li>the collocation results, one file per run, and a simple HTML page for comparing them</li>
+<li>concordance lines for the collocates you discuss</li>
+<li><code>report.md</code>, the same report as the PDF, <strong>1,000–1,500 words in English</strong></li>
 <li><code>AI-USE.md</code> following the <a href="../">course-wide requirements</a></li>
-<li><code>requirements.txt</code> listing the packages the analysis needs</li>
+<li><code>requirements.txt</code></li>
 </ul>
 
-<h2>Method requirements</h2>
+<h2>Method</h2>
+<p>Use <code>find_collocates</code> from qhchina. Choose the settings that fit your source and your question, and explain those choices. In particular:</p>
 <ul>
-<li>Use <code>find_collocates</code> from qhchina (<code>qhchina.analytics.collocations.find_collocates</code>) with the arguments learned in class (target word(s), method/horizon, filters, measures, etc.).</li>
-<li>If your source is in traditional characters, convert it to simplified Chinese with <code>opencc</code> <strong>before</strong> splitting it into sentences and segmenting it with jieba, and write your target word(s) in simplified characters.</li>
-<li>Load a jieba <strong>user dictionary</strong> (<code>userdict.txt</code>) with the names, offices, and terms your question depends on, and check a sample of the segmented sentences by eye. Report what you checked and what problems remained.</li>
-<li>Remove stopwords with qhchina’s <code>load_stopwords</code> (for example <code>"zh_cl_sim"</code> for classical Chinese in simplified characters; choose the list that fits your source). You may add your own stopwords; if you do, list them and explain why.</li>
-<li>Focus on words of two or more characters: set <code>min_word_length</code> to at least 2 in the <code>filters</code> argument.</li>
-<li>Keep only statistically significant collocates: use <code>correction="fdr_bh"</code> and set <code>max_adjusted_p</code> to 0.05 in the <code>filters</code> argument.</li>
-<li>Report both a <strong>significance</strong> measure and a <strong>strength</strong> measure: add <code>measures=["log_likelihood", "logDice"]</code>, and compare the ranking by <code>log_likelihood</code> with the ranking by <code>log_dice</code>.</li>
-<li>Explore your results <strong>iteratively</strong>: run <code>find_collocates</code> more than once with different settings before settling on your interpretation. Try at least two window sizes (e.g. <code>horizon=5</code> and <code>horizon=10</code>) with <code>method="window"</code>, and also <code>method="sentence"</code>. Save each run to its own CSV and build a simple HTML page that puts all the tables together. Your report should reflect this process of exploration, not just the output of a single run.</li>
-<li>Go back to the text: use <code>kwic</code> from qhchina to read the passages behind at least <strong>five</strong> of the collocates you discuss, and cite passages by 卷 (juan) where possible.</li>
+<li>Prepare the text so that segmentation is trustworthy (character conversion, a user dictionary, stopwords, and so on, as needed). Check a sample by eye and say what problems remained.</li>
+<li>Decide which collocates to keep. Filters such as word length, frequency, and significance depend on the language and the size of the text. In classical Chinese, a minimum length of two characters will drop many real words.</li>
+<li>Report one <strong>significance</strong> measure and one <strong>strength</strong> measure, and compare the two rankings.</li>
+<li>Run the analysis more than once, changing how “near” is defined (for example the window size, or a window versus the sentence). Save each run. Your interpretation should come from comparing them, not from a single run.</li>
+<li>Read the passages behind the collocates you discuss, and cite them so a reader can find them in the source.</li>
 </ul>
 
 <h2>Report</h2>
-<p>The report (800–1,200 words in English) should read as a short, well-argued essay rather than a checklist.</p>
+<p>Write 1,000–1,500 words in English, as a short essay:</p>
 <ul>
-<li><strong>Question and source.</strong> State your question and why it matters. Introduce the source(s): which text or part of it you used, where it came from, its rights status, and roughly how many characters or tokens it contains. Say briefly how and when the history was compiled and why that matters for your question.</li>
-<li><strong>Processing.</strong> Describe how you processed the text: conversion, sentence splitting, segmentation, the user dictionary, stopwords, and the segmentation problems you found.</li>
-<li><strong>Method.</strong> Explain your statistical setup in terms a historian can follow: how the contingency table is built, what a p-value from Fisher’s exact test tells you, why you corrected for multiple testing, why you chose the test direction (<code>alternative</code>) you did, and the difference between the significance measure (log-likelihood) and the strength measure (logDice).</li>
-<li><strong>Results.</strong> Present your main results, with a small table or visualization if it helps. Say how the collocates changed across window sizes and methods, and where the two rankings disagreed.</li>
-<li><strong>Interpretation.</strong> Why is your target surrounded by these words and not others? Use close reading of specific passages to support, qualify, or correct what the numbers suggest. Bring your findings into conversation with at least one scholarly work on your topic or on the compilation of your source.</li>
-<li><strong>Limitations.</strong> What would a different window size, target word, segmentation, or source have changed? What are the limits of reading an official history through collocations alone, and whose perspective do your results capture?</li>
+<li><strong>Question and source.</strong> Your question, which text or part you used, its origin, rights, and size, and why the way it was compiled matters.</li>
+<li><strong>Processing and method.</strong> How you prepared the text, and why you chose your window, filters, and measures. Explain, in terms a historian can follow, how the contingency table is built, what a p-value tells you, and how significance differs from strength.</li>
+<li><strong>Results and interpretation.</strong> What you found, how the results changed across runs, and where the two rankings disagreed. Use close reading to support or qualify the numbers, and cite at least one scholarly work.</li>
+<li><strong>Limitations.</strong> What a different window, target, segmentation, or source might have changed, and what collocations alone cannot show.</li>
 </ul>
-<p>You may use AI to help with code and troubleshooting, but the analytical prose must be your own work (see the <a href="../">submission rules</a>). A report that is fully AI-generated will receive <strong>0 points</strong>. If there is any doubt, the instructor may ask you to explain your workflow individually, to confirm that you understand your own analysis.</p>
-<p>Once your analysis is finished, <strong>commit</strong> and <strong>push</strong> everything (data, scripts, user dictionary, CSVs, HTML pages, <code>report.md</code>, and <code>AI-USE.md</code>) to your repository, then submit the repository URL and the PDF report on Moodle.</p>
+<p>You may use AI for code and troubleshooting. The analytical prose must be your own (see the <a href="../">submission rules</a>). A fully AI-generated report receives <strong>0 points</strong>. The instructor may ask you to explain your analysis.</p>
 
 <h2>Marking criteria</h2>
 <ul>
-<li><strong>Source and data documentation (20%):</strong> complete citation, provenance, rights, and transparent processing decisions, including segmentation checks</li>
-<li><strong>Method and code (25%):</strong> a correct, readable workflow that creates the required outputs and meets the method requirements</li>
-<li><strong>Statistical reasoning (15%):</strong> a clear explanation of the contingency table, Fisher’s test, multiple-testing correction, and the difference between significance and strength</li>
-<li><strong>Historical interpretation (30%):</strong> a focused argument connecting collocational patterns to specific passages, engaging with scholarship, and acknowledging uncertainty</li>
-<li><strong>Reproducibility and AI disclosure (10%):</strong> usable instructions, dependencies, an organized repository, and a complete <code>AI-USE.md</code></li>
+<li><strong>Source and documentation (20%):</strong> citation, provenance, rights, and a clear account of how you prepared the text</li>
+<li><strong>Method and code (25%):</strong> a readable workflow whose settings fit the source and the question</li>
+<li><strong>Statistical reasoning (15%):</strong> contingency table, significance, and the difference between significance and strength</li>
+<li><strong>Historical interpretation (30%):</strong> an argument that connects the collocates to passages and to scholarship</li>
+<li><strong>Reproducibility and AI disclosure (10%):</strong> instructions that work, an organized repository with no personal identifiers, and a complete <code>AI-USE.md</code></li>
 </ul>
 
-<p>For the segmentation, collocation, and concordance workflow (including example prompts you can adapt), see the <a href="../../notes/week-04/">Week 4 notes</a>.</p>
+<p>The workflow from class is in the <a href="../../notes/week-04/">Week 4 notes</a>.</p>
