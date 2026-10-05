@@ -233,7 +233,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           </ul>
         </div>
       </td>
-      <td class="notes"></td>
+      <td class="notes"><a href="slides/networks/">Slides</a></td>
     </tr>
   </tbody>
   <tbody class="due">
