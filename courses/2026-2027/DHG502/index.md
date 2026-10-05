@@ -239,7 +239,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
   <tbody class="due">
     <tr>
       <td></td>
-      <td class="date">12 Oct</td>
+      <td class="date">13 Oct</td>
       <td colspan="3"><a href="assignments/assignment-1/">Assignment 1 due, 9:00 am</a></td>
     </tr>
   </tbody>

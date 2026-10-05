@@ -7,7 +7,7 @@ title: DHG502 Assignment 1
 <p><a href="../">Assignments</a> · <a href="../../">DHG 502 syllabus</a></p>
 <h1>Assignment 1: The Company Words Keep in Official Histories (15%)</h1>
 
-<p><strong>Due:</strong> 12 Oct, 9:00 am</p>
+<p><strong>Due:</strong> 13 Oct, 9:00 am</p>
 <p>Use the collocation methods from class to examine how an official history (正史) represents one person, group, institution, or concept. The history may be premodern or modern, whole or in part. You may also compare two histories. Official histories are not neutral records: their compilers chose who to include and in what words. Ask what the words around your target suggest about that framing.</p>
 
 <p>On Moodle, submit the URL of your GitHub repository and a PDF of your report. Do not put your name or student ID anywhere in the repository. The repository must include:</p>
