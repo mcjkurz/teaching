@@ -450,7 +450,7 @@ h2.bi > .en { font-size: 40px; font-weight: 600; } h2.bi > .zh { font-size: 22px
 .title-slide .big-zh { font-size: 40px; font-weight: 500; color: var(--mute); letter-spacing: .1em; order: 1; }
 .title-slide .quote .en { font-size: 28px; font-style: italic; } .title-slide .quote .zh { font-size: 20px; }
 
-/* language switch: English only by default; button / T shows the Chinese too */
+/* language switch: both languages by default; button / T hides the Chinese */
 .lcard p { margin: 8px 0 0; font-size: 16px; line-height: 1.45; color: var(--ink); }
 .lcard b { font-size: 24px; }
 .lang-en .zh, .lang-en .zh-s, .lang-en .big-zh { display: none !important; }
@@ -473,3 +473,8 @@ table.tbl.sm { font-size: 17px; } table.tbl.sm td, table.tbl.sm th { padding: 4p
 .banner { margin: 16px 0 0; }
 .banner img { display: block; width: 100%; height: 190px; object-fit: cover; border-radius: 10px; border: 1.5px solid var(--line); }
 .banner figcaption { font-size: 12px; color: var(--mute); margin-top: 4px; }
+
+.rel { display: flex; align-items: center; gap: 14px; }
+.rel .ric { flex: none; width: 44px; height: 44px; color: var(--tgt); }
+.rel b { font-size: 21px; line-height: 1.25; } .rel .zh-s { font-size: 15px; color: var(--mute); }
+.tle > b { width: 140px; white-space: nowrap; }
