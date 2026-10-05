@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>網絡分析 Network Analysis — DHG 502</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+
+<section class="slide full title-slide" id="s-title">
+  <div class="big-zh">網絡分析</div>
+  <div class="big-en">Historical Network Analysis</div>
+  <div class="rule"></div>
+  <div class="quote bi">
+    <span class="zh">網絡能用在任何研究上；但應該用的，要少得多。</span>
+    <span class="en">“Networks can be used on any project. Networks should be used on far fewer.” — Scott Weingart</span>
+  </div>
+  <div class="hint">DHG 502 Digital Approaches in Historical Research &nbsp;·&nbsp; Week 5 &nbsp;·&nbsp; <kbd>←</kbd> <kbd>→</kbd> navigate &nbsp;·&nbsp; <kbd>1</kbd>–<kbd>8</kbd> sections &nbsp;·&nbsp; <kbd>F</kbd> fullscreen</div>
+</section>
+
+<section class="slide" id="s-plan" data-sec="basics">
+  <h2 class="bi"><span class="zh">今天的路線</span><span class="en">Today’s route</span></h2>
+  <div class="route">
+    <div class="rstop" data-step="1"><i>1</i><div class="bi sm"><span class="zh"><b>基本概念</b></span><span class="en">Nodes, edges, types</span></div></div>
+    <div class="rarrow" data-step="2">→</div>
+    <div class="rstop" data-step="2"><i>2</i><div class="bi sm"><span class="zh"><b>測量</b></span><span class="en">Global and local</span></div></div>
+    <div class="rarrow" data-step="3">→</div>
+    <div class="rstop" data-step="3"><i>3</i><div class="bi sm"><span class="zh"><b>版面</b></span><span class="en">Layout</span></div></div>
+    <div class="rarrow" data-step="4">→</div>
+    <div class="rstop" data-step="4"><i>4</i><div class="bi sm"><span class="zh"><b>資料與個案</b></span><span class="en">Data, cases, theory</span></div></div>
+  </div>
+  <div class="bi sm" style="margin-top:26px" data-step="5"><span class="zh"><b>本週閱讀</b></span><span class="en">This week’s readings</span></div>
+  <ul class="reads" data-step="5">
+    <li>Scott B. Weingart, “Demystifying Networks, Parts I &amp; II” <span class="role">概念 · concepts</span></li>
+    <li>Ahnert, Ahnert, Coleman &amp; Weingart, <em>The Network Turn</em> (2020) <span class="role">方法論 · methodology</span></li>
+    <li>De Weerdt, Ho, Wagner, Qiao &amp; Chu, “Is There a Faction in This List?” (2016/2020) <span class="role">個案 · case study</span></li>
+    <li class="opt">(optional) Rudolph &amp; Chen, eds., “Beyond Guanxi: Chinese Historical Networks” (2020)</li>
+  </ul>
+</section>
+
+<section class="slide" id="s-why" data-sec="basics">
+  <h2 class="bi"><span class="zh">什麼時候想到「網絡」？</span><span class="en">When do we think “network”?</span></h2>
+  <div class="def" data-step="1">
+    <div class="bi">
+      <span class="zh">研究對象之間<b>相互依存</b>；要理解發生了什麼，<b>關係本身</b>是必要的。</span>
+      <span class="en">The things you study are interdependent: the connections matter, and are required to understand what is going on.</span>
+    </div>
+    <div class="src">after Weingart, “Demystifying Networks”, Part I</div>
+  </div>
+  <div class="bi sm" data-step="2"><span class="zh">歷史資料裡到處是關係：</span><span class="en">Historical sources are full of relations:</span></div>
+  <div class="relgrid">
+    <div class="rel" data-step="2"><b>書信往來</b><span>correspondence</span></div>
+    <div class="rel" data-step="3"><b>師生、同年</b><span>teacher–student, same exam year</span></div>
+    <div class="rel" data-step="4"><b>姻親、親屬</b><span>marriage and kinship</span></div>
+    <div class="rel" data-step="5"><b>共同出現</b><span>named together in a text</span></div>
+    <div class="rel" data-step="6"><b>城市與路線</b><span>places linked by routes</span></div>
+    <div class="rel" data-step="7"><b>文本互引</b><span>texts citing or copying texts</span></div>
+  </div>
+  <div class="callout key bi" data-step="8">
+    <span class="zh">網絡把這些關係變成<b>可以計數、比較</b>的東西。</span>
+    <span class="en">A network turns relations into something we can count and compare.</span>
+  </div>
+</section>
+
+<section class="slide" id="s-nodes" data-sec="basics">
+  <h2 class="bi"><span class="zh">節點</span><span class="en">Nodes</span></h2>
+  <div class="def" data-step="1">
+    <div class="bi sm"><span class="zh"><b>節點</b>（node；也叫 vertex, actor, agent）：我們所研究的「東西」。通常是同一<b>類型</b>的許多個例。</span><span class="en">The “stuff” we study: many individuals of one type (also called vertices, actors, agents).</span></div>
+  </div>
+  <div class="bi sm" data-step="2"><span class="zh">歷史研究中的節點類型：</span><span class="en">Node types in historical research:</span></div>
+  <div class="chips" data-step="2"><span>人物 people</span><span>地點 places</span><span>機構 institutions</span><span>事件 events</span><span>文本 texts</span><span>作品 works</span></div>
+  <div class="bi sm" style="margin-top:16px" data-step="3"><span class="zh">節點有<b>屬性</b>（attributes）：</span><span class="en">Nodes carry attributes:</span></div>
+  <table class="tbl" data-step="3">
+    <thead><tr><th>節點 node</th><th>生年 born</th><th>卒年 died</th><th>籍貫 native place</th><th>官職 office</th></tr></thead>
+    <tr><td><b>王安石</b></td><td>1021</td><td>1086</td><td>撫州臨川</td><td>宰相</td></tr>
+    <tr><td><b>司馬光</b></td><td>1019</td><td>1086</td><td>陝州夏縣</td><td>宰相</td></tr>
+    <tr><td><b>蘇軾</b></td><td>1037</td><td>1101</td><td>眉州眉山</td><td>翰林學士</td></tr>
+  </table>
+  <div class="callout key bi" data-step="4">
+    <span class="zh">屬性讓我們之後能問：<b>相連的人是否也共享籍貫、官職？</b></span>
+    <span class="en">Attributes let us ask later: do connected people also share a native place or an office?</span>
+  </div>
+</section>
+
+<section class="slide" id="s-edges" data-sec="basics">
+  <h2 class="bi"><span class="zh">邊</span><span class="en">Edges</span></h2>
+  <div class="bi sm"><span class="zh"><b>邊</b>（edge；也叫 link, tie, relation）：節點之間的關係。<b>關係的類型</b>要事先定義。</span><span class="en">Relations between nodes (links, ties). The type of relation must be defined up front.</span></div>
+  <div class="edgegrid">
+    <div class="ecell" data-step="1">
+      <svg viewBox="0 0 230 90"><line x1="45" y1="45" x2="185" y2="45" class="ge hot"/><circle cx="45" cy="45" r="18" class="cl-n"/><circle cx="185" cy="45" r="18" class="cl-n"/><text x="45" y="50" text-anchor="middle" class="cl-t">甲</text><text x="185" y="50" text-anchor="middle" class="cl-t">乙</text></svg>
+      <div class="bi xs"><span class="zh"><b>無向</b>：對稱的關係</span><span class="en">Undirected: symmetric (kinship, alliance)</span></div>
+    </div>
+    <div class="ecell" data-step="2">
+      <svg viewBox="0 0 230 90"><defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#e0570f"/></marker></defs><line x1="63" y1="45" x2="165" y2="45" class="ge hot" marker-end="url(#arr)"/><circle cx="45" cy="45" r="18" class="cl-n"/><circle cx="185" cy="45" r="18" class="cl-n"/><text x="45" y="50" text-anchor="middle" class="cl-t">甲</text><text x="185" y="50" text-anchor="middle" class="cl-t">乙</text></svg>
+      <div class="bi xs"><span class="zh"><b>有向</b>：有方向</span><span class="en">Directed: a letter from A to B, a citation</span></div>
+    </div>
+    <div class="ecell" data-step="3">
+      <svg viewBox="0 0 230 90"><line x1="45" y1="45" x2="185" y2="45" class="ge hot" style="stroke-width:9"/><circle cx="45" cy="45" r="18" class="cl-n"/><circle cx="185" cy="45" r="18" class="cl-n"/><text x="115" y="30" text-anchor="middle" class="cl-t" style="font-size:16px">× 12</text></svg>
+      <div class="bi xs"><span class="zh"><b>加權</b>：強度或次數</span><span class="en">Weighted: 12 letters, not 1</span></div>
+    </div>
+    <div class="ecell" data-step="4">
+      <svg viewBox="0 0 230 90"><path d="M45 45 Q115 12 185 45" class="ge hot" style="stroke:#1f5fd6"/><path d="M45 45 Q115 78 185 45" class="ge hot"/><circle cx="45" cy="45" r="18" class="cl-n"/><circle cx="185" cy="45" r="18" class="cl-n"/></svg>
+      <div class="bi xs"><span class="zh"><b>多種類型</b>：同一對人可有多種關係</span><span class="en">Multiple types: both colleagues and in-laws</span></div>
+    </div>
+  </div>
+  <div class="callout key bi" data-step="5">
+    <span class="zh">每一個選擇都是<b>歷史判斷</b>：「同年」算不算一條邊？一封信算一條邊嗎？</span>
+    <span class="en">Every choice is a historical judgement: is “same exam year” an edge? Is one letter a tie?</span>
+  </div>
+</section>
+
+<section class="slide" id="s-modes" data-sec="basics">
+  <h2 class="bi"><span class="zh">一類節點，還是兩類？</span><span class="en">One kind of node, or two?</span></h2>
+  <div class="bi sm" data-step="1"><span class="zh"><b>單模</b>（1-mode）：只有一種節點。<b>雙模</b>（2-mode, bipartite）：兩種節點，邊只連接不同類型。</span><span class="en">1-mode: one type of node. 2-mode (bipartite): two types, and edges only link across types.</span></div>
+  <div class="two" style="margin-top:6px">
+    <div data-step="2">
+      <div class="ct-title">雙模 2-mode：人物 ↔ 文獻 people ↔ documents</div>
+      <svg viewBox="0 0 330 300" width="330" height="300" class="net">
+        <g class="ge hot"><line x1="70" y1="50" x2="250" y2="70"/><line x1="70" y1="110" x2="250" y2="70"/><line x1="70" y1="110" x2="250" y2="150"/><line x1="70" y1="170" x2="250" y2="150"/><line x1="70" y1="170" x2="250" y2="230"/><line x1="70" y1="230" x2="250" y2="230"/></g>
+        <g class="cl"><circle cx="70" cy="50" r="18"/><circle cx="70" cy="110" r="18"/><circle cx="70" cy="170" r="18"/><circle cx="70" cy="230" r="18"/></g>
+        <g class="cl2"><rect x="232" y="52" width="36" height="36" rx="6"/><rect x="232" y="132" width="36" height="36" rx="6"/><rect x="232" y="212" width="36" height="36" rx="6"/></g>
+        <g class="cl-t" text-anchor="middle"><text x="70" y="55">甲</text><text x="70" y="115">乙</text><text x="70" y="175">丙</text><text x="70" y="235">丁</text><text x="250" y="75">一</text><text x="250" y="155">二</text><text x="250" y="235">三</text></g>
+      </svg>
+    </div>
+    <div class="grow" style="padding-top:60px">
+      <div class="absarrow" data-step="3" style="font-size:40px;margin-bottom:6px">⇒ <span class="small">投影 projection</span></div>
+      <div data-step="3"><div class="ct-title">單模 1-mode：同現於一份文獻 co-named in a document</div>
+      <svg viewBox="0 0 400 100" width="400" height="100" class="net"><g class="ge hot"><line x1="50" y1="50" x2="150" y2="50"/><line x1="150" y1="50" x2="250" y2="50"/><line x1="250" y1="50" x2="350" y2="50"/></g><g class="cl"><circle cx="50" cy="50" r="18"/><circle cx="150" cy="50" r="18"/><circle cx="250" cy="50" r="18"/><circle cx="350" cy="50" r="18"/></g><g class="cl-t" text-anchor="middle"><text x="50" y="55">甲</text><text x="150" y="55">乙</text><text x="250" y="55">丙</text><text x="350" y="55">丁</text></g></svg></div>
+      <div class="bi sm" style="margin-top:14px" data-step="4"><span class="zh">多數中心性演算法為<b>單模</b>設計。</span><span class="en">Most centrality algorithms were designed for one-mode networks.</span></div>
+    </div>
+  </div>
+  <div class="callout bi" data-step="5">
+    <span class="zh">把雙模網絡丟進 Gephi 算「中心性」，程式會跑，數字卻<b>不是你以為的意思</b>（Weingart）。</span>
+    <span class="en">Load a bipartite network into Gephi and the centrality button runs, but the numbers do not mean what they usually mean (Weingart).</span>
+  </div>
+</section>
+
+<section class="slide" id="s-toy" data-sec="basics">
+  <h2 class="bi"><span class="zh">一張小網絡</span><span class="en">A small network to work with</span></h2>
+  <div class="two">
+    <div class="netbox">
+      <svg id="g-toy" class="net" viewBox="0 0 640 430" width="640" height="430"></svg>
+      <div class="toycap">示意網絡（簡化，非研究資料） toy network, simplified for illustration</div>
+    </div>
+    <div class="grow">
+      <div class="bi sm" data-step="1"><span class="zh"><b>12</b> 個節點（人物）<br><b>19</b> 條無向邊（「有往來」）</span><span class="en">12 nodes (people), 19 undirected edges (“in contact”)</span></div>
+      <div class="bi sm" style="margin-top:16px" data-step="2"><span class="zh">以<b>屬性</b>上色：</span><span class="en">Colour by attribute:</span></div>
+      <div id="toy-legend" class="legend">
+        <div><i style="background:#e0570f"></i><span class="bi xs"><span class="zh">新法一系</span><span class="en">associated with the New Policies</span></span></div>
+        <div><i style="background:#1f5fd6"></i><span class="bi xs"><span class="zh">舊法一系</span><span class="en">associated with the opposition</span></span></div>
+        <div><i style="background:#8a93a6"></i><span class="bi xs"><span class="zh">其他／難以歸類</span><span class="en">other / hard to classify</span></span></div>
+      </div>
+      <div class="callout bi" data-step="3" style="margin-top:20px">
+        <span class="zh">接下來幾頁，我們都用這張圖<b>量一量</b>。</span>
+        <span class="en">We will measure this one network for the next several slides.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-props" data-sec="measures">
+  <h2 class="bi"><span class="zh">整體與局部</span><span class="en">Network properties: global and local</span></h2>
+  <div class="cards" style="margin-top:14px">
+    <div class="card" data-step="1">
+      <h3 class="bi"><span class="zh">整體測量</span><span class="en">Global measures</span></h3>
+      <div class="bi sm" style="margin:10px 0"><span class="zh">描述<b>整張網絡</b>的結構</span><span class="en">Describe the overall structure</span></div>
+      <div class="chips sm"><span>密度 density</span><span>平均路徑長度 average path length</span><span>模組度 modularity</span></div>
+      <div class="bi xs" style="margin-top:12px"><span class="zh">例：緊密的明代官員網絡 vs. 鬆散的貿易網絡</span><span class="en">A dense network of Ming officials vs. a sparse trade network</span></div>
+    </div>
+    <div class="card" data-step="2">
+      <h3 class="bi"><span class="zh">局部測量</span><span class="en">Local measures</span></h3>
+      <div class="bi sm" style="margin:10px 0"><span class="zh">聚焦<b>個別節點</b>或小群體</span><span class="en">Focus on individual nodes or small groups</span></div>
+      <div class="chips sm"><span>度中心性 degree</span><span>聚類係數 clustering</span><span>中介／接近 betweenness, closeness</span></div>
+      <div class="bi xs" style="margin-top:12px"><span class="zh">例：誰是關鍵中間人？誰屬於緊密小圈子？</span><span class="en">Who is the key intermediary? Who sits in a tight circle?</span></div>
+    </div>
+  </div>
+  <div class="callout key bi" data-step="3">
+    <span class="zh">整體看<b>大圖</b>，局部看<b>行動者</b>。接下來用同一張小網絡逐項計算。</span>
+    <span class="en">Global: the big picture. Local: the actors. Next we compute each measure on one small network.</span>
+  </div>
+</section>
+
+<section class="slide" id="s-global" data-sec="measures">
+  <h2 class="bi"><span class="zh">整體測量</span><span class="en">Global measures: describing the whole network</span></h2>
+  <div class="two">
+    <div class="netbox">
+      <svg id="g-global" class="net" viewBox="0 0 640 430" width="640" height="430"></svg>
+      <div class="toycap">示意網絡 toy network</div>
+    </div>
+    <div class="grow">
+      <div class="stat" data-step="1"><div class="n"><span id="gm-n"></span> · <span id="gm-e"></span></div><div class="bi xs"><span class="zh"><b>規模</b>：節點數 · 邊數</span><span class="en">Size: nodes · edges</span></div></div>
+      <div class="stat" data-step="2"><div class="n" id="gm-d"></div><div class="bi xs"><span class="zh"><b>密度</b> = 實際的邊 ÷ 可能的邊（<span id="gm-max"></span>）</span><span class="en">Density: actual edges ÷ possible edges</span></div></div>
+      <div class="stat" data-step="3"><div class="n" id="gm-p"></div><div class="bi xs"><span class="zh"><b>平均路徑長度</b>：任兩人之間平均隔幾步</span><span class="en">Average path length: steps between two nodes</span></div></div>
+      <div class="stat" data-step="4"><div class="n" id="gm-diam"></div><div class="bi xs"><span class="zh"><b>直徑</b>：最遠的兩人（橘色路徑）</span><span class="en">Diameter: the longest shortest path (orange)</span></div></div>
+      <div class="bi xs" style="margin-top:14px" data-step="5"><span class="zh">注意：網絡越大，密度通常越低 —— 所以<b>不同規模的網絡不能直接比密度</b>。</span><span class="en">Large networks tend to be sparser, so densities of different-sized networks cannot be compared directly.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-central-def" data-sec="measures">
+  <h2 class="bi"><span class="zh">誰重要？三種中心性</span><span class="en">Who matters? Three centralities</span></h2>
+  <div class="cards" style="margin-top:12px">
+    <div class="card" data-step="1">
+      <h3 class="bi"><span class="zh">度中心性</span><span class="en">Degree</span></h3>
+      <div class="bi sm" style="margin:10px 0"><span class="zh">直接連接的數量</span><span class="en">How many direct connections</span></div>
+      <div class="bi xs"><span class="zh">例：通信對象最多的學者</span><span class="en">The scholar with the most correspondents</span></div>
+      <div class="ex">誰最<b>活躍</b> who is busiest</div>
+    </div>
+    <div class="card" data-step="2">
+      <h3 class="bi"><span class="zh">中介中心性</span><span class="en">Betweenness</span></h3>
+      <div class="bi sm" style="margin:10px 0"><span class="zh">有多常位於其他人的最短路徑上</span><span class="en">How often a node lies on shortest paths between others</span></div>
+      <div class="bi xs"><span class="zh">例：連接兩個派系的人</span><span class="en">The one connecting two factions</span></div>
+      <div class="ex">誰是<b>橋樑</b> who is the bridge</div>
+    </div>
+    <div class="card" data-step="3">
+      <h3 class="bi"><span class="zh">接近中心性</span><span class="en">Closeness</span></h3>
+      <div class="bi sm" style="margin:10px 0"><span class="zh">到所有人平均有多近</span><span class="en">How near a node is to everyone else</span></div>
+      <div class="bi xs"><span class="zh">例：位於貿易路線中心的城市</span><span class="en">A city at the centre of trade routes</span></div>
+      <div class="ex">誰<b>最快到達</b>全網 who reaches all fastest</div>
+    </div>
+  </div>
+  <div class="bi xs" style="margin-top:16px" data-step="4"><span class="zh">進階：<b>特徵向量中心性</b>與 <b>PageRank</b> —— 連到「重要的人」比連到「很多人」更算數。</span><span class="en">Advanced: eigenvector centrality and PageRank weigh the importance of the neighbours too (links to important nodes count for more).</span></div>
+</section>
+
+<section class="slide" id="s-central" data-sec="measures">
+  <h2 class="bi"><span class="zh">同一張圖，三個答案</span><span class="en">One network, three answers</span></h2>
+  <div class="two">
+    <div class="netbox">
+      <svg id="g-central" class="net" viewBox="0 0 640 430" width="640" height="430"></svg>
+      <div class="toycap">節點大小 ＝ 中心性；橘色為前三名 size = centrality, orange = top three</div>
+    </div>
+    <div class="grow">
+      <div class="swap" style="min-height:96px">
+        <div class="bi" data-step="1" data-until="2"><span class="zh"><b>度</b>：誰的朋友最多？</span><span class="en">Degree: who has the most ties?</span></div>
+        <div class="bi" data-step="2" data-until="3"><span class="zh"><b>中介</b>：誰是橋樑？</span><span class="en">Betweenness: who bridges the camps?</span></div>
+        <div class="bi" data-step="3"><span class="zh"><b>接近</b>：誰離所有人最近？</span><span class="en">Closeness: who is nearest to everyone?</span></div>
+      </div>
+      <div id="cent-list"></div>
+      <div class="bi xs" style="margin-top:14px" data-step="3"><span class="zh">三個排名<b>不一樣</b>。選哪個指標，就是選哪種「重要」。</span><span class="en">The rankings differ. Choosing a measure means choosing a kind of importance.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-clust" data-sec="measures">
+  <h2 class="bi"><span class="zh">聚類係數：朋友的朋友也互相認識嗎？</span><span class="en">Clustering: are my neighbours also neighbours?</span></h2>
+  <div class="two">
+    <div class="netbox">
+      <svg id="g-clust" class="net" viewBox="0 0 640 430" width="640" height="430"></svg>
+      <div class="toycap">藍＝所選節點；橘＝鄰居與鄰居之間的邊 blue = chosen node, orange = its neighbours and their mutual edges</div>
+    </div>
+    <div class="grow">
+      <div class="bi sm"><span class="zh">看一個節點的鄰居：他們之間有多少條邊？</span><span class="en">Look at one node’s neighbours: how many of them know each other?</span></div>
+      <div id="cl-out" style="margin-top:14px"></div>
+      <div class="bi xs" style="margin-top:12px" data-step="3"><span class="zh">高 C ＝ 緊密小團體；低 C ＝ 鄰居互不相識，此人可能是<b>中介者</b>。</span><span class="en">High C: a tight clique. Low C: neighbours do not know each other, so this node may be a broker.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-central-adv" data-sec="measures">
+  <h2 class="bi"><span class="zh">進階中心性</span><span class="en">Advanced centrality measures</span></h2>
+  <div class="bi sm"><span class="zh">不只算「有幾條邊」，還算「<b>連到誰</b>」。</span><span class="en">Not only how many ties, but who the ties lead to.</span></div>
+  <div class="grid2" style="margin-top:14px">
+    <div class="card" data-step="1"><h3 class="bi sm"><span class="zh">特徵向量中心性</span><span class="en">Eigenvector centrality</span></h3><div class="bi xs" style="margin-top:8px"><span class="zh">鄰居越重要，自己越重要。</span><span class="en">Important if connected to other well-connected nodes.</span></div></div>
+    <div class="card" data-step="2"><h3 class="bi sm"><span class="zh">Katz 中心性</span><span class="en">Katz centrality</span></h3><div class="bi xs" style="margin-top:8px"><span class="zh">計入直接與間接連結，距離越遠權重越小（衰減）。</span><span class="en">Direct and indirect ties, with a decay for distant nodes.</span></div></div>
+    <div class="card" data-step="3"><h3 class="bi sm"><span class="zh">PageRank</span><span class="en">PageRank</span></h3><div class="bi xs" style="margin-top:8px"><span class="zh">兼顧連結的<b>數量與品質</b>；原用於網頁排名。</span><span class="en">Weighs the number and quality of links; designed for ranking web pages.</span></div></div>
+    <div class="card" data-step="4"><h3 class="bi sm"><span class="zh">調和中心性</span><span class="en">Harmonic centrality</span></h3><div class="bi xs" style="margin-top:8px"><span class="zh">類似接近中心性，但適用於<b>不連通</b>的網絡。</span><span class="en">Like closeness, but works on disconnected networks.</span></div></div>
+  </div>
+  <div class="callout bi" data-step="5">
+    <span class="zh">歷史網絡常常<b>不連通</b>（史料有缺）；選指標時要先檢查網絡是否連通。</span>
+    <span class="en">Historical networks are often disconnected because sources are incomplete: check connectivity before choosing a measure.</span>
+  </div>
+</section>
+
+<section class="slide" id="s-comm" data-sec="measures">
+  <h2 class="bi"><span class="zh">社群：網絡自己分出來的群</span><span class="en">Communities: groups the network finds by itself</span></h2>
+  <div class="two">
+    <div class="netbox">
+      <svg id="g-comm" class="net" viewBox="0 0 640 430" width="640" height="430"></svg>
+      <div class="toycap">示意網絡 toy network</div>
+    </div>
+    <div class="grow">
+      <div class="bi sm" data-step="1"><span class="zh"><b>模組度 Q</b>：群內的邊，比「隨機連接」所預期的多多少？</span><span class="en">Modularity Q: how many more edges fall within groups than chance would give?</span></div>
+      <div class="stat" style="margin-top:12px" data-step="1"><div class="n" id="q-val"></div><div class="bi xs" id="q-lab"></div></div>
+      <div class="bi xs" style="margin-top:12px" data-step="2"><span class="zh">已知標籤 Q = <b id="q-attr"></b>；演算法 Q = <b id="q-alg"></b>（越高，分群越清楚）</span><span class="en">Our labels vs. the algorithm: higher Q means a cleaner split</span></div>
+      <div class="callout key bi" data-step="3" style="margin-top:14px">
+        <span class="zh">社群是<b>結構</b>找出的，不是史料說的。結構群與「黨派」標籤吻合嗎？<b>不吻合，才有意思。</b></span>
+        <span class="en">Communities come from structure, not from the sources. Do they match the party labels? Where they do not, it gets interesting.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-layout-types" data-sec="layout">
+  <h2 class="bi"><span class="zh">圖的版面</span><span class="en">Graph layouts</span></h2>
+  <div class="def" data-step="1"><div class="bi sm"><span class="zh"><b>版面（layout）</b>：決定節點與邊在圖上的位置的方法。它影響可讀性，也影響我們「看到」什麼。</span><span class="en">The method that positions nodes and edges. It shapes readability, and what we think we see.</span></div></div>
+  <div class="grid3">
+    <div class="card" data-step="2"><h3 class="bi sm"><span class="zh">力導向</span><span class="en">Force-directed / spring</span></h3><div class="bi xs"><span class="zh">節點互斥、邊如彈簧；均衡且好看。</span><span class="en">Nodes repel, edges act as springs.</span></div></div>
+    <div class="card" data-step="3"><h3 class="bi sm"><span class="zh">圓形</span><span class="en">Circular</span></h3><div class="bi xs"><span class="zh">節點排成一圈；適合比較同一組節點。</span><span class="en">Nodes on a circle; good for comparing the same node set.</span></div></div>
+    <div class="card" data-step="4"><h3 class="bi sm"><span class="zh">同心圓</span><span class="en">Shell</span></h3><div class="bi xs"><span class="zh">節點分層排成同心圓；突顯層級。</span><span class="en">Concentric circles; highlights hierarchy.</span></div></div>
+    <div class="card" data-step="5"><h3 class="bi sm"><span class="zh">Kamada–Kawai</span><span class="en">Kamada–Kawai</span></h3><div class="bi xs"><span class="zh">另一種力導向；節點分布更均勻。</span><span class="en">A force-directed variant with more even spacing.</span></div></div>
+    <div class="card" data-step="6"><h3 class="bi sm"><span class="zh">譜版面</span><span class="en">Spectral</span></h3><div class="bi xs"><span class="zh">用特徵值定位；常能顯示群集。</span><span class="en">Uses eigenvalues; often reveals clusters.</span></div></div>
+    <div class="card" data-step="7" style="border-style:dashed"><h3 class="bi sm"><span class="zh">時間／地圖</span><span class="en">Timeline / geographic</span></h3><div class="bi xs"><span class="zh">以時間或地理座標定位：位置<b>有</b>意義。</span><span class="en">Positions given by time or geography: here position is meaningful.</span></div></div>
+  </div>
+</section>
+
+<section class="slide" id="s-layout" data-sec="layout">
+  <h2 class="bi"><span class="zh">版面不是證據</span><span class="en">A layout is not evidence</span></h2>
+  <div class="two">
+    <div class="netbox">
+      <svg id="g-layout" class="net" viewBox="0 0 640 430" width="640" height="430"></svg>
+    </div>
+    <div class="grow">
+      <div class="bi sm"><span class="zh"><b>同一份資料</b>，三種畫法：</span><span class="en">The same data, drawn three ways:</span></div>
+      <div class="laynames">
+        <div class="lay-name"><b>隨機</b> random</div>
+        <div class="lay-name"><b>圓形</b> circular</div>
+        <div class="lay-name"><b>力導向</b> force-directed</div>
+      </div>
+      <div class="bi xs" style="margin-top:16px" data-step="2"><span class="zh">力導向：節點互相排斥，邊像彈簧把相連的節點拉近。</span><span class="en">Force-directed: nodes repel, edges pull like springs.</span></div>
+      <div class="callout" data-step="2" style="margin-top:14px">
+        <div class="bi xs"><span class="zh">位置的意義只在<b>相對的遠近</b>；x、y 軸本身沒有意義。看起來在「中間」，不代表中心。</span><span class="en">Only relative closeness means anything; axes carry no meaning. “Centre of the picture” is not “central”.</span></div>
+      </div>
+      <div class="bi xs" style="margin-top:12px" data-step="2"><span class="zh">結論要靠<b>指標與史料</b>，不要靠圖的「感覺」。</span><span class="en">Rest conclusions on measures and sources, not on how the picture feels.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-layout-fig" data-sec="layout">
+  <h2 class="bi"><span class="zh">好版面：固定位置，才能比較</span><span class="en">A good layout: fixed positions allow comparison</span></h2>
+  <img class="fig wide" src="img/chao-words.png" alt="Liang Qichao and Chen Duxiu term networks" data-step="1">
+  <div class="figcap" data-step="1">Chao et al. 2021, Fig. 7: 30 terms on a circle; left Liang Qichao, right Chen Duxiu; red edges are shared by both men.</div>
+  <div class="two3" style="margin-top:8px">
+    <div class="callout key" data-step="2"><div class="bi xs"><span class="zh">兩張圖用<b>同樣的節點位置</b>，眼睛一下就能看出哪些邊不同。</span><span class="en">Both graphs use identical node positions, so differences in edges are visible at once.</span></div></div>
+    <div class="callout" data-step="3"><div class="bi xs"><span class="zh">力導向版面會讓兩張圖<b>無法並排比較</b>。</span><span class="en">A force-directed layout would make the two graphs hard to compare.</span></div></div>
+  </div>
+</section>
+
+<section class="slide" id="s-layout-hair" data-sec="layout">
+  <h2 class="bi"><span class="zh">毛線球：太多節點時怎麼辦</span><span class="en">The hairball: what to do with too many nodes</span></h2>
+  <div class="two">
+    <div class="figbox" data-step="1"><img class="fig tall" src="img/jin-tales.png" alt="Eastern Jin aristocratic network"><div class="figcap">Shang &amp; Sang 2021, Fig. 2: aristocratic network from the <i>Shishuo xinyu</i> (<i>Tales of the World</i>), 250 nodes</div></div>
+    <div class="grow">
+      <div class="bi sm" data-step="2"><span class="zh"><b>用視覺通道傳遞資訊</b></span><span class="en">Use visual channels to carry information</span></div>
+      <ul class="bul" data-step="2">
+        <li><b>大小／字級</b> = 中心性 <em>size = centrality</em></li>
+        <li><b>顏色</b> = 社群（Louvain，18 個）<em>colour = community</em></li>
+        <li><b>線粗</b> = 權重 <em>thickness = weight</em></li>
+      </ul>
+      <div class="bi sm" style="margin-top:14px" data-step="3"><span class="zh"><b>過濾</b>：只畫重要的</span><span class="en">Filter: draw only what matters</span></div>
+      <div class="bi xs" data-step="3"><span class="zh">Xiong 的圖濾掉了中介中心性低於中位數的節點，「為了視覺清晰」。</span><span class="en">Xiong filters out nodes below the median betweenness “for visual clarity”.</span></div>
+      <div class="callout key bi" data-step="4" style="margin-top:14px"><span class="zh">圖是<b>溝通工具</b>；結論來自指標與史料。</span><span class="en">The picture communicates; conclusions come from measures and sources.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-tables" data-sec="data">
+  <h2 class="bi"><span class="zh">網絡 ＝ 兩張表</span><span class="en">A network is two tables</span></h2>
+  <div class="two">
+    <div class="grow" data-step="1">
+      <div class="bi sm"><span class="zh"><b>節點表</b> node table</span><span class="en">one row per entity</span></div>
+      <table class="tbl sm">
+        <thead><tr><th>id</th><th>name</th><th>born</th><th>group</th></tr></thead>
+        <tr><td>P001</td><td>王安石</td><td>1021</td><td>new</td></tr>
+        <tr><td>P002</td><td>司馬光</td><td>1019</td><td>old</td></tr>
+        <tr><td>P003</td><td>蘇軾</td><td>1037</td><td>other</td></tr>
+        <tr><td>P004</td><td>蘇轍</td><td>1039</td><td>other</td></tr>
+        <tr><td>…</td><td></td><td></td><td></td></tr>
+      </table>
+    </div>
+    <div class="grow" data-step="2" style="flex:1.5">
+      <div class="bi sm"><span class="zh"><b>邊表</b> edge list</span><span class="en">one row per relation</span></div>
+      <table class="tbl sm">
+        <thead><tr><th>source</th><th>target</th><th>type</th><th>weight</th><th>evidence</th></tr></thead>
+        <tr><td>P003</td><td>P004</td><td>兄弟 brothers</td><td>1</td><td>…</td></tr>
+        <tr><td>P003</td><td>P002</td><td>書信 letter</td><td>3</td><td>文集卷…</td></tr>
+        <tr><td>P001</td><td>P003</td><td>共現 co-named</td><td>7</td><td>…</td></tr>
+        <tr><td>…</td><td></td><td></td><td></td><td></td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="callout key bi" data-step="3">
+    <span class="zh">這就是 Gephi、Palladio、Python 所需要的<b>全部</b>輸入。難的是<b>怎麼填好這兩張表</b>。</span>
+    <span class="en">This is all that Gephi, Palladio, or Python need as input. The hard part is filling in the two tables.</span>
+  </div>
+  <div class="bi xs" style="margin-top:12px" data-step="4"><span class="zh">好習慣：每條邊都要記下<b>出處</b>（evidence），才能回到史料核對。</span><span class="en">Good habit: record the evidence for every edge, so you can go back to the source.</span></div>
+</section>
+
+<section class="slide" id="s-cooc" data-sec="data">
+  <h2 class="bi"><span class="zh">共現：用文本造邊</span><span class="en">Co-occurrence: building edges from texts</span></h2>
+  <div class="bi sm" data-step="1"><span class="zh">不是每段關係都有記載；但<b>兩個名字出現在同一處</b>，是可以大規模抽取的證據。</span><span class="en">Few relationships are recorded explicitly, but two names appearing together can be extracted at scale.</span></div>
+  <div class="toks" style="margin:20px 0 6px;font-size:30px" data-step="2">
+    <span class="tok">……</span><span class="tok tgt">甲</span><span class="tok">與</span><span class="tok col">乙</span><span class="tok">同遊，</span><span class="tok">丙</span><span class="tok">後至。</span><span class="tok">……</span>
+  </div>
+  <div class="small" data-step="2">示意句 illustrative sentence</div>
+  <div class="def" data-step="3" style="margin-top:20px">
+    <div class="bi"><span class="zh">同一個句子裡？同一封信裡？同一份文獻裡？—— <b>「共現」要多近</b>，是你的選擇。</span><span class="en">Same sentence? Same letter? Same document? How near is “together” is your choice.</span></div>
+  </div>
+  <div class="callout key bi" data-step="4">
+    <span class="zh">這就是<b>上週搭配詞</b>的問題：視窗、句子、語法關係。邊的定義決定網絡的形狀。</span>
+    <span class="en">The same problem as last week’s collocations: window, sentence, grammatical relation. The definition of the edge shapes the network.</span>
+  </div>
+  <div class="bi xs" style="margin-top:12px" data-step="5"><span class="zh">De Weerdt 等人：在同時代人的文集中標記黨籍名單上的人名，兩人共現就算一條「被認知的關係」(perceived tie)。</span><span class="en">De Weerdt et al.: names from the faction lists were tagged in contemporaries’ writings; co-occurrence counts as a “perceived tie”.</span></div>
+</section>
+
+<section class="slide" id="s-cooc2" data-sec="data">
+  <h2 class="bi"><span class="zh">共現的陷阱：一份名單 ＝ 一個全連接圖</span><span class="en">A trap: one list becomes a clique</span></h2>
+  <div class="cards" style="margin-top:8px">
+    <div class="card" data-step="1">
+      <h3 class="bi sm"><span class="zh">一句話裡 3 個名字</span><span class="en">3 names in one sentence</span></h3>
+      <svg id="clq3" class="net" viewBox="0 0 160 140" width="200" height="175"></svg>
+      <div class="bi xs"><span class="zh"><b>3</b> 條邊</span><span class="en">3 edges</span></div>
+    </div>
+    <div class="card" data-step="2">
+      <h3 class="bi sm"><span class="zh">一份名單裡 5 個名字</span><span class="en">5 names in one list</span></h3>
+      <svg id="clq5" class="net" viewBox="0 0 160 140" width="200" height="175"></svg>
+      <div class="bi xs"><span class="zh"><b>10</b> 條邊 —— n 個名字 → n(n−1)/2 條邊</span><span class="en">10 edges: n names give n(n−1)/2 edges</span></div>
+    </div>
+    <div class="card" data-step="3">
+      <h3 class="bi sm"><span class="zh">309 人的黨籍名單</span><span class="en">The 309-name Yuanyou list</span></h3>
+      <div style="font-size:54px;font-weight:600;color:var(--col);margin:22px 0 4px">47,586</div>
+      <div class="bi xs"><span class="zh">條「關係」，只因為一份名單</span><span class="en">“ties” created by a single list: 309 × 308 / 2</span></div>
+    </div>
+  </div>
+  <div class="callout key bi" data-step="4">
+    <span class="zh">De Weerdt 等人因此把整份名單這類文件<b>另外處理</b>，不當作關係證據。</span>
+    <span class="en">De Weerdt et al. therefore treat documents that merely reproduce the full list separately, not as evidence of relations.</span>
+  </div>
+</section>
+
+<section class="slide" id="s-identity" data-sec="data">
+  <h2 class="bi"><span class="zh">同一個人，多個名字</span><span class="en">Entity identity: one person, many names</span></h2>
+  <div class="bi sm" data-step="1"><span class="zh">電腦把「蘇軾」和「蘇東坡」當成兩個節點。</span><span class="en">A computer treats 蘇軾 and 蘇東坡 as two different nodes.</span></div>
+  <div class="chips" data-step="1" style="margin:10px 0"><span>蘇軾</span><span>蘇子瞻</span><span>蘇東坡</span><span>東坡居士</span><span>蘇文忠</span></div>
+  <div class="two" style="margin-top:6px">
+    <div class="idcol" data-step="2">
+      <div class="ct-title">不做對應 without resolution</div>
+      <svg viewBox="0 0 330 150" width="330" height="150" class="net">
+        <g class="ge hot"><line x1="40" y1="30" x2="100" y2="40"/><line x1="40" y1="75" x2="100" y2="40"/><line x1="40" y1="75" x2="100" y2="105"/><line x1="40" y1="120" x2="100" y2="105"/><line x1="190" y1="40" x2="250" y2="30"/><line x1="190" y1="105" x2="250" y2="120"/></g>
+        <g class="cl"><circle cx="40" cy="30" r="11"/><circle cx="40" cy="75" r="11"/><circle cx="40" cy="120" r="11"/><circle cx="250" cy="30" r="11"/><circle cx="250" cy="120" r="11"/></g>
+        <g class="cl2b"><circle cx="100" cy="40" r="13"/><circle cx="100" cy="105" r="13"/><circle cx="190" cy="40" r="13"/></g>
+        <g class="cl-t" style="font-size:13px" text-anchor="middle"><text x="100" y="45">蘇軾</text><text x="100" y="110">東坡</text><text x="190" y="45">子瞻</text></g>
+      </svg>
+      <div class="bi xs"><span class="zh">一個人被拆成<b>三個小節點</b>，每個都只有一兩個鄰居</span><span class="en">One person split into three small, weakly connected nodes</span></div>
+    </div>
+    <div class="idcol" data-step="3">
+      <div class="ct-title">對應後 after resolution</div>
+      <svg viewBox="0 0 330 150" width="330" height="150" class="net">
+        <g class="ge hot"><line x1="165" y1="75" x2="40" y2="30"/><line x1="165" y1="75" x2="40" y2="75"/><line x1="165" y1="75" x2="40" y2="120"/><line x1="165" y1="75" x2="290" y2="30"/><line x1="165" y1="75" x2="290" y2="120"/></g>
+        <g class="cl"><circle cx="40" cy="30" r="11"/><circle cx="40" cy="75" r="11"/><circle cx="40" cy="120" r="11"/><circle cx="290" cy="30" r="11"/><circle cx="290" cy="120" r="11"/></g>
+        <circle cx="165" cy="75" r="22" class="cl2b" style="fill:#ffe8d9;stroke:#e0570f"/><text x="165" y="80" text-anchor="middle" class="cl-t" style="font-size:14px">蘇軾</text>
+      </svg>
+      <div class="bi xs"><span class="zh">一個<b>樞紐</b>節點，度中心性大增</span><span class="en">One hub node: its degree jumps</span></div>
+    </div>
+  </div>
+  <div class="two3" style="margin-top:14px">
+    <div class="callout key" data-step="4"><div class="bi xs"><span class="zh"><b>反方向的錯誤</b>：不同人同名，被錯併成一個節點</span><span class="en">The opposite error: different people with the same name merged into one</span></div></div>
+    <div class="callout" data-step="5"><div class="bi xs"><span class="zh"><b>解法</b>：用唯一 ID 的人物資料庫（如 CBDB）；De Weerdt 等人：309 人中 301 人在 CBDB</span><span class="en">Fix: a database with unique IDs (e.g. CBDB). In De Weerdt et al., 301 of 309 listees are in CBDB.</span></div></div>
+  </div>
+</section>
+
+<section class="slide" id="s-missing" data-sec="data">
+  <h2 class="bi"><span class="zh">缺失的關係與不確定性</span><span class="en">Missing relationships and uncertainty</span></h2>
+  <div class="grid2">
+    <div class="card" data-step="1">
+      <h3 class="bi sm"><span class="zh">① 沒有邊 ≠ 沒有關係</span><span class="en">No edge ≠ no relationship</span></h3>
+      <div class="bi xs" style="margin-top:8px"><span class="zh">文獻沒有記載，只代表<b>沒有留下證據</b>。</span><span class="en">Absence from the sources means no surviving evidence, not no relation.</span></div>
+    </div>
+    <div class="card" data-step="2">
+      <h3 class="bi sm"><span class="zh">② 史料被選擇過</span><span class="en">The archive was selected</span></h3>
+      <div class="bi xs" style="margin-top:8px"><span class="zh">牛津藏信的網絡，反映的是<b>誰收藏了什麼</b>，不只是誰寫了信（Weingart）。</span><span class="en">A network of letters held in Oxford reflects what Oxford collected, not only who wrote to whom.</span></div>
+    </div>
+    <div class="card" data-step="3">
+      <h3 class="bi sm"><span class="zh">③ 以「我」為中心的取樣</span><span class="en">Ego-network sampling</span></h3>
+      <div class="bi xs" style="margin-top:8px"><span class="zh">只收集某人的朋友，這個人<b>必然</b>最中心。取樣方式直接影響中心性。</span><span class="en">Collect one person’s friends and that person is necessarily most central. Sampling shapes centrality.</span></div>
+    </div>
+    <div class="card" data-step="4">
+      <h3 class="bi sm"><span class="zh">④ 邊本身不確定</span><span class="en">Edges are uncertain</span></h3>
+      <div class="bi xs" style="margin-top:8px"><span class="zh">是「同一人」嗎？是「友」還是「敵」？人文資料「本質上就是不確定的」。</span><span class="en">Same person? Friend or foe? Humanistic data are almost by definition uncertain.</span></div>
+    </div>
+  </div>
+  <div class="callout key bi" data-step="5">
+    <span class="zh">所以：<b>記錄你的決定</b>，並在結論中說明網絡「看不見」什麼。</span>
+    <span class="en">So: document your decisions, and state in your conclusions what the network cannot see.</span>
+  </div>
+</section>
+
+<section class="slide" id="s-faction-q" data-sec="case">
+  <h2 class="bi"><span class="zh">黨籍名單裡真的有「黨」嗎？</span><span class="en">Is there a faction in this list?</span></h2>
+  <div class="bi sm"><span class="zh">De Weerdt, Ho, Wagner, Qiao &amp; Chu (<i>Journal of Chinese History</i>, 2020)</span><span class="en">Large-scale network analysis of Song faction lists</span></div>
+  <div class="lists">
+    <div class="lcard" data-step="1"><b>元祐黨籍</b><span class="yr">c. 1104</span><span class="cnt">309 人 names</span></div>
+    <div class="lcard" data-step="2"><b>紹興名單</b><span class="yr">c. 1142</span><span class="cnt"></span></div>
+    <div class="lcard" data-step="3"><b>慶元黨禁</b><span class="yr">c. 1198</span><span class="cnt">59 人 names</span></div>
+  </div>
+  <div class="bi sm" style="margin-top:6px" data-step="4"><span class="zh">問題：名單上的人，在<b>當時人眼中</b>真的彼此相連嗎？還是「黨」只是名單製造出來的？</span><span class="en">Question: were the people on these lists actually seen as connected by their contemporaries, or is “faction” an artefact of the list?</span></div>
+  <div class="callout key bi" data-step="5">
+    <span class="zh">把一個老問題，改成<b>可檢驗的</b>問題：同時代文集裡，名單上的人是否更常被一起提到？</span>
+    <span class="en">An old debate becomes a testable question: are listees mentioned together in contemporary writings?</span>
+  </div>
+</section>
+
+<section class="slide" id="s-faction-method" data-sec="case">
+  <h2 class="bi"><span class="zh">他們怎麼做</span><span class="en">How they did it</span></h2>
+  <div class="flow">
+    <div class="fstep" data-step="1"><i>1</i><div class="bi sm"><span class="zh"><b>名單</b> → 節點</span><span class="en">Each listee becomes a node, matched to CBDB (301 of 309)</span></div></div>
+    <div class="fstep" data-step="2"><i>2</i><div class="bi sm"><span class="zh"><b>標記人名</b>（含別名）於同時代文集</span><span class="en">Tag names and aliases in contemporary prose collections (MARKUS)</span></div></div>
+    <div class="fstep" data-step="3"><i>3</i><div class="bi sm"><span class="zh"><b>共現</b> → 邊（「被認知的關係」）</span><span class="en">Co-occurrence becomes an edge: a perceived tie</span></div></div>
+    <div class="fstep" data-step="4"><i>4</i><div class="bi sm"><span class="zh"><b>算密度、聚類係數</b>、社群</span><span class="en">Density, clustering, community detection</span></div></div>
+    <div class="fstep" data-step="5"><i>5</i><div class="bi sm"><span class="zh"><b>與隨機樣本比較</b>（下一頁）</span><span class="en">Compare against random samples (next slide)</span></div></div>
+  </div>
+  <div class="bi xs" style="margin-top:12px" data-step="6"><span class="zh">還區分了：作者「自己提到自己的關係」、名單上的人所寫的文字，與其他人所寫的文字。</span><span class="en">They also separated self-reported ties, and texts by listees from texts by outsiders.</span></div>
+</section>
+
+<section class="slide" id="s-faction-stat" data-sec="case">
+  <h2 class="bi"><span class="zh">不同大小的網絡，怎麼比？</span><span class="en">How do you compare networks of different sizes?</span></h2>
+  <div class="bi sm" data-step="1"><span class="zh">問題：大網絡的密度通常較低 —— 直接比，會誤判。</span><span class="en">Problem: larger networks are usually sparser, so a direct comparison misleads.</span></div>
+  <div class="flow h" style="margin-top:20px">
+    <div class="bx" data-step="2"><b>大網絡</b><span>e.g. 146 nodes</span></div>
+    <div class="absarrow" data-step="3">→</div>
+    <div class="bx" data-step="3"><b>隨機抽樣</b><span>down-sample to the size of the small network</span></div>
+    <div class="absarrow" data-step="4">→</div>
+    <div class="bx" data-step="4"><b>重複 1,000 次</b><span>gives a null distribution</span></div>
+    <div class="absarrow" data-step="5">→</div>
+    <div class="bx hl" data-step="5"><b>經驗 p 值</b><span>is the small network’s density unusual?</span></div>
+  </div>
+  <div class="callout key bi" data-step="6">
+    <span class="zh">跟上週一樣的邏輯：不問「這個數字大不大」，而問「<b>在偶然之下，這個數字會多大</b>」。</span>
+    <span class="en">The same logic as last week: not “is this number big?” but “how big would it be by chance?”</span>
+  </div>
+</section>
+
+<section class="slide" id="s-faction-find" data-sec="case">
+  <h2 class="bi"><span class="zh">他們發現了什麼</span><span class="en">What they found</span></h2>
+  <div class="grid2">
+    <div class="card" data-step="1">
+      <h3 class="bi sm"><span class="zh">慶元名單更緊密</span><span class="en">The Qingyuan group is denser</span></h3>
+      <div class="bi xs" style="margin-top:8px"><span class="zh">被禁者的網絡（59 人中 49 人入網）顯著比元祐組（309 人中 146 人入網）<b>更密、局部聚類更高</b>。</span><span class="en">The blacklisted Qingyuan network (49 of 59) is significantly denser, with higher local clustering, than the Yuanyou group (146 of 309).</span></div>
+    </div>
+    <div class="card" data-step="2">
+      <h3 class="bi sm"><span class="zh">只有「核心」才相連</span><span class="en">Only a core is connected</span></h3>
+      <div class="bi xs" style="margin-top:8px"><span class="zh">元祐名單上的多數人，在這些文獻中<b>與名單上其他人沒有關聯</b>。</span><span class="en">A majority of Yuanyou listees are not associated with others on the list in these sources.</span></div>
+    </div>
+    <div class="card" data-step="3">
+      <h3 class="bi sm"><span class="zh">不是同一個現象</span><span class="en">Not one continuous phenomenon</span></h3>
+      <div class="bi xs" style="margin-top:8px"><span class="zh">三份名單在結構上<b>各有特徵</b>，不宜當作同一種「黨爭」。</span><span class="en">The lists have different features; they should not be read as the same phenomenon.</span></div>
+    </div>
+    <div class="card" data-step="4">
+      <h3 class="bi sm"><span class="zh">結論仍可被挑戰</span><span class="en">Conclusions remain open</span></h3>
+      <div class="bi xs" style="margin-top:8px"><span class="zh">作者強調：計算結論像傳統結論一樣，<b>可以被修正或反駁</b>。</span><span class="en">The authors stress that computational conclusions, like traditional ones, may be adapted or challenged.</span></div>
+    </div>
+  </div>
+  <div class="callout key bi" data-step="5">
+    <span class="zh">網絡沒有「證明」黨存在或不存在；它讓一個爭論有了<b>可比較的證據</b>。</span>
+    <span class="en">The network does not prove that factions existed or did not; it gives the debate comparable evidence.</span>
+  </div>
+</section>
+
+<section class="slide" id="s-bg-intro" data-sec="cases">
+  <h2 class="bi"><span class="zh">中國史上的網絡研究</span><span class="en">Case studies from “Beyond Guanxi”</span></h2>
+  <div class="bi xs">Rudolph &amp; Chen, eds., <i>Journal of Historical Network Research</i> 5 (2021)</div>
+  <table class="tbl sm" style="margin-top:12px">
+    <thead><tr><th>研究 study</th><th>節點 nodes</th><th>邊 edges</th><th>問題 question</th></tr></thead>
+    <tr data-step="1"><td><b>Shang &amp; Sang</b> 東晉</td><td>人物</td><td>《世說新語》中的互動</td><td>家族內聚 vs. 跨家族關係？</td></tr>
+    <tr data-step="2"><td><b>Xiong</b> 南宋</td><td>官職</td><td>仕途轉任（有向）</td><td>哪些職位是「跳板」？</td></tr>
+    <tr data-step="3"><td><b>Bol</b> 婺州</td><td>士人</td><td>親屬、學術關係</td><td>從親族到同僚？</td></tr>
+    <tr data-step="4"><td><b>Chao et al.</b> 梁啟超、陳獨秀</td><td>30 個詞</td><td>詞語共現</td><td>兩人的建國構想有多相似？</td></tr>
+    <tr data-step="5"><td><b>Armand &amp; Henriot</b> 民國</td><td>人物</td><td>傳記中的共現</td><td>共現＝關係嗎？</td></tr>
+    <tr data-step="6"><td><b>Levine</b> 留蘇／歐革命者</td><td>人物</td><td>共同經歷</td><td>誰是樞紐？</td></tr>
+    <tr data-step="7"><td><b>ECPO</b> 民國期刊</td><td>人、文章、廣告、機構</td><td>出現於</td><td>雙模網絡</td></tr>
+  </table>
+  <div class="callout key bi" data-step="8"><span class="zh">注意：節點不一定是人，邊不一定是「友誼」。</span><span class="en">Nodes need not be people; edges need not be friendship.</span></div>
+</section>
+
+<section class="slide" id="s-bg-jin" data-sec="cases">
+  <h2 class="bi"><span class="zh">東晉士族：家族是堡壘嗎？</span><span class="en">Eastern Jin: were aristocratic families fortresses?</span></h2>
+  <div class="bi xs">Shang Wenyi &amp; Sang Zizhou, “Solidity in a Turbulent Flow” (2021)</div>
+  <div class="flow" style="margin-top:12px">
+    <div class="fstep" data-step="1"><i>1</i><div class="bi sm"><span class="zh"><b>資料</b>：《世說新語》的軼事</span><span class="en">Data: anecdotes in <i>A New Account of the Tales of the World</i></span></div></div>
+    <div class="fstep" data-step="2"><i>2</i><div class="bi sm"><span class="zh"><b>網絡</b>：250 個人物、505 條邊；195 人歸入 62 個家族（屬性）</span><span class="en">250 nodes, 505 edges; family affiliation as a node attribute (195 people, 62 families)</span></div></div>
+    <div class="fstep" data-step="3"><i>3</i><div class="bi sm"><span class="zh"><b>測試</b>：同族相連（<b>同質性 homophily</b>）有多強？與模擬網絡比較（ERGM）</span><span class="en">How strong is homophily by family? Compared with simulated networks (ERGM)</span></div></div>
+    <div class="fstep" data-step="4"><i>4</i><div class="bi sm"><span class="zh"><b>結果</b>：同族偏好存在，但<b>很弱</b>；跨家族往來很普遍</span><span class="en">Homophily exists but is weak; ties across families were common</span></div></div>
+  </div>
+  <div class="callout key bi" data-step="5"><span class="zh">對比「士族相互衝突」的傳統敘述：網絡顯示了相當程度的<b>社會凝聚</b>。</span><span class="en">Against the traditional emphasis on conflict between families, the network shows notable social cohesion.</span></div>
+  <div class="bi xs" style="margin-top:10px" data-step="6"><span class="zh">對應今天的概念：<b>屬性</b>（家族）＋ <b>與隨機比較</b>（模擬）。</span><span class="en">Today’s concepts at work: node attributes, and comparison with a random baseline.</span></div>
+</section>
+
+<section class="slide" id="s-bg-xiong" data-sec="cases">
+  <h2 class="bi"><span class="zh">節點不一定是人：官職網絡</span><span class="en">Nodes need not be people: a network of offices</span></h2>
+  <div class="bi xs">Xiong Huei-Lan, “Path toward the Top Leadership” (2021): Imperial Library appointees, 1131–1164</div>
+  <div class="chain" data-step="1">
+    <div class="cn">祕書省<span>Imperial Library</span></div><div class="ca">→</div>
+    <div class="cn">某職位<span>office B</span></div><div class="ca">→</div>
+    <div class="cn">某職位<span>office C</span></div><div class="ca">→</div>
+    <div class="cn hl">高層職位<span>top offices</span></div>
+  </div>
+  <div class="small" data-step="1" style="margin-top:2px">示意 schematic</div>
+  <div class="stats3" data-step="2">
+    <div class="stat"><div class="n">197</div><div class="bi xs"><span class="zh">被任命者</span><span class="en">appointees</span></div></div>
+    <div class="stat"><div class="n">3,367</div><div class="bi xs"><span class="zh">轉任紀錄</span><span class="en">transfer records</span></div></div>
+    <div class="stat"><div class="n">1,042 · 2,360</div><div class="bi xs"><span class="zh">節點（官職）· 有向加權邊</span><span class="en">nodes (offices) · directed, weighted edges</span></div></div>
+  </div>
+  <div class="bi sm" style="margin-top:12px" data-step="3"><span class="zh">邊有<b>方向</b>、有<b>權重</b>（轉任次數）；許多職位是通往最高層的<b>跳板</b>。</span><span class="en">Edges are directed and weighted; many offices turn out to be stepping-stones to the top.</span></div>
+  <div class="callout key bi" data-step="4"><span class="zh">同樣的工具，不同的問題：<b>制度如何運作</b>，而不只是誰認識誰。</span><span class="en">The same tools, a different question: how the institution worked, not only who knew whom.</span></div>
+</section>
+
+<section class="slide" id="s-bg-bol" data-sec="cases">
+  <h2 class="bi"><span class="zh">從親族到同僚</span><span class="en">From kinship to collegiality</span></h2>
+  <div class="two">
+    <div class="figbox" data-step="1"><img class="fig tall" src="img/bol-yuan-kinship.png" alt="Yuan kinship giant component, Wuzhou"><div class="figcap">Bol 2021, Fig. 2: giant component of Yuan kinship (242 of 1,321 nodes); Wuzhou counties coloured</div></div>
+    <div class="grow">
+      <div class="bi xs">Peter K. Bol, “From Kinship to Collegiality: Changing Literati Networks, 1100–1400” (2021)</div>
+      <div class="bi sm" style="margin-top:12px" data-step="2"><span class="zh">資料：<b>CBDB</b>；範圍：浙江<b>婺州</b></span><span class="en">Data from CBDB, for Wuzhou prefecture</span></div>
+      <div class="bi sm" style="margin-top:12px" data-step="3"><span class="zh">婚姻（親族）關係越來越<b>地方化</b>，連跨府的親族關係也減少。</span><span class="en">Kinship ties became more local, and cross-prefecture kinship declined.</span></div>
+      <div class="bi sm" style="margin-top:12px" data-step="4"><span class="zh">但<b>跨府的學術往來</b>增加，成為士人團結的新基礎。</span><span class="en">Cross-prefecture scholarly connections grew and became the new basis of literati solidarity.</span></div>
+      <div class="callout key bi" data-step="5" style="margin-top:14px"><span class="zh">圖中<b>多個分離的小群</b>（連通分量）也是結果：網絡不必是一大片。</span><span class="en">The many separate components are findings too: a network need not be one connected mass.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-bg-chao" data-sec="cases">
+  <h2 class="bi"><span class="zh">詞語網絡：用共現看思想</span><span class="en">A network of words: co-occurrence and ideas</span></h2>
+  <div class="bi xs">Chao, Yang, Liu &amp; Li, “Network of Words” (2021): nation-building terms in Liang Qichao and Chen Duxiu</div>
+  <div class="flow" style="margin-top:10px">
+    <div class="fstep" data-step="1"><i>1</i><div class="bi sm"><span class="zh"><b>節點</b>：30 個與建國相關的詞（民主、共和、立憲……）</span><span class="en">Nodes: 30 nation-building terms (democracy, republic, constitutionalism…)</span></div></div>
+    <div class="fstep" data-step="2"><i>2</i><div class="bi sm"><span class="zh"><b>邊</b>：兩詞<b>共現</b>，且卡方檢定 p &lt; 0.001（非偶然）</span><span class="en">Edge: two terms co-occur and Pearson’s χ² gives p &lt; 0.001</span></div></div>
+    <div class="fstep" data-step="3"><i>3</i><div class="bi sm"><span class="zh">按時期分別建網，用<b>模組度</b>看模組（例：陳獨秀第一期 Q = 0.7，五個模組）</span><span class="en">Networks per period; modularity finds modules (e.g. Chen, first period: Q = 0.7, five modules)</span></div></div>
+  </div>
+  <div class="callout key bi" data-step="4"><span class="zh">就是<b>上週的搭配詞</b>，換成網絡的語言：顯著共現的詞對 ＝ 邊。</span><span class="en">Last week’s collocations in network language: a significant co-occurring pair is an edge.</span></div>
+  <div class="bi xs" style="margin-top:10px" data-step="5"><span class="zh">兩人的網絡有多少<b>共同的邊</b>（紅色）？—— 見版面一頁的圖。</span><span class="en">How many edges do the two men share (red)? See the figure on the layout slide.</span></div>
+</section>
+
+<section class="slide" id="s-bg-armand" data-sec="cases">
+  <h2 class="bi"><span class="zh">共現 ＝ 關係嗎？</span><span class="en">Does co-occurrence equal a relationship?</span></h2>
+  <div class="bi xs">Armand &amp; Henriot, “From Textual to Historical Networks” (2021): <i>Biographical Dictionary of Republican China</i></div>
+  <div class="two" style="margin-top:8px">
+    <div class="grow">
+      <div class="bi sm" data-step="1"><span class="zh">區分<b>傳主</b>（bionode）與傳記中<b>被提到的人</b>（object-node）。</span><span class="en">Distinguish the subject of a biography (bionode) from people merely mentioned in it.</span></div>
+      <div class="stat" style="margin-top:10px" data-step="2"><div class="n">3,254 · 9,524</div><div class="bi xs"><span class="zh">共現網絡：節點 · 邊</span><span class="en">co-occurrence network: nodes · edges</span></div></div>
+      <div class="bi sm" style="margin-top:10px" data-step="3"><span class="zh"><b>曾國藩</b>只有 14 條邊，卻連接 544 個節點、7,795 條邊 —— 典型的<b>中介者</b>。</span><span class="en">Zeng Guofan has only 14 edges yet connects 544 nodes and 7,795 links: a broker.</span></div>
+    </div>
+    <div class="grow">
+      <div class="bi sm" data-step="4"><span class="zh">人工標註<b>真正的關係</b>後（軍人網絡）：</span><span class="en">After annotating actual relations (military networks):</span></div>
+      <table class="tbl sm" data-step="4" style="margin-top:8px">
+        <thead><tr><th></th><th>共現 co-occurrence</th><th>標註 annotated</th></tr></thead>
+        <tr><td>節點 nodes</td><td>227</td><td>101</td></tr>
+        <tr><td>邊 edges</td><td>811</td><td>225</td></tr>
+        <tr><td>聚類係數 clustering</td><td>0.339</td><td>0.074</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="callout key bi" data-step="5"><span class="zh">共現網絡<b>高估</b>了關係與聚類；很多人只是被當作背景「提到」。</span><span class="en">A co-occurrence network overstates relations and clustering; many people are mentioned only as historical context.</span></div>
+</section>
+
+<section class="slide" id="s-bg-levine" data-sec="cases">
+  <h2 class="bi"><span class="zh">以人為中心：自我網絡</span><span class="en">Ego networks: starting from one person</span></h2>
+  <img class="fig wide" src="img/levine-ego.png" alt="Ego network of Zhang Wentian" data-step="1" style="max-height:380px">
+  <div class="figcap" data-step="1">Levine 2021, Fig. 11: ego network of Zhang Wentian, pruned to 1,500 ties (Soviet Returned Leaders dataset)</div>
+  <div class="two3" style="margin-top:8px">
+    <div class="callout key" data-step="2"><div class="bi xs"><span class="zh">資料：133 位 1920 年代留學歐洲與蘇聯的革命者；找出兩組與其中的關鍵人物。</span><span class="en">133 revolutionary leaders trained in Europe and the USSR in the 1920s; two groups and key actors emerge.</span></div></div>
+    <div class="callout" data-step="3"><div class="bi xs"><span class="zh">提醒（Weingart）：自我網絡裡，<b>中心的人必然最中心</b>。</span><span class="en">Reminder (Weingart): in an ego network the ego is necessarily the most central.</span></div></div>
+  </div>
+</section>
+
+<section class="slide" id="s-bg-ecpo" data-sec="cases">
+  <h2 class="bi"><span class="zh">雙模網絡的實例</span><span class="en">A two-mode network in practice</span></h2>
+  <div class="two">
+    <div class="figbox" data-step="1"><img class="fig tall" style="max-height:500px" src="img/ecpo-ego.png" alt="Two-mode ego network of Song Qingling"><div class="figcap">Arnold &amp; Rudolph 2021, Fig. 2: two-mode ego network of Song Qingling in ECPO</div></div>
+    <div class="grow">
+      <div class="bi sm" data-step="2"><span class="zh">節點有<b>多種</b>：人物（藍）、文章（紫）、廣告（淺綠）、機構（深綠）、圖像（橘）。</span><span class="en">Several node types: persons, articles, advertisements, organisations, images.</span></div>
+      <div class="bi sm" style="margin-top:12px" data-step="3"><span class="zh">邊＝「出現於同一篇／同一頁」。</span><span class="en">Edges: appears in the same article or page.</span></div>
+      <div class="callout key bi" data-step="4" style="margin-top:14px"><span class="zh">多模網絡很豐富，但多數演算法只為<b>單模</b>設計；要把它投影成單模，或選用專門的方法。</span><span class="en">Rich, but most algorithms assume one mode: project to one mode or use methods built for multimodal data.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-bg-db" data-sec="cases">
+  <h2 class="bi"><span class="zh">資料從哪裡來：資料庫與工具</span><span class="en">Where the data come from: databases and tools</span></h2>
+  <div class="grid2">
+    <div class="card" data-step="1"><h3 class="bi sm"><span class="zh">CBDB</span><span class="en">China Biographical Database</span></h3><div class="bi xs" style="margin-top:6px"><span class="zh">超過 <b>47 萬</b>人；可查詢親屬與社會關係網絡。</span><span class="en">470,000+ individuals; kinship and social networks can be queried.</span></div></div>
+    <div class="card" data-step="2"><h3 class="bi sm"><span class="zh">中國佛教社會網絡</span><span class="en">Bingenheimer: Chinese Buddhism</span></h3><div class="bi xs" style="margin-top:6px"><span class="zh">約 <b>17,500</b> 位行動者、<b>25,000</b> 條連結；自三世紀末至二十世紀初。</span><span class="en">c. 17,500 actors and 25,000 links, late 3rd to early 20th century.</span></div></div>
+    <div class="card" data-step="3"><h3 class="bi sm"><span class="zh">ECPO</span><span class="en">Early Chinese Periodicals Online</span></h3><div class="bi xs" style="margin-top:6px"><span class="zh">民國期刊與人物資料；也討論<b>隱私</b>問題。</span><span class="en">Republican-era periodicals and biographical data; also discusses privacy.</span></div></div>
+    <div class="card" data-step="4"><h3 class="bi sm"><span class="zh">維基百科傳記</span><span class="en">Wikipedia biographies (ENP-China)</span></h3><div class="bi xs" style="margin-top:6px"><span class="zh"><b>228,144</b> 篇中文傳記，用 NLP 抽取人名與關係。</span><span class="en">228,144 Chinese biographies, with NLP-extracted entities.</span></div></div>
+  </div>
+  <div class="callout key bi" data-step="5"><span class="zh">資料庫解決<b>實體對應</b>與<b>大規模抽取</b>，但<b>邊的定義</b>仍要由你決定。</span><span class="en">Databases help with entity identity and extraction at scale; defining the edge is still your job.</span></div>
+</section>
+
+<section class="slide" id="s-hammer" data-sec="theory">
+  <h2 class="bi"><span class="zh">兩個警告</span><span class="en">Two warnings (Weingart)</span></h2>
+  <div class="cards" style="margin-top:18px">
+    <div class="card" data-step="1">
+      <h3 class="bi"><span class="zh">① 有了鎚子，什麼都像釘子</span><span class="en">When you have a hammer…</span></h3>
+      <div class="bi sm" style="margin-top:14px"><span class="zh">軟體容易上手、資料唾手可得，於是人人都能畫出一張網絡。</span><span class="en">Easy tools and available datasets make it tempting to network everything.</span></div>
+      <div class="bi xs" style="margin-top:14px"><span class="zh">問自己：這個問題真的是關於<b>關係</b>嗎？</span><span class="en">Ask: is this question really about relations?</span></div>
+    </div>
+    <div class="card" data-step="2">
+      <h3 class="bi"><span class="zh">② 借用方法很危險</span><span class="en">Methodology appropriation is dangerous</span></h3>
+      <div class="bi sm" style="margin-top:14px"><span class="zh">演算法是為別的目的設計的；原本的前提和但書，搬過來時往往丟失。</span><span class="en">Algorithms were built for other purposes; their assumptions and caveats get lost in translation.</span></div>
+      <div class="bi xs" style="margin-top:14px"><span class="zh">問自己：這個指標在<b>我的資料</b>上代表什麼？</span><span class="en">Ask: what does this measure mean on my data?</span></div>
+    </div>
+  </div>
+  <div class="callout bi" data-step="3">
+    <span class="zh">今天的目標：學會工具，也學會<b>在什麼時候不相信它</b>。</span>
+    <span class="en">Today: learn the tools, and learn when not to trust them.</span>
+  </div>
+</section>
+
+<section class="slide" id="s-abstract" data-sec="theory">
+  <h2 class="bi"><span class="zh">網絡是一種抽象</span><span class="en">A network is an abstraction</span></h2>
+  <div class="bi sm" data-step="1"><span class="zh">Ahnert 等人：網絡<b>永遠是隱喻</b> —— 把豐富的世界簡化成「點」與「線」。</span><span class="en"><i>The Network Turn</i>, ch. 1: networks are always metaphorical, reducing a rich world to points and lines.</span></div>
+  <div class="absrow">
+    <div class="card" data-step="2">
+      <h3 class="bi"><span class="zh">史料</span><span class="en">Source</span></h3>
+      <div class="bi sm" style="margin-top:8px"><span class="zh">一封信：語氣、請託、禮物、時間、保密……</span><span class="en">A letter: tone, a favour asked, a gift, a date, a secret…</span></div>
+    </div>
+    <div class="absarrow" data-step="3">→</div>
+    <div class="card" data-step="3">
+      <h3 class="bi"><span class="zh">邊</span><span class="en">Edge</span></h3>
+      <div style="margin-top:8px"><svg width="220" height="60" viewBox="0 0 220 60"><line x1="40" y1="30" x2="180" y2="30" class="ge hot"/><circle cx="40" cy="30" r="16" class="cl-n"/><circle cx="180" cy="30" r="16" class="cl-n"/></svg></div>
+      <div class="bi xs"><span class="zh">甲 — 乙（1 封信）</span><span class="en">A — B (1 letter)</span></div>
+    </div>
+  </div>
+  <div class="two3" style="margin-top:20px">
+    <div class="callout key" data-step="4"><div class="bi sm"><span class="zh"><b>保留</b>：誰與誰有關、關係多密</span><span class="en">Kept: who is related to whom, how densely</span></div></div>
+    <div class="callout" data-step="5"><div class="bi sm"><span class="zh"><b>丟掉</b>：內容、語境、獨特性</span><span class="en">Lost: content, context, uniqueness</span></div></div>
+  </div>
+  <div class="bi xs" style="margin-top:12px" data-step="6"><span class="zh">Weingart：歷史學者在乎差異與獨特，那正是定義成節點時最容易失去的資訊。</span><span class="en">Weingart: humanists care about what makes things unique, which is exactly what is lost when objects become nodes.</span></div>
+</section>
+
+<section class="slide" id="s-guanxi" data-sec="theory">
+  <h2 class="bi"><span class="zh">「關係」不是中國的文化本質</span><span class="en">Beyond guanxi</span></h2>
+  <div class="bi xs">Chen &amp; Rudolph, “Beyond Relationships and Guanxi: An Introduction” (2021)</div>
+  <div class="cards" style="margin-top:12px">
+    <div class="card" data-step="1"><h3 class="bi sm"><span class="zh">問題</span><span class="en">The problem</span></h3><div class="bi xs" style="margin-top:8px"><span class="zh">把 <b>guanxi</b> 當作千年不變的「中國特質」，是<b>去歷史化、文化本質論</b>的說法。</span><span class="en">Treating guanxi as a millennia-old “Chinese” trait is ahistorical and culturalist.</span></div></div>
+    <div class="card" data-step="2"><h3 class="bi sm"><span class="zh">替代方案</span><span class="en">The alternative</span></h3><div class="bi xs" style="margin-top:8px"><span class="zh">用<b>可重建、可比較</b>的網絡分析，檢驗不同時期、不同群體的關係結構。</span><span class="en">Reconstruct relations and analyse structure, comparing periods and groups.</span></div></div>
+  </div>
+  <div class="bi sm" style="margin-top:14px" data-step="3"><span class="zh">古人也有「網絡」意識：「<b>盤根錯節</b>」 —— 但視為<b>無法理清</b>的整體。</span><span class="en">Historical actors had a sense of networks too (“entwined roots”), but saw an indecipherable whole.</span></div>
+  <div class="bi sm" style="margin-top:8px" data-step="4"><span class="zh">現代分析者假設結構<b>可以被梳理</b>：定義範圍、劃分群集、計算距離。</span><span class="en">Modern analysts presume structure can be teased out: define scope, partition, count links and distances.</span></div>
+  <div class="callout key bi" data-step="5"><span class="zh">網絡分析是一種<b>現代的「科學化」</b>；真相介於兩者之間 —— 使用時要意識到自己的假設。</span><span class="en">Network analysis is a modern scientification of relations; the truth lies in between, so stay aware of your assumptions.</span></div>
+</section>
+
+<section class="slide" id="s-central-caveat" data-sec="theory">
+  <h2 class="bi"><span class="zh">中心性在你的資料上是什麼意思？</span><span class="en">What does centrality mean on your data?</span></h2>
+  <div class="grid2">
+    <div class="card" data-step="1">
+      <h3 class="bi sm"><span class="zh">度 ≈ 出現次數</span><span class="en">Degree ≈ frequency</span></h3>
+      <div class="bi xs" style="margin-top:8px"><span class="zh">在共現網絡中，常被提到的人自然與更多人共現。度中心性幾乎等於<b>出現頻率</b>。</span><span class="en">In co-occurrence networks, frequently mentioned people co-occur with more people: degree tracks frequency.</span></div>
+    </div>
+    <div class="card" data-step="2">
+      <h3 class="bi sm"><span class="zh">文獻越長，越「中心」</span><span class="en">Longer text, more central</span></h3>
+      <div class="bi xs" style="margin-top:8px"><span class="zh">以主題相似度連邊的網絡，越長的書越可能與別的書相連。</span><span class="en">In a document-similarity network, longer books are more likely to share topics with others.</span></div>
+    </div>
+    <div class="card" data-step="3">
+      <h3 class="bi sm"><span class="zh">取樣決定結果</span><span class="en">Sampling decides</span></h3>
+      <div class="bi xs" style="margin-top:8px"><span class="zh">只看某人的鄰居，他必然最中心；補上更多資料，排名可能全變。</span><span class="en">An ego network makes the ego central; add more data and the ranking can change.</span></div>
+    </div>
+    <div class="card" data-step="4">
+      <h3 class="bi sm"><span class="zh">雙模網絡</span><span class="en">Two-mode networks</span></h3>
+      <div class="bi xs" style="margin-top:8px"><span class="zh">「作者—出版社」網絡中，度只是作品數量，與社交位置無關。</span><span class="en">In an author–publisher network, degree just counts publications, not social position.</span></div>
+    </div>
+  </div>
+  <div class="callout key bi" data-step="5">
+    <span class="zh">先問：「這個數字<b>在我的資料裡</b>可能代表什麼？」再解讀。</span>
+    <span class="en">First ask what this number could mean in your data. Then interpret.</span>
+  </div>
+</section>
+
+<section class="slide" id="s-questions" data-sec="theory">
+  <h2 class="bi"><span class="zh">畫網絡之前，先問自己</span><span class="en">Before you build a network, ask</span></h2>
+  <div class="recap">
+    <div class="rrow" data-step="1"><i>1</i><div class="bi sm"><span class="zh"><b>我的問題真的是關於關係嗎？</b></span><span class="en">Is my question really about relations?</span></div></div>
+    <div class="rrow" data-step="2"><i>2</i><div class="bi sm"><span class="zh"><b>節點是什麼？</b>人物名字是否已對應到同一個人？</span><span class="en">What is a node, and has each person been resolved?</span></div></div>
+    <div class="rrow" data-step="3"><i>3</i><div class="bi sm"><span class="zh"><b>邊是什麼？</b>誰決定它算數？證據在哪裡？</span><span class="en">What is an edge, who decided it counts, and where is the evidence?</span></div></div>
+    <div class="rrow" data-step="4"><i>4</i><div class="bi sm"><span class="zh"><b>誰不在網絡裡？</b>史料為何只留下這些人？</span><span class="en">Who is missing, and why did the sources keep only these?</span></div></div>
+    <div class="rrow" data-step="5"><i>5</i><div class="bi sm"><span class="zh"><b>這個指標在我的資料上代表什麼？</b></span><span class="en">What does this measure mean on my data?</span></div></div>
+    <div class="rrow" data-step="6"><i>6</i><div class="bi sm"><span class="zh"><b>偶然會產生同樣的結果嗎？</b>與隨機網絡比一比。</span><span class="en">Could chance produce the same result? Compare with random networks.</span></div></div>
+  </div>
+</section>
+
+<section class="slide" id="s-workflow" data-sec="summary">
+  <h2 class="bi"><span class="zh">工作流程與工具</span><span class="en">Workflow and tools</span></h2>
+  <div class="pipe">
+    <div class="pstep" data-step="1"><b>史料</b><span>sources</span><em>文集、書信、名單</em></div>
+    <div class="parr" data-step="2">→</div>
+    <div class="pstep" data-step="2"><b>標記</b><span>tagging</span><em>MARKUS</em></div>
+    <div class="parr" data-step="3">→</div>
+    <div class="pstep" data-step="3"><b>實體對應</b><span>identity</span><em>CBDB</em></div>
+    <div class="parr" data-step="4">→</div>
+    <div class="pstep" data-step="4"><b>節點表＋邊表</b><span>tables</span><em>CSV</em></div>
+    <div class="parr" data-step="5">→</div>
+    <div class="pstep" data-step="5"><b>分析與圖</b><span>analysis</span><em>Gephi · Palladio · Python</em></div>
+  </div>
+  <div class="loop" data-step="6">↺ <span class="zh-s">回到史料：</span>每個異常的節點，都要回頭讀原文 <span class="en-s">— go back to the sources for every surprising node</span></div>
+  <div class="cards" style="margin-top:18px">
+    <div class="card" data-step="7"><h3 class="bi xs"><span class="zh">Gephi</span><span class="en">desktop app</span></h3><div class="bi xs"><span class="zh">視覺化與指標、社群、版面</span><span class="en">visualisation, metrics, communities, layouts</span></div></div>
+    <div class="card" data-step="7"><h3 class="bi xs"><span class="zh">Palladio</span><span class="en">in the browser</span></h3><div class="bi xs"><span class="zh">上傳表格，快速出圖</span><span class="en">upload a table, explore quickly</span></div></div>
+    <div class="card" data-step="7"><h3 class="bi xs"><span class="zh">Python</span><span class="en">e.g. NetworkX</span></h3><div class="bi xs"><span class="zh">可重現、可抽樣、可寫檢定</span><span class="en">reproducible; supports sampling and tests</span></div></div>
+  </div>
+</section>
+
+<section class="slide" id="s-recap" data-sec="summary">
+  <h2 class="bi"><span class="zh">回顧</span><span class="en">Recap</span></h2>
+  <div class="recap">
+    <div class="rrow" data-step="1"><i>1</i><div class="bi sm"><span class="zh"><b>網絡 ＝ 節點 ＋ 邊</b>：一種把關係變成資料的抽象</span><span class="en">A network is nodes and edges: an abstraction that turns relations into data</span></div></div>
+    <div class="rrow" data-step="2"><i>2</i><div class="bi sm"><span class="zh"><b>兩張表</b>：節點表與邊表；難處在實體對應、邊的定義、缺失與不確定</span><span class="en">Two tables; the difficulty is identity, edge definition, missing data and uncertainty</span></div></div>
+    <div class="rrow" data-step="3"><i>3</i><div class="bi sm"><span class="zh"><b>整體測量</b>：密度、路徑長度、直徑</span><span class="en">Global: density, path length, diameter</span></div></div>
+    <div class="rrow" data-step="4"><i>4</i><div class="bi sm"><span class="zh"><b>局部測量</b>：度、中介、接近、聚類 —— 各自回答不同的「重要」</span><span class="en">Local: degree, betweenness, closeness, clustering, each a different kind of importance</span></div></div>
+    <div class="rrow" data-step="5"><i>5</i><div class="bi sm"><span class="zh"><b>社群與版面</b>：社群由結構決定；版面不是證據</span><span class="en">Communities come from structure; layout is not evidence</span></div></div>
+    <div class="rrow" data-step="6"><i>6</i><div class="bi sm"><span class="zh"><b>與隨機比較</b>：像元祐、慶元一案，用抽樣檢驗「偶然」</span><span class="en">Compare to chance, as in the faction-list study</span></div></div>
+  </div>
+</section>
+
+<div id="side"></div>
+<div id="bar"></div>
+<div id="num"></div>
+</div>
+<script src="slides.js"></script>
+<script src="deck.js"></script>
+</body>
+</html>
