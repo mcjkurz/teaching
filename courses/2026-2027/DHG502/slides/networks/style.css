@@ -478,3 +478,25 @@ table.tbl.sm { font-size: 17px; } table.tbl.sm td, table.tbl.sm th { padding: 4p
 .rel .ric { flex: none; width: 44px; height: 44px; color: var(--tgt); }
 .rel b { font-size: 21px; line-height: 1.25; } .rel .zh-s { font-size: 15px; color: var(--mute); }
 .tle > b { width: 140px; white-space: nowrap; }
+
+/* compact tuning for the bilingual view */
+.bi.sm > .zh { font-size: 15px; } .bi.xs > .zh { font-size: 13px; } .bi > .zh { font-size: 18px; }
+.banner img { height: 150px; }
+.tl .bi.xs > .en { font-size: 17px; } .tl .bi.xs > .zh { font-size: 13px; line-height: 1.3; }
+.tle { margin: 5px 0; }
+#s-comm .bi.xs > .en { font-size: 16px; } #s-comm .bi.xs > .zh { font-size: 12.5px; }
+.lcard { padding: 12px 18px; } .lcard p { font-size: 14px; margin-top: 5px; }
+#s-faction-q .def .bi.xs > .en { font-size: 16px; }
+#s-faction-q .lists { margin: 10px 0 6px; }
+table.tbl.sm td, table.tbl.sm th { padding: 3px 10px; } table.tbl.sm { font-size: 16px; }
+#s-props .banner img { height: 110px; }
+.tl .bi.xs > .en { font-size: 16px; line-height: 1.3; } .tl .bi.xs > .zh { font-size: 12.5px; }
+#s-toy-bg .callout { margin-top: 8px; } #s-toy-bg .callout .en { font-size: 20px; }
+#s-faction-q .def { margin: 4px 0 4px !important; } #s-faction-q .callout .en { font-size: 20px; }
+table.tbl.sm td, table.tbl.sm th { padding: 2px 10px; }
+#s-toy-bg .tle > b { width: 120px; } #s-toy-bg .portraits { width: 170px; }
+#s-toy-bg .portraits img { height: 100px; width: 75px; }
+.title-slide .rule, .title-slide .quote { order: 2; } .title-slide .hint { order: 3; }
+#s-comm .bi.xs > .en { font-size: 15px; line-height: 1.3; } #s-comm .bi.xs > .zh { font-size: 12px; }
+#s-comm .grow > .bi, #s-comm .grow > .stat { margin-top: 6px !important; }
+#s-comm .callout { margin-top: 8px !important; padding-top: 6px; padding-bottom: 6px; } #s-comm .callout .en { font-size: 18px; }
