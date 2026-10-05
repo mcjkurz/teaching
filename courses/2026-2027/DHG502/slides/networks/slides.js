@@ -258,7 +258,6 @@ HOOKS['s-central-def'] = {
         n.c.setAttribute('r', 24); n.c.style.fill = `rgb(${c})`; n.c.style.stroke = i === top ? '#7a0c05' : '#b8c0cf';
         n.c.style.strokeWidth = i === top ? 5 : 2; n.t.style.display = 'none';
       });
-      $('.topn[data-m="' + svg.dataset.m + '"]', el).innerHTML = `<b style="color:#c0160c">${NODES[top].zh}</b>`;
     });
   }
 };

@@ -144,9 +144,10 @@
     <div class="tle" data-step="2"><b>1070s</b><div class="bi xs"><span class="zh"><b>司馬光</b>、<b>韓琦</b>等反對；司馬光退居洛陽，編《資治通鑑》。</span><span class="en">Sima Guang, Han Qi and others oppose; Sima Guang retires to Luoyang to write the Zizhi tongjian.</span></div></div>
     <div class="tle" data-step="3"><b>1085–86</b><div class="bi xs"><span class="zh">神宗去世，司馬光主政，廢除多數新法：<b>元祐更化</b>。</span><span class="en">Shenzong dies; Sima Guang returns and reverses most reforms (the Yuanyou period).</span></div></div>
     <div class="tle" data-step="4"><b>1094–</b><div class="bi xs"><span class="zh">哲宗親政，起用<b>章惇</b>等新法派，元祐舊臣遭貶。</span><span class="en">Zhezong takes over; Zhang Dun and reformers return, Yuanyou officials are banished.</span></div></div>
-    <div class="tle" data-step="5"><b>1104</b><div class="bi xs"><span class="zh">徽宗朝頒布<b>元祐黨籍碑</b>：309 人的名單 —— 正是 De Weerdt 等人的研究對象。</span><span class="en">Huizong’s reign issues the Yuanyou faction list of 309 names, the subject of De Weerdt et al.</span></div></div>
+    <div class="tle" data-step="5"><b>1102–04</b><div class="bi xs"><span class="zh">徽宗即位後重用<b>蔡京</b>，延續新法路線。為了鞏固權力、清除政敵，蔡京把反對新法的官員列成「<b>奸黨</b>」名單，刻石立碑（<b>元祐黨籍碑</b>）：1104 年擴充為 <b>309 人</b>，並頒行各州縣。名單上的人被禁止任官、不得入京，子孫也受限制。</span><span class="en">Huizong comes to the throne and relies on Cai Jing, who continues the reform line. To consolidate power and eliminate rivals, Cai Jing lists opponents of the reforms as a “treacherous faction” and has the list carved in stone (the Yuanyou faction stele). In 1104 it is expanded to 309 names and sent out to the prefectures. Those named are barred from office and from the capital, and their descendants are restricted too.</span></div></div>
+    <div class="tle" data-step="6"><b>→</b><div class="bi xs"><span class="zh">這份名單是<b>政治上製造出來的「黨」</b>，所以正好可以問：名單上的人彼此真的相連嗎？這就是 De Weerdt 等人用社會網絡分析所研究的對象。</span><span class="en">The list is a politically manufactured “faction”, so we can ask: were the people on it really connected to one another? This is what De Weerdt et al. study with network analysis.</span></div></div>
   </div>
-  <div class="callout key bi" data-step="6"><span class="zh">「新法」「舊法」是<b>後人與當時人貼的標籤</b>；蘇軾、歐陽修等人很難歸類。</span><span class="en">“New” and “old” are labels; people like Su Shi and Ouyang Xiu are hard to classify.</span></div>
+  <div class="callout key bi" data-step="7"><span class="zh">「新法」「舊法」是<b>後人與當時人貼的標籤</b>；蘇軾、歐陽修等人很難歸類。</span><span class="en">“New” and “old” are labels; people like Su Shi and Ouyang Xiu are hard to classify.</span></div>
 </section>
 
 <section class="slide" id="s-toy" data-sec="basics">
@@ -216,19 +217,19 @@
       <h3 class="bi"><span class="zh">度中心性</span><span class="en">Degree</span></h3>
       <div class="bi sm" style="margin:6px 0"><span class="zh">直接連接的數量</span><span class="en">How many direct connections</span></div>
       <svg class="net mini" data-m="degree" viewBox="0 0 640 430"></svg>
-      <div class="ex">誰最<b>活躍</b> who is busiest · <span class="topn" data-m="degree"></span></div>
+      <div class="ex">誰最<b>活躍</b> who is busiest</div>
     </div>
     <div class="card" data-step="2">
       <h3 class="bi"><span class="zh">中介中心性</span><span class="en">Betweenness</span></h3>
       <div class="bi sm" style="margin:6px 0"><span class="zh">位於他人最短路徑上的頻率</span><span class="en">How often a node lies on shortest paths</span></div>
       <svg class="net mini" data-m="betweenness" viewBox="0 0 640 430"></svg>
-      <div class="ex">誰是<b>橋樑</b> who is the bridge · <span class="topn" data-m="betweenness"></span></div>
+      <div class="ex">誰是<b>橋樑</b> who is the bridge</div>
     </div>
     <div class="card" data-step="3">
       <h3 class="bi"><span class="zh">接近中心性</span><span class="en">Closeness</span></h3>
       <div class="bi sm" style="margin:6px 0"><span class="zh">到所有人平均有多近</span><span class="en">How near a node is to everyone else</span></div>
       <svg class="net mini" data-m="closeness" viewBox="0 0 640 430"></svg>
-      <div class="ex">誰<b>最快到達</b> reaches all fastest · <span class="topn" data-m="closeness"></span></div>
+      <div class="ex">誰<b>最快到達</b> reaches all fastest</div>
     </div>
   </div>
   <div class="bi xs" style="margin-top:10px" data-step="4"><span class="zh">進階：<b>特徵向量中心性</b>與 <b>PageRank</b> —— 連到「重要的人」比連到「很多人」更算數。</span><span class="en">Advanced: eigenvector centrality and PageRank weigh the importance of the neighbours too (links to important nodes count for more).</span></div>
@@ -292,6 +293,8 @@
     </div>
     <div class="grow">
       <div class="bi sm" data-step="1"><span class="zh"><b>模組度 Q</b>：群內的邊，比「隨機連接」所預期的多多少？</span><span class="en">Modularity Q: how many more edges fall within groups than chance would give?</span></div>
+      <div class="bi xs" style="margin-top:8px" data-step="1"><span class="zh"><b>「隨機」怎麼算？</b>每個節點的連接數不變，把邊隨機重新配對。連接多的節點，碰到別人的機會也多：節點 <i>i</i> 與 <i>j</i> 之間預期有 <b>(<i>i</i> 的連接數 × <i>j</i> 的連接數) ÷ (2 × 總邊數)</b> 條邊。</span><span class="en">How is chance computed? Keep every node’s number of ties but rewire the edges at random. Well-connected nodes meet others more often: the expected number of edges between i and j is (ties of i × ties of j) ÷ (2 × total edges).</span></div>
+      <div class="bi xs" style="margin-top:8px" data-step="1"><span class="zh"><b>Q</b> ＝ 群內實際的邊所佔比例 − 群內預期的邊所佔比例（各群加總）。Q 越接近 0，分群和隨機差不多。</span><span class="en">Q = share of edges that actually fall inside groups − share expected inside groups by chance (summed over groups). Q near 0 means the split is no better than random.</span></div>
       <div class="stat" style="margin-top:4px" data-step="1"><div class="n" id="q-val"></div><div class="bi xs" id="q-lab"></div></div>
       <div class="bi xs" style="margin-top:12px" data-step="2"><span class="zh">已知標籤 Q = <b id="q-attr"></b>；演算法 Q = <b id="q-alg"></b>（越高，分群越清楚）</span><span class="en">Our labels vs. the algorithm: higher Q means a cleaner split</span></div>
       <div class="callout key bi" data-step="3" style="margin-top:14px">

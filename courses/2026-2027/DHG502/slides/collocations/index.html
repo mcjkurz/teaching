@@ -576,11 +576,11 @@
     <div class="grow">
       <div data-step="1">
         <div class="bi sm"><span class="zh">兩詞的出現機會中，有多少比例是「在一起」的？</span><span class="en">Of all the chances the two words had, what share did they spend together?</span></div>
-        <div class="eq big">\(\text{Dice} = \dfrac{2 \cdot O}{\textcolor{#1f5fd6}{R_1} + \textcolor{#e0570f}{C_1}}\)</div>
-        <div class="bi xs"><span class="zh">\(\textcolor{#1f5fd6}{R_1}\)：「喝」周圍的位置數（第 1 列）；\(\textcolor{#e0570f}{C_1}\)：「茶」出現的次數（第 1 欄）。值介於 0 與 1 之間。</span><span class="en">R₁: slots around 喝 (row 1); C₁: occurrences of 茶 (column 1). Always between 0 and 1.</span></div>
+        <div class="eq big">\(\text{Dice} = \dfrac{2 \cdot O}{\text{「喝」的機會} + \text{「茶」的次數}}\)</div>
+        <div class="bi xs"><span class="zh">分母＝「喝」周圍的位置數 ＋「茶」出現的次數。值介於 0 與 1 之間。</span><span class="en">Denominator: slots around 喝 plus occurrences of 茶. Always between 0 and 1.</span></div>
       </div>
       <div data-step="2" style="margin-top:12px">
-        <div class="bi sm"><span class="zh">logDice（Rychlý 2008）：取 log₂ 再加 14</span><span class="en">logDice (Rychlý 2008): take log₂ and add 14</span></div>
+        <div class="bi sm"><span class="zh">logDice：把 Dice 換成方便閱讀的刻度</span><span class="en">logDice: Dice on a more readable scale</span></div>
         <div class="eq">\(\text{logDice} = 14 + \log_2 \text{Dice}\)</div>
       </div>
     </div>
@@ -588,11 +588,10 @@
       <div data-step="3">
         <div class="bi sm"><span class="zh">喝 ／ 茶：</span><span class="en">for (喝, 茶)</span></div>
         <div class="eq" style="font-size:22px">\(\text{Dice} = \dfrac{2 \times 12}{800 + 40} \approx 0.029\)</div>
-        <div class="eq" style="font-size:22px">\(\text{logDice} = 14 + \log_2 0.029 \approx \mathbf{8.87}\)</div>
+        <div class="eq" style="font-size:22px">\(\text{logDice} \approx \mathbf{8.87}\)</div>
       </div>
       <div class="callout key" data-step="4" style="margin-top:10px">
-        <div class="bi xs"><span class="zh">最高 14（兩詞總是一起出現）；每少 1 分 ＝ 強度減半。</span><span class="en">Maximum 14 (the words always occur together); each point lower means half as strong.</span></div>
-        <div class="bi xs" style="margin-top:6px"><span class="zh">公式裡<b>沒有 N</b>：不受語料大小影響，可以跨語料比較。</span><span class="en">N does not appear in the formula, so logDice ignores corpus size and can be compared across corpora.</span></div>
+        <div class="bi xs"><span class="zh">最高 14（兩詞總是一起出現）；分數越高，關係越強。</span><span class="en">Maximum 14 (the words always occur together). The higher the score, the stronger the tie.</span></div>
       </div>
     </div>
   </div>
