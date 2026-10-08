@@ -8,7 +8,7 @@ title: CHI3242 第6週講義
 <h1>第6週　從詞語到語料庫：正則表達式（Regex）</h1>
 
 <h2>1. 什麼是正則表達式？</h2>
-<p><strong>正則表達式（regular expression，簡稱 regex）</strong>是一種描述文本「<em>形狀</em>」的小型模式語言，而不是只描述某一個固定的字符串。例如，你不必搜尋字面上的「1898」，而可以搜尋「任意四個數字」；你也不必刪除某一個特定的註腳標記，而可以刪除「任何方括號裡的數字」。有了 regex，電腦就能根據文本的<strong>結構</strong>來查找、提取或清理內容。這正是處理文本資料時最常見的需求，例如：</p>
+<p><strong>正則表達式（regular expression，簡稱 regex）</strong>是一種描述文本「形狀」的小型模式語言，而不是只描述某一個固定的字符串。例如，你不必搜尋字面上的「1898」，而可以搜尋「任意四個數字」；你也不必刪除某一個特定的註腳標記，而可以刪除「任何方括號裡的數字」。有了 regex，電腦就能根據文本的<strong>結構</strong>來查找、提取或清理內容。這正是處理文本資料時最常見的需求，例如：</p>
 <ul>
 <li>從 OCR（文字識別）得到的文本中提取日期、人名或章回標題；</li>
 <li>刪除頁碼和註腳標記；</li>
@@ -47,11 +47,11 @@ title: CHI3242 第6週講義
 <table>
 <thead><tr><th>模式／問題</th><th>解決什麼</th></tr></thead>
 <tbody>
-<tr><td><code>[一-鿿]</code></td><td>匹配一個常用漢字，即 Unicode 的主要「中日韓統一表意文字」區塊。</td></tr>
-<tr><td><code>[㐀-䶿]</code></td><td>CJK 擴展 A 區：落在上面主區塊之外的較少見漢字（一些人名和古字會用到）。</td></tr>
-<tr><td><code>\p{Script=Han}</code></td><td>一次匹配<em>所有</em> Unicode 區塊和擴展區的漢字，不必記各個範圍。在 Python 中需使用第三方的 <code>regex</code> 模塊（不是內置的 <code>re</code>）；在 JavaScript 中要加上 <code>u</code> 標誌。</td></tr>
+<tr><td><code>[\u4e00-\u9fff]</code></td><td>匹配一個常用漢字，即 Unicode 的主要「中日韓統一表意文字」區塊。</td></tr>
+<tr><td><code>[\u3400-\u4dbf]</code></td><td>CJK 擴展 A 區：落在上面主區塊之外的較少見漢字（一些人名和古字會用到）。</td></tr>
+<tr><td><code>\p{Script=Han}</code></td><td>一次匹配所有 Unicode 區塊和擴展區的漢字，不必記各個範圍。在 Python 中需使用第三方的 <code>regex</code> 模塊（不是內置的 <code>re</code>）；在 JavaScript 中要加上 <code>u</code> 標誌。</td></tr>
 <tr><td>全角與半角標點</td><td>中文通常使用全角標點（<code>，。！？</code>），看起來和 ASCII 標點（<code>,.!?</code>）相似，其實是不同的字符。只針對 ASCII 標點寫的模式，遇到中文標點會悄悄地匹配不到。</td></tr>
-<tr><td><code>　</code></td><td>表意文字空格（全角空格），和普通的 ASCII 空格（<code> </code>）是不同的字符。OCR 或複製貼上得到的中文文本常常兩種混用，導致只找普通空格的模式失效。</td></tr>
+<tr><td><code>\u3000</code></td><td>表意文字空格（全角空格），和普通的 ASCII 空格（<code> </code>）是不同的字符。OCR 或複製貼上得到的中文文本常常兩種混用，導致只找普通空格的模式失效。</td></tr>
 <tr><td>簡體與繁體</td><td>同一個詞可能是兩個不同的字符串，例如 討論（繁體）和 讨论（簡體）。只針對其中一種寫的模式或字符類，匹配不到另一種。解決辦法：先統一文本（例如用 <code>opencc</code>，搭配詞練習中用過），或在字符類／「或」中把兩種寫法都寫進去。</td></tr>
 </tbody>
 </table>
@@ -68,7 +68,7 @@ title: CHI3242 第6週講義
 <p>請完成互動課程 <a href="../../../../../visualizations/regex-abc-chinese.html">中文正則表達式入門（Regex ABCs for Chinese）</a>：每一步會給你一句真實的古典或現代中文文本，要你寫出能把指定部分提取出來的模式。</p>
 
 <h2>4. 課堂／課後練習</h2>
-<p>把下面的提示詞貼到 OpenCode，並根據你自己的文本調整文件名和需要的模式。</p>
+<p>把下面的提示詞貼給你的智能體（agent），並根據你自己的文本調整文件名和需要的模式。</p>
 <div class="prompt">
 <p class="prompt-label">提示詞（Prompt）</p>
 <pre>我有一個需要在分析前清理的文本文件 source.txt。
