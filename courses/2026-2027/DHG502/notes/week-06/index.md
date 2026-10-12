@@ -28,7 +28,7 @@ title: DHG 502 Week 6 Notes
 <p>Experiment: run the same page with each model and compare the results. To switch, copy the model ID from its <a href="https://openrouter.ai/models">OpenRouter</a> page into <code>ocr.py</code>. Keep reasoning <strong>off</strong>.</p>
 
 <h2>3. In-class exercise</h2>
-<p>Start <code>opencode</code> in your repo (your OpenRouter key from Week 1 is already connected) and paste:</p>
+<p>Open your repo in your AI coding assistant (for example VS Code with Copilot, OpenCode, or any other you set up in Week 1) and paste:</p>
 <div class="prompt">
 <p class="prompt-label">Prompt 1</p>
 <pre>Write a simple Python script ocr.py that does OCR on hongloumeng.jpeg using the OpenRouter API.
