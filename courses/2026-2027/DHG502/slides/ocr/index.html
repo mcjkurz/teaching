@@ -532,6 +532,34 @@
   <div class="box-key" data-step="6"><b>Not all errors are equal.</b> A random typo is noise; an insertion that always points the same way is <b>bias</b>, and bias survives in your counts, collocations and arguments.</div>
 </section>
 
+<!-- Post-correction -->
+<section class="slide" id="s-ru-corr" data-sec="cases">
+  <h2>Result 3: should an LLM correct the OCR? Two papers disagree</h2>
+  <div class="t" data-step="1" style="margin-top:-6px">Idea: run OCR first, then give an LLM <b>the image and the draft text</b> and ask for a corrected transcript.</div>
+  <div class="row" style="gap:24px;margin-top:6px">
+    <div class="grow card ac2" data-step="2" style="padding:16px 22px"><h3>Levchenko (Russian print, 18th c.)</h3>
+      <ul class="pts sm" style="margin-top:4px"><li>Image + OCR text: <b>no better than direct OCR</b> for the stronger models; they “re-perform OCR.”</li><li>Text only: <b class="bad-c">consistently worse</b>.</li></ul>
+      <div class="pill r" style="margin-top:8px">advice: pick the best OCR model, skip correction</div></div>
+    <div class="grow card ac3" data-step="3" style="padding:16px 22px"><h3>Humphries et al. (English handwriting, 1761–1827)</h3>
+      <ul class="pts sm" style="margin-top:4px"><li>Claude correcting Gemini’s draft: modified CER <b>4.1%</b>, WER <b>7.0%</b> (reductions of 63% and 38%).</li><li>Correcting Transkribus output: modified WER down to <b>3.5%</b>.</li></ul>
+      <div class="pill g" style="margin-top:8px">advice: transcribe, then correct</div></div>
+  </div>
+  <div class="box-warn" data-step="4"><b>Same idea, opposite verdicts.</b> For a historian the stakes are specific: does correction <em>restore</em> the source, or <em>normalize</em> it toward what the model finds likely?</div>
+</section>
+
+<!-- Post-correction: why they differ -->
+<section class="slide" id="s-ru-corr2" data-sec="cases">
+  <h2>Why might the results differ?</h2>
+  <ul class="pts" style="margin-top:2px">
+    <li data-step="1"><b>Who corrects whom.</b> Humphries: a model correcting <em>its own</em> output gained only about 1%; gains came from a <em>different</em> model or from Transkribus drafts. The same weights that made the error tend to accept it as probable.</li>
+    <li data-step="2"><b>What kind of errors.</b> Character-level noise (“furr5”) is easy for a language model to fix. A fluent, plausible error is not, and “over-historicization” is plausible by design.</li>
+    <li data-step="3"><b>Which language and period.</b> English handwriting is well represented in training data. 18th-century Russian orthography is thin, so the corrector’s prior pulls toward the wrong period.</li>
+    <li data-step="4"><b>What counts as an error.</b> Humphries’ headline numbers are <em>modified</em>: capitalization, punctuation and modernized spelling are ignored. Some “correction” may be normalization the metric forgives (our reading). Levchenko’s diplomatic standard does not forgive it.</li>
+  </ul>
+  <div class="src" data-step="4">Reasons 1–2 are Humphries’ own explanation; 3–4 are our interpretation, not tested in either paper.</div>
+  <div class="box-key" data-step="5"><b>For discussion:</b> for your own source, would you accept a correction that improves modified WER but changes the spelling? Which of the two papers is closer to your material?</div>
+</section>
+
 <!-- 18 ─────────── Manchu: setup -->
 <section class="slide" id="s-mc-intro" data-sec="cases">
   <h2>Case 2: Manchu word images</h2>
@@ -766,7 +794,7 @@
     <li data-step="6"><i>6</i><div><b>Spot-check against the image</b><small>never read only the text; fluent output can be wrong</small></div></li>
   </ul>
   <div class="row" style="gap:22px;margin-top:6px">
-    <div class="grow box-warn" data-step="7" style="margin-top:0"><b>LLM post-correction is not a free fix.</b> Levchenko: correcting with text only made the best models <em>worse</em>; with the image they only re-did the OCR. Humphries: it helped a lot for weaker HTR output (to CER 1.8–4%). Test it.</div>
+    <div class="grow box-warn" data-step="7" style="margin-top:0"><b>LLM post-correction is not a free fix</b> (Case 1, Result 3): Levchenko and Humphries disagree. Test it on your own sources.</div>
     <div class="grow box-key" data-step="8" style="margin-top:0"><b>Contamination:</b> if your pages are online, the model may have seen them in training. Prefer unpublished sources for benchmarks.</div>
   </div>
 </section>
