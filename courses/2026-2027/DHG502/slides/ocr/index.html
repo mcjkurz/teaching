@@ -96,16 +96,24 @@
 <!-- 5 ─────────── History of OCR -->
 <section class="slide" id="s-history" data-sec="what">
   <h2>A short history of machine reading</h2>
-  <div class="ptl">
-    <div class="ev" data-step="1"><span class="yr">1960s</span><i></i><b>Template matching</b><p>Compare each character with stored shapes. Needs clean input and known fonts.</p><img class="tlimg" src="img/tl-1.png" alt=""></div>
-    <div class="ev" data-step="2"><span class="yr">LATE 1990s–2000s</span><i></i><b>Machine learning</b><p>Pattern classifiers. ABBYY FineReader and open-source Tesseract become standard.</p><img class="tlimg" src="img/tl-2.png" alt=""></div>
-    <div class="ev" data-step="3"><span class="yr">2010s</span><i></i><b>Deep networks</b><p>CNN + LSTM models; Transkribus brings HTR to historians. One model per script, hand or collection.</p><img class="tlimg" src="img/tl-3.png" alt=""></div>
-    <div class="ev" data-step="4"><span class="yr">LATE 2010s–</span><i></i><b>Transformers</b><p>Attention-based recognizers such as TrOCR, usually fine-tuned on your own transcribed pages.</p><img class="tlimg" src="img/tl-4.png" alt=""></div>
-    <div class="ev new" data-step="5"><span class="yr">2023–</span><i></i><b>Multimodal LLMs</b><p>General models that read an image <em>and</em> follow a prompt: GPT-4, Gemini, Claude, Qwen-VL, Llama Vision.</p><img class="tlimg" src="img/tl-5.png" alt=""></div>
+  <div class="atl"><div class="aline"></div>
+  <div class="acard top" data-step="1" style="left:0px"><i class="adot"></i><div class="atx"><span class="yr">1960s</span><b>Template matching</b><p>Compare each character with stored shapes. Needs clean input and known fonts.</p></div><img class="tlimg" src="img/tl-1.png" alt=""></div>
+  <div class="acard bot" data-step="2" style="left:194px"><i class="adot"></i><img class="tlimg" src="img/tl-2.png" alt=""><div class="atx"><span class="yr">Late 1990s–2000s</span><b>Machine learning</b><p>Pattern classifiers; ABBYY FineReader and open-source Tesseract become standard.</p></div></div>
+  <div class="acard top" data-step="3" style="left:389px"><i class="adot"></i><div class="atx"><span class="yr">2010s</span><b>Deep networks</b><p>CNN + LSTM models; Transkribus brings HTR to historians. One model per script or hand.</p></div><img class="tlimg" src="img/tl-3.png" alt=""></div>
+  <div class="acard bot" data-step="4" style="left:583px"><i class="adot"></i><img class="tlimg" src="img/tl-4.png" alt=""><div class="atx"><span class="yr">Late 2010s–</span><b>Transformers</b><p>Attention-based recognizers such as TrOCR, usually fine-tuned on your own pages.</p></div></div>
+  <div class="acard top new" data-step="5" style="left:778px"><i class="adot"></i><div class="atx"><span class="yr">2023–</span><b>Multimodal LLMs</b><p>General models that read an image and follow a prompt: GPT-4, Gemini, Claude, Qwen-VL, Llama Vision.</p></div><img class="tlimg" src="img/tl-5.png" alt=""></div>
+</div>
+</section>
+
+<!-- 5b ─────────── The big shift -->
+<section class="slide" id="s-shift" data-sec="what">
+  <h2>The big shift</h2>
+  <div class="row" style="gap:26px;margin-top:10px">
+    <div class="grow card ac2" data-step="1" style="padding:18px 24px"><h3>Before: a specialist per collection</h3><ul class="pts sm"><li>one model for <b>one script, hand or collection</b></li><li>needs <b>transcribed pages</b> to train (about 75 pages for a new hand, Humphries et al.)</li><li>poor out of the box on new material</li></ul></div>
+    <div class="arrowc" data-step="2" style="font-size:44px">→</div>
+    <div class="grow card ac3" data-step="2" style="padding:18px 24px"><h3>Now: a generalist, used with a prompt</h3><ul class="pts sm"><li>one model for <b>many scripts and tasks</b></li><li>used <b>out of the box</b>: image plus instruction in, text out</li><li>strong, but it brings a language prior (see the case studies)</li></ul></div>
   </div>
-  <div class="box-key" data-step="6" style="margin-top:22px">
-    <b>The big shift:</b> from a model trained <em>for one</em> script or collection (needs transcribed pages, ~75 pages for a new hand in Humphries et al.) to a general model used <em>out of the box</em>, with a prompt.
-  </div>
+  <div class="box-key" data-step="3" style="margin-top:26px">What changes for the historian: less training data and tooling, <b>more responsibility for checking</b> the output.</div>
 </section>
 
 <!-- 6 ─────────── Pipeline stages -->

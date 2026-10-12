@@ -665,3 +665,19 @@ svg.arrows [data-step] { transform: none; }
 .ptl .ev .tlimg { margin-top: auto; }
 .ptl .ev p { margin-bottom: 12px; }
 #s-lessons .checklist li { font-size: 28px; margin: 22px 0; } #s-lessons .checklist li small { font-size: 20px; }
+
+/* alternating timeline */
+.atl { position: relative; height: 580px; margin-top: 6px; }
+.aline { position: absolute; left: 0; right: 0; top: 282px; height: 4px; background: var(--line); }
+.acard { position: absolute; width: 330px; }
+.acard.top { top: 0; height: 270px; display: flex; flex-direction: column; justify-content: flex-end; }
+.acard.bot { top: 300px; }
+.acard .atx { margin: 6px 0; }
+.acard .atx .yr { font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--tgt); margin-right: 8px; }
+.acard.new .atx .yr { color: var(--col); }
+.acard .atx b { font-size: 21px; font-weight: 600; }
+.acard .atx p { margin: 2px 0 0; font-size: 16px; line-height: 1.35; color: #3a4357; }
+.acard .tlimg { margin: 0; width: 330px; }
+.acard .adot { position: absolute; left: 50%; width: 18px; height: 18px; margin-left: -9px; border-radius: 50%; background: var(--tgt); box-shadow: 0 0 0 5px #fff; }
+.acard.new .adot { background: var(--col); }
+.acard.top .adot { bottom: -20px; } .acard.bot .adot { top: -28px; }

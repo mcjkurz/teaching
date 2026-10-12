@@ -19,11 +19,13 @@ title: DHG 502 Week 6 Notes
 </ul>
 
 <h2>2. Choose a model</h2>
-<p>The model must accept <strong>images</strong>, not only text. We use:</p>
+<p>The model must accept <strong>images</strong>. Use one of the Qwen models:</p>
 <ul>
-<li><code>qwen/qwen3.5-9b</code> — a small, cheap multimodal model from Alibaba, good with Chinese.</li>
+<li>Qwen3.5-9B (<code>qwen/qwen3.5-9b</code>), our default</li>
+<li>Qwen3.7 Flash</li>
+<li>Qwen3.8 Flash</li>
 </ul>
-<p>Any other vision model on <a href="https://openrouter.ai/models?input_modalities=image">OpenRouter</a> can be swapped in by changing the model name. Reasoning should be switched <strong>off</strong>; it only makes OCR slower.</p>
+<p>Experiment: run the same page with each model and compare the results. To switch, copy the model ID from its <a href="https://openrouter.ai/models">OpenRouter</a> page into <code>ocr.py</code>. Keep reasoning <strong>off</strong>.</p>
 
 <h2>3. In-class exercise</h2>
 <p>Start <code>opencode</code> in your repo (your OpenRouter key from Week 1 is already connected) and paste:</p>
@@ -33,7 +35,7 @@ title: DHG 502 Week 6 Notes
 
 - Endpoint: https://openrouter.ai/api/v1/chat/completions
 - Model: qwen/qwen3.5-9b, with reasoning disabled ("reasoning": {"enabled": false}).
-- Send the image as a base64 data URL (image_url) together with a text prompt asking for OCR: transcribe all text exactly as it appears, preserve line breaks, output only the text.
+- Send the image as a base64 data URL (image_url) together with a text prompt asking for OCR: transcribe all text exactly as it appears, preserve line breaks, output only the text. In the message content, put the image first and the text prompt after it.
 - Read the API key from the environment variable OPENROUTER_API_KEY (do not hard-code it).
 - Use only the Python standard library, set a timeout, and print the result.
 - Also save the result to hongloumeng.txt.</pre>
