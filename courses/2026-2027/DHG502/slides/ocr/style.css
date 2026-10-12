@@ -506,8 +506,7 @@ table.tbl.sm td, table.tbl.sm th { padding: 2px 10px; }
 /* ===== OCR deck (English only) ===== */
 h2 { font-size: 40px; font-weight: 600; letter-spacing: .005em; margin: 0 0 16px; line-height: 1.15; }
 h3 { margin: 0 0 6px; font-weight: 600; font-size: 24px; }
-.title-slide .big-en { font-size: 40px; }
-.title-slide .big-zh { font-size: 120px; letter-spacing: .02em; }
+.title-slide .big-zh { letter-spacing: .01em; font-size: 34px; }
 .lead { font-size: 26px; line-height: 1.4; margin: 0 0 12px; }
 .t { font-size: 21px; line-height: 1.45; margin: 0 0 10px; }
 .t.sm { font-size: 18px; } .t.mute, .mute { color: var(--mute); }
@@ -538,22 +537,22 @@ figure.fx .lab { font-size: 15px; font-weight: 600; margin-bottom: 6px; color: v
 .cards.three .card { flex: 1; }
 
 /* timeline */
-.tl { display: flex; margin-top: 18px; gap: 0; position: relative; }
-.tl::before { content: ""; position: absolute; left: 0; right: 0; top: 18px; height: 4px; background: var(--line); }
-.tl .ev { flex: 1; position: relative; padding: 0 12px 0 0; }
-.tl .ev i { position: relative; display: block; width: 18px; height: 18px; border-radius: 50%; background: var(--tgt); margin: 9px 0 14px; box-shadow: 0 0 0 5px #fff; }
-.tl .ev b { display: block; font-size: 20px; font-weight: 600; }
-.tl .ev .yr { font-size: 14px; color: var(--tgt); font-weight: 600; letter-spacing: .06em; }
-.tl .ev p { margin: 4px 0 0; font-size: 16px; line-height: 1.4; color: #3a4357; }
-.tl .ev.new i { background: var(--col); } .tl .ev.new .yr { color: var(--col); }
+.ptl { display: flex; margin-top: 18px; gap: 0; position: relative; }
+.ptl::before { content: ""; position: absolute; left: 0; right: 0; top: 18px; height: 4px; background: var(--line); }
+.ptl .ev { flex: 1; position: relative; padding: 0 12px 0 0; }
+.ptl .ev i { position: relative; display: block; width: 18px; height: 18px; border-radius: 50%; background: var(--tgt); margin: 9px 0 14px; box-shadow: 0 0 0 5px #fff; }
+.ptl .ev b { display: block; font-size: 23px; font-weight: 600; }
+.ptl .ev .yr { font-size: 14px; color: var(--tgt); font-weight: 600; letter-spacing: .06em; }
+.ptl .ev p { margin: 4px 0 0; font-size: 18px; line-height: 1.4; color: #3a4357; }
+.ptl .ev.new i { background: var(--col); } .ptl .ev.new .yr { color: var(--col); }
 
 /* flow boxes */
-.flow { display: flex; align-items: stretch; gap: 10px; margin-top: 14px; }
-.flow .fb { flex: 1; border: 1.5px solid var(--line); border-radius: 14px; background: #fff; padding: 12px 14px; box-shadow: 0 2px 10px rgba(20,30,60,.05); }
-.flow .fb b { display: block; font-size: 19px; font-weight: 600; margin-bottom: 4px; }
-.flow .fb span { font-size: 15px; color: var(--mute); line-height: 1.35; display: block; }
-.flow .fb.hot { border-color: var(--tgt); background: var(--tgt-bg); }
-.flow .fa { align-self: center; color: var(--mute); font-size: 24px; flex: none; }
+.pflow { display: flex; align-items: stretch; gap: 10px; margin-top: 14px; }
+.pflow .fb { flex: 1; border: 1.5px solid var(--line); border-radius: 14px; background: #fff; padding: 12px 14px; box-shadow: 0 2px 10px rgba(20,30,60,.05); }
+.pflow .fb b { display: block; font-size: 19px; font-weight: 600; margin-bottom: 4px; }
+.pflow .fb span { font-size: 15px; color: var(--mute); line-height: 1.35; display: block; }
+.pflow .fb.hot { border-color: var(--tgt); background: var(--tgt-bg); }
+.pflow .fa { align-self: center; color: var(--mute); font-size: 24px; flex: none; }
 
 /* pills */
 .pill { display: inline-block; font-size: 15px; font-weight: 600; border-radius: 999px; padding: 2px 12px; background: var(--panel); color: var(--mute); border: 1.5px solid var(--line); }
@@ -659,3 +658,10 @@ svg.arrows text { font-family: var(--latin); font-size: 14px; fill: var(--mute);
 .checklist li i { flex: none; width: 34px; height: 34px; border-radius: 50%; background: var(--tgt); color: #fff; font-style: normal; font-weight: 600; display: grid; place-items: center; font-size: 17px; }
 .checklist li small { display: block; font-size: 16px; color: var(--mute); }
 #side .item .tip .en { font-size: 16px; color: #fff; }
+svg.arrows [data-step] { transform: none; }
+.tlimg { display: block; width: 100%; margin-top: 10px; border: 1.5px solid var(--line); border-radius: 8px; }
+.ptl { margin-top: 10px; }
+.ptl .ev { display: flex; flex-direction: column; }
+.ptl .ev .tlimg { margin-top: auto; }
+.ptl .ev p { margin-bottom: 12px; }
+#s-lessons .checklist li { font-size: 28px; margin: 22px 0; } #s-lessons .checklist li small { font-size: 20px; }

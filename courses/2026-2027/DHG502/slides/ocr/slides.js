@@ -3,8 +3,8 @@ window.HOOKS = {};
 window.SECTIONS = [
   { id: 'what',    en: 'What is OCR?' },
   { id: 'prep',    en: 'Preparing the images' },
-  { id: 'cases',   en: 'Case studies: Russian and Manchu' },
   { id: 'metrics', en: 'Measuring errors' },
+  { id: 'cases',   en: 'Case studies: Russian and Manchu' },
   { id: 'vlm',     en: 'Vision–language models' },
   { id: 'summary', en: 'Summary' }
 ];

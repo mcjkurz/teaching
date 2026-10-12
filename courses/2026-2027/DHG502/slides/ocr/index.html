@@ -11,8 +11,8 @@
 
 <!-- 1 ─────────── Title -->
 <section class="slide full title-slide" id="s-title">
-  <div class="big-zh" style="font-size:104px">OCR</div>
-  <div class="big-en">Optical Character Recognition and Multimodal Transcription</div>
+  <div class="big-en" style="font-size:120px">OCR</div>
+  <div class="big-zh">Optical Character Recognition and Multimodal Transcription</div>
   <div class="rule"></div>
   <div class="quote">
     <span class="en" style="font-size:24px">From a picture of a page to text we can search, count and cite, and how to tell whether we can trust it.</span>
@@ -28,10 +28,10 @@
     <div class="rarrow" data-step="2">→</div>
     <div class="rstop" data-step="2"><i>2</i><div><b>Preparing images</b><br><span class="mute">before the model sees them</span></div></div>
     <div class="rarrow" data-step="3">→</div>
-    <div class="rstop" data-step="3"><i>3</i><div><b>Two case studies</b><br><span class="mute">Old Russian, Manchu</span></div></div>
+    <div class="rstop" data-step="3"><i>3</i><div><b>Measuring errors</b><br><span class="mute">CER, WER and friends</span></div></div>
   </div>
   <div class="route" style="margin-top:14px">
-    <div class="rstop" data-step="4"><i>4</i><div><b>Measuring errors</b><br><span class="mute">CER, WER and friends</span></div></div>
+    <div class="rstop" data-step="4"><i>4</i><div><b>Three papers</b><br><span class="mute">Old Russian, Manchu, handwriting</span></div></div>
     <div class="rarrow" data-step="5">→</div>
     <div class="rstop" data-step="5"><i>5</i><div><b>Vision–language models</b><br><span class="mute">how the pipeline works</span></div></div>
   </div>
@@ -39,7 +39,7 @@
   <ul class="reads" data-step="6">
     <li>Maria Levchenko, “Evaluating LLMs for Historical Document OCR” (2025) <span class="role">Old Russian</span></li>
     <li>Chung &amp; Choi, “Fine-tuning vision–language models as OCR systems for low-resource languages: a case study of Manchu,” <em>CHR</em> 2 (2026) <span class="role">Manchu</span></li>
-    <li class="opt">(background) Humphries et al., “Unlocking the Archives” (2024): LLMs for handwritten historical documents</li>
+    <li>Humphries et al., “Unlocking the Archives: LLMs Achieve State-of-the-Art Performance on the Transcription of Handwritten Historical Documents” (2024) <span class="role">Handwriting · student presentation</span></li>
   </ul>
 </section>
 
@@ -96,14 +96,14 @@
 <!-- 5 ─────────── History of OCR -->
 <section class="slide" id="s-history" data-sec="what">
   <h2>A short history of machine reading</h2>
-  <div class="tl">
-    <div class="ev" data-step="1"><span class="yr">1960s</span><i></i><b>Template matching</b><p>Compare each character with stored shapes. Needs clean input and known fonts.</p></div>
-    <div class="ev" data-step="2"><span class="yr">LATE 1990s–2000s</span><i></i><b>Machine learning</b><p>Pattern classifiers. ABBYY FineReader and open-source Tesseract become standard.</p></div>
-    <div class="ev" data-step="3"><span class="yr">2010s</span><i></i><b>Deep networks</b><p>CNN + LSTM models; Transkribus brings HTR to historians. One model per script, hand or collection.</p></div>
-    <div class="ev" data-step="4"><span class="yr">LATE 2010s–</span><i></i><b>Transformers</b><p>Attention-based recognizers such as TrOCR, usually fine-tuned on your own transcribed pages.</p></div>
-    <div class="ev new" data-step="5"><span class="yr">2023–</span><i></i><b>Multimodal LLMs</b><p>General models that read an image <em>and</em> follow a prompt: GPT-4, Gemini, Claude, Qwen-VL, Llama Vision.</p></div>
+  <div class="ptl">
+    <div class="ev" data-step="1"><span class="yr">1960s</span><i></i><b>Template matching</b><p>Compare each character with stored shapes. Needs clean input and known fonts.</p><img class="tlimg" src="img/tl-1.png" alt=""></div>
+    <div class="ev" data-step="2"><span class="yr">LATE 1990s–2000s</span><i></i><b>Machine learning</b><p>Pattern classifiers. ABBYY FineReader and open-source Tesseract become standard.</p><img class="tlimg" src="img/tl-2.png" alt=""></div>
+    <div class="ev" data-step="3"><span class="yr">2010s</span><i></i><b>Deep networks</b><p>CNN + LSTM models; Transkribus brings HTR to historians. One model per script, hand or collection.</p><img class="tlimg" src="img/tl-3.png" alt=""></div>
+    <div class="ev" data-step="4"><span class="yr">LATE 2010s–</span><i></i><b>Transformers</b><p>Attention-based recognizers such as TrOCR, usually fine-tuned on your own transcribed pages.</p><img class="tlimg" src="img/tl-4.png" alt=""></div>
+    <div class="ev new" data-step="5"><span class="yr">2023–</span><i></i><b>Multimodal LLMs</b><p>General models that read an image <em>and</em> follow a prompt: GPT-4, Gemini, Claude, Qwen-VL, Llama Vision.</p><img class="tlimg" src="img/tl-5.png" alt=""></div>
   </div>
-  <div class="box-key" data-step="6" style="margin-top:34px">
+  <div class="box-key" data-step="6" style="margin-top:22px">
     <b>The big shift:</b> from a model trained <em>for one</em> script or collection (needs transcribed pages, ~75 pages for a new hand in Humphries et al.) to a general model used <em>out of the box</em>, with a prompt.
   </div>
 </section>
@@ -111,7 +111,7 @@
 <!-- 6 ─────────── Pipeline stages -->
 <section class="slide" id="s-stages" data-sec="what">
   <h2>The classic OCR / HTR workflow</h2>
-  <div class="flow">
+  <div class="pflow">
     <div class="fb" data-step="1"><b>1 Image</b><span>scan, photo, microfilm</span></div><div class="fa" data-step="2">→</div>
     <div class="fb hot" data-step="2"><b>2 Preprocessing</b><span>deskew, light, binarize, crop, resize</span></div><div class="fa" data-step="3">→</div>
     <div class="fb" data-step="3"><b>3 Layout analysis</b><span>regions, columns, text lines, reading order</span></div><div class="fa" data-step="4">→</div>
@@ -267,7 +267,7 @@
     <div class="card k ac2" data-step="2"><h3>Format</h3><p>Archive in lossless <b>TIFF/PNG</b>. Heavy <b>JPEG</b> compression leaves artifacts that read as strokes or diacritics, and the Manchu paper lists “heavily compressed scans” among the failure causes.</p></div>
     <div class="card k ac3" data-step="3"><h3>Unit of input</h3><p>One <b>line</b>, a <b>sliding window</b> of a few lines, or the <b>full page</b>? More context helps, but dense pages raise errors and hallucinations.</p></div>
   </div>
-  <div class="t" style="margin-top:18px" data-step="4"><b>Levchenko 2025: CER (%) by input unit, 18th-century Russian</b></div>
+  <div class="t" style="margin-top:18px" data-step="4"><b>Levchenko 2025: CER (%) by input unit, 18th-century Russian</b> <span class="mute" style="font-size:16px">(CER = character error rate, defined in the next section)</span></div>
   <table class="tbl c" data-step="4" style="margin-top:2px">
     <thead><tr><th>Model</th><th class="num">Full page</th><th class="num">Single line</th><th class="num">Sliding window</th></tr></thead>
     <tbody>
@@ -300,175 +300,7 @@
     <li><i>✓</i><div>Binarize only if tests show it helps<small>keep a colour or grayscale copy</small></div></li>
     <li><i>✓</i><div>Always keep the original image<small>and record every step you applied</small></div></li>
   </ul>
-  <div class="box-key" data-step="4"><b>Decide with data, not habit:</b> transcribe 10–20 pages by hand once, then compare pipelines (raw vs. cleaned) by their error rates. That is the next two sections.</div>
-</section>
-
-<!-- 14 ─────────── Russian: setup -->
-<section class="slide" id="s-ru-intro" data-sec="cases">
-  <h2>Case 1: 18th-century Russian print</h2>
-  <div class="t" style="margin-top:-6px;color:var(--mute)">Levchenko, “Evaluating LLMs for Historical Document OCR” (RANLP workshop, 2025)</div>
-  <figure class="fx" data-step="1" style="margin-top:10px">
-    <img src="img/russian-fig4.png" alt="Excerpt of an 18th-century Russian book in Civil font">
-    <figcaption>Levchenko 2025, Fig. 4: Civil font, 1750–1800. Note the variable “ш”, sometimes close to “т”.</figcaption>
-  </figure>
-  <div class="row" style="margin-top:16px;gap:22px">
-    <div class="card k ac" data-step="2" style="flex:1"><h3>The data</h3><p><span class="num-big c1" style="font-size:34px">1,029</span> pages from <b>428</b> books, never published online: a test the models cannot have memorized.</p></div>
-    <div class="card k ac2" data-step="3" style="flex:1"><h3>The task</h3><p><b>Diplomatic transcription</b>: keep the period spelling, hyphens, line breaks and even printers’ errors.</p></div>
-    <div class="card k ac3" data-step="4" style="flex:1"><h3>The contest</h3><p><b>12 models</b> (GPT, Claude, Gemini, Qwen, Llama) against Tesseract, Surya and Transkribus.</p></div>
-  </div>
-</section>
-
-<!-- 15 ─────────── Russian: results -->
-<section class="slide" id="s-ru-res" data-sec="cases">
-  <h2>Result 1: general LLMs beat classic OCR, with no training</h2>
-  <div class="hb">
-    <div class="r sub" data-step="1"><div class="l">Tesseract 4.0</div><div class="tr"><div class="b m" style="width:224px"></div><div class="v">21.6</div></div></div>
-    <div class="r sub" data-step="1"><div class="l">Transkribus PyLaia</div><div class="tr"><div class="b m" style="width:280px"></div><div class="v">26.9</div></div></div>
-    <div class="r sub" data-step="1"><div class="l">Surya (multilingual)</div><div class="tr"><div class="b m" style="width:478px"></div><div class="v">46.0</div></div></div>
-    <div class="r" data-step="2"><div class="l">Gemini-2.5-Pro</div><div class="tr"><div class="b g" style="width:35px"></div><div class="v">3.4</div></div></div>
-    <div class="r" data-step="2"><div class="l">Gemini-2.5-Flash</div><div class="tr"><div class="b g" style="width:51px"></div><div class="v">4.9</div></div></div>
-    <div class="r" data-step="2"><div class="l">Qwen-2.5-VL</div><div class="tr"><div class="b g" style="width:60px"></div><div class="v">5.8</div></div></div>
-    <div class="r" data-step="2"><div class="l">Claude-3.5</div><div class="tr"><div class="b g" style="width:71px"></div><div class="v">6.8</div></div></div>
-    <div class="r" data-step="2"><div class="l">GPT-4o</div><div class="tr"><div class="b g" style="width:96px"></div><div class="v">9.2</div></div></div>
-    <div class="r" data-step="2"><div class="l">Llama-4-Scout</div><div class="tr"><div class="b g" style="width:166px"></div><div class="v">15.9</div></div></div>
-    <div class="r sub" data-step="3"><div class="l">TrOCR, fine-tuned on this corpus</div><div class="tr"><div class="b o" style="width:19px"></div><div class="v">1.8</div></div></div>
-  </div>
-  <div class="cap" style="margin-top:0">Character error rate (%), lower is better. Classic engines: 100-page sample. LLMs: full corpus, full-page mode. Levchenko 2025, Tables 1 and 3.</div>
-  <ul class="pts sm" style="margin-top:10px">
-    <li data-step="3">The fine-tuned TrOCR is the <b>upper bound</b>: it needed 495 corrected pages from the same corpus. The best LLM comes close with just a prompt.</li>
-    <li data-step="4">Tesseract’s WER was <b>126%</b>: a rate above 100% is possible (see the metrics section).</li>
-  </ul>
-</section>
-
-<!-- 16 ─────────── Over-historicization -->
-<section class="slide" id="s-ru-hist" data-sec="cases">
-  <h2>Result 2: “over-historicization”</h2>
-  <div class="t" data-step="1" style="margin-top:-4px">Expected error: the model <b>modernizes</b> old spellings. Observed: models also <b class="bad-c">insert archaic letters that were not in the book</b>, letters Peter the Great’s reforms had already removed from the Civil font.</div>
-  <div class="glyphs" data-step="2">
-    <div class="gl"><span class="a bad">ѧ</span><span class="ar">for</span><span class="a">я</span><small>little yus; reflexive endings, after palatalized consonants</small></div>
-    <div class="gl"><span class="a bad">ѡ</span><span class="ar">in</span><span class="a">…</span><small>omega; prepositions and prefixes</small></div>
-    <div class="gl"><span class="a bad">ꙋ</span><span class="ar">for</span><span class="a">у</span><small>monograph uk; specific word positions</small></div>
-    <div class="gl"><span class="a bad">ѿ</span><span class="ar">for</span><span class="a">от</span><small>“ot” ligature</small></div>
-  </div>
-  <div class="row" style="margin-top:6px;gap:26px">
-    <div style="width:330px;flex:none" data-step="3">
-      <div class="card" style="text-align:center;padding:16px"><div class="num-big c3">59%</div><div class="t sm" style="margin:6px 0 0">of files in which <b>GPT-4o</b> inserted archaic characters</div></div>
-    </div>
-    <div class="grow" data-step="4">
-      <table class="tbl c">
-        <thead><tr><th>Model family</th><th>Typical archaic insertions</th></tr></thead>
-        <tbody>
-          <tr><td>GPT-4o, GPT-4.1</td><td>ѡ ѧ ꙋ ѿ ꙗ</td></tr>
-          <tr><td>o4-mini, Gemini-2.5-Flash</td><td>ѧ ѭ ѥ</td></tr>
-          <tr><td>Claude-3.7, Qwen-2.5</td><td>minimal</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="box-warn" data-step="5">The text looks <b>more “authentic”</b> than the source, and a researcher who trusts it would conclude that this printing still used pre-Petrine letters. A character-level score cannot tell.</div>
-  <div class="src">Levchenko 2025, §5 and Table 5. Other models listed in the paper are omitted.</div>
-</section>
-
-<!-- 17 ─────────── Why / other errors -->
-<section class="slide" id="s-ru-why" data-sec="cases">
-  <h2>Why would a model do that?</h2>
-  <div class="row" style="gap:36px">
-    <div class="grow">
-      <ul class="pts">
-        <li data-step="1"><b>No period tags.</b> Training data mixes Church Slavonic, pre-reform, 18th-century and post-1918 Russian, and the model does not know which one you mean.</li>
-        <li data-step="2"><b>“Old-looking” cues become a generic signal.</b> Yus letters, omega and diacritics say <em>historical text</em>, so the model adds them.</li>
-        <li data-step="3"><b>Visual noise.</b> Faded ink, bleed-through or worn type look like diacritics; models “err on the side of complexity.”</li>
-        <li data-step="4"><b>Family signatures.</b> OpenAI, Anthropic and Google models show different error profiles, probably from different training data.</li>
-      </ul>
-      <div class="src" data-step="4">Levchenko’s interpretation; the paper does not have access to training data.</div>
-    </div>
-    <div style="width:430px;flex:none" data-step="5">
-      <h3>Everyday errors, all models</h3>
-      <table class="tbl c">
-        <thead><tr><th>Truth</th><th>Output</th><th>Why</th></tr></thead>
-        <tbody>
-          <tr><td class="mono">ї</td><td class="mono">і</td><td>the most common substitution</td></tr>
-          <tr><td class="mono">ъ</td><td class="mono">ь</td><td>hard vs. soft sign</td></tr>
-          <tr><td class="mono">ш</td><td class="mono">т</td><td>variable 18th-c. glyph shapes</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="box-key" data-step="6"><b>Not all errors are equal.</b> A random typo is noise; an insertion that always points the same way is <b>bias</b>, and bias survives in your counts, collocations and arguments.</div>
-</section>
-
-<!-- 18 ─────────── Manchu: setup -->
-<section class="slide" id="s-mc-intro" data-sec="cases">
-  <h2>Case 2: Manchu word images</h2>
-  <div class="t" style="margin-top:-6px;color:var(--mute)">Chung &amp; Choi, <i>Computational Humanities Research</i> 2 (2026)</div>
-  <div class="row" style="gap:34px">
-    <figure class="fx noborder" data-step="1" style="width:92px;flex:none">
-      <img src="img/manchu-fig1.png" alt="The Manchu words manju gisun, written vertically">
-      <figcaption><i>manju gisun</i>, “Manchu language.” Written vertically; letters change shape by position.</figcaption>
-    </figure>
-    <div class="grow">
-      <ul class="pts sm">
-        <li data-step="2"><b>Problem:</b> Manchu (endangered, essential for Qing history) has no practical OCR for real archival documents.</li>
-        <li data-step="3"><b>Training data:</b> 60,000 <em>synthetic</em> word images rendered from a 130,917-word dictionary in several typefaces.</li>
-        <li data-step="4"><b>Models:</b> three open VLMs (Llama-3.2-11B-Vision, Qwen2.5-VL-7B, -3B), fine-tuned with LoRA (a light-weight method).</li>
-        <li data-step="5"><b>Test:</b> 753 word images from <em>real</em> scans of seven Qing sources, five handwritten and two printed.</li>
-      </ul>
-      <div class="prompt" data-step="6" style="margin-top:12px;font-size:14px">You are an expert OCR system for Manchu script. Extract the text from the provided image with perfect accuracy. Format your answer exactly as follows: first line with ‘Manchu:’ followed by the Manchu script, then a new line with ‘Roman:’ followed by the romanized transliteration.</div>
-      <div class="src" data-step="6">The prompt used in the paper (Chung &amp; Choi 2026).</div>
-    </div>
-  </div>
-</section>
-
-<!-- 19 ─────────── Manchu: gap -->
-<section class="slide" id="s-mc-gap" data-sec="cases">
-  <h2>Result: a great score on synthetic data is not a great score on your sources</h2>
-  <div class="t" style="margin-top:-4px"><span class="pill b">synthetic test</span> &nbsp;vs.&nbsp; <span class="pill o">real archival words</span> <span class="mute" style="font-size:16px">&nbsp; word accuracy, %</span></div>
-  <div class="hb" style="margin-top:12px">
-    <div class="r" data-step="1"><div class="l"><b>Llama-3.2-11B-Vision</b><br>fine-tuned VLM</div><div class="tr" style="flex-direction:column;align-items:flex-start;gap:3px"><div style="display:flex;align-items:center;gap:10px"><div class="b" style="width:513px"></div><span class="v">98.6</span></div><div style="display:flex;align-items:center;gap:10px"><div class="b o" style="width:454px"></div><span class="v">87.4</span></div></div></div>
-    <div class="r" data-step="2"><div class="l"><b>CRNN</b><br>classic CNN + LSTM</div><div class="tr" style="flex-direction:column;align-items:flex-start;gap:3px"><div style="display:flex;align-items:center;gap:10px"><div class="b" style="width:519px"></div><span class="v">99.9</span></div><div style="display:flex;align-items:center;gap:10px"><div class="b o" style="width:295px"></div><span class="v">56.8</span></div></div></div>
-    <div class="r" data-step="3"><div class="l"><b>Qwen2.5-VL-7B</b></div><div class="tr" style="flex-direction:column;align-items:flex-start;gap:3px"><div style="display:flex;align-items:center;gap:10px"><div class="b" style="width:449px"></div><span class="v">86.3</span></div><div style="display:flex;align-items:center;gap:10px"><div class="b o" style="width:175px"></div><span class="v">33.7</span></div></div></div>
-    <div class="r" data-step="3"><div class="l"><b>Qwen2.5-VL-3B</b></div><div class="tr" style="flex-direction:column;align-items:flex-start;gap:3px"><div style="display:flex;align-items:center;gap:10px"><div class="b" style="width:434px"></div><span class="v">83.5</span></div><div style="display:flex;align-items:center;gap:10px"><div class="b o" style="width:145px"></div><span class="v">27.8</span></div></div></div>
-  </div>
-  <ul class="pts sm" style="margin-top:10px">
-    <li data-step="4">The classic CRNN is <b>nearly perfect on synthetic words</b> (99.9%) and falls 43 points on real ones. The VLM falls 11 points: pre-trained visual and linguistic knowledge transfers better.</li>
-    <li data-step="5">CER on real words: Llama <b>0.05</b>, CRNN <b>0.166</b>. The authors’ synthetic scores are also “likely optimistic” (they chose checkpoints on the same pool).</li>
-  </ul>
-</section>
-
-<!-- 20 ─────────── Manchu: errors -->
-<section class="slide" id="s-mc-err" data-sec="cases">
-  <h2>What still goes wrong in Manchu</h2>
-  <div class="row" style="gap:30px">
-    <div class="grow">
-      <ul class="pts">
-        <li data-step="1"><b>Position-dependent letters.</b> A Manchu letter changes form as initial, medial or final, and some vowels are “visually indistinguishable in isolation.”</li>
-        <li data-step="2"><b>Systematic confusion.</b> On real words the three vowels <b>a, i, e</b> account for <b>47.5%</b> of all Llama’s character errors (a alone 22.2%).</li>
-        <li data-step="3"><b>The same language knowledge cuts both ways.</b> The authors credit VLMs for “linguistic knowledge to maintain coherence even when characters are visually ambiguous,” the same prior that makes a Russian model reach for ѧ.</li>
-      </ul>
-    </div>
-    <div style="width:340px;flex:none" data-step="4">
-      <div class="card" style="padding:18px 22px">
-        <div class="num-big c3" style="font-size:48px">1 in 8</div>
-        <div class="t sm" style="margin:6px 0 0">real words still wrong (87.4% word accuracy). “Manual post-correction by domain experts” is needed before scholarly use.</div>
-      </div>
-      <div class="card" style="padding:14px 22px;margin-top:14px">
-        <div class="t sm" style="margin:0"><b>9–15 s per word image</b> on a 48 GB GPU: full pages and entire archives are not yet practical.</div>
-      </div>
-    </div>
-  </div>
-  <div class="box-warn" data-step="5"><b>Scope matters:</b> single, pre-cut words; formal Qing documents only; no layout or line segmentation. It is a proof of concept, not an archive-ready tool.</div>
-</section>
-
-<!-- 21 ─────────── Lessons -->
-<section class="slide" id="s-lessons" data-sec="cases">
-  <h2>What the two cases teach</h2>
-  <ul class="checklist">
-    <li data-step="1"><i>1</i><div><b>A language prior is a strength and a risk.</b><small>It rescues a smudged letter (Manchu) and invents a period letter (Russian).</small></div></li>
-    <li data-step="2"><i>2</i><div><b>A low CER can hide systematic bias.</b><small>Check <em>which</em> errors, not only how many.</small></div></li>
-    <li data-step="3"><i>3</i><div><b>Scores from synthetic or clean data overstate real performance.</b><small>Test on a sample of <em>your</em> sources.</small></div></li>
-    <li data-step="4"><i>4</i><div><b>Decide: diplomatic or normalized transcription?</b><small>Then say so in the prompt, and check that the output obeys.</small></div></li>
-    <li data-step="5"><i>5</i><div><b>Models differ, and they change.</b><small>Same pages, same prompt, different model or different week: different errors.</small></div></li>
-  </ul>
+  <div class="box-key" data-step="4"><b>Decide with data, not habit:</b> transcribe 10–20 pages by hand once, then compare pipelines (raw vs. cleaned) by their error rates. That is the next section.</div>
 </section>
 
 <!-- 22 ─────────── Metrics intro -->
@@ -557,26 +389,11 @@
       <tr data-step="2"><td><b>Character F1</b></td><td>precision and recall of matched characters; e.g. 3 of 5 characters found, none wrong: P = 1, R = 0.6, F1 = 0.75</td><td>Manchu</td></tr>
       <tr data-step="3"><td><b>Line exact-match rate</b></td><td>share of lines with no error at all</td><td>Russian</td></tr>
       <tr data-step="4"><td><b>Case-insensitive CER</b></td><td>isolates recognition from capitalization errors</td><td>Russian</td></tr>
-      <tr data-step="5"><td><b>HCPR</b></td><td>Historical Character Preservation Rate: how many period-specific letters (і/ї, ѣ, ъ) survive</td><td>Russian</td></tr>
+      <tr data-step="5"><td><b>HCPR</b></td><td>Historical Character Preservation Rate: how many period-specific letters (і/ї, ѣ, ъ) survive (we use it in Case 1)</td><td>Russian</td></tr>
       <tr data-step="5"><td><b>AIR</b></td><td>Archaic Insertion Rate: how often obsolete letters are inserted</td><td>Russian</td></tr>
     </tbody>
   </table>
   <div class="box-key" data-step="6">HCPR and AIR are <b>tailored to the historian’s question</b>: they measure the very thing a generic CER cannot see. Define the errors that matter for <em>your</em> source.</div>
-</section>
-
-<!-- 27 ─────────── Historical-character error -->
-<section class="slide" id="s-m-hist" data-sec="metrics">
-  <h2>A good CER can hide a bad error where it matters</h2>
-  <div class="t" style="margin-top:-6px"><span class="pill b">CER, all characters</span> &nbsp;vs.&nbsp; <span class="pill r">error on period-specific characters</span></div>
-  <div class="hb" style="margin-top:10px">
-    <div class="r" data-step="1"><div class="l">Gemini-2.5-Pro</div><div class="tr" style="flex-direction:column;align-items:flex-start;gap:3px"><div style="display:flex;align-items:center;gap:10px"><div class="b" style="width:38px"></div><span class="v">3.4</span></div><div style="display:flex;align-items:center;gap:10px"><div class="b o" style="width:112px"></div><span class="v">9.8</span></div></div></div>
-    <div class="r" data-step="1"><div class="l">Gemini-2.5-Flash</div><div class="tr" style="flex-direction:column;align-items:flex-start;gap:3px"><div style="display:flex;align-items:center;gap:10px"><div class="b" style="width:56px"></div><span class="v">4.9</span></div><div style="display:flex;align-items:center;gap:10px"><div class="b o" style="width:147px"></div><span class="v">12.9</span></div></div></div>
-    <div class="r" data-step="1"><div class="l">Claude-3.5</div><div class="tr" style="flex-direction:column;align-items:flex-start;gap:3px"><div style="display:flex;align-items:center;gap:10px"><div class="b" style="width:77px"></div><span class="v">6.8</span></div><div style="display:flex;align-items:center;gap:10px"><div class="b o" style="width:174px"></div><span class="v">15.2</span></div></div></div>
-    <div class="r" data-step="1"><div class="l">GPT-4o</div><div class="tr" style="flex-direction:column;align-items:flex-start;gap:3px"><div style="display:flex;align-items:center;gap:10px"><div class="b" style="width:105px"></div><span class="v">9.2</span></div><div style="display:flex;align-items:center;gap:10px"><div class="b o" style="width:236px"></div><span class="v">20.7</span></div></div></div>
-    <div class="r" data-step="1"><div class="l">Llama-4-Scout</div><div class="tr" style="flex-direction:column;align-items:flex-start;gap:3px"><div style="display:flex;align-items:center;gap:10px"><div class="b" style="width:182px"></div><span class="v">15.9</span></div><div style="display:flex;align-items:center;gap:10px"><div class="b o" style="width:481px"></div><span class="v">42.2</span></div></div></div>
-  </div>
-  <div class="cap">Full-page mode, Levchenko 2025, Table 3 (%).</div>
-  <div class="box-warn" data-step="2"><b>Every model</b> does worse on the characters that make the text <em>period-specific</em> than on characters in general: for the best model about three times worse. For a historian these are the characters that matter most.</div>
 </section>
 
 <!-- 28 ─────────── How good is good enough -->
@@ -598,13 +415,196 @@
   </ul>
 </section>
 
+<!-- 14 ─────────── Russian: setup -->
+<section class="slide" id="s-ru-intro" data-sec="cases">
+  <h2>Case 1: 18th-century Russian print</h2>
+  <div class="t" style="margin-top:-6px;color:var(--mute)">Levchenko, “Evaluating LLMs for Historical Document OCR” (RANLP workshop, 2025)</div>
+  <figure class="fx" data-step="1" style="margin-top:10px">
+    <img src="img/russian-fig4.png" alt="Excerpt of an 18th-century Russian book in Civil font">
+    <figcaption>Levchenko 2025, Fig. 4: Civil font, 1750–1800. Note the variable “ш”, sometimes close to “т”.</figcaption>
+  </figure>
+  <div class="row" style="margin-top:16px;gap:22px">
+    <div class="card k ac" data-step="2" style="flex:1"><h3>The data</h3><p><span class="num-big c1" style="font-size:34px">1,029</span> pages from <b>428</b> books, never published online: a test the models cannot have memorized.</p></div>
+    <div class="card k ac2" data-step="3" style="flex:1"><h3>The task</h3><p><b>Diplomatic transcription</b>: keep the period spelling, hyphens, line breaks and even printers’ errors.</p></div>
+    <div class="card k ac3" data-step="4" style="flex:1"><h3>The contest</h3><p><b>12 models</b> (GPT, Claude, Gemini, Qwen, Llama) against Tesseract, Surya and Transkribus.</p></div>
+  </div>
+</section>
+
+<!-- 15 ─────────── Russian: results -->
+<section class="slide" id="s-ru-res" data-sec="cases">
+  <h2>Result 1: general LLMs beat classic OCR, with no training</h2>
+  <div class="hb">
+    <div class="r sub" data-step="1"><div class="l">Tesseract 4.0</div><div class="tr"><div class="b m" style="width:224px"></div><div class="v">21.6</div></div></div>
+    <div class="r sub" data-step="1"><div class="l">Transkribus PyLaia</div><div class="tr"><div class="b m" style="width:280px"></div><div class="v">26.9</div></div></div>
+    <div class="r sub" data-step="1"><div class="l">Surya (multilingual)</div><div class="tr"><div class="b m" style="width:478px"></div><div class="v">46.0</div></div></div>
+    <div class="r" data-step="2"><div class="l">Gemini-2.5-Pro</div><div class="tr"><div class="b g" style="width:35px"></div><div class="v">3.4</div></div></div>
+    <div class="r" data-step="2"><div class="l">Gemini-2.5-Flash</div><div class="tr"><div class="b g" style="width:51px"></div><div class="v">4.9</div></div></div>
+    <div class="r" data-step="2"><div class="l">Qwen-2.5-VL</div><div class="tr"><div class="b g" style="width:60px"></div><div class="v">5.8</div></div></div>
+    <div class="r" data-step="2"><div class="l">Claude-3.5</div><div class="tr"><div class="b g" style="width:71px"></div><div class="v">6.8</div></div></div>
+    <div class="r" data-step="2"><div class="l">GPT-4o</div><div class="tr"><div class="b g" style="width:96px"></div><div class="v">9.2</div></div></div>
+    <div class="r" data-step="2"><div class="l">Llama-4-Scout</div><div class="tr"><div class="b g" style="width:166px"></div><div class="v">15.9</div></div></div>
+    <div class="r sub" data-step="3"><div class="l">TrOCR, fine-tuned on this corpus</div><div class="tr"><div class="b o" style="width:19px"></div><div class="v">1.8</div></div></div>
+  </div>
+  <div class="cap" style="margin-top:0">Character error rate (%), lower is better. Classic engines: 100-page sample. LLMs: full corpus, full-page mode. Levchenko 2025, Tables 1 and 3.</div>
+  <ul class="pts sm" style="margin-top:10px">
+    <li data-step="3">The fine-tuned TrOCR is the <b>upper bound</b>: it needed 495 corrected pages from the same corpus. The best LLM comes close with just a prompt.</li>
+    <li data-step="4">Tesseract’s WER was <b>126%</b>: a rate above 100% is possible (more on this in the metrics section above).</li>
+  </ul>
+</section>
+
+<!-- 16 ─────────── Over-historicization -->
+<section class="slide" id="s-ru-hist" data-sec="cases">
+  <h2>Result 2: “over-historicization”</h2>
+  <div class="t" data-step="1" style="margin-top:-4px">Expected error: the model <b>modernizes</b> old spellings. Observed: models also <b class="bad-c">insert archaic letters that were not in the book</b>, letters Peter the Great’s reforms had already removed from the Civil font.</div>
+  <div class="glyphs" data-step="2">
+    <div class="gl"><span class="a bad">ѧ</span><span class="ar">for</span><span class="a">я</span><small>little yus; reflexive endings, after palatalized consonants</small></div>
+    <div class="gl"><span class="a bad">ѡ</span><span class="ar">in</span><span class="a">…</span><small>omega; prepositions and prefixes</small></div>
+    <div class="gl"><span class="a bad">ꙋ</span><span class="ar">for</span><span class="a">у</span><small>monograph uk; specific word positions</small></div>
+    <div class="gl"><span class="a bad">ѿ</span><span class="ar">for</span><span class="a">от</span><small>“ot” ligature</small></div>
+  </div>
+  <div class="row" style="margin-top:6px;gap:26px">
+    <div style="width:330px;flex:none" data-step="3">
+      <div class="card" style="text-align:center;padding:16px"><div class="num-big c3">59%</div><div class="t sm" style="margin:6px 0 0">of files in which <b>GPT-4o</b> inserted archaic characters</div></div>
+    </div>
+    <div class="grow" data-step="4">
+      <table class="tbl c">
+        <thead><tr><th>Model family</th><th>Typical archaic insertions</th></tr></thead>
+        <tbody>
+          <tr><td>GPT-4o, GPT-4.1</td><td style="font-size:26px">ѡ ѧ ꙋ ѿ ꙗ</td></tr>
+          <tr><td>o4-mini, Gemini-2.5-Flash</td><td style="font-size:26px">ѧ ѭ ѥ</td></tr>
+          <tr><td>Claude-3.7, Qwen-2.5</td><td>minimal</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="box-warn" data-step="5">The text looks <b>more “authentic”</b> than the source, and a researcher who trusts it would conclude that this printing still used pre-Petrine letters. A character-level score cannot tell.</div>
+  <div class="src">Levchenko 2025, §5 and Table 5. Other models listed in the paper are omitted.</div>
+</section>
+
+<!-- 27 ─────────── Historical-character error -->
+<section class="slide" id="s-m-hist" data-sec="cases">
+  <h2>A good CER can hide a bad error where it matters</h2>
+  <div class="t" style="margin-top:-6px"><span class="pill b">CER, all characters</span> &nbsp;vs.&nbsp; <span class="pill r">error on period-specific characters</span></div>
+  <div class="hb" style="margin-top:10px">
+    <div class="r" data-step="1"><div class="l">Gemini-2.5-Pro</div><div class="tr" style="flex-direction:column;align-items:flex-start;gap:3px"><div style="display:flex;align-items:center;gap:10px"><div class="b" style="width:38px"></div><span class="v">3.4</span></div><div style="display:flex;align-items:center;gap:10px"><div class="b o" style="width:112px"></div><span class="v">9.8</span></div></div></div>
+    <div class="r" data-step="1"><div class="l">Gemini-2.5-Flash</div><div class="tr" style="flex-direction:column;align-items:flex-start;gap:3px"><div style="display:flex;align-items:center;gap:10px"><div class="b" style="width:56px"></div><span class="v">4.9</span></div><div style="display:flex;align-items:center;gap:10px"><div class="b o" style="width:147px"></div><span class="v">12.9</span></div></div></div>
+    <div class="r" data-step="1"><div class="l">Claude-3.5</div><div class="tr" style="flex-direction:column;align-items:flex-start;gap:3px"><div style="display:flex;align-items:center;gap:10px"><div class="b" style="width:77px"></div><span class="v">6.8</span></div><div style="display:flex;align-items:center;gap:10px"><div class="b o" style="width:174px"></div><span class="v">15.2</span></div></div></div>
+    <div class="r" data-step="1"><div class="l">GPT-4o</div><div class="tr" style="flex-direction:column;align-items:flex-start;gap:3px"><div style="display:flex;align-items:center;gap:10px"><div class="b" style="width:105px"></div><span class="v">9.2</span></div><div style="display:flex;align-items:center;gap:10px"><div class="b o" style="width:236px"></div><span class="v">20.7</span></div></div></div>
+    <div class="r" data-step="1"><div class="l">Llama-4-Scout</div><div class="tr" style="flex-direction:column;align-items:flex-start;gap:3px"><div style="display:flex;align-items:center;gap:10px"><div class="b" style="width:182px"></div><span class="v">15.9</span></div><div style="display:flex;align-items:center;gap:10px"><div class="b o" style="width:481px"></div><span class="v">42.2</span></div></div></div>
+  </div>
+  <div class="cap">Full-page mode, Levchenko 2025, Table 3 (%).</div>
+  <div class="box-warn" data-step="2"><b>Every model</b> does worse on the characters that make the text <em>period-specific</em> than on characters in general: for the best model about three times worse. For a historian these are the characters that matter most.</div>
+</section>
+
+<!-- 17 ─────────── Why / other errors -->
+<section class="slide" id="s-ru-why" data-sec="cases">
+  <h2>Why would a model do that?</h2>
+  <div class="row" style="gap:36px">
+    <div class="grow">
+      <ul class="pts">
+        <li data-step="1"><b>No period tags.</b> Training data mixes Church Slavonic, pre-reform, 18th-century and post-1918 Russian, and the model does not know which one you mean.</li>
+        <li data-step="2"><b>“Old-looking” cues become a generic signal.</b> Yus letters, omega and diacritics say <em>historical text</em>, so the model adds them.</li>
+        <li data-step="3"><b>Visual noise.</b> Faded ink, bleed-through or worn type look like diacritics; models “err on the side of complexity.”</li>
+        <li data-step="4"><b>Family signatures.</b> OpenAI, Anthropic and Google models show different error profiles, probably from different training data.</li>
+      </ul>
+      <div class="src" data-step="4">Levchenko’s interpretation; the paper does not have access to training data.</div>
+    </div>
+    <div style="width:430px;flex:none" data-step="5">
+      <h3>Everyday errors, all models</h3>
+      <table class="tbl c">
+        <thead><tr><th>Truth</th><th>Output</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td class="mono" style="font-size:28px">ї</td><td class="mono" style="font-size:28px">і</td><td>the most common substitution</td></tr>
+          <tr><td class="mono" style="font-size:28px">ъ</td><td class="mono" style="font-size:28px">ь</td><td>hard vs. soft sign</td></tr>
+          <tr><td class="mono" style="font-size:28px">ш</td><td class="mono" style="font-size:28px">т</td><td>variable 18th-c. glyph shapes</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="box-key" data-step="6"><b>Not all errors are equal.</b> A random typo is noise; an insertion that always points the same way is <b>bias</b>, and bias survives in your counts, collocations and arguments.</div>
+</section>
+
+<!-- 18 ─────────── Manchu: setup -->
+<section class="slide" id="s-mc-intro" data-sec="cases">
+  <h2>Case 2: Manchu word images</h2>
+  <div class="t" style="margin-top:-6px;color:var(--mute)">Chung &amp; Choi, <i>Computational Humanities Research</i> 2 (2026)</div>
+  <div class="row" style="gap:34px">
+    <figure class="fx noborder" data-step="1" style="width:130px;flex:none"><div style="width:70px;margin:0 auto">
+      <img src="img/manchu-fig1.png" alt="The Manchu words manju gisun, written vertically"></div>
+      <figcaption><i>manju gisun</i>, “Manchu language.” Written vertically; letters change shape by position.</figcaption>
+    </figure>
+    <div class="grow">
+      <ul class="pts sm">
+        <li data-step="2"><b>Problem:</b> Manchu (endangered, essential for Qing history) has no practical OCR for real archival documents.</li>
+        <li data-step="3"><b>Training data:</b> 60,000 <em>synthetic</em> word images rendered from a 130,917-word dictionary in several typefaces.</li>
+        <li data-step="4"><b>Models:</b> three open VLMs (Llama-3.2-11B-Vision, Qwen2.5-VL-7B, -3B), fine-tuned with LoRA (a light-weight method).</li>
+        <li data-step="5"><b>Test:</b> 753 word images from <em>real</em> scans of seven Qing sources, five handwritten and two printed.</li>
+      </ul>
+      <div class="prompt" data-step="6" style="margin-top:12px;font-size:14px">You are an expert OCR system for Manchu script. Extract the text from the provided image with perfect accuracy. Format your answer exactly as follows: first line with ‘Manchu:’ followed by the Manchu script, then a new line with ‘Roman:’ followed by the romanized transliteration.</div>
+      <div class="src" data-step="6">The prompt used in the paper (Chung &amp; Choi 2026).</div>
+    </div>
+  </div>
+</section>
+
+<!-- 19 ─────────── Manchu: gap -->
+<section class="slide" id="s-mc-gap" data-sec="cases">
+  <h2>Result: a great score on synthetic data is not a great score on your sources</h2>
+  <div class="t" style="margin-top:-4px"><span class="pill b">synthetic test</span> &nbsp;vs.&nbsp; <span class="pill o">real archival words</span> <span class="mute" style="font-size:16px">&nbsp; word accuracy, %</span></div>
+  <div class="hb" style="margin-top:12px">
+    <div class="r" data-step="1"><div class="l"><b>Llama-3.2-11B-Vision</b><br>fine-tuned VLM</div><div class="tr" style="flex-direction:column;align-items:flex-start;gap:3px"><div style="display:flex;align-items:center;gap:10px"><div class="b" style="width:513px"></div><span class="v">98.6</span></div><div style="display:flex;align-items:center;gap:10px"><div class="b o" style="width:454px"></div><span class="v">87.4</span></div></div></div>
+    <div class="r" data-step="2"><div class="l"><b>CRNN</b><br>classic CNN + LSTM</div><div class="tr" style="flex-direction:column;align-items:flex-start;gap:3px"><div style="display:flex;align-items:center;gap:10px"><div class="b" style="width:519px"></div><span class="v">99.9</span></div><div style="display:flex;align-items:center;gap:10px"><div class="b o" style="width:295px"></div><span class="v">56.8</span></div></div></div>
+    <div class="r" data-step="3"><div class="l"><b>Qwen2.5-VL-7B</b></div><div class="tr" style="flex-direction:column;align-items:flex-start;gap:3px"><div style="display:flex;align-items:center;gap:10px"><div class="b" style="width:449px"></div><span class="v">86.3</span></div><div style="display:flex;align-items:center;gap:10px"><div class="b o" style="width:175px"></div><span class="v">33.7</span></div></div></div>
+    <div class="r" data-step="3"><div class="l"><b>Qwen2.5-VL-3B</b></div><div class="tr" style="flex-direction:column;align-items:flex-start;gap:3px"><div style="display:flex;align-items:center;gap:10px"><div class="b" style="width:434px"></div><span class="v">83.5</span></div><div style="display:flex;align-items:center;gap:10px"><div class="b o" style="width:145px"></div><span class="v">27.8</span></div></div></div>
+  </div>
+  <ul class="pts sm" style="margin-top:10px">
+    <li data-step="4">The classic CRNN is <b>nearly perfect on synthetic words</b> (99.9%) and falls 43 points on real ones. The VLM falls 11 points: pre-trained visual and linguistic knowledge transfers better.</li>
+    <li data-step="5">CER on real words: Llama <b>0.05</b>, CRNN <b>0.166</b>. The authors’ synthetic scores are also “likely optimistic” (they chose checkpoints on the same pool).</li>
+  </ul>
+</section>
+
+<!-- 20 ─────────── Manchu: errors -->
+<section class="slide" id="s-mc-err" data-sec="cases">
+  <h2>What still goes wrong in Manchu</h2>
+  <div class="row" style="gap:30px">
+    <div class="grow">
+      <ul class="pts">
+        <li data-step="1"><b>Position-dependent letters.</b> A Manchu letter changes form as initial, medial or final, and some vowels are “visually indistinguishable in isolation.”</li>
+        <li data-step="2"><b>Systematic confusion.</b> On real words the three vowels <b>a, i, e</b> account for <b>47.5%</b> of all Llama’s character errors (a alone 22.2%).</li>
+        <li data-step="3"><b>The same language knowledge cuts both ways.</b> The authors credit VLMs for “linguistic knowledge to maintain coherence even when characters are visually ambiguous,” the same prior that makes a Russian model reach for ѧ.</li>
+      </ul>
+    </div>
+    <div style="width:340px;flex:none" data-step="4">
+      <div class="card" style="padding:18px 22px">
+        <div class="num-big c3" style="font-size:48px">1 in 8</div>
+        <div class="t sm" style="margin:6px 0 0">real words still wrong (87.4% word accuracy). “Manual post-correction by domain experts” is needed before scholarly use.</div>
+      </div>
+      <div class="card" style="padding:14px 22px;margin-top:14px">
+        <div class="t sm" style="margin:0"><b>9–15 s per word image</b> on a 48 GB GPU: full pages and entire archives are not yet practical.</div>
+      </div>
+    </div>
+  </div>
+  <div class="box-warn" data-step="5"><b>Scope matters:</b> single, pre-cut words; formal Qing documents only; no layout or line segmentation. It is a proof of concept, not an archive-ready tool.</div>
+</section>
+
+<!-- 21 ─────────── Lessons -->
+<section class="slide" id="s-lessons" data-sec="cases">
+  <h2>What the two cases teach</h2>
+  <ul class="checklist" style="font-size:28px;margin-top:24px">
+    <li data-step="1"><i>1</i><div><b>A language prior is a strength and a risk.</b><small>It rescues a smudged letter (Manchu) and invents a period letter (Russian).</small></div></li>
+    <li data-step="2"><i>2</i><div><b>A low CER can hide systematic bias.</b><small>Check <em>which</em> errors, not only how many.</small></div></li>
+    <li data-step="3"><i>3</i><div><b>Scores from synthetic or clean data overstate real performance.</b><small>Test on a sample of <em>your</em> sources.</small></div></li>
+    <li data-step="4"><i>4</i><div><b>Decide: diplomatic or normalized transcription?</b><small>Then say so in the prompt, and check that the output obeys.</small></div></li>
+    <li data-step="5"><i>5</i><div><b>Models differ, and they change.</b><small>Same pages, same prompt, different model or different week: different errors.</small></div></li>
+  </ul>
+</section>
+
 <!-- 29 ─────────── CRNN vs VLM -->
 <section class="slide" id="s-v-arch" data-sec="vlm">
   <h2>From a specialist recognizer to a vision–language model</h2>
   <div class="row" style="gap:26px">
     <div class="grow card ac2" data-step="1" style="padding:16px 22px">
       <h3>Classic: CRNN</h3>
-      <div class="flow" style="margin-top:6px"><div class="fb" style="padding:8px 10px"><b style="font-size:16px">CNN</b><span>sees strokes</span></div><div class="fa">→</div><div class="fb" style="padding:8px 10px"><b style="font-size:16px">LSTM</b><span>reads left→right</span></div><div class="fa">→</div><div class="fb" style="padding:8px 10px"><b style="font-size:16px">CTC</b><span>letters</span></div></div>
+      <div class="pflow" style="margin-top:6px"><div class="fb" style="padding:8px 10px"><b style="font-size:16px">CNN</b><span>sees strokes</span></div><div class="fa">→</div><div class="fb" style="padding:8px 10px"><b style="font-size:16px">LSTM</b><span>reads left→right</span></div><div class="fa">→</div><div class="fb" style="padding:8px 10px"><b style="font-size:16px">CTC</b><span>letters</span></div></div>
       <ul class="pts sm" style="margin-top:8px">
         <li>trained for <b>one script</b> or collection</li>
         <li>needs <b>cut-out lines</b> and transcribed training pages</li>
@@ -613,7 +613,7 @@
     </div>
     <div class="grow card ac3" data-step="2" style="padding:16px 22px">
       <h3>New: VLM</h3>
-      <div class="flow" style="margin-top:6px"><div class="fb" style="padding:8px 10px"><b style="font-size:16px">Vision encoder</b><span>sees the page</span></div><div class="fa">→</div><div class="fb" style="padding:8px 10px"><b style="font-size:16px">Language model</b><span>writes the text</span></div></div>
+      <div class="pflow" style="margin-top:6px"><div class="fb" style="padding:8px 10px"><b style="font-size:16px">Vision encoder</b><span>sees the page</span></div><div class="fa">→</div><div class="fb" style="padding:8px 10px"><b style="font-size:16px">Language model</b><span>writes the text</span></div></div>
       <ul class="pts sm" style="margin-top:8px">
         <li><b>general-purpose</b>: many scripts and tasks</li>
         <li>takes a <b>prompt</b>: “transcribe,” “keep the old spelling”</li>
@@ -634,13 +634,13 @@
       <path data-step="2" d="M140 115 H186" marker-end="url(#ah)"/>
       <path data-step="3" d="M340 115 H386" marker-end="url(#ah)"/>
       <path data-step="4" d="M530 115 H576" marker-end="url(#ah)"/>
-      <path data-step="5" d="M750 115 H796" marker-end="url(#ah)"/>
-      <path data-step="6" d="M750 340 H796" marker-end="url(#ah)"/>
-      <path data-step="7" d="M935 390 V426" marker-end="url(#ah)"/>
+      <path data-step="5" d="M750 115 H836" marker-end="url(#ah)"/>
+      <path data-step="6" d="M750 340 H836" marker-end="url(#ah)"/>
+      <path data-step="7" d="M955 390 V426" marker-end="url(#ah)"/>
       <path class="fb" data-step="8" d="M1070 480 H1094 V225 H1070" marker-end="url(#ao)"/>
-      <text data-step="5" x="758" y="102">image tokens</text>
-      <text data-step="6" x="760" y="326">text tokens</text>
-      <text data-step="7" x="946" y="414">one token at a time</text>
+      <text data-step="5" x="756" y="104">image tokens</text>
+      <text data-step="6" x="758" y="330">text tokens</text>
+      <text data-step="7" x="966" y="414">one token at a time</text>
     </svg>
 
     <div class="nd" data-step="1" style="left:0;top:30px;width:140px;height:170px"><span class="badge-n">1</span><b>Scan / photo</b>page image<img src="img/prep-0-photo.jpg" alt=""></div>
@@ -650,14 +650,13 @@
 
     <div class="nd o" data-step="5" style="left:300px;top:290px;width:450px;height:122px"><span class="badge-n">2</span><b>Text prompt</b><span style="color:var(--ink);font-size:15px;font-style:italic">“Transcribe this page exactly. Keep line breaks and the original orthography. Do not correct or translate.”</span><div class="toks2 t" style="margin-top:6px"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
 
-    <div class="nd p" data-step="6" style="left:800px;top:60px;width:270px;height:330px"><span class="badge-n">3</span><b>Language decoder (LLM)</b>
+    <div class="nd p" data-step="6" style="left:840px;top:60px;width:230px;height:330px"><span class="badge-n">3</span><b>Language decoder (LLM)</b>
       <div style="margin-top:6px">Reads <b style="display:inline;font-size:15px;color:var(--tgt)">image tokens</b> and <b style="display:inline;font-size:15px;color:var(--col)">prompt tokens</b> together, using attention.</div>
       <div style="margin-top:10px">Then predicts the <b style="display:inline;font-size:15px">most probable next token</b>: a character or part of a word.</div>
       <div style="margin-top:10px;color:var(--ink)">Image evidence <b style="display:inline;font-size:15px">+</b> language prior <b style="display:inline;font-size:15px">→</b> next token</div>
-      <div style="margin-top:12px;font-size:13px">temperature 0 → always the top choice</div></div>
+      <div style="margin-top:10px;font-size:14px;color:var(--col)">↺ each new token is fed back in</div><div style="margin-top:8px;font-size:13px">temperature 0 → always the top choice</div></div>
 
-    <div class="nd g" data-step="7" style="left:800px;top:430px;width:270px;height:100px"><span class="badge-n">4</span><b>OCR text</b><div class="ocrtxt" style="font-size:20px">紅樓夢小說本名石頭記作者相傳…</div></div>
-    <div class="alabel" data-step="8" style="left:1004px;top:350px;transform:rotate(90deg);transform-origin:left top;font-size:13px;white-space:nowrap;display:none"></div>
+    <div class="nd g" data-step="7" style="left:840px;top:430px;width:230px;height:100px"><span class="badge-n">4</span><b>OCR text</b><div class="ocrtxt" style="font-size:20px">紅樓夢小說本名石頭記作者相傳…</div></div>
 
     <div class="nd" data-step="9" style="left:0;top:262px;width:262px;height:270px;border-style:dashed">
       <b>Where you intervene</b>
@@ -669,7 +668,6 @@
       </div>
       <div style="margin-top:8px;font-size:14px">The decoder is a black box; the rest is your method.</div>
     </div>
-    <div class="alabel" data-step="8" style="left:960px;top:200px;font-size:13px;color:var(--col);width:140px;text-align:right">each new token is fed back in</div>
   </div>
 </section>
 
@@ -771,8 +769,8 @@
   <div class="recap">
     <div class="rrow" data-step="1"><i>1</i><div class="lead" style="margin:0;font-size:23px"><b>OCR</b> turns images into text. That text is a model’s <b>reading</b>, not the source.</div></div>
     <div class="rrow" data-step="2"><i>2</i><div class="lead" style="margin:0;font-size:23px"><b>Prepare images</b>: deskew, even light, binarize if it helps, crop, enough pixels per character, lossless format.</div></div>
-    <div class="rrow" data-step="3"><i>3</i><div class="lead" style="margin:0;font-size:23px"><b>Bias, not just noise:</b> LLMs “over-historicize” (Russian); synthetic scores fail on real documents (Manchu).</div></div>
-    <div class="rrow" data-step="4"><i>4</i><div class="lead" style="margin:0;font-size:23px"><b>CER and WER</b> = (S + D + I) / N. Define what counts, and add a metric for the errors you care about.</div></div>
+    <div class="rrow" data-step="3"><i>3</i><div class="lead" style="margin:0;font-size:23px"><b>CER and WER</b> = (S + D + I) / N. Define what counts, and add a metric for the errors you care about.</div></div>
+    <div class="rrow" data-step="4"><i>4</i><div class="lead" style="margin:0;font-size:23px"><b>Bias, not just noise:</b> LLMs “over-historicize” (Russian); synthetic scores fail on real documents (Manchu).</div></div>
     <div class="rrow" data-step="5"><i>5</i><div class="lead" style="margin:0;font-size:23px"><b>VLMs</b> = vision encoder + language decoder + your prompt: image evidence combined with a language prior.</div></div>
     <div class="rrow" data-step="6"><i>6</i><div class="lead" style="margin:0;font-size:23px"><b>Validate on your own sources</b>, log the model, and spot-check against the image.</div></div>
   </div>
@@ -784,7 +782,7 @@
   <ul class="pts sm" style="line-height:1.55">
     <li>Maria Levchenko, “Evaluating LLMs for Historical Document OCR: A Methodological Framework for Digital Humanities,” <i>Proc. First Workshop on NLP and Language Models for Digital Humanities</i> (RANLP 2025), 75–85. <span class="mute">Fig. 4 and Tables 1–5 above.</span></li>
     <li>Yan Hon Michael Chung and Donghyeok Choi, “Fine-tuning vision–language models as OCR systems for low-resource languages: A case study of Manchu,” <i>Computational Humanities Research</i> 2 (2026): e20. doi:10.1017/chr.2026.10042. <span class="mute">Figs. 1–4 and Tables 2–4 above (CC BY 4.0).</span></li>
-    <li>Mark Humphries et al., “Unlocking the Archives: Large Language Models Achieve State-of-the-Art Performance on the Transcription of Handwritten Historical Documents,” arXiv:2411.03340 (2024).</li>
+    <li>Mark Humphries et al., “Unlocking the Archives: Large Language Models Achieve State-of-the-Art Performance on the Transcription of Handwritten Historical Documents,” arXiv:2411.03340 (2024). <span class="mute">Handwriting paper, presented by students; its tables and figures appear throughout.</span></li>
     <li class="mute">Preprocessing demo images were made for this class from a library scan of the <i>Hongloumeng</i> preface (OpenCV). The decoder and prior illustrations use invented numbers and are labeled as such.</li>
   </ul>
 </section>
