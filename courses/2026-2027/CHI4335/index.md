@@ -318,6 +318,7 @@ title: CHI4335
         <ul class="readings">
           <li>陶東風：〈走向建構主義的文化創傷理論〉，《文藝理論研究》2024年第3期，頁34–44</li>
           <li>(optional) Jeffrey C. Alexander, “Toward a Theory of Cultural Trauma”</li>
+          <li>(optional) 陶東風：<a href="https://www.bilibili.com/video/BV1oR4y1H7MX/">《文化創傷與見證文學》系列講座（全4講，bilibili）</a></li>
         </ul>
       </td>
       <td class="notes"></td>
