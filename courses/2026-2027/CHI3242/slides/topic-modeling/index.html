@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>主題模型 Topic Modeling — CHI3242</title>
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+
+<!-- ─────────── Title -->
+<section class="slide full title-slide" id="s-title">
+  <div class="big-zh">主題模型</div>
+  <div class="big-en">Topic Modeling</div>
+  <div class="rule"></div>
+  <figure class="portrait title-portrait" data-step="1"><img src="img/dirichlet.jpeg" alt="Peter Gustav Lejeune Dirichlet"><figcaption>P. G. L. Dirichlet<br><span>1805–1859</span></figcaption></figure>
+  <div class="quote bi" data-step="1">
+    <span class="zh">LDA ＝ 潛在狄利克雷分配</span>
+    <span class="en">Latent Dirichlet Allocation: who is Dirichlet, and what is “latent”?</span>
+  </div>
+  <div class="hint">CHI3242 文本挖掘 Text Mining for Chinese Humanities &nbsp;·&nbsp; <kbd>←</kbd> <kbd>→</kbd> navigate &nbsp;·&nbsp; <kbd>1</kbd>–<kbd>9</kbd> sections &nbsp;·&nbsp; <kbd>F</kbd> fullscreen</div>
+</section>
+
+<!-- ─────────── What is a model? (animated reality vs model) -->
+<section class="slide" id="s-model" data-sec="intro">
+  <h2 class="bi"><span class="zh">什麼是「建模」？</span><span class="en">What is modeling?</span></h2>
+  <div class="two" style="gap:20px">
+    <div class="grow" style="padding-top:10px">
+      <div class="bi sm" data-step="1"><span class="zh"><b>模型</b>：對現實世界的<br>一種<b>簡化</b>表述</span><span class="en">a simplified representation of reality</span></div>
+      <div class="bi sm" data-step="2" style="margin-top:34px"><span class="zh"><b>建模</b>：用統計方法找出<br>世界中的<b>規律或結構</b></span><span class="en">using statistics to find regularities or structure</span></div>
+      <div class="bi sm" data-step="3" style="margin-top:34px"><span class="zh">兩者<b>永遠不會完全重合</b></span><span class="en">“All models are wrong, but some are useful.” (George Box)</span></div>
+    </div>
+    <svg id="rm-svg" class="rm" viewBox="0 0 560 500" width="560" height="500" style="flex:none"></svg>
+  </div>
+</section>
+
+<!-- ─────────── What is a topic? -->
+<section class="slide" id="s-topic" data-sec="intro">
+  <h2 class="bi"><span class="zh">什麼是「主題」？</span><span class="en">What is a topic?</span></h2>
+  <div class="def" data-step="1" style="margin-top:30px">
+    <div class="bi"><span class="zh">在文本中<b>經常一起出現</b>的<b>一組詞</b></span><span class="en">a group of words that often occur together in texts</span></div>
+  </div>
+  <div class="bi sm" data-step="2" style="margin-top:44px"><span class="zh">上次的搭配詞：<b>兩個詞</b>是否互相吸引</span><span class="en">collocations: do two words attract each other?</span></div>
+  <div class="bi sm" data-step="2"><span class="zh">這次的主題模型：<b>一整群詞</b>，在<b>整批文件</b>裡</span><span class="en">topic models: whole groups of words, across a whole collection</span></div>
+  <div class="callout key bi sm" data-step="3" style="margin-top:40px"><span class="zh"><b>無監督</b>：機器事先<b>不知道</b>有哪些主題</span><span class="en">unsupervised: the machine is not told what the topics are</span></div>
+</section>
+
+<!-- ─────────── Emails -->
+<section class="slide" id="s-mail" data-sec="intro">
+  <h2 class="bi"><span class="zh">一封信，可以有好幾個主題</span><span class="en">One document can be about several topics <span style="font-size:15px">· example after Serrano.Academy</span></span></h2>
+  <div class="mails">
+    <div class="mail"><div class="mh"><svg class="env" viewBox="0 0 24 18" width="28" height="21"><rect x="1" y="1" width="22" height="16" rx="2" fill="#fff" stroke="currentColor" stroke-width="1.6"/><path d="M2 2.5 L12 10 L22 2.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span class="from">王經理</span><span class="time">09:12</span></div><div class="subj">週五會議</div><div class="t">週五團隊會議的議程在這裡。<span class="en">Here’s the agenda for our team meeting on Friday.</span></div><div class="tags" data-step="1"><span class="tag k0">工作</span></div></div>
+    <div class="mail"><div class="mh"><svg class="env" viewBox="0 0 24 18" width="28" height="21"><rect x="1" y="1" width="22" height="16" rx="2" fill="#fff" stroke="currentColor" stroke-width="1.6"/><path d="M2 2.5 L12 10 L22 2.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span class="from">財務處</span><span class="time">10:47</span></div><div class="subj">計畫費用</div><div class="t">計畫的總費用是一百萬。<span class="en">The final cost of the project comes to $1MM.</span></div><div class="tags" data-step="1"><span class="tag k0">工作</span><span class="tag k1">財務</span></div></div>
+    <div class="mail"><div class="mh"><svg class="env" viewBox="0 0 24 18" width="28" height="21"><rect x="1" y="1" width="22" height="16" rx="2" fill="#fff" stroke="currentColor" stroke-width="1.6"/><path d="M2 2.5 L12 10 L22 2.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span class="from">小李</span><span class="time">昨天</span></div><div class="subj">出差報銷</div><div class="t">附件是我出差的報銷收據。<span class="en">I’ve attached the receipt of my travel expenses.</span></div><div class="tags" data-step="1"><span class="tag k1">財務</span></div></div>
+    <div class="mail"><div class="mh"><svg class="env" viewBox="0 0 24 18" width="28" height="21"><rect x="1" y="1" width="22" height="16" rx="2" fill="#fff" stroke="currentColor" stroke-width="1.6"/><path d="M2 2.5 L12 10 L22 2.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span class="from">陳老師</span><span class="time">昨天</span></div><div class="subj">轉寄申請</div><div class="t">可以把那份申請轉給行政嗎？<span class="en">Can you forward that request to my admin?</span></div><div class="tags" data-step="1"><span class="tag k0">工作</span></div></div>
+    <div class="mail"><div class="mh"><svg class="env" viewBox="0 0 24 18" width="28" height="21"><rect x="1" y="1" width="22" height="16" rx="2" fill="#fff" stroke="currentColor" stroke-width="1.6"/><path d="M2 2.5 L12 10 L22 2.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span class="from">阿美</span><span class="time">週一</span></div><div class="subj">好久不見！</div><div class="t">蜜月旅行怎麼樣？<span class="en">How was your honeymoon?</span></div><div class="tags" data-step="1"><span class="tag k2">私人</span></div></div>
+    <div class="mail"><div class="mh"><svg class="env" viewBox="0 0 24 18" width="28" height="21"><rect x="1" y="1" width="22" height="16" rx="2" fill="#fff" stroke="currentColor" stroke-width="1.6"/><path d="M2 2.5 L12 10 L22 2.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span class="from">會計師</span><span class="time">週一</span></div><div class="subj">你要的文件</div><div class="t">這是你要的財務文件。<span class="en">Here are the financial docs you asked for.</span></div><div class="tags" data-step="1"><span class="tag k1">財務</span></div></div>
+  </div>
+  <div class="callout key bi sm" data-step="2" style="margin-top:30px"><span class="zh">文件 ＝ 幾個主題的<b>混合</b>；標籤的<b>名字</b>由我們來取</span><span class="en">A document is a mixture of topics. The model gets no labels; we name the topics.</span></div>
+</section>
+
+<!-- ─────────── Bag of words -->
+<section class="slide" id="s-bow" data-sec="intro">
+  <h2 class="bi"><span class="zh">詞袋模型</span><span class="en">The bag-of-words model</span></h2>
+  <div id="bow-toks" class="words raw" style="margin:0 0 12px;min-height:92px"></div>
+  <div class="bi sm" data-step="1"><span class="zh">① 分詞（jieba 等工具）</span><span class="en">word segmentation</span></div>
+  <div class="bi sm" data-step="2"><span class="zh">② 去除<b>停用詞</b>：的、很、在、中、為……</span><span class="en">remove stopwords</span></div>
+  <div class="bi sm" data-step="3"><span class="zh">③ 只數次數，<b>忘掉順序</b></span><span class="en">count the words, forget their order</span></div>
+  <div id="bow-bag" class="bag" data-step="3" style="margin-top:12px"></div>
+  <div class="callout key bi sm" data-step="4" style="margin-top:8px;padding:6px 24px"><span class="zh">「狗咬人」＝「人咬狗」＝ {狗, 咬, 人}</span><span class="en">“Dog bites man” and “man bites dog” are the same bag.</span></div>
+</section>
+
+<!-- ─────────── Blei figure 1 -->
+<section class="slide" id="s-blei1" data-sec="lda">
+  <h2 class="bi"><span class="zh">LDA 的直覺</span><span class="en">The intuition behind LDA</span></h2>
+  <div class="figbox" style="width:700px">
+    <img class="fig" src="img/blei-fig1.png" alt="Blei 2012, Figure 1" style="width:700px">
+    <div class="hlbox" id="hb-topics" data-step="1" style="left:1.3%;top:10.8%;width:13.8%;height:81.5%"></div>
+    <div class="hlbox" id="hb-mix" data-step="2" style="left:81.4%;top:36.5%;width:9.4%;height:14.5%"></div>
+    <div class="hlbox" id="hb-dots" data-step="3" style="left:71.2%;top:22%;width:4.8%;height:45.2%"></div>
+  </div>
+  <svg class="arrows" id="b1-arrows"></svg>
+  <div class="bi xs flab" id="lb-topics" data-step="1" style="left:72px;top:612px"><span class="zh"><b>主題</b> ＝ 詞的機率分布</span><span class="en">topics: distributions over words</span></div>
+  <div class="bi xs flab" id="lb-mix" data-step="2" style="left:870px;top:318px"><span class="zh">這篇文件的<b>主題比例</b></span><span class="en">topic proportions of this document</span></div>
+  <div class="bi xs flab" id="lb-dots" data-step="3" style="left:870px;top:178px"><span class="zh"><b>每一個詞</b>屬於<br>哪個主題</span><span class="en">topic assignment of every word</span></div>
+  <div class="callout key bi xs flab" data-step="4" style="left:870px;top:470px;width:310px;margin:0"><span class="zh">所有文件<b>共用</b>主題，<br>只是<b>比例不同</b></span><span class="en">same topics, different proportions</span></div>
+  <div class="src" style="position:absolute;right:100px;bottom:40px">Blei, “Probabilistic Topic Models”, <i>CACM</i> 55.4 (2012), Fig. 1</div>
+</section>
+
+<!-- ─────────── Generative story -->
+<section class="slide" id="s-gen" data-sec="lda">
+  <h2 class="bi"><span class="zh">LDA 怎麼想像「寫作」</span><span class="en">The generative story</span></h2>
+  <div id="gen-topics" class="topics"></div>
+  <div class="two" style="margin-top:10px;gap:26px;align-items:flex-start">
+    <div style="width:300px;flex:none" data-step="1" id="gen-left">
+      <div class="bi xs"><span class="zh">① 選主題比例</span><span class="en">choose topic proportions</span></div>
+      <div id="gen-board" class="board" style="margin-top:10px"></div>
+    </div>
+    <div class="grow" data-step="2">
+      <div class="bi xs"><span class="zh">② 每個詞：射飛鏢選主題 → 從主題抽詞</span><span class="en">each word: throw a dart to choose a topic, then draw a word from it · <kbd>G</kbd> again</span></div>
+      <div id="gen-doc" class="words gen-doc" style="margin-top:10px"></div>
+    </div>
+  </div>
+  <div class="callout key bi xs" data-step="3" style="margin-top:10px"><span class="zh">現實正好<b>相反</b>：只看得到詞，主題是<b>潛在</b>（latent）的 → 要<b>推斷</b>回去</span><span class="en">We only see the words; the topics are hidden (latent) and must be inferred.</span></div>
+</section>
+
+<!-- ─────────── Blei figure 2 -->
+<section class="slide" id="s-blei2" data-sec="lda">
+  <h2 class="bi"><span class="zh">真實的例子：《科學》雜誌</span><span class="en">17,000 articles from <i>Science</i>, 100 topics</span></h2>
+  <div class="two" style="gap:30px">
+    <figure style="margin:0;width:290px;flex:none">
+      <img class="fig" src="img/science-cover.jpg" onerror="this.onerror=null;this.src='img/science-1880.jpg'" onload="if (!this.src.endsWith('science-1880.jpg')) this.nextElementSibling.innerHTML='《科學》雜誌封面<br><i>Science</i> cover © AAAS'" alt="Science cover" style="width:290px;box-shadow:0 4px 18px rgba(20,30,60,.22)">
+      <figcaption class="src" style="margin-top:6px">《科學》第一卷，1880 年<br><i>Science</i> vol. 1 (Wikimedia Commons, public domain)</figcaption>
+    </figure>
+    <div class="grow">
+      <div class="bi xs"><span class="zh">1880 年創刊，出資人是<b>愛迪生</b></span><span class="en">founded in 1880 with money from Thomas Edison</span></div>
+      <img class="fig" data-step="1" src="img/blei-fig2.png" alt="Blei 2012, Figure 2" style="width:690px;margin-top:10px">
+      <div class="src" data-step="1" style="margin-top:4px">Blei 2012, Fig. 2: the article from the previous slide</div>
+      <div class="bi xs" data-step="2" style="margin-top:8px"><span class="zh">100 個主題中只用了<b>少數幾個</b>；“Genetics” 等<b>名字是人加的</b></span><span class="en">only a handful of topics; the names in quotes were added by people</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Two distributions -->
+<section class="slide" id="s-two" data-sec="dist">
+  <h2 class="bi"><span class="zh">LDA 學到兩種分布</span><span class="en">What LDA learns: two distributions</span></h2>
+  <div class="two" style="gap:50px">
+    <div class="grow" data-step="1">
+      <div class="bi sm"><span class="zh">文件 → 主題 \(\theta_d\)</span><span class="en">document–topic · θ<sub>d</sub> = “theta d” (/ˈθeɪtə/): the topic mix of document d</span></div>
+      <table class="cmp" id="theta-table" style="margin-top:12px"></table>
+    </div>
+    <div class="grow" data-step="2">
+      <div class="bi sm"><span class="zh">主題 → 詞語 \(\varphi_k\)</span><span class="en">topic–word · φ<sub>k</sub> = “phi k” (/faɪ/): the word list of topic k</span></div>
+      <table class="cmp" id="phi-table" style="margin-top:12px"></table>
+    </div>
+  </div>
+  <div class="callout key bi sm" data-step="3" style="margin-top:14px"><span class="zh">每一行加起來都是 1；主題數 K 由<b>我們</b>決定</span><span class="en">Every row sums to 1. We choose the number of topics K.</span></div>
+</section>
+
+<!-- ─────────── The toy problem -->
+<section class="slide" id="s-goal" data-sec="gibbs">
+  <h2 class="bi"><span class="zh">玩具問題：替每個詞上色</span><span class="en">Colour every word blue, green or red (K = 3)</span></h2>
+  <div class="two" style="gap:36px">
+    <div class="docs" id="goal-docs"></div>
+    <div class="grow">
+      <div class="bi sm" data-step="1"><span class="zh"><b>我們的目標</b>：</span><span class="en">our goal (the true objective):</span></div>
+      <div class="bi sm" data-step="1" style="margin-top:12px"><span class="zh">① 讓每篇<b>文件</b>盡量單色</span><span class="en">make each document as monochromatic as possible</span></div>
+      <div class="bi sm" data-step="2"><span class="zh">② 讓每個<b>詞</b>盡量單色</span><span class="en">make each word as monochromatic as possible</span></div>
+      <div class="callout key bi xs" data-step="3" style="margin-top:20px"><span class="zh">兩個目標<b>互相矛盾</b> → 模型最後找到兩者的<b>平衡</b></span><span class="en">The goals contradict each other, so the model ends up finding a balance between them.</span></div>
+      <div class="bi xs" data-step="4" style="margin-top:24px"><span class="zh">起點：先<b>隨機</b>上色</span><span class="en">start: random colours</span></div>
+    </div>
+  </div>
+  <div class="src" style="position:absolute;bottom:40px;left:72px">足球 ball · 行星 planet · 星系 galaxy · 公投 referendum · after Serrano.Academy</div>
+</section>
+
+<!-- ─────────── One Gibbs step -->
+<section class="slide" id="s-step" data-sec="gibbs">
+  <h2 class="bi"><span class="zh">吉布斯採樣：一步</span><span class="en">Gibbs sampling: recolour one word</span></h2>
+  <div class="two" style="gap:36px">
+    <div class="docs" id="step-docs"></div>
+    <div class="grow swap" style="padding-top:8px">
+      <div class="bi sm" data-step="1" data-until="2"><span class="zh">① 選一個詞：<br>文件 1 的第一個「足球」</span><span class="en">pick one word</span></div>
+      <div class="bi sm" data-step="2" data-until="5"><span class="zh">② 拿掉它的顏色，<br>數一數</span><span class="en">remove its colour and count</span></div>
+      <div class="bi sm" data-step="5" data-until="6"><span class="zh">③ 相乘 ＝<br>長方形面積</span><span class="en">multiply: the area of a rectangle</span></div>
+      <div class="bi sm" data-step="6" data-until="7"><span class="zh">問題：乘以 0 → <b class="bad-c">完全消失</b><br>但我們還想留<b>一點機會</b></span><span class="en">a zero wipes blue and green out completely, but we still want to give them a small chance</span></div>
+      <div class="bi sm" data-step="7" data-until="8"><span class="zh">＋α、＋β：<br>每個顏色都<b>不為零</b></span><span class="en">add α and β (here α = β = 0.5): every colour stays possible</span></div>
+      <div class="bi sm" data-step="8"><span class="zh">④ 按面積<b>隨機</b>射飛鏢<br>→ 紅色機會最大</span><span class="en">throw a dart at random: red is most likely</span></div>
+    </div>
+  </div>
+  <div class="qgrid" id="step-q" style="margin-top:14px"></div>
+  <div class="rects" id="step-rects" data-step="5"></div>
+</section>
+
+<!-- ─────────── Gibbs sampling loop -->
+<section class="slide" id="s-gibbs" data-sec="gibbs">
+  <h2 class="bi"><span class="zh">反覆抽樣，直到平衡</span><span class="en">Repeat, word after word, until equilibrium</span></h2>
+  <div class="sim">
+    <div class="left">
+      <div class="docs" id="gs-docs"></div>
+      <div class="stat" style="margin-top:10px"><b style="color:#e0570f">困惑度 perplexity</b>：模型有多「意外」，<b>越低越好</b> · lower is better</div>
+      <svg id="gs-chart" class="chart" viewBox="0 0 720 150"></svg>
+    </div>
+    <div class="right">
+      <div class="panel">
+        <div class="stat">現在 now：<b id="gs-word">–</b></div>
+        <div class="pbars" id="gs-bars" style="margin-top:4px"></div>
+        <div class="stat" style="margin-top:4px">第 <b id="gs-step">0</b> 步 · 第 <b id="gs-sweep">0</b> 次迭代<br>α = 0.1 · β = 0.01 · <span class="speed" id="gs-speed"></span></div>
+      </div>
+      <div class="keys" style="margin-top:10px"><kbd>N</kbd> 下一步 next step<br><kbd>A</kbd> 自動 play / pause<br><kbd>↑</kbd> <kbd>↓</kbd> 速度 speed<br><kbd>R</kbd> 回到起點 reset</div>
+      <div class="callout key bi xs" data-step="1" style="margin-top:12px"><span class="zh">平衡 ≠ 不動：<br>整體分布穩定下來</span><span class="en">colours still flicker, the distribution is stable</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── What is perplexity? -->
+<section class="slide" id="s-perp" data-sec="gibbs">
+  <h2 class="bi"><span class="zh">什麼是困惑度？</span><span class="en">What is perplexity?</span></h2>
+  <div class="bi sm" style="margin-top:4px"><span class="zh">模型要<b>猜</b>文件裡的每一個詞。困惑度 ＝ 它平均在<b>幾個詞之間猶豫</b></span><span class="en">The model guesses each word in a document. Perplexity = how many words it is effectively hesitating between.</span></div>
+  <div class="two" style="gap:60px;margin-top:26px">
+    <div data-step="1">
+      <div class="bi xs"><span class="zh">完全亂猜</span><span class="en">random guessing</span></div>
+      <div class="pchart"><div class="pbar"><div class="pfill" style="height:25.0%"><span>25%</span></div><div class="plab">足球</div></div><div class="pbar"><div class="pfill" style="height:25.0%"><span>25%</span></div><div class="plab">行星</div></div><div class="pbar"><div class="pfill" style="height:25.0%"><span>25%</span></div><div class="plab">星系</div></div><div class="pbar"><div class="pfill" style="height:25.0%"><span>25%</span></div><div class="plab">公投</div></div></div>
+      <div class="pval">困惑度 ＝ <b>4</b></div>
+    </div>
+    <div data-step="2">
+      <div class="bi xs"><span class="zh">很有把握</span><span class="en">a confident guess</span></div>
+      <div class="pchart"><div class="pbar"><div class="pfill" style="height:85.0%"><span>85%</span></div><div class="plab">足球</div></div><div class="pbar"><div class="pfill" style="height:5.0%"><span>5%</span></div><div class="plab">行星</div></div><div class="pbar"><div class="pfill" style="height:5.0%"><span>5%</span></div><div class="plab">星系</div></div><div class="pbar"><div class="pfill" style="height:5.0%"><span>5%</span></div><div class="plab">公投</div></div></div>
+      <div class="pval">困惑度 ≈ <b>1.8</b></div>
+    </div>
+    <div class="grow" data-step="3" style="padding-top:30px">
+      <div class="bi xs"><span class="zh">剛才的玩具：<br>3.7 → <b>2.4</b></span><span class="en">our toy example: from almost random guessing to fairly confident</span></div>
+      <div class="callout key bi xs" style="margin-top:24px"><span class="zh"><b>越低越好</b>，但最低的模型<br>不一定最<b>好懂</b></span><span class="en">lower is better, but the lowest is not always the most interpretable (see the word-intrusion test later)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── K-means -->
+<section class="slide" id="s-kmeans" data-sec="k">
+  <h2 class="bi"><span class="zh">要分成幾群？</span><span class="en">How many groups? (K-means clustering)</span></h2>
+  <div class="two" style="gap:34px">
+    <svg id="km-svg" class="chart" viewBox="0 0 600 440" style="width:640px;flex:none;border:1.5px solid var(--line);border-radius:12px"></svg>
+    <div class="grow">
+      <div style="font-size:60px;font-weight:600;line-height:1">K = <span id="km-k">3</span></div>
+      <div class="keys" style="margin-top:6px"><kbd>↑</kbd> <kbd>↓</kbd> 選 K · <kbd>C</kbd> 分群 cluster · <kbd>R</kbd> 清除 · 第 <span id="km-it">0</span> 次迭代</div>
+      <div class="bi xs" data-step="1" style="margin-top:28px"><span class="zh">K = 3 還是 K = 10？<br><b>都對</b>：拉遠看 vs. 拉近看</span><span class="en">Both are right: zoom out vs. zoom in.</span></div>
+      <div class="callout key bi xs" data-step="2" style="margin-top:24px"><span class="zh">主題數沒有正確答案，<br>看你的<b>研究問題</b></span><span class="en">There is no right number of topics; it depends on your question.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Poetry corpus, choose K -->
+<section class="slide" id="s-poems" data-sec="k">
+  <h2 class="bi"><span class="zh">同一批詩，不同的 K</span><span class="en">The same “poems”, different numbers of topics</span></h2>
+  <svg id="po-perp" class="chart" viewBox="0 0 300 104" style="position:absolute;right:100px;top:36px;width:300px;height:104px"></svg>
+  <div style="display:flex;align-items:center;gap:18px;margin:-6px 0 10px">
+    <span style="font-size:24px">K ＝</span><span class="ksel" id="po-k"></span>
+    <span class="stat">第 <b id="po-sweep">0</b> 次迭代</span>
+    <span class="keys"><kbd>↑</kbd> <kbd>↓</kbd> K · <kbd>A</kbd> 自動 · <kbd>R</kbd> 重來</span>
+  </div>
+  <div class="cdocs" id="po-docs"></div>
+  <div class="topics" id="po-topics" style="margin-top:12px"></div>
+</section>
+
+<!-- ─────────── Dirichlet, alpha, beta -->
+<section class="slide" id="s-alpha" data-sec="alpha">
+  <h2 class="bi"><span class="zh">狄利克雷分布與超參數 α</span><span class="en"><b style="color:var(--ink)">超參數</b> hyperparameter：訓練<b style="color:var(--ink)">之前</b>由我們設定的值 · a setting we choose before training</span></h2>
+  <div class="two" style="gap:36px">
+    <svg class="simplex sx-svg" viewBox="-40 0 510 390" width="520" height="398" style="flex:none"></svg>
+    <div class="grow">
+      <div style="font-size:56px;font-weight:600;line-height:1">α = <span class="sx-val">1</span></div>
+      <div class="keys" style="margin-top:6px"><kbd>↑</kbd> <kbd>↓</kbd> 改變 α · <kbd>R</kbd> 重新抽樣</div>
+      <div class="sx-bars" style="margin-top:12px"></div>
+      <div class="bi xs" data-step="1" style="margin-top:16px"><span class="zh"><b>α 小</b> → 角落：只有一兩個主題</span><span class="en">small α: few topics per document</span></div>
+      <div class="bi xs" data-step="2"><span class="zh"><b>α 大</b> → 中間：所有主題平均混合</span><span class="en">large α: every topic in every document</span></div>
+      <div class="bi xs" data-step="3"><span class="zh">真實的 K 常是幾十、上百；三角形是 K = 3</span><span class="en">real models have dozens of topics; the triangle is the case K = 3</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Dirichlet for β -->
+<section class="slide" id="s-beta" data-sec="alpha">
+  <h2 class="bi"><span class="zh">同樣的三角形：超參數 β</span><span class="en">The same triangle for the hyperparameter β: how a topic spreads over words</span></h2>
+  <div class="two" style="gap:36px">
+    <svg class="simplex sx-svg" viewBox="-40 0 510 390" width="520" height="398" style="flex:none"></svg>
+    <div class="grow">
+      <div style="font-size:56px;font-weight:600;line-height:1">β = <span class="sx-val">1</span></div>
+      <div class="keys" style="margin-top:6px"><kbd>↑</kbd> <kbd>↓</kbd> 改變 β · <kbd>R</kbd> 重新抽樣</div>
+      <div class="sx-bars" style="margin-top:12px"></div>
+      <div class="bi xs" data-step="1" style="margin-top:16px"><span class="zh"><b>β 小</b> → 角落：每個主題集中在<b>少數幾個詞</b></span><span class="en">small β: each topic concentrates on a few words</span></div>
+      <div class="bi xs" data-step="2"><span class="zh"><b>β 大</b> → 中間：什麼詞都用，主題變<b>模糊</b></span><span class="en">large β: every topic uses every word, topics blur</span></div>
+      <div class="bi xs" data-step="3"><span class="zh">真實詞彙有<b>上萬個詞</b>；三角形只有 3 個</span><span class="en">a real vocabulary has tens of thousands of words; the triangle has 3</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── History -->
+<section class="slide" id="s-history" data-sec="dh">
+  <h2 class="bi"><span class="zh">從 LSA 到 BERTopic</span><span class="en">A short history of topic models</span></h2>
+  <div class="tl">
+    <div class="ev" data-step="1"><div class="yr">1990</div><div class="bi sm"><span class="zh"><b>LSA</b> 潛在語義分析：矩陣分解</span><span class="en">linear algebra (SVD); hard to interpret</span></div></div>
+    <div class="ev" data-step="2"><div class="yr">1999</div><div class="bi sm"><span class="zh"><b>pLSA</b> 機率潛在語義分析</span><span class="en">topics as probabilities (Hofmann)</span></div></div>
+    <div class="ev" data-step="3"><div class="yr">2003</div><div class="bi sm"><span class="zh"><b>LDA</b>：加上狄利克雷先驗</span><span class="en">Blei, Ng &amp; Jordan; the standard model for two decades</span></div></div>
+    <div class="ev" data-step="4"><div class="yr">2022</div><div class="bi sm"><span class="zh"><b>BERTopic</b>：語言模型嵌入 ＋ 聚類</span><span class="en">embeddings from pretrained language models plus clustering</span></div></div>
+  </div>
+  <div class="src" style="position:absolute;bottom:40px;left:72px">蘇祺〈主題模型〉，李飛躍、桑海（主編）《數字人文引論》第十章（北京：中華書局，2026）</div>
+</section>
+
+<!-- ─────────── Who paid for LDA? -->
+<section class="slide" id="s-dod" data-sec="dh">
+  <h2 class="bi"><span class="zh">誰資助了 LDA？</span><span class="en">Who paid for LDA?</span></h2>
+  <div class="two" style="gap:36px">
+    <div style="width:420px;flex:none">
+      <img class="fig" src="img/lda-title.png" alt="Blei, Ng, Jordan, Latent Dirichlet Allocation" style="width:420px">
+      <div class="src" style="margin-top:4px"><i>Journal of Machine Learning Research</i> 3 (2003)</div>
+    </div>
+    <div class="grow">
+      <img class="fig" data-step="1" src="img/lda-ack.png" alt="Acknowledgements" style="width:100%">
+      <div class="bi sm" data-step="2" style="margin-top:30px"><span class="zh">美國國家科學基金會、<br><b class="bad-c">美國國防部</b>、微軟</span><span class="en">NSF, the US Department of Defense (MURI), Microsoft</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Discussion -->
+<section class="slide" id="s-dod2" data-sec="dh">
+  <h2 class="bi"><span class="zh">討論</span><span class="en">Discussion</span></h2>
+  <div class="bi" data-step="1" style="margin-top:50px"><span class="zh">為什麼國防部會對<br>「自動閱讀大量文本」有興趣？</span><span class="en">Why would a defence department care about reading huge amounts of text automatically?</span></div>
+  <div class="bi" data-step="2" style="margin-top:50px"><span class="zh">同一個工具，今天用來讀《左傳》。<br>工具的來源重要嗎？</span><span class="en">The same tool now reads the <i>Zuozhuan</i>. Does the origin of a tool matter?</span></div>
+</section>
+
+<!-- ─────────── DH: literature -->
+<section class="slide" id="s-dh1" data-sec="dh">
+  <h2 class="bi"><span class="zh">應用：文學</span><span class="en">Topic models in literary studies</span></h2>
+  <div class="cards" style="gap:26px;margin-top:10px">
+    <div class="card case" data-step="1">
+      <h3 class="bi xs"><span class="zh">十九世紀英美小說</span><span class="en">Jockers &amp; Mimno 2013</span></h3>
+      <div class="big-num" style="margin:10px 0">3,346 部 → 500 主題</div>
+      <div class="bi xs"><span class="zh">去掉人名，切成約 1,000 詞的片段；女性作者偏好「時尚」「家庭」，男性偏好「戰爭」「槍械」</span><span class="en">names removed, ~1,000-word chunks; topic use differs by author gender</span></div>
+    </div>
+    <div class="card case" data-step="2">
+      <h3 class="bi xs"><span class="zh">西班牙黃金時代十四行詩</span><span class="en">Navarro-Colorado 2018</span></h3>
+      <div class="big-num" style="margin:10px 0">5,078 首 → 100 主題</div>
+      <div class="bi xs"><span class="zh">約四分之一是主題，一半以上是<b>母題</b>（motif），還有由押韻詞構成的「韻律主題」</span><span class="en">a quarter themes, over half motifs, some made of rhyme words</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── DH: history -->
+<section class="slide" id="s-dh2" data-sec="dh">
+  <h2 class="bi"><span class="zh">應用：歷史</span><span class="en">Topic models in history</span></h2>
+  <div class="cards" style="gap:26px;margin-top:10px">
+    <div class="card case" data-step="1">
+      <h3 class="bi xs"><span class="zh">《左傳》</span><span class="en">何琳等 2020</span></h3>
+      <div class="bi xs" style="margin-top:12px"><span class="zh">會盟、禮儀、戰爭、宮廷權力鬥爭……追蹤主題強度隨時間的變化</span><span class="en">alliances, ritual, war, court struggles; topic strength over time</span></div>
+    </div>
+    <div class="card case" data-step="2">
+      <h3 class="bi xs"><span class="zh">助產士瑪莎·巴拉德的日記</span><span class="en">Blevins 2010</span></h3>
+      <div class="bi xs" style="margin-top:12px"><span class="zh">十八世紀美國：家務、醫療、鄰里衝突等反覆出現的生活主題</span><span class="en">housework, medicine, neighbourhood conflict</span></div>
+    </div>
+  </div>
+  <div class="callout key bi sm" data-step="3" style="margin-top:36px"><span class="zh"><b>遠讀</b>提供線索，不取代<b>細讀</b></span><span class="en">Distant reading gives leads; it does not replace close reading.</span></div>
+</section>
+
+<!-- ─────────── Word intrusion -->
+<section class="slide" id="s-intrude" data-sec="eval">
+  <h2 class="bi"><span class="zh">找出「入侵者」</span><span class="en">Is a topic any good? The word-intrusion test</span></h2>
+  <div class="bi xs"><span class="zh">每一行混進了一個<b>別的</b>詞，是哪一個？</span><span class="en">One word in each row comes from elsewhere. Which?</span></div>
+  <div class="intr" id="intr" style="margin-top:20px"></div>
+  <div class="callout key bi xs" data-step="3" style="margin-top:26px"><span class="zh">容易找到 → 主題<b>連貫</b>；找不到 → 主題沒有意義</span><span class="en">Easy to spot → a coherent topic; impossible → a meaningless one (Chang et al., “Reading Tea Leaves”, 2009)</span></div>
+</section>
+
+<!-- ─────────── Questions to consider -->
+<section class="slide" id="s-questions" data-sec="eval">
+  <h2 class="bi"><span class="zh">動手之前要問的問題</span><span class="en">Questions to consider</span></h2>
+  <div class="recap">
+    <div class="rrow" data-step="1"><i>1</i><div class="bi sm"><span class="zh">資料從哪裡來？<b class="bad-c">請注意取得方式</b></span><span class="en">Where is your data from? Be careful how you acquire it.</span></div></div>
+    <div class="rrow" data-step="2"><i>2</i><div class="bi sm"><span class="zh">要幾個主題？<b>為什麼</b>？</span><span class="en">How many topics, and why?</span></div></div>
+    <div class="rrow" data-step="3"><i>3</i><div class="bi sm"><span class="zh">什麼是一篇「文件」？多長？</span><span class="en">What is a document: a passage, a chapter, a poem? How long?</span></div></div>
+    <div class="rrow" data-step="4"><i>4</i><div class="bi sm"><span class="zh">怎麼分詞？去掉哪些停用詞？</span><span class="en">How did you segment? Which stopwords, and why?</span></div></div>
+    <div class="rrow" data-step="5"><i>5</i><div class="bi sm"><span class="zh">資料清理過了嗎？</span><span class="en">Have you cleaned your data (OCR errors, tags, duplicates)?</span></div></div>
+  </div>
+</section>
+
+<!-- ─────────── Tools -->
+<section class="slide" id="s-tools" data-sec="eval">
+  <h2 class="bi"><span class="zh">常用工具</span><span class="en">Tools</span></h2>
+  <table class="cmp" style="margin-top:10px">
+    <tbody>
+      <tr data-step="1"><td style="width:220px"><b>tomotopy</b></td><td class="bi xs"><span class="zh">Python，吉布斯採樣，速度快</span></td></tr>
+      <tr data-step="1"><td><b>Gensim</b></td><td class="bi xs"><span class="zh">Python 自然語言處理庫</span></td></tr>
+      <tr data-step="1"><td><b>MALLET</b></td><td class="bi xs"><span class="zh">Java，數字人文常用</span></td></tr>
+      <tr data-step="2"><td><b>BERTopic</b></td><td class="bi xs"><span class="zh">語言模型嵌入 ＋ 聚類</span></td></tr>
+      <tr data-step="2"><td><b>pyLDAvis</b></td><td class="bi xs"><span class="zh">互動式視覺化</span></td></tr>
+      <tr data-step="3" style="background:var(--tgt-bg)"><td style="width:220px"><b>qhchina</b></td><td class="bi xs"><span class="zh">Python，吉布斯採樣的 LDA <b>（本課使用）</b></span></td></tr>
+    </tbody>
+  </table>
+  <div class="callout key bi sm" data-step="3" style="margin-top:24px"><span class="zh">本課：基本的 LDA（快速、簡單）</span><span class="en">In this course: plain LDA (fast and simple)</span></div>
+</section>
+
+<!-- ─────────── qhchina -->
+<section class="slide" id="s-qhchina" data-sec="eval">
+  <h2 class="bi"><span class="zh">本課：qhchina 的 LDA</span><span class="en">In class: <code>LDAGibbsSampler</code> from qhchina (Python) · qhchina.org/docs/topic_modeling/ldagibbssampler</span></h2>
+  <div class="annot" style="margin-top:14px">
+    <div class="cl"><code>from&nbsp;qhchina.analytics.topicmodels&nbsp;import&nbsp;(</code></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;LDAGibbsSampler)</code></div>
+    <div class="cl"><code>&nbsp;</code></div>
+    <div class="cl"><code>lda&nbsp;=&nbsp;LDAGibbsSampler(</code></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;n_topics=10,</code><span class="ann" data-step="1"><i class="arr"></i><span>主題數 <b>K</b>：要分成幾個主題</span></span></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;alpha=None,</code><span class="ann" data-step="2"><i class="arr"></i><span><b>α</b>：每篇文件裡的主題多寡</span></span></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;beta=None,</code><span class="ann" data-step="2"><i class="arr"></i><span><b>β</b>：每個主題的用詞多寡</span></span></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;iterations=100,</code><span class="ann" data-step="3"><i class="arr"></i><span>吉布斯採樣要<b>迭代幾次</b></span></span></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;random_state=42,</code><span class="ann" data-step="4"><i class="arr"></i><span>固定隨機起點 → 結果<b>可重現</b></span></span></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;stopwords=None,</code><span class="ann" data-step="5"><i class="arr"></i><span>要去掉的<b>停用詞</b></span></span></div>
+    <div class="cl"><code>)</code></div>
+  </div>
+  <div class="small" style="margin-top:14px">完整參數見文件 · see the docs for all parameters</div>
+</section>
+
+<!-- ─────────── AI-assisted topic labels -->
+<section class="slide" id="s-ai" data-sec="eval">
+  <h2 class="bi"><span class="zh">讓 AI 幫忙「命名」主題</span><span class="en">Interpreting topics, now often with the help of AI (large language models)</span></h2>
+  <div class="aiflow">
+    <div class="card" data-step="1" style="width:300px">
+      <div class="bi xs"><span class="zh">主題 4 的高頻詞</span><span class="en">top words of a topic</span></div>
+      <div class="words" style="margin-top:12px"><span class="w k3">戰</span><span class="w k3">沙場</span><span class="w k3">馬</span><span class="w k3">將軍</span><span class="w k3">兵</span><span class="w k3">胡</span><span class="w k3">劍</span><span class="w k3">關</span></div>
+      <div class="small" style="margin-top:10px">＋ 幾篇代表性的文件<br>+ a few typical documents</div>
+    </div>
+    <i class="farr" data-step="2"></i>
+    <div class="card ai" data-step="2" style="width:330px">
+      <div class="bi xs"><span class="zh">問大型語言模型</span><span class="en">ask an LLM</span></div>
+      <div class="bubble" style="margin-top:10px">「這些詞屬於同一個主題。請為它取一個簡短的名稱，並說明理由。」</div>
+    </div>
+    <i class="farr" data-step="3"></i>
+    <div class="card" data-step="3" style="width:300px">
+      <div class="bi xs"><span class="zh">建議的標籤</span><span class="en">suggested label</span></div>
+      <div style="font-size:34px;font-weight:600;margin-top:10px;color:var(--t3)">邊塞征戰</div>
+      <div class="small" style="margin-top:6px">frontier warfare: soldiers, horses, swords, passes, the 胡 peoples</div>
+    </div>
+  </div>
+  <div class="callout key bi sm" data-step="4" style="margin-top:34px"><span class="zh">AI 的標籤只是<b>建議</b>：要回到原文核對，名字本身也會影響<b>詮釋</b></span><span class="en">An AI label is a suggestion: check it against the texts, because the name itself shapes how we read the topic.</span></div>
+</section>
+
+<!-- ─────────── Recap -->
+<section class="slide" id="s-recap" data-sec="summary">
+  <h2 class="bi"><span class="zh">回顧</span><span class="en">Recap</span></h2>
+  <div class="recap">
+    <div class="rrow" data-step="1"><i>1</i><div class="bi sm"><span class="zh"><b>主題</b> ＝ 詞的分布；<b>文件</b> ＝ 主題的混合</span><span class="en">topics are distributions over words; documents are mixtures of topics</span></div></div>
+    <div class="rrow" data-step="2"><i>2</i><div class="bi sm"><span class="zh"><b>吉布斯採樣</b>：一次重新上色一個詞</span><span class="en">Gibbs sampling: recolour one word at a time, until equilibrium</span></div></div>
+    <div class="rrow" data-step="3"><i>3</i><div class="bi sm"><span class="zh"><b>K、α、β</b> 由我們決定</span><span class="en">we choose K, α and β; no single right K</span></div></div>
+    <div class="rrow" data-step="4"><i>4</i><div class="bi sm"><span class="zh">主題的<b>名字</b>和<b>意義</b>由人來詮釋</span><span class="en">naming and interpreting topics is our job</span></div></div>
+    <div class="rrow" data-step="5"><i>5</i><div class="bi sm"><span class="zh"><b>下一步</b>：在中文語料上訓練 LDA</span><span class="en">next: train LDA on a real Chinese corpus</span></div></div>
+  </div>
+</section>
+
+<div id="side"></div>
+<div id="bar"></div>
+<div id="num"></div>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="slides.js"></script>
+<script src="deck.js"></script>
+</body>
+</html>

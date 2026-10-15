@@ -337,7 +337,7 @@ title: CHI3242
           <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> David M. Blei, “Probabilistic Topic Models” (2012)</li>
         </ul>
       </td>
-      <td class="notes"></td>
+      <td class="notes"><a href="slides/topic-modeling/">Slides</a></td>
     </tr>
   </tbody>
   <tbody class="block-b">
