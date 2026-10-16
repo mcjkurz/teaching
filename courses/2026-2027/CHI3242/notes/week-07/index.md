@@ -21,8 +21,12 @@ title: CHI3242 第7週講義
 <pre>請從 GitHub 下載《全唐詩》：
 https://github.com/mcjkurz/qhchina-data/blob/main/corpora/misc/全唐诗.json
 
-然後用 qhchina.analytics.topicmodels.LDAGibbsSampler 訓練主題模型。
+然後安裝 qhchina：
+pip install qhchina
+
+再用 qhchina.analytics.topicmodels.LDAGibbsSampler 訓練主題模型。
 每一首詩算一篇文件，以「字」為單位（不分詞），並去掉標點符號。
+用 qhchina 的 load_stopwords("zh_cl_sim") 去掉文言（簡體）停用詞。
 
 先分別試 10 個和 20 個主題。
 每個主題列出前 10 個字，並為每個主題舉 2 首最典型的詩。</pre>

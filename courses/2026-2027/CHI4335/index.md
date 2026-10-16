@@ -321,7 +321,7 @@ title: CHI4335
           <li>(optional) 陶東風：<a href="https://www.bilibili.com/video/BV1oR4y1H7MX/">《文化創傷與見證文學》系列講座（全4講，bilibili）</a></li>
         </ul>
       </td>
-      <td class="notes"></td>
+      <td class="notes"><a href="notes/week-07/">Notes</a></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
