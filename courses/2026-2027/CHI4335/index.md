@@ -321,7 +321,7 @@ title: CHI4335
           <li>(optional) 陶東風：<a href="https://www.bilibili.com/video/BV1oR4y1H7MX/">《文化創傷與見證文學》系列講座（全4講，bilibili）</a></li>
         </ul>
       </td>
-      <td class="notes"><a href="notes/week-07/">Notes</a></td>
+      <td class="notes"><a href="notes/week-07/">Notes</a><br><a href="slides/cultural-trauma/">Slides</a></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
@@ -337,7 +337,7 @@ title: CHI4335
       <td class="date"><span class="lang-en">20 Oct</span><span class="lang-zh" lang="zh-Hant">10月20日</span></td>
       <td class="topic" rowspan="2"><span class="lang-en">Trauma and War</span><span class="lang-zh" lang="zh-Hant">創傷與戰爭</span></td>
       <td><ul class="readings"><li>Patrick Colm Hogan, “On Being Moved: Cognition and Emotion in Literature and Film”</li></ul></td>
-      <td class="notes"></td>
+      <td class="notes"><a href="slides/on-being-moved/">Slides</a></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
