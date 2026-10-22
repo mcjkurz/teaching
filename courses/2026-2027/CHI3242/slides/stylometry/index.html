@@ -190,7 +190,7 @@
 
 <!-- ─────────── A feature table -->
 <section class="slide" id="s-ftab" data-sec="vec">
-  <h2 class="bi"><span class="zh">特徵表：每一欄是一個特徵</span><span class="en">A feature table: texts as rows, features as columns (numbers illustrative)</span></h2>
+  <h2 class="bi"><span class="zh">特徵表：每一列是一個特徵</span><span class="en">A feature table: texts as rows, features as columns (numbers illustrative)</span></h2>
   <table class="cmp ftab" style="margin-top:6px">
     <thead><tr><th style="width:330px">文本 text</th><th class="num fc">平均句長<span>avg. sentence length（字）</span></th><th class="num">問句<span>questions / 1,000</span></th><th class="num">直接引語<span>share of dialogue</span></th><th class="num">「的」<span>per 1,000</span></th><th class="num">「了」<span>per 1,000</span></th></tr></thead>
     <tbody>
@@ -202,8 +202,8 @@
     </tbody>
   </table>
   <div class="ftx">
-  <div class="bi xs" data-step="1"><span class="zh"><b>一欄</b> ＝ 一個特徵：每篇文本都量<b>同一件事</b></span><span class="en">a column is one feature, measured the same way in every text</span></div>
-  <div class="bi xs" data-step="2"><span class="zh"><b>一列</b> ＝ 一篇文本的「檔案」：一串數字</span><span class="en">a row is one text’s profile: a list of numbers</span></div>
+  <div class="bi xs" data-step="1"><span class="zh"><b>一列</b>（column）＝ 一個特徵：每篇文本都量<b>同一件事</b></span><span class="en">a column is one feature, measured the same way in every text</span></div>
+  <div class="bi xs" data-step="2"><span class="zh"><b>一行</b>（row）＝ 一篇文本的「檔案」：一串數字</span><span class="en">a row is one text’s profile: a list of numbers</span></div>
   </div>
   <div class="callout key bi xs" data-step="3" style="margin-top:10px;padding:8px 20px"><span class="zh">「一串數字」在數學上叫做<b>向量</b>——等一下細談</span><span class="en">A list of numbers is what mathematicians call a vector.</span></div>
 </section>
@@ -265,7 +265,7 @@
         <tbody></tbody>
       </table>
       <div class="small" style="margin-top:6px">每千字 · per 1,000 characters (示意 illustrative)</div>
-      <div class="bi xs" data-step="1" style="margin-top:16px"><span class="zh">每一<b>行</b> ＝ 一個<b>向量</b></span><span class="en">each row is a vector: a list of numbers</span></div>
+      <div class="bi xs" data-step="1" style="margin-top:16px"><span class="zh">每一<b>行</b>（row）＝ 一個<b>向量</b></span><span class="en">each row is a vector: a list of numbers</span></div>
       <div class="bi xs" data-step="2" style="margin-top:10px"><span class="zh">三個數字 → <b>三維</b>；100 個詞 → 100 維</span><span class="en">a hundred dimensions cannot be drawn, but the rules are the same</span></div>
       <div class="callout key bi xs" data-step="3" style="margin-top:12px;padding:8px 20px"><span class="zh">箭頭<b>方向相近</b> ＝ 用字<b>習慣相近</b></span><span class="en">Arrows pointing the same way: similar habits.</span></div>
     </div>
@@ -454,7 +454,7 @@
       </div>
       <div data-step="1" data-until="2">
         <div class="bi xs"><span class="zh">除以總字數 × 1000 → <b>每千字</b></span><span class="en">divide by length, × 1,000</span></div>
-        <div class="bi xs" style="margin-top:16px"><span class="zh">最後兩行：每一欄的<br>平均 μ 和標準差 σ</span><span class="en">last two rows: mean and standard deviation of each column</span></div>
+        <div class="bi xs" style="margin-top:16px"><span class="zh">最後兩行：每一列的<br>平均 μ 和標準差 σ</span><span class="en">last two rows: mean and standard deviation of each column</span></div>
       </div>
       <div data-step="2" data-until="3">
         <div class="bi xs"><span class="zh">\(z = (x-\mu)/\sigma\)</span><span class="en">every column now has mean 0 and standard deviation 1</span></div>
