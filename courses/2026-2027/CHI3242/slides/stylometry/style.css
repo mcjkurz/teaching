@@ -501,3 +501,15 @@ table.cmp.ftab td { padding: 6px 12px; }
 .ftx .bi + .bi { margin-top: 0; }
 #s-split .strip i { height: 60px; }
 #s-split .exp .h { font-size: 24px; }
+
+/* Lutosławski's late-style scores */
+.lsteps .bi.xs + .bi.xs { margin-top: 14px; }
+.lsteps .bi.xs > .zh { font-size: 22px; line-height: 1.45; }
+.lbars { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+.lrow { display: flex; align-items: center; gap: 10px; }
+.lrow .ln { width: 150px; flex: none; text-align: right; font-family: var(--cjk); font-size: 20px; line-height: 1.1; }
+.lrow .ln i { display: block; font-size: 13px; color: var(--mute); font-family: var(--latin); }
+.lrow .lt { flex: 1; height: 24px; background: #eef0f4; border-radius: 5px; overflow: hidden; }
+.lrow .lf { height: 100%; border-radius: 5px; }
+.lrow .lv { width: 36px; font-size: 17px; color: var(--mute); font-variant-numeric: tabular-nums; }
+.lsteps .bi.xs + .bi.xs { margin-top: 10px; }
