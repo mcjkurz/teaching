@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>文體計量學 Stylometry — CHI3242</title>
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+
+<!-- ─────────── Title -->
+<section class="slide full title-slide" id="s-title">
+  <div class="big-zh">文體計量學</div>
+  <div class="big-en">Stylometry</div>
+  <div class="rule"></div>
+  <img class="title-print" src="img/fingerprint.png" alt="A fingerprint made of digits under a magnifying glass">
+  <figure class="portrait title-portrait" data-step="2"><img src="img/lutoslawski.png" alt="Wincenty Lutosławski"><figcaption>W. Lutosławski<br><span>1863–1954</span></figcaption></figure>
+  <div class="quote bi" data-step="1">
+    <span class="zh">「風格即其人。」</span>
+    <span class="en">“Le style est l’homme même.” (Buffon, 1753)</span>
+  </div>
+  <div class="quote bi" data-step="2" style="margin-top:22px">
+    <span class="zh">「文體計量學」一詞來自<b>盧托斯瓦夫斯基</b>（1897）</span>
+    <span class="en">The word “stylometry” was coined by the Polish philosopher Wincenty Lutosławski in 1897.</span>
+  </div>
+  <div class="hint">CHI3242 文本挖掘 Text Mining for Chinese Humanities &nbsp;·&nbsp; <kbd>←</kbd> <kbd>→</kbd> navigate &nbsp;·&nbsp; <kbd>1</kbd>–<kbd>9</kbd> sections &nbsp;·&nbsp; <kbd>F</kbd> fullscreen</div>
+</section>
+
+<!-- ═══════════════════ 1. What is style? -->
+
+<!-- ─────────── stilus -->
+<section class="slide" id="s-stilus" data-sec="intro">
+  <h2 class="bi"><span class="zh">「style」這個詞從哪裡來？</span><span class="en">Where does the English word “style” come from?</span></h2>
+  <div class="two" style="gap:40px">
+    <figure style="margin:0;width:500px;flex:none">
+      <img class="fig" src="img/wax-tablet.jpg" alt="Reproduction of a Roman wax tablet with three styli" style="width:500px;border:0">
+      <figcaption class="capt" style="margin-top:8px;font-size:16px">羅馬蠟板與三支尖筆（複製品）· reproduction of a Roman wax tablet with three <i>stili</i><br>尖端用來刻字，扁平的一端用來抹平、擦掉 · the point writes, the flat end erases</figcaption>
+    </figure>
+    <div class="grow" style="padding-top:20px">
+      <div class="bi sm" data-step="1"><span class="zh">拉丁文 <i>stilus</i>：<br>在蠟板上刻字的<b>尖筆</b></span><span class="en">Latin <i>stilus</i>: a pointed tool for writing on wax tablets</span></div>
+      <div class="bi sm" data-step="2" style="margin-top:30px"><span class="zh">轉喻：從「用<b>什麼</b>寫」<br>到「<b>怎麼</b>寫」</span><span class="en">by metonymy: <i>modus scribendi</i>, the way of writing</span></div>
+      <div class="bi sm" data-step="3" style="margin-top:30px"><span class="zh">最廣義：刻畫某人或<br>某物的<b>特徵</b></span><span class="en">most generally: the features that characterize someone or something</span></div>
+    </div>
+  </div>
+  <div class="src abs">Herrmann, van Dalen-Oskam &amp; Schöch, “Revisiting Style, a Key Concept in Literary Studies”, <i>Journal of Literary Theory</i> 9.1 (2015), 29</div>
+</section>
+
+<!-- ─────────── 風格 -->
+<section class="slide classic" id="s-fengge" data-sec="intro">
+  <h2 class="bi"><span class="zh">那麼，中文的「風格」呢？</span><span class="en">And where does the Chinese word <i>fengge</i> come from?</span></h2>
+  <div class="two" style="gap:40px">
+    <div class="glyphs">
+      <div class="glyph"><span class="ch">風</span><div class="bi xs"><span class="zh">風度、風範：一個人散發的<b>氣質</b></span><span class="en"><i>feng</i>: bearing, manner, the “air” of a person</span></div></div>
+      <div class="glyph"><span class="ch">格</span><div class="bi xs"><span class="zh">品格、格調：人的<b>品質與格局</b></span><span class="en"><i>ge</i>: character, standard, quality</span></div></div>
+    </div>
+    <div class="grow">
+      <div class="quote-card" data-step="1"><div class="lbl">先品評<b>人物</b> · first, people</div><div class="q">李元禮<b>風格</b>秀整，高自標持</div><div class="who">——南朝宋・劉義慶《世說新語・德行》</div><div class="en">“Li Yuanli’s bearing was refined and upright, and he held himself to high standards.”</div></div>
+      <div class="quote-card" data-step="2" style="margin-top:16px"><div class="lbl">再評論<b>文章</b> · then, writing</div><div class="q">亦各有美，<b>風格</b>存焉</div><div class="who">——南朝梁・劉勰《文心雕龍・議對》</div><div class="en">“Each has its own beauty; their style is present in them.”</div></div>
+    </div>
+  </div>
+  <div class="callout bi xs" data-step="3" style="margin-top:16px"><span class="zh">和 <i>style</i> 一樣：先指<b>人</b>，後指<b>文</b>——「風格即其人」</span><span class="en">Like “style”, the word moved from describing a person to describing a text.</span></div>
+</section>
+
+<!-- ─────────── Six definitions -->
+<section class="slide" id="s-defs" data-sec="intro">
+  <h2 class="bi"><span class="zh">六種常見的「風格」定義</span><span class="en">Six recurring definitions of style (Herrmann et al. 2015)</span></h2>
+  <div class="board" id="defs">
+    <div class="note n-y" style="--r:-2.2deg" data-step="1"><i class="tape"></i><span class="no">1</span><div class="nz">更高層次的<b>藝術價值</b>，靠審美經驗來把握</div><div class="ne">a higher-order artistic value, grasped through aesthetic experience</div><div class="who">Staiger（瑞士文學學者）：「不可言說的同一」</div><span class="stamp">文體計量</span></div>
+    <div class="note n-p" style="--r:1.6deg" data-step="2"><i class="tape"></i><span class="no">2</span><div class="nz">單一文本的整體<b>完形</b></div><div class="ne">the holistic <i>gestalt</i> of a single text</div><div class="who">Werkimmanenz：德國「作品內在」批評</div><span class="stamp">文體計量</span></div>
+    <div class="note n-b hot" style="--r:-1.2deg" data-step="3"><i class="tape"></i><span class="no">3</span><div class="nz">作者<b>個性</b>、主體性或情感的表達</div><div class="ne">an expression of the author’s individuality or emotion</div><div class="who">Spitzer（奧地利語文學家）· 作者歸屬</div><span class="stamp">文體計量</span></div>
+    <div class="note n-g hot" style="--r:2.0deg" data-step="4"><i class="tape"></i><span class="no">4</span><div class="nz">在近義的選項之間所做的<b>選擇</b></div><div class="ne">a choice among (more or less synonymous) alternatives</div><div class="who">Sanders、Sandig（德國語言學家）</div><span class="stamp">文體計量</span></div>
+    <div class="note n-o hot" style="--r:-1.8deg" data-step="5"><i class="tape"></i><span class="no">5</span><div class="nz">對某種<b>規範</b>的偏離（需要對照）</div><div class="ne">a deviation from some norm, which needs a contrast</div><div class="who">Riffaterre（法裔美國文學理論家）</div><span class="stamp">文體計量</span></div>
+    <div class="note n-y hot" style="--r:1.2deg" data-step="6"><i class="tape"></i><span class="no">6</span><div class="nz">任何可以用<b>計算</b>方式測量的文本屬性</div><div class="ne">any property of a text that can be measured computationally</div><div class="who">Stamatatos（希臘電腦科學家）：近千種「文體標記」</div><span class="stamp">文體計量</span></div>
+  </div>
+  <div class="callout key bi xs" data-step="7" style="margin-top:12px"><span class="zh">文體計量學主要建立在 <b>③ ④ ⑤ ⑥</b> 上：作者的習慣，表現為選擇，用數字來量，和語料對照</span><span class="en">Stylometry rests mainly on 3–6: an author’s habits, visible as choices, measured as numbers, compared against a corpus.</span></div>
+</section>
+
+<!-- ─────────── Operational definition -->
+<section class="slide" id="s-hdef" data-sec="intro">
+  <h2 class="bi"><span class="zh">一個可以操作的定義</span><span class="en">An operational definition, unpacked term by term</span></h2>
+  <div class="def">
+    <div class="bi"><span class="zh">風格是<span class="dterm t0"><i>1</i>文本</span>的一種屬性，由<span class="dterm t1"><i>2</i>一組</span>可以用<span class="dterm t3"><i>4</i>量化或質化</span>方式觀察的<span class="dterm t2"><i>3</i>形式特徵</span>所構成。</span><span class="en">“Style is a property of <u>texts</u> constituted by <u>an ensemble</u> of <u>formal features</u> which can be observed <u>quantitatively or qualitatively</u>.”</span></div>
+    <div class="src">Herrmann, van Dalen-Oskam &amp; Schöch 2015, 44 · 德國與荷蘭的文學、數位人文學者 · literary scholars and digital humanists in Germany and the Netherlands</div>
+  </div>
+  <div class="small" style="margin:2px 0 8px">下面四格：定義中的四個關鍵詞，逐一解釋 · below: the four key terms, one at a time</div>
+  <div class="terms">
+    <div class="card dcard t0" data-step="1"><div class="t"><i>1</i>文本<span>texts</span></div><div class="bi xs"><span class="zh">整部或片段；一篇或一批（同作者、文類、時代）；文學或非文學</span><span class="en">whole or partial, one text or a group, literary or not</span></div></div>
+    <div class="card dcard t1" data-step="2"><div class="t"><i>2</i>一組<span>an ensemble</span></div><div class="bi xs"><span class="zh">很多特徵的組合，不一定和諧統一</span><span class="en">many features together, not necessarily a harmonious whole</span></div></div>
+    <div class="card dcard t2" data-step="3"><div class="t"><i>3</i>形式特徵<span>formal features</span></div><div class="bi xs"><span class="zh">字、詞、句法、語義，甚至敘事視角；要<b>明確定義</b></span><span class="en">characters, words, syntax, narrative perspective; explicitly defined</span></div></div>
+    <div class="card dcard t3" data-step="4"><div class="t"><i>4</i>量化或質化<span>quantitatively or qualitatively</span></div><div class="bi xs"><span class="zh">數頻率、做統計 ＋ 細讀；實際研究多半兩者並用</span><span class="en">counting plus close reading; usually both</span></div></div>
+  </div>
+</section>
+
+<!-- ─────────── The authorial signal -->
+<section class="slide" id="s-signal" data-sec="intro">
+  <h2 class="bi"><span class="zh">作者訊號</span><span class="en">The authorial signal is mixed with many others</span></h2>
+  <div class="signals" id="signals">
+    <div class="src-list">
+      <div class="sig author" style="--c:var(--a)" data-step="1">作者 <small>author</small></div>
+      <div class="sig" style="--c:#16a34a" data-step="1">文類 <small>genre</small></div>
+      <div class="sig" style="--c:#d97706" data-step="1">時代 <small>period</small></div>
+      <div class="sig" style="--c:#9333ea" data-step="1">主題、情節 <small>topic, plot</small></div>
+      <div class="sig" style="--c:#0891b2" data-step="1">人物的聲音 <small>characters’ voices</small></div>
+      <div class="sig" style="--c:#6a7386" data-step="1">編者、抄手、譯者 <small>editors, scribes, translators</small></div>
+    </div>
+    <i class="bigarr" data-step="1"></i>
+    <div class="mixdoc" data-step="1">
+      <div class="ln" style="background:var(--a);width:80%"></div><div class="ln" style="background:#16a34a;width:65%"></div><div class="ln" style="background:#9333ea;width:85%"></div><div class="ln" style="background:var(--a);width:55%"></div><div class="ln" style="background:#d97706;width:75%"></div><div class="ln" style="background:#0891b2;width:60%"></div><div class="ln" style="background:#6a7386;width:70%"></div><div class="ln" style="background:var(--a);width:50%"></div>
+    </div>
+    <div class="grow" style="padding-left:10px">
+      <div class="bi xs" data-step="2"><span class="zh">我們只想要<b class="ca">一條</b>：作者</span><span class="en">we want only one of them: the author</span></div>
+      <div class="bi xs" data-step="3" style="margin-top:24px"><span class="zh">其他的都是<b>干擾</b> →<br>要靠<b>特徵選取</b>壓下去</span><span class="en">the rest is noise, to be suppressed by choosing features well</span></div>
+      <div class="bi xs" data-step="4" style="margin-top:24px"><span class="zh">例：比較偵探小說和兒童小說，<br>可能測到的是<b>文類</b></span><span class="en">compare a crime novel with a children’s book and you may be measuring genre</span></div>
+      <div class="small" data-step="5" style="margin-top:22px;border-top:1.5px dashed var(--line);padding-top:10px">反過來也行：研究<b style="color:var(--ink)">文類、時代、譯者</b>時，它們就是訊號，作者反而是干擾<br>The same methods also compare genres, periods or translators: then those are the signal.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ 2. History and classic cases -->
+
+<!-- ─────────── Timeline -->
+<section class="slide" id="s-tl" data-sec="hist">
+  <h2 class="bi"><span class="zh">文體計量學簡史</span><span class="en">A short history of stylometry</span></h2>
+  <div class="tl">
+    <div class="ev" data-step="1"><div class="yr">1851</div><div class="bi xs"><span class="zh"><b>德摩根</b><span class="role">英國數學家、邏輯學家</span>：能不能用平均詞長判斷<b>保羅書信</b>的作者？</span><span class="en">Augustus De Morgan, in a letter: could word length tell which New Testament letters (the Pauline epistles) Paul really wrote?</span></div></div>
+    <div class="ev" data-step="2"><div class="yr">1887</div><div class="bi xs"><span class="zh"><b>門登霍爾</b><span class="role">美國物理學家</span>：「寫作的特徵曲線」：每位作者的詞長分布</span><span class="en">T. C. Mendenhall, “The Characteristic Curves of Composition”, <i>Science</i></span></div></div>
+    <div class="ev" data-step="3"><div class="yr">1897</div><div class="bi xs"><span class="zh"><b>盧托斯瓦夫斯基</b><span class="role">波蘭哲學家</span>：創造 <i>stylometry</i> 一詞；柏拉圖對話錄的年代</span><span class="en">Wincenty Lutosławski coins the word; the order of Plato’s dialogues</span></div></div>
+    <div class="ev" data-step="4"><div class="yr">1964</div><div class="bi xs"><span class="zh"><b>莫斯特勒與華萊士</b><span class="role">美國統計學家</span>：《聯邦黨人文集》，貝氏統計</span><span class="en">Frederick Mosteller &amp; David Wallace: <i>The Federalist Papers</i></span></div></div>
+    <div class="ev" data-step="5"><div class="yr">2002</div><div class="bi xs"><span class="zh"><b>伯羅斯</b><span class="role">澳洲英國文學學者，研究奧斯汀</span>：Delta，至今仍是基準方法</span><span class="en">John Burrows: Delta, still the baseline</span></div></div>
+    <div class="ev" data-step="6"><div class="yr">2013</div><div class="bi xs"><span class="zh"><b>朱奧拉</b><span class="role">美國電腦科學家</span>：Robert Galbraith 就是 J. K. Rowling</span><span class="en">Patrick Juola: “Robert Galbraith” is J. K. Rowling</span></div></div>
+  </div>
+  <div class="small" data-step="1" style="position:absolute;left:72px;bottom:36px">保羅書信：《新約》中署名使徒保羅的書信，有幾封的作者至今仍有爭論 · Pauline epistles: New Testament letters in Paul’s name, some disputed</div>
+</section>
+
+<!-- ─────────── Plato's dialogues -->
+<section class="slide" id="s-plato" data-sec="hist">
+  <h2 class="bi"><span class="zh">背景：柏拉圖的對話錄</span><span class="en">Background: Plato’s dialogues</span></h2>
+  <div class="fig-l" style="gap:36px">
+    <figure style="margin:0;width:270px;flex:none"><img class="fig" src="img/plato.jpg" alt="Bust of Plato" style="width:270px"><figcaption class="capt">柏拉圖像（羅馬複製品）<br>bust of Plato, Roman copy</figcaption></figure>
+    <div class="txt">
+      <div class="bi xs" data-step="1"><span class="zh"><b>柏拉圖</b>（約前 427–前 347）：古希臘雅典的哲學家，<b>蘇格拉底</b>的學生</span><span class="en">Athenian philosopher, student of Socrates</span></div>
+      <div class="bi xs" data-step="2" style="margin-top:16px"><span class="zh">留下三十多篇<b>對話錄</b>：寫得像劇本，主角通常是蘇格拉底</span><span class="en">some thirty-odd dialogues, written like plays, usually with Socrates as the main speaker</span></div>
+      <div class="bi xs" data-step="2" style="margin-top:16px"><span class="zh">《理想國》《會飲篇》《斐多篇》……《法律篇》</span><span class="en"><i>Republic</i>, <i>Symposium</i>, <i>Phaedo</i> … <i>Laws</i></span></div>
+      <div class="bi xs" data-step="3" style="margin-top:16px"><span class="zh">哪些先寫、哪些後寫？要理解他的思想怎麼<b>發展</b>，就得知道順序</span><span class="en">which came first? To trace how his thought developed, we need the order</span></div>
+      <div class="callout key bi xs" data-step="4"><span class="zh">古代的說法：《法律篇》是<b>最後</b>一部，他死時還寫在<b>蠟板</b>上</span><span class="en">Ancient tradition (Diogenes Laertius): the <i>Laws</i> came last, still on wax tablets when he died. A fixed point to start from.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Lutosławski -->
+<section class="slide" id="s-luto" data-sec="hist">
+  <h2 class="bi"><span class="zh">盧托斯瓦夫斯基與柏拉圖</span><span class="en">Wincenty Lutosławski and the order of Plato’s dialogues</span></h2>
+  <div class="fig-l" style="gap:26px">
+    <div style="width:180px;flex:none">
+      <img class="fig" src="img/lutoslawski.png" alt="Wincenty Lutosławski" style="width:180px">
+      <div class="capt">波蘭哲學家 Polish philosopher<br>1863–1954</div>
+    </div>
+    <div style="width:280px;flex:none">
+      <img class="fig" src="img/lutoslawski-principes.png" alt="Principes de stylométrie" style="width:280px">
+      <div class="capt"><i>Revue des études grecques</i> 11 (1898); see also <i>The Origin and Growth of Plato’s Logic</i> (1897)</div>
+    </div>
+    <div class="txt">
+      <div class="bi xs" data-step="1"><span class="zh">問題：柏拉圖<b>沒有</b>告訴我們他寫作的<b>順序</b></span><span class="en">Plato left almost no record of the order of his dialogues</span></div>
+      <div class="bi xs" data-step="2"><span class="zh">假設：風格隨著年紀<b>逐漸</b>改變 → 數一數只在晚期作品常見的特徵</span><span class="en">style changes gradually; count features typical of the late works (the <i>Laws</i> is known to be last)</span></div>
+      <div class="bi xs" data-step="3"><span class="zh">結果：《智者》《政治家》《斐萊布》《蒂邁歐》《克里提亞斯》和《法律篇》同屬<b>晚期</b></span><span class="en">the <i>Sophist</i>, <i>Statesman</i>, <i>Philebus</i>, <i>Timaeus</i> and <i>Critias</i> join the <i>Laws</i> in the late group, building on Campbell (1867)</span></div>
+      <div class="callout key bi xs" data-step="4"><span class="zh">一開始就不只問「<b>誰</b>寫的」，還問「<b>什麼時候</b>寫的」</span><span class="en">From the start, not only “who wrote it?” but “when?”. Today’s paper looks for a break in time.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ 3. Features, vectors, distances -->
+
+<!-- ─────────── What is a feature? -->
+<section class="slide" id="s-feat" data-sec="vec">
+  <h2 class="bi"><span class="zh">什麼是「特徵」？</span><span class="en">What is a feature? Anything about a text that we can count or measure</span></h2>
+  <div class="passage" id="feat-p"></div>
+  <div class="small" style="margin-top:4px">示意文字 · an invented passage in the style of a Qing novel</div>
+  <div class="two" style="margin-top:14px;gap:30px">
+    <div class="grow swap">
+      <div class="bi sm" data-step="1" data-until="2"><span class="zh">① 句子長度</span><span class="en">sentence length</span></div>
+      <div class="bi sm" data-step="2" data-until="3"><span class="zh">② 功能字的頻率</span><span class="en">frequencies of function characters</span></div>
+      <div class="bi sm" data-step="3" data-until="4"><span class="zh">③ 引語與問句</span><span class="en">direct speech and questions</span></div>
+      <div class="bi sm" data-step="4"><span class="zh">④ 字元 n-gram（例：雙字）</span><span class="en">character n-grams, e.g. bigrams ending in 道</span></div>
+    </div>
+    <div class="featout" id="feat-out" style="width:620px;flex:none"></div>
+  </div>
+</section>
+
+<!-- ─────────── A feature table -->
+<section class="slide" id="s-ftab" data-sec="vec">
+  <h2 class="bi"><span class="zh">特徵表：每一欄是一個特徵</span><span class="en">A feature table: texts as rows, features as columns (numbers illustrative)</span></h2>
+  <table class="cmp ftab" style="margin-top:6px">
+    <thead><tr><th style="width:330px">文本 text</th><th class="num fc">平均句長<span>avg. sentence length（字）</span></th><th class="num">問句<span>questions / 1,000</span></th><th class="num">直接引語<span>share of dialogue</span></th><th class="num">「的」<span>per 1,000</span></th><th class="num">「了」<span>per 1,000</span></th></tr></thead>
+    <tbody>
+      <tr class="fr0"><td><b>魯迅《狂人日記》</b> <span class="small">1918</span></td><td class="num fc">12.4</td><td class="num">6.1</td><td class="num">8%</td><td class="num">21</td><td class="num">9</td></tr>
+      <tr class="fr1"><td><b>魯迅《孔乙己》</b> <span class="small">1919</span></td><td class="num fc">15.8</td><td class="num">2.3</td><td class="num">24%</td><td class="num">27</td><td class="num">12</td></tr>
+      <tr class="fr2"><td><b>老舍《駱駝祥子》第一章</b> <span class="small">1936</span></td><td class="num fc">17.2</td><td class="num">1.4</td><td class="num">11%</td><td class="num">38</td><td class="num">19</td></tr>
+      <tr class="fr3"><td><b>張愛玲《傾城之戀》</b> <span class="small">1943</span></td><td class="num fc">21.5</td><td class="num">2.0</td><td class="num">19%</td><td class="num">45</td><td class="num">14</td></tr>
+      <tr class="fr4"><td><b>沈從文《邊城》</b> <span class="small">1934</span></td><td class="num fc">14.9</td><td class="num">1.6</td><td class="num">17%</td><td class="num">33</td><td class="num">16</td></tr>
+    </tbody>
+  </table>
+  <div class="ftx">
+  <div class="bi xs" data-step="1"><span class="zh"><b>一欄</b> ＝ 一個特徵：每篇文本都量<b>同一件事</b></span><span class="en">a column is one feature, measured the same way in every text</span></div>
+  <div class="bi xs" data-step="2"><span class="zh"><b>一列</b> ＝ 一篇文本的「檔案」：一串數字</span><span class="en">a row is one text’s profile: a list of numbers</span></div>
+  </div>
+  <div class="callout key bi xs" data-step="3" style="margin-top:10px;padding:8px 20px"><span class="zh">「一串數字」在數學上叫做<b>向量</b>——等一下細談</span><span class="en">A list of numbers is what mathematicians call a vector.</span></div>
+</section>
+
+<!-- ─────────── Function words -->
+<section class="slide" id="s-func" data-sec="vec">
+  <h2 class="bi"><span class="zh">為什麼常用「功能詞」？</span><span class="en">Why function words?</span></h2>
+  <div class="fig-l">
+    <div style="width:600px;flex:none">
+      <img class="fig" src="img/zipf-copperfield.png" alt="The top 95 most frequent words in David Copperfield" style="width:600px">
+      <div class="src" style="margin-top:4px">Dickens, <i>David Copperfield</i>: the 95 most frequent words · Algee-Hewitt et al., “Novel as Data”</div>
+    </div>
+    <div class="txt">
+      <div class="bi xs" data-step="1"><span class="zh">最常見的詞幾乎都是<b>功能詞</b>：<br>the, and, to, of, a, I…</span><span class="en">the most frequent words are almost all function words (Zipf’s law: a few words are very frequent, then a long tail)</span></div>
+      <div class="bi xs" data-step="2"><span class="zh">① 出現很多次 → 統計<b>穩定</b></span><span class="en">frequent, so the estimates are stable</span></div>
+      <div class="bi xs" data-step="2"><span class="zh">② 和<b>主題</b>無關</span><span class="en">independent of topic</span></div>
+      <div class="bi xs" data-step="2"><span class="zh">③ 作者<b>不自覺</b>地使用，很難模仿</span><span class="en">used unconsciously, hard to imitate</span></div>
+      <div class="callout key bi xs" data-step="3"><span class="zh">中文：的、了、也、着、便、之、乎、者……<br>文言和白話的功能詞<b>不一樣</b></span><span class="en">Chinese: classical and vernacular texts use different function words</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Chinese function words -->
+<section class="slide" id="s-yu" data-sec="vec">
+  <h2 class="bi"><span class="zh">中文的例子：35 個功能詞</span><span class="en">A Chinese example: 35 function words</span></h2>
+  <div class="fig-l">
+    <img class="fig" src="img/yu-function-words.png" alt="Yu, 35 Chinese function words" style="width:510px;flex:none">
+    <div class="txt" style="padding-top:10px">
+      <div class="bi xs" data-step="1"><span class="zh">每篇文件 → 一個 <b>35 維</b>的向量</span><span class="en">every document becomes a vector with 35 dimensions</span></div>
+      <div class="bi xs" data-step="2" style="margin-top:22px"><span class="zh">每一維 ＝ 一個功能詞<br><b>每千詞</b>出現的次數</span><span class="en">each dimension: how often one function word occurs per thousand words</span></div>
+      <div class="bi xs" data-step="3" style="margin-top:22px"><span class="zh">為什麼是「每千詞」<br>而不是「次數」？→ 第 4 節</span><span class="en">why per thousand words and not raw counts? See section 4.</span></div>
+    </div>
+  </div>
+  <div class="src abs">Bei Yu, “Function Words for Chinese Authorship Attribution” (2012)</div>
+</section>
+
+<!-- ─────────── Texts as vectors -->
+<!-- ─────────── What is a vector? -->
+<section class="slide" id="s-vec0" data-sec="vec">
+  <h2 class="bi"><span class="zh">什麼是向量？</span><span class="en">What is a vector? First, pure geometry</span></h2>
+  <div class="two" style="gap:40px">
+    <svg id="v0-svg" class="chart" viewBox="0 0 520 470" style="width:520px;flex:none"></svg>
+    <div class="grow">
+      <div class="bi xs" data-step="1"><span class="zh">向量 ＝ 一串<b>有順序</b>的數字：\(\mathbf{u} = (3,\ 1)\)</span><span class="en">an ordered list of numbers; (3, 1) is not (1, 3)</span></div>
+      <div class="bi xs" data-step="2" style="margin-top:10px"><span class="zh">也是一支<b>箭頭</b>：從原點出發，<br>往右 3、往上 1</span><span class="en">also an arrow from the origin: 3 to the right, 1 up</span></div>
+      <div class="bi xs" data-step="3" style="margin-top:10px"><span class="zh">另一個向量 \(\mathbf{v} = (1,\ 2)\)：<br><b>方向</b>和<b>長度</b>都不同</span><span class="en">another vector, with a different direction and length</span></div>
+      <div class="bi xs" data-step="4" style="margin-top:10px"><span class="zh">長度（畢氏定理）：<br>\(\|\mathbf{u}\| = \sqrt{3^2 + 1^2} \approx 3.16\)</span><span class="en">the length, by Pythagoras; ‖·‖ comes back in the SVM section</span></div>
+      <div class="bi xs" data-step="5" style="margin-top:10px"><span class="zh">同樣：\(\|\mathbf{v}\| = \sqrt{1^2 + 2^2} = \sqrt{5} \approx 2.24\)</span><span class="en">the same for v: u is longer than v</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-vec" data-sec="vec">
+  <h2 class="bi"><span class="zh">從文本到向量</span><span class="en">From texts to vectors</span></h2>
+  <div class="two" style="gap:40px">
+    <div style="width:520px;flex:none">
+      <table class="cmp tight" id="vec-tab" style="width:420px">
+        <thead><tr><th>文件</th><th class="num">「的」</th><th class="num">「了」</th><th class="num">「也」</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <div class="small" style="margin-top:6px">每千字 · per 1,000 characters (示意 illustrative)</div>
+      <div class="bi xs" data-step="1" style="margin-top:16px"><span class="zh">每一<b>行</b> ＝ 一個<b>向量</b></span><span class="en">each row is a vector: a list of numbers</span></div>
+      <div class="bi xs" data-step="2" style="margin-top:10px"><span class="zh">三個數字 → <b>三維</b>；100 個詞 → 100 維</span><span class="en">a hundred dimensions cannot be drawn, but the rules are the same</span></div>
+      <div class="callout key bi xs" data-step="3" style="margin-top:12px;padding:8px 20px"><span class="zh">箭頭<b>方向相近</b> ＝ 用字<b>習慣相近</b></span><span class="en">Arrows pointing the same way: similar habits.</span></div>
+    </div>
+    <svg id="vec-svg" class="chart" viewBox="0 0 560 470" style="width:520px;flex:none;cursor:grab;touch-action:none"></svg>
+  </div>
+</section>
+
+<!-- ─────────── Feature selection -->
+<section class="slide" id="s-fsel" data-sec="vec">
+  <h2 class="bi"><span class="zh">特徵選取：要用幾個詞？</span><span class="en">Feature selection: how many words, and which?</span></h2>
+  <div class="two" style="gap:34px">
+    <div style="width:560px;flex:none">
+      <svg id="fsel-svg" class="chart" viewBox="0 0 560 300"></svg>
+      <div class="keys"><kbd>↑</kbd> <kbd>↓</kbd> 改變 N · 最常見的 <b id="fsel-n" style="color:var(--ink)">30</b> 個詞 <span class="small">（示意 illustrative）</span></div>
+    </div>
+    <div class="grow">
+      <div class="bi xs" data-step="1"><span class="zh">① 最常見的 N 個詞（<b>MFW</b>）：<br>N ＝ 100？500？1000？</span><span class="en">the N most frequent words; N is our choice</span></div>
+      <div class="bi xs" data-step="2" style="margin-top:14px"><span class="zh">② 只留<b>功能詞</b>：<br>Hu 等：前 500 字 → 144 個功能字</span><span class="en">keep only function words</span></div>
+      <div class="bi xs" data-step="3" style="margin-top:14px"><span class="zh">③ 剔除人名、地名、<br>只在少數文本出現的詞</span><span class="en">“culling”: drop names and words found in only a few texts</span></div>
+      <div class="bi xs" data-step="4" style="margin-top:14px"><span class="zh">④ 讓模型自己挑（SVM-RFE，第 7 節）</span><span class="en">let the model choose</span></div>
+    </div>
+  </div>
+  <div class="callout key bi xs" data-step="5" style="margin-top:8px"><span class="zh">太少 → 訊號不夠；太多 → <b>雜訊</b>（主題、人名）混進來</span><span class="en">Too few features: not enough signal. Too many: noise from topics and names creeps in.</span></div>
+</section>
+
+<!-- ─────────── Three distances -->
+<section class="slide" id="s-dist" data-sec="vec">
+  <h2 class="bi"><span class="zh">兩個向量有多遠？三種距離</span><span class="en">How far apart are two vectors? Three distances</span></h2>
+  <div class="two" style="gap:30px">
+    <div style="position:relative;width:500px;flex:none">
+      <svg id="dist-svg" class="chart" viewBox="0 0 500 470" style="width:500px"></svg>
+      <div class="taxi-pop" data-step="1" data-until="2"><span class="cab">🚕</span><div><b>計程車不能穿牆</b><br>只能沿著棋盤狀的街道開<br><span class="en">a taxi in Manhattan can only follow the street grid</span></div></div>
+    </div>
+    <div class="grow">
+      <div class="panel dp" data-step="1" style="border-left:6px solid #e0570f">
+        <div class="ptl"><b>曼哈頓距離</b>（計程車距離）<span class="en">Manhattan / taxicab distance</span></div>
+        <div class="eqrow" style="margin-top:2px"><span class="tex">\(|a_1-b_1| + |a_2-b_2|\)</span><span class="readout">＝ <b id="d-man">–</b></span></div>
+      </div>
+      <div class="panel dp" data-step="2" style="border-left:6px solid #16a34a;margin-top:8px">
+        <div class="ptl"><b>歐氏距離</b>：直線距離 <span class="en">Euclidean distance, as the crow flies</span></div>
+        <div class="eqrow" style="margin-top:2px"><span class="tex">\(\sqrt{(a_1-b_1)^2 + (a_2-b_2)^2}\)</span><span class="readout">＝ <b id="d-euc">–</b></span></div>
+      </div>
+      <div class="panel dp" data-step="3" style="border-left:6px solid #9333ea;margin-top:8px">
+        <div class="ptl"><b>餘弦距離</b>：只看<b>方向</b>（角度） <span class="en">cosine distance</span></div>
+        <div class="eqrow" style="margin-top:2px"><span class="tex">\(1 - \cos\theta = 1 - \frac{\mathbf{a}\cdot\mathbf{b}}{\|\mathbf{a}\|\,\|\mathbf{b}\|}\)</span><span class="readout">＝ <b id="d-cos">–</b></span></div>
+      </div>
+      <div class="keys" style="margin-top:4px"><kbd>↑</kbd> <kbd>↓</kbd> 把 B 拉長／縮短 · <kbd>P</kbd> 換位置</div>
+      <div class="callout key bi xs" data-step="4" style="margin-top:6px"><span class="zh">把 B 拉長：前兩個距離變了，<b>餘弦不變</b></span><span class="en">Stretch B: Manhattan and Euclidean change; cosine does not.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Which distance? -->
+<section class="slide" id="s-dist2" data-sec="vec">
+  <h2 class="bi"><span class="zh">哪一種比較好？</span><span class="en">Which distance should we use?</span></h2>
+  <table class="cmp" style="margin-top:6px">
+    <thead><tr><th style="width:190px"></th><th>特點 property</th><th style="width:300px">在文體計量學 in stylometry</th></tr></thead>
+    <tbody>
+      <tr data-step="1"><td><b style="color:#e0570f">曼哈頓</b></td><td class="bi xs"><span class="zh">每個差異<b>直接相加</b></span><span class="en">every difference counts linearly</span></td><td class="bi xs"><span class="zh">Burrows’s Delta（2002）</span></td></tr>
+      <tr data-step="2"><td><b style="color:#16a34a">歐氏</b></td><td class="bi xs"><span class="zh">平方會<b>放大</b>大的差異：一個怪詞可以主導</span><span class="en">squaring magnifies large gaps: one odd word can dominate</span></td><td class="bi xs"><span class="zh">Hu 等（2014）圖 5</span></td></tr>
+      <tr data-step="3"><td><b style="color:#9333ea">餘弦</b></td><td class="bi xs"><span class="zh">只看<b>模式</b>，不看大小</span><span class="en">the pattern, not the size</span></td><td class="bi xs"><span class="zh">Cosine Delta：常常<b>最好</b></span><span class="en">Smith &amp; Aldridge 2011; Evert et al. 2017</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ─────────── Why Euclidean fears one odd word -->
+<section class="slide" id="s-dist3" data-sec="vec">
+  <h2 class="bi"><span class="zh">三種距離，算一次看看</span><span class="en">One example, three distances: is B or C closer to A?</span></h2>
+  <div class="two" style="gap:30px;align-items:flex-start">
+    <table class="cmp tight d3" style="width:560px;flex:none">
+      <thead><tr><th>四個詞（示意）</th><th class="num">的</th><th class="num">了</th><th class="num">也</th><th class="num">着</th><th class="num">形狀 shape</th></tr></thead>
+      <tbody>
+        <tr><td><b style="color:#1b2333">文件 A</b></td><td class="num">2</td><td class="num">1</td><td class="num">3</td><td class="num">2</td><td class="num"><svg width="94" height="38" viewBox="0 0 94 38" style="vertical-align:middle"><rect x="4" y="25.0" width="16" height="11.0" rx="2" fill="#1b2333"/><rect x="26" y="30.5" width="16" height="5.5" rx="2" fill="#1b2333"/><rect x="48" y="19.5" width="16" height="16.5" rx="2" fill="#1b2333"/><rect x="70" y="25.0" width="16" height="11.0" rx="2" fill="#1b2333"/><line x1="0" y1="36.5" x2="94" y2="36.5" stroke="#cbd2dc"/></svg></td></tr>
+        <tr><td><b style="color:#2563eb">文件 B</b></td><td class="num">3</td><td class="num">2</td><td class="num">4</td><td class="num">3</td><td class="num"><svg width="94" height="38" viewBox="0 0 94 38" style="vertical-align:middle"><rect x="4" y="19.5" width="16" height="16.5" rx="2" fill="#2563eb"/><rect x="26" y="25.0" width="16" height="11.0" rx="2" fill="#2563eb"/><rect x="48" y="14.0" width="16" height="22.0" rx="2" fill="#2563eb"/><rect x="70" y="19.5" width="16" height="16.5" rx="2" fill="#2563eb"/><line x1="0" y1="36.5" x2="94" y2="36.5" stroke="#cbd2dc"/></svg></td></tr>
+        <tr><td><b style="color:#dc2626">文件 C</b></td><td class="num">6</td><td class="num">1</td><td class="num">3</td><td class="num">2</td><td class="num"><svg width="94" height="38" viewBox="0 0 94 38" style="vertical-align:middle"><rect x="4" y="3.0" width="16" height="33.0" rx="2" fill="#dc2626"/><rect x="26" y="30.5" width="16" height="5.5" rx="2" fill="#dc2626"/><rect x="48" y="19.5" width="16" height="16.5" rx="2" fill="#dc2626"/><rect x="70" y="25.0" width="16" height="11.0" rx="2" fill="#dc2626"/><line x1="0" y1="36.5" x2="94" y2="36.5" stroke="#cbd2dc"/></svg></td></tr>
+        <tr class="diff" data-step="1"><td>差 |A − B|</td><td class="num">1</td><td class="num">1</td><td class="num">1</td><td class="num">1</td><td class="small">每個詞都差一點</td></tr>
+        <tr class="diff" data-step="1"><td>差 |A − C|</td><td class="num"><b class="bad-c">4</b></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="small">只有一個詞差很多</td></tr>
+      </tbody>
+    </table>
+    <div class="grow">
+      <div class="bi xs" data-step="0"><span class="zh">B：每個詞都比 A <b>多一點</b><br>C：只有「的」<b>特別多</b>（例如寫了很多對話？）</span><span class="en">B is a little higher everywhere; C is much higher in one word only</span></div>
+      <div class="bi xs" data-step="1" style="margin-top:16px"><span class="zh">看表中的<b>形狀</b>：B 和 A 起伏一樣，C 的形狀變了</span><span class="en">look at the shapes: B keeps A’s profile, C does not</span></div>
+    </div>
+  </div>
+  <table class="cmp tight d3r" style="margin-top:14px">
+    <thead><tr><th style="width:250px">距離 distance</th><th class="num" style="width:230px">A ↔ <span class="ca">B</span></th><th class="num" style="width:230px">A ↔ <span class="cb">C</span></th><th>結論 verdict</th></tr></thead>
+    <tbody>
+      <tr data-step="2"><td><b style="color:#e0570f">曼哈頓</b> 差相加</td><td class="num">1+1+1+1 = <b>4</b></td><td class="num">4+0+0+0 = <b>4</b></td><td>一樣遠 · a tie</td></tr>
+      <tr data-step="3"><td><b style="color:#16a34a">歐氏</b> 平方相加再開根號</td><td class="num">√(1+1+1+1) = <b>2</b></td><td class="num">√(16+0+0+0) = <b>4</b></td><td>C 遠<b>兩倍</b>：大的差被放大</td></tr>
+      <tr data-step="4"><td><b style="color:#9333ea">餘弦</b> 1 − cos θ</td><td class="num"><b>0.006</b></td><td class="num"><b>0.133</b></td><td>B 幾乎<b>同方向</b>；C 的模式變了</td></tr>
+    </tbody>
+  </table>
+  <div class="callout key bi xs" data-step="5" style="margin-top:12px;padding:8px 22px"><span class="zh">三種距離回答不同的問題：曼哈頓＝總共差多少；歐氏＝大差特別重；餘弦＝<b>形狀</b>像不像</span><span class="en">Manhattan: how much in total? Euclidean: big gaps count extra. Cosine: is the shape the same?</span></div>
+</section>
+
+<!-- ═══════════════════ 4. Normalization & standardization -->
+
+<!-- ─────────── Length -->
+<section class="slide" id="s-len" data-sec="norm">
+  <h2 class="bi"><span class="zh">問題一：文本的長度</span><span class="en">Problem 1: texts have different lengths</span></h2>
+  <div class="two" style="gap:60px">
+    <div style="width:420px;flex:none">
+      <div id="len-cap" class="lencap">「的」出現的<b>次數</b><span>raw count of 的</span></div>
+      <div class="lenbars">
+        <div class="col"><div class="val" id="len-v1">150</div><div class="bar" id="len-b1" style="height:40px"></div></div>
+        <div class="col"><div class="val" id="len-v2">≈ 4,500</div><div class="bar" id="len-b2" style="height:200px"></div></div>
+      </div>
+      <div class="lenbars" style="height:auto;border:0;padding:0;margin:0">
+        <div class="col"><div class="lab">魯迅《狂人日記》<br>約 5,000 字</div></div>
+        <div class="col"><div class="lab">老舍《駱駝祥子》<br>十多萬字</div></div>
+      </div>
+    </div>
+    <div class="grow">
+      <div class="bi sm"><span class="zh">一個短篇，一部長篇</span><span class="en">a short story and a very long novel (numbers illustrative)</span></div>
+      <div class="bi xs" data-step="1" style="margin-top:24px"><span class="zh">假設兩部用「的」的習慣<b>完全一樣</b>：<br>《駱駝祥子》的次數還是多了幾十倍——<br>只因為它<b>長</b>了幾十倍</span><span class="en">even with identical habits, dozens of times as many 的, only because the novel is dozens of times longer</span></div>
+      <div class="bi xs" data-step="2" style="margin-top:24px"><span class="zh"><b>正規化</b>（normalization）：<br>相對頻率 ＝ 次數 ÷ 總字數</span><span class="en">relative frequency = count ÷ length (often × 1,000: per thousand)</span></div>
+      <div class="callout key bi xs" data-step="3" style="margin-top:24px"><span class="zh">兩部都是每千字 <b>30</b> 次 → 去掉了<b>長度</b>的影響</span><span class="en">Both: 30 per thousand. Normalization removes the effect of length.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Scale -->
+<section class="slide" id="s-scale" data-sec="norm">
+  <h2 class="bi"><span class="zh">問題二：每個詞的「量級」不同</span><span class="en">Problem 2: frequent words live on a bigger scale</span></h2>
+  <div class="two" style="gap:40px">
+    <table class="cmp" style="width:520px;flex:none">
+      <thead><tr><th>每千字 per 1,000</th><th class="num">「的」</th><th class="num">「呢」</th></tr></thead>
+      <tbody>
+        <tr><td>文件 A</td><td class="num">40</td><td class="num">1.0</td></tr>
+        <tr><td>文件 B</td><td class="num">30</td><td class="num">3.0</td></tr>
+        <tr data-step="1" style="background:var(--win-bg)"><td>差 |A−B|</td><td class="num"><b>10</b></td><td class="num"><b>2</b></td></tr>
+        <tr data-step="2" style="background:var(--tgt-bg)"><td>倍數 ratio</td><td class="num"><b>1.3 ×</b></td><td class="num"><b>3 ×</b></td></tr>
+      </tbody>
+    </table>
+    <div class="grow">
+      <div class="bi xs" data-step="1"><span class="zh">曼哈頓距離 ＝ 10 ＋ 2：<br>「的」佔了 <b>83%</b></span><span class="en">the 的 difference makes up 83% of the distance</span></div>
+      <div class="bi xs" data-step="2" style="margin-top:22px"><span class="zh">可是「的」只差 <b>1.3 倍</b>，<br>「呢」差了 <b>3 倍</b>！</span><span class="en">yet 的 differs by a factor of 1.3, 呢 by a factor of 3</span></div>
+    </div>
+  </div>
+  <div class="callout key bi sm" data-step="3" style="margin-top:36px"><span class="zh">不處理的話，最常見的幾個詞會<b>綁架</b>整個距離</span><span class="en">Left alone, the few most frequent words hijack the whole distance.</span></div>
+</section>
+
+<!-- ─────────── Mean and standard deviation -->
+<section class="slide" id="s-sd" data-sec="norm">
+  <h2 class="bi"><span class="zh">平均 μ 與標準差 σ</span><span class="en">Mean and standard deviation: where a word sits, and how much it varies between documents</span></h2>
+  <svg id="sd-svg" class="chart" viewBox="0 0 1110 370"></svg>
+  <div class="swap" style="margin-top:2px">
+    <div class="bi xs" data-step="0" data-until="1"><span class="zh">五個詞，各在 30 篇文件裡的頻率：每個點是一篇文件</span><span class="en">five words, their frequency in 30 documents each; every dot is a document (illustrative)</span></div>
+    <div class="bi xs" data-step="1" data-until="2"><span class="zh"><b style="color:#b45309">平均 μ</b>：這個詞通常用多少——每個詞<b>都不一樣</b></span><span class="en">the mean: how often the word is used on average; different for every word</span></div>
+    <div class="bi xs" data-step="2" data-until="3"><span class="zh"><b style="color:#9333ea">標準差 σ</b>：文件之間<b>差多少</b>——「的」差很多，「呢」幾乎都一樣</span><span class="en">the standard deviation: how much documents differ; a lot for 的, hardly at all for 呢</span></div>
+    <div class="callout key bi xs" data-step="3" style="margin:0"><span class="zh">同樣「差 2」：對「的」只是 0.3σ（很平常），對「呢」是 3.3σ（<b>非常特別</b>）→ 所以要除以 σ</span><span class="en">The same raw gap of 2 is ordinary for 的 but remarkable for 呢. That is why we divide by σ.</span></div>
+  </div>
+</section>
+
+<!-- ─────────── z-score -->
+<section class="slide" id="s-z" data-sec="norm">
+  <h2 class="bi"><span class="zh">標準化：z 分數</span><span class="en">Standardization: the z-score</span></h2>
+  <div class="two" style="gap:30px;align-items:center">
+    <div class="eq big" style="flex:none"><span class="tex tex-xl">\(z = \dfrac{x - \mu}{\sigma}\)</span></div>
+    <div class="grow">
+      <div class="bi xs"><span class="zh"><b>μ</b>（/mjuː/）：平均值；<b>σ</b>（/ˈsɪɡmə/）：標準差</span><span class="en">μ: the mean over all documents; σ: the standard deviation, i.e. the typical spread</span></div>
+      <div class="keys" style="margin-top:4px">● <span class="ca">作者甲</span> 的三篇 &nbsp; ● <span class="cb">作者乙</span> 的三篇</div>
+    </div>
+  </div>
+  <svg id="z-svg" class="zline chart" viewBox="0 0 1100 260" style="margin-top:0"></svg>
+  <div class="swap" style="margin-top:4px">
+    <div class="bi xs" data-step="0" data-until="1"><span class="zh">原始的相對頻率：「呢」全擠在一起，看不出差別</span><span class="en">raw relative frequencies: all the 呢 values are squeezed together</span></div>
+    <div class="bi xs" data-step="1" data-until="2"><span class="zh">① 減去平均 \(x-\mu\)：每一排<b>平移</b>，讓平均落在<b>中間的 0</b></span><span class="en">subtract the mean: slide each row so its own mean lands on 0, in the middle</span></div>
+    <div class="bi xs" data-step="2" data-until="3"><span class="zh">② 除以標準差 \(\div\,\sigma\)：兩排<b>散開</b>到一樣寬——「呢」÷ 1.0，「的」÷ 6.1</span><span class="en">divide by the standard deviation: both rows now spread equally wide</span></div>
+    <div class="callout key bi xs" data-step="3" style="margin:0"><span class="zh">z = +1：比平均<b>多用</b>一個標準差；「呢」和「的」現在<b>同樣重要</b></span><span class="en">z = +1 means one standard deviation above average. 呢 now counts as much as 的.</span></div>
+  </div>
+</section>
+
+<!-- ─────────── Walkthrough -->
+<section class="slide" id="s-walk" data-sec="norm">
+  <h2 class="bi"><span class="zh">一步一步：從次數到距離</span><span class="en">Step by step: from counts to distances</span></h2>
+  <div class="walk">
+    <div class="main">
+      <div class="wsteps" id="wk-steps"><span>① 次數</span><span>② 相對頻率</span><span>③ z 分數</span><span>④ 距離</span><span>⑤ 最近鄰</span></div>
+      <table class="wt" id="wk-tab"></table>
+    </div>
+    <div class="side swap">
+      <div data-step="0" data-until="1">
+        <div class="bi xs"><span class="zh">六篇文件，五個功能字的<b>次數</b></span><span class="en">six documents, raw counts of five function characters</span></div>
+        <div class="bi xs" style="margin-top:16px"><span class="zh">B 的「的」只有 51 次——因為 B 很短</span><span class="en">B has only 51 的: it is short</span></div>
+      </div>
+      <div data-step="1" data-until="2">
+        <div class="bi xs"><span class="zh">除以總字數 × 1000 → <b>每千字</b></span><span class="en">divide by length, × 1,000</span></div>
+        <div class="bi xs" style="margin-top:16px"><span class="zh">最後兩行：每一欄的<br>平均 μ 和標準差 σ</span><span class="en">last two rows: mean and standard deviation of each column</span></div>
+      </div>
+      <div data-step="2" data-until="3">
+        <div class="bi xs"><span class="zh">\(z = (x-\mu)/\sigma\)</span><span class="en">every column now has mean 0 and standard deviation 1</span></div>
+        <div class="bi xs" style="margin-top:16px"><span class="zh"><span style="color:#15803d">綠</span>：多於平均；<span style="color:#b91c1c">紅</span>：少於平均</span><span class="en">green: above average; red: below average</span></div>
+        <div class="bi xs" style="margin-top:16px"><span class="zh">一行的紅綠<b>模式</b> ＝ 作者的「指紋」</span><span class="en">the pattern along a row is the author’s profile</span></div>
+      </div>
+      <div data-step="3" data-until="4">
+        <div class="bi xs"><span class="zh">兩兩之間的距離</span><span class="en">pairwise distances between the z-score rows</span></div>
+        <div class="msel" id="wk-m" style="margin-top:12px;flex-direction:column;align-items:flex-start"></div>
+        <div class="keys" style="margin-top:4px"><kbd>↑</kbd> <kbd>↓</kbd> 換距離 switch</div>
+        <div class="bi xs" style="margin-top:12px"><span class="zh">曼哈頓 ÷ 特徵數 ＝ <b>Burrows’s Delta</b></span><span class="en">Manhattan ÷ number of features = Burrows’s Delta</span></div>
+        <div class="bi xs" style="margin-top:12px"><span class="zh">顏色越深 → 越近</span><span class="en">darker = closer</span></div>
+      </div>
+      <div data-step="4">
+        <div class="bi xs"><span class="zh">框起來的 ＝ 每一行<b>最近</b>的文件</span><span class="en">boxed: each document’s nearest neighbour</span></div>
+        <div class="callout key bi xs" style="margin-top:14px"><span class="zh"><b class="ca">A、C、E</b> 一組，<b class="cb">B、D、F</b> 一組——<br>正是兩位作者</span><span class="en">Two groups: exactly the two authors (who were never named to the computer).</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── The stylistic fingerprint -->
+<section class="slide" id="s-print" data-sec="norm">
+  <h2 class="bi"><span class="zh">文體的「指紋」</span><span class="en">A stylistic fingerprint: the peaks and troughs of the z-scores</span></h2>
+  <div class="two" style="gap:28px">
+    <img src="img/fingerprint.png" alt="A fingerprint made of digits under a magnifying glass" style="width:250px;flex:none;margin-top:6px">
+    <div class="grow">
+      <svg id="fp-svg" class="chart" viewBox="0 0 830 280"></svg>
+      <div class="two" style="gap:20px;margin-top:2px;align-items:flex-start">
+        <div class="grow swap">
+          <div class="bi xs" data-step="0" data-until="1"><span class="zh">作者甲的一篇文本：每個詞<b>高於</b>平均是峰，<b>低於</b>平均是谷</span><span class="en">one text by author A: above average is a peak, below average a trough</span></div>
+          <div class="bi xs" data-step="1" data-until="2"><span class="zh">作者甲的<b>另一篇</b>：峰和谷幾乎<b>對得上</b></span><span class="en">another text by the same author: the peaks and troughs line up</span></div>
+          <div class="bi xs" data-step="2"><span class="zh">作者乙：峰和谷<b>錯開</b>了</span><span class="en">a text by author B: the pattern does not match</span></div>
+        </div>
+        <div class="readout" style="width:250px;flex:none;font-size:18px;line-height:1.5">
+          <div data-step="1">甲 vs. 甲′：Δ ＝ <b id="fp-d1" style="font-size:22px;color:var(--a)">–</b></div>
+          <div data-step="2">甲 vs. 乙：Δ ＝ <b id="fp-d2" style="font-size:22px;color:var(--b)">–</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="callout key bi xs" data-step="3" style="margin-top:6px;padding:8px 22px"><span class="zh">認指紋不靠某一條紋路，而靠<b>整體的紋路模式</b>；認作者也一樣：看的是幾百個詞的起伏</span><span class="en">A fingerprint is identified by its overall pattern, not one ridge; so is an author, across hundreds of words.</span></div>
+  <div class="small" data-step="4" style="margin-top:6px">只是比喻：指紋一輩子不變，文體會隨<b style="color:var(--ink)">文類、年紀</b>改變 · only a metaphor: style, unlike a fingerprint, changes</div>
+</section>
+
+<!-- ─────────── Burrows's Delta -->
+<section class="slide" id="s-delta" data-sec="norm">
+  <h2 class="bi"><span class="zh">Burrows’s Delta 與 Cosine Delta</span><span class="en">Burrows, “‘Delta’: a Measure of Stylistic Difference and a Guide to Likely Authorship” (2002)</span></h2>
+  <div class="cards" style="gap:24px;margin-top:4px">
+    <div class="card" style="border-left:6px solid #e0570f">
+      <figure class="mini-portrait"><img src="img/burrows.jpg" alt="John Burrows"><figcaption>John Burrows<br>1928–2019<br>澳洲英國文學學者</figcaption></figure>
+      <h3 class="bi xs"><span class="zh">Burrows’s Delta</span></h3>
+      <div class="eq" style="font-size:24px;margin-top:8px"><span class="tex">\(\Delta = \dfrac{1}{n}\displaystyle\sum_{i=1}^{n} \bigl|z_A(i) - z_B(i)\bigr|\)</span></div>
+      <div class="bi xs" data-step="1" style="margin-top:6px"><span class="zh">一個詞一個詞比：差了<b>多少</b>？<br>＝ 曼哈頓距離 ÷ n</span><span class="en">word by word: how big is the gap? (the average gap)</span></div>
+    </div>
+    <div class="card" style="border-left:6px solid #9333ea" data-step="2">
+      <h3 class="bi xs"><span class="zh">Cosine Delta</span><span class="en">Smith &amp; Aldridge (2011); Evert et al. (2017)</span></h3>
+      <div class="eq" style="font-size:24px;margin-top:8px"><span class="tex">\(1 - \cos\theta(\mathbf{z}_A, \mathbf{z}_B)\)</span></div>
+      <div class="bi xs" style="margin-top:6px"><span class="zh">整串 z 分數當成一支箭頭：<br>兩支箭頭是否指向<b>同一個方向</b>？</span><span class="en">treat the whole z-score profile as an arrow: do the two arrows point the same way?</span></div>
+    </div>
+  </div>
+  <div class="two" data-step="3" style="gap:24px;margin-top:10px;align-items:center">
+    <table class="cmp tight" style="width:600px;flex:none">
+      <thead><tr><th>z 分數</th><th class="num">的</th><th class="num">了</th><th class="num">呢</th></tr></thead>
+      <tbody><tr><td>文件 A</td><td class="num">+1</td><td class="num">−1</td><td class="num">+2</td></tr>
+      <tr><td>文件 B</td><td class="num">+2</td><td class="num">−2</td><td class="num">+4</td></tr></tbody>
+    </table>
+    <div class="bi xs grow"><span class="zh">習慣<b>一樣</b>，B 只是更「誇張」：<br><b style="color:#e0570f">Δ = 1.33</b>，<b style="color:#9333ea">Cosine Delta = 0</b></span><span class="en">same habits, B is just more extreme: Delta sees a gap, Cosine Delta sees none</span></div>
+  </div>
+  <div class="callout key bi xs" data-step="4" style="margin-top:14px"><span class="zh"><b>最近</b>的候選作者 ＝ 最可能的作者；Cosine Delta 通常更準（餘弦：<b>word2vec</b> 那週細談）</span><span class="en">The nearest candidate is the most likely author. Cosine Delta is usually more accurate; more on cosine in the word2vec week.</span></div>
+</section>
+
+<!-- ─────────── What each step removes -->
+<section class="slide" id="s-remove" data-sec="norm">
+  <h2 class="bi"><span class="zh">每一步去掉了什麼？</span><span class="en">What does each step remove?</span></h2>
+  <table class="cmp rm-tab" style="margin-top:6px">
+    <thead><tr><th style="width:250px">步驟 step</th><th>去掉了 removes</th><th style="width:360px">結果 result</th></tr></thead>
+    <tbody>
+      <tr data-step="1"><td><b>正規化</b><span class="en">relative frequency</span></td><td>文本的<b>長度</b><span class="en">the length of the document</span></td><td>長短文本可以比<span class="en">long and short texts become comparable</span></td></tr>
+      <tr data-step="2"><td><b>標準化</b><span class="en">z-score</span></td><td>每個詞自己的<b>平均</b>和<b>波動</b><span class="en">each word’s own base rate and spread</span></td><td>每個詞投<b>同樣的一票</b><span class="en">every word gets an equal vote</span></td></tr>
+      <tr data-step="3"><td><b>餘弦距離</b><span class="en">cosine</span></td><td>向量的<b>長度</b>（整體強度）<span class="en">the length of the vector (overall intensity)</span></td><td>只比較<b>模式</b><span class="en">only the pattern is compared</span></td></tr>
+    </tbody>
+  </table>
+  <div class="callout key bi xs" data-step="4" style="margin-top:22px"><span class="zh">z 分數是<b>相對於語料</b>的：μ 和 σ 從整批文件算出來；換一批文件，z 就跟著變</span><span class="en">z-scores are relative to the corpus: μ and σ come from all the documents together, so a different corpus gives different z-scores.</span></div>
+</section>
+
+<!-- ═══════════════════ 5. Classic cases and methods -->
+
+<!-- ─────────── What are the Federalist Papers? -->
+<section class="slide" id="s-fedintro" data-sec="methods">
+  <h2 class="bi"><span class="zh">背景：《聯邦黨人文集》是什麼？</span><span class="en">Background: what are <i>The Federalist Papers</i>?</span></h2>
+  <div class="fig-l" style="gap:36px">
+    <figure style="margin:0;width:280px;flex:none"><img class="fig" src="img/federalist.jpg" alt="The Federalist, 1788, title page" style="width:280px"><figcaption class="capt">1788 年第一版書名頁 · first edition, 1788</figcaption></figure>
+    <div class="txt">
+      <div class="bi xs" data-step="1"><span class="zh">1787 年，美國剛寫好<b>憲法</b>，要各州投票批准</span><span class="en">1787: the new US Constitution needs to be ratified by the states</span></div>
+      <div class="bi xs" data-step="2" style="margin-top:16px"><span class="zh">紐約的報紙上連載 <b>85 篇</b>文章，勸讀者支持新憲法</span><span class="en">85 newspaper essays in New York argue for it</span></div>
+      <div class="bi xs" data-step="3" style="margin-top:16px"><span class="zh">三位作者：<b>漢密爾頓</b>、<b>麥迪遜</b>、<b>傑伊</b>——共用一個筆名「Publius」</span><span class="en">Alexander Hamilton, James Madison and John Jay, all signing as “Publius”</span></div>
+      <div class="bi xs" data-step="4" style="margin-top:16px"><span class="zh">後來漢密爾頓（決鬥身亡前）和麥迪遜各自留下名單：有 <b>12 篇</b>兩人都說是自己寫的</span><span class="en">later, Hamilton (before his fatal duel) and Madison each left lists: 12 essays are claimed by both</span></div>
+      <div class="callout key bi xs" data-step="5"><span class="zh">兩人的政治觀點、寫作題材都很接近 → 要靠<b>不起眼的小詞</b>來分辨</span><span class="en">Similar views and similar topics: only small, inconspicuous words can tell them apart.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Federalist -->
+<section class="slide" id="s-fed" data-sec="methods">
+  <h2 class="bi"><span class="zh">《聯邦黨人文集》：「upon」</span><span class="en"><i>The Federalist Papers</i> (1787–88) and the word “upon”</span></h2>
+  <div class="two" style="gap:50px">
+    <div class="grow">
+      <div class="bi xs"><span class="zh"><b>12 篇</b>有爭議：漢密爾頓還是麥迪遜？</span><span class="en">12 disputed essays: Hamilton or Madison?</span></div>
+      <div class="bi xs" data-step="1" style="margin-top:20px"><span class="zh">Mosteller &amp; Wallace（1964）：<br>功能詞 ＋ <b>貝氏統計</b></span><span class="en"><i>Inference and Disputed Authorship</i>: function words and Bayesian statistics</span></div>
+      <div class="callout key bi xs" data-step="3" style="margin-top:20px"><span class="zh">結論：12 篇<b>都是麥迪遜</b>寫的</span><span class="en">All twelve: Madison.</span></div>
+    </div>
+    <div style="width:460px;flex:none" data-step="2">
+      <div class="bi xs"><span class="zh">「upon」每千詞出現的次數</span><span class="en">“upon” per 1,000 words (approx.)</span></div>
+      <div class="lenbars" style="height:220px;gap:40px;justify-content:center">
+        <div class="col"><div class="val">≈ 3</div><div class="bar" style="height:170px;background:var(--b)"></div></div>
+        <div class="col"><div class="val">≈ 0.2</div><div class="bar" style="height:12px;background:var(--a)"></div></div>
+      </div>
+      <div class="lenbars" style="height:auto;border:0;padding:0;margin:0;gap:40px;justify-content:center">
+        <div class="col"><div class="lab">漢密爾頓<br>Hamilton</div></div>
+        <div class="col"><div class="lab">麥迪遜<br>Madison</div></div>
+      </div>
+      <div class="small" style="margin-top:10px">還有 while（漢密爾頓）vs. whilst（麥迪遜）</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Rowling -->
+<section class="slide" id="s-rowling" data-sec="methods">
+  <h2 class="bi"><span class="zh">《布穀鳥的呼喚》是誰寫的？</span><span class="en"><i>The Cuckoo’s Calling</i> (2013), by “Robert Galbraith”</span></h2>
+  <div class="fig-l">
+    <img class="fig" src="img/blatt-rowling.png" alt="Blatt: what vs. but per 10,000 words" style="width:440px;flex:none">
+    <div class="txt">
+      <div class="bi xs" data-step="1"><span class="zh">2013 年，「新人」Robert Galbraith 出版偵探小說；有人匿名爆料：是《哈利波特》的作者 <b>J. K. Rowling</b>？</span><span class="en">a “debut” crime novel; an anonymous tip says it is the author of Harry Potter</span></div>
+      <div class="bi xs" data-step="2"><span class="zh">Patrick Juola（美國杜肯大學電腦科學家）的四項測試：<b>詞長</b>、最常見 <b>100 詞</b>、常見<b>詞對</b>、字元 <b>4-gram</b></span><span class="en">word lengths, the 100 most frequent words, word pairs, character 4-grams: all point to Rowling</span></div>
+      <div class="bi xs" data-step="3"><span class="zh">Rowling 隨後<b>承認</b></span><span class="en">Rowling confirmed it</span></div>
+      <div class="callout key bi xs" data-step="4"><span class="zh">從《哈利波特》到偵探小說：文類變了，<b>作者訊號還在</b></span><span class="en">The genre changed; the authorial signal survived. (Left: Ben Blatt, “what” vs. “but” per 10,000 words.)</span></div>
+    </div>
+  </div>
+  <div class="src abs">Ben Blatt, <i>Nabokov’s Favourite Word Is Mauve</i> (2017); <a href="https://www.slate.com/blogs/browbeat/2017/08/17/identifying_an_author_s_prose_can_be_as_simple_as_counting_how_much_they.html" target="_blank" rel="noopener"><i>Slate</i>, “Can You Identify an Author By How Often They Use the Word ‘The’?”</a></div>
+</section>
+
+<!-- ─────────── Who are the Brontës? -->
+<section class="slide" id="s-bronte0" data-sec="methods">
+  <h2 class="bi"><span class="zh">背景：勃朗特三姊妹與奧斯汀</span><span class="en">Background: the Brontë sisters and Jane Austen</span></h2>
+  <div class="fig-l" style="gap:30px">
+    <div style="width:340px;flex:none">
+      <img class="fig" src="img/bronte-sisters.png" alt="Emily, Charlotte and Anne Brontë" style="width:340px">
+      <img class="fig" data-step="4" src="img/austen.png" alt="Jane Austen" style="width:340px;margin-top:12px">
+    </div>
+    <div class="txt">
+      <div class="bi xs" data-step="1"><span class="zh">十九世紀英國約克郡一位牧師家的<b>三姊妹</b></span><span class="en">three sisters, daughters of a clergyman in Yorkshire</span></div>
+      <div class="bi xs" data-step="2" style="margin-top:14px"><span class="zh">夏綠蒂《簡愛》、艾蜜莉《咆哮山莊》、安妮《艾格妮絲·格雷》《荒野莊園的房客》</span><span class="en">Charlotte: <i>Jane Eyre</i>; Emily: <i>Wuthering Heights</i>; Anne: <i>Agnes Grey</i>, <i>The Tenant of Wildfell Hall</i></span></div>
+      <div class="bi xs" data-step="3" style="margin-top:14px"><span class="zh">最初都用<b>男性筆名</b>出版：Currer、Ellis、Acton Bell</span><span class="en">first published under male pen names: Currer, Ellis and Acton Bell</span></div>
+      <div class="bi xs" data-step="4" style="margin-top:14px"><span class="zh">對照組：早一代的<b>奧斯汀</b>（1775–1817）：《傲慢與偏見》《愛瑪》《理性與感性》</span><span class="en">for comparison, Jane Austen, a generation earlier: <i>Pride and Prejudice</i>, <i>Emma</i>, <i>Sense and Sensibility</i></span></div>
+      <div class="callout key bi xs" data-step="5"><span class="zh">同一個家庭、同一個時代：電腦分得出三姊妹嗎？</span><span class="en">Same family, same time: can a computer tell the sisters apart?</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Brontë -->
+<section class="slide" id="s-bronte" data-sec="methods">
+  <h2 class="bi"><span class="zh">結果：分得開嗎？</span><span class="en">The Brontë sisters and Jane Austen in two dimensions</span></h2>
+  <div class="fig-l" style="gap:30px">
+    <img class="fig" src="img/eder-bronte-pca.png" alt="PCA of Austen and the Brontës" style="width:470px;flex:none">
+    <div class="txt">
+      <div class="bi xs" data-step="1"><span class="zh">最常見的 <b>100</b> 個詞</span><span class="en">100 most frequent words</span></div>
+      <div class="bi xs" data-step="2"><span class="zh"><b>主成分分析</b>（PCA）：把 100 維「壓扁」成 2 維，好讓我們看得見</span><span class="en">principal component analysis squeezes 100 dimensions into 2</span></div>
+      <div class="bi xs" data-step="3"><span class="zh"><span style="color:#16a34a">奧斯汀</span>自成一群；<span style="color:var(--a)">夏綠蒂</span>、<span style="color:#1b2333">艾蜜莉</span>彼此接近，<span style="color:var(--b)">安妮</span>偏向一邊</span><span class="en">Austen stands apart; Charlotte and Emily are close; Anne drifts away</span></div>
+    </div>
+  </div>
+  <div class="src abs">Eder, Rybicki &amp; Kestemont, “Stylometry with R”, <i>R Journal</i> 8.1 (2016) · 常用工具 <i>stylo</i> 的作者 · makers of the R package <i>stylo</i></div>
+</section>
+
+<!-- ─────────── Hildegard -->
+<section class="slide" id="s-hild" data-sec="methods">
+  <h2 class="bi"><span class="zh">希德嘉與她的秘書</span><span class="en">Hildegard of Bingen (c. 1098–1179) and her secretary</span></h2>
+  <div class="fig-l" style="gap:24px">
+    <img class="fig" src="img/hildegard.png" alt="Hildegard of Bingen" style="width:190px;flex:none">
+    <img class="fig" data-step="1" src="img/kestemont-pca.png" alt="PCA of the letters" style="width:400px;flex:none">
+    <div class="txt">
+      <div class="bi xs"><span class="zh">十二世紀的修道院院長、神秘主義者；晚年由秘書<b>吉伯特</b>協助寫作</span><span class="en">abbess and visionary; late in life she wrote with her secretary Guibert of Gembloux</span></div>
+      <div class="bi xs" data-step="2"><span class="zh">書信的 PCA：<b>G</b> ＝ 吉伯特、<b>H</b> ＝ 希德嘉，各成一群</span><span class="en">PCA of the letters: G (Guibert) and H (Hildegard) form separate groups</span></div>
+      <div class="bi xs" data-step="3"><span class="zh">注意：<b>去掉了代名詞</b>——書信的「我、你」反映的是文類</span><span class="en">pronouns deleted: in letters they reflect the genre, not the author</span></div>
+      <div class="callout key bi xs" data-step="4"><span class="zh">秘書的潤飾也會留下<b>可以測量</b>的痕跡 → 「合作作者」</span><span class="en">An editor’s hand leaves measurable traces: collaborative authorship.</span></div>
+    </div>
+  </div>
+  <div class="src abs">Kestemont, Moens &amp; Deploige（比利時學者 · Belgian scholars）, <i>DSH</i> 30.2 (2015)</div>
+</section>
+
+<!-- ─────────── Henry VIII -->
+<section class="slide" id="s-h8" data-sec="methods">
+  <h2 class="bi"><span class="zh">莎士比亞與弗萊徹：《亨利八世》</span><span class="en">A late play (1613) that Shakespeare co-wrote with John Fletcher, his successor at the King’s Men</span></h2>
+  <div class="fig-l" style="gap:24px">
+    <img class="fig" src="img/guardian-h8.png" alt="Guardian article" style="width:190px;flex:none">
+    <div class="grow">
+      <img class="fig" data-step="1" src="img/plechac-h8.png" alt="Rolling attribution of Henry VIII" style="width:100%">
+    </div>
+    <div class="txt" style="width:330px;flex:none">
+      <div class="bi xs" data-step="1"><span class="zh"><b>滾動歸屬</b>：滑動一個窗口，逐段問：比較像誰？</span><span class="en">rolling attribution: slide a window through the play and ask, passage by passage, who it resembles</span></div>
+      <div class="bi xs" data-step="2"><span class="zh">特徵：500 個最常見<b>詞</b> ＋ 500 個最常見<b>節奏型</b></span><span class="en">500 most frequent words and 500 most frequent rhythmic types</span></div>
+      <div class="callout key bi xs" data-step="3"><span class="zh">分類器是 <b>SVM</b>：本週的主角</span><span class="en">The classifier is an SVM, this week’s main character.</span></div>
+    </div>
+  </div>
+  <div class="src abs">Petr Plecháč（捷克科學院，詩律學者 · Czech Academy of Sciences, verse scholar）, “Relative Contributions of Shakespeare and Fletcher in <i>Henry VIII</i>”, <i>DSH</i> 36.2 (2021)</div>
+</section>
+
+<!-- ─────────── Du: Delta on Chinese -->
+<section class="slide" id="s-du" data-sec="methods">
+  <h2 class="bi"><span class="zh">Delta 也適用於中文嗎？</span><span class="en">Does Delta work for Chinese?</span></h2>
+  <div class="fig-l" style="gap:30px">
+    <img class="fig" src="img/du-dendrogram.png" alt="Dendrogram of the chapters of Hongloumeng" style="width:290px;flex:none">
+    <img class="fig" src="img/hlm-cover.png" alt="紅樓夢" style="width:250px;flex:none">
+    <div class="txt">
+      <div class="bi xs" data-step="1"><span class="zh">《紅樓夢》的 120 回；<br>600 個最常見的<b>雙字</b>；<br>Classic Delta</span><span class="en">120 chapters; the 600 most frequent character bigrams</span></div>
+      <div class="bi xs" data-step="2" style="margin-top:20px"><span class="zh"><b>樹狀圖</b>（層次聚類）：<br>越早合併 ＝ 越接近</span><span class="en">a dendrogram from hierarchical clustering: the earlier two branches join, the closer they are</span></div>
+      <div class="bi xs" data-step="3" style="margin-top:20px"><span class="zh">最上層分成<b>兩大群</b>：<br>它們對應什麼？</span><span class="en">at the top it splits into two large groups. What could they be?</span></div>
+    </div>
+  </div>
+  <div class="src abs">Du, “Testing Delta on Chinese Texts”</div>
+</section>
+
+
+
+<!-- ─────────── Tasks -->
+<section class="slide" id="s-tasks" data-sec="methods">
+  <h2 class="bi"><span class="zh">文體計量學在問什麼？</span><span class="en">What questions does stylometry ask?</span></h2>
+  <div class="grid3" style="margin-top:4px">
+    <div class="card" data-step="1"><h3>作者歸屬<span>attribution</span></h3><div class="ex">這是<b>誰</b>寫的？<span class="en">Federalist Papers, Rowling</span></div></div>
+    <div class="card" data-step="2"><h3>作者驗證<span>verification</span></h3><div class="ex">這是<b>不是</b> X 寫的？<span class="en">one candidate against everyone else</span></div></div>
+    <div class="card" data-step="3"><h3>作者側寫<span>profiling</span></h3><div class="ex">作者的性別、年齡、母語？<span class="en">gender, age, native language</span></div></div>
+    <div class="card" data-step="4"><h3>年代<span>chronology</span></h3><div class="ex"><b>什麼時候</b>寫的？<span class="en">Lutosławski and Plato</span></div></div>
+    <div class="card" data-step="5"><h3>合作寫作<span>collaboration</span></h3><div class="ex">誰寫了<b>哪一段</b>？<span class="en">Henry VIII, Hildegard</span></div></div>
+    <div class="card" data-step="6" style="border-color:var(--tgt);background:var(--tgt-bg)"><h3>斷點偵測<span>change detection</span></h3><div class="ex">從<b>哪裡</b>開始換人？<span class="en">Hongloumeng: today’s paper</span></div></div>
+  </div>
+</section>
+
+<!-- ─────────── Two routes -->
+<section class="slide" id="s-routes" data-sec="methods">
+  <h2 class="bi"><span class="zh">兩條路：無監督與有監督</span><span class="en">Two routes: unsupervised and supervised</span></h2>
+  <div class="cards" style="gap:24px;margin-top:6px">
+    <div class="card route" data-step="1">
+      <h3>無監督<span>unsupervised</span></h3>
+      <div class="bi xs" style="margin-top:6px"><span class="zh">不給答案，只看誰跟誰<b>接近</b></span><span class="en">no labels: who is close to whom?</span></div>
+      <ul>
+        <li>距離 ＋ 聚類（樹狀圖）<span class="en">distances, clustering</span></li>
+        <li>主成分分析 PCA</li>
+        <li>網絡圖 <span class="en">bootstrap consensus networks</span></li>
+      </ul>
+      <div class="eg">例：勃朗特 PCA、紅樓夢樹狀圖 · 上週的主題模型也是無監督</div>
+    </div>
+    <div class="card route sup" data-step="2">
+      <h3>有監督<span>supervised</span></h3>
+      <div class="bi xs" style="margin-top:6px"><span class="zh">用<b>已知作者</b>的文本訓練分類器</span><span class="en">train a classifier on texts of known authorship</span></div>
+      <ul>
+        <li>Delta（最近鄰 <span class="en">nearest neighbour</span>）</li>
+        <li><b>支持向量機 SVM</b></li>
+        <li>邏輯迴歸 <span class="en">logistic regression</span></li>
+        <li>樸素貝氏 <span class="en">naive Bayes (Mosteller &amp; Wallace)</span></li>
+        <li>隨機森林、神經網路、BERT… <span class="en">random forests, neural networks</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout key bi xs" data-step="3" style="margin-top:14px"><span class="zh">沒有「唯一正確」的方法：<b>特徵 × 距離／分類器 × 驗證</b>的組合</span><span class="en">There is no single right method: every study combines features, a distance or classifier, and a way of validating.</span></div>
+</section>
+
+<!-- ─────────── Feature sets -->
+<section class="slide" id="s-fsets" data-sec="methods">
+  <h2 class="bi"><span class="zh">特徵集也有很多種</span><span class="en">Many kinds of feature sets</span></h2>
+  <table class="cmp tight fsets" style="margin-top:0">
+    <tbody>
+      <tr data-step="1"><td style="width:330px"><b>最常見詞 MFW／功能詞</b></td><td class="bi xs"><span class="zh">經典做法（Burrows）</span></td></tr>
+      <tr data-step="1"><td><b>字元 n-gram</b> character n-grams</td><td class="bi xs"><span class="zh"><b>不必分詞</b>：對中文特別方便</span></td></tr>
+      <tr data-step="2"><td><b>詞性 n-gram</b> POS n-grams</td><td class="bi xs"><span class="zh">句法習慣</span></td></tr>
+      <tr data-step="2"><td><b>句長、詞長</b></td><td class="bi xs"><span class="zh">Mendenhall；單獨使用效果較弱</span></td></tr>
+      <tr data-step="3"><td><b>標點、引語、感嘆</b></td><td class="bi xs"><span class="zh">Hu 等（2014）</span></td></tr>
+      <tr data-step="3"><td><b>詞彙豐富度</b> vocabulary richness</td><td class="bi xs"><span class="zh">type-token ratio、Yule’s K</span></td></tr>
+      <tr data-step="4"><td><b>節奏、格律</b> rhythm, metre</td><td class="bi xs"><span class="zh">Plecháč（《亨利八世》）；詩的平仄？</span></td></tr>
+      <tr data-step="4"><td><b>語言模型嵌入</b> embeddings</td><td class="bi xs"><span class="zh">最新，但比較<b>難解釋</b></span></td></tr>
+    </tbody>
+  </table>
+  <div class="callout key bi xs" data-step="5" style="margin-top:10px"><span class="zh">中文要先決定：<b>字</b>還是<b>詞</b>？繁體還是簡體？<b>哪個版本</b>？</span><span class="en">For Chinese, decide first: characters or words? Which script, which edition?</span></div>
+</section>
+
+<!-- ─────────── Validation -->
+<section class="slide" id="s-exam" data-sec="methods">
+  <h2 class="bi"><span class="zh">訓練、驗證、測試：就像準備考試</span><span class="en">Training, validation and test data: like preparing for an exam</span></h2>
+  <div class="exam">
+    <div class="card" data-step="1"><div class="ico">📘</div><h3>訓練集<span>training set</span></h3><div class="ana">＝ 有答案的<b>練習題</b></div><div class="bi xs"><span class="zh">模型從這裡<b>學習</b>：作者已知的文本</span><span class="en">the model learns from texts whose author we know</span></div></div>
+    <div class="card" data-step="2"><div class="ico">📝</div><h3>驗證集<span>validation set</span></h3><div class="ana">＝ <b>模擬考</b></div><div class="bi xs"><span class="zh">用來<b>調整設定</b>：例如要用幾個特徵？</span><span class="en">used to choose the settings, e.g. how many features</span></div></div>
+    <div class="card" data-step="3"><div class="ico">🎓</div><h3>測試集<span>test set</span></h3><div class="ana">＝ <b>密封的期末考</b></div><div class="bi xs"><span class="zh">最後只考<b>一次</b>：模型真正的程度</span><span class="en">opened once, at the very end: the model’s real level</span></div></div>
+  </div>
+  <div class="callout bi xs" data-step="4" style="margin-top:14px"><span class="zh"><b>過度擬合</b>（overfitting）＝ 把練習題的答案<b>背下來</b>：練習題滿分，期末考不及格。特徵越多、文本越少，越容易發生</span><span class="en">Overfitting: memorizing the answers to the practice problems. Perfect in practice, fails the final. Many features and few texts make it likely.</span></div>
+  <div class="callout key bi xs" data-step="5"><span class="zh">所以：測試用的文本，在訓練時<b>絕對不能看到</b></span><span class="en">So the test texts must never be seen during training.</span></div>
+</section>
+
+<!-- ─────────── Cross-validation and controls -->
+<section class="slide" id="s-valid" data-sec="methods">
+  <h2 class="bi"><span class="zh">交叉驗證：輪流當模擬考</span><span class="en">Cross-validation: everyone takes a turn as the mock exam</span></h2>
+  <div class="two" style="gap:40px">
+    <div style="width:560px;flex:none">
+      <div class="folds" id="folds"></div>
+      <div class="legend" style="margin-top:12px"><span><i style="background:var(--a-bg)"></i>訓練 練習題</span><span><i style="background:var(--win)"></i>驗證 模擬考</span><span><i style="background:#e5e7eb"></i>測試 期末考</span></div>
+    </div>
+    <div class="grow">
+      <div class="bi xs" data-step="1"><span class="zh">期末考（測試集）先<b>鎖起來</b></span><span class="en">the test set is locked away first</span></div>
+      <div class="bi xs" data-step="2" style="margin-top:16px"><span class="zh">文本不多時，只考一次模擬考太看<b>運氣</b> → 分成 5 份，每份<b>輪流</b>當一次模擬考</span><span class="en">with few texts, one mock exam is luck; split the rest into 5 parts, each takes a turn</span></div>
+      <div class="bi xs" data-step="3" style="margin-top:16px"><span class="zh">5 次成績取<b>平均</b> → 比較可靠</span><span class="en">average the 5 scores: a fairer estimate</span></div>
+      <div class="bi xs" data-step="4" style="margin-top:16px"><span class="zh"><b>對照組</b>：在答案已知的文本上試試看——同一位作者的書，不應該被分成兩個人</span><span class="en">controls: try the method where we know the answer; a single-author book should not split in two</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ 6. The authorship of Hongloumeng -->
+
+<!-- ─────────── The paper -->
+<section class="slide classic" id="s-paper" data-sec="hlm">
+  <h2 class="bi"><span class="zh">今天的文本</span><span class="en">Today’s reading</span></h2>
+  <img class="fig" src="img/hu-title.png" alt="Multiple Authors Detection: A Quantitative Analysis of Dream of the Red Chamber" style="width:1000px;margin-top:4px">
+  <div class="src" style="margin-top:6px">Xianfeng Hu, Yang Wang &amp; Qiang Wu, <i>Advances in Adaptive Data Analysis</i> 6.4 (2014)</div>
+  <div class="two" style="gap:40px;margin-top:22px">
+    <div class="grow">
+      <div class="bi sm" data-step="1"><span class="zh">作者是<b>數學家</b>（密西根州立大學等）</span><span class="en">three mathematicians (Michigan State, Middle Tennessee State)</span></div>
+      <div class="bi sm" data-step="2"><span class="zh">問題：《紅樓夢》前 80 回和後 40 回，<br>是<b>同一個</b>作者嗎？</span><span class="en">Were the first 80 and the last 40 chapters written by the same author?</span></div>
+    </div>
+    <div class="callout key bi xs" data-step="3" style="width:400px;flex:none;margin:0"><span class="zh">方法：功能字 ＋ <b>SVM</b> ＋ 嚴格的驗證</span><span class="en">function characters, support vector machines, and careful validation</span></div>
+  </div>
+</section>
+
+<!-- ─────────── Background -->
+<section class="slide classic" id="s-hlmbg" data-sec="hlm">
+  <h2 class="bi"><span class="zh">《紅樓夢》與後四十回</span><span class="en">Background: the <i>Dream of the Red Chamber</i> and its last forty chapters</span></h2>
+  <div class="fig-l" style="gap:34px">
+    <figure class="scroll" style="width:540px;flex:none">
+      <img src="img/sunwen-garden.jpg" alt="Sun Wen, painting from the Dream of the Red Chamber">
+      <figcaption>清・孫溫繪《紅樓夢》圖冊 · Sun Wen, album of the <i>Dream</i> (19th c.)</figcaption>
+    </figure>
+    <div class="txt">
+      <div class="tl classic-tl">
+        <div class="ev" data-step="1"><div class="yr">1759</div><div class="bi xs"><span class="zh">約 80 回的<b>手抄本</b>開始流傳</span><span class="en">manuscripts of about 80 chapters circulate</span></div></div>
+        <div class="ev" data-step="1"><div class="yr">1763</div><div class="bi xs"><span class="zh"><b>曹雪芹</b>去世，小說未完</span><span class="en">Cao Xueqin dies; the novel is unfinished</span></div></div>
+        <div class="ev" data-step="2"><div class="yr">1791</div><div class="bi xs"><span class="zh"><b>程偉元、高鶚</b>出版 120 回本，說後 40 回來自<b>遺稿</b></span><span class="en">Cheng Weiyuan and Gao E print 120 chapters</span></div></div>
+        <div class="ev" data-step="3"><div class="yr">1921</div><div class="bi xs"><span class="zh"><b>胡適</b>：後 40 回是高鶚補寫的</span><span class="en">Hu Shi: Gao E wrote them himself</span></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="callout bi xs" data-step="4" style="margin-top:4px"><span class="zh">傳統的論證：情節、人物結局和前文的<b>伏筆</b>不合，文筆「較差」</span><span class="en">Traditional arguments: plot, characters’ fates that contradict earlier foreshadowing, “inferior” prose.</span></div>
+</section>
+
+<!-- ─────────── Earlier quantitative studies -->
+<section class="slide classic" id="s-hlmprev" data-sec="hlm">
+  <h2 class="bi"><span class="zh">以前的計量研究：結論互相矛盾</span><span class="en">Earlier quantitative studies disagree</span></h2>
+  <div class="grid3 prev" style="margin-top:10px">
+    <div class="card" data-step="1"><h3>陳炳藻<span>Chan, 1980</span></h3><div class="ex">字頻的相關係數</div><div class="verdict">→ <b>同一</b>作者</div></div>
+    <div class="card" data-step="2"><h3>李賢平<span>Li, 1987</span></h3><div class="ex">47 個虛字</div><div class="verdict">→ 高鶚整理曹家<b>遺稿</b></div></div>
+    <div class="card" data-step="3"><h3>余清祥<span>Yue, 1998</span></h3><div class="ex">虛字、詩詞的比例</div><div class="verdict">→ <b>不同</b>作者</div></div>
+  </div>
+  <div class="callout bi xs" data-step="4" style="margin-top:26px"><span class="zh">Hu 等人：這些研究都沒有檢查結果<b>穩不穩定</b>（沒有交叉驗證）→ 用機器學習重新做一次</span><span class="en">Hu et al.: none of them checked whether the result is stable (no cross-validation), so they redo it with machine learning.</span></div>
+</section>
+
+<!-- ─────────── Chrono-divide -->
+<section class="slide" id="s-cd" data-sec="hlm">
+  <h2 class="bi"><span class="zh">核心想法：「時序斷點」</span><span class="en">The key idea: a <i>chrono-divide</i></span></h2>
+  <svg id="cd-svg" class="chart" viewBox="0 0 1100 300"></svg>
+  <div class="swap" style="margin-top:6px">
+    <div class="bi xs" data-step="0" data-until="1"><span class="zh">按照章回順序，讓分類器給每一回打一個分數 S(n)：大於 0 ＝ 像作者甲，小於 0 ＝ 像作者乙</span><span class="en">a classifier gives every chapter a score: above 0 looks like author A, below 0 like author B</span></div>
+    <div class="bi xs" data-step="1" data-until="2"><span class="zh">只有<b>一個</b>作者：分數上下亂跳，沒有規律</span><span class="en">one author: the scores jump around with no pattern</span></div>
+    <div class="bi xs" data-step="2" data-until="3"><span class="zh">在第 X 回<b>換人</b>：分數在 X 之後<b>變號</b></span><span class="en">a new author from chapter X: the sign flips after X</span></div>
+    <div class="callout key bi xs" data-step="3" style="margin:0"><span class="zh">找到這樣的分類器 → 支持「兩個作者」；找不到 → 否定。<b>交錯</b>合寫的書不適用</span><span class="en">Finding such a classifier supports two authors; failing to find one rejects it. Not for books where two authors alternate.</span></div>
+  </div>
+</section>
+
+<!-- ═══════════════════ 7. SVM -->
+
+<!-- ─────────── What is a classifier? -->
+<section class="slide" id="s-clf" data-sec="svm">
+  <h2 class="bi"><span class="zh">什麼是分類器？</span><span class="en">What is a classifier? Features in, a label out</span></h2>
+  <svg id="clf-svg" class="chart" viewBox="0 0 1110 380"></svg>
+  <div class="two" style="gap:30px;margin-top:4px;align-items:flex-start">
+    <div class="grow swap">
+      <div class="bi xs" data-step="0" data-until="1"><span class="zh"><b>分類器</b>（classifier）：一台機器，輸入一篇文本，輸出一個<b>類別</b></span><span class="en">a machine that takes a text and outputs a category</span></div>
+      <div class="bi xs" data-step="1" data-until="2"><span class="zh">① 輸入：這一回的<b>特徵</b>（每個字的 z 分數）</span><span class="en">input: the features of one chapter</span></div>
+      <div class="bi xs" data-step="2" data-until="3"><span class="zh">② 每條線上有一個<b>權重</b> w：藍 ＝ 拉向前 80 回，紅 ＝ 拉向後 40 回，越粗越重要</span><span class="en">every wire has a weight; blue pulls towards the first 80, red towards the last 40</span></div>
+      <div class="bi xs" data-step="3"><span class="zh">③ 機器只做一件事：<b>特徵 × 權重</b>，加起來；&gt; 0 → 前 80 回，&lt; 0 → 後 40 回</span><span class="en">all it does: multiply, add up, look at the sign · <kbd>N</kbd> next chapter</span></div>
+    </div>
+    <div class="callout key bi xs" data-step="4" style="width:420px;flex:none;margin:0;padding:8px 18px"><span class="zh"><b>訓練</b> ＝ 用已知答案的章回，調整權重；之後幾週會再細談</span><span class="en">Training = adjusting the weights on chapters whose answer we know. More in later weeks.</span></div>
+  </div>
+</section>
+
+<!-- ─────────── Which line? -->
+<section class="slide" id="s-lines" data-sec="svm">
+  <h2 class="bi"><span class="zh">哪一條線最好？</span><span class="en">Many lines separate the two authors. Which is best?</span></h2>
+  <div class="two" style="gap:34px">
+    <svg id="ln-svg" class="svm" viewBox="0 0 560 470" width="560" height="470" style="flex:none"></svg>
+    <div class="grow">
+      <div class="keys"><span class="ca">● 前 80 回</span>的章回 &nbsp; <span class="cb">● 後 40 回</span>的章回<br><kbd>N</kbd> 換一條線 · 第 <b id="ln-i" style="color:var(--ink)">1</b> 條</div>
+      <div class="bi xs" data-step="1" style="margin-top:20px"><span class="zh">每一條都把訓練資料<b>完全分開</b></span><span class="en">every one of them separates the training data perfectly</span></div>
+      <div class="bi xs" data-step="2" style="margin-top:20px"><span class="zh">新的一回 <b>★</b> 來了：<br>不同的線，答案<b>不一樣</b></span><span class="en">a new chapter ★ arrives, and the lines disagree about it</span></div>
+      <div class="callout key bi xs" data-step="3"><span class="zh">直覺：選離兩邊<b>都最遠</b>的線<br>→ 最寬的「街道」</span><span class="en">Intuition: choose the line farthest from both groups, the widest street.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── The widest street -->
+<section class="slide" id="s-street" data-sec="svm">
+  <h2 class="bi"><span class="zh">最寬的街道</span><span class="en">Maximizing the margin: the widest street</span></h2>
+  <div class="two" style="gap:34px">
+    <svg id="st-svg" class="svm" viewBox="0 0 560 470" width="560" height="470" style="flex:none"></svg>
+    <div class="grow">
+      <div class="keys"><kbd>↑</kbd> <kbd>↓</kbd> 轉動 rotate · <kbd>O</kbd> 最佳 optimum</div>
+      <div class="readout" style="margin-top:6px">街寬 width：<b id="st-w">–</b> <span class="small">／最寬 max <span id="st-max">–</span></span></div>
+      <div class="meter"><div id="st-meter"></div></div>
+      <div class="bi xs" data-step="1" style="margin-top:18px"><span class="zh">碰到街邊的點 ＝ <b>支持向量</b>（圈起來的）</span><span class="en">the points on the edges of the street are the support vectors (circled)</span></div>
+      <div class="bi xs" data-step="2" style="margin-top:14px"><span class="zh">其他的點<b>不影響</b>答案</span><span class="en">the other points do not affect the answer at all</span></div>
+      <div class="callout key bi xs" data-step="3"><span class="zh">SVM ＝ 找<b>最寬的街道</b>，再沿著中線切開</span><span class="en">An SVM finds the widest street and splits the plane along its middle line. (Cortes &amp; Vapnik 1995)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── What are w and x? -->
+<section class="slide" id="s-wx" data-sec="svm">
+  <h2 class="bi"><span class="zh">分類器其實是一個加權總分</span><span class="en">The classifier is a weighted sum: what are \(\mathbf{w}\) and \(x_1, x_2, \dots\)?</span></h2>
+  <div class="eq" style="font-size:26px;margin:0"><span class="tex">\(f(\mathbf{x}) = w_1x_1 + w_2x_2 + \dots + w_dx_d + b \;=\; \mathbf{w}\cdot\mathbf{x} + b\)</span></div>
+  <div class="two" style="gap:30px;margin-top:10px">
+    <table class="cmp tight wx" style="width:620px;flex:none">
+      <thead><tr><th>特徵</th><th class="num" data-step="1">x（z 分數）</th><th class="num" data-step="2">w（權重）</th><th class="num" data-step="3">w × x</th><th data-step="3"></th></tr></thead>
+      <tbody>
+        <tr><td>x<sub>1</sub>：「了」</td><td class="num" data-step="1">+1.5</td><td class="num" data-step="2">+0.9</td><td class="num" data-step="3"><b>+1.35</b></td><td data-step="3"><svg width="140" height="20" viewBox="0 0 140 20"><line x1="60" y1="0" x2="60" y2="20" stroke="#cbd2dc"/><rect x="60" y="4" width="81" height="12" rx="2" fill="#2563eb"/></svg></td></tr>
+        <tr><td>x<sub>2</sub>：「便」</td><td class="num" data-step="1">−0.5</td><td class="num" data-step="2">−1.2</td><td class="num" data-step="3"><b>+0.60</b></td><td data-step="3"><svg width="140" height="20" viewBox="0 0 140 20"><line x1="60" y1="0" x2="60" y2="20" stroke="#cbd2dc"/><rect x="60" y="4" width="36" height="12" rx="2" fill="#2563eb"/></svg></td></tr>
+        <tr><td>x<sub>3</sub>：「呢」</td><td class="num" data-step="1">+0.2</td><td class="num" data-step="2">−0.4</td><td class="num" data-step="3"><b>−0.08</b></td><td data-step="3"><svg width="140" height="20" viewBox="0 0 140 20"><line x1="60" y1="0" x2="60" y2="20" stroke="#cbd2dc"/><rect x="55" y="4" width="5" height="12" rx="2" fill="#dc2626"/></svg></td></tr>
+        <tr><td>x<sub>4</sub>：「道」</td><td class="num" data-step="1">+0.8</td><td class="num" data-step="2">+0.3</td><td class="num" data-step="3"><b>+0.24</b></td><td data-step="3"><svg width="140" height="20" viewBox="0 0 140 20"><line x1="60" y1="0" x2="60" y2="20" stroke="#cbd2dc"/><rect x="60" y="4" width="14" height="12" rx="2" fill="#2563eb"/></svg></td></tr>
+        <tr class="tot" data-step="4"><td colspan="3">加總 ＋ b（−0.3）＝ f(x)</td><td class="num"><b style="font-size:26px;color:#2563eb">+1.81</b></td><td>→ 像<b class="ca">前 80 回</b></td></tr>
+      </tbody>
+    </table>
+    <div class="grow">
+      <div class="bi xs" data-step="1"><span class="zh">\(x_i\)：<b>這一回</b>的特徵值（論文：d ＝ 196 個）</span><span class="en">the features of one chapter</span></div>
+      <div class="bi xs" data-step="2" style="margin-top:12px"><span class="zh">\(w_i\)：SVM <b>學到</b>的權重；正 → 前 80 回，負 → 後 40 回</span><span class="en">learned weights; the sign says which side a word pulls towards</span></div>
+      <div class="bi xs" data-step="3" style="margin-top:12px"><span class="zh">每個字「投票」：w × x</span><span class="en">each word casts a vote</span></div>
+      <div class="bi xs" data-step="4" style="margin-top:12px"><span class="zh">b：整體偏移；總分 &gt; 0 → 前 80 回</span><span class="en">b shifts the threshold</span></div>
+    </div>
+  </div>
+  <div class="callout key bi xs" data-step="5" style="margin-top:12px;padding:8px 20px"><span class="zh">\(|w_i|\) 越大，這個字越<b>重要</b>——論文就是用這一點來<b>挑選特徵</b>（SVM-RFE）</span><span class="en">The larger |w<sub>i</sub>|, the more the word matters; the paper uses this to select features.</span></div>
+</section>
+
+<!-- ─────────── w and b -->
+<section class="slide" id="s-svmobj" data-sec="svm">
+  <h2 class="bi"><span class="zh">SVM 的目標，用數學說一次</span><span class="en">Why the street is 2/‖w‖ wide, and what the SVM optimizes</span></h2>
+  <div class="two" style="gap:28px">
+    <svg id="ob-svg" class="svm" viewBox="0 0 560 470" width="540" height="453" style="flex:none"></svg>
+    <div class="grow obj">
+      <div class="bi xs" data-step="1"><span class="zh">中線 \(\mathbf{w}\cdot\mathbf{x} + b = 0\)；街邊 \(= \pm 1\)</span><span class="en">the edges are where the score reaches ±1</span></div>
+      <div class="bi xs" data-step="2"><span class="zh">像<b>斜坡</b>：沿 \(\mathbf{w}\) 走 1 步，分數加 \(\|\mathbf{w}\|\)；從 0 到 1 只要走 \(1/\|\mathbf{w}\|\)</span><span class="en">a slope: one step along w raises the score by ‖w‖, so reaching 1 takes 1/‖w‖</span></div>
+      <div class="bi xs" data-step="3"><span class="zh">兩邊加起來：街寬 ＝ \(2/\|\mathbf{w}\|\) ＝ 2 / 1.59 ≈ 1.26</span><span class="en">both sides together; 1.26 is the widest street from the previous slide</span></div>
+      <div class="bi xs" data-step="4"><span class="zh">要最寬 ＝ \(\|\mathbf{w}\|\) 最小：\(\min\ \tfrac12\|\mathbf{w}\|^2\)</span><span class="en">the square and the ½ only make it easier to compute</span></div>
+      <div class="bi xs" data-step="5"><span class="zh">條件：每回都在自己那邊的街外<br>\(y_i(\mathbf{w}\cdot\mathbf{x}_i + b) \ge 1\)</span><span class="en">y = +1 (first 80) or −1 (last 40)</span></div>
+      <div class="callout key bi xs" data-step="6"><span class="zh">\(\mathbf{w}\cdot\mathbf{x}+b\) 的正負 ＝ 論文圖中的「SVM 分數」</span><span class="en">positive: like the first 80 chapters; negative: like the last 40</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── SVM vs logistic regression -->
+<section class="slide" id="s-lr" data-sec="svm">
+  <h2 class="bi"><span class="zh">另一種線性分類器：邏輯迴歸</span><span class="en">Another linear classifier: logistic regression</span></h2>
+  <div class="two" style="gap:30px">
+    <svg id="lr-svg" class="svm" viewBox="0 0 560 470" width="560" height="470" style="flex:none"></svg>
+    <div class="grow">
+      <div class="bi xs"><span class="zh"><b>SVM</b>（實線與街道）：只看<b>支持向量</b>；輸出的是<b>距離</b></span><span class="en">uses only the support vectors; outputs a signed distance</span></div>
+      <div class="bi xs" data-step="1" style="margin-top:16px"><span class="zh"><b style="color:#9333ea">邏輯迴歸</b>（虛線）：每個點都有影響；輸出 0 到 1 之間的<b>機率</b></span><span class="en">every point has a say; outputs a probability</span></div>
+            <div class="bi xs" data-step="2" style="margin-top:8px"><span class="zh">背景顏色 ＝ 機率：越靠近線越<b>不確定</b></span><span class="en">background shading: the probability, most uncertain near the line</span></div>
+      <div class="callout key bi xs" data-step="3"><span class="zh">兩條線很接近；實際上效果常常<b>差不多</b>——<br>更重要的是<b>特徵</b>和<b>驗證</b></span><span class="en">The lines are close, and in practice the two often perform alike; features and validation matter more.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── w as feature importance: RFE -->
+<section class="slide" id="s-rfe" data-sec="svm">
+  <h2 class="bi"><span class="zh">權重告訴我們哪些字重要：SVM-RFE</span><span class="en">The weights rank the features: recursive feature elimination</span></h2>
+  <div class="two" style="gap:40px">
+    <div style="width:520px;flex:none">
+      <div class="tally" id="rfe-bars"></div>
+      <div class="keys" style="margin-top:8px"><kbd>N</kbd> 刪掉最弱的、重新訓練 · <kbd>R</kbd> 重來 · 第 <b id="rfe-r" style="color:var(--ink)">0</b> 輪 <span class="small">（示意 illustrative）</span></div>
+    </div>
+    <div class="grow">
+      <div class="eq" style="font-size:22px;margin-top:0"><span class="tex">\(f(\mathbf{x}) = w_1x_1 + w_2x_2 + \dots + w_dx_d + b\)</span></div>
+      <div class="bi xs" data-step="1" style="margin-top:10px"><span class="zh">\(|w_j|\) 大 → 第 j 個特徵<b>重要</b></span><span class="en">a large |w<sub>j</sub>|: feature j matters</span></div>
+      <div class="bi xs" data-step="2" style="margin-top:14px"><span class="zh">訓練 → 刪掉 \(|w_j|\) <b>最小</b>的 → 重新訓練 → ……</span><span class="en">train, remove the weakest feature, retrain, repeat</span></div>
+      <div class="callout key bi xs" data-step="3"><span class="zh">來自<b>基因</b>研究：從上千個基因中找出和癌症有關的幾個（Guyon 等 2002）</span><span class="en">Invented to find a few cancer-related genes among thousands; here: a few characters among 196 features.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ 8. The paper: method and results -->
+
+<!-- ─────────── Features -->
+<section class="slide" id="s-pfeat" data-sec="paper">
+  <h2 class="bi"><span class="zh">論文的特徵：196 個</span><span class="en">The features: 196 per chapter</span></h2>
+  <div class="funnel" style="margin-top:4px">
+    <div class="frow" data-step="1"><div class="box">全書最常見的 500 個<b>字</b><span class="en">500 most frequent characters</span></div><i class="ar"></i><div class="res">144</div><div>個功能字</div></div>
+    <div class="frow" data-step="2"><div class="box">最常見的 300 個<b>詞</b><span class="en">300 most frequent words</span></div><i class="ar"></i><div class="res">48</div><div>個功能詞</div></div>
+    <div class="frow" data-step="3"><div class="box">句長的平均和變異、<br>直接引語、感嘆<span class="en">sentence length (mean, variance), direct speech, exclamations</span></div><i class="ar"></i><div class="res">4</div></div>
+    <div class="frow" data-step="4"><div style="width:300px;text-align:right;font-size:26px">每一回 ＝</div><i class="ar"></i><div class="res" style="font-size:40px">196</div><div>維的向量</div></div>
+  </div>
+  <div class="two" style="gap:24px;margin-top:16px">
+    <div class="bi xs grow" data-step="5"><span class="zh">正規化：每個特徵除以<b>中位數</b>（不是 z 分數！）</span><span class="en">each feature divided by its median, so the median becomes 1: another normalization</span></div>
+    <div class="bi xs grow" data-step="6"><span class="zh">樣本：一回一個；後 40 回每回「<b>複製</b>」成兩份，湊成 80 個</span><span class="en">one sample per chapter; each of the last 40 “duplicated” into two, to balance 80 against 80</span></div>
+  </div>
+</section>
+
+<!-- ─────────── Experimental design -->
+<section class="slide" id="s-split" data-sec="paper">
+  <h2 class="bi"><span class="zh">實驗設計</span><span class="en">Experimental design</span></h2>
+  <div class="legend" style="margin-bottom:10px"><span><i style="background:var(--a)"></i>訓練：甲類 train A</span><span><i style="background:var(--b)"></i>訓練：乙類 train B</span><span><i style="background:repeating-linear-gradient(45deg,#9ca3af 0 3px,#e5e7eb 3px 6px)"></i>測試：從沒看過 test, never seen</span></div>
+  <div id="split"></div>
+  <div class="bi xs" data-step="4" style="margin-top:6px"><span class="zh">實驗 4：<b>其他三大名著</b>（《三國演義》《水滸傳》《西遊記》）：頭尾各 25–30 回訓練，中間測試</span><span class="en">Experiment 4: the other three classic novels, trained on the first and last 25–30 chapters, tested on the middle</span></div>
+</section>
+
+<!-- ─────────── Instability, pseudo-aggregation -->
+<section class="slide" id="s-agg" data-sec="paper">
+  <h2 class="bi"><span class="zh">不穩定 → 重複一百次</span><span class="en">SVM-RFE is unstable, so repeat it a hundred times</span></h2>
+  <div class="two" style="gap:30px">
+    <div class="grow">
+      <img class="fig" src="img/hu-table1.png" alt="Table 1" style="width:560px">
+      <div class="bi xs" style="margin-top:8px"><span class="zh">兩次隨機抽樣，選出的字<b>幾乎完全不同</b>，只有「回」重複</span><span class="en">two random training subsets: 11 vs. 4 features, only 回 in common</span></div>
+      <div class="bi xs" data-step="1" style="margin-top:12px"><span class="zh">「偽聚合」：重複 100 次，數每個字被選中幾次</span><span class="en">pseudo-aggregation: 100 runs, count how often each feature is chosen</span></div>
+      <div class="bi xs" data-step="2" style="margin-top:12px"><span class="zh">「相對頻率」：模型越<b>小</b>、越<b>準</b>，選票越重</span><span class="en">relative frequency: votes from small, accurate models count more</span></div>
+            <div class="bi xs" data-step="3" style="margin-top:4px"><span class="zh">交叉驗證：<b>10–50</b> 個特徵就夠了</span><span class="en">cross-validation: 10 to 50 features are enough</span></div>
+    </div>
+    <div style="width:420px;flex:none">
+      <div class="keys" style="line-height:1.5"><kbd>N</kbd> 跑一次 · <kbd>A</kbd> 自動 · <kbd>R</kbd> 重來 · 第 <b id="agg-n" style="color:var(--ink)">0</b> 次 <span class="small">（示意）</span></div>
+      <div class="runchips" id="agg-run" style="margin:6px 0 8px"></div>
+      <div class="tally" id="agg-bars"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Result: the break at chapter 80 -->
+<section class="slide" id="s-res" data-sec="paper">
+  <h2 class="bi"><span class="zh">結果：第 80 回的斷點</span><span class="en">Result: a chrono-divide at chapter 80</span></h2>
+  <div class="two" style="gap:30px">
+    <svg id="res-svg" class="chart" viewBox="0 0 670 450" style="width:650px;flex:none"></svg>
+    <div class="grow">
+      <div class="bi xs" data-step="1"><span class="zh">第 61–80 回：幾乎都 <b class="ca">&gt; 0</b></span><span class="en">chapters 61–80: almost all positive</span></div>
+      <div class="bi xs" data-step="2" style="margin-top:14px"><span class="zh">第 81–90 回：<b class="cb">全部 &lt; 0</b></span><span class="en">chapters 81–90: all negative</span></div>
+      <div class="bi xs" data-step="3" style="margin-top:14px"><span class="zh">斷點剛好落在<b>第 80 回</b>之後</span><span class="en">the break falls exactly after chapter 80; the model was never told where to look in 61–90</span></div>
+      <div class="bi xs" data-step="4" style="margin-top:14px"><span class="zh">例外：<b>第 67 回</b>。庚辰本正好缺第 64、67 回，真偽本來就有爭議</span><span class="en">the exception, chapter 67, is missing from the Gengchen manuscript and long disputed</span></div>
+      <div class="callout key bi xs" data-step="5"><span class="zh">作者是<b>跑完實驗之後</b>才知道第 67 回有爭議的</span><span class="en">The authors learned about the chapter-67 controversy only after running the test.</span></div>
+    </div>
+  </div>
+  <div class="src abs">redrawn after Hu, Wang &amp; Wu 2014, Fig. 1(b); values read off the figure, approximate</div>
+</section>
+
+<!-- ─────────── Controls -->
+<section class="slide" id="s-ctrl" data-sec="paper">
+  <h2 class="bi"><span class="zh">對照組</span><span class="en">Controls: where the method should find nothing</span></h2>
+  <div class="two" style="gap:40px">
+    <div style="width:470px;flex:none">
+      <div class="bi xs" data-step="1"><span class="zh">實驗 2（前 80 回內部）：<b>沒有斷點</b> ✓</span><span class="en">within the first 80 chapters: no divide</span></div>
+      <div class="bi xs" data-step="2" style="margin-top:16px"><span class="zh">實驗 3（後 40 回內部）：沒有斷點，<br>但分數<b>逐漸下滑</b></span><span class="en">within the last 40: no sharp divide, but a gradual drift</span></div>
+      <div class="bi xs" data-step="3" style="margin-top:16px"><span class="zh">作者的解讀：續寫者先<b>模仿</b>曹雪芹，越寫越回到自己的風格？</span><span class="en">their reading: an imitator who slowly slipped back into his own style?</span></div>
+      <div class="callout key bi xs" data-step="5" style="margin-top:16px"><span class="zh">其他三部小說都找不到斷點 → 方法不會「到處都看到兩個作者」</span><span class="en">No divide in the other three novels: the method does not see two authors everywhere.</span></div>
+    </div>
+    <div class="grow" data-step="4">
+      <div class="bi xs"><span class="zh">最重要的 8 個特徵的「相對頻率」</span><span class="en">relative frequencies of the top 8 features (Table 2): high = a consistent difference</span></div>
+      <div class="rfrows" id="rf-rows" style="margin-top:12px"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Fig. 5 -->
+<section class="slide" id="s-fig5" data-sec="paper">
+  <h2 class="bi"><span class="zh">和另一部續書比一比</span><span class="en">Comparing with another sequel: Qin Zichen’s <i>Continued Dream</i></span></h2>
+  <div class="fig-l" style="gap:30px">
+    <div class="figbox" style="width:560px;flex:none">
+      <img class="fig" src="img/hu-fig5.png" alt="Hu et al. Fig. 5" style="width:560px">
+      <div class="hlbox" data-step="2" data-until="3" style="left:9.7%;top:5%;width:46%;height:47.5%;border-color:var(--a)"></div>
+      <div class="hlbox" data-step="3" data-until="4" style="left:55.6%;top:52.5%;width:23%;height:23.8%;border-color:var(--b)"></div>
+      <div class="hlbox" data-step="4" style="left:9.7%;top:52.5%;width:46%;height:23.8%;border-color:var(--b)"></div>
+      <div class="hlbox" data-step="4" style="left:9.7%;top:76.2%;width:46%;height:17.9%;border-color:#9333ea"></div>
+    </div>
+    <div class="txt">
+      <div class="bi xs" data-step="1"><span class="zh">用實驗 1 選出的特徵，算每兩回之間的<b>歐氏距離</b>；<span style="color:#1d4ed8">藍</span> ＝ 近，<span style="color:#dc2626">紅</span> ＝ 遠</span><span class="en">Euclidean distances between chapters: 1–80, 81–120, then 30 chapters of the <i>Continued Dream</i> (121–150)</span></div>
+      <div class="bi xs" data-step="2"><span class="zh">前 80 回彼此<b>接近</b></span><span class="en">the first 80 chapters are close to each other</span></div>
+      <div class="bi xs" data-step="3"><span class="zh">後 40 回自成一塊</span><span class="en">the last 40 form a block of their own</span></div>
+      <div class="bi xs" data-step="4"><span class="zh">《續紅樓夢》離前 80 回<b>更遠</b></span><span class="en">the sequel is even farther from the first 80</span></div>
+      <div class="callout key bi xs" data-step="5"><span class="zh">程高本的後 40 回，比別的續書<b>更像</b>曹雪芹——所以流傳最廣？</span><span class="en">The Cheng–Gao ending resembles Cao more than other sequels do. Is that why it won?</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Discussion -->
+<section class="slide" id="s-disc" data-sec="paper">
+  <h2 class="bi"><span class="zh">討論</span><span class="en">Discussion</span></h2>
+  <div class="recap qlist">
+    <div class="rrow" data-step="1"><i>1</i><div class="bi xs"><span class="zh">後 40 回「複製」成兩份——同一回的兩份會不會一份在訓練、一份在驗證？</span><span class="en">If chapters are duplicated, can the same text land in both training and validation?</span></div></div>
+    <div class="rrow" data-step="2"><i>2</i><div class="bi xs"><span class="zh">風格不同 ＝ <b>作者</b>不同？還是編輯、抄寫、情節變悲、程高的修改？</span><span class="en">Does a different style mean a different author, or editing, copying, a darker plot, Cheng and Gao’s revisions?</span></div></div>
+    <div class="rrow" data-step="3"><i>3</i><div class="bi xs"><span class="zh">表 1 是<b>簡體字</b>（时、没）：用的是哪個版本？版本會影響字頻嗎？</span><span class="en">Table 1 is in simplified characters: which edition? Does the edition change the frequencies?</span></div></div>
+    <div class="rrow" data-step="4"><i>4</i><div class="bi xs"><span class="zh">《三國》《水滸》的分數比《西遊》高得多：這說明了什麼？</span><span class="en">Why are the scores for the <em>Three Kingdoms</em> and <em>Water Margin</em> much higher than for <em>Journey to the West</em>?</span></div></div>
+    <div class="rrow" data-step="5"><i>5</i><div class="bi xs"><span class="zh">「即使不是無可辯駁，也極有說服力」：統計能<b>證明</b>作者是誰嗎？</span><span class="en">“Convincing if not irrefutable”: can statistics prove authorship?</span></div></div>
+  </div>
+</section>
+
+<!-- ═══════════════════ 9. Summary -->
+
+<!-- ─────────── qhchina -->
+<section class="slide" id="s-qhchina" data-sec="summary">
+  <h2 class="bi"><span class="zh">課堂實作：qhchina 的 Stylometry</span><span class="en">In class: <code>Stylometry</code> from qhchina (Python) · qhchina.org/docs</span></h2>
+  <div class="annot" style="margin-top:14px">
+    <div class="cl"><code>from qhchina.analytics.stylometry import Stylometry</code></div>
+    <div class="cl"><code> </code></div>
+    <div class="cl"><code>stylo = Stylometry(</code></div>
+    <div class="cl"><code>    n_features=100,</code><span class="ann" data-step="1"><i class="arr"></i><span>用最常見的 <b>100</b> 個詞（MFW）</span></span></div>
+    <div class="cl"><code>    distance='cosine',</code><span class="ann" data-step="2"><i class="arr"></i><span><b>距離</b>的算法</span></span></div>
+    <div class="cl"><code>    mode='instance')</code><span class="ann" data-step="3"><i class="arr"></i><span>和<b>每篇</b>文本比（預設：作者平均）</span></span></div>
+    <div class="cl"><code>stylo.fit_transform(corpus)</code><span class="ann" data-step="4"><i class="arr"></i><span>已知作者的文本 → <b>向量</b></span></span></div>
+    <div class="cl"><code>stylo.predict_author(unknown_text)</code><span class="ann" data-step="5"><i class="arr"></i><span>未知文本：<b>最近</b>的作者</span></span></div>
+    <div class="cl"><code>stylo.dendrogram()</code><span class="ann" data-step="6"><i class="arr"></i><span><b>樹狀圖</b></span></span></div>
+  </div>
+  <div class="small" style="margin-top:14px">完整參數見文件 · see the docs for all parameters</div>
+</section>
+
+<!-- ─────────── Recap -->
+<section class="slide" id="s-recap" data-sec="summary">
+  <h2 class="bi"><span class="zh">回顧</span><span class="en">Recap</span></h2>
+  <div class="recap" style="margin-top:0">
+    <div class="rrow" data-step="1"><i>1</i><div class="bi xs"><span class="zh"><b>風格</b> ＝ 一組可以觀察的形式特徵（但作者訊號混著文類、主題……）</span><span class="en">style as an ensemble of observable formal features, mixed with other signals</span></div></div>
+    <div class="rrow" data-step="2"><i>2</i><div class="bi xs"><span class="zh">文本 → <b>向量</b>：功能詞、MFW、n-gram……</span><span class="en">texts become vectors of feature values</span></div></div>
+    <div class="rrow" data-step="3"><i>3</i><div class="bi xs"><span class="zh"><b>相對頻率</b>去掉長度；<b>z 分數</b>讓每個詞同樣重要</span><span class="en">relative frequencies remove length; z-scores give every word an equal vote</span></div></div>
+    <div class="rrow" data-step="4"><i>4</i><div class="bi xs"><span class="zh"><b>距離</b>：曼哈頓（Delta）、歐氏、餘弦</span><span class="en">Manhattan (Delta), Euclidean, cosine</span></div></div>
+    <div class="rrow" data-step="5"><i>5</i><div class="bi xs"><span class="zh"><b>SVM</b>：最寬的街道 ＝ \(\min \tfrac12\|\mathbf{w}\|^2\)，且 \(y_i(\mathbf{w}\cdot\mathbf{x}_i+b)\ge 1\)</span><span class="en">the widest street, as an optimization problem</span></div></div>
+    <div class="rrow" data-step="6"><i>6</i><div class="bi xs"><span class="zh">《紅樓夢》：第 80 回的斷點——是<b>證據</b>，不是證明</span><span class="en">Hongloumeng: a break at chapter 80; evidence, not proof</span></div></div>
+  </div>
+</section>
+
+<div id="side"></div>
+<div id="bar"></div>
+<div id="num"></div>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="slides.js"></script>
+<script src="deck.js"></script>
+</body>
+</html>
