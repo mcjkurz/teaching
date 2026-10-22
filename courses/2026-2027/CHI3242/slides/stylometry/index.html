@@ -285,7 +285,7 @@
       <div class="bi xs" data-step="1"><span class="zh">① 最常見的 N 個詞（<b>MFW</b>）：<br>N ＝ 100？500？1000？</span><span class="en">the N most frequent words; N is our choice</span></div>
       <div class="bi xs" data-step="2" style="margin-top:14px"><span class="zh">② 只留<b>功能詞</b>：<br>Hu 等：前 500 字 → 144 個功能字</span><span class="en">keep only function words</span></div>
       <div class="bi xs" data-step="3" style="margin-top:14px"><span class="zh">③ 剔除人名、地名、<br>只在少數文本出現的詞</span><span class="en">“culling”: drop names and words found in only a few texts</span></div>
-      <div class="bi xs" data-step="4" style="margin-top:14px"><span class="zh">④ 讓模型自己挑（SVM-RFE，第 7 節）</span><span class="en">let the model choose</span></div>
+      <div class="bi xs" data-step="4" style="margin-top:14px"><span class="zh">④ 讓模型自己挑（用 SVM 的權重，第 7 節）</span><span class="en">let the model choose</span></div>
     </div>
   </div>
   <div class="callout key bi xs" data-step="5" style="margin-top:8px"><span class="zh">太少 → 訊號不夠；太多 → <b>雜訊</b>（主題、人名）混進來</span><span class="en">Too few features: not enough signal. Too many: noise from topics and names creeps in.</span></div>
@@ -325,7 +325,7 @@
     <thead><tr><th style="width:190px"></th><th>特點 property</th><th style="width:300px">在文體計量學 in stylometry</th></tr></thead>
     <tbody>
       <tr data-step="1"><td><b style="color:#e0570f">曼哈頓</b></td><td class="bi xs"><span class="zh">每個差異<b>直接相加</b></span><span class="en">every difference counts linearly</span></td><td class="bi xs"><span class="zh">Burrows’s Delta（2002）</span></td></tr>
-      <tr data-step="2"><td><b style="color:#16a34a">歐氏</b></td><td class="bi xs"><span class="zh">平方會<b>放大</b>大的差異：一個怪詞可以主導</span><span class="en">squaring magnifies large gaps: one odd word can dominate</span></td><td class="bi xs"><span class="zh">Hu 等（2014）圖 5</span></td></tr>
+      <tr data-step="2"><td><b style="color:#16a34a">歐氏</b></td><td class="bi xs"><span class="zh">平方會<b>放大</b>大的差異：一個怪詞可以主導</span><span class="en">squaring magnifies large gaps: one odd word can dominate</span></td><td class="bi xs"><span class="zh">Hu 等（2014）</span></td></tr>
       <tr data-step="3"><td><b style="color:#9333ea">餘弦</b></td><td class="bi xs"><span class="zh">只看<b>模式</b>，不看大小</span><span class="en">the pattern, not the size</span></td><td class="bi xs"><span class="zh">Cosine Delta：常常<b>最好</b></span><span class="en">Smith &amp; Aldridge 2011; Evert et al. 2017</span></td></tr>
     </tbody>
   </table>
@@ -415,8 +415,8 @@
   <div class="swap" style="margin-top:2px">
     <div class="bi xs" data-step="0" data-until="1"><span class="zh">五個詞，各在 30 篇文件裡的頻率：每個點是一篇文件</span><span class="en">five words, their frequency in 30 documents each; every dot is a document (illustrative)</span></div>
     <div class="bi xs" data-step="1" data-until="2"><span class="zh"><b style="color:#b45309">平均 μ</b>：這個詞通常用多少——每個詞<b>都不一樣</b></span><span class="en">the mean: how often the word is used on average; different for every word</span></div>
-    <div class="bi xs" data-step="2" data-until="3"><span class="zh"><b style="color:#9333ea">標準差 σ</b>：文件之間<b>差多少</b>——「的」差很多，「呢」幾乎都一樣</span><span class="en">the standard deviation: how much documents differ; a lot for 的, hardly at all for 呢</span></div>
-    <div class="callout key bi xs" data-step="3" style="margin:0"><span class="zh">同樣「差 2」：對「的」只是 0.3σ（很平常），對「呢」是 3.3σ（<b>非常特別</b>）→ 所以要除以 σ</span><span class="en">The same raw gap of 2 is ordinary for 的 but remarkable for 呢. That is why we divide by σ.</span></div>
+    <div class="bi xs" data-step="2" data-until="3"><span class="zh"><b style="color:#9333ea">標準差 σ</b>：文件之間<b>差多少</b>——「的」用得多，但各篇<b>差不多</b>；「呢」用得少，各篇卻<b>差很多</b>（有沒有對話）</span><span class="en">how much documents differ: 的 is frequent but stable, 呢 is rarer but varies a lot</span></div>
+    <div class="callout key bi xs" data-step="3" style="margin:0"><span class="zh">同樣「差 2」：對「呢」只是 0.4σ（很平常），對「也」是 3.3σ（<b>非常特別</b>）→ 所以要除以 σ</span><span class="en">The same raw gap of 2 is ordinary for 呢 but remarkable for 也. That is why we divide by σ.</span></div>
   </div>
 </section>
 
@@ -502,29 +502,16 @@
 
 <!-- ─────────── Burrows's Delta -->
 <section class="slide" id="s-delta" data-sec="norm">
-  <h2 class="bi"><span class="zh">Burrows’s Delta 與 Cosine Delta</span><span class="en">Burrows, “‘Delta’: a Measure of Stylistic Difference and a Guide to Likely Authorship” (2002)</span></h2>
-  <div class="cards" style="gap:24px;margin-top:4px">
-    <div class="card" style="border-left:6px solid #e0570f">
-      <figure class="mini-portrait"><img src="img/burrows.jpg" alt="John Burrows"><figcaption>John Burrows<br>1928–2019<br>澳洲英國文學學者</figcaption></figure>
-      <h3 class="bi xs"><span class="zh">Burrows’s Delta</span></h3>
-      <div class="eq" style="font-size:24px;margin-top:8px"><span class="tex">\(\Delta = \dfrac{1}{n}\displaystyle\sum_{i=1}^{n} \bigl|z_A(i) - z_B(i)\bigr|\)</span></div>
-      <div class="bi xs" data-step="1" style="margin-top:6px"><span class="zh">一個詞一個詞比：差了<b>多少</b>？<br>＝ 曼哈頓距離 ÷ n</span><span class="en">word by word: how big is the gap? (the average gap)</span></div>
-    </div>
-    <div class="card" style="border-left:6px solid #9333ea" data-step="2">
-      <h3 class="bi xs"><span class="zh">Cosine Delta</span><span class="en">Smith &amp; Aldridge (2011); Evert et al. (2017)</span></h3>
-      <div class="eq" style="font-size:24px;margin-top:8px"><span class="tex">\(1 - \cos\theta(\mathbf{z}_A, \mathbf{z}_B)\)</span></div>
-      <div class="bi xs" style="margin-top:6px"><span class="zh">整串 z 分數當成一支箭頭：<br>兩支箭頭是否指向<b>同一個方向</b>？</span><span class="en">treat the whole z-score profile as an arrow: do the two arrows point the same way?</span></div>
+  <h2 class="bi"><span class="zh">Burrows’s Delta</span><span class="en">Burrows, “‘Delta’: a Measure of Stylistic Difference and a Guide to Likely Authorship” (2002)</span></h2>
+  <div class="two" style="gap:40px;margin-top:6px">
+    <figure class="portrait" style="position:static;width:200px;flex:none"><img src="img/burrows.jpg" alt="John Burrows" style="height:220px;object-fit:cover;object-position:58% 20%"><figcaption>John Burrows<br><span>1928–2019<br>澳洲英國文學學者</span></figcaption></figure>
+    <div class="grow">
+      <div class="eq big" style="margin-top:0"><span class="tex tex-xl">\(\Delta(A,B) = \dfrac{1}{n}\displaystyle\sum_{i=1}^{n} \bigl|\,z_A(i) - z_B(i)\,\bigr|\)</span></div>
+      <div class="bi sm" data-step="1" style="margin-top:18px"><span class="zh">一個詞一個詞比，差多少就加起來，再取<b>平均</b></span><span class="en">compare word by word, add up the gaps, take the average (= Manhattan ÷ n)</span></div>
+      <div class="bi sm" data-step="2"><span class="zh">未知文本 → 和每位候選作者比 → <b>最近</b>的就是最可能的作者</span><span class="en">the nearest candidate is the most likely author</span></div>
     </div>
   </div>
-  <div class="two" data-step="3" style="gap:24px;margin-top:10px;align-items:center">
-    <table class="cmp tight" style="width:600px;flex:none">
-      <thead><tr><th>z 分數</th><th class="num">的</th><th class="num">了</th><th class="num">呢</th></tr></thead>
-      <tbody><tr><td>文件 A</td><td class="num">+1</td><td class="num">−1</td><td class="num">+2</td></tr>
-      <tr><td>文件 B</td><td class="num">+2</td><td class="num">−2</td><td class="num">+4</td></tr></tbody>
-    </table>
-    <div class="bi xs grow"><span class="zh">習慣<b>一樣</b>，B 只是更「誇張」：<br><b style="color:#e0570f">Δ = 1.33</b>，<b style="color:#9333ea">Cosine Delta = 0</b></span><span class="en">same habits, B is just more extreme: Delta sees a gap, Cosine Delta sees none</span></div>
-  </div>
-  <div class="callout key bi xs" data-step="4" style="margin-top:14px"><span class="zh"><b>最近</b>的候選作者 ＝ 最可能的作者；Cosine Delta 通常更準（餘弦：<b>word2vec</b> 那週細談）</span><span class="en">The nearest candidate is the most likely author. Cosine Delta is usually more accurate; more on cosine in the word2vec week.</span></div>
+  <div class="callout key bi xs" data-step="3" style="margin-top:18px"><span class="zh">二十多年來的<b>基準方法</b>；還有許多變體（例如用餘弦距離的 Cosine Delta）</span><span class="en">The standard baseline for two decades; many variants exist, e.g. Cosine Delta.</span></div>
 </section>
 
 <!-- ─────────── What each step removes -->
@@ -852,8 +839,7 @@
     <div class="grow">
       <div class="keys"><span class="ca">● 前 80 回</span>的章回 &nbsp; <span class="cb">● 後 40 回</span>的章回<br><kbd>N</kbd> 換一條線 · 第 <b id="ln-i" style="color:var(--ink)">1</b> 條</div>
       <div class="bi xs" data-step="1" style="margin-top:20px"><span class="zh">每一條都把訓練資料<b>完全分開</b></span><span class="en">every one of them separates the training data perfectly</span></div>
-      <div class="bi xs" data-step="2" style="margin-top:20px"><span class="zh">新的一回 <b>★</b> 來了：<br>不同的線，答案<b>不一樣</b></span><span class="en">a new chapter ★ arrives, and the lines disagree about it</span></div>
-      <div class="callout key bi xs" data-step="3"><span class="zh">直覺：選離兩邊<b>都最遠</b>的線<br>→ 最寬的「街道」</span><span class="en">Intuition: choose the line farthest from both groups, the widest street.</span></div>
+      <div class="callout key bi xs" data-step="2"><span class="zh">直覺：選離兩邊<b>都最遠</b>的線<br>→ 最寬的「街道」</span><span class="en">Intuition: choose the line farthest from both groups, the widest street.</span></div>
     </div>
   </div>
 </section>
@@ -896,7 +882,7 @@
       <div class="bi xs" data-step="4" style="margin-top:12px"><span class="zh">b：整體偏移；總分 &gt; 0 → 前 80 回</span><span class="en">b shifts the threshold</span></div>
     </div>
   </div>
-  <div class="callout key bi xs" data-step="5" style="margin-top:12px;padding:8px 20px"><span class="zh">\(|w_i|\) 越大，這個字越<b>重要</b>——論文就是用這一點來<b>挑選特徵</b>（SVM-RFE）</span><span class="en">The larger |w<sub>i</sub>|, the more the word matters; the paper uses this to select features.</span></div>
+  <div class="callout key bi xs" data-step="5" style="margin-top:12px;padding:8px 20px"><span class="zh">\(|w_i|\) 越大，這個字越<b>重要</b>——論文就是用這一點來<b>挑選特徵</b></span><span class="en">The larger |w<sub>i</sub>|, the more the word matters; the paper uses this to select features.</span></div>
 </section>
 
 <!-- ─────────── w and b -->
@@ -915,37 +901,6 @@
   </div>
 </section>
 
-<!-- ─────────── SVM vs logistic regression -->
-<section class="slide" id="s-lr" data-sec="svm">
-  <h2 class="bi"><span class="zh">另一種線性分類器：邏輯迴歸</span><span class="en">Another linear classifier: logistic regression</span></h2>
-  <div class="two" style="gap:30px">
-    <svg id="lr-svg" class="svm" viewBox="0 0 560 470" width="560" height="470" style="flex:none"></svg>
-    <div class="grow">
-      <div class="bi xs"><span class="zh"><b>SVM</b>（實線與街道）：只看<b>支持向量</b>；輸出的是<b>距離</b></span><span class="en">uses only the support vectors; outputs a signed distance</span></div>
-      <div class="bi xs" data-step="1" style="margin-top:16px"><span class="zh"><b style="color:#9333ea">邏輯迴歸</b>（虛線）：每個點都有影響；輸出 0 到 1 之間的<b>機率</b></span><span class="en">every point has a say; outputs a probability</span></div>
-            <div class="bi xs" data-step="2" style="margin-top:8px"><span class="zh">背景顏色 ＝ 機率：越靠近線越<b>不確定</b></span><span class="en">background shading: the probability, most uncertain near the line</span></div>
-      <div class="callout key bi xs" data-step="3"><span class="zh">兩條線很接近；實際上效果常常<b>差不多</b>——<br>更重要的是<b>特徵</b>和<b>驗證</b></span><span class="en">The lines are close, and in practice the two often perform alike; features and validation matter more.</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ─────────── w as feature importance: RFE -->
-<section class="slide" id="s-rfe" data-sec="svm">
-  <h2 class="bi"><span class="zh">權重告訴我們哪些字重要：SVM-RFE</span><span class="en">The weights rank the features: recursive feature elimination</span></h2>
-  <div class="two" style="gap:40px">
-    <div style="width:520px;flex:none">
-      <div class="tally" id="rfe-bars"></div>
-      <div class="keys" style="margin-top:8px"><kbd>N</kbd> 刪掉最弱的、重新訓練 · <kbd>R</kbd> 重來 · 第 <b id="rfe-r" style="color:var(--ink)">0</b> 輪 <span class="small">（示意 illustrative）</span></div>
-    </div>
-    <div class="grow">
-      <div class="eq" style="font-size:22px;margin-top:0"><span class="tex">\(f(\mathbf{x}) = w_1x_1 + w_2x_2 + \dots + w_dx_d + b\)</span></div>
-      <div class="bi xs" data-step="1" style="margin-top:10px"><span class="zh">\(|w_j|\) 大 → 第 j 個特徵<b>重要</b></span><span class="en">a large |w<sub>j</sub>|: feature j matters</span></div>
-      <div class="bi xs" data-step="2" style="margin-top:14px"><span class="zh">訓練 → 刪掉 \(|w_j|\) <b>最小</b>的 → 重新訓練 → ……</span><span class="en">train, remove the weakest feature, retrain, repeat</span></div>
-      <div class="callout key bi xs" data-step="3"><span class="zh">來自<b>基因</b>研究：從上千個基因中找出和癌症有關的幾個（Guyon 等 2002）</span><span class="en">Invented to find a few cancer-related genes among thousands; here: a few characters among 196 features.</span></div>
-    </div>
-  </div>
-</section>
-
 <!-- ═══════════════════ 8. The paper: method and results -->
 
 <!-- ─────────── Features -->
@@ -957,37 +912,16 @@
     <div class="frow" data-step="3"><div class="box">句長的平均和變異、<br>直接引語、感嘆<span class="en">sentence length (mean, variance), direct speech, exclamations</span></div><i class="ar"></i><div class="res">4</div></div>
     <div class="frow" data-step="4"><div style="width:300px;text-align:right;font-size:26px">每一回 ＝</div><i class="ar"></i><div class="res" style="font-size:40px">196</div><div>維的向量</div></div>
   </div>
-  <div class="two" style="gap:24px;margin-top:16px">
-    <div class="bi xs grow" data-step="5"><span class="zh">正規化：每個特徵除以<b>中位數</b>（不是 z 分數！）</span><span class="en">each feature divided by its median, so the median becomes 1: another normalization</span></div>
-    <div class="bi xs grow" data-step="6"><span class="zh">樣本：一回一個；後 40 回每回「<b>複製</b>」成兩份，湊成 80 個</span><span class="en">one sample per chapter; each of the last 40 “duplicated” into two, to balance 80 against 80</span></div>
-  </div>
 </section>
 
 <!-- ─────────── Experimental design -->
 <section class="slide" id="s-split" data-sec="paper">
-  <h2 class="bi"><span class="zh">實驗設計</span><span class="en">Experimental design</span></h2>
+  <h2 class="bi"><span class="zh">實驗設計</span><span class="en">Experimental design: train on the two ends, test on the middle</span></h2>
   <div class="legend" style="margin-bottom:10px"><span><i style="background:var(--a)"></i>訓練：甲類 train A</span><span><i style="background:var(--b)"></i>訓練：乙類 train B</span><span><i style="background:repeating-linear-gradient(45deg,#9ca3af 0 3px,#e5e7eb 3px 6px)"></i>測試：從沒看過 test, never seen</span></div>
   <div id="split"></div>
-  <div class="bi xs" data-step="4" style="margin-top:6px"><span class="zh">實驗 4：<b>其他三大名著</b>（《三國演義》《水滸傳》《西遊記》）：頭尾各 25–30 回訓練，中間測試</span><span class="en">Experiment 4: the other three classic novels, trained on the first and last 25–30 chapters, tested on the middle</span></div>
-</section>
-
-<!-- ─────────── Instability, pseudo-aggregation -->
-<section class="slide" id="s-agg" data-sec="paper">
-  <h2 class="bi"><span class="zh">不穩定 → 重複一百次</span><span class="en">SVM-RFE is unstable, so repeat it a hundred times</span></h2>
-  <div class="two" style="gap:30px">
-    <div class="grow">
-      <img class="fig" src="img/hu-table1.png" alt="Table 1" style="width:560px">
-      <div class="bi xs" style="margin-top:8px"><span class="zh">兩次隨機抽樣，選出的字<b>幾乎完全不同</b>，只有「回」重複</span><span class="en">two random training subsets: 11 vs. 4 features, only 回 in common</span></div>
-      <div class="bi xs" data-step="1" style="margin-top:12px"><span class="zh">「偽聚合」：重複 100 次，數每個字被選中幾次</span><span class="en">pseudo-aggregation: 100 runs, count how often each feature is chosen</span></div>
-      <div class="bi xs" data-step="2" style="margin-top:12px"><span class="zh">「相對頻率」：模型越<b>小</b>、越<b>準</b>，選票越重</span><span class="en">relative frequency: votes from small, accurate models count more</span></div>
-            <div class="bi xs" data-step="3" style="margin-top:4px"><span class="zh">交叉驗證：<b>10–50</b> 個特徵就夠了</span><span class="en">cross-validation: 10 to 50 features are enough</span></div>
-    </div>
-    <div style="width:420px;flex:none">
-      <div class="keys" style="line-height:1.5"><kbd>N</kbd> 跑一次 · <kbd>A</kbd> 自動 · <kbd>R</kbd> 重來 · 第 <b id="agg-n" style="color:var(--ink)">0</b> 次 <span class="small">（示意）</span></div>
-      <div class="runchips" id="agg-run" style="margin:6px 0 8px"></div>
-      <div class="tally" id="agg-bars"></div>
-    </div>
-  </div>
+  <div class="bi xs" data-step="1" style="margin-top:16px"><span class="zh">① 用<b class="ca">前 60 回</b>和<b class="cb">後 30 回</b>訓練分類器：已知「應該」是誰寫的</span><span class="en">train on the two ends, where the answer is fairly certain</span></div>
+  <div class="bi xs" data-step="1" style="margin-top:12px"><span class="zh">② 再讓它判斷<b>中間的第 61–90 回</b>：它從來沒看過這些章回，也不知道斷點在哪</span><span class="en">then let it judge chapters 61–90, which it has never seen</span></div>
+  <div class="callout key bi xs" data-step="2" style="margin-top:22px"><span class="zh">對照：只看前 80 回、或其他三大名著（《三國》《水滸》《西遊》）→ 都<b>找不到</b>斷點</span><span class="en">Controls: within the first 80 chapters, and in the other three classic novels, no divide is found.</span></div>
 </section>
 
 <!-- ─────────── Result: the break at chapter 80 -->
@@ -1004,56 +938,6 @@
     </div>
   </div>
   <div class="src abs">redrawn after Hu, Wang &amp; Wu 2014, Fig. 1(b); values read off the figure, approximate</div>
-</section>
-
-<!-- ─────────── Controls -->
-<section class="slide" id="s-ctrl" data-sec="paper">
-  <h2 class="bi"><span class="zh">對照組</span><span class="en">Controls: where the method should find nothing</span></h2>
-  <div class="two" style="gap:40px">
-    <div style="width:470px;flex:none">
-      <div class="bi xs" data-step="1"><span class="zh">實驗 2（前 80 回內部）：<b>沒有斷點</b> ✓</span><span class="en">within the first 80 chapters: no divide</span></div>
-      <div class="bi xs" data-step="2" style="margin-top:16px"><span class="zh">實驗 3（後 40 回內部）：沒有斷點，<br>但分數<b>逐漸下滑</b></span><span class="en">within the last 40: no sharp divide, but a gradual drift</span></div>
-      <div class="bi xs" data-step="3" style="margin-top:16px"><span class="zh">作者的解讀：續寫者先<b>模仿</b>曹雪芹，越寫越回到自己的風格？</span><span class="en">their reading: an imitator who slowly slipped back into his own style?</span></div>
-      <div class="callout key bi xs" data-step="5" style="margin-top:16px"><span class="zh">其他三部小說都找不到斷點 → 方法不會「到處都看到兩個作者」</span><span class="en">No divide in the other three novels: the method does not see two authors everywhere.</span></div>
-    </div>
-    <div class="grow" data-step="4">
-      <div class="bi xs"><span class="zh">最重要的 8 個特徵的「相對頻率」</span><span class="en">relative frequencies of the top 8 features (Table 2): high = a consistent difference</span></div>
-      <div class="rfrows" id="rf-rows" style="margin-top:12px"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ─────────── Fig. 5 -->
-<section class="slide" id="s-fig5" data-sec="paper">
-  <h2 class="bi"><span class="zh">和另一部續書比一比</span><span class="en">Comparing with another sequel: Qin Zichen’s <i>Continued Dream</i></span></h2>
-  <div class="fig-l" style="gap:30px">
-    <div class="figbox" style="width:560px;flex:none">
-      <img class="fig" src="img/hu-fig5.png" alt="Hu et al. Fig. 5" style="width:560px">
-      <div class="hlbox" data-step="2" data-until="3" style="left:9.7%;top:5%;width:46%;height:47.5%;border-color:var(--a)"></div>
-      <div class="hlbox" data-step="3" data-until="4" style="left:55.6%;top:52.5%;width:23%;height:23.8%;border-color:var(--b)"></div>
-      <div class="hlbox" data-step="4" style="left:9.7%;top:52.5%;width:46%;height:23.8%;border-color:var(--b)"></div>
-      <div class="hlbox" data-step="4" style="left:9.7%;top:76.2%;width:46%;height:17.9%;border-color:#9333ea"></div>
-    </div>
-    <div class="txt">
-      <div class="bi xs" data-step="1"><span class="zh">用實驗 1 選出的特徵，算每兩回之間的<b>歐氏距離</b>；<span style="color:#1d4ed8">藍</span> ＝ 近，<span style="color:#dc2626">紅</span> ＝ 遠</span><span class="en">Euclidean distances between chapters: 1–80, 81–120, then 30 chapters of the <i>Continued Dream</i> (121–150)</span></div>
-      <div class="bi xs" data-step="2"><span class="zh">前 80 回彼此<b>接近</b></span><span class="en">the first 80 chapters are close to each other</span></div>
-      <div class="bi xs" data-step="3"><span class="zh">後 40 回自成一塊</span><span class="en">the last 40 form a block of their own</span></div>
-      <div class="bi xs" data-step="4"><span class="zh">《續紅樓夢》離前 80 回<b>更遠</b></span><span class="en">the sequel is even farther from the first 80</span></div>
-      <div class="callout key bi xs" data-step="5"><span class="zh">程高本的後 40 回，比別的續書<b>更像</b>曹雪芹——所以流傳最廣？</span><span class="en">The Cheng–Gao ending resembles Cao more than other sequels do. Is that why it won?</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ─────────── Discussion -->
-<section class="slide" id="s-disc" data-sec="paper">
-  <h2 class="bi"><span class="zh">討論</span><span class="en">Discussion</span></h2>
-  <div class="recap qlist">
-    <div class="rrow" data-step="1"><i>1</i><div class="bi xs"><span class="zh">後 40 回「複製」成兩份——同一回的兩份會不會一份在訓練、一份在驗證？</span><span class="en">If chapters are duplicated, can the same text land in both training and validation?</span></div></div>
-    <div class="rrow" data-step="2"><i>2</i><div class="bi xs"><span class="zh">風格不同 ＝ <b>作者</b>不同？還是編輯、抄寫、情節變悲、程高的修改？</span><span class="en">Does a different style mean a different author, or editing, copying, a darker plot, Cheng and Gao’s revisions?</span></div></div>
-    <div class="rrow" data-step="3"><i>3</i><div class="bi xs"><span class="zh">表 1 是<b>簡體字</b>（时、没）：用的是哪個版本？版本會影響字頻嗎？</span><span class="en">Table 1 is in simplified characters: which edition? Does the edition change the frequencies?</span></div></div>
-    <div class="rrow" data-step="4"><i>4</i><div class="bi xs"><span class="zh">《三國》《水滸》的分數比《西遊》高得多：這說明了什麼？</span><span class="en">Why are the scores for the <em>Three Kingdoms</em> and <em>Water Margin</em> much higher than for <em>Journey to the West</em>?</span></div></div>
-    <div class="rrow" data-step="5"><i>5</i><div class="bi xs"><span class="zh">「即使不是無可辯駁，也極有說服力」：統計能<b>證明</b>作者是誰嗎？</span><span class="en">“Convincing if not irrefutable”: can statistics prove authorship?</span></div></div>
-  </div>
 </section>
 
 <!-- ═══════════════════ 9. Summary -->

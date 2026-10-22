@@ -268,7 +268,7 @@ HOOKS['s-len'] = {
 
 /* ---------- 3. mean and standard deviation: five words, thirty documents each (illustrative) ---------- */
 (function () {
-  const F = [['的', 40, 6], ['了', 25, 5], ['是', 14, 2.5], ['也', 6, 1.5], ['呢', 1.7, 0.6]];
+  const F = [['的', 40, 2], ['了', 25, 6], ['是', 14, 1.2], ['呢', 9, 5], ['也', 3, 0.6]];
   const r = rng(13);
   const DOTS = F.map(([, m, sd]) => Array.from({ length: 30 }, () => Math.max(0.1, m + normal(r) * sd)));
   const X0 = 90, X1 = 850, X = v => X0 + v / 60 * (X1 - X0), RY = i => 56 + i * 62, C1 = 880, C2 = 950, C3 = 1020;
@@ -521,36 +521,6 @@ function maxMargin(P) {
 const canon = m => { const h = m.W / 2; return { w: [m.n[0] / h, m.n[1] / h], b: -m.c / h }; };
 const OPT = maxMargin(PTS);
 
-// soft-margin linear SVM by dual coordinate descent (Hsieh et al. 2008); the bias is a constant feature
-function trainSVM(P, C) {
-  const B = 3, n = P.length, a = new Array(n).fill(0), w = [0, 0, 0];
-  const xs = P.map(p => [p.x, p.y, B]), Q = xs.map(x => x[0] ** 2 + x[1] ** 2 + x[2] ** 2);
-  const r = rng(3), order = [...Array(n).keys()];
-  for (let ep = 0; ep < 1500; ep++) {
-    for (let i = n - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [order[i], order[j]] = [order[j], order[i]]; }
-    for (const i of order) {
-      const y = P[i].c, x = xs[i], G = y * (w[0] * x[0] + w[1] * x[1] + w[2] * x[2]) - 1;
-      const PG = a[i] === 0 ? Math.min(G, 0) : a[i] === C ? Math.max(G, 0) : G;
-      if (Math.abs(PG) > 1e-12) {
-        const old = a[i]; a[i] = Math.min(Math.max(a[i] - G / Q[i], 0), C);
-        const d = (a[i] - old) * y; w[0] += d * x[0]; w[1] += d * x[1]; w[2] += d * x[2];
-      }
-    }
-  }
-  return { w: [w[0], w[1]], b: w[2] * B, alpha: a };
-}
-// L2-regularized logistic regression by gradient descent; P(blue | x) = σ(w·x + b)
-function trainLR(P, lam) {
-  let w = [0, 0], b = 0;
-  for (let it = 0; it < 6000; it++) {
-    const g = [0, 0]; let gb = 0;
-    P.forEach(p => { const y = p.c > 0 ? 1 : 0, s = 1 / (1 + Math.exp(-(w[0] * p.x + w[1] * p.y + b))); g[0] += (s - y) * p.x; g[1] += (s - y) * p.y; gb += s - y; });
-    const n = P.length;
-    w = [w[0] - 0.3 * (g[0] / n + lam * w[0]), w[1] - 0.3 * (g[1] / n + lam * w[1])]; b -= 0.3 * gb / n;
-  }
-  return { w, b };
-}
-
 /* a square plot of the toy data; draw(svg, opts) redraws everything */
 const SP = { L: 100, R: 520, T: 12, B: 432, lo: -3.2, hi: 3.2 };
 const SX = x => SP.L + (x - SP.lo) / (SP.hi - SP.lo) * (SP.R - SP.L);
@@ -600,19 +570,11 @@ const f = (L, p) => L.w[0] * p.x + L.w[1] * p.y + L.b;
     const c = m.mr + t * m.W;
     return { w: m.n, b: -c };
   });
-  // a new chapter, a little on the blue side of the best line
-  const o = OPT, dir = [-o.n[1], o.n[0]];
-  const STAR = { x: o.n[0] * (o.c + 0.12) + 0.9 * dir[0], y: o.n[1] * (o.c + 0.12) + 0.9 * dir[1] };
   let li = 0;
   HOOKS['s-lines'] = {
     render(step, el) {
-      const L = LINES[li], blue = f(L, STAR) > 0;
-      let extra = '';
-      if (step >= 2) {
-        const cx = SX(STAR.x), cy = SY(STAR.y);
-        extra = `<text x="${cx}" y="${cy + 11}" text-anchor="middle" style="font-size:34px;fill:${blue ? A_C : B_C};stroke:${INK};stroke-width:1.2">★</text><text x="${cx}" y="${cy + 38}" text-anchor="middle" style="font-size:16px;font-weight:600;fill:${blue ? A_C : B_C}">→ ${blue ? '前 80 回' : '後 40 回'}</text>`;
-      }
-      svmPlot($('#ln-svg', el), { lines: [{ ...L, color: INK }], extra });
+      const L = LINES[li];
+      svmPlot($('#ln-svg', el), { lines: [{ ...L, color: INK }] });
       $('#ln-i', el).textContent = li + 1;
     },
     key(e) { if (e.key === 'n' || e.key === 'N') { li = (li + 1) % LINES.length; return true; } }
@@ -716,104 +678,18 @@ HOOKS['s-svmobj'] = {
   }
 };
 
-/* ---------- 7. SVM vs logistic regression ---------- */
-(function () {
-  let LR = null, field = null;
-  HOOKS['s-lr'] = {
-    render(step, el) {
-      if (!LR) {
-        LR = trainLR(PTS, 0.1);
-        const G = 40, cw = (SP.R - SP.L) / G;
-        field = '';
-        for (let i = 0; i < G; i++) for (let j = 0; j < G; j++) {
-          const x = SP.lo + (i + 0.5) / G * (SP.hi - SP.lo), y = SP.hi - (j + 0.5) / G * (SP.hi - SP.lo);
-          const p = 1 / (1 + Math.exp(-(LR.w[0] * x + LR.w[1] * y + LR.b)));
-          field += `<rect x="${(SP.L + i * cw).toFixed(1)}" y="${(SP.T + j * cw).toFixed(1)}" width="${(cw + 0.4).toFixed(1)}" height="${(cw + 0.4).toFixed(1)}" fill="${p > 0.5 ? A_C : B_C}" opacity="${(Math.abs(p - 0.5) * 0.5).toFixed(3)}"/>`;
-        }
-      }
-      const lines = [{ ...canon(OPT), street: true, gutters: false }];
-      if (step >= 1) lines.push({ ...LR, color: '#9333ea', dash: '10 6', width: 3.5 });
-      svmPlot($('#lr-svg', el), { lines, field: step >= 2 ? field : '', sv: p => Math.abs(Math.abs(f(canon(OPT), p)) - 1) < 1e-6 });
-    }
-  };
-})();
-
-/* ---------- 7. recursive feature elimination ---------- */
-(function () {
-  const F = ['回', '沒', '便', '方', '呢', '倒', '好些', '去', '得', '就'];
-  const W0 = [0.92, 0.74, 0.52, 0.6, 0.47, 0.36, 0.3, 0.2, 0.24, 0.1];
-  let w, gone, round;
-  function reset() { w = W0.slice(); gone = new Set(); round = 0; }
-  reset();
-  const minIdx = () => w.reduce((b, v, i) => (gone.has(i) ? b : b < 0 || v < w[b] ? i : b), -1);
-  function eliminate() {
-    if (F.length - gone.size <= 3) return;
-    gone.add(minIdx()); round++;
-    // retraining shuffles the remaining weights a little
-    const r = rng(11 + round);
-    w = w.map((v, i) => gone.has(i) ? v : v * (0.8 + 0.4 * r()));
-  }
-  HOOKS['s-rfe'] = {
-    render(step, el) {
-      const box = $('#rfe-bars', el), mx = Math.max(...w), mi = minIdx();
-      box.innerHTML = F.map((c, i) => `<div class="tr ${gone.has(i) ? 'gone' : ''} ${i === mi && step >= 2 ? 'min' : ''}"><span class="ch">${c}</span><div class="track"><div class="fill" style="width:${gone.has(i) ? 0 : 100 * w[i] / mx}%"></div></div><span class="n">${gone.has(i) ? '✕' : w[i].toFixed(2)}</span></div>`).join('');
-      $('#rfe-r', el).textContent = round;
-    },
-    key(e) {
-      if (e.key === 'n' || e.key === 'N') { eliminate(); return true; }
-      if (e.key === 'r' || e.key === 'R') { reset(); return true; }
-    }
-  };
-})();
-
 /* ---------- 8. experimental design: chapter strips ---------- */
 (function () {
   const EXP = [
-    ['實驗 1：全書', 'whole book: train 1–60 vs. 91–120, test 61–90', n => n <= 60 ? 'ta' : n <= 90 ? 'te' : 'tb'],
-    ['實驗 2：只看前 80 回（應該沒有斷點）', 'first 80 only: 1–30 vs. 51–80, test 31–50', n => n <= 30 ? 'ta' : n <= 50 ? 'te' : n <= 80 ? 'tb' : ''],
-    ['實驗 3：只看後 40 回（每回切成兩半）', 'last 40 only: 81–95 vs. 106–120, test 96–105', n => n <= 80 ? '' : n <= 95 ? 'ta' : n <= 105 ? 'te' : 'tb']
+    ['全書 120 回', 'train 1–60 vs. 91–120, test 61–90', n => n <= 60 ? 'ta' : n <= 90 ? 'te' : 'tb'],
   ];
   HOOKS['s-split'] = {
     render(step, el) {
       const box = $('#split', el);
       if (!box.children.length) {
-        box.innerHTML = EXP.map(([zh, en, cls], k) => `<div class="exp" data-step="${k + 1}"><div class="h">${zh}<span class="en">${en}</span></div><div class="strip">${Array.from({ length: 120 }, (_, i) => `<i class="${cls(i + 1)}"></i>`).join('')}</div><div class="strip-ax">${[1, 20, 40, 60, 80, 100, 120].map(n => `<span style="left:${(n - 0.5) * 9}px">${n}</span>`).join('')}</div></div>`).join('');
+        box.innerHTML = EXP.map(([zh, en, cls], k) => `<div class="exp" data-step="${k}"><div class="h">${zh}<span class="en">${en}</span></div><div class="strip">${Array.from({ length: 120 }, (_, i) => `<i class="${cls(i + 1)}"></i>`).join('')}</div><div class="strip-ax">${[1, 20, 40, 60, 80, 100, 120].map(n => `<span style="left:${(n - 0.5) * 9}px">${n}</span>`).join('')}</div></div>`).join('');
       }
       box.querySelectorAll('[data-step]').forEach(e => e.classList.toggle('on', step >= +e.dataset.step));
-    }
-  };
-})();
-
-/* ---------- 8. pseudo-aggregation: a hundred runs of SVM-RFE (illustrative) ---------- */
-(function () {
-  const F = [['回', 0.85], ['沒', 0.62], ['便', 0.55], ['呢', 0.5], ['方', 0.46], ['好些', 0.4], ['倒', 0.34], ['去', 0.26], ['得', 0.24], ['就', 0.2], ['知', 0.17]];
-  let r, runs, cnt, last, timer = null;
-  function reset() { r = rng(5); runs = 0; cnt = F.map(() => 0); last = []; stop(); }
-  function stop() { if (timer) { clearInterval(timer); timer = null; } }
-  function run() {
-    if (runs >= 100) return;
-    runs++;
-    // each run keeps the strong features with high probability, plus a few random weak ones
-    last = F.map(([c, p], i) => (r() < p ? i : -1)).filter(i => i >= 0);
-    last.forEach(i => cnt[i]++);
-  }
-  let el0;
-  function paint(el) {
-    $('#agg-n', el).textContent = runs;
-    $('#agg-run', el).innerHTML = last.map(i => `<span class="w">${F[i][0]}</span>`).join('');
-    $('#agg-bars', el).innerHTML = F.map(([c], i) => `<div class="tr"><span class="ch">${c}</span><div class="track"><div class="fill" style="width:${runs ? 100 * cnt[i] / runs : 0}%"></div></div><span class="n">${cnt[i]}</span></div>`).join('');
-  }
-  reset();
-  HOOKS['s-agg'] = {
-    render(step, el) { el0 = el; paint(el); },
-    key(e, step, el) {
-      if (e.key === 'n' || e.key === 'N') { stop(); run(); return true; }
-      if (e.key === 'r' || e.key === 'R') { reset(); return true; }
-      if (e.key === 'a' || e.key === 'A') {
-        if (timer) stop();
-        else timer = setInterval(() => { if (!el0.classList.contains('active') || runs >= 100) { stop(); return; } run(); paint(el0); }, 90);
-        return true;
-      }
     }
   };
 })();
@@ -842,15 +718,5 @@ HOOKS['s-svmobj'] = {
     }
   };
 })();
-
-/* ---------- 8. controls: Table 2 as small bar charts ---------- */
-HOOKS['s-ctrl'] = {
-  render(step, el) {
-    const box = $('#rf-rows', el);
-    if (box.children.length) return;
-    const T = [['紅樓夢', [0.57, 0.46, 0.43, 0.36, 0.31, 0.30, 0.29, 0.19]], ['三國演義', [0.31, 0.27, 0.26, 0.25, 0.23, 0.22, 0.17, 0.15]], ['水滸傳', [0.18, 0.17, 0.16, 0.16, 0.14, 0.11, 0.11, 0.10]], ['西遊記', [0.03, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02]]];
-    box.innerHTML = T.map(([n, v], k) => `<div class="rfrow"><span class="nm">${n}</span><div class="bars">${v.map(x => `<div style="height:${Math.max(2, x / 0.6 * 70)}px;background:${k ? '#94a3b8' : 'var(--tgt)'}"></div>`).join('')}</div><span class="top">${v[0].toFixed(2)}</span></div>`).join('');
-  }
-};
 
 texify(document.getElementById('stage'));

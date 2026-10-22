@@ -352,7 +352,7 @@ title: CHI3242
           <li>Xianfeng Hu, Yang Wang, and Qiang Wu, <a href="https://doi.org/10.1142/S1793536914500125">“Multiple Authors Detection: A Quantitative Analysis of <em>Dream of the Red Chamber</em>”</a>, <em>Advances in Adaptive Data Analysis</em> 6, no. 4 (2014)</li>
         </ul>
       </td>
-      <td class="notes"></td>
+      <td class="notes"><a href="slides/stylometry/">Slides</a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
