@@ -393,3 +393,22 @@ svg.arrows { position: absolute; left: 0; top: 0; width: 1280px; height: 720px; 
 .board .hit { z-index: 1; pointer-events: none; }
 .gobtn { font: inherit; font-size: 17px; padding: 4px 16px; border: 1.5px solid var(--tgt); color: var(--tgt); background: #fff; border-radius: 999px; cursor: pointer; }
 .gobtn:hover { background: var(--tgt-bg); }
+
+.fterms { display: flex; justify-content: center; align-items: flex-start; gap: 6px; margin: 2px 0 0; }
+.fterms .ft { display: flex; flex-direction: column; align-items: center; width: 250px; text-align: center; }
+.fterms .fx { font-size: 38px; line-height: 1.2; padding: 6px 16px; border-radius: 10px; }
+.fterms .feq { font-size: 34px; padding-top: 12px; color: var(--mute); }
+.fterms .farrow { position: relative; width: 3px; height: 30px; margin: 4px 0 6px; background: currentColor; }
+.fterms .farrow::before { content: ""; position: absolute; left: -6px; top: -8px; border: 7px solid transparent; border-top: 0; border-bottom: 11px solid currentColor; }
+.fterms .bi { align-items: center; }
+.fterms .c-p { color: #475569; } .fterms .c-s { color: #7c3aed; } .fterms .c-t { color: #1f5fd6; } .fterms .c-f { color: #e0570f; }
+.fterms .fx { background: color-mix(in srgb, currentColor 10%, #fff); }
+.pcmp .callout { margin-top: 0; padding: 10px 20px; }
+.pcmp .callout.up { border-left-color: #16a34a; } .pcmp .callout.down { border-left-color: #dc2626; }
+.pcmp .grow { flex: 1; }
+#s-perp2 h2 { margin-bottom: 6px; }
+#s-perp2 .bi.xs > .zh { font-size: 20px; line-height: 1.3; } #s-perp2 .bi.xs > .en { font-size: 14px; line-height: 1.25; margin-top: 1px; }
+#s-perp2 .fterms .fx { font-size: 34px; }
+#s-perp2 .fterms .farrow { height: 20px; }
+#s-perp2 .fterms .ft { width: 260px; }
+#s-perp2 .pcmp .callout { padding: 8px 18px; }

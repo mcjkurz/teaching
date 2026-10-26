@@ -217,6 +217,38 @@
   </div>
 </section>
 
+<!-- ─────────── How perplexity is computed -->
+<section class="slide" id="s-perp2" data-sec="gibbs">
+  <h2 class="bi"><span class="zh">困惑度怎麼算？</span><span class="en">How is perplexity computed?</span></h2>
+  <div class="bi xs" data-step="1" style="margin-top:0"><span class="zh">文件已存在，詞是<b>固定</b>的。對每個真實出現的詞，問模型給它多大機率。<b>不抽樣主題</b>，而是對所有主題加總。</span><span class="en">The document already exists, so its words are fixed. For each actual word, ask how probable the trained model finds it, given that document. No topic is sampled: add up over all topics.</span></div>
+  <div class="fterms" data-step="2">
+    <div class="ft c-p"><div class="fx">\(P(w \mid d)\)</div><i class="farrow"></i><div class="bi xs"><span class="en">probability of word <i>w</i> in document <i>d</i></span><span class="zh">詞 w 在文件 d 中的機率</span></div></div>
+    <div class="feq">\(=\)</div>
+    <div class="ft c-s"><div class="fx">\(\sum_k\)</div><i class="farrow"></i><div class="bi xs"><span class="en">add up over all topics <i>k</i></span><span class="zh">對所有主題加總</span></div></div>
+    <div class="ft c-t"><div class="fx">\(\theta_{d,k}\)</div><i class="farrow"></i><div class="bi xs"><span class="en">share of topic <i>k</i> in document <i>d</i></span><span class="zh">主題 k 在文件 d 的比例</span></div></div>
+    <div class="feq">\(\times\)</div>
+    <div class="ft c-f"><div class="fx">\(\varphi_{k,w}\)</div><i class="farrow"></i><div class="bi xs"><span class="en">probability of word <i>w</i> in topic <i>k</i></span><span class="zh">詞 w 在主題 k 的機率</span></div></div>
+  </div>
+  <div class="two pcmp" data-step="3" style="gap:20px;margin-top:8px;align-items:stretch">
+    <div class="callout up grow"><div class="bi xs"><span class="en"><b>P rises ↑</b> when the document leans on topics (large θ) that also give the word a high probability (large φ).</span><span class="zh"><b>升高</b>：文件主要用的主題，剛好也最常用這個詞</span></div>
+      <div class="small" style="margin-top:6px">例：體育類文件中的「足球」 · 足球 in a sports-heavy document</div></div>
+    <div class="callout down grow"><div class="bi xs"><span class="en"><b>P falls ↓</b> when the word lives in topics the document barely uses (θ ≈ 0), or the document’s topics give it little probability (φ ≈ 0).</span><span class="zh"><b>降低</b>：這個詞屬於文件幾乎不用的主題，或文件的主題很少用到它</span></div>
+      <div class="small" style="margin-top:6px">例：政治類文件中的「足球」 · 足球 in a politics-heavy document</div></div>
+  </div>
+  <div class="bi xs" data-step="3" style="margin-top:6px"><span class="en">Each topic contributes only if <b>both</b> factors are large: high θ × low φ is small, and so is low θ × high φ.</span><span class="zh">每個主題要 θ 與 φ <b>都大</b>才有貢獻</span></div>
+</section>
+
+<!-- ─────────── From P to perplexity -->
+<section class="slide" id="s-perp3" data-sec="gibbs">
+  <h2 class="bi"><span class="zh">從機率到困惑度</span><span class="en">From word probabilities to perplexity</span></h2>
+  <div class="bi sm" data-step="1" style="margin-top:6px"><span class="en">Score every word of every document, average the surprise, and convert it back into “how many equally likely words”.</span><span class="zh">替每個詞打分，平均「意外程度」，再還原成「幾個同樣可能的詞」</span></div>
+  <div style="text-align:center;margin:26px 0" data-step="2"><div class="eq big">\(\text{perplexity} = \exp\!\Big(-\tfrac{1}{N}\sum_{i=1}^{N} \log P(w_i \mid d_i)\Big)\)</div></div>
+  <div class="cards" style="gap:20px" data-step="3">
+    <div class="callout up" style="margin:0;border-left-color:#16a34a;flex:1"><div class="bi xs"><span class="en">All words probable → small surprise → perplexity near 1</span><span class="zh">每個詞都很可能 → 意外少 → 困惑度接近 1</span></div></div>
+    <div class="callout down" style="margin:0;border-left-color:#dc2626;flex:1"><div class="bi xs"><span class="en">Many words improbable → large surprise → high perplexity</span><span class="zh">很多詞不太可能 → 意外多 → 困惑度高</span></div></div>
+  </div>
+</section>
+
 <!-- ─────────── K-means -->
 <section class="slide" id="s-kmeans" data-sec="k">
   <h2 class="bi"><span class="zh">要分成幾群？</span><span class="en">How many groups? (K-means clustering)</span></h2>
