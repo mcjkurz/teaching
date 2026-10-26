@@ -39,7 +39,7 @@ function texify(root) {
 
 /* ---------- shared helpers ---------- */
 const TC = ['#2563eb', '#16a34a', '#dc2626', '#9333ea', '#d97706', '#0891b2'];   // topic colours = --t0 … --t5
-const TNAME = ['藍', '綠', '紅', '紫', '橙', '青'];
+const TNAME = ['blue', 'green', 'red', 'purple', 'orange', 'teal'];
 // seeded random numbers (mulberry32), so the "random" pictures are the same every time
 function rng(seed) {
   let s = seed >>> 0;
@@ -138,7 +138,7 @@ function buildDocs(host, docs, { mix = false, plain = false } = {}) {
   host.innerHTML = '';
   const chips = docs.map((words, d) => {
     const box = document.createElement('div');
-    box.className = 'doc'; box.dataset.name = `文件 ${d + 1}`;
+    box.className = 'doc'; box.dataset.name = `Doc ${d + 1}`;
     const row = words.map(w => box.appendChild(wchip(w, plain ? 'plain' : '')));
     if (mix) {
       box.insertAdjacentHTML('beforeend', '<div class="mix"></div><div class="mixlbl"></div>');
@@ -176,11 +176,11 @@ function paintMix(row, counts) {
       <g class="rm-gap"><g mask="url(#m-notmodel)"><circle cx="${X0}" cy="${CY}" r="${R}" fill="${GREEN}" opacity=".45"/></g></g>
       <polygon class="mv" points="${OCT}" fill="url(#hb)" stroke="${BLUE}" stroke-width="3"/>
       <g class="rm-gap"><g mask="url(#m-notreal)"><polygon class="mv" points="${OCT}" fill="${ORANGE}" opacity=".45"/></g></g>
-      <text x="${X0 - 120}" y="88" font-size="26" font-weight="600" fill="${GREEN}">現實 <tspan font-size="18" font-weight="400">reality</tspan></text>
-      <g class="mv"><text x="10" y="-172" font-size="26" font-weight="600" fill="${BLUE}">模型 <tspan font-size="18" font-weight="400">our model</tspan></text></g>
+      <text x="${X0 - 120}" y="88" font-size="26" font-weight="600" fill="${GREEN}">reality <tspan font-size="18" font-weight="400">現實</tspan></text>
+      <g class="mv"><text x="10" y="-172" font-size="26" font-weight="600" fill="${BLUE}">our model <tspan font-size="18" font-weight="400">模型</tspan></text></g>
       <g class="rm-gap" font-size="20">
-        <rect x="20" y="440" width="22" height="22" rx="4" fill="${GREEN}" opacity=".6"/><text x="52" y="458">模型沒抓到的現實 <tspan fill="#6a7386" font-size="16">reality the model misses</tspan></text>
-        <rect x="20" y="472" width="22" height="22" rx="4" fill="${ORANGE}" opacity=".6"/><text x="52" y="490">現實中不存在的值 <tspan fill="#6a7386" font-size="16">invalid values</tspan></text>
+        <rect x="20" y="440" width="22" height="22" rx="4" fill="${GREEN}" opacity=".6"/><text x="52" y="458">reality the model misses <tspan fill="#6a7386" font-size="16">模型沒抓到的現實</tspan></text>
+        <rect x="20" y="472" width="22" height="22" rx="4" fill="${ORANGE}" opacity=".6"/><text x="52" y="490">invalid values <tspan fill="#6a7386" font-size="16">現實中不存在的值</tspan></text>
       </g>`;
   }
   function place(v, animate) {
@@ -241,9 +241,9 @@ function paintMix(row, counts) {
 /* ---------- 6. generative story ---------- */
 (function () {
   const TOPICS = [
-    { name: '天文', words: [['行星', .35], ['星系', .3], ['望遠鏡', .2], ['太空', .15]] },
-    { name: '體育', words: [['足球', .35], ['比賽', .3], ['球員', .2], ['進球', .15]] },
-    { name: '政治', words: [['公投', .35], ['選舉', .3], ['政府', .2], ['投票', .15]] }
+    { name: 'astronomy', words: [['行星', .35], ['星系', .3], ['望遠鏡', .2], ['太空', .15]] },
+    { name: 'sports', words: [['足球', .35], ['比賽', .3], ['球員', .2], ['進球', .15]] },
+    { name: 'politics', words: [['公投', .35], ['選舉', .3], ['政府', .2], ['投票', .15]] }
   ];
   const r = rng(3);
   let theta = [.6, .1, .3], timer = null, built = false, started = false;
@@ -280,7 +280,7 @@ function paintMix(row, counts) {
   HOOKS['s-gen'] = {
     render(step, el) {
       if (!built) {
-        $('#gen-topics', el).innerHTML = TOPICS.map((t, k) => `<div class="topic k${k}"><h4 style="color:${TC[k]}">主題 ${k + 1}（${t.name}）</h4>${t.words.map(([w, p]) => `<div class="row"><span>${w}</span><span>${p.toFixed(2)}</span></div>`).join('')}</div>`).join('');
+        $('#gen-topics', el).innerHTML = TOPICS.map((t, k) => `<div class="topic k${k}"><h4 style="color:${TC[k]}">Topic ${k + 1} (${t.name})</h4>${t.words.map(([w, p]) => `<div class="row"><span>${w}</span><span>${p.toFixed(2)}</span></div>`).join('')}</div>`).join('');
         showMix(el);
         built = true;
       }
@@ -304,9 +304,9 @@ HOOKS['s-two'] = {
     const m = new LDA(TOY_IDS, 4, 3, 0, 0, Z_FINAL, Math.random);
     const head = TNAME.slice(0, 3).map((n, k) => `<th class="num" style="color:${TC[k]}">${n}</th>`).join('');
     $('#theta-table', el).innerHTML = `<thead><tr><th></th>${head}<th style="width:120px"></th></tr></thead><tbody>` +
-      m.ndk.map((r, d) => `<tr><td>文件 ${d + 1}</td>${r.map(c => `<td class="num">${(c / 5).toFixed(1)}</td>`).join('')}<td><div class="mix" style="margin:0">${r.map((c, k) => `<div style="width:${20 * c}%;background:${TC[k]}"></div>`).join('')}</div></td></tr>`).join('') + '</tbody>';
+      m.ndk.map((r, d) => `<tr><td>Doc ${d + 1}</td>${r.map(c => `<td class="num">${(c / 5).toFixed(1)}</td>`).join('')}<td><div class="mix" style="margin:0">${r.map((c, k) => `<div style="width:${20 * c}%;background:${TC[k]}"></div>`).join('')}</div></td></tr>`).join('') + '</tbody>';
     $('#phi-table', el).innerHTML = `<thead><tr><th></th>${TOY_V.map(w => `<th class="num" style="font-family:var(--cjk)">${w}</th>`).join('')}</tr></thead><tbody>` +
-      m.nkw.map((r, k) => `<tr><td style="color:${TC[k]};font-weight:600">主題 ${TNAME[k]}</td>${r.map(c => `<td class="num" style="${c ? '' : 'color:#b6bcc8'}">${(c / m.nk[k]).toFixed(2)}</td>`).join('')}</tr>`).join('') + '</tbody>';
+      m.nkw.map((r, k) => `<tr><td style="color:${TC[k]};font-weight:600">Topic ${TNAME[k]}</td>${r.map(c => `<td class="num" style="${c ? '' : 'color:#b6bcc8'}">${(c / m.nk[k]).toFixed(2)}</td>`).join('')}</tr>`).join('') + '</tbody>';
     el._built = true;
   }
 };
@@ -329,10 +329,10 @@ HOOKS['s-goal'] = {
       if (!el._chips) {
         el._chips = buildDocs($('#step-docs', el), TOY);
         const q = $('#step-q', el);
-        q.innerHTML = '<div></div>' + [0, 1, 2].map(k => `<div class="hd" style="color:${TC[k]}">${TNAME[k]} 主題 ${k + 1}</div>`).join('') +
-          '<div class="q">文件 1 有幾個詞是這個顏色？<span class="en">How much of each topic is in document 1?</span></div>' + [0, 1, 2].map(k => `<div class="v q1" style="color:${TC[k]}"></div>`).join('') +
-          '<div class="q">其他「足球」有幾個是這個顏色？<span class="en">How much is 足球 in each topic?</span></div>' + [0, 1, 2].map(k => `<div class="v q2" style="color:${TC[k]}"></div>`).join('');
-        $('#step-rects', el).innerHTML = '<div class="q" style="align-self:center;font-size:17px">面積 ∝ 機率<span class="en" style="display:block;font-size:13px">area ∝ probability</span></div>' +
+        q.innerHTML = '<div></div>' + [0, 1, 2].map(k => `<div class="hd" style="color:${TC[k]}">${TNAME[k]} · topic ${k + 1}</div>`).join('') +
+          '<div class="q">How much of each topic is in document 1?<span class="en">文件 1 有幾個詞是這個顏色？</span></div>' + [0, 1, 2].map(k => `<div class="v q1" style="color:${TC[k]}"></div>`).join('') +
+          '<div class="q">How much is 足球 in each topic?<span class="en">其他「足球」有幾個是這個顏色？</span></div>' + [0, 1, 2].map(k => `<div class="v q2" style="color:${TC[k]}"></div>`).join('');
+        $('#step-rects', el).innerHTML = '<div class="q" style="align-self:center;font-size:17px">area ∝ probability<span class="en" style="display:block;font-size:13px">面積 ∝ 機率</span></div>' +
           [0, 1, 2].map(k => `<div class="r"><div class="dart" style="opacity:0;bottom:62px">🎯</div><div class="box" style="background:${TC[k]}"></div><div class="area"></div></div>`).join('');
       }
       const z = Z_INIT.map(r => r.slice());
@@ -359,10 +359,10 @@ HOOKS['s-goal'] = {
 /* ---------- 11. the Gibbs sampler, live ---------- */
 (function () {
   const SPEEDS = [
-    { name: '慢 slow', ms: 650, phased: true },
-    { name: '中 medium', ms: 220 },
-    { name: '快 fast', ms: 40 },
-    { name: '極快 turbo', ms: 40, perTick: 20 }
+    { name: 'slow', ms: 650, phased: true },
+    { name: 'medium', ms: 220 },
+    { name: 'fast', ms: 40 },
+    { name: 'turbo', ms: 40, perTick: 20 }
   ];
   let m, chips, el, timer = null, speed = 0, phase = 0, last = null, hist = [];
   const reset = (z) => {
@@ -403,8 +403,8 @@ HOOKS['s-goal'] = {
     const x = i => L + (W - L - R) * i / n, y = v => T + (H - T - Bm) * (1 - (Math.min(HI, v) - LO) / (HI - LO));
     let g = '';
     [2, 2.5, 3, 3.5, 4].forEach(v => { g += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="#e3e6ec"/><text x="${L - 6}" y="${y(v) + 4}" text-anchor="end">${v.toFixed(1)}</text>`; });
-    g += `<line x1="${L}" x2="${W - R}" y1="${y(4)}" y2="${y(4)}" stroke="#9aa1ad" stroke-dasharray="6 5"/><text x="${W - R}" y="${y(4) - 5}" text-anchor="end">隨機亂猜 random guessing (4 個詞)</text>`;
-    g += `<text x="${W - R}" y="${H - 4}" text-anchor="end">迭代 iterations → ${hist.length - 1}</text>`;
+    g += `<line x1="${L}" x2="${W - R}" y1="${y(4)}" y2="${y(4)}" stroke="#9aa1ad" stroke-dasharray="6 5"/><text x="${W - R}" y="${y(4) - 5}" text-anchor="end">random guessing (4 words)</text>`;
+    g += `<text x="${W - R}" y="${H - 4}" text-anchor="end">sweeps → ${hist.length - 1}</text>`;
     g += `<polyline points="${hist.map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(' ')}" fill="none" stroke="#e0570f" stroke-width="3"/>`;
     const v = hist[hist.length - 1];
     g += `<circle cx="${x(hist.length - 1)}" cy="${y(v)}" r="5" fill="#e0570f"/><text x="${x(hist.length - 1) + (hist.length < n / 4 ? 10 : -9)}" y="${y(v) - 10}" text-anchor="${hist.length < n / 4 ? 'start' : 'end'}" style="fill:#e0570f;font-weight:600">${v.toFixed(2)}</text>`;
@@ -416,7 +416,7 @@ HOOKS['s-goal'] = {
     chips.flat().forEach(c => c.classList.remove('pick'));
     if (last) chips[last.d][last.i].classList.add('pick');
     chips.forEach((row, d) => paintMix(row, m.ndk[d]));
-    $('#gs-word', el).textContent = last ? `文件 ${last.d + 1} · 「${TOY[last.d][last.i]}」` : '–';
+    $('#gs-word', el).textContent = last ? `Doc ${last.d + 1} · “${TOY[last.d][last.i]}”` : '–';
     $('#gs-bars', el).innerHTML = [0, 1, 2].map(k => {
       const p = last && last.p ? last.p[k] : 0;
       return `<div class="pb${last && last.k === k ? ' won' : ''}"><span style="background:${TC[k]}"></span><div class="track"><div class="fill" style="width:${100 * p}%;background:${TC[k]}"></div></div><span>${last && last.p ? pct(p) : ''}</span></div>`;
@@ -533,7 +533,7 @@ HOOKS['s-goal'] = {
   function mini() {
     const W = 300, H = 104, L = 30, R = 8, T = 18, B = 16, LO = 5, HI = 30, n = Math.max(60, hist.length - 1);
     const x = i => L + (W - L - R) * i / n, y = v => T + (H - T - B) * (1 - (Math.min(HI, v) - LO) / (HI - LO));
-    let g = `<text x="${W - R}" y="12" text-anchor="end" style="fill:#e0570f;font-weight:600">困惑度 perplexity</text>`;
+    let g = `<text x="${W - R}" y="12" text-anchor="end" style="fill:#e0570f;font-weight:600">perplexity</text>`;
     [10, 20, 30].forEach(v => { g += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="#e3e6ec"/><text x="${L - 5}" y="${y(v) + 4}" text-anchor="end">${v}</text>`; });
     g += `<polyline points="${hist.map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(' ')}" fill="none" stroke="#e0570f" stroke-width="2.5"/>`;
     const v = hist[hist.length - 1], i = hist.length - 1, right = i < n / 3;
@@ -548,7 +548,7 @@ HOOKS['s-goal'] = {
     mini();
     $('#po-topics', el).innerHTML = m.nkw.map((row, k) => {
       const top = row.map((c, w) => [c, VOC[w]]).filter(x => x[0]).sort((a, b) => b[0] - a[0]).slice(0, 4);
-      return `<div class="topic k${k}"><h4 style="color:${TC[k]}">主題 ${k + 1}</h4>${top.map(([c, w]) => `<div class="row"><span>${w}</span><span>${c}</span></div>`).join('')}</div>`;
+      return `<div class="topic k${k}"><h4 style="color:${TC[k]}">Topic ${k + 1}</h4>${top.map(([c, w]) => `<div class="row"><span>${w}</span><span>${c}</span></div>`).join('')}</div>`;
     }).join('');
   }
   function stop() { clearInterval(timer); timer = null; }
@@ -619,10 +619,10 @@ function simplexSlide(id, { colors, corner, item, center, legend, start = 3, see
     }
   };
 }
-simplexSlide('s-alpha', { colors: TC, corner: k => `只有主題 ${k + 1}`, item: d => `文件 ${d + 1}`, center: '平均混合', legend: ['每個點 ＝ 一篇文件', '離哪個角越近，', '該主題越多'] });
+simplexSlide('s-alpha', { colors: TC, corner: k => `only topic ${k + 1}`, item: d => `Doc ${d + 1}`, center: 'even mixture', legend: ['each dot = one document', 'the closer to a corner,', 'the more of that topic'] });
 // words get neutral colours of their own, so they are not mistaken for topics
 const WORD3 = ['足球', '行星', '公投'], WC = ['#475569', '#b45309', '#0f766e'];
-simplexSlide('s-beta', { colors: WC, corner: k => `只用「${WORD3[k]}」`, item: d => `主題 ${d + 1}`, center: '每個詞都用', legend: ['每個點 ＝ 一個主題', '離哪個角越近，', '該詞越多'], seed0: 9 });
+simplexSlide('s-beta', { colors: WC, corner: k => `only “${WORD3[k]}”`, item: d => `Topic ${d + 1}`, center: 'every word used', legend: ['each dot = one topic', 'the closer to a corner,', 'the more of that word'], seed0: 9 });
 
 /* ---------- 18. word intrusion ---------- */
 (function () {
@@ -641,7 +641,7 @@ simplexSlide('s-beta', { colors: WC, corner: k => `只用「${WORD3[k]}」`, ite
       [...box.children].forEach((row, i) => {
         const show = step >= (i < 3 ? 1 : 2);
         row.querySelector('.intruder').classList.toggle('show', show);
-        row.querySelector('.note').textContent = i === 3 && show ? '← 幾乎猜不出來 almost impossible to tell' : '';
+        row.querySelector('.note').textContent = i === 3 && show ? '← almost impossible to tell' : '';
       });
     }
   };

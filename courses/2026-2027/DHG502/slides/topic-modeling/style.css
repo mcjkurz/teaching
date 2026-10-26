@@ -406,3 +406,17 @@ h2.bi > .zh { font-size: 24px; }
 .title-slide .big-zh { font-size: 46px; color: var(--mute); font-weight: 500; margin-top: 6px; letter-spacing: .04em; }
 .title-slide .quote .en { font-size: 30px; font-style: italic; } .title-slide .quote .zh { font-size: 22px; }
 #s-goal .bi.sm > .en { font-size: 23px; } #s-goal .bi.xs > .en { font-size: 19px; }
+.zhn { display: block; font-family: var(--cjk), var(--latin); font-size: .78em; color: var(--mute); font-weight: 400; margin-top: 2px; }
+.stat .zhn { display: inline; margin-left: 6px; }
+.tag .tz { font-weight: 400; font-size: 14px; opacity: .9; margin-left: 2px; }
+.mail .t { display: flex; flex-direction: column; font-family: var(--latin), var(--cjk); }
+.mail .t .en { order: -1; font-size: 21px; line-height: 1.3; color: var(--ink); margin: 0 0 3px; }
+.mail .t { font-size: 17px; color: var(--mute); }
+.mail { min-height: 130px; }
+.ann .zhn { display: inline; margin-left: 10px; font-size: .8em; }
+.bubble .zhn { margin-top: 6px; }
+.ann { font-size: 21px; white-space: nowrap; }
+.ann .zhn { font-size: 16px; }
+#s-step .qgrid, #s-step .rects { grid-template-columns: 400px repeat(3, 1fr); }
+#s-step .qgrid .q { font-size: 19px; line-height: 1.25; }
+#s-step .qgrid .q .en { font-size: 14px; }
