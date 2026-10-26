@@ -249,8 +249,45 @@ function paintMix(row, counts) {
   let theta = [.6, .1, .3], timer = null, built = false, started = false;
   // the board: one strip per topic, as wide as its share; a dart lands at a random spot, the strip it hits is the topic
   const BW = 300, BH = 150;
+  // colours and percentages only (the legend is the row of topic cards above); two handles move the boundaries
   function showMix(el) {
-    $('#gen-board', el).innerHTML = theta.map((p, k) => `<div class="strip" style="width:${100 * p}%;background:${TC[k]}">${p * BW > 46 ? `<span>${TOPICS[k].name}<br>${pct(p)}</span>` : ''}</div>`).join('');
+    const board = $('#gen-board', el);
+    board.querySelectorAll('.strip, .hdl').forEach(n => n.remove());
+    theta.forEach((p, k) => {
+      const s = document.createElement('div');
+      s.className = 'strip'; s.style.background = TC[k];
+      board.appendChild(s);
+    });
+    [0, 1].forEach(i => {
+      const h = document.createElement('div');
+      h.className = 'hdl'; h.title = '拖曳以調整主題比例';
+      h.addEventListener('pointerdown', e => {
+        e.stopPropagation(); e.preventDefault();
+        h.setPointerCapture(e.pointerId); board.classList.add('drag');
+        const rect = board.getBoundingClientRect(), MIN = 0.03;
+        const move = ev => {
+          const x = (ev.clientX - rect.left) / rect.width;
+          const lo = i === 0 ? MIN : theta[0] + MIN, hi = i === 0 ? theta[0] + theta[1] - MIN : 1 - MIN;
+          const c = Math.max(lo, Math.min(hi, x));
+          if (i === 0) { theta = [c, theta[0] + theta[1] - c, theta[2]]; }
+          else { theta = [theta[0], c - theta[0], 1 - c]; }
+          paintMix(el);
+        };
+        const up = () => { board.classList.remove('drag'); h.removeEventListener('pointermove', move); h.removeEventListener('pointerup', up); };
+        h.addEventListener('pointermove', move); h.addEventListener('pointerup', up);
+      });
+      h.addEventListener('click', e => e.stopPropagation());
+      board.appendChild(h);
+    });
+    paintMix(el);
+  }
+  function paintMix(el) {
+    const board = $('#gen-board', el);
+    board.querySelectorAll('.strip').forEach((s, k) => {
+      s.style.width = (100 * theta[k]) + '%';
+      s.textContent = theta[k] * BW > 34 ? pct(theta[k]) : '';
+    });
+    board.querySelectorAll('.hdl').forEach((h, i) => { h.style.left = (100 * (i === 0 ? theta[0] : theta[0] + theta[1])) + '%'; });
   }
   function dart(el, u, v) {
     const board = $('#gen-board', el);
@@ -277,21 +314,30 @@ function paintMix(row, counts) {
       n++;
     }, 650);
   }
+  // generation waits for G or the button; pressing again resets (new topic mix) and starts over
+  function run(el) {
+    started = true;
+    generate(el);
+    $('#gen-go', el).textContent = '↻ 重來 (G)';
+  }
   HOOKS['s-gen'] = {
     render(step, el) {
       if (!built) {
         $('#gen-topics', el).innerHTML = TOPICS.map((t, k) => `<div class="topic k${k}"><h4 style="color:${TC[k]}">主題 ${k + 1}（${t.name}）</h4>${t.words.map(([w, p]) => `<div class="row"><span>${w}</span><span>${p.toFixed(2)}</span></div>`).join('')}</div>`).join('');
         showMix(el);
+        $('#gen-go', el).addEventListener('click', e => { e.stopPropagation(); run(el); });
         built = true;
       }
-      if (step >= 2 && !started) { started = true; generate(el); }
-      if (step < 2 && started) { started = false; clearInterval(timer); $('#gen-doc', el).innerHTML = ''; }
+      if (step < 2 && started) {
+        started = false; clearInterval(timer); $('#gen-doc', el).innerHTML = '';
+        theta = [.6, .1, .3]; showMix(el);
+        $('#gen-board', el).querySelectorAll('.hit').forEach(h => h.remove());
+        $('#gen-go', el).textContent = '▶ 開始 (G)';
+      }
     },
     key(e, step, el) {
-      if (e.key.toLowerCase() !== 'g' || step < 1) return false;
-      theta = dirichlet(0.8, 3, r);
-      showMix(el);
-      if (step >= 2) generate(el);
+      if (e.key.toLowerCase() !== 'g' || step < 2) return false;
+      run(el);
       return true;
     }
   };

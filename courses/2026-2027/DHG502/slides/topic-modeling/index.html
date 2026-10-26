@@ -217,6 +217,25 @@
   </div>
 </section>
 
+<!-- ─────────── How perplexity is computed -->
+<section class="slide" id="s-perp2" data-sec="gibbs">
+  <h2 class="bi"><span class="zh">困惑度怎麼算？</span><span class="en">How is perplexity computed?</span></h2>
+  <div class="bi xs" data-step="1" style="margin-top:0"><span class="zh">文件已存在，詞是<b>固定</b>的。對每個真實出現的詞，問模型給它多大機率。<b>不抽樣主題</b>，而是對所有主題加總。</span><span class="en">The document already exists, so its words are fixed. For each actual word, ask how probable the trained model finds it, given that document. No topic is sampled: add up over all topics.</span></div>
+  <div class="fterms" data-step="2">
+    <div class="ft c-p"><div class="fx">\(P(w \mid d)\)</div><i class="farrow"></i><div class="bi xs"><span class="en">probability of word <i>w</i> in document <i>d</i></span><span class="zh">詞 w 在文件 d 中的機率</span></div></div>
+    <div class="feq">\(=\)</div>
+    <div class="ft c-s"><div class="fx">\(\sum_k\)</div><i class="farrow"></i><div class="bi xs"><span class="en">add up over all topics <i>k</i></span><span class="zh">對所有主題加總</span></div></div>
+    <div class="ft c-t"><div class="fx">\(\theta_{d,k}\)</div><i class="farrow"></i><div class="bi xs"><span class="en">share of topic <i>k</i> in document <i>d</i></span><span class="zh">主題 k 在文件 d 的比例</span></div></div>
+    <div class="feq">\(\times\)</div>
+    <div class="ft c-f"><div class="fx">\(\varphi_{k,w}\)</div><i class="farrow"></i><div class="bi xs"><span class="en">probability of word <i>w</i> in topic <i>k</i></span><span class="zh">詞 w 在主題 k 的機率</span></div></div>
+  </div>
+  <div class="callout key" data-step="3" style="margin-top:6px;padding:8px 24px">
+    <div class="bi xs"><span class="zh">例：用剛才的玩具模型，文件 1 的 θ ＝ (0.4, 0, 0.6)；「足球」在紅色主題的 φ ＝ 1.00</span><span class="en">Example from our toy model: document 1 has θ = (0.4, 0, 0.6), and 足球 has φ = 1.00 in the red topic.</span></div>
+    <div class="eq" style="margin-top:6px">\(P(\text{足球} \mid \text{Doc 1}) = 0.4 \times 0.00 + 0 \times 0.00 + 0.6 \times 1.00 = 0.60\)</div>
+  </div>
+  <div class="bi xs" data-step="4" style="margin-top:6px"><span class="zh">對所有詞取平均「意外程度」再還原：<b>困惑度 ＝ exp(−平均 log P)</b></span><span class="en">Average the surprise (−log P) over all words and convert back to “N equally likely words”: perplexity = exp(−mean log P).</span></div>
+</section>
+
 <!-- ─────────── K-means -->
 <section class="slide" id="s-kmeans" data-sec="k">
   <h2 class="bi"><span class="zh">要分成幾群？</span><span class="en">How many groups? (K-means clustering)</span></h2>

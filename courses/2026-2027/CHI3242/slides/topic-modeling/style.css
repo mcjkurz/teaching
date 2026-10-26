@@ -385,3 +385,11 @@ svg.arrows { position: absolute; left: 0; top: 0; width: 1280px; height: 720px; 
 .annot .ann { flex: 1; display: flex; align-items: center; gap: 0; }
 .annot .arr { flex: 1; width: auto !important; margin-left: 14px !important; }
 .annot .ann > span { width: 440px; flex: none; padding-left: 22px; }
+
+.board .hdl { position: absolute; top: 0; bottom: 0; width: 18px; margin-left: -9px; cursor: ew-resize; touch-action: none; z-index: 2; }
+.board .hdl::after { content: ""; position: absolute; left: 7px; top: 0; bottom: 0; width: 4px; background: #fff; box-shadow: 0 0 4px rgba(0,0,0,.35); }
+.board .hdl::before { content: "↔"; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 22px; height: 22px; line-height: 22px; text-align: center; border-radius: 50%; background: #fff; color: var(--ink); font-size: 14px; box-shadow: 0 1px 5px rgba(0,0,0,.4); z-index: 1; }
+.board.drag .strip { transition: none; }
+.board .hit { z-index: 1; pointer-events: none; }
+.gobtn { font: inherit; font-size: 17px; padding: 4px 16px; border: 1.5px solid var(--tgt); color: var(--tgt); background: #fff; border-radius: 999px; cursor: pointer; }
+.gobtn:hover { background: var(--tgt-bg); }
