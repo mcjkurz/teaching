@@ -318,10 +318,8 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
         <div class="schedule-section">
           <strong class="schedule-label">Class content</strong>
           <ul class="readings">
-            <li>Interpretation, preservation, reconstruction, authenticity, and the digital representation of cultural heritage</li>
-            <li>Digital museum, library, and archive platforms; examples from the Hong Kong Heritage Museum and Hong Kong Palace Museum</li>
-            <li>Computer vision and “distant viewing”: what computational image analysis can and cannot “see,” and how it relates to manual annotation</li>
-            <li>3D and virtual reconstructions as case studies in historical accuracy and interpretation (critique only; hands-on 3D modeling is covered in another course)</li>
+            <li>Interpretation, preservation, reconstruction, and authenticity in the digital representation of cultural heritage; digital museum, library, and archive platforms (Hong Kong Heritage Museum, Hong Kong Palace Museum)</li>
+            <li>Computer vision and “distant viewing”: what computational image analysis can and cannot “see,” and how it relates to manual annotation; 3D and virtual reconstructions as case studies in historical accuracy (critique only)</li>
             <li>Hands-on: use <a href="https://immarkus.xmarkus.org/">IMMARKUS</a> to annotate regions in an East Asian historical image; inspect CSV and JSON-LD exports</li>
           </ul>
         </div>
