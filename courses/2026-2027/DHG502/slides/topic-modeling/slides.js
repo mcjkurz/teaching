@@ -277,21 +277,31 @@ function paintMix(row, counts) {
       n++;
     }, 650);
   }
+  // generation waits for G or the button; pressing again resets (new topic mix) and starts over
+  function run(el) {
+    if (started) { theta = dirichlet(0.8, 3, r); showMix(el); }
+    started = true;
+    generate(el);
+    $('#gen-go', el).textContent = '↻ Reset (G)';
+  }
   HOOKS['s-gen'] = {
     render(step, el) {
       if (!built) {
         $('#gen-topics', el).innerHTML = TOPICS.map((t, k) => `<div class="topic k${k}"><h4 style="color:${TC[k]}">Topic ${k + 1} (${t.name})</h4>${t.words.map(([w, p]) => `<div class="row"><span>${w}</span><span>${p.toFixed(2)}</span></div>`).join('')}</div>`).join('');
         showMix(el);
+        $('#gen-go', el).addEventListener('click', e => { e.stopPropagation(); run(el); });
         built = true;
       }
-      if (step >= 2 && !started) { started = true; generate(el); }
-      if (step < 2 && started) { started = false; clearInterval(timer); $('#gen-doc', el).innerHTML = ''; }
+      if (step < 2 && started) {
+        started = false; clearInterval(timer); $('#gen-doc', el).innerHTML = '';
+        theta = [.6, .1, .3]; showMix(el);
+        $('#gen-board', el).querySelectorAll('.hit').forEach(h => h.remove());
+        $('#gen-go', el).textContent = '▶ Start (G)';
+      }
     },
     key(e, step, el) {
-      if (e.key.toLowerCase() !== 'g' || step < 1) return false;
-      theta = dirichlet(0.8, 3, r);
-      showMix(el);
-      if (step >= 2) generate(el);
+      if (e.key.toLowerCase() !== 'g' || step < 2) return false;
+      run(el);
       return true;
     }
   };

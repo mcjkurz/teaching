@@ -420,3 +420,5 @@ h2.bi > .zh { font-size: 24px; }
 #s-step .qgrid, #s-step .rects { grid-template-columns: 400px repeat(3, 1fr); }
 #s-step .qgrid .q { font-size: 19px; line-height: 1.25; }
 #s-step .qgrid .q .en { font-size: 14px; }
+.gobtn { font: inherit; font-size: 17px; padding: 4px 16px; border: 1.5px solid var(--tgt); color: var(--tgt); background: #fff; border-radius: 999px; cursor: pointer; }
+.gobtn:hover { background: var(--tgt-bg); }
