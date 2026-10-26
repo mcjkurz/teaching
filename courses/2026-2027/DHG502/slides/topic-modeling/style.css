@@ -439,3 +439,6 @@ svg.rm { overflow: visible; }
 .fterms .fx { background: color-mix(in srgb, currentColor 10%, #fff); }
 .fterms .bi .en { color: var(--ink); } 
 .fterms .c-p .en, .fterms .c-s .en, .fterms .c-t .en, .fterms .c-f .en { font-weight: 500; }
+.pcmp .callout { margin-top: 0; padding: 10px 20px; }
+.pcmp .callout.up { border-left-color: #16a34a; } .pcmp .callout.down { border-left-color: #dc2626; }
+.pcmp .grow { flex: 1; }
