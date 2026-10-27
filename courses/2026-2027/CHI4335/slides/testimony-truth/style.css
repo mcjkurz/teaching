@@ -305,3 +305,9 @@ table.cmp2.s th { font-size: 20px; }
 .cmt.sm { font-size: 19px; }
 .ctxl { font-size: 18px; line-height: 1.5; color: var(--mute); margin: 0 0 10px; }
 mark { background: #fbe9e7; color: var(--acc); padding: 0 2px; border-radius: 2px; font-weight: 600; }
+/* roomier slides: enlarge everything below the title */
+.slide[data-z] > :not(h2):not(.src) { zoom: var(--z); }
+.rows.t.hist .r { grid-template-columns: 110px 1fr; gap: 16px; }
+.rows.t.hist .r .k { font-size: 21px; }
+.rows.t.hist .r .v { font-size: 19px; }
+#s-ung-voice .rows.t .r { padding: 7px 0; }
