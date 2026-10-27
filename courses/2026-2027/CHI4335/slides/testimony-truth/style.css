@@ -311,3 +311,4 @@ mark { background: #fbe9e7; color: var(--acc); padding: 0 2px; border-radius: 2p
 .rows.t.hist .r .k { font-size: 21px; }
 .rows.t.hist .r .v { font-size: 19px; }
 #s-ung-voice .rows.t .r { padding: 7px 0; }
+#s-laub ul.l li { font-size: 21px; line-height: 1.55; margin-bottom: 10px; }
