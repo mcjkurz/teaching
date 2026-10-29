@@ -643,6 +643,21 @@
   <div class="src abs">Eder, Rybicki &amp; Kestemont, “Stylometry with R”, <i>R Journal</i> 8.1 (2016) · 常用工具 <i>stylo</i> 的作者 · makers of the R package <i>stylo</i></div>
 </section>
 
+<!-- ─────────── Simulated PCA: Lu Xun vs Shen Congwen -->
+<section class="slide" id="s-pcaex" data-sec="methods">
+  <h2 class="bi"><span class="zh">想像一下：魯迅與沈從文</span><span class="en">Imagine it: Lu Xun and Shen Congwen in two dimensions (simulated)</span></h2>
+  <div class="fig-l" style="gap:30px">
+    <svg id="pcaex-svg" class="chart" viewBox="0 0 560 440" style="width:540px;flex:none"></svg>
+    <div class="txt">
+      <div class="bi xs"><span class="zh">每一個點 ＝ 一篇小說；最常見的 100 個詞 → PCA → 2 維</span><span class="en">one dot per story: 100 most frequent words, squeezed by PCA into 2 dimensions</span></div>
+      <div class="bi xs" data-step="1"><span class="zh"><span style="color:var(--a)">魯迅</span>和<span style="color:var(--b)">沈從文</span>各成一群</span><span class="en">each author forms his own cluster</span></div>
+      <div class="bi xs" data-step="2"><span class="zh">一篇<b>作者不明</b>的小說 <span style="color:#6a7386">●</span> 落在哪裡？</span><span class="en">where does a story of unknown authorship land?</span></div>
+      <div class="callout key bi xs" data-step="3"><span class="zh">它靠近<span style="color:var(--a)">魯迅</span>那一群 → 文體上<b>像魯迅</b>；但「像」不等於「就是」</span><span class="en">It lands among Lu Xun’s stories: stylistically close, but closeness is evidence, not proof.</span></div>
+    </div>
+  </div>
+  <div class="src abs">模擬數據，僅供示意 · simulated data, for illustration only</div>
+</section>
+
 <!-- ─────────── Hildegard -->
 <section class="slide" id="s-hild" data-sec="methods">
   <h2 class="bi"><span class="zh">希德嘉與她的秘書</span><span class="en">Hildegard of Bingen (c. 1098–1179) and her secretary</span></h2>

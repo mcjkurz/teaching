@@ -58,25 +58,48 @@
 
 <!-- ─────────── Features -->
 <section class="slide" id="s-feat" data-sec="feat">
-  <h2 class="bi"><span class="zh">文本 → 數字：特徵</span><span class="en">From text to numbers: features</span></h2>
+  <h2 class="bi"><span class="zh">文本 → 數字：詞袋</span><span class="en">From text to numbers: the bag of words</span></h2>
   <div class="two" style="gap:48px">
     <div class="grow">
       <div class="bi sm" data-step="1"><span class="zh">① 分詞（jieba）＋ 去停用詞</span><span class="en">segment with jieba, remove stopwords</span></div>
-      <div class="bi sm" data-step="2" style="margin-top:22px"><span class="zh">② 詞袋：數每個詞的次數 → 向量 x</span><span class="en">bag of words: count each word → a vector x</span></div>
-      <div class="bi sm" data-step="3" style="margin-top:22px"><span class="zh">③ TF-IDF：到處都出現的詞打折，<b>有鑑別力的詞</b>加權</span><span class="en">downweight ubiquitous words, upweight distinctive ones</span></div>
+      <div class="bi sm" data-step="2" style="margin-top:22px"><span class="zh">② 數每個詞出現幾次 → 每篇評論變成一個<b>向量</b> x</span><span class="en">count each word: every review becomes a vector x</span></div>
+      <div class="callout key bi xs" data-step="3" style="margin-top:22px"><span class="zh">但每個詞都一樣重要嗎？「電影」兩篇都有，說明不了什麼 → TF-IDF</span><span class="en">but are all words equally informative? 電影 occurs in both reviews and says little</span></div>
     </div>
-    <div style="width:500px;flex:none">
-      <div class="eq" data-step="3">\(\text{tfidf}(w) = \text{tf}(w) \times \log\dfrac{N}{\text{df}(w)}\)</div>
-      <table class="cmp" data-step="4" style="margin-top:16px">
-        <thead><tr><th>詞 word</th><th class="num">tf</th><th class="num">df</th><th class="num">TF-IDF</th></tr></thead>
+    <div style="width:540px;flex:none">
+      <div class="bi xs" data-step="1"><span class="zh">A「這部電影很精彩」</span><span class="en">→ 電影 ｜ 精彩</span></div>
+      <div class="bi xs" data-step="1"><span class="zh">B「這部電影浪費時間，非常失望」</span><span class="en">→ 電影 ｜ 浪費 ｜ 時間 ｜ 失望</span></div>
+      <table class="cmp" data-step="2" style="margin-top:18px">
+        <thead><tr><th></th><th class="num">電影</th><th class="num">精彩</th><th class="num">浪費</th><th class="num">時間</th><th class="num">失望</th></tr></thead>
         <tbody>
-          <tr><td>電影</td><td class="num">1</td><td class="num">60 / 100</td><td class="num">低 low</td></tr>
-          <tr><td>精彩</td><td class="num">1</td><td class="num">3 / 100</td><td class="num" style="color:var(--tgt)">高 high</td></tr>
+          <tr><td>A</td><td class="num">1</td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num">0</td></tr>
+          <tr><td>B</td><td class="num">1</td><td class="num">0</td><td class="num">1</td><td class="num">1</td><td class="num">1</td></tr>
         </tbody>
       </table>
-      <div class="bi xs" data-step="4" style="margin-top:12px"><span class="zh">tf：這篇出現幾次；df：幾篇出現過</span><span class="en">N: total number of documents (100 here, numbers illustrative)</span></div>
+      <div class="bi xs" data-step="2" style="margin-top:10px"><span class="zh">詞序不見了：只剩「袋子」裡的詞</span><span class="en">word order is lost; only the bag of words remains</span></div>
     </div>
   </div>
+</section>
+
+<!-- ─────────── TF-IDF -->
+<section class="slide" id="s-tfidf" data-sec="feat">
+  <h2 class="bi"><span class="zh">TF-IDF：哪些詞真正重要？</span><span class="en">TF-IDF: which words really matter?</span></h2>
+  <div class="two" style="gap:40px;align-items:center">
+    <div class="grow">
+      <div class="bi xs" data-step="1"><span class="zh">tf（詞頻）：這個詞在<b>這篇</b>出現幾次</span><span class="en">term frequency: how often the word occurs in this document</span></div>
+      <div class="bi xs" data-step="2" style="margin-top:12px"><span class="zh">df（文件頻率）：<b>多少篇</b>有這個詞；越少見，idf 越大</span><span class="en">document frequency: how many documents contain it; rarer words get a larger idf</span></div>
+    </div>
+    <div class="eq" data-step="3" style="flex:none">\(\text{tfidf}(w) = \text{tf}(w) \times \log\dfrac{N}{\text{df}(w)}\)</div>
+  </div>
+  <table class="cmp" data-step="4" style="margin-top:14px">
+    <thead><tr><th>詞 word</th><th class="num">tf</th><th class="num">df</th><th class="num">idf = log(N / df)</th><th class="num">TF-IDF</th></tr></thead>
+    <tbody>
+      <tr><td>的</td><td class="num">1</td><td class="num">100 / 100</td><td class="num">0.00</td><td class="num">0.00</td></tr>
+      <tr><td>電影</td><td class="num">1</td><td class="num">60 / 100</td><td class="num">0.51</td><td class="num">0.51</td></tr>
+      <tr><td>精彩</td><td class="num">1</td><td class="num">3 / 100</td><td class="num">3.51</td><td class="num" style="color:var(--tgt);font-weight:700">3.51</td></tr>
+    </tbody>
+  </table>
+  <div class="src" data-step="4" style="margin-top:6px">N = 100 篇評論，自然對數；示例數字。scikit-learn 用的是稍加平滑的版本 (a smoothed variant)</div>
+  <div class="callout key bi xs" data-step="5" style="margin-top:14px"><span class="zh">到處都出現的詞 → idf ≈ 0；只在少數評論出現的詞 → 分數高</span><span class="en">ubiquitous words are switched off; distinctive words are boosted</span></div>
 </section>
 
 <!-- ─────────── One prediction -->
@@ -140,6 +163,22 @@
   <div class="callout key bi xs" data-step="5" style="margin-top:28px"><span class="zh">機率總和 ＝ 1；只有兩類時，softmax 就等於 sigmoid</span><span class="en">probabilities sum to 1; with two classes, softmax reduces to the sigmoid</span></div>
 </section>
 
+<!-- ─────────── Train / test split -->
+<section class="slide" id="s-split" data-sec="eval">
+  <h2 class="bi"><span class="zh">訓練集與測試集</span><span class="en">Train / test split: never grade the model on its own homework</span></h2>
+  <div class="bi xs" data-step="1"><span class="zh">500 篇已標註的評論，先<b>隨機打亂</b>，再切成兩份</span><span class="en">shuffle 500 labelled reviews, then split them in two</span></div>
+  <div class="split" data-step="1" style="margin-top:16px">
+    <div class="part train"><b>訓練集 training set</b><span>400 篇 · 80%</span></div>
+    <div class="part test"><b>測試集 test set</b><span>100 篇 · 20%</span></div>
+  </div>
+  <div class="two" style="gap:40px;margin-top:20px">
+    <div class="bi xs grow" data-step="2"><span class="zh">① 只用<b>訓練集</b>學出 w、b</span><span class="en">learn the weights on the training set only</span></div>
+    <div class="bi xs grow" data-step="3" style="margin-top:0"><span class="zh">② 用模型<b>沒看過</b>的測試集評估</span><span class="en">evaluate on reviews the model has never seen</span></div>
+  </div>
+  <div class="eq" data-step="4" style="margin-top:18px;font-size:20px"><code>X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)</code></div>
+  <div class="callout key bi xs" data-step="5" style="margin-top:14px"><span class="zh">在訓練資料上考試 ＝ 先把考卷答案給學生：分數好看，卻不代表真的學會（過擬合 overfitting）</span><span class="en">testing on the training data is like handing out the answers before the exam</span></div>
+</section>
+
 <!-- ─────────── Evaluation -->
 <section class="slide" id="s-eval" data-sec="eval">
   <h2 class="bi"><span class="zh">模型有多準？</span><span class="en">Evaluation: the confusion matrix</span></h2>
@@ -191,7 +230,7 @@
     <div class="rrow" data-step="2"><i>2</i><div class="bi sm"><span class="zh">sigmoid 把分數壓成機率：\(p = \sigma(w \cdot x + b)\)</span><span class="en">the sigmoid squashes the score into a probability</span></div></div>
     <div class="rrow" data-step="3"><i>3</i><div class="bi sm"><span class="zh"><b>交叉熵</b>損失 ＋ <b>梯度下降</b> → 學出 w、b</span><span class="en">cross-entropy loss plus gradient descent learn the weights</span></div></div>
     <div class="rrow" data-step="4"><i>4</i><div class="bi sm"><span class="zh">多類：softmax（兩類時 ＝ sigmoid）</span><span class="en">softmax handles several classes</span></div></div>
-    <div class="rrow" data-step="5"><i>5</i><div class="bi sm"><span class="zh">評估看<b>混淆矩陣</b>：準確率、精確率、召回率</span><span class="en">evaluate with the confusion matrix, not accuracy alone</span></div></div>
+    <div class="rrow" data-step="5"><i>5</i><div class="bi sm"><span class="zh">在<b>測試集</b>上評估：混淆矩陣、準確率、精確率、召回率</span><span class="en">evaluate on held-out test data, not accuracy alone</span></div></div>
   </div>
   <div class="callout key bi sm" data-step="6" style="margin-top:8px"><span class="zh"><b>下一步</b>：在中文評論語料上做情感分析</span><span class="en">next: sentiment analysis on a real Chinese review corpus</span></div>
 </section>

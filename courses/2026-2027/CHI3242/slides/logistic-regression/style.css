@@ -163,3 +163,10 @@ code { font-family: "SF Mono", Menlo, Consolas, monospace; font-size: .92em; }
 
 /* the interactive sigmoid marker and its guides */
 #sig-svg .m, #sig-svg .s, #sig-svg .d { transition: opacity .4s; }
+
+/* train / test split bar */
+.split { display: flex; gap: 8px; height: 92px; }
+.split .part { border-radius: 12px; display: flex; flex-direction: column; justify-content: center; padding: 0 24px; font-size: 22px; font-family: var(--cjk), var(--latin); }
+.split .part span { font-size: 18px; color: var(--mute); margin-top: 2px; }
+.split .train { flex: 4; background: var(--tgt-bg); border: 2px solid var(--tgt); }
+.split .test { flex: 1; background: var(--win-bg); border: 2px solid var(--win); }

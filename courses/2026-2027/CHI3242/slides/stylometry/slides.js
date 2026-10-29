@@ -561,6 +561,38 @@ function svmPlot(svg, o) {
 }
 const f = (L, p) => L.w[0] * p.x + L.w[1] * p.y + L.b;
 
+/* ---------- simulated PCA: two author clusters, then an unknown story near Lu Xun ---------- */
+(function () {
+  // small deterministic generator, so the picture is the same every time
+  let seed = 7;
+  const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const gauss = () => Math.sqrt(-2 * Math.log(rnd() + 1e-9)) * Math.cos(2 * Math.PI * rnd());
+  const cluster = (cx, cy, sx, sy, n) => Array.from({ length: n }, () => [cx + gauss() * sx, cy + gauss() * sy]);
+  const LU = cluster(-1.6, 0.6, 0.55, 0.6, 24), SHEN = cluster(1.5, -0.5, 0.6, 0.55, 24), Q = [-1.15, 0.2];
+  const L = 60, R = 540, T = 20, B = 390, sx = x => L + (x + 3.5) / 7 * (R - L), sy = y => B - (y + 2.5) / 5 * (B - T);
+  HOOKS['s-pcaex'] = {
+    render(step, el) {
+      let h = `<rect x="${L}" y="${T}" width="${R - L}" height="${B - T}" fill="#f8fafc" stroke="${LINE}"/>`;
+      h += `<line x1="${sx(0)}" y1="${T}" x2="${sx(0)}" y2="${B}" stroke="${LINE}" stroke-dasharray="5 5"/><line x1="${L}" y1="${sy(0)}" x2="${R}" y2="${sy(0)}" stroke="${LINE}" stroke-dasharray="5 5"/>`;
+      h += `<text x="${(L + R) / 2}" y="${B + 32}" text-anchor="middle" style="font-size:17px;font-weight:600;fill:${INK}">PC1</text>`;
+      h += `<text x="${L - 16}" y="${(T + B) / 2}" text-anchor="middle" transform="rotate(-90 ${L - 16} ${(T + B) / 2})" style="font-size:17px;font-weight:600;fill:${INK}">PC2</text>`;
+      const col = c => step >= 1 ? c : '#9aa1ad';
+      LU.forEach(([x, y]) => { h += `<circle cx="${sx(x)}" cy="${sy(y)}" r="8" fill="${col(A_C)}" fill-opacity=".75" stroke="#fff" stroke-width="1.5"/>`; });
+      SHEN.forEach(([x, y]) => { h += `<circle cx="${sx(x)}" cy="${sy(y)}" r="8" fill="${col(B_C)}" fill-opacity=".75" stroke="#fff" stroke-width="1.5"/>`; });
+      if (step >= 1) {
+        h += `<text x="${sx(-2.6)}" y="${sy(2.05)}" style="font-size:22px;font-weight:700;fill:${A_C}">魯迅</text>`;
+        h += `<text x="${sx(1.6)}" y="${sy(-1.95)}" style="font-size:22px;font-weight:700;fill:${B_C}">沈從文</text>`;
+      }
+      if (step >= 2) {
+        h += `<circle cx="${sx(Q[0])}" cy="${sy(Q[1])}" r="12" fill="#6a7386" stroke="#fff" stroke-width="3"><animate attributeName="r" values="0;16;12" dur=".6s"/></circle>`;
+        h += `<text x="${sx(Q[0]) + 18}" y="${sy(Q[1]) + 7}" style="font-size:22px;font-weight:700;fill:#6a7386">?</text>`;
+      }
+      if (step >= 3) h += `<circle cx="${sx(-1.6)}" cy="${sy(0.6)}" r="${0.55 * 2.2 / 7 * (R - L)}" fill="none" stroke="${A_C}" stroke-width="2.5" stroke-dasharray="8 6"/>`;
+      $('#pcaex-svg', el).innerHTML = h;
+    }
+  };
+})();
+
 /* ---------- 7. many separating lines ---------- */
 (function () {
   const WANT = [[-24, 0.22], [18, 0.75], [-8, 0.85], [27, 0.3], [0, 0.5]];

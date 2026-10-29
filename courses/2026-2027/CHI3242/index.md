@@ -352,7 +352,7 @@ title: CHI3242
           <li>Xianfeng Hu, Yang Wang, and Qiang Wu, <a href="https://doi.org/10.1142/S1793536914500125">“Multiple Authors Detection: A Quantitative Analysis of <em>Dream of the Red Chamber</em>”</a>, <em>Advances in Adaptive Data Analysis</em> 6, no. 4 (2014)</li>
         </ul>
       </td>
-      <td class="notes"><a href="slides/stylometry/">Slides</a><br><a href="https://mcjkurz.github.io/teaching/visualizations/z-scores-for-stylometry.html">Z-scores</a></td>
+      <td class="notes"><a href="notes/week-08/">Notes</a><br><a href="slides/stylometry/">Slides</a><br><a href="https://mcjkurz.github.io/teaching/visualizations/z-scores-for-stylometry.html">Z-scores</a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -370,7 +370,7 @@ title: CHI3242
           <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Kurt Vonnegut, <a href="https://www.youtube.com/watch?v=4ec0lSd7qH4">“On the Shapes of Stories”</a> <span class="lang-en">(video)</span><span class="lang-zh" lang="zh-Hant">（影片）</span></li>
         </ul>
       </td>
-      <td class="notes"></td>
+      <td class="notes"><a href="notes/week-09/">Notes</a><br><a href="slides/logistic-regression/">Slides</a></td>
     </tr>
   </tbody>
   <tbody class="block-b">

@@ -121,7 +121,7 @@ HOOKS['s-title'] = {
 (function () {
   const INK = '#1b2333', MUTE = '#6a7386', POS = '#16a34a', NEG = '#dc2626', ACC = '#1f5fd6';
   const WORDS = ['精彩', '電影', '好看', '失望', '無聊'];
-  const X = [0.80, 0.50, 0, 0, 0], W = [1.10, 0.02, 0.95, -1.30, -0.90], B = 0.10;
+  const X = [3.51, 0.51, 0, 0, 0], W = [0.25, 0.02, 0.22, -0.30, -0.21], B = 0.10;   // x: the TF-IDF values of the previous slides
   const z = X.reduce((t, v, i) => t + v * W[i], B), p = sig(z);
   const IX = 320, IY = i => 57 + i * 64, NX = 600, NY = 185, SX0 = 720, SX1 = 860;
   const sg = v => (v >= 0 ? '+' : '−') + Math.abs(v).toFixed(2);
@@ -138,7 +138,7 @@ HOOKS['s-title'] = {
     WORDS.forEach((w, i) => {
       const col = W[i] >= 0 ? POS : NEG, d = `M${IX + 28} ${IY(i)} C${IX + 150} ${IY(i)}, ${NX - 160} ${NY}, ${NX - 56} ${NY}`;
       const off = step >= 3 && !X[i];
-      h += `<path d="${d}" fill="none" stroke="${step >= 2 ? col : '#cbd2dc'}" stroke-width="${step >= 2 ? 2 + Math.abs(W[i]) * 6 : 3}" opacity="${off ? 0.2 : 0.8}"/>`;
+      h += `<path d="${d}" fill="none" stroke="${step >= 2 ? col : '#cbd2dc'}" stroke-width="${step >= 2 ? 2 + Math.abs(W[i]) * 20 : 3}" opacity="${off ? 0.2 : 0.8}"/>`;
       // wires below the middle bend upwards, so their labels go underneath
       if (step >= 2) h += `<text x="${IX + 38}" y="${IY(i) + (i > 2 ? 24 : -10)}" style="font-size:16px;font-weight:700;fill:${col};opacity:${off ? 0.4 : 1}">w = ${sg(W[i])}</text>`;
       if (step === 3 && X[i]) h += `<circle r="7" fill="#fbbf24" stroke="#fff" stroke-width="2"><animateMotion dur="0.9s" begin="${0.15 * i}s" fill="freeze" path="${d}"/></circle>`;
