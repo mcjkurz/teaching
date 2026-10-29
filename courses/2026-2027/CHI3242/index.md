@@ -372,13 +372,6 @@ title: CHI3242
       <td class="notes"></td>
     </tr>
   </tbody>
-  <tbody class="due">
-    <tr>
-      <td></td>
-      <td class="date"><span class="lang-en">11 Nov</span><span class="lang-zh" lang="zh-Hant">11月11日</span></td>
-      <td colspan="3"><a href="assignments/assignment-2/"><span class="lang-en">Assignment 2 due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">作業2截止，上午9:00</span></a></td>
-    </tr>
-  </tbody>
   <tbody class="block-b">
     <tr>
       <td class="week">10</td>
@@ -395,6 +388,13 @@ title: CHI3242
         </ul>
       </td>
       <td class="notes"></td>
+    </tr>
+  </tbody>
+  <tbody class="due">
+    <tr>
+      <td></td>
+      <td class="date"><span class="lang-en">11 Nov</span><span class="lang-zh" lang="zh-Hant">11月11日</span></td>
+      <td colspan="3"><a href="assignments/assignment-2/"><span class="lang-en">Assignment 2 due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">作業2截止，上午9:00</span></a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
