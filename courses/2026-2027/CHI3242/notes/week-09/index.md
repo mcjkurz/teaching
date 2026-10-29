@@ -25,40 +25,33 @@ title: CHI3242 第9週講義
 <li>小說：徐懷中《牽風記》：<a href="https://github.com/mcjkurz/qhchina-data/blob/main/corpora/misc/%E7%89%B5%E9%A3%8E%E8%AE%B0-%E5%BE%90%E6%80%80%E4%B8%AD.txt">qhchina-data/corpora/misc/牵风记-徐怀中.txt</a></li>
 <li>工具：jieba、scikit-learn 的 <code>TfidfVectorizer</code> 和 <code>LogisticRegression</code>、matplotlib</li>
 </ul>
-<p>把下面三個提示<strong>依序</strong>貼給你的智能體（agent）。每一步做完，先看它的報告，再貼下一個。</p>
+<p>把下面兩個提示<strong>依序</strong>貼給你的智能體（agent）。第一步做完，先看它的報告，再貼第二個。</p>
 
 <div class="prompt">
-<p class="prompt-label">提示 1　安裝與下載</p>
+<p class="prompt-label">提示 1　訓練情感分類器</p>
 <pre>Install jieba, scikit-learn and matplotlib in this project's Python environment, and check that they import.
 
-From https://github.com/mcjkurz/qhchina-data (branch main), download these two files into corpora/:
-- datasets/classification/douban.json (Douban reviews: a JSON list of {"text", "label"} records, label = 1 to 5 stars)
-- corpora/misc/牵风记-徐怀中.txt (a novel)
+Download datasets/classification/douban.json from https://github.com/mcjkurz/qhchina-data (branch main) into corpora/. It is a JSON list of Douban reviews, {"text", "label"}, where label = 1 to 5 stars.
 
-Tell me how many reviews there are for each star label, and how many characters the novel has.</pre>
-</div>
-
-<div class="prompt">
-<p class="prompt-label">提示 2　訓練情感分類器</p>
-<pre>Write scripts/train_classifier.py that uses corpora/douban.json.
-
-1. Keep only 5-star reviews (positive, label 1) and 1-star reviews (negative, label 0). Randomly pick 5,000 of each for training and a different 1,000 of each for testing. Use random_state=42.
-2. Segment each review with jieba.
-3. Turn the reviews into TF-IDF vectors with sklearn TfidfVectorizer, fitted on the training reviews only.
-4. Train sklearn LogisticRegression on the training reviews.
-5. Save the vectorizer and the model together to outputs/sentiment_model.joblib.
+Write scripts/train_classifier.py that:
+1. Keeps only 5-star reviews (positive, label 1) and 1-star reviews (negative, label 0), and randomly picks 5,000 of each for training and a different 1,000 of each for testing. Use random_state=42.
+2. Segments each review with jieba.
+3. Turns the reviews into TF-IDF vectors with sklearn TfidfVectorizer, fitted on the training reviews only.
+4. Trains sklearn LogisticRegression on the training reviews.
+5. Saves the vectorizer and the model together to outputs/sentiment_model.joblib.
 
 Run the script. Report the accuracy on the 2,000 test reviews, and show me the 20 words with the most positive weights and the 20 with the most negative weights.</pre>
 </div>
 
 <div class="prompt">
-<p class="prompt-label">提示 3　小說的情感曲線</p>
-<pre>Write scripts/sentiment_arc.py that loads outputs/sentiment_model.joblib.
+<p class="prompt-label">提示 2　小說的情感曲線</p>
+<pre>Download corpora/misc/牵风记-徐怀中.txt from https://github.com/mcjkurz/qhchina-data (branch main) into corpora/.
 
-1. Read corpora/牵风记-徐怀中.txt as UTF-8 and split it into passages of about 500 characters, cutting only at the end of a sentence (。！？).
-2. Segment each passage with jieba and score it with the model: score = P(positive) - P(negative), so -1 is very negative and +1 is very positive.
-3. Save outputs/sentiment_arc.csv with columns: passage_number, score, text.
-4. Plot the scores in order (x = passage number, y = score), with a moving-average line over 10 passages and a horizontal line at 0. Save it as outputs/sentiment_arc.png.
+Write scripts/sentiment_arc.py that loads outputs/sentiment_model.joblib and:
+1. Reads corpora/牵风记-徐怀中.txt as UTF-8 and splits it into passages of about 500 characters, cutting only at the end of a sentence (。！？).
+2. Segments each passage with jieba and scores it with the model: score = P(positive) - P(negative), so -1 is very negative and +1 is very positive.
+3. Saves outputs/sentiment_arc.csv with columns: passage_number, score, text.
+4. Plots the scores in order (x = passage number, y = score), with a moving-average line over 10 passages and a horizontal line at 0, and saves it as outputs/sentiment_arc.png.
 
 Run the script, check that the PNG opens, and tell me the number of passages and the 3 passages with the highest and the 3 with the lowest score.</pre>
 </div>
