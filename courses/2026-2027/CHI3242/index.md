@@ -367,6 +367,7 @@ title: CHI3242
           <li>TF-IDF</li>
           <li>Daniel Jurafsky and James H. Martin, <a href="https://web.stanford.edu/~jurafsky/slp3/4.pdf"><em>Speech and Language Processing</em></a> (3rd ed. draft), Chapter 4, “Naive Bayes and Sentiment Classification” (sections 4.1–4.4)</li>
           <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Hoyt Long and Richard Jean So, “Literary Pattern Recognition: Modernism between Close Reading and Machine Learning,” <em>Critical Inquiry</em> 42, no. 2 (2016)</li>
+          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Kurt Vonnegut, <a href="https://www.youtube.com/watch?v=4ec0lSd7qH4">“On the Shapes of Stories”</a> <span class="lang-en">(video)</span><span class="lang-zh" lang="zh-Hant">（影片）</span></li>
         </ul>
       </td>
       <td class="notes"></td>

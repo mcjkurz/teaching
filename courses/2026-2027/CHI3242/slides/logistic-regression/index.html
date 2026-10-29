@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>邏輯迴歸 Logistic Regression — CHI3242</title>
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+
+<!-- ─────────── Title -->
+<section class="slide full title-slide" id="s-title">
+  <div class="big-zh">邏輯迴歸</div>
+  <div class="big-en">Logistic Regression</div>
+  <div class="rule"></div>
+  <svg id="tsig" viewBox="0 0 320 220" width="320" height="220" style="position:absolute;right:110px;top:130px"></svg>
+  <div class="quote bi" data-step="1">
+    <span class="zh">分類（一）：給文本貼上標籤</span>
+    <span class="en">Classification I: putting labels on texts (sentiment analysis)</span>
+  </div>
+  <div class="hint">CHI3242 文本挖掘 Text Mining for Chinese Humanities &nbsp;·&nbsp; <kbd>←</kbd> <kbd>→</kbd> navigate &nbsp;·&nbsp; <kbd>1</kbd>–<kbd>9</kbd> sections &nbsp;·&nbsp; <kbd>F</kbd> fullscreen</div>
+</section>
+
+<!-- ─────────── What is classification? -->
+<section class="slide" id="s-what" data-sec="intro">
+  <h2 class="bi"><span class="zh">什麼是「分類」？</span><span class="en">What is classification?</span></h2>
+  <div class="def" data-step="1">
+    <div class="bi sm"><span class="zh">給每篇文本一個<b>標籤</b></span><span class="en">assign a label to each text</span></div>
+  </div>
+  <div class="two" data-step="2" style="gap:40px">
+    <div class="bi xs grow"><span class="zh">主題模型：<b>無監督</b>，事先沒有標籤</span><span class="en">topic modeling was unsupervised: no labels beforehand</span></div>
+    <div class="bi xs grow" style="margin-top:0"><span class="zh">分類：<b>有監督</b>，標籤由人先給</span><span class="en">classification is supervised: humans provide the labels first</span></div>
+  </div>
+  <div class="revs" data-step="3" style="margin-top:28px">
+    <div class="rev"><div class="t">「太精彩了，全程無冷場！」</div><span class="lab pos">正面 positive</span></div>
+    <div class="rev"><div class="t">「浪費時間，非常失望。」</div><span class="lab neg">負面 negative</span></div>
+    <div class="rev"><div class="t">「還不錯，但沒有想像中好。」</div><span class="lab neu">？</span></div>
+  </div>
+  <div class="callout key bi xs" data-step="4" style="margin-top:24px"><span class="zh">情感分析：標籤可以來自星星評分、人工標註……</span><span class="en">sentiment analysis: the labels may come from star ratings or human annotation</span></div>
+</section>
+
+<!-- ─────────── From a straight line to the sigmoid -->
+<section class="slide" id="s-sig" data-sec="sig">
+  <h2 class="bi"><span class="zh">從線性到 S 形</span><span class="en">From a straight line to an S-shaped curve</span></h2>
+  <div class="two" style="gap:36px">
+    <div class="grow">
+      <div class="bi xs" data-step="1"><span class="zh">問題：線性輸出可以是<b>任何數</b>，但<b>機率</b>必須在 0 與 1 之間</span><span class="en">a linear score can be any number; a probability must lie between 0 and 1</span></div>
+      <div class="eq" data-step="2" style="margin-top:14px">\(\sigma(z) = \dfrac{1}{1+e^{-z}}\)</div>
+      <div class="bi xs" data-step="2" style="margin-top:6px"><span class="zh">σ(0) = 0.5；z 越大 → 越接近 1</span><span class="en">large z → near 1; small z → near 0</span></div>
+      <div class="stat" data-step="3" style="margin-top:12px">z = <b id="sig-z">+1.5</b>　→　σ(z) = <b id="sig-p">0.82</b>　<span class="keys"><kbd>↑</kbd> <kbd>↓</kbd></span></div>
+      <div class="callout key bi xs" data-step="3" style="margin-top:12px"><span class="zh">把任何分數 z <b>壓進</b> (0, 1)：這就是「邏輯斯函數」</span><span class="en">the logistic function squashes any score into (0, 1)</span></div>
+    </div>
+    <svg id="sig-svg" class="chart" viewBox="0 0 620 430" style="flex:none;width:560px;overflow:visible"></svg>
+  </div>
+</section>
+
+<!-- ─────────── Features -->
+<section class="slide" id="s-feat" data-sec="feat">
+  <h2 class="bi"><span class="zh">文本 → 數字：特徵</span><span class="en">From text to numbers: features</span></h2>
+  <div class="two" style="gap:48px">
+    <div class="grow">
+      <div class="bi sm" data-step="1"><span class="zh">① 分詞（jieba）＋ 去停用詞</span><span class="en">segment with jieba, remove stopwords</span></div>
+      <div class="bi sm" data-step="2" style="margin-top:22px"><span class="zh">② 詞袋：數每個詞的次數 → 向量 x</span><span class="en">bag of words: count each word → a vector x</span></div>
+      <div class="bi sm" data-step="3" style="margin-top:22px"><span class="zh">③ TF-IDF：到處都出現的詞打折，<b>有鑑別力的詞</b>加權</span><span class="en">downweight ubiquitous words, upweight distinctive ones</span></div>
+    </div>
+    <div style="width:500px;flex:none">
+      <div class="eq" data-step="3">\(\text{tfidf}(w) = \text{tf}(w) \times \log\dfrac{N}{\text{df}(w)}\)</div>
+      <table class="cmp" data-step="4" style="margin-top:16px">
+        <thead><tr><th>詞 word</th><th class="num">tf</th><th class="num">df</th><th class="num">TF-IDF</th></tr></thead>
+        <tbody>
+          <tr><td>電影</td><td class="num">1</td><td class="num">60 / 100</td><td class="num">低 low</td></tr>
+          <tr><td>精彩</td><td class="num">1</td><td class="num">3 / 100</td><td class="num" style="color:var(--tgt)">高 high</td></tr>
+        </tbody>
+      </table>
+      <div class="bi xs" data-step="4" style="margin-top:12px"><span class="zh">tf：這篇出現幾次；df：幾篇出現過</span><span class="en">N: total number of documents (100 here, numbers illustrative)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── One prediction -->
+<section class="slide" id="s-model" data-sec="model">
+  <h2 class="bi"><span class="zh">算一次預測</span><span class="en">One prediction: features in, a probability out</span></h2>
+  <svg id="clf-svg" class="chart" viewBox="0 0 1110 350"></svg>
+  <div class="two" style="gap:30px;margin-top:6px;align-items:flex-start">
+    <div class="grow swap">
+      <div class="bi xs" data-step="0" data-until="1"><span class="zh">邏輯迴歸：輸入一篇評論，輸出「正面」的<b>機率</b></span><span class="en">logistic regression takes a review and outputs the probability that it is positive</span></div>
+      <div class="bi xs" data-step="1" data-until="2"><span class="zh">① 輸入：每個詞的 TF-IDF 值 x；沒出現的詞 x = 0</span><span class="en">input: the TF-IDF value of each word; absent words are 0</span></div>
+      <div class="bi xs" data-step="2" data-until="3"><span class="zh">② 每條線一個<b>權重</b> w：綠 ＝ 拉向正面，紅 ＝ 拉向負面，越粗越重要</span><span class="en">every wire has a weight; green pulls towards positive, red towards negative</span></div>
+      <div class="bi xs" data-step="3" data-until="4"><span class="zh">③ 加權總分：\(z = 0.88 + 0.01 + 0.10 = 0.99\)</span><span class="en">multiply, add up, add the bias b: the same weighted sum as the SVM in stylometry</span></div>
+      <div class="bi xs" data-step="4"><span class="zh">④ 新的一步：\(p = \sigma(0.99) \approx 0.73 \ge 0.5\) → <b class="ok-c">正面</b></span><span class="en">new: the sigmoid turns the score into a probability</span></div>
+    </div>
+    <div class="callout key bi xs" data-step="5" style="width:420px;flex:none;margin:0;padding:8px 18px"><span class="zh">「電影」到處都出現 → 權重 ≈ 0</span><span class="en">a ubiquitous word like 電影 learns a weight near zero</span></div>
+</section>
+
+<!-- ─────────── Training -->
+<section class="slide" id="s-train" data-sec="train">
+  <h2 class="bi"><span class="zh">怎麼學出 w 和 b？</span><span class="en">How are the weights learned?</span></h2>
+  <div class="two" style="gap:36px">
+    <div class="grow">
+      <div class="bi xs" data-step="1"><span class="zh">找一組 w、b，讓模型在已標註的資料上「錯得最少」</span><span class="en">find the w and b that are least wrong on the labelled data</span></div>
+      <div class="bi xs" data-step="2" style="margin-top:14px"><span class="zh">交叉熵損失（y 是真實標籤）</span><span class="en">the cross-entropy loss (y is the true label)</span></div>
+      <div class="eq" data-step="2" style="margin-top:6px;font-size:22px">\(L = -[\,y\log p + (1-y)\log(1-p)\,]\)</div>
+      <div class="bi xs" data-step="4" style="margin-top:14px"><span class="zh">梯度下降：往損失變小的方向走一小步；η ＝ 步子大小</span><span class="en">gradient descent: step downhill; η is the learning rate</span></div>
+      <div class="eq" data-step="4" style="margin-top:6px;font-size:22px">\(w \leftarrow w - \eta \dfrac{\partial L}{\partial w}\)</div>
+    </div>
+    <div data-step="3" style="flex:none">
+      <svg id="loss-svg" class="chart" viewBox="0 0 600 336" style="width:540px;overflow:visible"></svg>
+    </div>
+  </div>
+  <div class="callout key bi xs" data-step="5" style="margin-top:6px"><span class="zh">預測得越錯，損失越大 → 模型就是這樣「知道自己錯了」</span><span class="en">the wronger the prediction, the bigger the loss: this is how the model registers its mistakes</span></div>
+</section>
+
+<!-- ─────────── Softmax -->
+<section class="slide" id="s-soft" data-sec="multi">
+  <h2 class="bi"><span class="zh">三個類別？Softmax</span><span class="en">More than two classes: softmax</span></h2>
+  <div class="two" style="gap:48px">
+  <div style="width:400px;flex:none">
+  <div class="bi xs" data-step="1"><span class="zh">每個類別一個分數 \(z_k\)；全部變成<b>正數</b>，再<b>歸一化</b></span><span class="en">one score per class; exponentiate, then normalize</span></div>
+  <div class="eq big" data-step="1" style="margin-top:10px">\(p_k = \dfrac{e^{z_k}}{\sum_j e^{z_j}}\)</div>
+  <div class="bi xs" data-step="4" style="margin-top:16px"><span class="zh">選機率最大的類別：<b class="ok-c">正面</b>（72%）</span><span class="en">pick the class with the highest probability</span></div>
+  </div>
+  <div class="grow">
+  <table class="cmp" data-step="2">
+    <thead><tr><th>類別 class</th><th class="num">分數 \(z_k\)</th><th class="num">\(e^{z_k}\)</th><th class="num">機率 \(p_k\)</th></tr></thead>
+    <tbody>
+      <tr><td style="color:var(--t2);font-weight:600">負面</td><td class="num">−2.0</td><td class="num">0.14</td><td class="num">2%</td></tr>
+      <tr><td style="color:var(--mute);font-weight:600">中性</td><td class="num">0.5</td><td class="num">1.65</td><td class="num">26%</td></tr>
+      <tr><td style="color:var(--t1);font-weight:600">正面</td><td class="num">1.5</td><td class="num">4.48</td><td class="num" style="font-weight:700">72%</td></tr>
+    </tbody>
+  </table>
+  <div class="probbar" data-step="3" style="margin-top:16px">
+    <div style="width:2%;background:var(--t2)"></div>
+    <div style="width:26%;background:var(--none)"></div>
+    <div style="width:72%;background:var(--t1)"></div>
+  </div>
+  </div>
+  </div>
+  <div class="callout key bi xs" data-step="5" style="margin-top:28px"><span class="zh">機率總和 ＝ 1；只有兩類時，softmax 就等於 sigmoid</span><span class="en">probabilities sum to 1; with two classes, softmax reduces to the sigmoid</span></div>
+</section>
+
+<!-- ─────────── Evaluation -->
+<section class="slide" id="s-eval" data-sec="eval">
+  <h2 class="bi"><span class="zh">模型有多準？</span><span class="en">Evaluation: the confusion matrix</span></h2>
+  <div class="two" style="gap:44px">
+    <div style="width:440px;flex:none" data-step="1">
+      <table class="cmp cmat">
+        <thead><tr><th></th><th class="num">預測正面</th><th class="num">預測負面</th></tr></thead>
+        <tbody>
+          <tr><td>實際正面</td><td class="num hit">45</td><td class="num miss">10</td></tr>
+          <tr><td>實際負面</td><td class="num miss">15</td><td class="num hit">30</td></tr>
+        </tbody>
+      </table>
+      <div class="bi xs" style="margin-top:10px"><span class="zh">100 篇測試評論的結果（示例）</span><span class="en">outcomes on 100 held-out reviews</span></div>
+    </div>
+    <div class="grow">
+      <div class="bi sm" data-step="2"><span class="zh">準確率 accuracy ＝ (45+30) / 100 ＝ <b>75%</b></span><span class="en">the share of correct predictions</span></div>
+      <div class="bi sm" data-step="3" style="margin-top:16px"><span class="zh">精確率 precision ＝ 45 / (45+15) ＝ <b>75%</b></span><span class="en">of the reviews predicted positive, how many really were</span></div>
+      <div class="bi sm" data-step="4" style="margin-top:16px"><span class="zh">召回率 recall ＝ 45 / (45+10) ≈ <b>82%</b></span><span class="en">of the truly positive reviews, how many were found</span></div>
+      <div class="callout key bi xs" data-step="5" style="margin-top:22px"><span class="zh">類別不平衡時，準確率會<b>騙人</b>：若 95% 都是負面，全猜「負面」也有 95% 準確率</span><span class="en">with imbalanced classes accuracy misleads: always guessing the majority class looks great</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── In practice -->
+<section class="slide" id="s-code" data-sec="code">
+  <h2 class="bi"><span class="zh">實作：scikit-learn</span><span class="en">In practice: a few lines of scikit-learn</span></h2>
+  <div class="annot" style="margin-top:14px">
+    <div class="cl"><code>from&nbsp;sklearn.feature_extraction.text&nbsp;import&nbsp;(</code></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;TfidfVectorizer)</code></div>
+    <div class="cl"><code>from&nbsp;sklearn.linear_model&nbsp;import&nbsp;LogisticRegression</code></div>
+    <div class="cl"><code>&nbsp;</code></div>
+    <div class="cl"><code>vec&nbsp;=&nbsp;TfidfVectorizer()</code></div>
+    <div class="cl"><code>X&nbsp;=&nbsp;vec.fit_transform(train_texts)</code><span class="ann" data-step="1"><i class="arr"></i><span>特徵：文本 → TF-IDF 向量</span></span></div>
+    <div class="cl"><code>&nbsp;</code></div>
+    <div class="cl"><code>clf&nbsp;=&nbsp;LogisticRegression()</code></div>
+    <div class="cl"><code>clf.fit(X,&nbsp;train_labels)</code><span class="ann" data-step="2"><i class="arr"></i><span>訓練：學出 w 和 b</span></span></div>
+    <div class="cl"><code>&nbsp;</code></div>
+    <div class="cl"><code>p&nbsp;=&nbsp;clf.predict_proba(</code></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vec.transform(new_texts))</code><span class="ann" data-step="3"><i class="arr"></i><span>預測：每篇一組機率</span></span></div>
+  </div>
+  <div class="bi xs" data-step="4" style="margin-top:18px"><span class="zh">中文文本先用 jieba 分詞（見前面幾週）；一樣可以請編程助手幫你寫</span><span class="en">segment Chinese text with jieba first; a coding assistant can write this for you</span></div>
+</section>
+
+<!-- ─────────── Recap -->
+<section class="slide" id="s-recap" data-sec="summary">
+  <h2 class="bi"><span class="zh">回顧</span><span class="en">Recap</span></h2>
+  <div class="recap">
+    <div class="rrow" data-step="1"><i>1</i><div class="bi sm"><span class="zh">分類 ＝ <b>有監督</b>學習：標籤由人先給</span><span class="en">classification is supervised: humans label the training data first</span></div></div>
+    <div class="rrow" data-step="2"><i>2</i><div class="bi sm"><span class="zh">sigmoid 把分數壓成機率：\(p = \sigma(w \cdot x + b)\)</span><span class="en">the sigmoid squashes the score into a probability</span></div></div>
+    <div class="rrow" data-step="3"><i>3</i><div class="bi sm"><span class="zh"><b>交叉熵</b>損失 ＋ <b>梯度下降</b> → 學出 w、b</span><span class="en">cross-entropy loss plus gradient descent learn the weights</span></div></div>
+    <div class="rrow" data-step="4"><i>4</i><div class="bi sm"><span class="zh">多類：softmax（兩類時 ＝ sigmoid）</span><span class="en">softmax handles several classes</span></div></div>
+    <div class="rrow" data-step="5"><i>5</i><div class="bi sm"><span class="zh">評估看<b>混淆矩陣</b>：準確率、精確率、召回率</span><span class="en">evaluate with the confusion matrix, not accuracy alone</span></div></div>
+  </div>
+  <div class="callout key bi sm" data-step="6" style="margin-top:8px"><span class="zh"><b>下一步</b>：在中文評論語料上做情感分析</span><span class="en">next: sentiment analysis on a real Chinese review corpus</span></div>
+</section>
+
+<div id="side"></div>
+<div id="bar"></div>
+<div id="num"></div>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="slides.js"></script>
+<script src="deck.js"></script>
+</body>
+</html>
