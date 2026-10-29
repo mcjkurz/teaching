@@ -375,7 +375,7 @@ title: CHI3242
   <tbody class="due">
     <tr>
       <td></td>
-      <td class="date"><span class="lang-en">4 Nov</span><span class="lang-zh" lang="zh-Hant">11月4日</span></td>
+      <td class="date"><span class="lang-en">11 Nov</span><span class="lang-zh" lang="zh-Hant">11月11日</span></td>
       <td colspan="3"><a href="assignments/assignment-2/"><span class="lang-en">Assignment 2 due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">作業2截止，上午9:00</span></a></td>
     </tr>
   </tbody>

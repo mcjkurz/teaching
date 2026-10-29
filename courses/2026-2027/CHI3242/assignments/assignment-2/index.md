@@ -9,11 +9,11 @@ title: CHI3242 Assignment 2
 
 <div class="i18n-block">
 <div class="lang-en">
-<p><strong>Due:</strong> 28 Oct, 9:00 am</p>
+<p><strong>Due:</strong> 11 Nov, 9:00 am</p>
 <p>Details will be updated soon.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
-<p><strong>截止：</strong>10月28日 上午9:00</p>
+<p><strong>截止：</strong>11月11日 上午9:00</p>
 <p>內容即將更新。</p>
 </div>
 </div>
