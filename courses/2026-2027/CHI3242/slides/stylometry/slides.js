@@ -566,9 +566,9 @@ const f = (L, p) => L.w[0] * p.x + L.w[1] * p.y + L.b;
   // small deterministic generator, so the picture is the same every time
   let seed = 7;
   const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
-  const gauss = () => Math.sqrt(-2 * Math.log(rnd() + 1e-9)) * Math.cos(2 * Math.PI * rnd());
+  const gauss = () => Math.max(-1.6, Math.min(1.6, Math.sqrt(-2 * Math.log(rnd() + 1e-9)) * Math.cos(2 * Math.PI * rnd())));
   const cluster = (cx, cy, sx, sy, n) => Array.from({ length: n }, () => [cx + gauss() * sx, cy + gauss() * sy]);
-  const LU = cluster(-1.6, 0.6, 0.55, 0.6, 24), SHEN = cluster(1.5, -0.5, 0.6, 0.55, 24), Q = [-1.15, 0.2];
+  const LU = cluster(-1.6, 0.6, 0.55, 0.6, 24), SHEN = cluster(1.5, -0.5, 0.6, 0.55, 24), Q = [-1.0, 0.05];
   const L = 60, R = 540, T = 20, B = 390, sx = x => L + (x + 3.5) / 7 * (R - L), sy = y => B - (y + 2.5) / 5 * (B - T);
   HOOKS['s-pcaex'] = {
     render(step, el) {
