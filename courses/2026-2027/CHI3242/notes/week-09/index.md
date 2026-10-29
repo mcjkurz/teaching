@@ -22,16 +22,45 @@ title: CHI3242 第9週講義
 <p>我們先用豆瓣評論訓練一個情感分類器，再用它逐段給一部小說打分，畫出整部小說的情感起伏。</p>
 <ul>
 <li>訓練資料：<a href="https://github.com/mcjkurz/qhchina-data/blob/main/datasets/classification/douban.json">qhchina-data/datasets/classification/douban.json</a>（豆瓣評論，1–5 星）</li>
-<li>小說：徐懷中《牽風記》。這部小說不在 qhchina-data 中，請先把它的 <code>.txt</code> 檔存為 <code>corpora/牵风记-徐怀中.txt</code>（UTF-8）。</li>
+<li>小說：徐懷中《牽風記》：<a href="https://github.com/mcjkurz/qhchina-data/blob/main/corpora/misc/%E7%89%B5%E9%A3%8E%E8%AE%B0-%E5%BE%90%E6%80%80%E4%B8%AD.txt">qhchina-data/corpora/misc/牵风记-徐怀中.txt</a></li>
 <li>工具：jieba、scikit-learn 的 <code>TfidfVectorizer</code> 和 <code>LogisticRegression</code>、matplotlib</li>
 </ul>
-<p>打開你的智能體（agent）環境，把下面的提示詞貼給它。</p>
+<p>把下面三個提示<strong>依序</strong>貼給你的智能體（agent）。每一步做完，先看它的報告，再貼下一個。</p>
 
 <div class="prompt">
-<p class="prompt-label">提示詞（Prompt）　訓練情感分類器並畫出情感曲線</p>
-<pre>Download datasets/classification/douban.json from https://github.com/mcjkurz/qhchina-data (branch main) into corpora/; it is a JSON list of {"text", "label"} records with labels 1-5. Write scripts/sentiment_arc.py that samples 5,000 five-star reviews (positive) and 5,000 one-star reviews (negative) for training plus a separate 1,000 of each for testing, tokenizes them with jieba, builds tf-idf features, and trains a scikit-learn logistic regression. Report accuracy on the 2,000 test reviews.
+<p class="prompt-label">提示 1　安裝與下載</p>
+<pre>Install jieba, scikit-learn and matplotlib in this project's Python environment, and check that they import.
 
-Read corpora/牵风记-徐怀中.txt as UTF-8, split it into passages of about 500 characters cut at sentence boundaries, and score each passage as P(positive) - P(negative). Plot the scores in order with a moving-average line and a zero baseline, and save the plot as outputs/sentiment_arc.png and per-passage scores and text as outputs/sentiment_arc.csv. Run the script and check the PNG opens.</pre>
+From https://github.com/mcjkurz/qhchina-data (branch main), download these two files into corpora/:
+- datasets/classification/douban.json (Douban reviews: a JSON list of {"text", "label"} records, label = 1 to 5 stars)
+- corpora/misc/牵风记-徐怀中.txt (a novel)
+
+Tell me how many reviews there are for each star label, and how many characters the novel has.</pre>
+</div>
+
+<div class="prompt">
+<p class="prompt-label">提示 2　訓練情感分類器</p>
+<pre>Write scripts/train_classifier.py that uses corpora/douban.json.
+
+1. Keep only 5-star reviews (positive, label 1) and 1-star reviews (negative, label 0). Randomly pick 5,000 of each for training and a different 1,000 of each for testing. Use random_state=42.
+2. Segment each review with jieba.
+3. Turn the reviews into TF-IDF vectors with sklearn TfidfVectorizer, fitted on the training reviews only.
+4. Train sklearn LogisticRegression on the training reviews.
+5. Save the vectorizer and the model together to outputs/sentiment_model.joblib.
+
+Run the script. Report the accuracy on the 2,000 test reviews, and show me the 20 words with the most positive weights and the 20 with the most negative weights.</pre>
+</div>
+
+<div class="prompt">
+<p class="prompt-label">提示 3　小說的情感曲線</p>
+<pre>Write scripts/sentiment_arc.py that loads outputs/sentiment_model.joblib.
+
+1. Read corpora/牵风记-徐怀中.txt as UTF-8 and split it into passages of about 500 characters, cutting only at the end of a sentence (。！？).
+2. Segment each passage with jieba and score it with the model: score = P(positive) - P(negative), so -1 is very negative and +1 is very positive.
+3. Save outputs/sentiment_arc.csv with columns: passage_number, score, text.
+4. Plot the scores in order (x = passage number, y = score), with a moving-average line over 10 passages and a horizontal line at 0. Save it as outputs/sentiment_arc.png.
+
+Run the script, check that the PNG opens, and tell me the number of passages and the 3 passages with the highest and the 3 with the lowest score.</pre>
 </div>
 
 <h3>觀察與詮釋</h3>

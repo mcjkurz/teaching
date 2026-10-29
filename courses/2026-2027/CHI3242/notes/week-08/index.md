@@ -22,7 +22,7 @@ title: CHI3242 第8週講義
 <li>資料：<a href="https://github.com/mcjkurz/qhchina-data/tree/main/corpora/authors">qhchina-data/corpora/authors</a> 中魯迅的《呐喊》《彷徨》《故事新编》和《沈从文小说集》。每個 <code>.txt</code> 檔是一篇小說，在圖上就是一個點。</li>
 <li>工具：qhchina 的 <a href="https://www.qhchina.org/docs/stylometry/"><code>Stylometry</code></a>、jieba、scikit-learn 的 PCA</li>
 </ul>
-<p>把下面四個提示<strong>依序</strong>貼給你的智能體（agent）。每一步做完，先看它的報告，再貼下一個。</p>
+<p>把下面三個提示<strong>依序</strong>貼給你的智能體（agent）。每一步做完，先看它的報告，再貼下一個。</p>
 
 <div class="prompt">
 <p class="prompt-label">提示 1　安裝與下載</p>
@@ -39,32 +39,20 @@ Tell me how many .txt files are in each folder.</pre>
 </div>
 
 <div class="prompt">
-<p class="prompt-label">提示 2　分詞</p>
-<pre>Write scripts/tokenize_stories.py. Each .txt file is one story; do not split it.
+<p class="prompt-label">提示 2　分詞、文體計量與 PCA</p>
+<pre>Write scripts/stylometry_pca.py.
 
-For each story:
-- read it as UTF-8
-- replace punctuation, symbols and whitespace with a space
-- segment it with jieba and keep only tokens made of letters or digits
-- record: author (鲁迅 or 沈从文), collection (呐喊, 彷徨, 故事新编 or 沈从文), file path, number of tokens
+1. Read every .txt file in the four folders as UTF-8. Each file is one story; do not split it. Replace punctuation, symbols and whitespace with a space, segment the text with jieba, and keep only tokens made of letters or digits. For each story, record: author (鲁迅 or 沈从文), collection (呐喊, 彷徨, 故事新编 or 沈从文), file path, number of tokens.
+2. Fit qhchina.analytics.stylometry.Stylometry(n_features=100, distance="cosine") on a dictionary {"鲁迅": [token list of each Lu Xun story], "沈从文": [token list of each Shen Congwen story]}. Keep qhchina's default z-scores.
+3. Run sklearn PCA(n_components=2) on the fitted story vectors. Check that there is exactly one point per story.
+4. Save outputs/story_coordinates.csv with columns: story_id, author, collection, file, tokens, PC1, PC2.
+5. Save outputs/features.csv with one row per collection and feature word (4 x 100 = 400 rows), with columns: collection, word, count, per_10000_tokens, mean_z (the average z-score of the word over that collection's stories).
 
-Save everything to outputs/stories.json. Run the script, then tell me the number of stories per collection and list any file that could not be read or has no tokens.</pre>
+Run the script. Tell me the number of stories per collection, list any file that could not be read or has no tokens, and show me the 10 words with the highest mean_z in each collection.</pre>
 </div>
 
 <div class="prompt">
-<p class="prompt-label">提示 3　文體計量與 PCA</p>
-<pre>Write scripts/stylometry_pca.py that uses outputs/stories.json.
-
-1. Fit qhchina.analytics.stylometry.Stylometry(n_features=100, distance="cosine") on a dictionary {"鲁迅": [token list of each Lu Xun story], "沈从文": [token list of each Shen Congwen story]}. Keep qhchina's default z-scores.
-2. Run sklearn PCA(n_components=2) on the fitted story vectors. Check that there is exactly one point per story.
-3. Save outputs/story_coordinates.csv with columns: story_id, author, collection, file, tokens, PC1, PC2.
-4. Save outputs/features.csv with one row per collection and feature word (4 x 100 = 400 rows), with columns: collection, word, count, per_10000_tokens, mean_z (the average z-score of the word over that collection's stories).
-
-Run the script and show me the 10 words with the highest mean_z in each collection.</pre>
-</div>
-
-<div class="prompt">
-<p class="prompt-label">提示 4　畫圖</p>
+<p class="prompt-label">提示 3　畫圖</p>
 <pre>Write scripts/plot_pca.py that uses outputs/story_coordinates.csv. Before plotting, run "from qhchina import load_fonts" and "load_fonts()" so Chinese characters display correctly.
 
 Make two plots, with one color per collection (呐喊, 彷徨, 故事新编, 沈从文) and a legend:
