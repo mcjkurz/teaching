@@ -53,7 +53,7 @@ title: CHI3242 Assignment 2
 </ul>
 <p>The <strong>report</strong> (2,000–2,500 characters) should read as a short, well-argued essay, not a checklist. Introduce your question and why the distinction matters. Describe your labels, data, and preparation, plus the train/test split and features used. Present your test-set results (accuracy and confusion matrix) and interpret the errors: which items were misclassified, and what patterns or ambiguities explain them? Then analyze the predictions on your separate text and be cautious about taking the model’s labels at face value. Conclude with the limits of your data, labels, and model, and what you would change.</p>
 <p>You may use AI to help with coding or writing, but the report must be your own analysis. A fully AI-generated report will receive <strong>0 points</strong>; if in doubt, the instructor may ask you to explain your workflow and results.</p>
-<p>You may work alone or in a group of up to <strong>3 people</strong>. If you work in a group, share the data and code, but each member submits their own rewritten report. List all members' names only in the Moodle upload; names should not appear in the repository.</p>
+<p>You may work alone or in a group of up to <strong>3 people</strong>. A group works in <strong>one shared GitHub repository</strong> and writes <strong>one report</strong>: every member submits the same repository URL and the same PDF on Moodle. List all members' names only in the Moodle upload; names should not appear in the repository.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
 <p><strong>截止：</strong>11月11日 上午9:00</p>
@@ -89,6 +89,6 @@ title: CHI3242 Assignment 2
 </ul>
 <p><strong>報告</strong>（2,000–2,500字）應該是一篇論證清楚的短文，而不是條列式的檢查清單。請介紹你的問題及其重要性，描述標籤、資料與處理方式，以及訓練／測試切分和所用的特徵。呈現測試集結果（準確率與混淆矩陣）並詮釋錯誤：哪些文本被錯誤分類？有何共同模式或歧義？接著分析分類器對另一組文本的預測，並小心不要全盤接受模型的標籤。最後反思資料、標籤與模型的限制，以及你會如何改進。</p>
 <p>你可以使用人工智能協助撰寫程式或報告，但報告必須是你自己的分析。完全由 AI 生成的報告將獲得<strong>0分</strong>；如有疑慮，教師可能會個別要求你解釋工作流程與結果。</p>
-<p>你可以單獨完成，也可以組成最多<strong>3人</strong>的小組合作。若以小組進行，可以共用資料與程式碼，但每位成員須各自提交改寫後的報告。所有成員姓名只列在 Moodle 上傳中；姓名不應出現在倉庫裡。</p>
+<p>你可以單獨完成，也可以組成最多<strong>3人</strong>的小組合作。若以小組進行，全組共用<strong>一個 GitHub 倉庫</strong>，並合寫<strong>一份報告</strong>：每位成員在 Moodle 提交相同的倉庫網址與相同的 PDF。所有成員姓名只列在 Moodle 上傳中；姓名不應出現在倉庫裡。</p>
 </div>
 </div>
