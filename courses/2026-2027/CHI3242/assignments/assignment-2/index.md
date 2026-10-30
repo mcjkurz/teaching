@@ -12,7 +12,7 @@ title: CHI3242 Assignment 2
 <p><strong>Due:</strong> 11 Nov, 9:00 am</p>
 <div style="display:flex; gap:1.5rem; align-items:flex-start;">
 <div style="flex:1; min-width:0;">
-<p>In this course we have learned how to train our own logistic regression classifier to estimate the sentiment of a text (positive versus negative). This way we operationalized Kurt Vonnegut's argument about the Shapes of Stories. In this assignment, you are asked to choose a <strong>binary</strong> problem of your own: a question that can be answered by assigning one of two labels to a piece of text. It can be positive versus negative sentiment, embodied versus abstract language, Cao Xueqin versus Gao E (authorship), or any other distinction that interests you. Define what each label means, prepare and label your own training data, and train a logistic regression classifier using the methods from class.</p>
+<p>In this course we have learned how to train our own logistic regression classifier to estimate the sentiment of a text (positive versus negative). This way we operationalized Kurt Vonnegut's argument about the Shapes of Stories. In this assignment, you are asked to choose a <strong>binary</strong> problem of your own: a question that can be answered by assigning one of two labels to a piece of text. It can be positive versus negative sentiment, embodied versus abstract language, Cao Xueqin versus Gao E (authorship), or any other distinction that interests you. Define what each label means, prepare and label your own training data, and train a logistic regression classifier using the methods from class. You may use AI to help label your training data, but do it carefully: check a sample yourself, since AI labels can be wrong or biased.</p>
 </div>
 <div style="flex:0 0 260px;">
 <img src="sigmoid.png" alt="The logistic (sigmoid) function: an S-shaped curve mapping any score z to a probability between 0 and 1" style="width:100%; height:auto;">
@@ -48,7 +48,7 @@ title: CHI3242 Assignment 2
 <p><strong>截止：</strong>11月11日 上午9:00</p>
 <div style="display:flex; gap:1.5rem; align-items:flex-start;">
 <div style="flex:1; min-width:0;">
-<p>在課程中，我們已經學過如何訓練自己的邏輯迴歸分類器，來估計一段文本的情感（正面或負面）。這樣一來，我們把 Kurt Vonnegut 關於「故事形狀」（Shapes of Stories）的論點操作化了。這次作業請你自選一個<strong>二元</strong>問題：一個可以透過替文本指定兩種標籤之一來回答的問題。可以是正面／負面情感、具體／抽象語言、曹雪芹／高鶚（作者歸屬），或任何你感興趣的區分。請定義每個標籤的意義，準備並標註自己的訓練資料，然後運用課堂所學的方法訓練邏輯迴歸分類器。</p>
+<p>在課程中，我們已經學過如何訓練自己的邏輯迴歸分類器，來估計一段文本的情感（正面或負面）。這樣一來，我們把 Kurt Vonnegut 關於「故事形狀」（Shapes of Stories）的論點操作化了。這次作業請你自選一個<strong>二元</strong>問題：一個可以透過替文本指定兩種標籤之一來回答的問題。可以是正面／負面情感、具體／抽象語言、曹雪芹／高鶚（作者歸屬），或任何你感興趣的區分。請定義每個標籤的意義，準備並標註自己的訓練資料，然後運用課堂所學的方法訓練邏輯迴歸分類器。你可以使用 AI 協助標註訓練資料，但請謹慎：自行抽樣檢查，因為 AI 標註可能出錯或有偏誤。</p>
 </div>
 <div style="flex:0 0 260px;">
 <img src="sigmoid.png" alt="邏輯斯（sigmoid）函數：一條 S 形曲線，把任何分數 z 對應到 0 與 1 之間的機率" style="width:100%; height:auto;">
