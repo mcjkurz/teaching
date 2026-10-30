@@ -15,7 +15,7 @@
   <div class="big-zh">邏輯迴歸</div>
   <div class="big-en">Logistic Regression</div>
   <div class="rule"></div>
-  <svg id="tsig" viewBox="0 0 320 220" width="320" height="220" style="position:absolute;right:110px;top:130px"></svg>
+  <svg id="tsig" viewBox="0 0 400 290" width="400" height="290" style="position:absolute;right:90px;top:110px"></svg>
   <div class="quote bi" data-step="1">
     <span class="zh">分類（一）：給文本貼上標籤</span>
     <span class="en">Classification I: putting labels on texts (sentiment analysis)</span>
@@ -138,29 +138,17 @@
 <!-- ─────────── Softmax -->
 <section class="slide" id="s-soft" data-sec="multi">
   <h2 class="bi"><span class="zh">三個類別？Softmax</span><span class="en">More than two classes: softmax</span></h2>
-  <div class="two" style="gap:48px">
-  <div style="width:400px;flex:none">
-  <div class="bi xs" data-step="1"><span class="zh">每個類別一個分數 \(z_k\)；全部變成<b>正數</b>，再<b>歸一化</b></span><span class="en">one score per class; exponentiate, then normalize</span></div>
-  <div class="eq big" data-step="1" style="margin-top:10px">\(p_k = \dfrac{e^{z_k}}{\sum_j e^{z_j}}\)</div>
-  <div class="bi xs" data-step="4" style="margin-top:16px"><span class="zh">選機率最大的類別：<b class="ok-c">正面</b>（72%）</span><span class="en">pick the class with the highest probability</span></div>
+  <svg id="soft-svg" class="chart" viewBox="0 0 1110 300"></svg>
+  <div class="two" style="gap:30px;margin-top:8px;align-items:center">
+    <div class="grow swap">
+      <div class="bi xs" data-step="1" data-until="2"><span class="zh">① 輸入：每個類別一個分數 \(z_k\)（各有一組權重）</span><span class="en">input: one weighted-sum score per class</span></div>
+      <div class="bi xs" data-step="2" data-until="3"><span class="zh">② softmax：全部變成<b>正數</b> \(e^{z_k}\)，再除以總和</span><span class="en">exponentiate every score, then divide by the total</span></div>
+      <div class="bi xs" data-step="3" data-until="4"><span class="zh">③ 輸出：每個類別一個<b>機率</b> \(p_k\)</span><span class="en">output: one probability per class</span></div>
+      <div class="bi xs" data-step="4"><span class="zh">④ 選機率最大的類別：<b class="ok-c">正面</b>（72%）</span><span class="en">pick the class with the highest probability</span></div>
+    </div>
+    <div class="eq" data-step="2" style="flex:none;margin:0">\(p_k = \dfrac{e^{z_k}}{\sum_j e^{z_j}}\)</div>
   </div>
-  <div class="grow">
-  <table class="cmp" data-step="2">
-    <thead><tr><th>類別 class</th><th class="num">分數 \(z_k\)</th><th class="num">\(e^{z_k}\)</th><th class="num">機率 \(p_k\)</th></tr></thead>
-    <tbody>
-      <tr><td style="color:var(--t2);font-weight:600">負面</td><td class="num">−2.0</td><td class="num">0.14</td><td class="num">2%</td></tr>
-      <tr><td style="color:var(--mute);font-weight:600">中性</td><td class="num">0.5</td><td class="num">1.65</td><td class="num">26%</td></tr>
-      <tr><td style="color:var(--t1);font-weight:600">正面</td><td class="num">1.5</td><td class="num">4.48</td><td class="num" style="font-weight:700">72%</td></tr>
-    </tbody>
-  </table>
-  <div class="probbar" data-step="3" style="margin-top:16px">
-    <div style="width:2%;background:var(--t2)"></div>
-    <div style="width:26%;background:var(--none)"></div>
-    <div style="width:72%;background:var(--t1)"></div>
-  </div>
-  </div>
-  </div>
-  <div class="callout key bi xs" data-step="5" style="margin-top:28px"><span class="zh">機率總和 ＝ 1；只有兩類時，softmax 就等於 sigmoid</span><span class="en">probabilities sum to 1; with two classes, softmax reduces to the sigmoid</span></div>
+  <div class="callout key bi xs" data-step="5" style="margin-top:12px"><span class="zh">機率總和 ＝ 1；只有兩類時，softmax 就等於 sigmoid</span><span class="en">probabilities sum to 1; with two classes, softmax reduces to the sigmoid</span></div>
 </section>
 
 <!-- ─────────── Train / test split -->

@@ -44,19 +44,24 @@ HOOKS['s-title'] = {
     if (el._b) return;
     el._b = true;
     const svg = $('#tsig', el);
-    const X0 = 24, X1 = 296, Y0 = 34, Y1 = 192;
+    // a clean plot: y-axis at the left edge, x-axis along p = 0, ticks on both
+    const X0 = 56, X1 = 380, Y0 = 24, Y1 = 236;
     const px = z => X0 + (z + 6) / 12 * (X1 - X0);
     const py = p => Y1 - p * (Y1 - Y0);
-    let g = '<rect x="8" y="12" width="304" height="196" rx="14" fill="#f5f7fa"/>';
-    g += `<line x1="${X0}" y1="${py(.5)}" x2="${X1}" y2="${py(.5)}" stroke="#c9ced8" stroke-dasharray="6 6"/>`;
-    g += `<line x1="${px(0)}" y1="${Y0}" x2="${px(0)}" y2="${Y1}" stroke="#c9ced8" stroke-dasharray="6 6"/>`;
+    const AX = '#6a7386', T = 'font-size:15px;fill:#6a7386';
+    let g = `<line x1="${X0}" y1="${py(.5)}" x2="${X1}" y2="${py(.5)}" stroke="#e3e6ec" stroke-width="1.5" stroke-dasharray="5 5"/>`;
+    g += `<line x1="${X0}" y1="${py(1)}" x2="${X1}" y2="${py(1)}" stroke="#e3e6ec" stroke-width="1.5" stroke-dasharray="5 5"/>`;
+    g += `<line x1="${X0}" y1="${Y0 - 6}" x2="${X0}" y2="${Y1}" stroke="${AX}" stroke-width="2"/>`;
+    g += `<line x1="${X0}" y1="${Y1}" x2="${X1}" y2="${Y1}" stroke="${AX}" stroke-width="2"/>`;
+    for (let z = -6; z <= 6; z += 3) g += `<line x1="${px(z)}" y1="${Y1}" x2="${px(z)}" y2="${Y1 + 6}" stroke="${AX}" stroke-width="2"/><text x="${px(z)}" y="${Y1 + 24}" text-anchor="middle" style="${T}">${z < 0 ? '−' + -z : z}</text>`;
+    [0, .5, 1].forEach(p => g += `<line x1="${X0 - 6}" y1="${py(p)}" x2="${X0}" y2="${py(p)}" stroke="${AX}" stroke-width="2"/><text x="${X0 - 12}" y="${py(p) + 5}" text-anchor="end" style="${T}">${p}</text>`);
+    g += `<text x="${X1}" y="${Y1 + 46}" text-anchor="end" style="${T};font-style:italic">z</text>`;
+    g += `<text x="${X0 - 12}" y="${Y0 - 12}" text-anchor="end" style="${T};font-style:italic">p</text>`;
     const pts = [];
-    for (let z = -6; z <= 6.001; z += .25) pts.push(px(z).toFixed(1) + ',' + py(sig(z)).toFixed(1));
-    g += `<polyline points="${pts.join(' ')}" fill="none" stroke="#1f5fd6" stroke-width="5" stroke-linecap="round"/>`;
-    g += `<text x="${px(0) - 4}" y="${Y1 + 20}" style="font-size:14px;fill:#6a7386">z = 0</text>`;
-    g += `<text x="${X0 - 8}" y="${py(1) - 6}" style="font-size:14px;fill:#6a7386">1</text>`;
-    g += `<text x="${X0 - 8}" y="${py(0) + 4}" style="font-size:14px;fill:#6a7386">0</text>`;
-    g += `<text x="${px(0) - 12}" y="${py(.5) - 10}" text-anchor="end" style="font-size:17px;font-weight:600;fill:#1f5fd6">σ(0) = 0.5</text>`;
+    for (let z = -6; z <= 6.001; z += .2) pts.push(px(z).toFixed(1) + ',' + py(sig(z)).toFixed(1));
+    g += `<polyline points="${pts.join(' ')}" fill="none" stroke="#1f5fd6" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>`;
+    g += `<circle cx="${px(0)}" cy="${py(.5)}" r="6" fill="#1f5fd6" stroke="#fff" stroke-width="2.5"/>`;
+    g += `<text x="${px(0) + 14}" y="${py(.5) + 22}" style="font-size:17px;font-weight:600;fill:#1f5fd6">σ(z) = 1 / (1 + e<tspan dy="-7" style="font-size:12px">−z</tspan><tspan dy="7">)</tspan></text>`;
     svg.innerHTML = g;
   }
 };
@@ -174,6 +179,55 @@ HOOKS['s-title'] = {
     svg.innerHTML = h;
   }
   HOOKS['s-model'] = { render(step, el) { draw(step, $('#clf-svg', el)); } };
+})();
+
+/* ---------- softmax as a machine: scores in → softmax → probabilities out ----------
+ * steps: 1 the input scores · 2 arrows in, e^z inside the box · 3 arrows out, probability bars · 4 the winner */
+(function () {
+  const INK = '#1b2333', MUTE = '#6a7386', ACC = '#1f5fd6';
+  const CLS = [['負面', '#dc2626', -2.0], ['中性', '#9aa1ad', 0.5], ['正面', '#16a34a', 1.5]];
+  const E = CLS.map(c => Math.exp(c[2])), S = E.reduce((a, b) => a + b), P = E.map(e => e / S);
+  const best = P.indexOf(Math.max(...P));
+  const RY = i => 86 + i * 72, BX0 = 410, BX1 = 640, OX = 800, BAR = 180;
+  const sg = v => (v >= 0 ? '+' : '−') + Math.abs(v).toFixed(1);
+  function draw(step, svg) {
+    let h = `<defs><marker id="sm-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="${INK}"/></marker></defs>`;
+    const head = (x, t, col) => `<text x="${x}" y="30" text-anchor="middle" style="font-size:17px;font-weight:700;fill:${col}">${t}</text>`;
+    h += head(145, '輸入：分數 z', step >= 1 ? INK : MUTE);
+    h += head((BX0 + BX1) / 2, 'softmax', step >= 2 ? ACC : MUTE);
+    h += head(OX + 140, '輸出：機率 p', step >= 3 ? INK : MUTE);
+    // the softmax box
+    h += `<rect x="${BX0}" y="52" width="${BX1 - BX0}" height="212" rx="22" fill="${INK}" opacity="${step >= 2 ? 1 : 0.25}"/>`;
+    if (step >= 2) h += `<text x="${(BX0 + BX1) / 2}" y="290" text-anchor="middle" style="font-size:16px">總和 Σ = ${S.toFixed(2)}</text>`;
+    CLS.forEach(([t, col, z], i) => {
+      const y = RY(i), dim = step >= 4 && i !== best ? 0.35 : 1;
+      // inputs
+      h += `<g opacity="${dim}"><text x="20" y="${y + 8}" style="font-size:22px;font-weight:600;fill:${col}">${t}</text>`;
+      h += `<rect x="90" y="${y - 26}" width="140" height="52" rx="10" fill="#fff" stroke="${col}" stroke-width="2.5"/>`;
+      if (step >= 1) h += `<text x="160" y="${y + 7}" text-anchor="middle" style="font-size:20px;font-weight:700;fill:${INK}">z = ${sg(z)}</text>`;
+      // arrows in, and e^z inside the box
+      if (step >= 2) {
+        h += `<path d="M238 ${y} H${BX0 - 8}" stroke="${INK}" stroke-width="3" marker-end="url(#sm-arr)"/>`;
+        h += `<text x="${(BX0 + BX1) / 2}" y="${y + 7}" text-anchor="middle" style="font-size:21px;font-weight:600;fill:#fde68a">e<tspan dy="-9" style="font-size:14px">z</tspan><tspan dy="9"> = ${E[i].toFixed(2)}</tspan></text>`;
+        if (step === 2) h += `<circle r="7" fill="#fbbf24" stroke="#fff" stroke-width="2"><animateMotion dur="0.7s" begin="${0.15 * i}s" fill="freeze" path="M238 ${y} H${BX0 - 14}"/></circle>`;
+      }
+      // arrows out, and the probabilities
+      if (step >= 3) {
+        h += `<path d="M${BX1 + 8} ${y} H${OX - 12}" stroke="${INK}" stroke-width="3" marker-end="url(#sm-arr)"/>`;
+        if (step === 3) h += `<circle r="7" fill="#fbbf24" stroke="#fff" stroke-width="2"><animateMotion dur="0.7s" begin="${0.15 * i}s" fill="freeze" path="M${BX1 + 8} ${y} H${OX - 18}"/></circle>`;
+      }
+      h += `<text x="${OX}" y="${y + 8}" style="font-size:22px;font-weight:600;fill:${step >= 3 ? col : MUTE}">${t}</text>`;
+      h += `<rect x="${OX + 60}" y="${y - 13}" width="${BAR}" height="26" rx="13" fill="#eef0f4"/>`;
+      if (step >= 3) {
+        h += `<rect x="${OX + 60}" y="${y - 13}" width="${Math.max(26, P[i] * BAR)}" height="26" rx="13" fill="${col}"/>`;
+        h += `<text x="${OX + 70 + BAR}" y="${y + 8}" style="font-size:22px;font-weight:700;fill:${INK}">${Math.round(P[i] * 100)}%</text>`;
+      }
+      h += '</g>';
+    });
+    if (step >= 4) h += `<rect x="${OX - 12}" y="${RY(best) - 32}" width="322" height="64" rx="14" fill="none" stroke="${ACC}" stroke-width="3"/>`;
+    svg.innerHTML = h;
+  }
+  HOOKS['s-soft'] = { render(step, el) { draw(step, $('#soft-svg', el)); } };
 })();
 
 /* ---------- cross-entropy: two loss curves, one per true label ---------- */
