@@ -194,10 +194,11 @@
       <div class="bi xs" style="margin-top:10px"><span class="zh">100 篇測試評論的結果（示例）</span><span class="en">outcomes on 100 held-out reviews</span></div>
     </div>
     <div class="grow">
-      <div class="bi sm" data-step="2"><span class="zh">準確率 accuracy ＝ (45+30) / 100 ＝ <b>75%</b></span><span class="en">the share of correct predictions</span></div>
-      <div class="bi sm" data-step="3" style="margin-top:16px"><span class="zh">精確率 precision ＝ 45 / (45+15) ＝ <b>75%</b></span><span class="en">of the reviews predicted positive, how many really were</span></div>
-      <div class="bi sm" data-step="4" style="margin-top:16px"><span class="zh">召回率 recall ＝ 45 / (45+10) ≈ <b>82%</b></span><span class="en">of the truly positive reviews, how many were found</span></div>
-      <div class="callout key bi xs" data-step="5" style="margin-top:22px"><span class="zh">類別不平衡時，準確率會<b>騙人</b>：若 95% 都是負面，全猜「負面」也有 95% 準確率</span><span class="en">with imbalanced classes accuracy misleads: always guessing the majority class looks great</span></div>
+      <div class="metric" data-step="2"><span class="name acc">準確率 accuracy</span><span class="expl">＝ (45+30) / 100 ＝ <b>75%</b> · 正確預測的比例 · the share of correct predictions</span></div>
+      <div class="metric" data-step="3" style="margin-top:14px"><span class="name pre">精確率 precision</span><span class="expl">＝ 45 / (45+15) ＝ <b>75%</b> · 誤報（false positives）越少，精確率越高 · fewer false positives → higher precision</span></div>
+      <div class="metric" data-step="4" style="margin-top:14px"><span class="name rec">召回率 recall</span><span class="expl">＝ 45 / (45+10) ≈ <b>82%</b> · 漏報（false negatives）越少，召回率越高 · fewer false negatives → higher recall</span></div>
+      <div class="metric" data-step="5" style="margin-top:14px"><span class="name f1">F1</span><span class="expl">＝ 精確率與召回率的<b>調和平均數</b>（harmonic mean）＝ 2PR / (P+R) ≈ <b>78%</b></span></div>
+      <div class="callout key bi xs" data-step="6" style="margin-top:14px"><span class="zh">類別不平衡時，準確率會<b>騙人</b>：若 95% 都是負面，全猜「負面」也有 95% 準確率</span><span class="en">with imbalanced classes accuracy misleads: always guessing the majority class looks great</span></div>
     </div>
   </div>
 </section>
@@ -230,7 +231,7 @@
     <div class="rrow" data-step="2"><i>2</i><div class="bi sm"><span class="zh">sigmoid 把分數壓成機率：\(p = \sigma(w \cdot x + b)\)</span><span class="en">the sigmoid squashes the score into a probability</span></div></div>
     <div class="rrow" data-step="3"><i>3</i><div class="bi sm"><span class="zh"><b>交叉熵</b>損失 ＋ <b>梯度下降</b> → 學出 w、b</span><span class="en">cross-entropy loss plus gradient descent learn the weights</span></div></div>
     <div class="rrow" data-step="4"><i>4</i><div class="bi sm"><span class="zh">多類：softmax（兩類時 ＝ sigmoid）</span><span class="en">softmax handles several classes</span></div></div>
-    <div class="rrow" data-step="5"><i>5</i><div class="bi sm"><span class="zh">在<b>測試集</b>上評估：混淆矩陣、準確率、精確率、召回率</span><span class="en">evaluate on held-out test data, not accuracy alone</span></div></div>
+    <div class="rrow" data-step="5"><i>5</i><div class="bi sm"><span class="zh">在<b>測試集</b>上評估：混淆矩陣、準確率、精確率、召回率、F1</span><span class="en">evaluate on held-out test data: confusion matrix, accuracy, precision, recall, and F1</span></div></div>
   </div>
   <div class="callout key bi sm" data-step="6" style="margin-top:8px"><span class="zh"><b>下一步</b>：在中文評論語料上做情感分析</span><span class="en">next: sentiment analysis on a real Chinese review corpus</span></div>
 </section>

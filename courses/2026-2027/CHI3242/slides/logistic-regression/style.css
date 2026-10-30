@@ -48,6 +48,15 @@ h2.bi > .en { font-size: 24px; }
 
 .ok-c { color: var(--ok); font-weight: 600; }
 .bad-c { color: var(--bad); font-weight: 600; }
+/* metric rows: coloured metric name, smaller muted explanation */
+.metric { display: flex; align-items: baseline; gap: 12px; }
+.metric .name { font-weight: 700; white-space: nowrap; font-size: 26px; }
+.metric .name.acc { color: var(--tgt); }
+.metric .name.pre { color: var(--ok); }
+.metric .name.rec { color: var(--t3); }
+.metric .name.f1  { color: var(--win); }
+.metric .expl { font-size: 20px; color: var(--mute); line-height: 1.4; }
+.metric .expl b { color: var(--ink); }
 b, strong { font-weight: 600; }
 .small { font-size: 18px; color: var(--mute); }
 .src { font-size: 15px; color: var(--mute); }
