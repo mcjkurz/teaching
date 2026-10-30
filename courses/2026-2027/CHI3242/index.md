@@ -407,7 +407,7 @@ title: CHI3242
         <ul class="readings">
           <li><span class="lang-en">Neural networks</span><span class="lang-zh" lang="zh-Hant">神經網絡</span></li>
           <li><span class="lang-en">Training BERT-based classifiers (sentiment analysis); uploading a model to Hugging Face</span><span class="lang-zh" lang="zh-Hant">訓練基於 BERT 的分類器（情感分析）；上載模型至 Hugging Face</span></li>
-          <li>Kurt Vonnegut, “The Shapes of Stories” <span class="lang-en">(lecture)</span><span class="lang-zh" lang="zh-Hant">（講座）</span></li>
+          <li>Kurt Vonnegut, <a href="https://www.youtube.com/watch?v=4ec0lSd7qH4">“The Shapes of Stories”</a> <span class="lang-en">(lecture)</span><span class="lang-zh" lang="zh-Hant">（講座）</span></li>
           <li>Jay Alammar, <a href="https://jalammar.github.io/illustrated-bert/">“The Illustrated BERT”</a></li>
           <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Katherine Elkins, <em>The Shapes of Stories: Sentiment Analysis for Narrative</em></li>
           <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Andrew Reagan et al., <a href="https://epjdatascience.springeropen.com/articles/10.1140/epjds/s13688-016-0093-1">“The Emotional Arcs of Stories Are Dominated by Six Basic Shapes”</a>, <em>EPJ Data Science</em> (2016)</li>

@@ -62,7 +62,7 @@ Run the script, check that the PNG opens, and tell me the number of passages and
 <li>打開 <code>outputs/sentiment_arc.png</code>：曲線的高點和低點在哪裡？到 CSV 裡找出分數最高和最低的幾段，細讀一下：分類器說得對嗎？</li>
 <li>模型是用<strong>電影評論</strong>訓練的，卻拿來讀<strong>小說</strong>。哪些段落可能被誤判？為什麼？</li>
 <li>改變段落長度（例如 200 或 1,000 字）或移動平均的窗口大小，曲線的形狀會怎麼變？</li>
-<li>把結果和 Kurt Vonnegut 講的「故事的形狀」對照：這部小說的曲線像哪一種？</li>
+<li>把結果和 <a href="https://www.youtube.com/watch?v=4ec0lSd7qH4">Kurt Vonnegut 講的「故事的形狀」</a>對照：這部小說的曲線像哪一種？</li>
 </ul>
 
 <h2>延伸閱讀</h2>
