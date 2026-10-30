@@ -10,8 +10,14 @@ title: CHI3242 Assignment 2
 <div class="i18n-block">
 <div class="lang-en">
 <p><strong>Due:</strong> 11 Nov, 9:00 am</p>
+<div style="display:flex; gap:1.5rem; align-items:flex-start;">
+<div style="flex:1; min-width:0;">
 <p>In this course we have learned how to train our own logistic regression classifier to estimate the sentiment of a text (positive versus negative). This way we operationalized Kurt Vonnegut's argument about the Shapes of Stories. In this assignment, you are asked to choose a <strong>binary</strong> problem of your own: a question that can be answered by assigning one of two labels to a piece of text. It can be positive versus negative sentiment, embodied versus abstract language, Cao Xueqin versus Gao E (authorship), or any other distinction that interests you. Define what each label means, prepare and label your own training data, and train a logistic regression classifier using the methods from class.</p>
-<p><img src="sigmoid.png" alt="The logistic (sigmoid) function: an S-shaped curve mapping any score z to a probability between 0 and 1" style="max-width:520px"></p>
+</div>
+<div style="flex:0 0 260px;">
+<img src="sigmoid.png" alt="The logistic (sigmoid) function: an S-shaped curve mapping any score z to a probability between 0 and 1" style="width:100%; height:auto;">
+</div>
+</div>
 <p>Having trained the model, use it on another text of your choice. Report how well it works, look at where it goes wrong, and say what its predictions tell you about that text.</p>
 <hr>
 <p>On Moodle, submit two things: the URL of one public GitHub repository and a PDF of your report. The core deliverables are the <strong>PDF report</strong>, your <strong>data</strong>, and your <strong>code</strong>; everything needed to understand and reproduce your analysis should live inside the repository. Do not include your name or student ID in the public repository. The repository must include:</p>
@@ -41,8 +47,14 @@ title: CHI3242 Assignment 2
 </div>
 <div class="lang-zh" lang="zh-Hant">
 <p><strong>截止：</strong>11月11日 上午9:00</p>
+<div style="display:flex; gap:1.5rem; align-items:flex-start;">
+<div style="flex:1; min-width:0;">
 <p>在課程中，我們已經學過如何訓練自己的邏輯迴歸分類器，來估計一段文本的情感（正面或負面）。這樣一來，我們把 Kurt Vonnegut 關於「故事形狀」（Shapes of Stories）的論點操作化了。這次作業請你自選一個<strong>二元</strong>問題：一個可以透過替文本指定兩種標籤之一來回答的問題。可以是正面／負面情感、具體／抽象語言、曹雪芹／高鶚（作者歸屬），或任何你感興趣的區分。請定義每個標籤的意義，準備並標註自己的訓練資料，然後運用課堂所學的方法訓練邏輯迴歸分類器。</p>
-<p><img src="sigmoid.png" alt="邏輯斯（sigmoid）函數：一條 S 形曲線，把任何分數 z 對應到 0 與 1 之間的機率" style="max-width:520px"></p>
+</div>
+<div style="flex:0 0 260px;">
+<img src="sigmoid.png" alt="邏輯斯（sigmoid）函數：一條 S 形曲線，把任何分數 z 對應到 0 與 1 之間的機率" style="width:100%; height:auto;">
+</div>
+</div>
 <p>訓練好模型之後，請把它用在另一段你自選的文本上。報告它的表現如何、看看它在哪裡出錯，並說明它的預測對這段文本說明了什麼。</p>
 <hr>
 <p>請在 Moodle 提交兩項：一個公開 GitHub 倉庫的網址，以及報告的 PDF 檔。核心交付物是<strong>PDF 報告</strong>、你的<strong>資料</strong>與<strong>程式碼</strong>；所有理解與重現分析所需的東西都應放在倉庫裡。公開倉庫中請勿放入姓名或學號。倉庫須包含：</p>
