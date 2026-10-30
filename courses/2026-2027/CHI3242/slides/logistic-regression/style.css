@@ -150,6 +150,8 @@ code { font-family: "SF Mono", Menlo, Consolas, monospace; font-size: .92em; }
 .revs { display: flex; gap: 24px; }
 .rev { flex: 1; border: 1.5px solid var(--line); border-radius: 12px; padding: 16px 20px 14px; background: #fff; box-shadow: 0 2px 10px rgba(20, 30, 60, .05); display: flex; flex-direction: column; gap: 14px; }
 .rev .t { font-family: var(--cjk), var(--latin); font-size: 27px; line-height: 1.4; }
+/* labels sit at the bottom of each card, so they line up across cards */
+.rev .lab { margin-top: auto; align-self: flex-start; }
 
 /* confusion matrix: green = correct, red = wrong */
 .cmat td.hit { background: var(--ok-bg); font-weight: 600; }
