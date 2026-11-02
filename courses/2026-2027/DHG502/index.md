@@ -3,7 +3,7 @@ layout: default
 title: DHG502
 ---
 
-<p class="updated">Last updated: Sep 28, 2026</p>
+<p class="updated">Last updated: Nov 2, 2026</p>
 <div class="course-header">
 <div class="course-header-info">
 <h1>DHG 502 Course Syllabus</h1>
@@ -326,9 +326,9 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
         <div class="schedule-section reading">
           <strong class="schedule-label">Readings</strong>
           <ul class="readings">
-            <li>Freeman Tilden, <em>Interpreting Our Heritage</em>, Introduction</li>
+            <li>Freeman Tilden, <em>Interpreting Our Heritage</em>, 3rd ed. (University of North Carolina Press, 1977; first published 1957), Chapter 1, “Principles of Interpretation”</li>
             <li>Taylor Arnold and Lauren Tilton, <em>Distant Viewing: Computational Exploration of Digital Images</em> (MIT Press, 2023; open access), Chapter 1, “Distant Viewing: Theory”</li>
-            <li>Sarah Kenderdine, “Radical Intangibles: Materializing the Ephemeral,” <em>Museum Anthropology Review</em> 19, no. 2 (2024), selected sections</li>
+            <li>Sarah Kenderdine, Lily Hibberd, and Jeffrey Shaw, “Radical Intangibles: Materializing the Ephemeral,” <em>Museum &amp; Society</em> 19, no. 2 (2021): 252–272, selected sections</li>
             <li>(optional) Hilde De Weerdt et al., <a href="https://dhq.digitalhumanities.org/vol/19/4/000808/000808.html">“Contextual Semantic Text and Image Annotation in the MARKUS Environment”</a>, <em>Digital Humanities Quarterly</em> 19, no. 4 (2025), selected sections</li>
             <li>(optional) Fiona Cameron and Sarah Kenderdine, eds., <em>Theorizing Digital Cultural Heritage: A Critical Discourse</em> (MIT Press, 2007)</li>
           </ul>

@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital Heritage and Image Annotation — DHG 502</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+
+<!-- 1 ─────────── Title -->
+<section class="slide full title-slide" id="s-title">
+  <div class="seal" aria-hidden="true"><span>遺</span><span>觀</span><span>產</span><span>看</span></div>
+  <div class="big-en" style="font-size:96px">Digital Heritage</div>
+  <div class="big-zh">Interpretation, Reconstruction, and Ways of Viewing</div>
+  <div class="rule"></div>
+  <div class="quote">
+    <span class="en" style="font-size:24px">What happens to the past when we scan it, rebuild it, capture it in motion, or ask a computer to look at it for us?</span>
+  </div>
+  <div class="hint">DHG 502 Digital Approaches in Historical Research &nbsp;·&nbsp; Week 8 &nbsp;·&nbsp; <kbd>←</kbd> <kbd>→</kbd> navigate &nbsp;·&nbsp; <kbd>1</kbd>–<kbd>6</kbd> sections &nbsp;·&nbsp; <kbd>G</kbd> go to slide &nbsp;·&nbsp; <kbd>F</kbd> fullscreen</div>
+</section>
+
+<!-- 2 ─────────── Route -->
+<section class="slide" id="s-plan" data-sec="interp">
+  <h2>Today’s route</h2>
+  <div class="route">
+    <div class="rstop" data-step="1"><i>1</i><div><b>Interpretation</b><br><span class="mute">Tilden: what heritage is <em>for</em></span></div></div>
+    <div class="rarrow" data-step="2">→</div>
+    <div class="rstop" data-step="2"><i>2</i><div><b>Digital surrogates</b><br><span class="mute">Mogao Cave 45, Sanxingdui</span></div></div>
+    <div class="rarrow" data-step="3">→</div>
+    <div class="rstop" data-step="3"><i>3</i><div><b>Radical intangibles</b><br><span class="mute">Hong Kong kung fu, Confucian rites</span></div></div>
+  </div>
+  <div class="route" style="margin-top:14px">
+    <div class="rarrow" data-step="4" style="font-size:34px;margin-left:18px">↳</div>
+    <div class="rstop" data-step="4"><i>4</i><div><b>Distant viewing</b><br><span class="mute">what computers “see” in images</span></div></div>
+    <div class="rarrow" data-step="5">→</div>
+    <div class="rstop" data-step="5"><i>5</i><div><b>Annotation</b><br><span class="mute">by hand (IMMARKUS) and by machine</span></div></div>
+  </div>
+  <div class="t" style="margin-top:30px" data-step="6"><b>This week’s readings</b></div>
+  <ul class="reads" data-step="6">
+    <li>Freeman Tilden, <em>Interpreting Our Heritage</em> (1957; 3rd ed. 1977), Ch. 1, “Principles of Interpretation” <span class="role">interpretation</span></li>
+    <li>Taylor Arnold and Lauren Tilton, <em>Distant Viewing</em> (MIT Press, 2023), Ch. 1, “Distant Viewing: Theory” <span class="role">computer vision</span></li>
+    <li>Sarah Kenderdine, Lily Hibberd and Jeffrey Shaw, “Radical Intangibles: Materializing the Ephemeral,” <em>Museum &amp; Society</em> 19, no. 2 (2021) <span class="role">intangible heritage</span></li>
+  </ul>
+</section>
+
+<!-- 3 ─────────── Two jobs -->
+<section class="slide" id="s-jobs" data-sec="interp">
+  <h2>Two jobs, often confused</h2>
+  <div class="row" style="gap:26px;margin-top:10px">
+    <div class="grow card k ac" data-step="1"><h3>Preservation</h3><p>Keep a record of the thing: a scan, a 3D model, a recording. The aim is <b>fidelity</b>: the record should survive the original and be as complete and accurate as possible.</p><p style="margin-top:10px" class="mute">Question to ask: <i>is the copy faithful?</i></p></div>
+    <div class="grow card k ac2" data-step="2"><h3>Interpretation</h3><p>Help a person understand why the thing matters. The aim is <b>meaning</b>: a visitor who leaves with a question, a connection, a changed view.</p><p style="margin-top:10px" class="mute">Question to ask: <i>does anyone understand more?</i></p></div>
+  </div>
+  <div class="t" style="margin-top:22px" data-step="3">Digital projects often claim both. Much of today’s critique comes from mixing them up:</div>
+  <ul class="pts sm" data-step="3">
+    <li>a perfect laser scan can be <b>uninterpretable</b> to a visitor;</li>
+    <li>a vivid virtual world can be <b>unfaithful</b> to the evidence, and nobody can tell which parts are invented.</li>
+  </ul>
+  <div class="box-ok" data-step="4"><b>For discussion:</b> what in Hong Kong’s heritage is <b>tangible</b>, and what is <b>intangible</b>? Which of the two can a scanner record?</div>
+  <div class="row" style="gap:20px;margin-top:12px">
+    <div class="grow card k ac" data-step="5"><h3>Tangible</h3><p>Things that can be touched, kept and scanned: buildings, objects, documents, paintings. A tenement house, a temple bell, a Qing map.</p></div>
+    <div class="grow card k ac2" data-step="5"><h3>Intangible</h3><p>Practices that exist only while people perform and pass them on: skills, rituals, festivals, music, oral traditions. Kung fu, Cantonese opera, the Cheung Chau Bun Festival.</p></div>
+  </div>
+</section>
+
+<!-- 4 ─────────── Q: Tilden's definition -->
+<section class="slide" id="s-tilden" data-sec="interp">
+  <h2>Freeman Tilden: interpretation</h2>
+  <div class="qs">
+    <figure class="ph" style="width:375px"><img src="img/tilden-cover.jpg" alt="Cover of Interpreting Our Heritage by Freeman Tilden"><figcaption>Written in 1957 for the US National Park Service; still the founding text of heritage interpretation.</figcaption></figure>
+    <div class="tx">
+      <p class="bq sm" data-step="1">An educational activity which aims to <b>reveal meanings and relationships</b> through the use of original objects, by firsthand experience, and by illustrative media, <b>rather than simply to communicate factual information</b>.<span class="who">Tilden, Ch. 1, p. 8: his definition “for the dictionary”</span></p>
+      <p class="bq sm" data-step="2">Interpretation is the <b>revelation of a larger truth</b> that lies behind any statement of fact.<span class="who">p. 8: the same idea, “for the interpreter”</span></p>
+      <p class="bq sm" data-step="3">Here he meets <b>the Thing Itself</b> … “To pay a personal visit to a historic shrine is to receive a concept <b>such as no book can supply</b>.”<span class="who">p. 3, on the visitor to a park, site or museum</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- 5 ─────────── Six principles -->
+<section class="slide" id="s-principles" data-sec="interp">
+  <h2>Tilden’s six principles</h2>
+  <ul class="checklist roman" style="margin-top:0">
+    <li class="hot" data-step="1"><i>I</i><div>Any interpretation that does not somehow relate what is being displayed or described to something within the personality or experience of the visitor will be <b>sterile</b>.</div></li>
+    <li class="hot" data-step="2"><i>II</i><div><b>Information, as such, is not Interpretation.</b> Interpretation is revelation based upon information. But they are entirely different things. However, all interpretation includes information.</div></li>
+    <li data-step="3"><i>III</i><div>Interpretation is an <b>art</b>, which combines many arts, whether the materials presented are scientific, historical or architectural. Any art is in some degree teachable.</div></li>
+    <li class="hot" data-step="4"><i>IV</i><div>The chief aim of Interpretation is not instruction, but <b>provocation</b>.</div></li>
+    <li data-step="5"><i>V</i><div>Interpretation should aim to present a <b>whole</b> rather than a part, and must address itself to the whole man rather than any phase.</div></li>
+    <li data-step="6"><i>VI</i><div>Interpretation addressed to children (say, up to the age of twelve) should not be a dilution of the presentation to adults, but should follow a <b>fundamentally different approach</b>.</div></li>
+  </ul>
+  <div class="box-key" data-step="7" style="margin-top:6px">A database, a search portal or a 3D model is <b>information</b> (principle II). What turns it into interpretation? Tilden’s answer is principle IV.</div>
+</section>
+
+<!-- 6 ─────────── Q: provocation -->
+<section class="slide" id="s-provocation" data-sec="interp">
+  <h2>Not instruction, but provocation</h2>
+  <div class="qs">
+    <figure class="ph" style="width:360px"><img src="img/mammoth.jpg" alt="Illustration of a woolly mammoth"><figcaption>Tilden’s favourite museum label (Witte Museum, San Antonio) told visitors that mammoths once “browsed <b>right where you are standing now</b>” (Ch. 2).</figcaption></figure>
+    <div class="tx">
+      <p class="bq xs" data-step="1">The provocation to the visitor to <b>search out meanings for himself</b>, and join in the expedition <b>like a fellow discoverer</b>, was sometimes submerged in <b>a high tide of facts, perfectly accurate, perfectly ineffectual</b>.<span class="who">Tilden, Ch. 5, “Not Instruction But Provocation,” p. 36</span></p>
+      <p class="bq xs" data-step="2">A ranger explains how, over centuries, rock becomes soil, grass and forest. Then, with a snap of the fingers: “And with a lighted cigarette you can destroy it all—<b>LIKE THAT!</b>” … Not all the warning signs about fires ever put on the roadsides; not all the statistics ever published … could have had the effect … <b>It was not instruction. It was provocation.</b><span class="who">pp. 38–39</span></p>
+      <div class="note" data-step="3" style="font-family:var(--serif);font-size:21px;color:var(--ink)">“Through interpretation, understanding; through understanding, appreciation; <b style="color:var(--tgt)">through appreciation, protection</b>.” <span style="font-family:var(--latin);font-size:14px;color:var(--mute)">National Park Service manual, quoted by Tilden, p. 38</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 ─────────── Labels exercise -->
+<section class="slide" id="s-provoke" data-sec="interp">
+  <h2>Try it: information vs. provocation</h2>
+  <div class="row" style="gap:24px;margin-top:6px">
+    <div class="grow label dry" data-step="1"><div class="lt">A label that informs</div>Mammoth (<i>Mammuthus</i>). Pleistocene epoch. Skeleton excavated in Texas. Height at shoulder 3.4 m.</div>
+    <div class="grow label" data-step="2"><div class="lt">The label Tilden admired</div>“Prehistoric mammoths were here in Texas just a few thousand years ago. They roamed the plains in great herds… . The chances are that they browsed <b>right where you are standing now</b>.”</div>
+  </div>
+  <ul class="pts sm" style="margin-top:16px">
+    <li data-step="3">The second label connects to <b>the visitor’s own place</b> (principle I) and leaves a question behind (principle IV).</li>
+    <li data-step="4">It contains <b>less</b> information. Interpretation <em>includes</em> information but is not reducible to it.</li>
+  </ul>
+  <div class="box-ok" data-step="5"><b>Your turn (5 min):</b> pick one object from the online collection of the <a href="https://www.heritagemuseum.gov.hk/en/collections/highlight.html" target="_blank" rel="noopener">Hong Kong Heritage Museum</a> or the <a href="https://www.hkpm.org.hk/en/collection" target="_blank" rel="noopener">Hong Kong Palace Museum</a>. Write two labels of 30 words each: one that <b>informs</b>, one that <b>provokes</b>. We will read a few aloud.</div>
+  <div class="box-key" data-step="6">Then ask the same of a digital project: does the 3D model, VR cave or online database <b>provoke</b>, or does it only add to the “high tide of facts”?</div>
+</section>
+
+<!-- 8 ─────────── Q: Gadgetry -->
+<section class="slide" id="s-gadget-q" data-sec="interp">
+  <h2>Tilden on technology: “Of Gadgetry”</h2>
+  <div class="qs">
+    <figure class="ph"><img src="img/ayutthaya-3d.jpg" alt="Web viewer showing 3D models of temples at Ayutthaya, Thailand"><figcaption>A gadget of our time: online 3D models of Ayutthaya, Thailand. Tilden’s gadgets were slide projectors, tape recorders and push-button displays.</figcaption></figure>
+    <div class="tx">
+      <p class="bq sm" data-step="1">There will never be a device of telecommunication <b>as satisfactory as the direct contact</b> not merely with the voice, but with the hand, the eye, the casual and meaningful ad lib … While I think nobody disagrees upon this, we all know that <b>there will not be enough of those individuals</b> to make the direct contact.<span class="who">Tilden, Ch. 13, p. 95</span></p>
+      <p class="bq sm" data-step="2">Such a mechanical device can <b>never deliver anything better than what some person thought, prepared, spoke</b> or otherwise personally performed.<span class="who">p. 96</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- 9 ─────────── Gadgetry reflections -->
+<section class="slide" id="s-gadget" data-sec="interp">
+  <h2>Tilden’s six reflections on gadgets</h2>
+  <div class="row" style="gap:28px">
+    <ol class="checklist" style="flex:1.25;margin-top:4px">
+      <li data-step="1"><i>1</i><div>No device is as desirable as interpretation by <b>direct contact with the person</b>.</div></li>
+      <li data-step="2"><i>2</i><div>A good device is far better than <b>no contact at all</b>.</div></li>
+      <li data-step="3"><i>3</i><div>A good result by device is better than a poor performance by an individual.</div></li>
+      <li data-step="4"><i>4</i><div>A poor interpretation by machine is <b>worse</b> than a poor one by a person.</div></li>
+      <li data-step="5"><i>5</i><div>A poor device may be <b>worse than none at all</b>.</div></li>
+      <li data-step="6"><i>6</i><div>Install nothing that cannot be <b>serviced quickly and continually</b>.</div></li>
+    </ol>
+    <div style="flex:1">
+      <div class="qt sm" data-step="6">Gadgets do not supplant the personal contact; we accept them as <b>valuable alternatives and supplements</b>.<span class="who">Tilden, p. 97</span></div>
+      <div class="box-warn" data-step="7" style="font-size:18px">Reflection 6 today: broken links, dead plug-ins, abandoned apps, unsupported VR headsets. <b>Who maintains a digital exhibit in ten years?</b></div>
+      <div class="box-key" data-step="8" style="font-size:18px"><b>Your turn:</b> think of the last digital display you used in a museum. Which of the six does it pass?</div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 ─────────── Cave 45: context -->
+<section class="slide" id="s-cave" data-sec="surrogate">
+  <h2>Case: Mogao Cave 45, Dunhuang</h2>
+  <div class="row" style="gap:30px">
+    <div style="width:560px;flex:none" data-step="1">
+      <div class="vid"><iframe data-src="https://www.youtube.com/embed/0uUIjgIH-5s" data-yt="0uUIjgIH-5s" title="Cave 45 Virtual Immersive Experience" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
+      <div class="vlink">“Cave 45 Virtual Immersive Experience (2-D Version),” Getty Research Institute. <a href="https://www.youtube.com/watch?v=0uUIjgIH-5s" target="_blank" rel="noopener">youtube.com/watch?v=0uUIjgIH-5s</a></div>
+    </div>
+    <dl class="ctx grow" style="margin:0">
+      <dt data-step="2">The site</dt><dd data-step="2">The Mogao Grottoes near Dunhuang, Gansu: Buddhist cave temples cut between the 4th and 14th centuries, about 500 of them painted. A UNESCO World Heritage Site since 1987.</dd>
+      <dt data-step="3">The cave</dt><dd data-step="3">Cave 45 is a High Tang cave (8th century), known for its painted clay sculptures of the Buddha with disciples, bodhisattvas and heavenly kings.</dd>
+      <dt data-step="4">The problem</dt><dd data-step="4">Breath, humidity and light damage the murals. Visitor numbers are capped, and many caves are closed to the public.</dd>
+      <dt data-step="5">The surrogate</dt><dd data-step="5">For its 2016 exhibition <i>Cave Temples of Dunhuang</i> in Los Angeles, the Getty showed full-size replica caves and this virtual walk-through of Cave 45, made with the Dunhuang Academy.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- 11 ─────────── Q: Cave 45 and the Thing Itself -->
+<section class="slide" id="s-cave-q" data-sec="surrogate">
+  <h2>Does the copy replace the Thing Itself?</h2>
+  <div class="qs">
+    <figure class="ph wide" style="width:470px"><img src="img/cave45.jpg" alt="Still from the virtual Cave 45: a light beam on a painted wall beside clay sculptures"><figcaption>The virtual Cave 45: a beam of light picks out details on the wall, in the order the designers chose.</figcaption></figure>
+    <div class="tx">
+      <p class="bq xs" data-step="1">The <b>decoupling of the original from its copy</b> and its integration into networked culture has created new avenues for the lives of bodies as virtual (if not actual) museum artefacts, where the sense of presence, or its <b>thingness takes precedence over the thing itself</b>.<span class="who">Kenderdine, Hibberd and Shaw 2021, p. 255</span></p>
+      <div class="note" data-step="2"><b>Against Tilden?</b> Tilden’s visitor meets “the Thing Itself.” Here the experience of presence is produced <b>without</b> the thing. But the cave was built for worship, not for a camera path, and the designers choose the lighting, scale and order of looking.</div>
+      <div class="note" data-step="3"><b>With Tilden:</b> for a cave that cannot take visitors, the real comparison is his second reflection, “a good device is far better than <b>no contact at all</b>.”</div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 ─────────── Sanxingdui: context -->
+<section class="slide" id="s-sanxingdui" data-sec="surrogate">
+  <h2>Case: reconstructing Sanxingdui</h2>
+  <div class="row" style="gap:30px">
+    <div style="width:560px;flex:none" data-step="1">
+      <div class="vid"><iframe data-src="https://www.youtube.com/embed/52sVaUjlbR0" data-yt="52sVaUjlbR0" title="3D Revivification of newly unearthed relics from Sanxingdui" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
+      <div class="vlink">“3D Revivification of newly unearthed relics from Sanxingdui 三星堆新出土文物3D复原” (Sanxingdui-Jinsha channel). <a href="https://www.youtube.com/watch?v=52sVaUjlbR0" target="_blank" rel="noopener">youtube.com/watch?v=52sVaUjlbR0</a></div>
+    </div>
+    <dl class="ctx grow" style="margin:0">
+      <dt data-step="2">The site</dt><dd data-step="2">Sanxingdui 三星堆, Guanghan, Sichuan: a Bronze Age culture of about 3,000 years ago with no known writing. Two sacrificial pits were found in 1986; six more were excavated from 2020.</dd>
+      <dt data-step="3">The objects</dt><dd data-step="3">Bronze masks and heads, gold foil, jade, ivory. Many were <b>deliberately broken and burned</b> before burial, so they come out of the ground as fragments.</dd>
+      <dt data-step="4">The video</dt><dd data-step="4">Scanned fragments are joined, completed and re-coloured into whole, gleaming objects, ending in a gold mask “restored” to its imagined place.</dd>
+    </dl>
+  </div>
+  <div class="box-warn" data-step="5" style="font-size:18px">The objects were broken <b>on purpose</b>. Making them whole again shows their original form, but it hides the ritual act of breaking them, which is itself evidence. Should a reconstruction show the object as it was <b>made</b>, or as it was <b>buried</b>?</div>
+</section>
+
+<!-- 13 ─────────── Critique checklist -->
+<section class="slide" id="s-critique" data-sec="surrogate">
+  <h2>Critiquing a reconstruction: five questions</h2>
+  <ul class="checklist" style="margin-top:6px">
+    <li data-step="1"><i>1</i><div><b>Evidence or conjecture?</b><small>Can you tell the scanned parts from the inferred ones? Is uncertainty shown (colour, transparency, a note), or is everything rendered with the same confidence?</small></div></li>
+    <li data-step="2"><i>2</i><div><b>Are the decisions documented?</b><small>Sources, alternatives rejected, who decided. The London Charter (2009) calls this documentation <em>paradata</em>.</small></div></li>
+    <li data-step="3"><i>3</i><div><b>Which moment, and whose past?</b><small>An object has many states: made, used, broken, buried, excavated. Choosing “the original” is choosing a story, often a national one.</small></div></li>
+    <li data-step="4"><i>4</i><div><b>What is left out?</b><small>Sound, smell, use, dirt, crowds, the people who made and used it.</small></div></li>
+    <li data-step="5"><i>5</i><div><b>What does it ask the visitor to do?</b><small>Look, play, buy, or think? Tilden: provoke, do not only display.</small></div></li>
+  </ul>
+  <div class="box-key" data-step="6">A reconstruction is an <b>argument</b> about the past, presented as an image, and images do not footnote themselves. The same is true of historians’ maps, networks and charts.</div>
+</section>
+
+<!-- 14 ─────────── ICH -->
+<section class="slide" id="s-ich" data-sec="intangible">
+  <h2>Heritage that does not stay still</h2>
+  <div class="def" data-step="1"><div class="lead" style="margin:0"><b>Intangible cultural heritage (ICH)</b>: practices, performances, skills and knowledge kept alive by communities “with a sense of identity and continuity.”</div><div class="src">UNESCO Convention for the Safeguarding of the Intangible Cultural Heritage (2003); China ratified it in 2004.</div></div>
+  <table class="tbl c" data-step="2" style="margin-top:4px">
+    <thead><tr><th style="width:200px"></th><th>Intangible cultural heritage</th><th>Reenactment</th></tr></thead>
+    <tbody>
+      <tr><td><b>Status</b></td><td>a <b>living</b> practice, transmitted without a break</td><td>a practice that was <b>discontinued</b> and must be recreated</td></tr>
+      <tr><td><b>Example</b></td><td>Hong Kong kung fu, taught master to student</td><td>Confucian rites of the <i>Yili</i>, broken in the 20th century</td></tr>
+      <tr><td><b>Authority</b></td><td>the community of practitioners</td><td>texts, archaeology, and the scholars who read them</td></tr>
+    </tbody>
+  </table>
+  <div class="box-warn" data-step="3" style="font-size:18px"><b>Critiques:</b> UNESCO lists can become an “authorized heritage discourse” (Laurajane Smith, 2006); in China, ICH policy can serve national narratives (Chen 2015; Wu 2012). Popular reenactment has been criticized for upholding nationalist and colonial stories.</div>
+  <div class="src">Kenderdine, Hibberd and Shaw 2021, §1.1.</div>
+</section>
+
+<!-- 15 ─────────── Q: radical intangibles -->
+<section class="slide" id="s-radical" data-sec="intangible">
+  <h2>“Radical intangibles”</h2>
+  <div class="qs">
+    <figure class="ph"><img src="img/ken-mocap.jpg" alt="Kung fu master wearing reflective markers in a motion capture studio"><figcaption>A kung fu master in a motion capture studio: infrared cameras track reflective markers on the body (Fig. 1).</figcaption></figure>
+    <div class="tx">
+      <p class="bq" data-step="1">What were once considered <b>practices beyond representation or recording</b>, the intangible realms of experience inherent to bodies (as they are conjoined with minds) are being <b>transformed through computational processes</b> into what we call ‘radical intangibles’.<span class="who">Kenderdine, Hibberd and Shaw 2021, p. 252</span></p>
+      <div class="note" data-step="2">Their method, <b>“computational museology,”</b> links three steps: <b>data capture</b> (motion capture, video, photogrammetry) → <b>modelling</b> (3D bodies moving over time) → <b>algorithmic reenactment</b> (interactive archives that can be replayed and <em>reperformed</em>).</div>
+    </div>
+  </div>
+</section>
+
+<!-- 16 ─────────── HKMALA: context -->
+<section class="slide" id="s-hkmala" data-sec="intangible">
+  <h2>Case: Hong Kong Martial Arts Living Archive</h2>
+  <div class="row" style="gap:30px">
+    <dl class="ctx grow" style="margin:0">
+      <dt data-step="1">Why</dt><dd data-step="1">Many southern Chinese masters moved to Hong Kong, many during the Cultural Revolution; today they are <b>ageing</b>. Kung fu passes from master to student over years, and “embodied practices cannot be learned from a book” (p. 258).</dd>
+      <dt data-step="2">Who</dt><dd data-step="2">Started in 2012 by the International Guoshu Association and City University of Hong Kong; later also EPFL’s Laboratory for Experimental Museology.</dd>
+      <dt data-step="3">What</dt><dd data-step="3"><b>19 styles</b> performed by <b>33</b> elite practitioners, recorded with motion capture, 3D reconstruction and panoramic video: by the authors’ account, the largest motion archive of its kind.</dd>
+      <dt data-step="4">Where you could see it</dt><dd data-step="4"><i>300 Years of Hakka Kung Fu</i>, <b>Hong Kong Heritage Museum</b>, Sha Tin, 2016. Two installations: <b>Re-Actor</b> and <b>Kung Fu Pose Matching</b>.</dd>
+    </dl>
+    <figure class="fx" data-step="4" style="width:420px;flex:none"><img src="img/ken-reactor.jpg" alt="Visitor at a joystick before a screen with a 3D kung fu figure"><figcaption>Re-Actor at the Hong Kong Heritage Museum, 2016 (Fig. 2): a six-sided structure, five metres across. Each side shows one master’s <i>taolu</i> 套路 (set routine) in stereoscopic 3D; a joystick switches between six visualizations.</figcaption></figure>
+  </div>
+</section>
+
+<!-- 17 ─────────── Q: aesthetic transcription -->
+<section class="slide" id="s-transcription" data-sec="intangible">
+  <h2>Making the invisible visible</h2>
+  <div class="qs">
+    <figure class="ph" style="width:340px"><img src="img/ken-transcription.jpg" alt="Kung fu movements rendered as coloured trails and sculptural shapes"><figcaption>Kung fu annotation and visualizations, 2016 (Fig. 3).</figcaption></figure>
+    <div class="tx">
+      <p class="bq sm" data-step="1">Through colour and motion graphics, these six forms of documentation dynamically visualize the aesthetics and <b>spatial-temporal dimensions</b> underlying the movements of kung fu masters … They reveal the depth and array of intricate dynamics in the HKMALA repertoire; <b>aspects of kung fu motion usually indiscernible to amateurs</b>.<span class="who">Kenderdine, Hibberd and Shaw 2021, p. 259</span></p>
+      <div class="note" data-step="2">The authors call this <b>“aesthetic transcription”</b> and place it in a long line: Chinese martial-arts manuals, the ritual scripts of the <i>Yili</i>, and Labanotation for dance. In Tilden’s terms it aims at <b>revelation</b>, not only information: it shows what the eye alone misses.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 18 ─────────── Q: Pose matching -->
+<section class="slide" id="s-pose" data-sec="intangible">
+  <h2>Can a body learn from a database?</h2>
+  <div class="qs">
+    <figure class="ph" style="width:460px"><img src="img/ken-posematch.jpg" alt="A visitor copies the pose of a life-size projected kung fu master"><figcaption>Kung Fu Pose Matching, Hong Kong Heritage Museum, 2016 (Fig. 4). Sensors detect when the visitor’s pose matches the master’s; the screen flashes, as in a video game. A 2018 EPFL/UNIL study found some improvement with repetition.</figcaption></figure>
+    <div class="tx">
+      <p class="bq sm" data-step="1">There is <b>no guarantee</b> that a novice engaged in copying the kung fu master’s movements will either <b>comprehend, access, or acquire the tacit expertise</b> they are replicating.<span class="who">Kenderdine, Hibberd and Shaw 2021, p. 261</span></p>
+      <div class="note" data-step="2">One master quoted in the article says kung fu requires “at least ten years of strict commitment” (p. 258).</div>
+      <div class="note" data-step="3"><b>Tilden’s test:</b> is the installation <b>transmission</b>, or a good <b>provocation</b> that might send a visitor to a real teacher? Which of his six reflections does it pass?</div>
+    </div>
+  </div>
+</section>
+
+<!-- 19 ─────────── RCR: context -->
+<section class="slide" id="s-rcr" data-sec="intangible">
+  <h2>Case: Remaking Confucian Rites</h2>
+  <div class="row" style="gap:30px">
+    <dl class="ctx grow" style="margin:0">
+      <dt data-step="1">The text</dt><dd data-step="1">The <b><i>Yili</i> 儀禮</b> (<i>Book of Etiquette and Rites</i>), a canonical description of 17 rites that the authors call a “performance manual” for ritual conduct (<i>li</i> 禮).</dd>
+      <dt data-step="2">The break</dt><dd data-step="2">The practice of these rites broke down after 1911 and in the Cultural Revolution. Nobody performs them from living memory, so this is <b>reenactment</b>, not living ICH.</dd>
+      <dt data-step="3">The project</dt><dd data-step="3">Led by Peng Lin 彭林 at Tsinghua University, with City University of Hong Kong and EPFL. A script was written from close reading of the text, philology and archaeology, with replica props and costumes.</dd>
+      <dt data-step="4">The shoot</dt><dd data-step="4">The provincial archery rite <b>鄉射禮</b>: a near full-scale temple set in a Beijing studio, <b>30 Beijing Opera actors</b>, about <b>8 hours</b> of cinema-quality film, plus motion capture and 360° video. The footage is annotated in a database.</dd>
+    </dl>
+    <div style="width:420px;flex:none">
+      <figure class="fx" data-step="2"><img style="height:215px;object-fit:cover" src="img/ken-rcr-screens.jpg" alt="Three-screen installation showing a Confucian capping ceremony"><figcaption>Three-screen installation of the capping ceremony, Ljubljana, 2016 (Fig. 5).</figcaption></figure>
+      <figure class="fx" data-step="4" style="margin-top:10px"><img style="height:215px;object-fit:cover" src="img/ken-rcr-annotation.jpg" alt="Annotated multimodal recordings of ritual movements"><figcaption>Multimodal recordings and annotation (Fig. 6).</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 20 ─────────── RCR: video + quote -->
+<section class="slide" id="s-rcr-q" data-sec="intangible">
+  <h2>Reenactment as historical method?</h2>
+  <div class="row" style="gap:30px">
+    <div style="width:540px;flex:none" data-step="1">
+      <div class="vid"><iframe data-src="https://www.youtube.com/embed/ry2leciY58Q" data-yt="ry2leciY58Q" title="Deep Time Machine II: Jeffrey Shaw's Screening of Konfuzius Rites" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
+      <div class="vlink">“Deep Time Machine II: Jeffrey Shaw’s Screening of Konfuzius Rites,” <i>Potential Spaces</i>, ZKM / HfG Karlsruhe, 2017 (cited in the article, n. 15). <a href="https://www.youtube.com/watch?v=ry2leciY58Q" target="_blank" rel="noopener">youtube.com/watch?v=ry2leciY58Q</a></div>
+    </div>
+    <div class="grow">
+      <p class="bq xs" data-step="2" style="padding-top:30px">Digitally augmented in this way, scholarly reenactment generates <b>ontologically intense knowledge</b> because its liveness as well as more abstract ritual qualities can be contextualized in a <b>wholly live and yet remakeable encoded world</b>.<span class="who">Kenderdine, Hibberd and Shaw 2021, p. 263</span></p>
+      <ul class="pts sm" style="margin-top:10px">
+        <li data-step="3">The archive records <b>opera actors</b> performing a <b>scholarly reading</b> of an ancient text. What exactly is being preserved?</li>
+        <li data-step="4">The strongest claim: the team uses the recordings to <b>test hypotheses</b> drawn from the text, like experimental archaeology.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 21 ─────────── Q: message without a code -->
+<section class="slide" id="s-dv-code" data-sec="distant">
+  <h2>Images make meaning differently from text</h2>
+  <div class="qs">
+    <figure class="ph wide" style="width:470px"><img src="img/dv-palms.jpg" alt="Winslow Homer watercolour of a palm tree beside a 2019 photograph of palm trees"><figcaption>Fig. 1.1: a Winslow Homer watercolour (Nassau, 1898) and a photograph (Hayman Island, 2019). Different materials, a century apart, and both say “palm trees, wind, sea.”</figcaption></figure>
+    <div class="tx">
+      <p class="bq sm" data-step="1">As Roland Barthes argues, there is a “special status of the photographic image: it is <b>a message without a code</b>.” In photography, it is not necessary to construct an explicit mapping between the visual representation and what is being represented.<span class="who">Arnold and Tilton 2023, p. 14</span></p>
+      <div class="note" data-step="2">A word like <i>pencil</i> refers <b>by convention</b>, so texts can be split into words and counted. An image refers <b>by resemblance</b>: people who share no language can recognize what it shows. Paul Valéry: seeing is “looking, in other words <b>forgetting the name</b> of the things that one sees.”</div>
+    </div>
+  </div>
+</section>
+
+<!-- 22 ─────────── Q: encoding/decoding -->
+<section class="slide" id="s-dv-decode" data-sec="distant">
+  <h2>Encoded is not decoded</h2>
+  <div class="qs">
+    <figure class="ph" style="width:350px"><img src="img/dv-shepherd.jpg" alt="Shepherd with horse and dog on Gravelly Range, Montana, 1942"><figcaption>Fig. 1.2: Russell Lee, “Shepherd with his horse and dog on Gravelly Range, Madison County, Montana,” 1942. Farm Security Administration / Office of War Information collection, Library of Congress.</figcaption></figure>
+    <div class="tx">
+      <p class="bq sm" data-step="1">The photographer may have taken the photograph … to convey <b>loyalty</b>. Whether the viewer decodes that message is not necessarily a given … A viewer from a different position may interpret the image as about the man’s <b>dominance of the landscape</b>.<span class="who">Arnold and Tilton 2023, p. 15</span></p>
+      <p class="bq sm" data-step="2">The messages that are encoded may not be decoded, and <b>messages that were not intentionally encoded may be decoded</b>.<span class="who">p. 15, following Stuart Hall</span></p>
+      <div class="note" data-step="3">This is true of every viewer: you, your classmates, a museum visitor, <b>and a computer-vision model</b>.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 23 ─────────── Pixels -->
+<section class="slide" id="s-dv-pixels" data-sec="distant">
+  <h2>What the computer has: numbers</h2>
+  <div class="row" style="gap:26px">
+    <figure class="fx" data-step="1" style="width:330px;flex:none"><img src="img/dv-rgb.jpg" alt="The shepherd image split into red, green and blue channels with pixel values"><figcaption>Fig. 1.3: each pixel is three numbers, red, green and blue, from 0 to 255.</figcaption></figure>
+    <figure class="fx" data-step="2" style="width:330px;flex:none"><img src="img/dv-horse-eye.jpg" alt="Four zoom levels centred on the horse's eye"><figcaption>Fig. 1.4: four zoom levels on the horse’s left eye. Up close, the same pixels are just grey squares.</figcaption></figure>
+    <div class="grow">
+      <ul class="pts sm" style="margin-top:0">
+        <li data-step="2">We recognize the eye only <b>in context</b>: next to ears, nose, neck.</li>
+        <li data-step="3">There is a “substantial gap” between the <b>numeric representation</b> and <b>what one sees</b> (p. 19).</li>
+        <li data-step="4">Text compression must be reversible. Images survive <b>lossy</b> compression and resizing: more evidence that images have no discrete code.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="box-key" data-step="5">Compare OCR (Week 6): there the gap was crossed by recognizing <b>characters</b>, a code. Most images have no such code to recover.</div>
+</section>
+
+<!-- 24 ─────────── Q: viewed first -->
+<section class="slide" id="s-dv-annot" data-sec="distant">
+  <h2>Why images must be viewed first</h2>
+  <div class="qs">
+    <figure class="ph wide" style="width:470px"><img src="img/dv-pipeline.jpg" alt="Two pipelines: structured data, and distant viewing which starts with Annotate"><figcaption>Fig. 2.1: a data-science pipeline (top) and distant viewing (bottom), which adds <b>Annotate</b> before everything else.</figcaption></figure>
+    <div class="tx">
+      <p class="bq sm" data-step="1">There is no equivalent way of grouping together and counting raw pixel values in the way that we were able to do by grouping letters into words … In other words, <b>the images must first be viewed</b>. There is no equivalent option, as there is with structured and textual data, to <b>delay interpretation</b>.<span class="who">Arnold and Tilton 2023, pp. 22–23</span></p>
+      <div class="note" data-step="2">Recall Week 7: a topic model counts words first; we name the topic (“weather”) only at the end. With images, the <b>annotation</b> (a count of people, an object label, a caption, a colour profile) comes first, and it is <b>already an interpretation</b>.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 25 ─────────── Q: never neutral -->
+<section class="slide" id="s-dv-cv" data-sec="distant">
+  <h2>Whose eyes does computer vision have?</h2>
+  <div class="qs">
+    <figure class="ph" style="width:340px"><img src="img/dv-cv-output.jpg" alt="Object boxes, region masks, panoptic segmentation and body keypoints on the shepherd photo"><figcaption>Fig. 2.2: object boxes, region masks, panoptic regions and body keypoints, all on the same photograph.</figcaption></figure>
+    <div class="tx">
+      <p class="bq sm" data-step="1">Applications to support the <b>military and surveillance state</b> have motived many of the most studied and accessible computer vision methods, such as face detection and object-tracking. Applying these methods is <b>never culturally neutral</b>.<span class="who">Arnold and Tilton 2023, p. 11</span></p>
+      <table class="tbl sm" data-step="2" style="margin-top:14px">
+        <thead><tr><th>Task works well</th><th>because it was funded for</th></tr></thead>
+        <tbody>
+          <tr><td>handwritten digits</td><td>sorting mail by postcode</td></tr>
+          <tr><td>faces</td><td>surveillance</td></tr>
+          <tr><td>cars, people, stop lights</td><td>self-driving cars</td></tr>
+        </tbody>
+      </table>
+      <div class="note" data-step="3">Concrete tasks (photo orientation, objects) are easier; culturally mediated ones (emotion, style, “dignity”) are much harder (p. 25). A pedestrian detector will find “pedestrians” in a Song dynasty scroll: <b>its categories are not ours</b>.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 26 ─────────── Q: ways of viewing -->
+<section class="slide" id="s-dv-viewing" data-sec="distant">
+  <h2>“Distant” and “viewing”</h2>
+  <div class="qs">
+    <figure class="ph wide" style="width:460px"><img src="img/dv-lange.jpg" alt="Dorothea Lange's Migrant Mother and a wider view of the same scene"><figcaption>Fig. 2.3: Dorothea Lange, Nipomo, California, 1936. The iconic <i>Migrant Mother</i> (left) and another view of the same scene (right). The photographer’s choice of frame is already a way of viewing.</figcaption></figure>
+    <div class="tx">
+      <p class="bq xs" data-step="1">As John Berger argued … “an image became <b>a record of how X had seen Y</b>.”<span class="who">Arnold and Tilton 2023, p. 29</span></p>
+      <p class="bq xs" data-step="2">Rather than focusing on <b>whether a computer vision algorithm can be objective</b>, we focus on defining <b>which ways of viewing are encoded and decoded</b>, and assessing the possibilities, limitations, and effects of these decisions.<span class="who">p. 30</span></p>
+      <div class="note" data-step="3" style="font-size:17px"><b>Distant</b>: away from the eye (the computer calculates) and at a scale beyond memory. <b>Viewing</b>: seeing is passive, but <b>looking</b> is intentional and learned, so it is shaped by culture.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 27 ─────────── Close vs distant annotation -->
+<section class="slide" id="s-compare" data-sec="annot">
+  <h2>Two ways to annotate an image</h2>
+  <table class="tbl c" style="margin-top:4px">
+    <thead><tr><th style="width:230px"></th><th>By hand (today’s lab)</th><th>By computer vision</th></tr></thead>
+    <tbody>
+      <tr data-step="1"><td><b>Who looks</b></td><td>you, with your training as a historian</td><td>a model, with the “training” of its data</td></tr>
+      <tr data-step="2"><td><b>Categories</b></td><td>your own, fitted to your question (seal, inscription, official’s rank)</td><td>the model’s (person, horse, umbrella)</td></tr>
+      <tr data-step="3"><td><b>Scale</b></td><td>dozens of images</td><td>millions</td></tr>
+      <tr data-step="4"><td><b>Errors</b></td><td>inconsistency, fatigue, your own bias</td><td>systematic bias, confident mistakes</td></tr>
+      <tr data-step="5"><td><b>Output</b></td><td>regions + tags + notes, linked to the image</td><td>boxes, labels, scores, embeddings</td></tr>
+    </tbody>
+  </table>
+  <div class="box-key" data-step="6">Both are <b>viewing</b> in Arnold and Tilton’s sense. Manual annotation is how we <b>check</b> machine annotation, and how we build the categories it lacks.</div>
+</section>
+
+<!-- 28 ─────────── Lab -->
+<section class="slide" id="s-lab" data-sec="annot">
+  <h2>Lab: annotating with IMMARKUS</h2>
+  <div class="pflow" style="margin-top:6px">
+    <div class="fb" data-step="1"><b>1 Open an image</b><span>a IIIF image of an East Asian historical source</span></div><div class="fa" data-step="2">→</div>
+    <div class="fb hot" data-step="2"><b>2 Draw regions</b><span>a figure, a seal, an inscription, a building</span></div><div class="fa" data-step="3">→</div>
+    <div class="fb" data-step="3"><b>3 Describe</b><span>tags, notes, links to people and places</span></div><div class="fa" data-step="4">→</div>
+    <div class="fb" data-step="4"><b>4 Export</b><span>CSV (a table) and JSON-LD (W3C Web Annotation)</span></div>
+  </div>
+  <div class="row" style="gap:26px;margin-top:22px">
+    <div class="grow" data-step="5">
+      <h3>Keep the theory in mind</h3>
+      <ul class="pts sm">
+        <li>Decide your <b>categories before you start</b>, and write them down. That is your “way of viewing.”</li>
+        <li>What did you <b>not</b> annotate, and why?</li>
+        <li>Could a computer-vision model produce your tags? Which ones, and which never?</li>
+      </ul>
+    </div>
+    <div class="grow" data-step="6">
+      <h3>Links</h3>
+      <ul class="pts sm">
+        <li>Tool: <a href="https://immarkus.xmarkus.org/">immarkus.xmarkus.org</a></li>
+        <li>Guide: <a href="https://ldas.jp/en/posts/immarkus-handson/">“Reading Digital Historical Sources with IIIF and Web Annotation”</a></li>
+        <li>Background (optional): De Weerdt et al., <a href="https://dhq.digitalhumanities.org/vol/19/4/000808/000808.html">MARKUS</a>, <i>DHQ</i> 19.4 (2025)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 29 ─────────── Recap -->
+<section class="slide" id="s-recap" data-sec="summary">
+  <h2>Recap</h2>
+  <div class="recap">
+    <div class="rrow" data-step="1"><i>1</i><div class="lead" style="margin:0;font-size:23px"><b>Not instruction, but provocation.</b> A faithful copy is information; interpretation reveals and provokes (Tilden).</div></div>
+    <div class="rrow" data-step="2"><i>2</i><div class="lead" style="margin:0;font-size:23px"><b>Gadgets</b> supplement, never replace, the person, and must be maintained.</div></div>
+    <div class="rrow" data-step="3"><i>3</i><div class="lead" style="margin:0;font-size:23px"><b>Reconstructions are arguments:</b> ask for the evidence, the decisions and the uncertainty.</div></div>
+    <div class="rrow" data-step="4"><i>4</i><div class="lead" style="margin:0;font-size:23px"><b>Radical intangibles:</b> bodies and rituals turned into data that can be reperformed (Hong Kong kung fu, Confucian rites).</div></div>
+    <div class="rrow" data-step="5"><i>5</i><div class="lead" style="margin:0;font-size:23px"><b>Distant viewing:</b> images must be annotated before analysis, and annotation is already interpretation.</div></div>
+    <div class="rrow" data-step="6"><i>6</i><div class="lead" style="margin:0;font-size:23px"><b>Every annotation is a way of viewing:</b> by hand or by machine, name your categories.</div></div>
+  </div>
+</section>
+
+<!-- 30 ─────────── Sources -->
+<section class="slide" id="s-sources" data-sec="summary">
+  <h2>Sources</h2>
+  <ul class="pts sm" style="line-height:1.5">
+    <li>Freeman Tilden, <i>Interpreting Our Heritage</i>, 3rd ed. (Chapel Hill: University of North Carolina Press, 1977 [1957]). Ch. 1, “Principles of Interpretation”; Ch. 2, “The Visitor’s First Interest”; Ch. 5, “Not Instruction But Provocation”; Ch. 13, “Of Gadgetry.”</li>
+    <li>Taylor Arnold and Lauren Tilton, <i>Distant Viewing: Computational Exploration of Digital Images</i> (Cambridge, MA: MIT Press, 2023), open access. Ch. 1; Figs. 1.1–1.4, 2.1–2.3.</li>
+    <li>Sarah Kenderdine, Lily Hibberd and Jeffrey Shaw, “Radical Intangibles: Materializing the Ephemeral,” <i>Museum &amp; Society</i> 19, no. 2 (2021): 252–272. Figs. 1–6.</li>
+    <li>Videos: Getty Research Institute (Mogao Cave 45); Sanxingdui-Jinsha; HfG Karlsruhe / ZKM (<i>Potential Spaces</i>, 2017). Links on each slide.</li>
+    <li class="mute">Further reading: Fiona Cameron and Sarah Kenderdine, eds., <i>Theorizing Digital Cultural Heritage</i> (MIT Press, 2007); The London Charter for the Computer-Based Visualisation of Cultural Heritage (2009); Laurajane Smith, <i>Uses of Heritage</i> (Routledge, 2006).</li>
+  </ul>
+</section>
+
+<div id="side"></div>
+<div id="bar"></div>
+<div id="num"></div>
+</div>
+<script src="slides.js"></script>
+<script src="deck.js"></script>
+</body>
+</html>
