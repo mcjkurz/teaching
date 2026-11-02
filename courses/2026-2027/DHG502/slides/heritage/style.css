@@ -776,3 +776,4 @@ a { color: var(--tgt); }
 .ctx { font-size: 20px; line-height: 1.45; } .ctx dt { font-size: 14px; margin-top: 12px; }
 .measuring [data-step] { transform: none !important; transition: none !important; }
 .qs { height: 540px; }
+.rstop > div, .pflow .fb b { white-space: nowrap; }
