@@ -773,3 +773,6 @@ a { color: var(--tgt); }
 .qs .ph.wide { justify-content: center; }
 .qs .ph.wide img { flex: none; height: auto; object-fit: contain; }
 #s-principles .roman li { font-size: 21.5px; line-height: 1.38; margin: 8px 0; }
+.ctx { font-size: 20px; line-height: 1.45; } .ctx dt { font-size: 14px; margin-top: 12px; }
+.measuring [data-step] { transform: none !important; transition: none !important; }
+.qs { height: 540px; }
