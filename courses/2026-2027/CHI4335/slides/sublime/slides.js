@@ -5,6 +5,7 @@ window.SECTIONS = [
   { id: 'sublime', zh: '崇高', en: 'The sublime' },
   { id: 'event', zh: '32111 鑽井隊', en: 'The 32111 Drilling Team' },
   { id: 'read', zh: '細讀文本', en: 'Close reading' },
+  { id: 'aside', zh: '旁白：計算', en: 'Aside: computation' },
   { id: 'voice', zh: '誰在說話', en: 'Who is speaking' },
   { id: 'axes', zh: '準確與本真', en: 'Accuracy and authenticity' },
   { id: 'after', zh: '從紙面到舞台', en: 'From page to stage' },
