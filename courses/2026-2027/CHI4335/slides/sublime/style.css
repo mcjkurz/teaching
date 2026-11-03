@@ -424,3 +424,11 @@ ol.story li::before { background: none; color: var(--acc); font-family: var(--se
 #laser { position: absolute; width: 18px; height: 18px; margin: -9px 0 0 -9px; border-radius: 50%; background: rgba(214,40,30,.85); box-shadow: 0 0 10px 4px rgba(255,60,40,.55); pointer-events: none; z-index: 20; display: none; }
 #stage.laser-on, #stage.laser-on * { cursor: none !important; }
 #stage.laser-on #laser { display: block; }
+
+/* Kant: the two kinds of sublime, side by side without boxes */
+.two-k { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; }
+.two-k h3 { margin: 0 0 4px; font-family: var(--serif); font-size: 25px; font-weight: 600; color: var(--acc); }
+.two-k h3 small { font-size: 15px; color: var(--mute); font-weight: 400; margin-left: .4em; }
+.two-k p { font-family: var(--serif); font-size: 18px; line-height: 1.6; margin: 0 0 8px; }
+.two-k p.ex { font-size: 15px; color: var(--mute); font-style: italic; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+.two-k p.lesson { color: var(--acc); font-weight: 600; }
