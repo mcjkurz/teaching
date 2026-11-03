@@ -23,3 +23,24 @@ window.SECTIONS = [
   });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
 })();
+
+/* Laser pointer: press L to swap the mouse cursor for a red dot (press L again to turn it off). */
+(function () {
+  const run = () => {
+    const stage = document.getElementById('stage');
+    const dot = document.createElement('div');
+    dot.id = 'laser';
+    stage.appendChild(dot);
+    // the stage is scaled with a CSS transform, so convert screen coordinates to stage coordinates
+    addEventListener('mousemove', e => {
+      const r = stage.getBoundingClientRect(), k = r.width / 1280;
+      dot.style.left = (e.clientX - r.left) / k + 'px';
+      dot.style.top = (e.clientY - r.top) / k + 'px';
+    });
+    addEventListener('keydown', e => {
+      if (e.metaKey || e.ctrlKey || e.altKey || (e.target && /^(INPUT|TEXTAREA)$/.test(e.target.tagName))) return;
+      if (e.key === 'l' || e.key === 'L') { stage.classList.toggle('laser-on'); e.preventDefault(); }
+    });
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
+})();

@@ -357,3 +357,70 @@ mark { background: #fbe9e7; color: var(--acc); padding: 0 2px; border-radius: 2p
 /* vocabulary chart (inline SVG) */
 .vchart { display: block; width: 100%; height: auto; }
 .vchart text { font-family: var(--latin), var(--cjk); }
+
+/* ================= week 10: a quieter, book-like theme (overrides the shared styles above) ================= */
+:root {
+  --ink: #26221e;
+  --mute: #8c847a;
+  --line: #e4ddd2;
+  --acc: #9e2a22;
+  --paper: #fbf8f2;
+  --tint: #f4ece2;
+  --serif: "Noto Serif TC", "Songti TC", "STSong", "PMingLiU", Georgia, serif;
+}
+#stage { background: var(--paper); }
+.slide.bleed { background: #111; }
+
+/* titles: serif, a short red rule underneath instead of the bar on the left */
+h2 { font-family: var(--serif); font-weight: 600; border-left: none; padding: 0 0 14px; margin-bottom: 34px; letter-spacing: .06em; position: relative; }
+h2::after { content: ''; position: absolute; left: 0; bottom: 0; width: 46px; height: 2px; background: var(--acc); }
+h2 small { font-family: var(--latin); font-style: italic; letter-spacing: .02em; }
+.title-slide .t1 { font-family: var(--serif); font-weight: 600; }
+.title-slide .t3 { font-family: var(--serif); }
+
+/* quotations read like quotations: serif, a hairline instead of a bar */
+.quote, .pq .zh, .mirror .who2, ol.story li, .rows .r .v { font-family: var(--serif); }
+.quote { border-left: 1px solid var(--acc); padding-left: 24px; }
+.pq .en { border-left: 1px solid var(--line); font-style: italic; }
+.pq .zh { border-left: 1px solid var(--acc); color: var(--ink); }
+.pq .en mark, .pq .zh mark, mark { background: none; color: var(--acc); font-weight: 600; padding: 0; box-shadow: inset 0 -.32em 0 rgba(158,42,34,.10); }
+
+/* questions to the class: a red marginal question, no speech bubble */
+.bubble { background: none; border: none; border-radius: 0; padding: 0 0 0 30px; color: var(--acc); font-family: var(--serif); font-weight: 600; position: relative; }
+.bubble::before { content: '問'; position: absolute; left: 0; top: .1em; font-size: .62em; line-height: 1; color: var(--paper); background: var(--acc); border-radius: 50%; width: 1.5em; height: 1.5em; display: grid; place-items: center; }
+.bubble::after { display: none; }
+
+/* fewer boxes */
+.opts > div { border: none; border-bottom: 1px solid var(--line); border-radius: 0; font-family: var(--serif); font-weight: 600; text-align: left; padding: 8px 2px; }
+.flow .box { border: none; background: var(--tint); border-radius: 2px; }
+.flow .box.k { background: none; border-left: 2px solid var(--acc); border-radius: 0; color: var(--acc); }
+.tag { border: none; padding: 0; font-variant: small-caps; letter-spacing: .12em; font-family: var(--serif); }
+.rows .r { border-top-color: var(--line); }
+.rows .r:last-child { border-bottom-color: var(--line); }
+.rows .r.hot { background: none; }
+.rows .r.hot .k { color: var(--acc); }
+.rows .r .k { font-family: var(--serif); font-weight: 600; }
+.pair2 .box { border-top: 1px solid var(--line); }
+.pair2 .box.k { border-top: 1px solid var(--acc); }
+.pair2 .box h3 { font-family: var(--serif); }
+table.cmp2 th { border-bottom: 1px solid var(--ink); font-family: var(--serif); }
+table.cmp2 td { border-bottom-color: var(--line); }
+ol.story li::before { background: none; color: var(--acc); font-family: var(--serif); font-size: 18px; font-weight: 600; border: 1px solid var(--acc); }
+.forms .it .txt { border: none; background: var(--tint); font-family: var(--serif); }
+.forms .it.hot .txt { color: var(--acc); }
+.mirror .m { border-top-color: var(--line); }
+
+/* images: a thin frame, like a plate in a book, instead of a floating shadow */
+.fig img, .gal .it img, .forms .it img, .mirror .img img, .cover img { box-shadow: 0 1px 2px rgba(60,40,20,.12), 0 6px 18px rgba(60,40,20,.10); }
+.fig figcaption, .cap, .gal .it span, .forms .it span { font-family: var(--serif); font-style: normal; }
+.src { font-family: var(--serif); }
+
+/* chrome */
+#side { background: var(--paper); }
+#bar { background: var(--acc); height: 3px; }
+#nav button { background: var(--paper); }
+
+/* laser pointer (press L) */
+#laser { position: absolute; width: 18px; height: 18px; margin: -9px 0 0 -9px; border-radius: 50%; background: rgba(214,40,30,.85); box-shadow: 0 0 10px 4px rgba(255,60,40,.55); pointer-events: none; z-index: 20; display: none; }
+#stage.laser-on, #stage.laser-on * { cursor: none !important; }
+#stage.laser-on #laser { display: block; }
