@@ -432,3 +432,34 @@ ol.story li::before { background: none; color: var(--acc); font-family: var(--se
 .two-k p { font-family: var(--serif); font-size: 18px; line-height: 1.6; margin: 0 0 8px; }
 .two-k p.ex { font-size: 15px; color: var(--mute); font-style: italic; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
 .two-k p.lesson { color: var(--acc); font-weight: 600; }
+
+/* newspaper clippings scattered on the desk */
+.clips { position: relative; height: 500px; margin-top: -14px; }
+.clips .c { position: absolute; background: #fff; padding: 7px 7px 0; box-shadow: 0 1px 2px rgba(60,40,20,.18), 0 10px 26px rgba(60,40,20,.16); transform: rotate(var(--r)); transition: opacity .45s ease, transform .45s ease; }
+.clips .c[data-step] { transform: rotate(var(--r)) translateY(12px); }
+.clips .c[data-step].on { transform: rotate(var(--r)); }
+.clips .c:hover { z-index: 5; transform: rotate(0) scale(1.6) !important; }
+.clips .c img { display: block; width: 100%; height: calc(100% - 7px); object-fit: cover; object-position: top; box-shadow: none; filter: sepia(.18); }
+.clips .c .lab { position: absolute; left: 10px; bottom: -14px; background: var(--paper); padding: 2px 10px; font-family: var(--serif); font-size: 15px; color: var(--mute); box-shadow: 0 1px 3px rgba(60,40,20,.15); white-space: nowrap; }
+.clips .c .lab b { color: var(--ink); }
+.clips .c.note { background: #fffdf8; padding: 18px 20px; font-family: var(--serif); border-top: 3px solid var(--acc); z-index: 3; }
+.clips .c.note small { display: block; font-size: 14px; color: var(--mute); margin-bottom: 6px; }
+.clips .c.note b { display: block; font-size: 22px; line-height: 1.35; color: var(--acc); }
+.clips .c.note p { font-size: 16px; line-height: 1.5; margin: 10px 0 0; color: var(--ink); }
+.clips .c.note .lab b { display: inline; font-size: 15px; color: var(--acc); }
+
+/* Yang Zirong: person → novel → model opera */
+.yz { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-top: -10px; }
+.yz .fig { width: 300px; }
+.yz .fig img { height: 250px; width: auto; max-width: 100%; }
+.yz .fig figcaption { font-size: 15px; line-height: 1.55; color: var(--ink); }
+.yz .fig figcaption b { color: var(--acc); }
+.yz .arr { align-self: center; margin-top: -60px; font-size: 34px; color: var(--acc); }
+
+/* Yang Zirong: person → novel → model opera */
+.yz { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-top: -10px; }
+.yz .fig { width: 300px; }
+.yz .fig img { height: 250px; width: auto; max-width: 100%; }
+.yz .fig figcaption { font-size: 15px; line-height: 1.55; color: var(--ink); }
+.yz .fig figcaption b { color: var(--acc); }
+.yz .arr { align-self: center; margin-top: -60px; font-size: 34px; color: var(--acc); }
