@@ -1,12 +1,12 @@
 /* Slide-specific logic (loaded before deck.js). */
 window.HOOKS = {};
 window.SECTIONS = [
-  { id: 'intro', zh: '什麼是崇高', en: 'What is the sublime' },
-  { id: 'china', zh: '實踐的崇高', en: 'The sublime of practice' },
+  { id: 'genre', zh: '這是什麼文類？', en: 'What genre is this?' },
+  { id: 'sublime', zh: '崇高', en: 'The sublime' },
   { id: 'event', zh: '32111 鑽井隊', en: 'The 32111 Drilling Team' },
   { id: 'read', zh: '細讀文本', en: 'Close reading' },
+  { id: 'voice', zh: '誰在說話', en: 'Who is speaking' },
   { id: 'axes', zh: '準確與本真', en: 'Accuracy and authenticity' },
-  { id: 'fiction', zh: '虛構性與「我們」', en: 'Fictionality and “we”' },
   { id: 'after', zh: '從紙面到舞台', en: 'From page to stage' },
   { id: 'wrap', zh: '小結與導修', en: 'Conclusion and tutorial' }
 ];
