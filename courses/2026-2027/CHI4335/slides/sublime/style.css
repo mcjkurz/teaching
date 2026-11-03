@@ -335,3 +335,8 @@ mark { background: #fbe9e7; color: var(--acc); padding: 0 2px; border-radius: 2p
 .mirror .who2 { font-size: 20px; line-height: 1.55; }
 .mirror .arr { font-size: 36px; color: var(--acc); text-align: center; }
 .mirror .img img { height: 115px; width: auto; max-width: 200px; object-fit: contain; display: block; margin: 0 auto; box-shadow: 0 3px 12px rgba(0,0,0,.22); }
+
+/* full-bleed painting */
+.slide.bleed { padding: 0; background: #111; }
+.slide.bleed > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.slide.bleed .bcap { position: absolute; left: 24px; bottom: 18px; font-size: 15px; color: #fff; background: rgba(0,0,0,.45); padding: 4px 12px; border-radius: 4px; }
