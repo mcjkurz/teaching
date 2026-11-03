@@ -387,7 +387,7 @@ title: CHI4335
           <li>（選讀）王斑：〈實踐的崇高主體〉，於《歷史的崇高形象：二十世紀中國的美學與政治》</li>
         </ul>
       </td>
-      <td class="notes"></td>
+      <td class="notes"><a href="slides/sublime/">Slides</a></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
