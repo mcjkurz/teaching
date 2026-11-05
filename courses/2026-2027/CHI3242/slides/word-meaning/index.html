@@ -394,11 +394,26 @@
   <div class="two">
     <div class="grow">
       <div class="bi sm" data-step="1"><span class="zh">內積會被<b>長度</b>左右：高頻詞的向量往往更長。</span><span class="en">The dot product is swayed by length; frequent words have longer vectors.</span></div>
-      <div class="eq" data-step="2">\(\vec v=[3,4]\qquad\lVert\vec v\rVert=\sqrt{9+16}=5\)</div>
-      <div class="eq" data-step="3">\(\vec u=\dfrac{\vec v}{\lVert\vec v\rVert}=\Big[\dfrac35,\dfrac45\Big]\qquad\lVert\vec u\rVert=1\)</div>
+      <div class="eq" data-step="2">\(\mathbf a=[3,4]\qquad\lVert\mathbf a\rVert=5\)</div>
+      <div class="eq" data-step="3">\(\hat{\mathbf a}=\dfrac{\mathbf a}{\lVert\mathbf a\rVert}=\Big[\dfrac35,\dfrac45\Big]\qquad\lVert\hat{\mathbf a}\rVert=1\)</div>
       <div class="callout key bi" data-step="4"><span class="zh">把向量縮成長度 1（正規化）之後，內積就等於 cos θ，只剩下方向。</span><span class="en">After normalising to length 1, the dot product equals cos θ: only direction remains.</span></div>
     </div>
-    <svg class="plot" id="norm-plot" viewBox="0 0 440 420"></svg>
+    <svg class="plot" id="norm-plot" viewBox="0 0 480 480"></svg>
+  </div>
+</section>
+
+<!-- ③c ─────────── cos θ = adjacent / hypotenuse → projection -->
+<section class="slide" id="s-cosproj" data-sec="similarity">
+  <h2 class="bi"><span class="zh">為什麼正規化之後，cos θ 就是投影？</span><span class="en">Why, after normalizing, cos θ is just the projection</span></h2>
+  <div class="two">
+    <div class="grow">
+      <div class="bi sm" data-step="1"><span class="zh">直角三角形裡：cos θ ＝ <b>鄰邊 ÷ 斜邊</b>。</span><span class="en">In a right triangle: cos θ = adjacent / hypotenuse.</span></div>
+      <div class="eq cp-eq" data-step="1">\(\cos\theta=\dfrac{b}{c}=\dfrac{3}{5}\)</div>
+      <div class="bi sm" data-step="2"><span class="zh">正規化之後（放大來看），斜邊 c ＝ 1：</span><span class="en">After normalizing (zoomed in), the hypotenuse is 1:</span></div>
+      <div class="eq cp-eq" data-step="2">\(\cos\theta=\dfrac{b}{1}=b=\dfrac35\)</div>
+      <div class="callout key bi" data-step="3"><span class="zh">cos θ ＝ 單位向量的<b>投影長度</b> ＝ 兩個單位向量的<b>內積</b>：[1, 0] · [3/5, 4/5] = 3/5</span><span class="en">cos θ = the projection of the unit vector = the dot product of the two unit vectors.</span></div>
+    </div>
+    <svg class="plot" id="cosproj-plot" viewBox="0 0 480 480"></svg>
   </div>
 </section>
 
@@ -518,23 +533,6 @@
   </table>
   <div class="moviecos" id="movie-cos"></div>
   <div class="callout key bi" data-step="4"><span class="zh">每部電影只用 5 個數字；相近類型的電影，向量方向也相近。<small>（示意數字）</small></span><span class="en">Each film is just 5 numbers; films of similar kinds point in similar directions. (Toy numbers.)</span></div>
-</section>
-
-<!-- 24 ─────────── People -->
-<section class="slide" id="s-people" data-sec="embeddings">
-  <h2 class="bi"><span class="zh">維度就是「特徵」</span><span class="en">Dimensions are features</span></h2>
-  <table class="cmp people" data-step="1">
-    <thead><tr><th></th><th class="num"><img class="kid" src="assets/kid1.jpeg" alt=""><span>小王</span></th><th class="num"><img class="kid" src="assets/kid2.jpeg" alt=""><span>小劉</span></th><th class="num"><img class="kid" src="assets/kid3.jpeg" alt=""><span>小陳</span></th><th class="num"><img class="kid" src="assets/kid4.jpeg" alt=""><span>小馬</span></th></tr></thead>
-    <tbody>
-      <tr><th>身高</th><td class="num">160</td><td class="num">171</td><td class="num">142</td><td class="num">152</td></tr>
-      <tr><th>體重</th><td class="num">45</td><td class="num">72</td><td class="num">53</td><td class="num">85</td></tr>
-      <tr><th>運動能力</th><td class="num">0.55</td><td class="num">0.86</td><td class="num">0.31</td><td class="num">0.40</td></tr>
-      <tr><th>學術成績</th><td class="num">0.96</td><td class="num">0.23</td><td class="num">0.63</td><td class="num">0.41</td></tr>
-      <tr><th>社交活躍度</th><td class="num">0.43</td><td class="num">0.11</td><td class="num">0.53</td><td class="num">0.98</td></tr>
-    </tbody>
-  </table>
-  <div class="bi" data-step="2"><span class="zh">人可以設計特徵，給每個維度取名字。但<b>詞語</b>的「特徵」是什麼？誰來設計？</span><span class="en">People can design features and name each dimension. But what are the features of <i>words</i>, and who designs them?</span></div>
-  <div class="callout key bi" data-step="3"><span class="zh">想法：讓機器從大量文本中，自己學出這些維度。</span><span class="en">Idea: let the machine learn the dimensions from large amounts of text.</span></div>
 </section>
 
 <!-- 25 ─────────── Gender / royalty -->
@@ -741,6 +739,18 @@
     </div>
   </div>
   <div class="callout key bi" data-step="4"><span class="zh">向量裡不只有「語義」，也有<b>語法</b>：詞性也是空間中的一個方向。Mikolov 等 (2013) 也測試了這類語法類比（big : bigger）。</span><span class="en">Vectors hold grammar as well as meaning: part of speech is a direction too. Mikolov et al. (2013) also tested such syntactic analogies (big : bigger).</span></div>
+</section>
+
+<!-- B4a2 ─────────── Bonus: loudness -->
+<section class="slide" id="s-loud" data-sec="bonus">
+  <h2 class="bi"><span class="zh">再一個方向：「響度」</span><span class="en">One more direction: loudness, from quiet words to loud words</span></h2>
+  <div class="loud-top" data-step="1">
+    <div class="cp-legend"><span class="loud">響 loud</span><span class="quiet">靜 quiet</span></div>
+    <div class="cpairs loud5"><span><em class="loud">吼叫</em><em class="quiet">低語</em></span><span><em class="loud">尖叫</em><em class="quiet">耳語</em></span><span><em class="loud">喧鬧</em><em class="quiet">安靜</em></span><span><em class="loud">轟隆</em><em class="quiet">沙沙</em></span><span><em class="loud">大喊</em><em class="quiet">呢喃</em></span></div>
+    <div class="eq loud-eq">\(\hat{\mathbf v}=\operatorname{平均}(\mathbf{吼叫}-\mathbf{低語},\ \dots)\)</div>
+  </div>
+  <svg class="plot" id="loud-plot" viewBox="0 0 1108 300"></svg>
+  <div class="callout key bi" data-step="4"><span class="zh">連「聲音有多大」這種<b>感官</b>性質，也藏在詞的共現模式裡。<small>（分數為示意）</small></span><span class="en">Even a sensory property like loudness hides in co-occurrence patterns. (Illustrative scores.)</span></div>
 </section>
 
 <!-- B4b ─────────── Bonus: discussion -->

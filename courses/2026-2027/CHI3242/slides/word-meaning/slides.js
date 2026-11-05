@@ -244,23 +244,80 @@ dotviz($('#dot-a'), [3, 2, 0.5], [-1, 3.5, 2], { vecStep: 1 });
 dotviz($('#dot-q1'), [2, -5, -2, 3], [3, -3, -4, 4], { names: ['a', 'b'], compact: true });
 dotviz($('#dot-q2'), [-1, 6, -2, -2], [2, -5, 4, 4], { names: ['c', 'd'], compact: true });
 /* ---------- magnitude ‖a‖: the 3-4-5 triangle ---------- */
-HOOKS['s-mag'] = {
+// The 3-4-5 picture. Both the length slide and the worked-normalization slide draw it with exactly the same
+// geometry, so moving from one slide to the next keeps the triangle in place.
+function draw345(svg, o) {
+  const p = Plot(svg, { xmin: -0.8, xmax: 4.8, ymin: -0.8, ymax: 4.8, pad: 10 });
+  p.clear(); p.grid(1, true, true);
+  if (o.legs) {
+    el('polygon', { points: `${p.X(0)},${p.Y(0)} ${p.X(3)},${p.Y(0)} ${p.X(3)},${p.Y(4)}`, fill: '#fff6d6', stroke: 'none' }, svg);
+    p.line(0, 0, 3, 0, { color: GLD, w: 6 }); p.line(3, 0, 3, 4, { color: GLD, w: 6 });
+    el('rect', { x: p.X(3) - 18, y: p.Y(0) - 18, width: 18, height: 18, fill: 'none', stroke: GLD, 'stroke-width': 2.5 }, svg);
+    p.text(1.5, 0, '3', { color: '#8a6400', size: 30, weight: 700, dy: 36, anchor: 'middle' });
+    p.text(3, 2, '4', { color: '#8a6400', size: 30, weight: 700, dx: 14, dy: 10 });
+  }
+  p.arrow(0, 0, 3, 4, { color: BLUE, w: 6 });
+  p.text(3, 4, 'a = [3, 4]', { color: BLUE, size: 26, weight: 700, dx: 10, dy: -10 });
+  if (o.len) p.text(1.5, 2, '‖a‖ = 5', { color: BLUE, size: 32, weight: 700, dx: -18, dy: -10, anchor: 'end' }).setAttribute('style', 'font-family: "Times New Roman", STIXGeneral, serif');
+  if (o.unit) {   // â = a / 5 on the unit circle, with its shadows 3/5 and 4/5
+    el('path', { d: `M${p.X(1)},${p.Y(0)} A${p.s},${p.s} 0 0 0 ${p.X(0)},${p.Y(1)}`, fill: 'none', stroke: ORG, 'stroke-width': 2.5, 'stroke-dasharray': '4 5', opacity: 0.8 }, svg);
+    p.line(0.6, 0.8, 0.6, 0, { color: ORG, w: 2, dash: '4 4' }); p.line(0.6, 0.8, 0, 0.8, { color: ORG, w: 2, dash: '4 4' });
+    p.line(0, 0, 0.6, 0, { color: ORG, w: 10 }).setAttribute('opacity', 0.45); p.line(0, 0, 0, 0.8, { color: ORG, w: 10 }).setAttribute('opacity', 0.45);
+    p.text(0.6, 0, '3/5', { color: ORG, size: 20, weight: 700, dy: 58, anchor: 'middle' });
+    p.text(0, 0.8, '4/5', { color: ORG, size: 20, weight: 700, dx: -24, dy: 7, anchor: 'end' });
+    p.arrow(0, 0, 0.6, 0.8, { color: ORG, w: 8, head: 16 });
+    p.text(0.6, 0.8, 'â = [3/5, 4/5]', { color: ORG, size: 22, weight: 700, dx: 16, dy: 10 });
+  }
+  if (o.theta) {   // the angle θ between a and the x-axis
+    p.arc(0.55, 0, Math.atan2(4, 3), { color: PUR, w: 3 });
+    p.text(0.62, 0.32, 'θ', { color: PUR, size: 28, weight: 700, dx: 4, dy: 6 });
+  }
+  if (o.names) {   // name the sides of the big triangle
+    p.text(1.5, 0, '鄰邊 b', { color: '#8a6400', size: 20, weight: 700, dx: 22, dy: 36 });
+    p.text(1.5, 2, '斜邊 c', { color: BLUE, size: 20, weight: 700, dx: -18, dy: 22, anchor: 'end' });
+    p.text(3, 2, '對邊', { color: '#8a6400', size: 20, weight: 700, dx: 14, dy: 36 });
+  }
+  if (o.cosHL) {   // after normalizing, the x-shadow IS cos θ
+    p.line(0, 0, 0.6, 0, { color: PUR, w: 12 });
+    p.line(0.6, 0.8, 0.6, 0, { color: PUR, w: 3, dash: '5 4' });
+    const t = p.text(0.3, 0, 'cos θ', { color: PUR, size: 22, weight: 700, dy: -14, anchor: 'middle' });
+    t.setAttribute('stroke', '#fff'); t.setAttribute('stroke-width', 5); t.setAttribute('paint-order', 'stroke');
+  }
+  p.dot(0, 0, { r: 5, color: INK });
+}
+// zoomed view of the unit triangle: hypotenuse 1, adjacent 3/5 (= cos θ), opposite 4/5
+function drawUnitZoom(svg, hl) {
+  const p = Plot(svg, { xmin: -0.22, xmax: 1.18, ymin: -0.22, ymax: 1.18, pad: 10 });
+  p.clear(); p.grid(0.2, true, false);
+  [1].forEach(v => { { p.text(v, 0, String(v), { color: MUTE, size: 16, dy: 22, anchor: 'middle' }); p.text(0, v, String(v), { color: MUTE, size: 16, dx: -8, dy: 5, anchor: 'end' }); } });
+  // unit circle arc
+  el('path', { d: `M${p.X(1)},${p.Y(0)} A${p.s},${p.s} 0 0 0 ${p.X(0)},${p.Y(1)}`, fill: 'none', stroke: ORG, 'stroke-width': 2.5, 'stroke-dasharray': '6 6', opacity: 0.7 }, svg);
+  // the big vector a continues beyond the view (faint)
+  p.line(0, 0, 3 / 5 * 1.42, 4 / 5 * 1.42, { color: BLUE, w: 4 }).setAttribute('opacity', 0.25);
+  // unit triangle
+  el('polygon', { points: `${p.X(0)},${p.Y(0)} ${p.X(0.6)},${p.Y(0)} ${p.X(0.6)},${p.Y(0.8)}`, fill: '#f1e9ff', stroke: 'none' }, svg);
+  p.line(0.6, 0, 0.6, 0.8, { color: GLD, w: 4, dash: '7 5' });
+  el('rect', { x: p.X(0.6) - 16, y: p.Y(0) - 16, width: 16, height: 16, fill: 'none', stroke: GLD, 'stroke-width': 2.5 }, svg);
+  p.line(0, 0, 0.6, 0, { color: PUR, w: hl ? 12 : 6 });
+  p.arrow(0, 0, 0.6, 0.8, { color: ORG, w: 7, head: 20 });
+  p.arc(0.18, 0, Math.atan2(4, 3), { color: PUR, w: 3 });
+  p.text(0.2, 0.08, 'θ', { color: PUR, size: 28, weight: 700, dx: 6, dy: 4 });
+  const lab = (x, y, t, c, o) => { const e = p.text(x, y, t, { color: c, size: 24, weight: 700, ...o }); e.setAttribute('stroke', '#fff'); e.setAttribute('stroke-width', 6); e.setAttribute('paint-order', 'stroke'); };
+  lab(0.3, 0.4, '斜邊 c = 1', ORG, { dx: -14, dy: -4, anchor: 'end' });
+  lab(0.6, 0.4, '對邊 4/5', '#8a6400', { dx: 12, dy: 8 });
+  lab(0.3, 0, hl ? '鄰邊 b = cos θ = 3/5' : '鄰邊 b = 3/5', PUR, { dy: 36, anchor: 'middle' });
+  lab(0.6, 0.8, 'â = [3/5, 4/5]', ORG, { dx: 14, dy: -6 });
+  p.dot(0, 0, { r: 5, color: INK });
+}
+HOOKS['s-cosproj'] = {
   render(step) {
-    const svg = $('#mag-plot'), p = Plot(svg, { xmin: -0.8, xmax: 4.8, ymin: -0.8, ymax: 4.8, pad: 10 });
-    p.clear(); p.grid(1, true, true);
-    if (step >= 2) {
-      el('polygon', { points: `${p.X(0)},${p.Y(0)} ${p.X(3)},${p.Y(0)} ${p.X(3)},${p.Y(4)}`, fill: '#fff6d6', stroke: 'none' }, svg);
-      p.line(0, 0, 3, 0, { color: GLD, w: 6 }); p.line(3, 0, 3, 4, { color: GLD, w: 6 });
-      el('rect', { x: p.X(3) - 18, y: p.Y(0) - 18, width: 18, height: 18, fill: 'none', stroke: GLD, 'stroke-width': 2.5 }, svg);
-      p.text(1.5, 0, '3', { color: '#8a6400', size: 30, weight: 700, dy: 36, anchor: 'middle' });
-      p.text(3, 2, '4', { color: '#8a6400', size: 30, weight: 700, dx: 14, dy: 10 });
-    }
-    p.arrow(0, 0, 3, 4, { color: BLUE, w: 6 });
-    p.text(3, 4, 'a = [3, 4]', { color: BLUE, size: 26, weight: 700, dx: 10, dy: -10 });
-    if (step >= 3) p.text(1.5, 2, '‖a‖ = 5', { color: BLUE, size: 32, weight: 700, dx: -18, dy: -10, anchor: 'end' }).setAttribute('style', 'font-family: "Times New Roman", STIXGeneral, serif');
-    p.dot(0, 0, { r: 5, color: INK });
+    const svg = $('#cosproj-plot');
+    if (step >= 2) drawUnitZoom(svg, step >= 3);
+    else draw345(svg, { legs: true, len: true, unit: true, theta: step >= 1, names: step >= 1 });
   }
 };
+HOOKS['s-mag'] = { render(step) { draw345($('#mag-plot'), { legs: step >= 2, len: step >= 3 }); } };
+HOOKS['s-norm'] = { render(step) { draw345($('#norm-plot'), { legs: true, len: true, unit: step >= 3 }); } };
 
 /* ---------- ③ normalization picture: vectors of many lengths → all on the unit circle (animated) ---------- */
 (function () {
@@ -403,31 +460,6 @@ function cosCurve(svg, o = {}) {
   draw();
 })();
 
-/* ---------- normalisation plot: v = [3, 4] first; on the next click u = [3/5, 4/5] appears with its shadows ---------- */
-HOOKS['s-norm'] = {
-  render(step) {
-    const svg = $('#norm-plot'), p = Plot(svg, { xmin: -0.9, xmax: 4.8, ymin: -0.6, ymax: 4.8, pad: 12 });
-    p.clear(); p.grid(1, true, true);
-    if (step >= 2) {   // v and its 3-4-5 triangle
-      p.line(0, 0, 3, 0, { color: GLD, w: 3, dash: '6 5' }); p.line(3, 0, 3, 4, { color: GLD, w: 3, dash: '6 5' });
-      p.text(1.5, 0, '3', { color: '#8a6400', size: 22, weight: 700, dy: 30, anchor: 'middle' });
-      p.text(3, 2, '4', { color: '#8a6400', size: 22, weight: 700, dx: 10, dy: 8 });
-      p.arrow(0, 0, 3, 4, { color: BLUE, w: 5 });
-      p.text(3, 4, 'v = [3, 4]', { color: BLUE, size: 24, weight: 700, dx: 10, dy: -8 });
-      p.text(1.5, 2, 'length 5', { color: BLUE, size: 20, weight: 600, dx: -14, dy: -6, anchor: 'end' });
-    }
-    if (step >= 3) {   // u = v / 5 on the unit circle, with its shadows 3/5 and 4/5
-      el('path', { d: `M${p.X(1)},${p.Y(0)} A${p.s},${p.s} 0 0 0 ${p.X(0)},${p.Y(1)}`, fill: 'none', stroke: ORG, 'stroke-width': 2, 'stroke-dasharray': '4 5', opacity: 0.7 }, svg);
-      p.line(0.6, 0.8, 0.6, 0, { color: ORG, w: 2, dash: '4 4' }); p.line(0.6, 0.8, 0, 0.8, { color: ORG, w: 2, dash: '4 4' });
-      p.line(0, 0, 0.6, 0, { color: ORG, w: 9 }).setAttribute('opacity', 0.45); p.line(0, 0, 0, 0.8, { color: ORG, w: 9 }).setAttribute('opacity', 0.45);
-      p.text(0.6, 0, '3/5', { color: ORG, size: 20, weight: 700, dy: 32, anchor: 'middle' });
-      p.text(0, 0.8, '4/5', { color: ORG, size: 20, weight: 700, dx: -26, dy: 7, anchor: 'end' });
-      p.arrow(0, 0, 0.6, 0.8, { color: ORG, w: 8, head: 16 });
-      p.text(0.6, 0.8, 'u = [3/5, 4/5]', { color: ORG, size: 22, weight: 700, dx: 14, dy: 4 });
-    }
-  }
-};
-
 /* ---------- excerpts and window counts ---------- */
 (function () {
   const lines = [
@@ -477,11 +509,11 @@ HOOKS['s-norm'] = {
   for (let i = 0; i < 4; i++) for (let j = i + 1; j < 4; j++) { const c = cosine(vecs[i], vecs[j]); if (!best || c > best.c) best = { i, j, c }; if (!worst || c < worst.c) worst = { i, j, c }; }
   HOOKS['s-dense'] = {
     render(step, root) {
-      const pick = step === 2 ? best : step === 3 ? worst : null;
+      const pick = step === 2 ? best : step >= 3 ? worst : null;
       $$('[data-c]', root).forEach(e => { const c = +e.dataset.c; e.classList.toggle('hl', !!pick && (c === pick.i || c === pick.j)); });
       const box = $('#movie-cos');
       box.classList.toggle('on', step >= 2);
-      box.innerHTML = pick ? `<span>${names[pick.i]}</span> ↔ <span>${names[pick.j]}</span> <b>cos = ${fmt(pick.c)}</b> <em>${step === 2 ? '最相似' : '最不相似'}</em>` : '';
+      box.innerHTML = pick ? `<span>${names[pick.i]}</span> ↔ <span>${names[pick.j]}</span> <b>cos = ${fmt(pick.c)}</b> <em>${pick === best ? '最相似' : '最不相似'}</em>` : '';
     }
   };
   $('#movie-cos').dataset.step = 2;
@@ -498,8 +530,8 @@ HOOKS['s-norm'] = {
     ['加上第二個維度「皇室」：皇帝、皇后往上移，重疊的詞<b>分開了</b>。更多維度 ＝ 更多空間。', 'Add a second dimension, royalty: emperor and empress move up and separate. More dimensions = more room.'],
     ['每個詞都是一支從原點出發的箭頭。', 'Each word is an arrow from the origin.'],
     ['從女走到男：先 <b>− 女</b>。女在 +1，減去女 ＝ 往左走一格，回到原點。', 'From woman to man: first − woman. Woman is at +1, so subtracting it moves one step left, back to the origin.'],
-    ['再 <b>+ 男</b>：往左再走一格，到達男。合起來就是 <b>男 − 女</b>。', 'Then + man: one more step left, arriving at man. Together: man − woman.'],
-    ['從皇后出發，走同一支箭頭「男 − 女」，就到了皇帝。', 'Start at empress and follow the same arrow, man − woman: you arrive at emperor.']
+    ['再 <b>+ 男</b>：往左再走一格，到達男。合起來就是 <b>− 女 + 男</b>。', 'Then + man: one more step left, arriving at man. Together: − woman + man.'],
+    ['從皇后出發，走同一支箭頭「− 女 + 男」，就到了皇帝。', 'Start at empress and follow the same arrow, − woman + man: you arrive at emperor.']
   ];
   const col = w => (w === '男' || w === '皇帝') ? BLUE : ORG;
   const renderMain = (step, root) => {
@@ -533,12 +565,12 @@ HOOKS['s-norm'] = {
         if (step >= 5) { p.arrow(1, 0.015, 0.06, 0.015, { color: RED, w: 10, head: 24 }); p.text(0.5, 0.015, '− 女', { color: RED, size: 26, weight: 700, dy: -18, anchor: 'middle' }); }
         if (step >= 6) {
           p.arrow(-0.02, 0.015, -0.9, 0.015, { color: RED, w: 10, head: 24 }); p.text(-0.48, 0.015, '+ 男', { color: RED, size: 26, weight: 700, dy: -18, anchor: 'middle' });
-          // bracket under the two halves: together = 男 − 女
+          // bracket under the two halves: together = − 女 + 男
           el('path', { d: `M${p.X(-1)},${p.Y(0) + 46} L${p.X(-1)},${p.Y(0) + 58} L${p.X(1)},${p.Y(0) + 58} L${p.X(1)},${p.Y(0) + 46}`, fill: 'none', stroke: RED, 'stroke-width': 2.5 }, svg);
-          const lb = p.text(0, 0, '＝ 男 − 女', { color: RED, size: 24, weight: 700, dy: 86, anchor: 'middle' }); lb.setAttribute('stroke', '#fff'); lb.setAttribute('stroke-width', 6); lb.setAttribute('paint-order', 'stroke');
+          const lb = p.text(0, 0, '＝ − 女 + 男', { color: RED, size: 24, weight: 700, dy: 86, anchor: 'middle' }); lb.setAttribute('stroke', '#fff'); lb.setAttribute('stroke-width', 6); lb.setAttribute('paint-order', 'stroke');
         }
         // top row: the same arrow takes empress to emperor
-        if (step >= 7) { p.arrow(0.99, 1, -0.88, 1, { color: RED, w: 10, head: 24 }); p.text(0, 1, '男 − 女', { color: RED, size: 24, weight: 700, dy: -20, anchor: 'middle' }); }
+        if (step >= 7) { p.arrow(0.99, 1, -0.88, 1, { color: RED, w: 10, head: 24 }); { const t = p.text(0, 1, '− 女 + 男', { color: RED, size: 24, weight: 700, dy: -20, anchor: 'middle' }); t.setAttribute('stroke', '#fff'); t.setAttribute('stroke-width', 6); t.setAttribute('paint-order', 'stroke'); } }
         Object.keys(P).forEach(w => { p.dot(...P[w], { color: col(w), r: 10 }); p.text(...P[w], w, { color: col(w), size: 26, weight: 700, dy: P[w][1] > 0.5 ? -20 : 38, anchor: 'middle' }); });
         // black origin arrows drawn last, so they sit on top of the word dots
         if (step >= 4) Object.keys(P).forEach(w => { const g = p.arrow(0, 0, ...P[w], { color: INK, w: 2.2, head: 12 }); if (step >= 5) g.setAttribute('opacity', 0.25); });
@@ -812,4 +844,36 @@ HOOKS['s-dir1'] = { render(step, el) { el.classList.toggle('show-hot', step >= 2
     const bar = s >= 0 ? `left: 50%; width: ${wpx}%` : `right: 50%; width: ${wpx}%`;
     return `<div class="brow en"><span>${w}</span><div class="btrack"><i style="${bar}; background: ${c}"></i></div><b style="color:${c}">${s >= 0 ? '+' : '−'}${Math.abs(s).toFixed(2)}</b></div>`;
   }).join('');
+})();
+
+/* ---------- bonus: the loudness axis (illustrative scores) ---------- */
+(function () {
+  const svg = $('#loud-plot'), W = 1108, X0 = 90, X1 = W - 90, Y = 200;
+  const words = [['🧨', '鞭炮', 1.5], ['⛈️', '雷聲', 1.25], ['🎤', '演唱會', 1.0], ['🛒', '市場', 0.5], ['💼', '會議', -0.05], ['🌙', '月光', -0.7], ['📚', '圖書館', -1.05], ['❄️', '雪', -1.4]];
+  const X = s => X0 + (s + 1.7) / 3.4 * (X1 - X0);
+  HOOKS['s-loud'] = {
+    render(step) {
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+      if (step < 2) return;
+      const defs = el('defs', {}, svg), g = el('linearGradient', { id: 'loud-grad', x1: 0, x2: 1, y1: 0, y2: 0 }, defs);
+      el('stop', { offset: '0%', 'stop-color': '#14a3a3' }, g); el('stop', { offset: '50%', 'stop-color': '#e9e4d8' }, g); el('stop', { offset: '100%', 'stop-color': '#d9362b' }, g);
+      // the axis: a volume bar that thickens towards the loud end
+      el('path', { d: `M${X0},${Y - 4} L${X1},${Y - 16} L${X1},${Y + 16} L${X0},${Y + 4} Z`, fill: 'url(#loud-grad)' }, svg);
+      el('text', { x: X0 - 50, y: Y + 14, 'font-size': 40, 'text-anchor': 'middle' }, svg, '🔇');
+      el('text', { x: X1 + 50, y: Y + 14, 'font-size': 40, 'text-anchor': 'middle' }, svg, '🔊');
+      el('text', { x: X0, y: Y + 52, fill: '#14a3a3', 'font-size': 22, 'font-weight': 700 }, svg, '靜 quiet');
+      el('text', { x: X1, y: Y + 52, fill: '#d9362b', 'font-size': 22, 'font-weight': 700, 'text-anchor': 'end' }, svg, '響 loud');
+      el('line', { x1: X(0), y1: Y - 26, x2: X(0), y2: Y + 26, stroke: '#9aa3b2', 'stroke-width': 2, 'stroke-dasharray': '4 4' }, svg);
+      if (step < 3) return;
+      words.forEach(([icon, w, s], i) => {
+        const x = X(s), up = i % 2 === 0, ty = up ? Y - 92 : Y - 150;
+        const c = s > 0.3 ? '#d9362b' : s < -0.3 ? '#14a3a3' : MUTE;
+        el('line', { x1: x, y1: ty + 20, x2: x, y2: Y - 8, stroke: c, 'stroke-width': 2, 'stroke-dasharray': '3 4' }, svg);
+        el('circle', { cx: x, cy: Y, r: 8, fill: c, stroke: '#fff', 'stroke-width': 2.5 }, svg);
+        el('text', { x, y: ty - 6, 'font-size': 34, 'text-anchor': 'middle' }, svg, icon);
+        el('text', { x, y: ty + 18, fill: c, 'font-size': 22, 'font-weight': 700, 'text-anchor': 'middle' }, svg, w);
+      });
+    }
+  };
+  const i = document.createElement('i'); i.className = 'stepper'; i.dataset.step = 3; $('#s-loud').appendChild(i);
 })();

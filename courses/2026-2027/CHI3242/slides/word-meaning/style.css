@@ -887,3 +887,20 @@ table.dirt tr.diff td { border-top: 3px solid #d63384; }
 #s-discuss .dq > div { font-size: 42px; margin: 44px 0; gap: 24px; }
 #s-discuss .dq i { width: 64px; height: 64px; font-size: 30px; }
 .dq-sub { display: block; font-size: 26px; color: var(--mute); margin-top: 4px; }
+.two > svg#norm-plot { width: 470px; border: 1.5px solid var(--line); border-radius: 16px; }
+#s-norm .two { margin-top: 3px; }
+.two > svg#cosproj-plot { width: 470px; border: 1.5px solid var(--line); border-radius: 16px; }
+#s-cosproj .two { margin-top: 3px; }
+.cp-eq { font-size: 34px; padding: 8px 22px; margin: 6px 0 14px; }
+.cp-eq { font-size: 30px; padding: 6px 20px; margin: 4px 0 10px; }
+
+.loud { color: #d9362b; } .quiet { color: #14a3a3; }
+.loud-top { display: grid; grid-template-columns: auto 1fr; grid-template-areas: "leg leg" "pairs eq"; column-gap: 24px; align-items: center; }
+.loud-top .cp-legend { grid-area: leg; }
+.cpairs.loud5 { grid-area: pairs; grid-template-columns: repeat(5, 92px); margin-top: 4px; }
+.cpairs.loud5 span em { font-size: 26px; }
+.loud-eq { grid-area: eq; font-size: 24px; padding: 8px 16px; margin: 0; justify-self: start; }
+#loud-plot { width: 1108px; margin-top: 6px; overflow: visible; }
+#s-loud .callout { margin-top: 4px; }
+#loud-plot { margin-top: 0; }
+#s-loud .callout { margin-top: 0; }
