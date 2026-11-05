@@ -96,11 +96,12 @@ const dotp = (a, b) => a.reduce((s, v, i) => s + v * b[i], 0);
 const norm = a => Math.sqrt(dotp(a, a));
 const cosine = (a, b) => dotp(a, b) / (norm(a) * norm(b));
 
-/* ---------- 1. title: a slowly rotating 3-D word space ---------- */
+/* ---------- 1. title: a slowly rotating 3-D word space ----------
+   Performance: every SVG element is created ONCE; each frame only updates attributes.
+   The animation runs at ~30 fps, only while the title slide is visible and the tab is in front. */
 (function () {
   const svg = $('#title-plot'), slide = $('#s-title');
   const W = 560, H = 560, cx = W / 2 - 10, cy = H / 2 + 20, S = 80;
-  // word clusters (illustrative coordinates): emotions, sadness, everyday objects, royalty
   const words = [
     ['幸福', [1.9, 1.3, 1.2], BLUE], ['快樂', [1.6, 1.7, 0.9], BLUE], ['開心', [2.0, 1.5, 0.6], BLUE],
     ['悲傷', [-1.7, 1.2, 1.4], PUR], ['痛苦', [-1.9, 0.9, 1.0], PUR],
@@ -109,57 +110,78 @@ const cosine = (a, b) => dotp(a, b) / (norm(a) * norm(b));
   ];
   let seed = 11; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
   const dust = Array.from({ length: 90 }, () => [(rnd() * 2 - 1) * 2.4, (rnd() * 2 - 1) * 2.4, (rnd() * 2 - 1) * 2.4]);
-  const L = 2.5;
-  let yaw = 0.6, t0 = null;
-  const pitch = 0.42;
+  const L = 2.5, pitch = 0.42, cp = Math.cos(pitch), sp = Math.sin(pitch);
+  let yaw = 0.6;
   function proj([x, y, z]) {
-    // rotate around the vertical (z) axis, then tilt; perspective by depth
-    const xr = x * Math.cos(yaw) - y * Math.sin(yaw), yr = x * Math.sin(yaw) + y * Math.cos(yaw);
-    const yt = yr * Math.cos(pitch) - z * Math.sin(pitch), zt = yr * Math.sin(pitch) + z * Math.cos(pitch);
-    const f = 6 / (6 + yt);           // yt = depth (positive = further away)
+    const c = Math.cos(yaw), s = Math.sin(yaw);
+    const xr = x * c - y * s, yr = x * s + y * c;
+    const yt = yr * cp - z * sp, zt = yr * sp + z * cp;
+    const f = 6 / (6 + yt);
     return { x: cx + xr * S * f, y: cy - zt * S * f, d: yt, f };
   }
-  const line = (p, q, attrs) => el('line', { x1: p.x, y1: p.y, x2: q.x, y2: q.y, ...attrs }, svg);
-  function arrow(p, q, c, w, op) {
-    const ang = Math.atan2(q.y - p.y, q.x - p.x), hl = 14 * q.f, hw = 5.5 * q.f;
-    const g = el('g', { opacity: op }, svg);
-    el('line', { x1: p.x, y1: p.y, x2: q.x - Math.cos(ang) * hl * 0.8, y2: q.y - Math.sin(ang) * hl * 0.8, stroke: c, 'stroke-width': w, 'stroke-linecap': 'round' }, g);
-    const px = -Math.sin(ang), py = Math.cos(ang);
-    el('polygon', { points: `${q.x},${q.y} ${q.x - Math.cos(ang) * hl + px * hw},${q.y - Math.sin(ang) * hl + py * hw} ${q.x - Math.cos(ang) * hl - px * hw},${q.y - Math.sin(ang) * hl - py * hw}`, fill: c }, g);
+  const set = (e, o) => { for (const k in o) e.setAttribute(k, o[k]); };
+
+  // ---- build the scene once ----
+  const gGrid = el('g', {}, svg), gAxes = el('g', {}, svg), gDust = el('g', {}, svg), gWords = el('g', {}, svg);
+  const grid = [];
+  for (let i = -2; i <= 2; i++) {
+    grid.push([[i, -2, 0], [i, 2, 0], el('line', { stroke: '#dfe4ec', 'stroke-width': 1 }, gGrid)]);
+    grid.push([[-2, i, 0], [2, i, 0], el('line', { stroke: '#dfe4ec', 'stroke-width': 1 }, gGrid)]);
   }
+  const axes = [[[L, 0, 0], 'x₁'], [[0, L, 0], 'x₂'], [[0, 0, L], 'x₃']].map(([v, n]) => ({
+    v, line: el('line', { stroke: '#a3acbb', 'stroke-width': 1.6 }, gAxes),
+    label: el('text', { fill: '#8a93a3', 'font-size': 16, 'font-style': 'italic' }, gAxes, n)
+  }));
+  const dots = dust.map(v => ({ v, c: el('circle', { fill: '#9aa6bb' }, gDust) }));
+  const items = words.map(([w, v, c]) => {
+    const g = el('g', {}, gWords);
+    return {
+      v, g,
+      line: el('line', { stroke: c, 'stroke-linecap': 'round' }, g),
+      head: el('polygon', { fill: c }, g),
+      dot: el('circle', { fill: c }, g),
+      text: el('text', { fill: c, 'font-weight': 700, stroke: '#fff', 'stroke-width': 4, 'paint-order': 'stroke' }, g, w)
+    };
+  });
+  const origin = el('circle', { r: 4.5, fill: INK }, svg);
+  let order = '';
+
   function draw() {
-    while (svg.firstChild) svg.removeChild(svg.firstChild);
     const O = proj([0, 0, 0]);
-    // floor grid
-    for (let i = -2; i <= 2; i++) {
-      line(proj([i, -2, 0]), proj([i, 2, 0]), { stroke: '#dfe4ec', 'stroke-width': 1 });
-      line(proj([-2, i, 0]), proj([2, i, 0]), { stroke: '#dfe4ec', 'stroke-width': 1 });
-    }
-    // axes
-    [[[L, 0, 0], 'x₁'], [[0, L, 0], 'x₂'], [[0, 0, L], 'x₃']].forEach(([v, n]) => {
-      const neg = proj(v.map(c => -c * 0.8)), pos = proj(v);
-      line(neg, pos, { stroke: '#a3acbb', 'stroke-width': 1.6 });
-      el('text', { x: pos.x + 6, y: pos.y - 4, fill: '#8a93a3', 'font-size': 16, 'font-style': 'italic' }, svg, n);
+    grid.forEach(([p, q, e]) => { const a = proj(p), b = proj(q); set(e, { x1: a.x, y1: a.y, x2: b.x, y2: b.y }); });
+    axes.forEach(({ v, line, label }) => {
+      const n = proj(v.map(c => -c * 0.8)), p = proj(v);
+      set(line, { x1: n.x, y1: n.y, x2: p.x, y2: p.y }); set(label, { x: p.x + 6, y: p.y - 4 });
     });
-    // dust: other words in the space
-    dust.forEach(v => { const p = proj(v); el('circle', { cx: p.x, cy: p.y, r: 2.6 * p.f, fill: '#9aa6bb', opacity: 0.18 + 0.3 * (1 - (p.d + 3) / 6) }, svg); });
-    // word arrows, far ones first
-    words.map(([w, v, c]) => ({ w, v, c, p: proj(v) })).sort((a, b) => b.p.d - a.p.d).forEach(({ w, c, p }) => {
-      const near = Math.max(0, Math.min(1, 1 - (p.d + 2.5) / 5));
-      arrow(O, p, c, 3.2 * p.f, 0.45 + 0.55 * near);
-      el('circle', { cx: p.x, cy: p.y, r: 5 * p.f, fill: c, opacity: 0.45 + 0.55 * near }, svg);
-      el('text', { x: p.x + 9, y: p.y - 8, fill: c, 'font-size': 23 * p.f, 'font-weight': 700, opacity: 0.5 + 0.5 * near, stroke: '#fff', 'stroke-width': 4, 'paint-order': 'stroke' }, svg, w);
+    dots.forEach(({ v, c }) => { const p = proj(v); set(c, { cx: p.x, cy: p.y, r: 2.6 * p.f, opacity: 0.18 + 0.3 * (1 - (p.d + 3) / 6) }); });
+    items.forEach(it => {
+      const p = it.p = proj(it.v);
+      const near = Math.max(0, Math.min(1, 1 - (p.d + 2.5) / 5)), op = 0.45 + 0.55 * near;
+      const ang = Math.atan2(p.y - O.y, p.x - O.x), hl = 14 * p.f, hw = 5.5 * p.f, ca = Math.cos(ang), sa = Math.sin(ang);
+      set(it.g, { opacity: op });
+      set(it.line, { x1: O.x, y1: O.y, x2: p.x - ca * hl * 0.8, y2: p.y - sa * hl * 0.8, 'stroke-width': 3.2 * p.f });
+      set(it.head, { points: `${p.x},${p.y} ${p.x - ca * hl - sa * hw},${p.y - sa * hl + ca * hw} ${p.x - ca * hl + sa * hw},${p.y - sa * hl - ca * hw}` });
+      set(it.dot, { cx: p.x, cy: p.y, r: 5 * p.f });
+      set(it.text, { x: p.x + 9, y: p.y - 8, 'font-size': 23 * p.f });
     });
-    el('circle', { cx: O.x, cy: O.y, r: 4.5, fill: INK }, svg);
+    // paint far words first: re-append only when the depth order actually changes
+    const sorted = items.slice().sort((a, b) => b.p.d - a.p.d), key = sorted.map(it => it.v.join()).join('|');
+    if (key !== order) { sorted.forEach(it => gWords.appendChild(it.g)); order = key; }
+    set(origin, { cx: O.x, cy: O.y });
   }
+
+  // ---- animation loop: ~30 fps, only while visible ----
+  const still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let running = false, last = 0;
   function tick(ts) {
-    if (t0 == null) t0 = ts;
-    const dt = Math.min(64, ts - t0); t0 = ts;
-    if (slide.classList.contains('active')) { yaw += dt * 0.00018; draw(); }
+    if (!slide.classList.contains('active') || document.hidden) { running = false; return; }
+    if (ts - last >= 33) { yaw += Math.min(100, ts - (last || ts)) * 0.00018; last = ts; draw(); }
     requestAnimationFrame(tick);
   }
+  function start() { if (running || still) return; running = true; last = 0; requestAnimationFrame(tick); }
+  HOOKS['s-title'] = { render() { start(); } };
+  document.addEventListener('visibilitychange', () => { if (!document.hidden && slide.classList.contains('active')) start(); });
   draw();
-  requestAnimationFrame(tick);
 })();
 
 /* ---------- vectors: 2D ---------- */
@@ -220,21 +242,6 @@ function dotviz(root, a, b, o = {}) {
 dotviz($('#dot-a'), [3, 2, 0.5], [-1, 3.5, 2], { vecStep: 1 });
 dotviz($('#dot-q1'), [2, -5, -2, 3], [3, -3, -4, 4], { names: ['a', 'b'], compact: true });
 dotviz($('#dot-q2'), [-1, 6, -2, -2], [2, -5, 4, 4], { names: ['c', 'd'], compact: true });
-/* ---------- angle panels ---------- */
-(function () {
-  [['ang-1', 25], ['ang-2', 90], ['ang-3', 180]].forEach(([id, th]) => {
-    const p = Plot($('#' + id), { xmin: -1.5, xmax: 1.5, ymin: -1.3, ymax: 1.5, pad: 8 });
-    p.grid(1, true);
-    const a0 = rad(20), a1 = rad(20 + th);
-    p.arrow(0, 0, 1.2 * Math.cos(a0), 1.2 * Math.sin(a0), { color: BLUE, w: 5 });
-    p.arrow(0, 0, 1.2 * Math.cos(a1), 1.2 * Math.sin(a1), { color: ORG, w: 5 });
-    p.arc(0.45, a0, a1);
-    p.text(1.2 * Math.cos(a0), 1.2 * Math.sin(a0), 'A', { color: BLUE, size: 24, weight: 700, dx: 8, dy: -6 });
-    p.text(1.2 * Math.cos(a1), 1.2 * Math.sin(a1), 'B', { color: ORG, size: 24, weight: 700, dx: 8, dy: -6 });
-    p.text(-1.4, -1.0, 'cos = ' + ({ 25: '+0.91', 90: '0', 180: '−1' })[th], { color: INK, size: 24, weight: 700 });
-  });
-})();
-
 /* ---------- magnitude ‖a‖: the 3-4-5 triangle ---------- */
 HOOKS['s-mag'] = {
   render(step) {
@@ -253,6 +260,40 @@ HOOKS['s-mag'] = {
     p.dot(0, 0, { r: 5, color: INK });
   }
 };
+
+/* ---------- ③ normalization picture: vectors of many lengths → all on the unit circle (animated) ---------- */
+(function () {
+  const svg = $('#normviz-plot');
+  const V = [[2.7, 1.1, BLUE], [0.7, 2.5, GRN], [-1.6, 2.3, PUR], [-2.7, -0.7, ORG], [1.3, -2.1, BLUE], [0.45, -0.35, GRN], [-0.5, 0.6, PUR], [1.6, 1.5, ORG]];
+  let t = 0, anim = null;
+  const ease = x => x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
+  function draw(t) {
+    const R = 3.0 - 1.55 * t;                        // zoom in as the vectors settle on the circle
+    const p = Plot(svg, { xmin: -R * 1.15, xmax: R * 1.15, ymin: -R, ymax: R, pad: 8 });
+    p.clear(); p.grid(R > 2 ? 1 : 0.5, true);
+    // unit circle
+    el('circle', { cx: p.X(0), cy: p.Y(0), r: p.s, fill: t > 0 ? '#fff6d6' : 'none', 'fill-opacity': t, stroke: GLD, 'stroke-width': 2 + 2 * t, 'stroke-dasharray': t > 0.98 ? '' : '6 6' }, svg);
+    if (t > 0.98) p.text(0.72, -0.72, '半徑 1', { color: '#8a6400', size: 20, weight: 700, dx: 6, dy: 18 });
+    V.forEach(([x, y, c]) => {
+      const L = Math.hypot(x, y), k = (1 - t) + t / L;   // length goes from L to 1
+      if (t > 0) p.arrow(0, 0, x, y, { color: c, w: 3, dash: '3 6' }).setAttribute('opacity', 0.25);
+      p.arrow(0, 0, x * k, y * k, { color: c, w: 5, head: 15 });
+    });
+    p.dot(0, 0, { r: 5, color: INK });
+  }
+  function go(target) {
+    if (anim) cancelAnimationFrame(anim);
+    const t0 = t, start = performance.now(), dur = 900;
+    const f = now => {
+      const u = Math.min(1, (now - start) / dur);
+      t = t0 + (target - t0) * ease(u); draw(t);
+      if (u < 1) anim = requestAnimationFrame(f); else anim = null;
+    };
+    anim = requestAnimationFrame(f);
+  }
+  HOOKS['s-normviz'] = { render(step) { const target = step >= 1 ? 1 : 0; if (target !== t) go(target); else draw(t); } };
+  draw(0);
+})();
 
 /* ---------- the cosine curve (shared by the cosine-function slide and the drag slide) ---------- */
 function cosCurve(svg, o = {}) {
@@ -279,32 +320,45 @@ function cosCurve(svg, o = {}) {
   return { X, Y };
 }
 
-/* ---------- cosine-function slide ---------- */
+/* ---------- ② angle slide: three panels → arrows → points on the cosine curve ---------- */
 (function () {
-  const svg = $('#cosgraph-plot');
-  const pts = [[0, '相同方向 similar', GRN], [90, '垂直 unrelated', MUTE], [180, '相反方向 opposite', BAD_C]];
-  HOOKS['s-cosgraph'] = {
+  const svg = $('#angle-plot');
+  const cases = [[25, 'Similar 方向相近', GRN, '+0.91'], [90, 'Unrelated 垂直', MUTE, '0'], [180, 'Opposite 相反', BAD_C, '−1']];
+  const PW = 300, PH = 180, PY = 0, gap = (1108 - 3 * PW) / 2;           // panel geometry (outer coordinates)
+  const CY = 228, CH = 262;                                             // curve area (outer coordinates)
+  const nest = (x, y, w, hh, vb) => el('svg', { x, y, width: w, height: hh, viewBox: vb, overflow: 'visible' }, svg);
+  function arrowOuter(x1, y1, x2, y2, c) {
+    const ang = Math.atan2(y2 - y1, x2 - x1), hl = 16, hw = 7;
+    el('line', { x1, y1, x2: x2 - Math.cos(ang) * hl * 0.8, y2: y2 - Math.sin(ang) * hl * 0.8, stroke: c, 'stroke-width': 3, 'stroke-dasharray': '7 6' }, svg);
+    el('polygon', { points: `${x2},${y2} ${x2 - Math.cos(ang) * hl - Math.sin(ang) * hw},${y2 - Math.sin(ang) * hl + Math.cos(ang) * hw} ${x2 - Math.cos(ang) * hl + Math.sin(ang) * hw},${y2 - Math.sin(ang) * hl - Math.cos(ang) * hw}`, fill: c }, svg);
+  }
+  HOOKS['s-angle'] = {
     render(step) {
-      const { X, Y } = cosCurve(svg, { fs: 20, pl: 64, pr: 34, pt: 70, w: 4, halves: true, shade: step >= 3 });
-      el('text', { x: 14, y: 40, fill: MUTE, 'font-size': 22, 'font-style': 'italic' }, svg, 'cos θ');
-      el('text', { x: X(360), y: Y(-1) - 10, 'text-anchor': 'end', fill: MUTE, 'font-size': 20, 'font-style': 'italic' }, svg, '夾角 θ');
-      // annotation anchors (angle, value) placed in empty regions, away from the curve
-      const anchor = { 0: [58, 0.92], 90: [122, 0.28], 180: [196, -0.22] };
-      if (step >= 1) pts.forEach(([d, lab, c]) => {
-        const px = X(d), py = Y(Math.cos(rad(d)));
-        if (step >= 2) {
-          const [ad, av] = anchor[d], cx = X(ad), cy = Y(av), L = 44;
-          el('line', { x1: px, y1: py, x2: cx - 8, y2: cy, stroke: c, 'stroke-width': 1.5, 'stroke-dasharray': '3 4', opacity: 0.7 }, svg);
-          const arr = (ang, col) => { const ex = cx + L * Math.cos(rad(ang)), ey = cy - L * Math.sin(rad(ang)); el('line', { x1: cx, y1: cy, x2: ex, y2: ey, stroke: col, 'stroke-width': 5, 'stroke-linecap': 'round' }, svg); el('circle', { cx: ex, cy: ey, r: 6, fill: col }, svg); };
-          if (d === 0) { arr(0, BLUE); const ey = cy - 9; el('line', { x1: cx, y1: ey, x2: cx + 40, y2: ey, stroke: ORG, 'stroke-width': 5, 'stroke-linecap': 'round' }, svg); el('circle', { cx: cx + 40, cy: ey, r: 6, fill: ORG }, svg); } else { arr(0, BLUE); arr(d, ORG); }
-          el('circle', { cx, cy, r: 4, fill: INK }, svg);
-          const tx = cx + (d === 180 ? 62 : 58);
-          el('text', { x: tx, y: cy - 4, fill: c, 'font-size': 26, 'font-weight': 700 }, svg, lab);
-          el('text', { x: tx, y: cy + 24, fill: MUTE, 'font-size': 20 }, svg, `θ = ${d}°  →  cos = ${d === 0 ? '+1' : d === 90 ? '0' : '−1'}`);
-        }
-        el('circle', { cx: px, cy: py, r: 11, fill: c, stroke: '#fff', 'stroke-width': 3 }, svg);
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+      // the curve (always visible), half shaded beyond 180° from step 5
+      const cs = nest(0, CY, 1108, CH, `0 0 1108 ${CH}`);
+      const { X, Y } = cosCurve(cs, { fs: 18, pl: 60, pr: 30, pt: 26, w: 4, halves: true, shade: step >= 5 });
+      el('text', { x: 6, y: 12, fill: MUTE, 'font-size': 18, 'font-style': 'italic' }, cs, 'cos θ');
+      if (step >= 5) el('text', { x: (X(180) + X(360)) / 2, y: Y(0) - 14, 'text-anchor': 'middle', fill: MUTE, 'font-size': 19 }, cs, '兩個向量的夾角不會超過 180°');
+      cases.forEach(([th, lab, c, val], i) => {
+        if (step < i + 1) return;
+        const px = i * (PW + gap);
+        // panel
+        el('rect', { x: px, y: PY, width: PW, height: PH, rx: 14, fill: '#fff', stroke: '#e3e6ec', 'stroke-width': 1.5 }, svg);
+        const ps = nest(px, PY, PW, PH - 34, `0 0 ${PW} ${PH - 34}`);
+        const p = Plot(ps, { xmin: -1.45, xmax: 1.45, ymin: -0.5, ymax: 1.35, pad: 6 });
+        p.grid(1, true);
+        const a0 = rad(0), a1 = rad(th);
+        p.arrow(0, 0, 1.2, 0, { color: BLUE, w: 5 });
+        p.arrow(0, 0, 1.2 * Math.cos(a1), 1.2 * Math.sin(a1), { color: ORG, w: 5 });
+        p.arc(0.38, a0, a1);
+        el('text', { x: px + PW / 2, y: PY + PH - 12, 'text-anchor': 'middle', fill: c, 'font-size': 22, 'font-weight': 700 }, svg, `${lab} · θ = ${th}°`);
+        // arrow from the panel to the point on the curve
+        const tx = X(th), ty = CY + Y(Math.cos(a1));
+        arrowOuter(px + PW / 2, PY + PH + 4, tx, ty - 14, c);
+        el('circle', { cx: tx, cy: ty, r: 11, fill: c, stroke: '#fff', 'stroke-width': 3 }, svg);
+        el('text', { x: tx + 18, y: ty + (th === 25 ? -10 : th === 180 ? 6 : -14), fill: c, 'font-size': 22, 'font-weight': 700, stroke: '#fff', 'stroke-width': 5, 'paint-order': 'stroke' }, svg, `cos = ${val}`);
       });
-      if (step >= 3) el('text', { x: (X(180) + X(360)) / 2 + 60, y: Y(-1) + 0 - 12, 'text-anchor': 'middle', fill: MUTE, 'font-size': 20 }, svg, '兩向量夾角不會超過 180°');
     }
   };
 })();
@@ -642,4 +696,27 @@ const addStepper = (id, n) => { const i = document.createElement('i'); i.classNa
       $('#why-note').innerHTML = `<span class="zh">${notes[k][0]}</span><span class="en">${notes[k][1]}</span>`;
     }
   };
+})();
+
+/* ---------- laser pointer (as in the CHI4335 decks): press L to swap the cursor for a red dot; L again to turn it off.
+   G opens the page-number box to jump to a slide. ---------- */
+(function () {
+  const run = () => {
+    const stage = document.getElementById('stage');
+    const dot = document.createElement('div');
+    dot.id = 'laser';
+    stage.appendChild(dot);
+    // the stage is scaled with a CSS transform, so convert screen coordinates to stage coordinates
+    addEventListener('mousemove', e => {
+      const r = stage.getBoundingClientRect(), k = r.width / 1280;
+      dot.style.left = (e.clientX - r.left) / k + 'px';
+      dot.style.top = (e.clientY - r.top) / k + 'px';
+    });
+    addEventListener('keydown', e => {
+      if (e.metaKey || e.ctrlKey || e.altKey || (e.target && /^(INPUT|TEXTAREA)$/.test(e.target.tagName))) return;
+      if (e.key === 'l' || e.key === 'L') { stage.classList.toggle('laser-on'); e.preventDefault(); }
+      if (e.key === 'g' || e.key === 'G') { e.preventDefault(); document.getElementById('num').click(); }
+    });
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
 })();

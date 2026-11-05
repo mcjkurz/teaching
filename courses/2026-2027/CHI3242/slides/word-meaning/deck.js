@@ -72,7 +72,7 @@
     let done = 0, total = 0;
     slides.forEach((x, i) => { const n = maxStep(x) + 1; if (i < cur) done += n; if (i === cur) done += step; total += n; });
     bar.style.width = (100 * done / Math.max(1, total - 1)) + '%';
-    num.textContent = `${cur + 1} / ${slides.length}`;
+    if (!num.querySelector('input')) num.innerHTML = `<span class="cur">${cur + 1}</span> / ${slides.length}`;
     history.replaceState(null, '', `#${cur + 1}.${step}`);
   }
 
@@ -92,7 +92,33 @@
     apply();
   }
 
+  // click the slide number to type a slide to jump to (Enter = go, Esc = cancel)
+  num.title = 'Click to jump to a slide';
+  num.addEventListener('click', e => {
+    e.stopPropagation();
+    if (num.querySelector('input')) return;
+    const inp = document.createElement('input');
+    inp.type = 'number'; inp.min = 1; inp.max = slides.length; inp.value = cur + 1;
+    num.innerHTML = ''; num.appendChild(inp); num.appendChild(document.createTextNode(` / ${slides.length}`));
+    inp.focus(); inp.select();
+    let finished = false;
+    const done = goTo => {
+      if (finished) return;
+      finished = true;
+      const n = parseInt(inp.value, 10);
+      inp.remove();   // fires blur, which is ignored thanks to `finished`
+      if (goTo && n >= 1 && n <= slides.length) go(n - 1, 0); else apply();
+    };
+    inp.addEventListener('keydown', ev => {
+      ev.stopPropagation();
+      if (ev.key === 'Enter') done(true);
+      else if (ev.key === 'Escape') done(false);
+    });
+    inp.addEventListener('blur', () => done(false));
+  });
+
   addEventListener('keydown', e => {
+    if (e.target && e.target.tagName === 'INPUT') return;
     if (e.metaKey || e.ctrlKey || e.altKey) return;
     const h = hooks[slides[cur].id];
     if (h && h.key && h.key(e, step, slides[cur])) { e.preventDefault(); apply(); return; }
