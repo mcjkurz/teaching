@@ -797,6 +797,7 @@ const addStepper = (id, n) => { const i = document.createElement('i'); i.classNa
 
 /* ---------- bonus ③: projection onto the 女 − 男 direction (2-D picture + ranked bars) ---------- */
 (function () {
+  const AXIS = '#6d28d9', FEM = '#c27a00', MASC = '#0e7c86';   // neutral colours: no pink / blue stereotype
   const ga = rad(28), g = [Math.cos(ga), Math.sin(ga)], nrm = [-Math.sin(ga), Math.cos(ga)];
   // each word = score along g  +  some offset perpendicular to g (illustrative)
   const W = [['口紅', 1.45, 0.55], ['裙子', 1.0, -0.75], ['桌子', 0.05, 1.25], ['足球', -0.75, -0.9], ['鬍子', -1.35, 0.6]];
@@ -807,13 +808,13 @@ const addStepper = (id, n) => { const i = document.createElement('i'); i.classNa
       const p = Plot(svg, { xmin: -2.3, xmax: 2.3, ymin: -2.0, ymax: 2.0, pad: 8 });
       p.clear(); p.grid(1, true);
       if (step >= 2) {   // the direction: a long axis through the origin, and the arrow 女 − 男
-        p.line(-2.2 * g[0], -2.2 * g[1], 2.2 * g[0], 2.2 * g[1], { color: '#d63384', w: 2, dash: '8 6' });
-        p.arrow(0, 0, 1.0 * g[0], 1.0 * g[1], { color: '#d63384', w: 7, head: 20 });
-        p.text(1.0 * g[0], 1.0 * g[1], '女 − 男', { color: '#d63384', size: 22, weight: 700, dx: 8, dy: 30 });
+        p.line(-2.2 * g[0], -2.2 * g[1], 2.2 * g[0], 2.2 * g[1], { color: AXIS, w: 2, dash: '8 6' });
+        p.arrow(0, 0, 1.0 * g[0], 1.0 * g[1], { color: AXIS, w: 7, head: 20 });
+        p.text(1.0 * g[0], 1.0 * g[1], '女 − 男', { color: AXIS, size: 22, weight: 700, dx: 8, dy: 30 });
       }
       W.forEach(w => {
         const [x, y] = pos(w), s = w[1], pr = [s * g[0], s * g[1]];
-        const c = s > 0.3 ? '#d63384' : s < -0.3 ? BLUE : MUTE;
+        const c = s > 0.3 ? FEM : s < -0.3 ? MASC : MUTE;
         if (step >= 3) {
           p.line(x, y, pr[0], pr[1], { color: c, w: 2, dash: '4 4' });
           p.dot(pr[0], pr[1], { r: 6, color: c });
@@ -826,7 +827,7 @@ const addStepper = (id, n) => { const i = document.createElement('i'); i.classNa
   // ranked bars
   const max = 1.6;
   $('#dir3-bars').innerHTML = W.slice().sort((a, b) => b[1] - a[1]).map(([w, s]) => {
-    const c = s > 0.3 ? '#d63384' : s < -0.3 ? BLUE : MUTE, wpx = Math.abs(s) / max * 50;
+    const c = s > 0.3 ? FEM : s < -0.3 ? MASC : MUTE, wpx = Math.abs(s) / max * 50;
     const bar = s >= 0 ? `left: 50%; width: ${wpx}%` : `right: 50%; width: ${wpx}%`;
     return `<div class="brow"><span>${w}</span><div class="btrack"><i style="${bar}; background: ${c}"></i></div><b style="color:${c}">${s >= 0 ? '+' : '−'}${Math.abs(s).toFixed(2)}</b></div>`;
   }).join('');
