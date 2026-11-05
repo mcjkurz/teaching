@@ -15,7 +15,7 @@ title: CHI3242 第10週講義
 <li>兩個詞有多相似，用<strong>餘弦相似度</strong>來量：方向越接近，cos θ 越接近 1。</li>
 </ul>
 <p>向量之間還可以做<strong>加減法</strong>。把意思相同、只在某一方面相反的詞相減（例如「女 − 男」），共有的部分互相抵消，留下的就是一個<strong>方向</strong>。用很多對詞取<strong>平均</strong>，雜訊會抵消，方向更清楚。最後把任何一個詞<strong>投影</strong>到這個方向上（和它算餘弦相似度），就得到這個詞在這個方向上的「分數」。</p>
-<p>詳見本週<a href="../../slides/word-meaning/">投影片</a>，特別是最後的「加分」部分。</p>
+<p>詳見本週投影片，特別是最後的「加分」部分。</p>
 
 <h2>2. 課堂／課後練習：哪些詞最「粵」？</h2>
 <p><strong>問題：</strong>我們把粵語句子和國語句子<strong>混在一起</strong>，訓練<strong>一個</strong> word2vec 模型。模型從來不知道世界上有「粵語」和「國語」。如果用 20 對意思相同的粵語／國語詞找出一個「粵語方向」，再把所有詞投影上去，排在最前面的 100 個詞，是不是都是粵語詞？</p>
@@ -29,10 +29,15 @@ title: CHI3242 第10週講義
 
 <div class="prompt">
 <p class="prompt-label">提示 1　安裝與下載</p>
-<pre>Install gensim, jieba, pyarrow, numpy and requests in this project's Python environment, and check that they import.
+<pre>gensim does not support Python 3.14 yet. Check the Python version first. If it is 3.14 or newer, create a virtual environment with Python 3.12 instead (for example: pip install uv, then uv venv --python 3.12 .venv) and use that environment for this and all later steps.
 
-Download these files into corpora/. Stream large files to disk instead of loading them into memory, and skip any file that is already there:
-- Cantonese: the three files https://huggingface.co/datasets/raptorkwok/ccpc-dataset-v2.1/resolve/main/data/SPLIT-00000-of-00001.parquet, where SPLIT is train, validation and test. Save them as corpora/ccpc_train.parquet, corpora/ccpc_validation.parquet and corpora/ccpc_test.parquet.
+Install gensim, jieba, pyarrow, numpy and requests in that environment, and check that they import.
+
+Download these files into corpora/, using exactly these URLs (no login is needed; if you get HTTP 401 or 404, the URL is wrong). Stream large files to disk instead of loading them into memory, and skip any file that is already there:
+- Cantonese, three files:
+  https://huggingface.co/datasets/raptorkwok/ccpc-dataset-v2.1/resolve/main/data/train-00000-of-00001.parquet  → corpora/ccpc_train.parquet
+  https://huggingface.co/datasets/raptorkwok/ccpc-dataset-v2.1/resolve/main/data/validation-00000-of-00001.parquet  → corpora/ccpc_validation.parquet
+  https://huggingface.co/datasets/raptorkwok/ccpc-dataset-v2.1/resolve/main/data/test-00000-of-00001.parquet  → corpora/ccpc_test.parquet
 - Mandarin: https://huggingface.co/datasets/yuhuanstudio/PTT-pretrain-zhtw/resolve/main/ppt_pretrain.json (849 MB), saved as corpora/ptt.json. Show a progress bar.
 - jieba's dictionary for traditional characters: https://raw.githubusercontent.com/fxsjy/jieba/master/extra_dict/dict.txt.big
 - a list of Cantonese words: https://raw.githubusercontent.com/mcjkurz/teaching/main/courses/2026-2027/CHI3242/notes/week-10/cantonese_words.txt

@@ -388,7 +388,7 @@ title: CHI3242
           <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Yuxi Ma, Yongqian Peng, and Yixin Zhu, <a href="https://escholarship.org/uc/item/57j9j7h6">“Word Embeddings Track Social Group Changes Across 70 Years in China”</a>, in <em>Proceedings of the 47th Annual Meeting of the Cognitive Science Society</em> (2025)</li>
         </ul>
       </td>
-      <td class="notes"><a href="notes/week-10/">Notes</a><br><a href="slides/word-meaning/">Slides</a></td>
+      <td class="notes"><a href="notes/week-10/">Notes</a></td>
     </tr>
   </tbody>
   <tbody class="due">
