@@ -672,25 +672,26 @@
   </div>
 </section>
 
-<!-- 28e ─────────── Training word2vec with gensim -->
+<!-- 28e ─────────── Training word2vec with qhchina -->
 <section class="slide" id="s-gensim" data-sec="embeddings">
-  <h2 class="bi"><span class="zh">自己訓練：gensim 的 Word2Vec</span><span class="en">Train your own: <code>Word2Vec</code> in gensim (Python) · radimrehurek.com/gensim/models/word2vec.html</span></h2>
+  <h2 class="bi"><span class="zh">自己訓練：qhchina 的 Word2Vec</span><span class="en">Train your own: <code>Word2Vec</code> in qhchina (Python) · qhchina.org/docs/word_embeddings/word2vec</span></h2>
   <div class="annot">
-    <div class="cl"><code>from&nbsp;gensim.models&nbsp;import&nbsp;Word2Vec</code></div>
-        <div class="cl"><code>model&nbsp;=&nbsp;Word2Vec(</code></div>
+    <div class="cl"><code>from&nbsp;qhchina.analytics&nbsp;import&nbsp;Word2Vec</code></div>
+    <div class="cl"><code>model&nbsp;=&nbsp;Word2Vec(</code></div>
     <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;sentences,</code><span class="ann" data-step="1"><i class="arr"></i><span>已<b>分詞</b>的句子：[["王婆", "半日", …], …]</span></span></div>
     <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;vector_size=100,</code><span class="ann" data-step="2"><i class="arr"></i><span>每個詞向量的<b>維度</b></span></span></div>
     <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;window=5,</code><span class="ann" data-step="3"><i class="arr"></i><span><b>視窗</b>：中心詞左右各幾個詞</span></span></div>
-    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;min_count=5,</code><span class="ann" data-step="4"><i class="arr"></i><span>出現少於 5 次的詞<b>忽略</b></span></span></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;min_word_count=5,</code><span class="ann" data-step="4"><i class="arr"></i><span>出現少於 5 次的詞<b>忽略</b></span></span></div>
     <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;sg=1,</code><span class="ann" data-step="5"><i class="arr"></i><span>1 ＝ <b>Skip-gram</b>，0 ＝ CBOW</span></span></div>
     <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;negative=5,</code><span class="ann" data-step="6"><i class="arr"></i><span>每對鄰居配幾個<b>隨機詞</b>（推遠）</span></span></div>
     <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;epochs=5,</code><span class="ann" data-step="7"><i class="arr"></i><span>整個語料<b>讀幾遍</b></span></span></div>
     <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;workers=4)</code><span class="ann" data-step="8"><i class="arr"></i><span>用幾個 CPU 核心（速度）</span></span></div>
+    <div class="cl"><code>model.train()</code><span class="ann" data-step="9"><i class="arr"></i><span>開始<b>訓練</b></span></span></div>
   </div>
-  <pre class="code use" data-step="9"><span class="cm"># 用訓練好的模型 · using the trained model</span>
-model.wv["幸福"]                       <span class="cm"># 「幸福」的向量（100 個數字）</span>
-model.wv.most_similar("幸福", topn=5)  <span class="cm"># 餘弦相似度最高的 5 個詞</span>
-model.wv.similarity("幸福", "快樂")     <span class="cm"># 兩個詞的餘弦相似度</span></pre>
+  <pre class="code use" data-step="10"><span class="cm"># 用訓練好的模型 · using the trained model</span>
+model.get_vector("幸福")              <span class="cm"># 「幸福」的向量（100 個數字）</span>
+model.most_similar("幸福", topn=5)    <span class="cm"># 餘弦相似度最高的 5 個詞</span>
+model.similarity("幸福", "快樂")       <span class="cm"># 兩個詞的餘弦相似度</span></pre>
 </section>
 
 <!-- 29 ─────────── Analogy -->

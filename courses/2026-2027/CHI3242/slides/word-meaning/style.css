@@ -937,3 +937,6 @@ pre.code .cm { color: var(--mute); }
 .annot .cl { padding: 0; margin: 0; border: 0; line-height: normal; font-size: inherit; }
 #s-gensim .annot .cl { height: 35px; }
 #s-gensim pre.code { font-size: 19px; line-height: 1.45; margin-top: 10px; padding: 6px 16px; }
+#s-gensim .annot .cl { height: 33px; }
+#s-gensim .annot .cl code { width: 560px; }
+#s-gensim .annot .arr { width: 170px; margin-left: -150px; }

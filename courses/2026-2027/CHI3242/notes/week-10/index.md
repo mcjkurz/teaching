@@ -23,15 +23,13 @@ title: CHI3242 第10週講義
 <li>粵語：<a href="https://huggingface.co/datasets/raptorkwok/ccpc-dataset-v2.1">raptorkwok/ccpc-dataset-v2.1</a> 的 <code>yue</code> 欄（約 85 萬句書面粵語）</li>
 <li>國語：<a href="https://huggingface.co/datasets/yuhuanstudio/PTT-pretrain-zhtw">yuhuanstudio/PTT-pretrain-zhtw</a>（台灣 PTT 論壇的貼文）。兩邊都是<strong>繁體字</strong>、都以口語化的文字為主，所以模型很難靠字形分辨它們，差別主要在「粵語 vs. 國語」。</li>
 <li>分詞：jieba 加上繁體詞典 <code>dict.txt.big</code>，以及一份粵語詞表 <a href="cantonese_words.txt"><code>cantonese_words.txt</code></a>（jieba 本身不認得「我哋」「鍾意」這類粵語詞）</li>
-<li>工具：<a href="https://radimrehurek.com/gensim/models/word2vec.html">gensim 的 <code>Word2Vec</code></a>、jieba、numpy</li>
+<li>工具：<a href="https://www.qhchina.org/docs/word_embeddings/word2vec/">qhchina 的 <code>Word2Vec</code></a>、jieba、numpy</li>
 </ul>
 <p>把下面四個提示<strong>依序</strong>貼給你的智能體（agent）。每一步做完，先看它的報告，再貼下一個。國語資料檔有 849 MB，第一步的下載要幾分鐘；之後每一步都在一兩分鐘內完成。</p>
 
 <div class="prompt">
 <p class="prompt-label">提示 1　安裝與下載</p>
-<pre>gensim does not support Python 3.14 yet. Check the Python version first. If it is 3.14 or newer, create a virtual environment with Python 3.12 instead (for example: pip install uv, then uv venv --python 3.12 .venv) and use that environment for this and all later steps.
-
-Install gensim, jieba, pyarrow, numpy and requests in that environment, and check that they import.
+<pre>Install qhchina, jieba, pyarrow, numpy and requests in this project's Python environment, and check that they import.
 
 Download these files into corpora/, using exactly these URLs (no login is needed; if you get HTTP 401 or 404, the URL is wrong). Stream large files to disk instead of loading them into memory, and skip any file that is already there:
 - Cantonese, three files:
@@ -60,28 +58,29 @@ Run the script. Report the number of sentences and tokens for each side, and sho
 
 <div class="prompt">
 <p class="prompt-label">提示 3　訓練 word2vec</p>
-<pre>Write scripts/train_word2vec.py that trains gensim's Word2Vec on corpora/mixed_segmented.txt (use gensim's LineSentence) with these parameters:
-vector_size=100, window=5, min_count=5, sg=1, negative=5, epochs=3, workers=4, seed=42.
-Save the model to models/canto_mando.model.
+<pre>Write scripts/train_word2vec.py that:
+1. Reads corpora/mixed_segmented.txt into a list of sentences, each sentence a list of tokens (split each line at spaces).
+2. Trains qhchina's Word2Vec (from qhchina.analytics.embeddings.word2vec.base import Word2Vec):
+   model = Word2Vec(sentences, vector_size=100, window=5, min_word_count=5, sg=1, negative=5, epochs=3, workers=4, seed=42)
+   model.train()
+3. Saves the model with model.save("models/canto_mando.model").
 
-Run the script. Report how long training took and the vocabulary size. Then show me the 10 most similar words to each of 唔, 不, 食, 吃 and 香港, and the cosine similarity of the pairs (唔, 不) and (嘅, 的).</pre>
+Run the script. Report how long training took and the vocabulary size (len(model.vocab)). Then show me the 10 most similar words to each of 唔, 不, 食, 吃 and 香港 (model.most_similar(word, topn=10)), and the cosine similarity of the pairs (唔, 不) and (嘅, 的) (model.similarity(a, b)).</pre>
 </div>
 
 <div class="prompt">
 <p class="prompt-label">提示 4　「粵語方向」與投影</p>
-<pre>Write scripts/cantonese_axis.py that loads models/canto_mando.model and uses these 20 (Cantonese, Mandarin) word pairs with the same meaning:
+<pre>Write scripts/cantonese_axis.py that loads the model with Word2Vec.load("models/canto_mando.model") (from qhchina.analytics.embeddings.word2vec.base import Word2Vec) and uses these 20 (Cantonese, Mandarin) word pairs with the same meaning:
 唔/不, 係/是, 嘅/的, 佢/他, 我哋/我們, 乜嘢/什麼, 邊個/誰, 冇/沒有, 食/吃, 飲/喝, 睇/看, 講/說, 畀/給, 嘢/東西, 屋企/家, 而家/現在, 鍾意/喜歡, 攰/累, 邊度/哪裡, 返工/上班
 
-1. Skip any pair where a word is not in the model's vocabulary, and tell me which ones were skipped.
-2. Normalize every word vector to length 1. For each pair, compute (Cantonese vector − Mandarin vector). Average these differences and normalize the result to length 1: this is the "Cantonese direction".
-3. Score every word in the vocabulary that appears at least 50 times and contains at least one Chinese character: score = (its normalized vector) · (the Cantonese direction), i.e. its cosine similarity with the direction. Positive = Cantonese, negative = Mandarin.
+1. Skip any pair where a word is not in the model's vocabulary (model.vocab), and tell me which ones were skipped.
+2. Use word vectors normalized to length 1: model.get_vector(word, normalize=True). For each pair, compute (Cantonese vector − Mandarin vector). Average these differences and normalize the result to length 1: this is the "Cantonese direction".
+3. Score every word in the vocabulary that appears at least 50 times (model.word_counts[word]) and contains at least one Chinese character: score = (its normalized vector) · (the Cantonese direction), i.e. its cosine similarity with the direction. Positive = Cantonese, negative = Mandarin.
 4. Save outputs/cantonese_axis.csv with columns word, score, count, sorted by score.
 5. Save outputs/top100.md with three tables (rank, word, score, count): the 100 words with the highest scores (most Cantonese), the 100 with the lowest scores (most Mandarin), and the scores of the 40 seed words.
 
 Run the script. Show me the top 20 words on each side.</pre>
 </div>
-
-<p>提示：訓練時，gensim 可能會先印出幾行 <code>Exception ignored in: 'gensim.models.word2vec_inner.our_dot_float'</code>。這是 gensim 啟動時的自我檢查，不影響結果，可以忽略。</p>
 
 <h3>觀察與詮釋</h3>
 <p>打開 <code>outputs/top100.md</code>：</p>
@@ -97,5 +96,5 @@ Run the script. Show me the top 20 words on each side.</pre>
 <ul>
 <li>Tomas Mikolov, Kai Chen, Greg Corrado, and Jeffrey Dean, <a href="https://arxiv.org/abs/1301.3781">“Efficient Estimation of Word Representations in Vector Space”</a> (2013)</li>
 <li>Austin C. Kozlowski, Matt Taddy, and James A. Evans, <a href="https://doi.org/10.1177/0003122419877135">“The Geometry of Culture: Analyzing the Meanings of Class through Word Embeddings”</a>, <em>American Sociological Review</em> 84, no. 5 (2019)</li>
-<li>gensim 文件：<a href="https://radimrehurek.com/gensim/models/word2vec.html">Word2Vec</a></li>
+<li>qhchina 文件：<a href="https://www.qhchina.org/docs/word_embeddings/word2vec/">Word2Vec</a></li>
 </ul>
