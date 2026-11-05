@@ -264,7 +264,9 @@ HOOKS['s-mag'] = {
 /* ---------- ③ normalization picture: vectors of many lengths → all on the unit circle (animated) ---------- */
 (function () {
   const svg = $('#normviz-plot');
-  const V = [[2.7, 1.1, BLUE], [0.7, 2.5, GRN], [-1.6, 2.3, PUR], [-2.7, -0.7, ORG], [1.3, -2.1, BLUE], [0.45, -0.35, GRN], [-0.5, 0.6, PUR], [1.6, 1.5, ORG]];
+  // eight directions spread ~45° apart, lengths from 0.55 to 2.8, eight different colours
+  const V = [[15, 2.8, BLUE], [60, 1.5, GRN], [105, 2.4, PUR], [150, 0.6, ORG], [195, 2.2, '#0e9aa7'], [240, 1.1, '#d63384'], [285, 2.7, GLD], [330, 0.55, '#7a5230']]
+    .map(([d, L, c]) => [L * Math.cos(rad(d)), L * Math.sin(rad(d)), c]);
   let t = 0, anim = null;
   const ease = x => x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
   function draw(t) {
@@ -400,25 +402,30 @@ function cosCurve(svg, o = {}) {
   draw();
 })();
 
-/* ---------- normalisation plot: the 3-4-5 vector shrunk to length 1 ---------- */
-(function () {
-  const svg = $('#norm-plot'), p = Plot(svg, { xmin: -0.9, xmax: 4.8, ymin: -0.6, ymax: 4.8, pad: 12 });
-  p.grid(1, true, true);
-  p.line(0, 0, 3, 0, { color: GLD, w: 3, dash: '6 5' }); p.line(3, 0, 3, 4, { color: GLD, w: 3, dash: '6 5' });
-  p.text(1.5, 0, '3', { color: '#8a6400', size: 22, weight: 700, dy: 30, anchor: 'middle' });
-  p.text(3, 2, '4', { color: '#8a6400', size: 22, weight: 700, dx: 10, dy: 8 });
-  el('path', { d: `M${p.X(1)},${p.Y(0)} A${p.s},${p.s} 0 0 0 ${p.X(0)},${p.Y(1)}`, fill: 'none', stroke: ORG, 'stroke-width': 2, 'stroke-dasharray': '4 5', opacity: 0.7 }, svg);
-  p.arrow(0, 0, 3, 4, { color: BLUE, w: 5 });
-  // shadows of u on the two axes: 3/5 and 4/5
-  p.line(0.6, 0.8, 0.6, 0, { color: ORG, w: 2, dash: '4 4' }); p.line(0.6, 0.8, 0, 0.8, { color: ORG, w: 2, dash: '4 4' });
-  p.line(0, 0, 0.6, 0, { color: ORG, w: 9 }).setAttribute('opacity', 0.45); p.line(0, 0, 0, 0.8, { color: ORG, w: 9 }).setAttribute('opacity', 0.45);
-  p.text(0.6, 0, '3/5', { color: ORG, size: 20, weight: 700, dy: 32, anchor: 'middle' });
-  p.text(0, 0.8, '4/5', { color: ORG, size: 20, weight: 700, dx: -26, dy: 7, anchor: 'end' });
-  p.arrow(0, 0, 0.6, 0.8, { color: ORG, w: 8, head: 16 });
-  p.text(3, 4, 'v = [3, 4]', { color: BLUE, size: 24, weight: 700, dx: 10, dy: -8 });
-  p.text(1.5, 2, 'length 5', { color: BLUE, size: 20, weight: 600, dx: -14, dy: -6, anchor: 'end' });
-  p.text(0.6, 0.8, 'u = [3/5, 4/5]', { color: ORG, size: 22, weight: 700, dx: 14, dy: 4 });
-})();
+/* ---------- normalisation plot: v = [3, 4] first; on the next click u = [3/5, 4/5] appears with its shadows ---------- */
+HOOKS['s-norm'] = {
+  render(step) {
+    const svg = $('#norm-plot'), p = Plot(svg, { xmin: -0.9, xmax: 4.8, ymin: -0.6, ymax: 4.8, pad: 12 });
+    p.clear(); p.grid(1, true, true);
+    if (step >= 2) {   // v and its 3-4-5 triangle
+      p.line(0, 0, 3, 0, { color: GLD, w: 3, dash: '6 5' }); p.line(3, 0, 3, 4, { color: GLD, w: 3, dash: '6 5' });
+      p.text(1.5, 0, '3', { color: '#8a6400', size: 22, weight: 700, dy: 30, anchor: 'middle' });
+      p.text(3, 2, '4', { color: '#8a6400', size: 22, weight: 700, dx: 10, dy: 8 });
+      p.arrow(0, 0, 3, 4, { color: BLUE, w: 5 });
+      p.text(3, 4, 'v = [3, 4]', { color: BLUE, size: 24, weight: 700, dx: 10, dy: -8 });
+      p.text(1.5, 2, 'length 5', { color: BLUE, size: 20, weight: 600, dx: -14, dy: -6, anchor: 'end' });
+    }
+    if (step >= 3) {   // u = v / 5 on the unit circle, with its shadows 3/5 and 4/5
+      el('path', { d: `M${p.X(1)},${p.Y(0)} A${p.s},${p.s} 0 0 0 ${p.X(0)},${p.Y(1)}`, fill: 'none', stroke: ORG, 'stroke-width': 2, 'stroke-dasharray': '4 5', opacity: 0.7 }, svg);
+      p.line(0.6, 0.8, 0.6, 0, { color: ORG, w: 2, dash: '4 4' }); p.line(0.6, 0.8, 0, 0.8, { color: ORG, w: 2, dash: '4 4' });
+      p.line(0, 0, 0.6, 0, { color: ORG, w: 9 }).setAttribute('opacity', 0.45); p.line(0, 0, 0, 0.8, { color: ORG, w: 9 }).setAttribute('opacity', 0.45);
+      p.text(0.6, 0, '3/5', { color: ORG, size: 20, weight: 700, dy: 32, anchor: 'middle' });
+      p.text(0, 0.8, '4/5', { color: ORG, size: 20, weight: 700, dx: -26, dy: 7, anchor: 'end' });
+      p.arrow(0, 0, 0.6, 0.8, { color: ORG, w: 8, head: 16 });
+      p.text(0.6, 0.8, 'u = [3/5, 4/5]', { color: ORG, size: 22, weight: 700, dx: 14, dy: 4 });
+    }
+  }
+};
 
 /* ---------- excerpts and window counts ---------- */
 (function () {
@@ -489,14 +496,12 @@ function cosCurve(svg, o = {}) {
     ['問題：男 和 皇帝 <b>重疊</b>了，女 和 皇后 也是！一個維度不夠分開它們。', 'Problem: man and emperor overlap, and so do woman and empress. One dimension is not enough.'],
     ['加上第二個維度「皇室」：皇帝、皇后往上移，重疊的詞<b>分開了</b>。更多維度 ＝ 更多空間。', 'Add a second dimension, royalty: emperor and empress move up and separate. More dimensions = more room.'],
     ['每個詞都是一支從原點出發的箭頭。', 'Each word is an arrow from the origin.'],
-    ['從男走到女：先 <b>− 男</b>。男在 −1，減去男 ＝ 往右走一格，回到原點。', 'From man to woman: first − man. Man is at −1, so subtracting it moves one step right, back to the origin.'],
-    ['再 <b>+ 女</b>：往右再走一格，到達女。合起來就是 <b>女 − 男</b>。', 'Then + woman: one more step right, arriving at woman. Together: woman − man.'],
-    ['皇帝 → 皇后：也是同一支箭頭「女 − 男」，<b>方向相同</b>！', 'Emperor → empress is the same arrow, woman − man: the same direction!'],
-    ['所以：從皇后減去「女 − 男」，就回到皇帝。', 'So subtracting “woman − man” from empress lands on emperor.']
+    ['從女走到男：先 <b>− 女</b>。女在 +1，減去女 ＝ 往左走一格，回到原點。', 'From woman to man: first − woman. Woman is at +1, so subtracting it moves one step left, back to the origin.'],
+    ['再 <b>+ 男</b>：往左再走一格，到達男。合起來就是 <b>男 − 女</b>。', 'Then + man: one more step left, arriving at man. Together: man − woman.'],
+    ['從皇后出發，走同一支箭頭「男 − 女」，就到了皇帝。', 'Start at empress and follow the same arrow, man − woman: you arrive at emperor.']
   ];
   const col = w => (w === '男' || w === '皇帝') ? BLUE : ORG;
-  HOOKS['s-gender'] = {
-    render(step, root) {
+  const renderMain = (step, root) => {
       const p = Plot(svg, { xmin: -1.45, xmax: 1.45, ymin: -0.55, ymax: 1.45, pad: 12 });
       p.clear();
       if (step <= 2) {
@@ -522,28 +527,50 @@ function cosCurve(svg, o = {}) {
           p.dot(P[w][0], 0, { color: col(w), r: 8 }).setAttribute('opacity', 0.3);
           p.arrow(P[w][0], 0.06, P[w][0], 0.9, { color: col(w), w: 3, dash: '5 6', head: 14 });
         });
-        if (step >= 4) Object.keys(P).forEach(w => { const g = p.arrow(0, 0, ...P[w], { color: INK, w: 2.2, head: 12 }); if (step >= 5) g.setAttribute('opacity', 0.25); });
         // bottom row: man → woman, built as  − 男  then  + 女
-        if (step >= 5) { p.arrow(-1, 0.015, -0.06, 0.015, { color: RED, w: 10, head: 24 }); p.text(-0.5, 0.015, '− 男', { color: RED, size: 26, weight: 700, dy: -18, anchor: 'middle' }); }
+        // bottom row: woman → man, built as  − 女  then  + 男
+        if (step >= 5) { p.arrow(1, 0.015, 0.06, 0.015, { color: RED, w: 10, head: 24 }); p.text(0.5, 0.015, '− 女', { color: RED, size: 26, weight: 700, dy: -18, anchor: 'middle' }); }
         if (step >= 6) {
-          p.arrow(0.02, 0.015, 0.9, 0.012, { color: RED, w: 10, head: 24 }); p.text(0.48, 0.015, '+ 女', { color: RED, size: 26, weight: 700, dy: -18, anchor: 'middle' });
-          // brace under the two halves: together = 女 − 男
+          p.arrow(-0.02, 0.015, -0.9, 0.015, { color: RED, w: 10, head: 24 }); p.text(-0.48, 0.015, '+ 男', { color: RED, size: 26, weight: 700, dy: -18, anchor: 'middle' });
+          // bracket under the two halves: together = 男 − 女
           el('path', { d: `M${p.X(-1)},${p.Y(0) + 46} L${p.X(-1)},${p.Y(0) + 58} L${p.X(1)},${p.Y(0) + 58} L${p.X(1)},${p.Y(0) + 46}`, fill: 'none', stroke: RED, 'stroke-width': 2.5 }, svg);
-          const lb = p.text(0, 0, '＝ 女 − 男', { color: RED, size: 24, weight: 700, dy: 86, anchor: 'middle' }); lb.setAttribute('stroke', '#fff'); lb.setAttribute('stroke-width', 6); lb.setAttribute('paint-order', 'stroke');
+          const lb = p.text(0, 0, '＝ 男 − 女', { color: RED, size: 24, weight: 700, dy: 86, anchor: 'middle' }); lb.setAttribute('stroke', '#fff'); lb.setAttribute('stroke-width', 6); lb.setAttribute('paint-order', 'stroke');
         }
-        // top row: the same arrow
-        if (step === 7) { p.arrow(-0.97, 1, 0.9, 1, { color: RED, w: 10, head: 24 }); p.text(0, 1, '女 − 男', { color: RED, size: 24, weight: 700, dy: -20, anchor: 'middle' }); }
-        if (step >= 8) { p.arrow(0.99, 1, -0.88, 1, { color: RED, w: 10, head: 24 }); p.text(0, 1, '− (女 − 男)', { color: RED, size: 24, weight: 700, dy: -20, anchor: 'middle' }); }
+        // top row: the same arrow takes empress to emperor
+        if (step >= 7) { p.arrow(0.99, 1, -0.88, 1, { color: RED, w: 10, head: 24 }); p.text(0, 1, '男 − 女', { color: RED, size: 24, weight: 700, dy: -20, anchor: 'middle' }); }
         Object.keys(P).forEach(w => { p.dot(...P[w], { color: col(w), r: 10 }); p.text(...P[w], w, { color: col(w), size: 26, weight: 700, dy: P[w][1] > 0.5 ? -20 : 38, anchor: 'middle' }); });
+        // black origin arrows drawn last, so they sit on top of the word dots
+        if (step >= 4) Object.keys(P).forEach(w => { const g = p.arrow(0, 0, ...P[w], { color: INK, w: 2.2, head: 12 }); if (step >= 5) g.setAttribute('opacity', 0.25); });
       }
       const t = $('#gx-table', root);
       t.classList.toggle('c3on', step >= 1);
       t.classList.toggle('r2on', step >= 3);
-      $('#gx-eq', root).style.visibility = step >= 8 ? 'visible' : 'hidden';
+      $('#gx-eq', root).style.visibility = step >= 7 ? 'visible' : 'hidden';
       $('#gx-note', root).innerHTML = `<span class="zh">${notes[step][0]}</span><span class="en">${notes[step][1]}</span>`;
+  };
+  // two pre-steps: an empty space, then the gender axis alone; the main build follows
+  const pre = [
+    ['一個空的空間：還沒有任何維度，也還沒有任何詞。', 'An empty space: no dimensions yet, no words yet.'],
+    ['先放一個維度：「性別」軸。', 'First, one dimension: a gender axis.']
+  ];
+  HOOKS['s-gender'] = {
+    render(step, root) {
+      const t = $('#gx-table', root);
+      t.style.visibility = step >= 2 ? 'visible' : 'hidden';
+      if (step >= 2) return renderMain(step - 2, root);
+      const p = Plot(svg, { xmin: -1.45, xmax: 1.45, ymin: -0.55, ymax: 1.45, pad: 12 });
+      p.clear();
+      if (step === 1) {
+        p.arrow(-1.4, 0, 1.4, 0, { color: '#9aa3b2', w: 3 });
+        p.text(0, 0, '性別 gender →', { color: MUTE, size: 20, dy: 32, anchor: 'middle' });
+        [-1, 1].forEach(x => { p.line(x, -0.04, x, 0.04, { color: '#9aa3b2', w: 2 }); p.text(x, 0, x > 0 ? '+1' : '−1', { color: MUTE, size: 16, dy: -12, anchor: 'middle' }); });
+      }
+      t.classList.remove('c3on', 'r2on');
+      $('#gx-eq', root).style.visibility = 'hidden';
+      $('#gx-note', root).innerHTML = `<span class="zh">${pre[step][0]}</span><span class="en">${pre[step][1]}</span>`;
     }
   };
-  const i = document.createElement('i'); i.className = 'stepper'; i.dataset.step = 8; $('#s-gender').appendChild(i);
+  const i = document.createElement('i'); i.className = 'stepper'; i.dataset.step = 9; $('#s-gender').appendChild(i);
 })();
 
 /* ---------- more dimensions ---------- */

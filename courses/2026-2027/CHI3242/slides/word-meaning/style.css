@@ -775,3 +775,45 @@ table.cmp.mx.rc th, table.cmp.mx.rc td { font-size: 32px; padding: 6px 18px; }
 
 #angle-plot { width: 1108px; margin-top: 4px; }
 .angle-eq { position: absolute; right: 100px; top: 40px; margin: 0; font-size: 26px; padding: 6px 18px; }
+
+/* Hebb ≈ Firth */
+.hebb { display: flex; align-items: stretch; gap: 18px; margin-top: 6px; }
+.hebb-col { flex: 1; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.hebb-imgs { display: flex; gap: 10px; justify-content: center; height: 250px; }
+.hebb-imgs img { height: 100%; width: auto; border-radius: 12px; box-shadow: 0 3px 14px rgba(20,30,60,.12); }
+.hebb-words { height: 250px; display: flex; flex-wrap: wrap; align-content: center; justify-content: center; gap: 12px; background: var(--panel); border-radius: 12px; }
+.hebb-words span { font-size: 34px; font-family: var(--cjk); background: #fff; border: 2px solid var(--win); border-radius: 12px; padding: 4px 16px; }
+.hebb-words span:first-child { background: var(--tgt); color: #fff; border-color: var(--tgt); font-weight: 600; }
+.hebb-words i { font-style: normal; font-size: 36px; color: var(--col); }
+.hebb-card { border-radius: 12px; padding: 10px 18px; border-left: 5px solid; }
+.hebb-card b { display: block; font-size: 20px; margin-bottom: 2px; }
+.hebb-card .zh { display: block; font-size: 26px; } .hebb-card .en { display: block; font-size: 17px; font-style: italic; }
+.hebb-card.neuro { background: #fdeef0; border-color: #d94f6a; } .hebb-card.neuro b { color: #b23a52; }
+.hebb-card.lang { background: var(--tgt-bg); border-color: var(--tgt); } .hebb-card.lang b { color: var(--tgt); }
+.hebb-eq { align-self: center; font-size: 60px; color: var(--mute); flex: none; }
+.hebb-imgs, .hebb-words { height: 285px; }
+
+/* "more dimensions" table: fixed column widths, new columns append on the right */
+table.cmp.dx { width: auto; }
+table.cmp.dx th, table.cmp.dx td { width: 140px; min-width: 140px; max-width: 140px; box-sizing: border-box; }
+table.cmp.dx th:first-child { width: 110px; min-width: 110px; max-width: 110px; }
+
+/* paper slide */
+.paper { display: flex; gap: 34px; align-items: flex-start; margin-top: 2px; }
+.paper-page { margin: 0; flex: none; height: 530px; }
+.paper-page img { height: 100%; width: auto; display: block; border: 1px solid var(--line); border-radius: 6px; box-shadow: 0 8px 28px rgba(20,30,60,.22); transform: rotate(-1.2deg); }
+.paper-facts { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+.pf-title { font-family: Georgia, "Times New Roman", serif; font-size: 30px; font-weight: 700; line-height: 1.25; }
+.pf-auth { display: flex; gap: 14px; align-items: center; font-size: 19px; }
+.pf-auth img { width: 70px; height: 86px; object-fit: cover; object-position: 50% 20%; border-radius: 8px; }
+.pf-auth small { color: var(--mute); font-size: 16px; }
+.pf-item { background: var(--panel); border-left: 5px solid var(--tgt); border-radius: 10px; padding: 8px 16px; }
+.pf-item b:first-child { display: block; font-size: 22px; color: var(--tgt); }
+.pf-item span { font-size: 22px; font-family: var(--cjk), var(--latin); }
+.pf-item small { display: block; font-size: 14px; color: var(--mute); font-style: italic; margin-top: 2px; }
+.paper-page { height: 470px; }
+.pf-item b:first-child { display: inline; font-size: inherit; color: var(--col); }
+.pf-item > b:first-child { display: block; font-size: 22px; color: var(--tgt); }
+.paper-facts { gap: 10px; }
+.pf-title { font-size: 28px; }
+.pf-item { padding: 6px 16px; }

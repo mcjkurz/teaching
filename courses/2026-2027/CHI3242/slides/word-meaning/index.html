@@ -100,6 +100,23 @@
   </div>
 </section>
 
+<!-- 5b ─────────── Hebb and Firth: the same idea -->
+<section class="slide" id="s-hebb" data-sec="meaning">
+  <h2 class="bi"><span class="zh">同一個時代的同一個想法：一起出現，就連在一起</span><span class="en">The same idea, the same era: what occurs together becomes connected</span></h2>
+  <div class="hebb">
+    <div class="hebb-col" data-step="1">
+      <div class="hebb-imgs"><img src="assets/neurons-fire1.jpeg" alt="Neurons that fire together wire together"><img src="assets/neurons-fire2.jpeg" alt="Neurons that fire together wire together"></div>
+      <div class="hebb-card neuro"><b>神經科學 · Hebb (1949)</b><span class="zh">一起放電的神經元，彼此的連結會變強。</span><span class="en">“Neurons that fire together, wire together.”</span></div>
+    </div>
+    <div class="hebb-eq" data-step="2">≈</div>
+    <div class="hebb-col ling" data-step="2">
+      <div class="hebb-words"><span>小確幸</span><i>⇄</i><span>生活</span><span>美食</span><span>家人</span></div>
+      <div class="hebb-card lang"><b>語言學 · Harris (1954) · Firth (1957)</b><span class="zh">一起出現的詞，意義彼此相連。</span><span class="en">“You shall know a word by the company it keeps.”</span></div>
+    </div>
+  </div>
+  <div class="callout key bi" data-step="3"><span class="zh">共現 → 連結。後面的 word2vec 也是這樣學習的：一起出現的詞，向量就被<b>拉近</b>一點。</span><span class="en">Co-occurrence → connection. word2vec learns the same way: words that occur together get their vectors pulled a little closer.</span></div>
+</section>
+
 <!-- 5 ─────────── Synonymy -->
 <section class="slide" id="s-syn" data-sec="relations">
   <h2 class="bi"><span class="zh">語義關係：同義詞 (synonymy)</span><span class="en">Semantic relations: synonymy</span></h2>
@@ -381,7 +398,7 @@
       <div class="eq" data-step="3">\(\vec u=\dfrac{\vec v}{\lVert\vec v\rVert}=\Big[\dfrac35,\dfrac45\Big]\qquad\lVert\vec u\rVert=1\)</div>
       <div class="callout key bi" data-step="4"><span class="zh">把向量縮成長度 1（正規化）之後，內積就等於 cos θ，只剩下方向。</span><span class="en">After normalising to length 1, the dot product equals cos θ: only direction remains.</span></div>
     </div>
-    <svg class="plot" id="norm-plot" viewBox="0 0 440 420" data-step="2"></svg>
+    <svg class="plot" id="norm-plot" viewBox="0 0 440 420"></svg>
   </div>
 </section>
 
@@ -532,7 +549,7 @@
           <tr class="r2"><th>皇室</th><td>0.02</td><td>0.01</td><td class="c3">1</td><td class="c3">1</td></tr>
         </tbody>
       </table>
-      <div class="eq big" id="gx-eq">皇帝 = 皇后 − 女 + 男</div>
+      <div class="eq big" id="gx-eq">皇帝 = 皇后 <span class="red-c">− 女 + 男</span></div>
       <div class="bi sm" id="gx-note"></div>
     </div>
     <svg class="plot" id="gx-plot" viewBox="0 0 520 440"></svg>
@@ -566,10 +583,24 @@
   </div>
 </section>
 
+<!-- 28a ─────────── The word2vec paper -->
+<section class="slide" id="s-mikolov" data-sec="embeddings">
+  <h2 class="bi"><span class="zh">Mikolov 等人 (2013)：word2vec</span><span class="en">The paper that made word vectors mainstream</span></h2>
+  <div class="paper">
+    <figure class="paper-page"><img src="assets/mikolov-2013-p1.jpeg" alt="First page of Mikolov et al. 2013, Efficient Estimation of Word Representations in Vector Space"></figure>
+    <div class="paper-facts">
+      <div class="pf-title">Efficient Estimation of Word Representations in Vector Space</div>
+      <div class="pf-auth"><img src="assets/mikolov.jpeg" alt="Tomáš Mikolov"><span>Tomáš Mikolov, Kai Chen, Greg Corrado, Jeffrey Dean<br><small>Google · arXiv:1301.3781 · 2013</small></span></div>
+      <div class="pf-item" data-step="1"><b>兩種架構</b><span>CBOW：由語境預測中心詞<br>Skip-gram：由中心詞預測語境</span></div>
+      <div class="pf-item" data-step="2"><b>又快又大</b><span>不到一天，就從 <b>16 億</b>詞的語料學出高品質的詞向量</span><small>“less than a day to learn high quality word vectors from a 1.6 billion words data set”</small></div>
+      <div class="pf-item" data-step="3"><b>向量的算術</b><span>king − man + woman ≈ queen</span></div>
+    </div>
+  </div>
+</section>
+
 <!-- 28 ─────────── word2vec -->
 <section class="slide" id="s-w2v" data-sec="embeddings">
   <h2 class="bi"><span class="zh">word2vec：從文本中自動學出向量</span><span class="en">word2vec: learning the vectors from text</span></h2>
-  <figure class="mini-portrait"><figcaption>Tomáš Mikolov<span>word2vec, 2013</span></figcaption><img src="assets/mikolov.jpeg" alt="Tomáš Mikolov"></figure>
   <div class="bi sm"><span class="zh">「觀其伴，知其義。」— Firth</span><span class="en">“You shall know a word by the company it keeps.” Mikolov et al. (2013): predict a word’s neighbours.</span></div>
   <div class="toks w2v" id="w2v-toks"></div>
   <div class="two">
