@@ -8,7 +8,8 @@ window.SECTIONS = [
   { id: 'counts',     zh: '共現向量',     en: 'Co-occurrence vectors' },
   { id: 'embeddings', zh: '稠密詞向量',   en: 'Dense word vectors' },
   { id: 'limits',     zh: '限制與下一步', en: 'Limits and next steps' },
-  { id: 'summary',    zh: '總結',         en: 'Summary' }
+  { id: 'summary',    zh: '總結',         en: 'Summary' },
+  { id: 'bonus',      zh: '加分：找出一個維度', en: 'Bonus: finding a dimension' }
 ];
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -746,4 +747,69 @@ const addStepper = (id, n) => { const i = document.createElement('i'); i.classNa
     });
   };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
+})();
+
+
+/* ---------- bonus ②: three noisy pair differences, then their average ---------- */
+(function () {
+  const rows = [['女 − 男', [0.1, -0.2, 1.8, 0.0, 0.2, -0.1]], ['皇后 − 皇帝', [-0.2, 0.1, 1.6, 0.3, -0.1, 0.2]], ['母親 − 父親', [0.1, 0.1, 1.7, -0.3, -0.1, -0.1]]];
+  const avg = [0, 1, 2, 3, 4, 5].map(k => rows.reduce((s, r) => s + r[1][k], 0) / rows.length);
+  const cell = (v, k, avgRow) => {
+    const big = k === 2, z = Math.abs(v) < 1e-9;
+    return `<td class="${big ? 'hot' + (avgRow ? ' big' : '') : (avgRow ? 'z' : 'noise')}">${z ? '0' : fmt(v)}</td>`;
+  };
+  $('#dir2-table tbody').innerHTML =
+    rows.map(([n, v], i) => `<tr data-step="${i + 1}"><th>${n}</th>${v.map((x, k) => cell(x, k, false)).join('')}</tr>`).join('') +
+    `<tr class="diff avg" data-step="4"><th>平均 average</th>${avg.map((x, k) => cell(x, k, true)).join('')}</tr>`;
+})();
+
+/* ---------- bonus ③: projection onto the 女 − 男 direction (2-D picture + ranked bars) ---------- */
+(function () {
+  const ga = rad(28), g = [Math.cos(ga), Math.sin(ga)], nrm = [-Math.sin(ga), Math.cos(ga)];
+  // each word = score along g  +  some offset perpendicular to g (illustrative)
+  const W = [['口紅', 1.45, 0.55], ['裙子', 1.0, -0.75], ['桌子', 0.05, 1.25], ['足球', -0.75, -0.9], ['鬍子', -1.35, 0.6]];
+  const pos = ([, s, q]) => [s * g[0] + q * nrm[0], s * g[1] + q * nrm[1]];
+  const svg = $('#dir3-plot');
+  HOOKS['s-dir3'] = {
+    render(step) {
+      const p = Plot(svg, { xmin: -2.3, xmax: 2.3, ymin: -2.0, ymax: 2.0, pad: 8 });
+      p.clear(); p.grid(1, true);
+      if (step >= 2) {   // the direction: a long axis through the origin, and the arrow 女 − 男
+        p.line(-2.2 * g[0], -2.2 * g[1], 2.2 * g[0], 2.2 * g[1], { color: '#d63384', w: 2, dash: '8 6' });
+        p.arrow(0, 0, 1.0 * g[0], 1.0 * g[1], { color: '#d63384', w: 7, head: 20 });
+        p.text(1.0 * g[0], 1.0 * g[1], '女 − 男', { color: '#d63384', size: 22, weight: 700, dx: 8, dy: 30 });
+      }
+      W.forEach(w => {
+        const [x, y] = pos(w), s = w[1], pr = [s * g[0], s * g[1]];
+        const c = s > 0.3 ? '#d63384' : s < -0.3 ? BLUE : MUTE;
+        if (step >= 3) {
+          p.line(x, y, pr[0], pr[1], { color: c, w: 2, dash: '4 4' });
+          p.dot(pr[0], pr[1], { r: 6, color: c });
+        }
+        p.dot(x, y, { r: 8, color: step >= 3 ? c : INK });
+        p.text(x, y, w[0], { color: step >= 3 ? c : INK, size: 23, weight: 700, dx: 12, dy: -8 });
+      });
+    }
+  };
+  // ranked bars
+  const max = 1.6;
+  $('#dir3-bars').innerHTML = W.slice().sort((a, b) => b[1] - a[1]).map(([w, s]) => {
+    const c = s > 0.3 ? '#d63384' : s < -0.3 ? BLUE : MUTE, wpx = Math.abs(s) / max * 50;
+    const bar = s >= 0 ? `left: 50%; width: ${wpx}%` : `right: 50%; width: ${wpx}%`;
+    return `<div class="brow"><span>${w}</span><div class="btrack"><i style="${bar}; background: ${c}"></i></div><b style="color:${c}">${s >= 0 ? '+' : '−'}${Math.abs(s).toFixed(2)}</b></div>`;
+  }).join('');
+})();
+(function () { const i = document.createElement('i'); i.className = 'stepper'; i.dataset.step = 2; $('#s-dir3').appendChild(i); })();
+/* bonus ①: highlight the differing column from step 2 on */
+HOOKS['s-dir1'] = { render(step, el) { el.classList.toggle('show-hot', step >= 2); } };
+
+/* ---------- bonus: adjectiveness bars (illustrative scores) ---------- */
+(function () {
+  const W = [['bright', 1.3], ['quick', 1.1], ['green', 0.8], ['running', 0.1], ['table', -0.9], ['idea', -1.1], ['elephant', -1.4]];
+  const max = 1.6, A = '#1f8a70', N = '#c25e00';
+  $('#adj-bars').innerHTML = W.map(([w, s]) => {
+    const c = s > 0.3 ? A : s < -0.3 ? N : MUTE, wpx = Math.abs(s) / max * 50;
+    const bar = s >= 0 ? `left: 50%; width: ${wpx}%` : `right: 50%; width: ${wpx}%`;
+    return `<div class="brow en"><span>${w}</span><div class="btrack"><i style="${bar}; background: ${c}"></i></div><b style="color:${c}">${s >= 0 ? '+' : '−'}${Math.abs(s).toFixed(2)}</b></div>`;
+  }).join('');
 })();

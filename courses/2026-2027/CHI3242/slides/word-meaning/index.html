@@ -685,6 +685,94 @@
   <div class="callout key bi" data-step="5"><span class="zh">向量是探索文本的工具，不是取代閱讀的答案機器：兩個詞的向量很接近時，仍要回到文本問「為什麼」。</span><span class="en">Vectors are a tool for exploring texts, not an answer machine: when two words are close, go back to the texts and ask why.</span></div>
 </section>
 
+<!-- B1 ─────────── Bonus: subtract opposites -->
+<section class="slide" id="s-dir1" data-sec="bonus">
+  <h2 class="bi"><span class="zh">加分：把相反的詞相減，得到一個「方向」</span><span class="en">Bonus: subtract opposite words to find a direction</span></h2>
+  <div class="bi sm" data-step="1"><span class="zh">玩具例子：「女」和「男」在 6 個維度裡，只有<b>一個</b>維度正負相反，其他完全一樣。</span><span class="en">Toy example: 女 and 男 agree on every dimension except one, where the signs are opposite.</span></div>
+  <table class="dirt" id="dir1-table" data-step="1">
+    <thead><tr><th></th><th>d₁</th><th>d₂</th><th class="hot">d₃</th><th>d₄</th><th>d₅</th><th>d₆</th></tr></thead>
+    <tbody>
+      <tr><th>女</th><td>0.4</td><td>−0.6</td><td class="hot">0.9</td><td>0.2</td><td>−0.3</td><td>0.5</td></tr>
+      <tr><th>男</th><td>0.4</td><td>−0.6</td><td class="hot">−0.9</td><td>0.2</td><td>−0.3</td><td>0.5</td></tr>
+      <tr class="diff" data-step="3"><th>女 − 男</th><td class="z">0</td><td class="z">0</td><td class="hot big">1.8</td><td class="z">0</td><td class="z">0</td><td class="z">0</td></tr>
+    </tbody>
+  </table>
+  <div class="bi sm" data-step="2"><span class="zh">只有 d₃ 不同：女 = +0.9，男 = −0.9。</span><span class="en">Only d₃ differs: +0.9 vs −0.9.</span></div>
+  <div class="callout key bi" data-step="4"><span class="zh">相同的部分互相<b>抵消</b>，變成 0；相反的部分反而<b>加倍</b>（0.9 − (−0.9) = 1.8）。留下的，就是「女 − 男」的<b>方向</b>。</span><span class="en">What the two words share cancels to 0; what is opposite doubles. What remains is the direction 女 − 男.</span></div>
+</section>
+
+<!-- B2 ─────────── Bonus: average many pairs -->
+<section class="slide" id="s-dir2" data-sec="bonus">
+  <h2 class="bi"><span class="zh">真實的向量有雜訊：用很多對詞，取平均</span><span class="en">Real vectors are noisy: average over many pairs</span></h2>
+  <table class="dirt" id="dir2-table">
+    <thead><tr><th></th><th>d₁</th><th>d₂</th><th class="hot">d₃</th><th>d₄</th><th>d₅</th><th>d₆</th></tr></thead>
+    <tbody></tbody>
+  </table>
+  <div class="bi sm" data-step="4"><span class="zh">每一對都有一點雜訊（灰色的小數字），但雜訊方向各不相同，平均之後就互相抵消；<b>大家共有的 d₃</b> 留了下來。</span><span class="en">The noise points in different directions and cancels; the shared d₃ survives.</span></div>
+  <div class="callout key bi" data-step="5"><span class="zh">所以課堂練習要用 20 對詞。社會學也用這個方法找出「階級」「性別」等維度（Kozlowski 等 2019）。</span><span class="en">Hence 20 pairs in class. Sociologists find class and gender dimensions this way (Kozlowski, Taddy &amp; Evans 2019).</span></div>
+</section>
+
+<!-- B3 ─────────── Bonus: project words onto the direction -->
+<section class="slide" id="s-dir3" data-sec="bonus">
+  <h2 class="bi"><span class="zh">把每個詞「投影」到這個方向上</span><span class="en">Project every word onto the direction: a “femininity” score</span></h2>
+  <div class="two">
+    <svg class="plot" id="dir3-plot" viewBox="0 0 540 470"></svg>
+    <div class="grow">
+      <div class="eq dir-eq" data-step="3">\(\text{分數}(w)=\mathbf w\cdot\hat{\mathbf g},\quad \hat{\mathbf g}=\dfrac{\mathbf{女}-\mathbf{男}}{\lVert\mathbf{女}-\mathbf{男}\rVert}\)</div>
+      <div class="bars" id="dir3-bars" data-step="4"></div>
+      <div class="callout key bi" data-step="5"><span class="zh">注意：分數反映<b>語料</b>裡的用法，包括刻板印象（Bolukbasi 等 2016）。</span><span class="en">The score reflects corpus usage, stereotypes included (Bolukbasi et al. 2016).</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- B4a ─────────── Bonus: adjectives vs nouns -->
+<section class="slide" id="s-adjnoun" data-sec="bonus">
+  <h2 class="bi"><span class="zh">另一個方向：「形容詞性」</span><span class="en">Another direction: adjectives minus nouns = “adjectiveness”</span></h2>
+  <div class="two adjn">
+    <div class="grow">
+      <div class="bi sm" data-step="1"><span class="zh">意思相同、只有<b>詞性</b>不同的詞對：</span><span class="en">Pairs with the same meaning but a different part of speech:</span></div>
+      <div class="cp-legend" data-step="1"><span class="adj">形容詞 adjective</span><span class="noun">名詞 noun</span></div>
+      <div class="cpairs en4" data-step="1"><span><em class="adj">happy</em><em class="noun">happiness</em></span><span><em class="adj">dark</em><em class="noun">darkness</em></span><span><em class="adj">strong</em><em class="noun">strength</em></span><span><em class="adj">beautiful</em><em class="noun">beauty</em></span><span><em class="adj">angry</em><em class="noun">anger</em></span><span><em class="adj">wise</em><em class="noun">wisdom</em></span><span><em class="adj">true</em><em class="noun">truth</em></span><span><em class="adj">deep</em><em class="noun">depth</em></span></div>
+      <div class="eq adj-eq" data-step="2">\(\hat{\mathbf d} = \operatorname{平均}\big(\mathbf{happy}-\mathbf{happiness},\ \dots\big)\)</div>
+    </div>
+    <div class="grow">
+      <div class="bi sm" data-step="3"><span class="zh">把其他詞投影上去（示意）：</span><span class="en">Project other words onto it (illustrative):</span></div>
+      <div class="bars" id="adj-bars" data-step="3"></div>
+    </div>
+  </div>
+  <div class="callout key bi" data-step="4"><span class="zh">向量裡不只有「語義」，也有<b>語法</b>：詞性也是空間中的一個方向。Mikolov 等 (2013) 也測試了這類語法類比（big : bigger）。</span><span class="en">Vectors hold grammar as well as meaning: part of speech is a direction too. Mikolov et al. (2013) also tested such syntactic analogies (big : bigger).</span></div>
+</section>
+
+<!-- B4b ─────────── Bonus: discussion -->
+<section class="slide" id="s-discuss" data-sec="bonus">
+  <h2 class="bi"><span class="zh">討論：你會想找哪一個方向？</span><span class="en">Discussion: which direction would you like to find?</span></h2>
+  <div class="dq">
+    <div data-step="1"><i>1</i><span>你會用哪些<b>詞對</b>來定義這個方向？</span></div>
+    <div data-step="2"><i>2</i><span>你預期哪些詞會落在兩端？</span></div>
+    <div data-step="3"><i>3</i><span>可能出什麼問題？<small class="dq-sub">詞頻、語料不平衡、一詞多義……</small></span></div>
+  </div>
+</section>
+
+<!-- B4 ─────────── Bonus: Cantonese vs Putonghua exercise -->
+<section class="slide" id="s-canto" data-sec="bonus">
+  <h2 class="bi"><span class="zh">課堂練習：找出「粵語」方向</span><span class="en">In class: find the “Cantonese” direction</span></h2>
+  <div class="two canto">
+    <div class="grow" data-step="1">
+      <div class="bi sm"><span class="zh">① 手動找出意思相同的<b>粵語 / 普通話</b>詞對（約 20 對）：</span><span class="en">Pick about 20 Cantonese / Putonghua synonym pairs:</span></div>
+      <div class="cp-legend"><span class="yue">粵語 Cantonese</span><span class="pth">普通話 Putonghua</span></div>
+      <div class="cpairs">
+        <span><em class="yue">佢</em><em class="pth">他</em></span><span><em class="yue">嘅</em><em class="pth">的</em></span><span><em class="yue">唔</em><em class="pth">不</em></span><span><em class="yue">睇</em><em class="pth">看</em></span><span><em class="yue">食</em><em class="pth">吃</em></span><span><em class="yue">喺</em><em class="pth">在</em></span><span><em class="yue">冇</em><em class="pth">沒有</em></span><span><em class="yue">咗</em><em class="pth">了</em></span><span><em class="yue">係</em><em class="pth">是</em></span><span><em class="yue">嘢</em><em class="pth">東西</em></span>
+      </div>
+    </div>
+    <div class="grow steps3">
+      <div class="st" data-step="2"><i>②</i><span>每一對相減：<b>粵 − 普</b>，例如 \(\mathbf{佢}-\mathbf{他}\)</span></div>
+      <div class="st" data-step="3"><i>③</i><span>20 個差取平均 ＝ <b>「粵語方向」</b> \(\hat{\mathbf c}\)</span></div>
+      <div class="st" data-step="4"><i>④</i><span>把語料裡<b>每個詞</b>投影上去：\(\mathbf w\cdot\hat{\mathbf c}\) ＝ 它有多「粵」</span></div>
+    </div>
+  </div>
+  <div class="callout key bi" data-step="5"><span class="zh">問題：投影分數最高的詞，是不是都是粵語詞？有沒有意外的詞？為什麼？回到文本去看。</span><span class="en">Are the top-scoring words all Cantonese? Any surprises? Why? Go back to the texts.</span></div>
+</section>
+
 <div id="side"></div>
 <div id="bar"></div>
 <div id="num"></div>
