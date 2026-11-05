@@ -312,9 +312,9 @@
   <h2 class="bi"><span class="zh">為什麼要除以長度？</span><span class="en">Why divide by the lengths?</span></h2>
   <div class="two">
     <div class="grow">
-      <div class="bi sm" data-step="1"><span class="zh">內積會被向量的<b>長度</b>左右：高頻詞的向量往往更長。</span><span class="en">The dot product is swayed by vector length; frequent words tend to have longer vectors.</span></div>
-      <div class="eq" data-step="2">\(\vec v=[6,8]\)，\(\lVert\vec v\rVert=\sqrt{36+64}=10\)</div>
-      <div class="eq" data-step="3">\(\vec u=\dfrac{\vec v}{\lVert\vec v\rVert}=[0.6,\,0.8]\)，\(\lVert\vec u\rVert=1\)</div>
+      <div class="bi sm" data-step="1"><span class="zh">內積會被<b>長度</b>左右：高頻詞的向量往往更長。</span><span class="en">The dot product is swayed by length; frequent words have longer vectors.</span></div>
+      <div class="eq" data-step="2">\(\vec v=[3,4]\qquad\lVert\vec v\rVert=\sqrt{9+16}=5\)</div>
+      <div class="eq" data-step="3">\(\vec u=\dfrac{\vec v}{\lVert\vec v\rVert}=\Big[\dfrac35,\dfrac45\Big]\qquad\lVert\vec u\rVert=1\)</div>
       <div class="callout key bi" data-step="4"><span class="zh">把向量縮成長度 1（正規化）之後，內積就等於 cos θ，只剩下方向。</span><span class="en">After normalising to length 1, the dot product equals cos θ: only direction remains.</span></div>
     </div>
     <svg class="plot" id="norm-plot" viewBox="0 0 440 420" data-step="2"></svg>

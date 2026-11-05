@@ -346,14 +346,19 @@ function cosCurve(svg, o = {}) {
   draw();
 })();
 
-/* ---------- normalisation plot ---------- */
+/* ---------- normalisation plot: the 3-4-5 vector shrunk to length 1 ---------- */
 (function () {
-  const p = Plot($('#norm-plot'), { xmin: -1, xmax: 8, ymin: -1, ymax: 9, pad: 12 });
+  const svg = $('#norm-plot'), p = Plot(svg, { xmin: -0.6, xmax: 4.8, ymin: -0.6, ymax: 4.8, pad: 12 });
   p.grid(1, true, true);
-  p.arrow(0, 0, 6, 8, { color: BLUE, w: 5 });
-  p.arrow(0, 0, 0.6, 0.8, { color: ORG, w: 6, head: 12 });
-  p.text(6, 8, 'v = [6, 8]', { color: BLUE, size: 22, weight: 700, dx: 12, dy: 4 });
-  p.text(0.6, 0.8, 'u = [0.6, 0.8]', { color: ORG, size: 20, weight: 700, dx: 14, dy: 12 });
+  p.line(0, 0, 3, 0, { color: GLD, w: 3, dash: '6 5' }); p.line(3, 0, 3, 4, { color: GLD, w: 3, dash: '6 5' });
+  p.text(1.5, 0, '3', { color: '#8a6400', size: 22, weight: 700, dy: 30, anchor: 'middle' });
+  p.text(3, 2, '4', { color: '#8a6400', size: 22, weight: 700, dx: 10, dy: 8 });
+  el('path', { d: `M${p.X(1)},${p.Y(0)} A${p.s},${p.s} 0 0 0 ${p.X(0)},${p.Y(1)}`, fill: 'none', stroke: ORG, 'stroke-width': 2, 'stroke-dasharray': '4 5', opacity: 0.7 }, svg);
+  p.arrow(0, 0, 3, 4, { color: BLUE, w: 5 });
+  p.arrow(0, 0, 0.6, 0.8, { color: ORG, w: 8, head: 16 });
+  p.text(3, 4, 'v = [3, 4]', { color: BLUE, size: 24, weight: 700, dx: 10, dy: -8 });
+  p.text(1.5, 2, 'length 5', { color: BLUE, size: 20, weight: 600, dx: -14, dy: -6, anchor: 'end' });
+  p.text(0.6, 0.8, 'u = [3/5, 4/5]', { color: ORG, size: 22, weight: 700, dx: 14, dy: 4 });
 })();
 
 /* ---------- excerpts and window counts ---------- */

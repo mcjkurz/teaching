@@ -711,3 +711,9 @@ table.frames { margin: 6px 0 6px -6px; }
 #s-field .callout { margin-top: 8px; }
 .two > svg#mag-plot { width: 470px; border: 1.5px solid var(--line); border-radius: 16px; }
 .mag-eq { font-size: 28px; }
+.eqnote { font-size: 18px; color: var(--mute); margin-left: 8px; }
+#s-norm .eq { font-size: 26px; padding: 8px 18px; }
+.two > svg#norm-plot { width: 440px; }
+#s-norm .eq { font-size: 31px; padding: 10px 20px; margin: 12px 0; }
+.two > svg#norm-plot { width: 490px; }
+#s-norm div.bi.sm > .zh { font-size: 30px; }
