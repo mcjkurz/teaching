@@ -15,7 +15,7 @@
   <div class="big-zh">詞向量</div>
   <div class="big-en">Word Vectors</div>
   <div class="rule"></div>
-  <svg class="plot title-plot" id="title-plot" viewBox="0 0 440 440" aria-hidden="true"></svg>
+  <svg class="plot title-plot" id="title-plot" viewBox="0 0 560 560" aria-hidden="true"></svg>
   <div class="quote bi" data-step="1">
     <span class="zh">一個詞的意義，能不能用一串數字來表示？</span>
     <span class="en">Can the meaning of a word be written as a list of numbers?</span>
@@ -45,15 +45,15 @@
 <section class="slide" id="s-three" data-sec="meaning">
   <h2 class="bi"><span class="zh">三種看法：差異、使用、搭配</span><span class="en">Three views: difference, use, company</span></h2>
   <div class="thinker" data-step="1">
-    <img class="ava" src="assets/saussure.jpeg" alt="Ferdinand de Saussure"><div class="who"><b>Saussure</b><span>1857–1913</span></div>
+    <img class="ava" src="assets/saussure.jpeg" alt="Ferdinand de Saussure"><div class="who"><b>Ferdinand de Saussure</b><span>1857–1913</span></div>
     <div class="what bi"><span class="zh">語言中只有差異，沒有正面成分。</span><span class="en">“In language there are only differences without positive terms.”</span></div>
   </div>
   <div class="thinker" data-step="2">
-    <img class="ava" src="assets/wittgenstein.jpeg" alt="Ludwig Wittgenstein"><div class="who"><b>Wittgenstein</b><span>1889–1951</span></div>
+    <img class="ava" src="assets/wittgenstein.jpeg" alt="Ludwig Wittgenstein"><div class="who"><b>Ludwig Wittgenstein</b><span>1889–1951</span></div>
     <div class="what bi"><span class="zh">一個詞的意義在於它在語言中的使用。</span><span class="en">“The meaning of a word is its use in the language.” <i>Philosophical Investigations</i> §43</span></div>
   </div>
   <div class="thinker" data-step="3">
-    <img class="ava" src="assets/firth.png" alt="J. R. Firth"><div class="who"><b>Firth</b><span>1890–1960</span></div>
+    <img class="ava" src="assets/firth.png" alt="J. R. Firth"><div class="who"><b>John Rupert Firth</b><span>1890–1960</span></div>
     <div class="what bi"><span class="zh">觀其伴，知其義。</span><span class="en">“You shall know a word by the company it keeps.” <i>A Synopsis of Linguistic Theory</i> (1957)</span></div>
   </div>
   <div class="callout key bi" data-step="4">
@@ -207,10 +207,7 @@
     <div class="grow">
       <div class="vecs" data-step="1"><div><b class="tgt-c">a</b> = [3, 2, 1]</div><div><b class="ok-c">b</b> = [−4, 2, 2]</div></div>
       <div class="bi sm" data-step="2"><span class="zh">三維還畫得出來。十維呢？</span><span class="en">Three dimensions can still be drawn. Ten?</span></div>
-      <div class="vecs small" data-step="2">
-        <div><b class="tgt-c">a</b> = [1, 5.2, 4, 2.4, −5.1, 7, 1.5, 2.4, −4, 2.1]</div>
-        <div><b class="ok-c">b</b> = [−4, 2, 2, 3, −2.4, 5.4, 3, −4.1, 2.5, 0.1]</div>
-      </div>
+      <div class="mv10s" data-step="2"><div class="mv10"><b class="tgt-c">a</b><span>1</span><span>5.2</span><span>4</span><span>2.4</span><span>−5.1</span><span>7</span><span>1.5</span><span>2.4</span><span>−4</span><span>2.1</span></div><div class="mv10"><b class="ok-c">b</b><span>−4</span><span>2</span><span>2</span><span>3</span><span>−2.4</span><span>5.4</span><span>3</span><span>−4.1</span><span>2.5</span><span>0.1</span></div></div>
       <div class="callout key bi" data-step="3"><span class="zh">畫不出來，但運算規則完全一樣。詞向量通常有幾十到幾百個維度。</span><span class="en">We cannot draw it, but the arithmetic is the same. Word vectors typically have tens to hundreds of dimensions.</span></div>
     </div>
   </div>
@@ -256,6 +253,22 @@
   <div class="callout key bi" data-step="5"><span class="zh">為什麼這樣寫？因為它把內積放進<b>矩陣運算</b>：一次乘法就能算出成千上萬個內積（例如所有詞與「思」的分數）。程式裡寫作 <code>a @ b</code> 或 <code>np.dot(a, b)</code>。</span><span class="en">Why? It turns dot products into matrix algebra: one matrix product computes thousands of them at once (e.g. every word against 思). In code: a @ b, np.dot(a, b).</span></div>
 </section>
 
+<!-- 13c ─────────── Magnitude ‖a‖ -->
+<section class="slide" id="s-mag" data-sec="vectors">
+  <h2 class="bi"><span class="zh">向量的長度 \(\lVert\mathbf a\rVert\) (magnitude)</span><span class="en">The length of a vector: Pythagoras</span></h2>
+  <div class="two">
+    <div class="grow">
+      <div class="bi sm" data-step="1"><span class="zh">\(\lVert\mathbf a\rVert\) 讀作「a 的長度」（範數 norm）：箭頭從原點到端點有多長？</span><span class="en">\(\lVert\mathbf a\rVert\) is the length (norm) of a: how long is the arrow?</span></div>
+      <div class="bi sm" data-step="2"><span class="zh">向右 3、向上 4：正好是一個<b>直角三角形</b>的兩條直角邊。</span><span class="en">3 right and 4 up: the two legs of a right triangle.</span></div>
+      <div class="eq tbig mag-eq" data-step="3">\(\lVert\mathbf a\rVert=\sqrt{3^2+4^2}=\sqrt{9+16}=\sqrt{25}=\mathbf{5}\)</div>
+      <div class="bi sm" data-step="4"><span class="zh">畢氏定理（勾股定理）可以推廣到<b>任意維度</b>：</span><span class="en">Pythagoras extends to any number of dimensions:</span></div>
+      <div class="eq tbig mag-eq" data-step="4">\(\lVert\mathbf a\rVert=\sqrt{a_1^2+a_2^2+\cdots+a_n^2}=\sqrt{\mathbf a\cdot\mathbf a}\)</div>
+      <div class="eq tbig mag-eq" data-step="5">例：\(\lVert[2,3,6]\rVert=\sqrt{4+9+36}=\sqrt{49}=\mathbf{7}\)</div>
+    </div>
+    <svg class="plot" id="mag-plot" viewBox="0 0 480 480"></svg>
+  </div>
+</section>
+
 <!-- 14 ─────────── Angle -->
 <section class="slide" id="s-angle" data-sec="similarity">
   <h2 class="bi"><span class="zh">用夾角衡量相似</span><span class="en">Measuring similarity with the angle</span></h2>
@@ -277,18 +290,18 @@
 
 <!-- 15 ─────────── Cosine interactive -->
 <section class="slide" id="s-cos" data-sec="similarity">
-  <h2 class="bi"><span class="zh">餘弦相似度 (cosine similarity)</span><span class="en">Cosine similarity: drag the green tip</span></h2>
+  <h2 class="bi"><span class="zh">餘弦相似度 (cosine similarity)</span><span class="en">Cosine similarity: drag the purple tip</span></h2>
   <div class="two">
     <svg class="plot" id="cos-plot" viewBox="0 0 560 480" data-step="1"></svg>
     <div class="grow cosread" data-step="1">
       <div class="big-num"><span>cos θ</span><b id="cos-val">0.77</b></div>
       <svg class="plot" id="cos-curve" viewBox="0 0 500 170"></svg>
-      <div class="minirow"><span>θ = <b id="cos-th">40°</b></span><span>A · B = <b id="cos-dot">—</b></span><span>‖A‖‖B‖ = <b id="cos-len">—</b></span></div>
+      <div class="minirow"><span>θ = <b id="cos-th">40°</b></span><span>A · B = <b id="cos-dot">—</b></span><span>\(\lVert A\rVert\,\lVert B\rVert\) = <b id="cos-len">—</b></span></div>
       <div class="swap cosnote">
-        <div class="bi sm" data-step="1" data-until="2"><span class="zh">綠色箭頭 B 與藍色 A 方向相近：橘色是 B 在 A 上的<b>投影</b>。</span><span class="en">B points roughly along A; orange is the projection of B onto A.</span></div>
+        <div class="bi sm" data-step="1" data-until="2"><span class="zh">紫色箭頭 B 與藍色 A 方向相近：橘色是 B 在 A 上的<b>投影</b>。</span><span class="en">B points roughly along A; orange is the projection of B onto A.</span></div>
         <div class="bi sm" data-step="2" data-until="3"><span class="zh">垂直：投影是一個點，cos = 0。</span><span class="en">Perpendicular: the projection vanishes, cos = 0.</span></div>
         <div class="bi sm" data-step="3" data-until="4"><span class="zh">反向：投影指向相反方向，cos = −1。</span><span class="en">Opposite: the projection flips, cos = −1.</span></div>
-        <div class="bi sm" data-step="4"><span class="zh">拖動綠色端點試試。改變<u>長度</u>，cos 不變；只有<u>方向</u>有影響。</span><span class="en">Drag the green tip. Length changes, cos does not; only direction matters.</span></div>
+        <div class="bi sm" data-step="4"><span class="zh">拖動紫色端點試試。改變<u>長度</u>，cos 不變；只有<u>方向</u>有影響。</span><span class="en">Drag the purple tip. Length changes, cos does not; only direction matters.</span></div>
       </div>
     </div>
   </div>

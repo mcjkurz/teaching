@@ -326,7 +326,7 @@ svg [data-step] { transform: none; }
 mark { background: var(--win-bg); border-radius: 6px; padding: 0 4px; color: inherit; }
 
 /* title */
-.title-plot { position: absolute; right: 70px; top: 90px; width: 440px; height: 440px; }
+.title-plot { position: absolute; right: 40px; top: 60px; width: 560px; height: 560px; }
 .title-slide .quote { max-width: 640px; margin-top: 0; }
 
 /* sentences / thinkers / concordance */
@@ -674,3 +674,40 @@ img.kid { display: block; height: 104px; margin: 0 auto 2px; }
 .toks.w2v .tok { font-size: 54px; padding: 6px 14px; }
 .pairlist span { font-size: 34px; }
 .polys { font-size: 27px; gap: 4px 36px; }
+.title-plot { overflow: visible; }
+.thinker .who { width: 230px; }
+.thinker .who b { font-size: 27px; line-height: 1.2; }
+
+/* ---------- keep every slide clear of the page number / progress bar (content bottom ≤ 672px) ---------- */
+.hint { bottom: 46px; }
+.two > svg#vec3d-plot { width: 500px; }
+.two > svg#vec2d-plot { width: 480px; }
+#s-dot .drow { margin: 4px 0; }
+#s-dot .dc { font-size: 34px; padding: 7px 0; }
+#s-dot .dsum { font-size: 36px; }
+#s-dot .dotviz { margin: 8px 0; }
+#s-field .anto { margin: 3px 0; }
+#s-field .field { margin: 7px 0; }
+img.kid { height: 82px; }
+#s-people table.cmp.people tbody th, #s-people table.cmp.people tbody td { padding-top: 0; padding-bottom: 0; }
+.zz { font-size: 56px; margin-top: 10px; }
+.zzsrc { margin-bottom: 10px; }
+#s-diff .sent { min-height: 126px; padding: 12px 20px; }
+.scores > div { margin: 14px 0; }
+#s-sparse .eq { margin-top: 2px; }
+#s-sparse .callout { margin-top: 8px; }
+table.frames { margin: 6px 0 6px -6px; }
+#s-dotT .eq.tbig { margin: 4px 0 6px; }
+.hint { bottom: 50px; }
+#s-vec3d .vecs { font-size: 38px; margin: 4px 0 8px; }
+#s-vec3d .vecs.small { font-size: 21px; line-height: 1.5; }
+#s-vec3d .callout { margin-top: 8px; }
+#s-field .field span { font-size: 23px; padding: 2px 12px; }
+.mv10s { margin: 8px 0 4px; }
+.mv10 { display: grid; grid-template-columns: 26px repeat(10, 1fr); gap: 4px; margin: 5px 0; white-space: nowrap; }
+.mv10 b { font-size: 24px; align-self: center; }
+.mv10 span { font-family: "SF Mono", Menlo, monospace; font-size: 19px; text-align: center; background: var(--panel); border-radius: 6px; padding: 5px 0; }
+#s-field .anto { font-size: 26px; }
+#s-field .callout { margin-top: 8px; }
+.two > svg#mag-plot { width: 470px; border: 1.5px solid var(--line); border-radius: 16px; }
+.mag-eq { font-size: 28px; }

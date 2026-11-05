@@ -96,13 +96,70 @@ const dotp = (a, b) => a.reduce((s, v, i) => s + v * b[i], 0);
 const norm = a => Math.sqrt(dotp(a, a));
 const cosine = (a, b) => dotp(a, b) / (norm(a) * norm(b));
 
-/* ---------- 1. title: a few arrows ---------- */
+/* ---------- 1. title: a slowly rotating 3-D word space ---------- */
 (function () {
-  const p = Plot($('#title-plot'), { xmin: -3, xmax: 4.8, ymin: -0.6, ymax: 4.4, pad: 10 });
-  p.grid(1, true);
-  const words = [['幸福', 3.3, 2.1, BLUE, 8, -2], ['快樂', 2.4, 3.2, GRN, -4, -10], ['牙刷', -1.4, 3.0, ORG, -4, -12]];
-  words.forEach(([w, x, y, c, dx, dy]) => { p.arrow(0, 0, x, y, { color: c, w: 5 }); p.text(x, y, w, { color: c, size: 26, weight: 600, dx: dx + (x > 3 ? 12 : -4), dy, anchor: x < 0 ? 'end' : 'start' }); });
-  p.dot(0, 0, { r: 5, color: INK });
+  const svg = $('#title-plot'), slide = $('#s-title');
+  const W = 560, H = 560, cx = W / 2 - 10, cy = H / 2 + 20, S = 80;
+  // word clusters (illustrative coordinates): emotions, sadness, everyday objects, royalty
+  const words = [
+    ['幸福', [1.9, 1.3, 1.2], BLUE], ['快樂', [1.6, 1.7, 0.9], BLUE], ['開心', [2.0, 1.5, 0.6], BLUE],
+    ['悲傷', [-1.7, 1.2, 1.4], PUR], ['痛苦', [-1.9, 0.9, 1.0], PUR],
+    ['牙刷', [0.6, -1.8, 1.6], ORG], ['香蕉', [1.1, -1.6, 2.0], ORG],
+    ['皇帝', [-0.9, -1.2, -1.6], GRN], ['皇后', [-0.3, -1.6, -1.7], GRN]
+  ];
+  let seed = 11; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const dust = Array.from({ length: 90 }, () => [(rnd() * 2 - 1) * 2.4, (rnd() * 2 - 1) * 2.4, (rnd() * 2 - 1) * 2.4]);
+  const L = 2.5;
+  let yaw = 0.6, t0 = null;
+  const pitch = 0.42;
+  function proj([x, y, z]) {
+    // rotate around the vertical (z) axis, then tilt; perspective by depth
+    const xr = x * Math.cos(yaw) - y * Math.sin(yaw), yr = x * Math.sin(yaw) + y * Math.cos(yaw);
+    const yt = yr * Math.cos(pitch) - z * Math.sin(pitch), zt = yr * Math.sin(pitch) + z * Math.cos(pitch);
+    const f = 6 / (6 + yt);           // yt = depth (positive = further away)
+    return { x: cx + xr * S * f, y: cy - zt * S * f, d: yt, f };
+  }
+  const line = (p, q, attrs) => el('line', { x1: p.x, y1: p.y, x2: q.x, y2: q.y, ...attrs }, svg);
+  function arrow(p, q, c, w, op) {
+    const ang = Math.atan2(q.y - p.y, q.x - p.x), hl = 14 * q.f, hw = 5.5 * q.f;
+    const g = el('g', { opacity: op }, svg);
+    el('line', { x1: p.x, y1: p.y, x2: q.x - Math.cos(ang) * hl * 0.8, y2: q.y - Math.sin(ang) * hl * 0.8, stroke: c, 'stroke-width': w, 'stroke-linecap': 'round' }, g);
+    const px = -Math.sin(ang), py = Math.cos(ang);
+    el('polygon', { points: `${q.x},${q.y} ${q.x - Math.cos(ang) * hl + px * hw},${q.y - Math.sin(ang) * hl + py * hw} ${q.x - Math.cos(ang) * hl - px * hw},${q.y - Math.sin(ang) * hl - py * hw}`, fill: c }, g);
+  }
+  function draw() {
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    const O = proj([0, 0, 0]);
+    // floor grid
+    for (let i = -2; i <= 2; i++) {
+      line(proj([i, -2, 0]), proj([i, 2, 0]), { stroke: '#dfe4ec', 'stroke-width': 1 });
+      line(proj([-2, i, 0]), proj([2, i, 0]), { stroke: '#dfe4ec', 'stroke-width': 1 });
+    }
+    // axes
+    [[[L, 0, 0], 'x₁'], [[0, L, 0], 'x₂'], [[0, 0, L], 'x₃']].forEach(([v, n]) => {
+      const neg = proj(v.map(c => -c * 0.8)), pos = proj(v);
+      line(neg, pos, { stroke: '#a3acbb', 'stroke-width': 1.6 });
+      el('text', { x: pos.x + 6, y: pos.y - 4, fill: '#8a93a3', 'font-size': 16, 'font-style': 'italic' }, svg, n);
+    });
+    // dust: other words in the space
+    dust.forEach(v => { const p = proj(v); el('circle', { cx: p.x, cy: p.y, r: 2.6 * p.f, fill: '#9aa6bb', opacity: 0.18 + 0.3 * (1 - (p.d + 3) / 6) }, svg); });
+    // word arrows, far ones first
+    words.map(([w, v, c]) => ({ w, v, c, p: proj(v) })).sort((a, b) => b.p.d - a.p.d).forEach(({ w, c, p }) => {
+      const near = Math.max(0, Math.min(1, 1 - (p.d + 2.5) / 5));
+      arrow(O, p, c, 3.2 * p.f, 0.45 + 0.55 * near);
+      el('circle', { cx: p.x, cy: p.y, r: 5 * p.f, fill: c, opacity: 0.45 + 0.55 * near }, svg);
+      el('text', { x: p.x + 9, y: p.y - 8, fill: c, 'font-size': 23 * p.f, 'font-weight': 700, opacity: 0.5 + 0.5 * near, stroke: '#fff', 'stroke-width': 4, 'paint-order': 'stroke' }, svg, w);
+    });
+    el('circle', { cx: O.x, cy: O.y, r: 4.5, fill: INK }, svg);
+  }
+  function tick(ts) {
+    if (t0 == null) t0 = ts;
+    const dt = Math.min(64, ts - t0); t0 = ts;
+    if (slide.classList.contains('active')) { yaw += dt * 0.00018; draw(); }
+    requestAnimationFrame(tick);
+  }
+  draw();
+  requestAnimationFrame(tick);
 })();
 
 /* ---------- vectors: 2D ---------- */
@@ -178,6 +235,25 @@ dotviz($('#dot-q2'), [-1, 6, -2, -2], [2, -5, 4, 4], { names: ['c', 'd'], compac
   });
 })();
 
+/* ---------- magnitude ‖a‖: the 3-4-5 triangle ---------- */
+HOOKS['s-mag'] = {
+  render(step) {
+    const svg = $('#mag-plot'), p = Plot(svg, { xmin: -0.8, xmax: 4.8, ymin: -0.8, ymax: 4.8, pad: 10 });
+    p.clear(); p.grid(1, true, true);
+    if (step >= 2) {
+      el('polygon', { points: `${p.X(0)},${p.Y(0)} ${p.X(3)},${p.Y(0)} ${p.X(3)},${p.Y(4)}`, fill: '#fff6d6', stroke: 'none' }, svg);
+      p.line(0, 0, 3, 0, { color: GLD, w: 6 }); p.line(3, 0, 3, 4, { color: GLD, w: 6 });
+      el('rect', { x: p.X(3) - 18, y: p.Y(0) - 18, width: 18, height: 18, fill: 'none', stroke: GLD, 'stroke-width': 2.5 }, svg);
+      p.text(1.5, 0, '3', { color: '#8a6400', size: 30, weight: 700, dy: 36, anchor: 'middle' });
+      p.text(3, 2, '4', { color: '#8a6400', size: 30, weight: 700, dx: 14, dy: 10 });
+    }
+    p.arrow(0, 0, 3, 4, { color: BLUE, w: 6 });
+    p.text(3, 4, 'a = [3, 4]', { color: BLUE, size: 26, weight: 700, dx: 10, dy: -10 });
+    if (step >= 3) p.text(1.5, 2, '‖a‖ = 5', { color: BLUE, size: 32, weight: 700, dx: -18, dy: -10, anchor: 'end' }).setAttribute('style', 'font-family: "Times New Roman", STIXGeneral, serif');
+    p.dot(0, 0, { r: 5, color: INK });
+  }
+};
+
 /* ---------- the cosine curve (shared by the cosine-function slide and the drag slide) ---------- */
 function cosCurve(svg, o = {}) {
   while (svg.firstChild) svg.removeChild(svg.firstChild);
@@ -249,11 +325,11 @@ function cosCurve(svg, o = {}) {
     p.line(B[0], B[1], proj[0], proj[1], { color: ORG, dash: '6 5', w: 2 });
     p.arrow(0, 0, proj[0], proj[1], { color: ORG, w: 9, head: 0.1 });
     p.arrow(0, 0, A[0], A[1], { color: BLUE, w: 5 });
-    p.arrow(0, 0, B[0], B[1], { color: GRN, w: 5 });
+    p.arrow(0, 0, B[0], B[1], { color: PUR, w: 5 });
     p.arc(0.55, Math.atan2(A[1], A[0]), Math.atan2(A[1], A[0]) + ta);
-    p.dot(B[0], B[1], { r: 11, color: GRN, stroke: '#fff' });
+    p.dot(B[0], B[1], { r: 11, color: PUR, stroke: '#fff' });
     p.text(A[0], A[1], 'A', { color: BLUE, size: 26, weight: 700, dx: 10, dy: -8 });
-    p.text(B[0], B[1], 'B', { color: GRN, size: 26, weight: 700, dx: 14, dy: -10 });
+    p.text(B[0], B[1], 'B', { color: PUR, size: 26, weight: 700, dx: 14, dy: -10 });
     $('#cos-val').textContent = fmt(c); $('#cos-th').textContent = Math.round(Math.abs(ta) * 180 / Math.PI) + '°';
     $('#cos-dot').textContent = fmt(dotp(A, B)); $('#cos-len').textContent = fmt(la * lb);
     cosCurve($('#cos-curve'), { theta: Math.abs(ta) * 180 / Math.PI, fs: 13, pl: 34, w: 2.5 });
@@ -264,7 +340,8 @@ function cosCurve(svg, o = {}) {
   svg.addEventListener('pointerdown', e => { drag = true; svg.setPointerCapture(e.pointerId); move(e); });
   svg.addEventListener('pointermove', e => { if (drag) move(e); });
   svg.addEventListener('pointerup', () => { drag = false; });
-  function move(e) { let [x, y] = pos(e); const l = Math.hypot(x, y); if (l < 0.2) return; if (l > 1.95) { x *= 1.95 / l; y *= 1.95 / l; } B = [x, y]; draw(); }
+  const MAXLEN = 1.8;   // = the shorter positive axis (y runs −1.8 … 1.8), so B never leaves the canvas
+  function move(e) { let [x, y] = pos(e); const l = Math.hypot(x, y); if (l < 0.2) return; if (l > MAXLEN) { x *= MAXLEN / l; y *= MAXLEN / l; } B = [x, y]; draw(); }
   HOOKS['s-cos'] = { render(step) { if (step <= 1) setB(40, 1.3); else if (step === 2) setB(90, 1.3); else if (step === 3) setB(180, 1.0); } };
   draw();
 })();
