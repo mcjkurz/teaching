@@ -657,7 +657,7 @@ code { font-family: "SF Mono", Menlo, monospace; font-size: .9em; background: #e
 .zzarrow { font-size: 40px; color: var(--tgt); }
 .cells { display: flex; gap: 3px; margin: 8px 0 6px; justify-content: center; }
 .cells i { width: 10px; height: 26px; border-radius: 3px; background: #dfe3ea; }
-.cells.sp i.on { background: var(--tgt); }
+.cells.spc i.on { background: var(--tgt); }
 .cells.dn i { width: 26px; } .cells.dn i:nth-child(1) { background: #1f5fd6; } .cells.dn i:nth-child(2) { background: #4a7fe0; } .cells.dn i:nth-child(3) { background: #7aa1ea; } .cells.dn i:nth-child(4) { background: #2d55a8; } .cells.dn i:nth-child(5) { background: #9bb8f0; } .cells.dn i:nth-child(6) { background: #3a6dd6; }
 .mini-portrait { position: absolute; right: 100px; top: 30px; display: flex; gap: 12px; align-items: center; margin: 0; }
 .mini-portrait img { width: 86px; height: 108px; object-fit: cover; object-position: 50% 20%; border-radius: 10px; box-shadow: 0 3px 12px rgba(20,30,60,.25); }
@@ -666,7 +666,7 @@ code { font-family: "SF Mono", Menlo, monospace; font-size: .9em; background: #e
 table.cmp.people thead th { vertical-align: bottom; }
 img.kid { display: block; height: 104px; margin: 0 auto 2px; }
 .pairs.col .pair { font-size: 26px; }
-.cells.sp i { width: 8px; }
+.cells.spc i { width: 8px; }
 .zzfig { width: 470px; }
 .toks.w2v .tok.done { opacity: .45; }
 .pairlist span.tot { background: none; border: none; font-size: 22px; color: var(--mute); width: 100%; padding: 2px 4px; }

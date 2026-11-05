@@ -415,15 +415,19 @@ function cosCurve(svg, o = {}) {
   $('#movie-cos').dataset.step = 2;
 })();
 
-/* ---------- gender / royalty construction: 1 dimension overlaps, 2 dimensions separate ---------- */
+/* ---------- gender / royalty: build up one pair at a time; one dimension overlaps, two separate ---------- */
 (function () {
   const svg = $('#gx-plot'), P = { 男: [-1, 0.02], 女: [1, 0.01], 皇帝: [-0.97, 1], 皇后: [0.99, 1] };
   const RED = '#d92d20';
   const notes = [
-    ['只有一個維度「性別」：男 和 皇帝 幾乎<b>重疊</b>，女 和 皇后 也是。', 'One dimension only: man and emperor overlap; so do woman and empress.'],
-    ['加上第二個維度「皇室」：重疊的詞<b>分開了</b>。更多維度 ＝ 更多空間。', 'Add a second dimension, royalty: the overlapping words separate. More dimensions = more room.'],
+    ['先看一對詞：男、女。只用一個維度「性別」：男 = −1，女 = 1。', 'Start with one pair, using one dimension (gender): man = −1, woman = 1.'],
+    ['再加一對：皇帝、皇后。在「性別」上，皇帝 ≈ −1，皇后 ≈ 1。', 'Add a second pair: emperor ≈ −1, empress ≈ 1 on the same gender axis.'],
+    ['問題：男 和 皇帝 <b>重疊</b>了，女 和 皇后 也是！一個維度不夠分開它們。', 'Problem: man and emperor overlap, and so do woman and empress. One dimension is not enough.'],
+    ['加上第二個維度「皇室」：皇帝、皇后往上移，重疊的詞<b>分開了</b>。更多維度 ＝ 更多空間。', 'Add a second dimension, royalty: emperor and empress move up and separate. More dimensions = more room.'],
     ['每個詞都是一支從原點出發的箭頭。', 'Each word is an arrow from the origin.'],
-    ['紅色箭頭：男 → 女 和 皇帝 → 皇后 是<b>同一個方向</b>。', 'Red: man → woman and emperor → empress are the same direction.'],
+    ['從男走到女：先 <b>− 男</b>。男在 −1，減去男 ＝ 往右走一格，回到原點。', 'From man to woman: first − man. Man is at −1, so subtracting it moves one step right, back to the origin.'],
+    ['再 <b>+ 女</b>：往右再走一格，到達女。合起來就是 <b>女 − 男</b>。', 'Then + woman: one more step right, arriving at woman. Together: woman − man.'],
+    ['皇帝 → 皇后：也是同一支箭頭「女 − 男」，<b>方向相同</b>！', 'Emperor → empress is the same arrow, woman − man: the same direction!'],
     ['所以：從皇后減去「女 − 男」，就回到皇帝。', 'So subtracting “woman − man” from empress lands on emperor.']
   ];
   const col = w => (w === '男' || w === '皇帝') ? BLUE : ORG;
@@ -431,34 +435,51 @@ function cosCurve(svg, o = {}) {
     render(step, root) {
       const p = Plot(svg, { xmin: -1.45, xmax: 1.45, ymin: -0.55, ymax: 1.45, pad: 12 });
       p.clear();
-      if (step === 0) {
+      if (step <= 2) {
+        // one dimension: a single gender axis
         p.arrow(-1.4, 0, 1.4, 0, { color: '#9aa3b2', w: 3 });
         p.text(0, 0, '性別 gender →', { color: MUTE, size: 20, dy: 32, anchor: 'middle' });
-        [['男', 34], ['皇帝', -22]].forEach(([w, dy]) => { p.dot(P[w][0], 0, { color: col(w), r: 11 }).setAttribute('opacity', 0.7); p.text(P[w][0], 0, w, { color: col(w), size: 26, weight: 700, dy, anchor: 'middle' }); });
-        [['女', 34], ['皇后', -22]].forEach(([w, dy]) => { p.dot(P[w][0], 0, { color: col(w), r: 11 }).setAttribute('opacity', 0.7); p.text(P[w][0], 0, w, { color: col(w), size: 26, weight: 700, dy, anchor: 'middle' }); });
-        [-0.985, 0.995].forEach(x => el('ellipse', { cx: p.X(x), cy: p.Y(0) - 4, rx: 50, ry: 68, fill: 'none', stroke: RED, 'stroke-width': 3, 'stroke-dasharray': '7 6' }, svg));
-        p.text(0, 0, '重疊！overlap', { color: RED, size: 24, weight: 700, dy: -60, anchor: 'middle' });
+        const words = step === 0 ? ['男', '女'] : ['男', '女', '皇帝', '皇后'];
+        words.forEach(w => {
+          const royal = w === '皇帝' || w === '皇后';
+          p.dot(P[w][0], 0, { color: col(w), r: 11 }).setAttribute('opacity', royal ? 0.75 : 1);
+          p.text(P[w][0], 0, w, { color: col(w), size: 26, weight: 700, dy: royal ? -22 : 38, anchor: 'middle' });
+        });
+        if (step === 2) {
+          [-0.985, 0.995].forEach(x => el('ellipse', { cx: p.X(x), cy: p.Y(0) - 4, rx: 52, ry: 70, fill: 'none', stroke: RED, 'stroke-width': 3.5, 'stroke-dasharray': '7 6' }, svg));
+          p.text(0, 0, '重疊！overlap', { color: RED, size: 28, weight: 700, dy: -62, anchor: 'middle' });
+        }
       } else {
+        // two dimensions: gender × royalty
         p.grid(0.5, true);
         p.text(1.4, 0, '性別', { color: MUTE, size: 18, dy: 26, anchor: 'end' });
         p.text(0, 1.45, '皇室', { color: MUTE, size: 18, dx: 8, dy: 6 });
-        if (step === 1) ['皇帝', '皇后'].forEach(w => {   // show the move from the overlapping position
+        if (step === 3) ['皇帝', '皇后'].forEach(w => {
           p.dot(P[w][0], 0, { color: col(w), r: 8 }).setAttribute('opacity', 0.3);
-          p.arrow(P[w][0], 0.06, P[w][0], 0.9, { color: col(w), w: 2.5, dash: '5 6', head: 12 });
+          p.arrow(P[w][0], 0.06, P[w][0], 0.9, { color: col(w), w: 3, dash: '5 6', head: 14 });
         });
-        if (step >= 2) Object.keys(P).forEach(w => { const g = p.arrow(0, 0, ...P[w], { color: col(w), w: 4 }); if (step >= 3) g.setAttribute('opacity', 0.3); });
-        if (step >= 3) p.arrow(-1, 0.02, 0.9, 0.012, { color: RED, w: 10, head: 26 });
-        if (step === 3) { p.arrow(-0.97, 1, 0.9, 1, { color: RED, w: 10, head: 26 }); p.text(0, 1, '女 − 男', { color: RED, size: 24, weight: 700, dy: -20, anchor: 'middle' }); }
-        if (step >= 3) p.text(0, 0.02, '女 − 男', { color: RED, size: 24, weight: 700, dy: -20, anchor: 'middle' });
-        if (step >= 4) { p.arrow(0.99, 1, -0.88, 1, { color: RED, w: 10, head: 26 }); p.text(0, 1, '− (女 − 男)', { color: RED, size: 24, weight: 700, dy: -20, anchor: 'middle' }); }
+        if (step >= 4) Object.keys(P).forEach(w => { const g = p.arrow(0, 0, ...P[w], { color: col(w), w: 4 }); if (step >= 5) g.setAttribute('opacity', 0.25); });
+        // bottom row: man → woman, built as  − 男  then  + 女
+        if (step >= 5) { p.arrow(-1, 0.015, -0.06, 0.015, { color: RED, w: 10, head: 24 }); p.text(-0.5, 0.015, '− 男', { color: RED, size: 26, weight: 700, dy: -18, anchor: 'middle' }); }
+        if (step >= 6) {
+          p.arrow(0.02, 0.015, 0.9, 0.012, { color: RED, w: 10, head: 24 }); p.text(0.48, 0.015, '+ 女', { color: RED, size: 26, weight: 700, dy: -18, anchor: 'middle' });
+          // brace under the two halves: together = 女 − 男
+          el('path', { d: `M${p.X(-1)},${p.Y(0) + 46} L${p.X(-1)},${p.Y(0) + 58} L${p.X(1)},${p.Y(0) + 58} L${p.X(1)},${p.Y(0) + 46}`, fill: 'none', stroke: RED, 'stroke-width': 2.5 }, svg);
+          const lb = p.text(0, 0, '＝ 女 − 男', { color: RED, size: 24, weight: 700, dy: 86, anchor: 'middle' }); lb.setAttribute('stroke', '#fff'); lb.setAttribute('stroke-width', 6); lb.setAttribute('paint-order', 'stroke');
+        }
+        // top row: the same arrow
+        if (step === 7) { p.arrow(-0.97, 1, 0.9, 1, { color: RED, w: 10, head: 24 }); p.text(0, 1, '女 − 男', { color: RED, size: 24, weight: 700, dy: -20, anchor: 'middle' }); }
+        if (step >= 8) { p.arrow(0.99, 1, -0.88, 1, { color: RED, w: 10, head: 24 }); p.text(0, 1, '− (女 − 男)', { color: RED, size: 24, weight: 700, dy: -20, anchor: 'middle' }); }
         Object.keys(P).forEach(w => { p.dot(...P[w], { color: col(w), r: 10 }); p.text(...P[w], w, { color: col(w), size: 26, weight: 700, dy: P[w][1] > 0.5 ? -20 : 38, anchor: 'middle' }); });
       }
-      $('#gx-table', root).classList.toggle('r2on', step >= 1);
-      $('#gx-eq', root).style.visibility = step >= 4 ? 'visible' : 'hidden';
+      const t = $('#gx-table', root);
+      t.classList.toggle('c3on', step >= 1);
+      t.classList.toggle('r2on', step >= 3);
+      $('#gx-eq', root).style.visibility = step >= 8 ? 'visible' : 'hidden';
       $('#gx-note', root).innerHTML = `<span class="zh">${notes[step][0]}</span><span class="en">${notes[step][1]}</span>`;
     }
   };
-  const i = document.createElement('i'); i.className = 'stepper'; i.dataset.step = 4; $('#s-gender').appendChild(i);
+  const i = document.createElement('i'); i.className = 'stepper'; i.dataset.step = 8; $('#s-gender').appendChild(i);
 })();
 
 /* ---------- more dimensions ---------- */
