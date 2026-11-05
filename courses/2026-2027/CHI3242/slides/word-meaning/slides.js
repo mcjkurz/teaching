@@ -348,13 +348,18 @@ function cosCurve(svg, o = {}) {
 
 /* ---------- normalisation plot: the 3-4-5 vector shrunk to length 1 ---------- */
 (function () {
-  const svg = $('#norm-plot'), p = Plot(svg, { xmin: -0.6, xmax: 4.8, ymin: -0.6, ymax: 4.8, pad: 12 });
+  const svg = $('#norm-plot'), p = Plot(svg, { xmin: -0.9, xmax: 4.8, ymin: -0.6, ymax: 4.8, pad: 12 });
   p.grid(1, true, true);
   p.line(0, 0, 3, 0, { color: GLD, w: 3, dash: '6 5' }); p.line(3, 0, 3, 4, { color: GLD, w: 3, dash: '6 5' });
   p.text(1.5, 0, '3', { color: '#8a6400', size: 22, weight: 700, dy: 30, anchor: 'middle' });
   p.text(3, 2, '4', { color: '#8a6400', size: 22, weight: 700, dx: 10, dy: 8 });
   el('path', { d: `M${p.X(1)},${p.Y(0)} A${p.s},${p.s} 0 0 0 ${p.X(0)},${p.Y(1)}`, fill: 'none', stroke: ORG, 'stroke-width': 2, 'stroke-dasharray': '4 5', opacity: 0.7 }, svg);
   p.arrow(0, 0, 3, 4, { color: BLUE, w: 5 });
+  // shadows of u on the two axes: 3/5 and 4/5
+  p.line(0.6, 0.8, 0.6, 0, { color: ORG, w: 2, dash: '4 4' }); p.line(0.6, 0.8, 0, 0.8, { color: ORG, w: 2, dash: '4 4' });
+  p.line(0, 0, 0.6, 0, { color: ORG, w: 9 }).setAttribute('opacity', 0.45); p.line(0, 0, 0, 0.8, { color: ORG, w: 9 }).setAttribute('opacity', 0.45);
+  p.text(0.6, 0, '3/5', { color: ORG, size: 20, weight: 700, dy: 32, anchor: 'middle' });
+  p.text(0, 0.8, '4/5', { color: ORG, size: 20, weight: 700, dx: -26, dy: 7, anchor: 'end' });
   p.arrow(0, 0, 0.6, 0.8, { color: ORG, w: 8, head: 16 });
   p.text(3, 4, 'v = [3, 4]', { color: BLUE, size: 24, weight: 700, dx: 10, dy: -8 });
   p.text(1.5, 2, 'length 5', { color: BLUE, size: 20, weight: 600, dx: -14, dy: -6, anchor: 'end' });
@@ -463,7 +468,7 @@ function cosCurve(svg, o = {}) {
           p.dot(P[w][0], 0, { color: col(w), r: 8 }).setAttribute('opacity', 0.3);
           p.arrow(P[w][0], 0.06, P[w][0], 0.9, { color: col(w), w: 3, dash: '5 6', head: 14 });
         });
-        if (step >= 4) Object.keys(P).forEach(w => { const g = p.arrow(0, 0, ...P[w], { color: col(w), w: 4 }); if (step >= 5) g.setAttribute('opacity', 0.25); });
+        if (step >= 4) Object.keys(P).forEach(w => { const g = p.arrow(0, 0, ...P[w], { color: INK, w: 2.2, head: 12 }); if (step >= 5) g.setAttribute('opacity', 0.25); });
         // bottom row: man → woman, built as  − 男  then  + 女
         if (step >= 5) { p.arrow(-1, 0.015, -0.06, 0.015, { color: RED, w: 10, head: 24 }); p.text(-0.5, 0.015, '− 男', { color: RED, size: 26, weight: 700, dy: -18, anchor: 'middle' }); }
         if (step >= 6) {

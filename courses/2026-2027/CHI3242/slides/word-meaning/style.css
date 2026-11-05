@@ -717,3 +717,8 @@ table.frames { margin: 6px 0 6px -6px; }
 #s-norm .eq { font-size: 31px; padding: 10px 20px; margin: 12px 0; }
 .two > svg#norm-plot { width: 490px; }
 #s-norm div.bi.sm > .zh { font-size: 30px; }
+
+.dogres { text-align: right; font-size: 24px; color: var(--mute); margin-top: 2px; }
+.dogres em { font-style: normal; font-size: 44px; font-weight: 700; font-family: "SF Mono", Menlo, monospace; margin-left: 6px; }
+.dogres.pos em { color: var(--ok); } .dogres.neg em { color: var(--mute); }
+#s-dog .dogimgs img { height: 96px; }
