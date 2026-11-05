@@ -206,6 +206,29 @@
   </div>
 </section>
 
+<!-- 9a ─────────── WordNet: relations curated by hand -->
+<section class="slide" id="s-wordnet" data-sec="relations">
+  <h2 class="bi"><span class="zh">WordNet：人工整理的詞彙關係</span><span class="en">WordNet: word relations curated by hand (Princeton, since 1985)</span></h2>
+  <div class="two wn">
+    <svg class="plot" id="wn-plot" viewBox="0 0 540 470"></svg>
+    <div class="grow">
+      <div class="wn-syn" data-step="1"><b>同義詞集 synset</b> dog.n.01 ＝ { dog, domestic dog, <i>Canis familiaris</i> }</div>
+      <div class="wn-rels" data-step="1">
+        <span><b>上位詞</b> is-a：狗 → 犬科</span>
+        <span><b>部分</b> part-of：尾巴 → 狗</span>
+        <span><b>反義</b> antonym：熱 ↔ 冷</span>
+      </div>
+      <div class="eq wn-eq" data-step="2">path_similarity(狗, 貓) ＝ \(\dfrac{1}{4+1}\) ＝ 0.2</div>
+      <div class="wn-lim" data-step="3">
+        <div>✋ 全靠<b>人工</b>：語言學家花了幾十年</div>
+        <div>🆕 新詞（「小確幸」）、口語、方言常常沒有</div>
+        <div>🧩 只有邏輯結構，沒有<b>使用</b>（Wittgenstein！）</div>
+      </div>
+    </div>
+  </div>
+  <div class="callout key bi" data-step="4"><span class="zh">問題：能不能不靠人工，讓電腦從大量文本中<b>自己</b>算出 similarity(x, y)？</span><span class="en">Can a computer compute similarity(x, y) by itself, from large amounts of text, without hand-made relations?</span></div>
+</section>
+
 <!-- 9 ─────────── Goal -->
 <section class="slide" id="s-goal" data-sec="relations">
   <h2 class="bi"><span class="zh">目標：讓機器算出詞與詞的相似度</span><span class="en">Goal: let a machine compute how similar two words are</span></h2>
@@ -647,6 +670,27 @@
       <div class="bi xs" data-step="5"><span class="zh">這正是 Harris 的分布假說：環境相同 → 向量相近。<small>（示意：此處語境詞固定不動）</small></span><span class="en">Harris’s distributional hypothesis, done with arithmetic. (Illustration: context vectors held fixed.)</span></div>
     </div>
   </div>
+</section>
+
+<!-- 28e ─────────── Training word2vec with gensim -->
+<section class="slide" id="s-gensim" data-sec="embeddings">
+  <h2 class="bi"><span class="zh">自己訓練：gensim 的 Word2Vec</span><span class="en">Train your own: <code>Word2Vec</code> in gensim (Python) · radimrehurek.com/gensim/models/word2vec.html</span></h2>
+  <div class="annot">
+    <div class="cl"><code>from&nbsp;gensim.models&nbsp;import&nbsp;Word2Vec</code></div>
+        <div class="cl"><code>model&nbsp;=&nbsp;Word2Vec(</code></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;sentences,</code><span class="ann" data-step="1"><i class="arr"></i><span>已<b>分詞</b>的句子：[["王婆", "半日", …], …]</span></span></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;vector_size=100,</code><span class="ann" data-step="2"><i class="arr"></i><span>每個詞向量的<b>維度</b></span></span></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;window=5,</code><span class="ann" data-step="3"><i class="arr"></i><span><b>視窗</b>：中心詞左右各幾個詞</span></span></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;min_count=5,</code><span class="ann" data-step="4"><i class="arr"></i><span>出現少於 5 次的詞<b>忽略</b></span></span></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;sg=1,</code><span class="ann" data-step="5"><i class="arr"></i><span>1 ＝ <b>Skip-gram</b>，0 ＝ CBOW</span></span></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;negative=5,</code><span class="ann" data-step="6"><i class="arr"></i><span>每對鄰居配幾個<b>隨機詞</b>（推遠）</span></span></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;epochs=5,</code><span class="ann" data-step="7"><i class="arr"></i><span>整個語料<b>讀幾遍</b></span></span></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;workers=4)</code><span class="ann" data-step="8"><i class="arr"></i><span>用幾個 CPU 核心（速度）</span></span></div>
+  </div>
+  <pre class="code use" data-step="9"><span class="cm"># 用訓練好的模型 · using the trained model</span>
+model.wv["幸福"]                       <span class="cm"># 「幸福」的向量（100 個數字）</span>
+model.wv.most_similar("幸福", topn=5)  <span class="cm"># 餘弦相似度最高的 5 個詞</span>
+model.wv.similarity("幸福", "快樂")     <span class="cm"># 兩個詞的餘弦相似度</span></pre>
 </section>
 
 <!-- 29 ─────────── Analogy -->

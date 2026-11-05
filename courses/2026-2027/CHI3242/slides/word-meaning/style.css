@@ -904,3 +904,36 @@ table.dirt tr.diff td { border-top: 3px solid #6d28d9; }
 #s-loud .callout { margin-top: 4px; }
 #loud-plot { margin-top: 0; }
 #s-loud .callout { margin-top: 0; }
+
+/* WordNet */
+.two > svg#wn-plot { width: 500px; border: 1.5px solid var(--line); border-radius: 16px; flex: none; }
+.wn { gap: 30px; }
+.wn-syn { font-size: 21px; background: var(--panel); border-radius: 12px; padding: 10px 14px; line-height: 1.45; }
+.wn-syn b { display: block; color: #6d28d9; font-size: 20px; }
+.wn-rels { display: flex; flex-direction: column; gap: 6px; margin: 10px 0; font-size: 22px; font-family: var(--cjk), var(--latin); }
+.wn-rels b { color: #6d28d9; margin-right: 6px; }
+.wn-eq { font-size: 24px; padding: 6px 16px; margin: 0 0 10px; }
+.wn-lim { display: flex; flex-direction: column; gap: 4px; font-size: 22px; font-family: var(--cjk), var(--latin); }
+#s-wordnet .callout { margin-top: 10px; }
+.two > svg#wn-plot { width: 470px; }
+.wn-lim { font-size: 21px; }
+.wn-rels { margin: 8px 0; }
+#s-norm .two, #s-cosproj .two { margin-top: 6px; }
+#s-norm .two, #s-cosproj .two { margin-top: 0; padding-top: 2.6px; }
+
+/* annotated code (as in the topic-modeling deck): an arrow from each parameter to its explanation */
+.annot { display: flex; flex-direction: column; margin-top: 6px; }
+.annot .cl { display: flex; align-items: center; height: 38px; }
+.annot .cl code { width: 520px; flex: none; font-size: 22px; background: var(--panel); padding: 4px 18px; height: 100%; display: flex; align-items: center; white-space: pre; font-family: "SF Mono", Menlo, Consolas, monospace; border-radius: 0; }
+.annot .cl:first-child code { border-radius: 10px 10px 0 0; padding-top: 10px; }
+.annot .cl:last-child code { border-radius: 0 0 10px 10px; padding-bottom: 10px; }
+.annot .ann { display: flex; align-items: center; gap: 14px; font-size: 24px; font-family: var(--cjk), var(--latin); }
+.annot .arr { position: relative; width: 190px; height: 3px; background: var(--tgt); margin-left: -170px; }
+.annot .arr::after { content: ""; position: absolute; right: -2px; top: -7px; border-left: 14px solid var(--tgt); border-top: 8.5px solid transparent; border-bottom: 8.5px solid transparent; }
+pre.code { margin: 12px 0 0; font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 20px; line-height: 1.5; color: var(--ink); background: #fff; border: 1.5px solid var(--line); border-radius: 10px; padding: 8px 16px; }
+pre.code .cm { color: var(--mute); }
+#s-gensim h2.bi > .en { font-size: 19px; }
+#s-gensim h2.bi > .en code { font-size: .95em; }
+.annot .cl { padding: 0; margin: 0; border: 0; line-height: normal; font-size: inherit; }
+#s-gensim .annot .cl { height: 35px; }
+#s-gensim pre.code { font-size: 19px; line-height: 1.45; margin-top: 10px; padding: 6px 16px; }

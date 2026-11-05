@@ -309,13 +309,46 @@ function drawUnitZoom(svg, hl) {
   lab(0.6, 0.8, 'â = [3/5, 4/5]', ORG, { dx: 14, dy: -6 });
   p.dot(0, 0, { r: 5, color: INK });
 }
-HOOKS['s-cosproj'] = {
-  render(step) {
-    const svg = $('#cosproj-plot');
-    if (step >= 2) drawUnitZoom(svg, step >= 3);
-    else draw345(svg, { legs: true, len: true, unit: true, theta: step >= 1, names: step >= 1 });
+// one frame of the zoom between the full 3-4-5 view (t = 0) and the unit-triangle view (t = 1)
+function drawZoomFrame(svg, t) {
+  const lerp = (a, b) => a + (b - a) * t;
+  const p = Plot(svg, { xmin: lerp(-0.8, -0.22), xmax: lerp(4.8, 1.18), ymin: lerp(-0.8, -0.22), ymax: lerp(4.8, 1.18), pad: 10 });
+  p.clear(); p.grid(t > 0.6 ? 0.2 : 1, true, false);
+  el('polygon', { points: `${p.X(0)},${p.Y(0)} ${p.X(3)},${p.Y(0)} ${p.X(3)},${p.Y(4)}`, fill: '#fff6d6', opacity: 1 - t }, svg);
+  p.line(0, 0, 3, 0, { color: GLD, w: 6 }).setAttribute('opacity', 1 - 0.7 * t);
+  p.line(3, 0, 3, 4, { color: GLD, w: 6 }).setAttribute('opacity', 1 - 0.7 * t);
+  p.arrow(0, 0, 3, 4, { color: BLUE, w: 6 }).setAttribute('opacity', 1 - 0.75 * t);
+  el('path', { d: `M${p.X(1)},${p.Y(0)} A${p.s},${p.s} 0 0 0 ${p.X(0)},${p.Y(1)}`, fill: 'none', stroke: ORG, 'stroke-width': 2.5, 'stroke-dasharray': '6 6', opacity: 0.75 }, svg);
+  el('polygon', { points: `${p.X(0)},${p.Y(0)} ${p.X(0.6)},${p.Y(0)} ${p.X(0.6)},${p.Y(0.8)}`, fill: '#f1e9ff', opacity: t }, svg);
+  p.line(0.6, 0, 0.6, 0.8, { color: GLD, w: 3, dash: '6 5' });
+  p.line(0, 0, 0.6, 0, { color: PUR, w: 3 + 3 * t });
+  p.arrow(0, 0, 0.6, 0.8, { color: ORG, w: 4 + 3 * t, head: 12 + 8 * t });
+  p.dot(0, 0, { r: 5, color: INK });
+}
+(function () {
+  const svg = $('#cosproj-plot');
+  let t = 0, anim = null;
+  const ease = x => x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
+  const settle = step => { if (t >= 1) drawUnitZoom(svg, step >= 3); else draw345(svg, { legs: true, len: true, unit: true, theta: step >= 1, names: step >= 1 }); };
+  function zoom(target, step) {
+    if (anim) cancelAnimationFrame(anim);
+    const t0 = t, start = performance.now(), dur = 1000;
+    const f = now => {
+      const u = Math.min(1, (now - start) / dur);
+      t = t0 + (target - t0) * ease(u);
+      if (u < 1) { drawZoomFrame(svg, t); anim = requestAnimationFrame(f); } else { t = target; anim = null; settle(step); }
+    };
+    anim = requestAnimationFrame(f);
   }
-};
+  HOOKS['s-cosproj'] = {
+    render(step) {
+      const target = step >= 2 ? 1 : 0;
+      if (target !== t && !anim) zoom(target, step);
+      else if (anim) { /* a zoom is running; it settles on the current step when done */ zoom(target, step); }
+      else settle(step);
+    }
+  };
+})();
 HOOKS['s-mag'] = { render(step) { draw345($('#mag-plot'), { legs: step >= 2, len: step >= 3 }); } };
 HOOKS['s-norm'] = { render(step) { draw345($('#norm-plot'), { legs: true, len: true, unit: step >= 3 }); } };
 
@@ -877,4 +910,39 @@ HOOKS['s-dir1'] = { render(step, el) { el.classList.toggle('show-hot', step >= 2
     }
   };
   const i = document.createElement('i'); i.className = 'stepper'; i.dataset.step = 3; $('#s-loud').appendChild(i);
+})();
+
+/* ---------- WordNet: a small hypernym tree; the dog → cat path lights up ---------- */
+(function () {
+  const svg = $('#wn-plot');
+  const N = {   // name: [x, y, label]
+    animal: [270, 40, '動物 animal'], mammal: [270, 120, '哺乳動物 mammal'], carn: [270, 200, '食肉動物 carnivore'],
+    canine: [150, 290, '犬科 canine'], feline: [390, 290, '貓科 feline'],
+    dog: [150, 390, '狗 dog'], cat: [390, 390, '貓 cat'], tail: [75, 448, '尾巴 tail']
+  };
+  const E = [['animal', 'mammal'], ['mammal', 'carn'], ['carn', 'canine'], ['carn', 'feline'], ['canine', 'dog'], ['feline', 'cat']];
+  const PATH = ['dog-canine', 'canine-carn', 'carn-feline', 'feline-cat'];
+  const VIO = '#6d28d9';
+  HOOKS['s-wordnet'] = {
+    render(step) {
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+      const on = step >= 2, inPath = (a, b) => PATH.includes(`${a}-${b}`) || PATH.includes(`${b}-${a}`);
+      E.forEach(([a, b]) => {
+        const hot = on && inPath(a, b);
+        el('line', { x1: N[a][0], y1: N[a][1] + 18, x2: N[b][0], y2: N[b][1] - 18, stroke: hot ? VIO : '#b8c0cc', 'stroke-width': hot ? 6 : 2.5 }, svg);
+      });
+      // part-of (meronym) link
+      el('line', { x1: N.tail[0] + 20, y1: N.tail[1] - 18, x2: N.dog[0] - 30, y2: N.dog[1] + 18, stroke: '#c27a00', 'stroke-width': 2.5, 'stroke-dasharray': '6 5' }, svg);
+      el('text', { x: 30, y: 410, fill: '#c27a00', 'font-size': 15, 'font-style': 'italic' }, svg, 'part-of');
+      el('text', { x: 300, y: 82, fill: MUTE, 'font-size': 15, 'font-style': 'italic' }, svg, 'is-a');
+      Object.entries(N).forEach(([k, [x, y, t]]) => {
+        const hot = on && ['dog', 'canine', 'carn', 'feline', 'cat'].includes(k), end = k === 'dog' || k === 'cat';
+        const w = t.length * 13 + 26;
+        el('rect', { x: x - w / 2, y: y - 18, width: w, height: 36, rx: 10, fill: end ? (hot ? VIO : '#eef0f4') : (hot ? '#ede4ff' : '#fff'), stroke: hot ? VIO : '#cfd5e0', 'stroke-width': 2 }, svg);
+        el('text', { x, y: y + 7, 'text-anchor': 'middle', fill: end && hot ? '#fff' : INK, 'font-size': 19, 'font-weight': end ? 700 : 500 }, svg, t);
+      });
+      if (on) [['①', 150, 340], ['②', 210, 245], ['③', 330, 245], ['④', 390, 340]].forEach(([n, x, y]) =>
+        el('text', { x, y, 'text-anchor': 'middle', fill: VIO, 'font-size': 20, 'font-weight': 700, stroke: '#fff', 'stroke-width': 5, 'paint-order': 'stroke' }, svg, n));
+    }
+  };
 })();
