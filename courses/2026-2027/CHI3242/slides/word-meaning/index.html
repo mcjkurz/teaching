@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>詞向量 Word Vectors — CHI3242</title>
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+
+<!-- 1 ─────────── Title -->
+<section class="slide full title-slide" id="s-title">
+  <div class="big-zh">詞向量</div>
+  <div class="big-en">Word Vectors</div>
+  <div class="rule"></div>
+  <svg class="plot title-plot" id="title-plot" viewBox="0 0 440 440" aria-hidden="true"></svg>
+  <div class="quote bi" data-step="1">
+    <span class="zh">一個詞的意義，能不能用一串數字來表示？</span>
+    <span class="en">Can the meaning of a word be written as a list of numbers?</span>
+  </div>
+  <div class="hint">CHI3242 文本挖掘 Text Mining for Chinese Humanities &nbsp;·&nbsp; <kbd>←</kbd> <kbd>→</kbd> navigate &nbsp;·&nbsp; <kbd>1</kbd>–<kbd>8</kbd> sections &nbsp;·&nbsp; <kbd>F</kbd> fullscreen</div>
+</section>
+
+<!-- 2 ─────────── Saussure -->
+<section class="slide" id="s-diff" data-sec="meaning">
+  <h2 class="bi"><span class="zh">語義是什麼？語言中只有差異</span><span class="en">What is word meaning? Language is a system of differences</span></h2>
+  <div class="def" data-step="1">
+    <div class="bi sm"><span class="zh">「語言中只有差異，沒有正面成分。」</span><span class="en">“In language there are only differences without positive terms.” — Ferdinand de Saussure</span></div>
+  </div>
+  <div class="grid2">
+    <div class="sent" data-step="2"><b class="tgt-c">開心</b><span>收到你的來信，我真的很<b>開心</b>！</span></div>
+    <div class="sent" data-step="3"><b class="tgt-c">愉快</b><span>這次旅行非常<b>愉快</b>，希望下次還能一起去。</span></div>
+    <div class="sent" data-step="4"><b class="tgt-c">快樂</b><span>他買了一支新手機，興奮地笑了起來，臉上充滿<b>快樂</b>。</span></div>
+    <div class="sent" data-step="5"><b class="tgt-c">幸福</b><span>雖然他收入不高，但擁有愛他的家人，他覺得自己很<b>幸福</b>。</span></div>
+  </div>
+  <div class="callout key bi" data-step="6">
+    <span class="zh">四個詞都和「高興」有關，但各有各的位置：一個詞的意義，來自它和其他詞的區別。</span>
+    <span class="en">Four words around “happy”, each with its own place: meaning comes from how a word differs from the others.</span>
+  </div>
+</section>
+
+<!-- 3 ─────────── Three thinkers -->
+<section class="slide" id="s-three" data-sec="meaning">
+  <h2 class="bi"><span class="zh">三種看法：差異、使用、搭配</span><span class="en">Three views: difference, use, company</span></h2>
+  <div class="thinker" data-step="1">
+    <img class="ava" src="assets/saussure.jpeg" alt="Ferdinand de Saussure"><div class="who"><b>Saussure</b><span>1857–1913</span></div>
+    <div class="what bi"><span class="zh">語言中只有差異，沒有正面成分。</span><span class="en">“In language there are only differences without positive terms.”</span></div>
+  </div>
+  <div class="thinker" data-step="2">
+    <img class="ava" src="assets/wittgenstein.jpeg" alt="Ludwig Wittgenstein"><div class="who"><b>Wittgenstein</b><span>1889–1951</span></div>
+    <div class="what bi"><span class="zh">一個詞的意義在於它在語言中的使用。</span><span class="en">“The meaning of a word is its use in the language.” <i>Philosophical Investigations</i> §43</span></div>
+  </div>
+  <div class="thinker" data-step="3">
+    <img class="ava" src="assets/firth.png" alt="J. R. Firth"><div class="who"><b>Firth</b><span>1890–1960</span></div>
+    <div class="what bi"><span class="zh">觀其伴，知其義。</span><span class="en">“You shall know a word by the company it keeps.” <i>A Synopsis of Linguistic Theory</i> (1957)</span></div>
+  </div>
+  <div class="callout key bi" data-step="4">
+    <span class="zh">共同的方向：不要問「這個詞指什麼」，而要看它<b>怎麼被使用</b>、<b>和誰一起出現</b>。</span>
+    <span class="en">The common thread: do not ask what a word “stands for”; look at how it is used and what it occurs with.</span>
+  </div>
+</section>
+
+<!-- 4 ─────────── 小確幸 -->
+<section class="slide" id="s-xqx" data-sec="meaning">
+  <h2 class="bi"><span class="zh">「小確幸」：看它的「伴」</span><span class="en">Know 小確幸 by the company it keeps</span></h2>
+  <div class="origin-tag"><b>語源</b> 村上春樹《蘭格漢斯島的午後》(1986)<br><span>“small but certain happiness” — Murakami Haruki</span></div>
+  <div class="conc">
+    <div class="cl" data-step="1">「我不是不懂生活的<b class="t">小確幸</b>，而是更渴望那些能撼動心靈的<mark>大幸福</mark>。」</div>
+    <div class="cl" data-step="2">為感謝<mark>老顧客</mark>的支持，月底<b class="t">小確幸</b><mark>活動</mark>將優先開放予曾於<mark>純煉官網消費</mark>的顧客購買。</div>
+    <div class="cl" data-step="3">「只許<mark>政府亂花錢</mark>不許<mark>人民</mark><b class="t">小確幸</b>」</div>
+    <div class="cl" data-step="4">家裡有<mark>愛做飯</mark>、喜歡研究<mark>新菜式</mark>的<mark>親人</mark>，就是我的<b class="t">小確幸</b>，因為只需留在家中就能品賞<mark>健康、低脂的美食</mark>。</div>
+    <div class="cl" data-step="5">任天堂近日發出公告，不再發放購買遊戲贈送的「<mark>黃金點數</mark>」，讓不少 <mark>Switch 玩家</mark>哀號<b class="t">小確幸</b>沒了，更有人認為這是變相<mark>漲價</mark>。</div>
+  </div>
+  <div class="callout key bi" data-step="6">
+    <span class="zh">同一個詞，在不同的語境裡有不同的「伴」：生活感受、消費、政治批評、遊戲點數……</span>
+    <span class="en">The same word keeps different company in different contexts: everyday life, shopping, politics, games.</span>
+  </div>
+</section>
+
+<!-- 5 ─────────── Synonymy -->
+<section class="slide" id="s-syn" data-sec="relations">
+  <h2 class="bi"><span class="zh">語義關係：同義詞 (synonymy)</span><span class="en">Semantic relations: synonymy</span></h2>
+  <div class="two">
+    <div class="grow">
+      <div class="pairs big" data-step="1">
+        <span class="pair">番茄 <b>/</b> 西紅柿</span><span class="pair">玉米 <b>/</b> 包穀</span><span class="pair">漂亮 <b>/</b> 美麗</span>
+        <span class="pair">自行車 <b>/</b> 單車</span><span class="pair">嘔吐 <b>/</b> 作嘔</span><span class="pair">老師 <b>/</b> 教師</span><span class="pair">窗口 <b>/</b> 窗戶</span>
+      </div>
+    </div>
+  </div>
+  <div class="card swapcard" data-step="2">
+    <div class="bi"><span class="zh">但是，同義詞幾乎從來不是完全可以互換的：</span><span class="en">But synonyms are almost never fully interchangeable:</span></div>
+    <div class="subst"><span class="ok-c">my <b>big</b> sister</span><span class="neq">≠</span><span class="bad-c">my <s>large</s> sister</span></div>
+  </div>
+  <div class="callout key bi" data-step="3">
+    <span class="zh">「意思相近」不等於「用法相同」：搭配、語氣、地域、場合都不一樣。</span>
+    <span class="en">Similar meaning is not identical usage: collocations, tone, region, and register all differ.</span>
+  </div>
+</section>
+
+<!-- 6 ─────────── Similarity vs relatedness -->
+<section class="slide" id="s-sim" data-sec="relations">
+  <h2 class="bi"><span class="zh">語義關係：相似性 vs. 關係性</span><span class="en">Similarity vs. relatedness</span></h2>
+  <div class="two cols2">
+    <article class="card dist" data-step="1">
+      <div class="dist-kind sim">相似性 <span>similarity</span></div>
+      <div class="pairs col"><span class="pair">🚗 汽車 <b>/</b> 公交車 🚌</span><span class="pair">🐄 牛 <b>/</b> 馬 🐎</span><span class="pair">🇨🇳 中國 <b>/</b> 波蘭 🇵🇱</span><span class="pair">📱 手機 <b>/</b> 電腦 💻</span><span class="pair">💑 戀愛 <b>/</b> 愛情 ❤️</span></div>
+      <div class="bi sm"><span class="zh">屬於同一類，有許多共同特徵</span><span class="en">Same kind of thing, many shared features</span></div>
+    </article>
+    <article class="card dist" data-step="2">
+      <div class="dist-kind rel">關係性 <span>relatedness</span></div>
+      <div class="pairs col"><span class="pair no">🥛 一杯 <b>/</b> 咖啡 ☕</span><span class="pair no">🧑‍⚕️ 醫生 <b>/</b> 醫院 🏥</span><span class="pair no">🍽️ 餐廳 <b>/</b> 菜單 📜</span></div>
+      <div class="bi sm"><span class="zh">並不相似，但經常一起出現</span><span class="en">Not alike, but often found together</span></div>
+    </article>
+  </div>
+  <div class="callout key bi" data-step="3">
+    <span class="zh">茶 / 咖啡 是相似的；一杯 / 咖啡 只是有關係。基於語境的向量，往往兩者都會抓到。</span>
+    <span class="en">Tea / coffee are similar; a cup / coffee are merely related. Context-based vectors tend to capture both.</span>
+  </div>
+</section>
+
+<!-- 7 ─────────── Semantic fields + antonyms -->
+<section class="slide" id="s-field" data-sec="relations">
+  <h2 class="bi"><span class="zh">語義場與反義詞</span><span class="en">Semantic fields and antonyms</span></h2>
+  <div class="two cols2">
+    <div class="grow" data-step="1">
+      <div class="bi sm"><span class="zh"><b>語義場</b>：涵蓋某個特定語義範疇、彼此有結構化關聯的詞彙</span><span class="en">Semantic field: words covering one domain, structurally related</span></div>
+      <div class="field"><b>🏥 醫院 <small>hospitals</small></b><span>外科醫生</span><span>手術刀</span><span>護士</span><span>麻醉</span><span>醫院</span></div>
+      <div class="field"><b>🍽️ 餐廳 <small>restaurants</small></b><span>服務員</span><span>菜單</span><span>餐盤</span><span>食物</span><span>廚師</span></div>
+      <div class="field"><b>🏠 房屋 <small>houses</small></b><span>門</span><span>屋頂</span><span>廚房</span><span>家庭</span><span>床</span></div>
+    </div>
+    <div class="grow" data-step="2">
+      <div class="bi sm"><span class="zh"><b>反義詞</b>：只有<u>一個</u>特徵相對，其他方面都非常相似</span><span class="en">Antonyms: opposed in exactly one feature, otherwise very similar</span></div>
+      <div class="anto"><span>黑暗</span><i>↔</i><span>明亮</span></div>
+      <div class="anto"><span>短</span><i>↔</i><span>長</span></div>
+      <div class="anto"><span>快</span><i>↔</i><span>慢</span></div>
+      <div class="anto"><span>熱</span><i>↔</i><span>冷</span></div>
+      <div class="anto"><span>上</span><i>↔</i><span>下</span></div>
+      <div class="anto"><span>內</span><i>↔</i><span>外</span></div>
+    </div>
+  </div>
+  <div class="callout key bi" data-step="3">
+    <span class="zh">「熱」和「冷」意思相反，卻出現在非常相似的語境中：相近的向量不一定表示相同的意思。</span>
+    <span class="en">Hot and cold are opposites yet share contexts: nearby vectors do not mean identical meaning.</span>
+  </div>
+</section>
+
+<!-- 8 ─────────── Harris -->
+<section class="slide" id="s-harris" data-sec="relations">
+  <h2 class="bi"><span class="zh">Harris：用「環境」定義意義</span><span class="en">Harris: meaning as distribution</span></h2>
+  <figure class="portrait" id="harris-fig" data-step="1"><img src="assets/harris-portrait.jpeg" alt="Zellig S. Harris"><figcaption>Zellig S. Harris<br><span>1909–1992</span></figcaption></figure>
+  <div class="harris-body">
+    <div class="def" data-step="1">
+      <div class="bi sm"><span class="zh">如果 A 和 B 有幾乎相同的環境，我們說它們是<b>同義詞</b>。如果 A 和 B 有一些共同的環境，也有一些不同，我們就說它們有<b>不同的含義</b>——意義差異的多少，大致相當於環境差異的多少。</span>
+      <span class="en">“If A and B have almost identical environments … we say they are synonyms … If A and B have some environments in common and some not … we say that they have different meanings, the amount of meaning difference corresponding roughly to the amount of difference in their environments.” <i>Distributional Structure</i> (1954)</span></div>
+    </div>
+    <table class="frames" data-step="2">
+      <thead><tr><th></th><th>我感到＿＿</th><th>＿＿的一天</th><th>＿＿地笑</th><th>＿＿的眼淚</th></tr></thead>
+      <tbody>
+        <tr><th>開心</th><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td>—</td></tr>
+        <tr><th>愉快</th><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td>—</td></tr>
+        <tr><th>悲傷</th><td class="y">✓</td><td class="y">✓</td><td>—</td><td class="y">✓</td></tr>
+      </tbody>
+    </table>
+    <div class="bi sm" data-step="3"><span class="zh">開心 ≈ 愉快（環境幾乎一樣）；悲傷與它們只有部分重疊。<small>（示意資料）</small></span><span class="en">開心 ≈ 愉快 (near-identical environments); 悲傷 overlaps only partly. Illustrative data.</span></div>
+  </div>
+</section>
+
+<!-- 9 ─────────── Goal -->
+<section class="slide" id="s-goal" data-sec="relations">
+  <h2 class="bi"><span class="zh">目標：讓機器算出詞與詞的相似度</span><span class="en">Goal: let a machine compute how similar two words are</span></h2>
+  <div class="scores" data-step="1">
+    <div><span>similarity(“幸福”, “快樂”)</span><b class="good">= 0.9</b></div>
+    <div><span>similarity(“幸福”, “牙刷”)</span><b>= 0.1</b></div>
+    <div><span>similarity(“香蕉”, “網絡”)</span><b class="neg">= −0.3</b></div>
+  </div>
+  <div class="eq big" data-step="2">distance(x, y) = 1 − similarity(x, y)</div>
+  <div class="callout key bi" data-step="3">
+    <span class="zh">這需要把每個詞變成<b>數字</b>，而且是可以比較、可以計算的數字：這就是<b>向量</b>。</span>
+    <span class="en">For this, every word must become numbers that can be compared and computed with: a vector.</span>
+  </div>
+</section>
+
+<!-- 10 ─────────── Vector 2D -->
+<section class="slide" id="s-vec2d" data-sec="vectors">
+  <h2 class="bi"><span class="zh">向量 (vector)</span><span class="en">Vectors</span></h2>
+  <div class="two">
+    <div class="grow">
+      <div class="def" data-step="1">
+        <div class="bi sm"><span class="zh">向量：具有<b>大小</b>和<b>方向</b>的量，可以畫成帶箭頭的線段。</span><span class="en">A vector has magnitude and direction; draw it as an arrow.</span></div>
+      </div>
+      <div class="vecs" data-step="1"><div><b class="tgt-c">a</b> = [3, 2]</div><div><b class="ok-c">b</b> = [−2, 3]</div></div>
+      <div class="bi sm" data-step="2"><span class="zh">[3, 2]：向右 3 格，向上 2 格。</span><span class="en">[3, 2]: three steps right, two steps up.</span></div>
+      <div class="bi sm" data-step="3"><span class="zh">標量 (scalar) 只有大小，如 3；向量還有方向。</span><span class="en">A scalar has only magnitude, like 3.</span></div>
+    </div>
+    <svg class="plot" id="vec2d-plot" viewBox="0 0 500 500" data-step="2"></svg>
+  </div>
+</section>
+
+<!-- 11 ─────────── Vector 3D / n-D -->
+<section class="slide" id="s-vec3d" data-sec="vectors">
+  <h2 class="bi"><span class="zh">向量可以有很多維度</span><span class="en">Vectors can have many dimensions</span></h2>
+  <div class="two">
+    <svg class="plot" id="vec3d-plot" viewBox="0 0 500 460" data-step="1"></svg>
+    <div class="grow">
+      <div class="vecs" data-step="1"><div><b class="tgt-c">a</b> = [3, 2, 1]</div><div><b class="ok-c">b</b> = [−4, 2, 2]</div></div>
+      <div class="bi sm" data-step="2"><span class="zh">三維還畫得出來。十維呢？</span><span class="en">Three dimensions can still be drawn. Ten?</span></div>
+      <div class="vecs small" data-step="2">
+        <div><b class="tgt-c">a</b> = [1, 5.2, 4, 2.4, −5.1, 7, 1.5, 2.4, −4, 2.1]</div>
+        <div><b class="ok-c">b</b> = [−4, 2, 2, 3, −2.4, 5.4, 3, −4.1, 2.5, 0.1]</div>
+      </div>
+      <div class="callout key bi" data-step="3"><span class="zh">畫不出來，但運算規則完全一樣。詞向量通常有幾十到幾百個維度。</span><span class="en">We cannot draw it, but the arithmetic is the same. Word vectors typically have tens to hundreds of dimensions.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 ─────────── Dot product -->
+<section class="slide" id="s-dot" data-sec="vectors">
+  <h2 class="bi"><span class="zh">內積 (dot product)</span><span class="en">The dot product</span></h2>
+  <div class="eq" data-step="1">\(\vec a\cdot\vec b=\sum_{i=1}^{n} a_i b_i = a_1b_1+a_2b_2+\cdots+a_nb_n\)</div>
+  <div class="bi sm" data-step="1"><span class="zh">對應位置相乘，再全部相加。結果是<b>一個數字</b>。</span><span class="en">Multiply position by position, then add everything up. The result is a single number.</span></div>
+  <div class="dotviz" id="dot-a" data-vals='{"a":[3,2,0.5],"b":[-1,3.5,2]}'></div>
+  <div class="callout key bi" data-step="4"><span class="zh">兩個向量在同一個位置上「同號」，這一項就為正；「異號」就為負。內積越大，兩者越「一致」。</span><span class="en">Same signs at a position add to the score; opposite signs subtract. The larger the dot product, the more the vectors agree.</span></div>
+</section>
+
+<!-- 13 ─────────── Dot quiz -->
+<section class="slide" id="s-dotquiz" data-sec="vectors">
+  <h2 class="bi"><span class="zh">先猜：哪個內積更大？（別算！）</span><span class="en">Guess first: which dot product is larger? (Don’t calculate!)</span></h2>
+  <div class="two cols2 quizcols">
+    <div class="grow"><div class="dotviz small" id="dot-q1"></div></div>
+    <div class="grow"><div class="dotviz small" id="dot-q2"></div></div>
+  </div>
+  <div class="bi" data-step="1"><span class="zh">提示：只看每個位置是「同號」還是「異號」。</span><span class="en">Hint: look only at whether the signs match.</span></div>
+  <div class="callout key bi" data-step="4"><span class="zh">a · b = 41 ＞ c · d = −48。a 與 b 每個位置都同號；c 與 d 每個位置都異號。</span><span class="en">a · b = 41 ＞ c · d = −48: a and b agree everywhere; c and d disagree everywhere.</span></div>
+</section>
+
+<!-- 13b ─────────── Notation a·b = aᵀb -->
+<section class="slide" id="s-dotT" data-sec="vectors">
+  <h2 class="bi"><span class="zh">記法：a · b 就是 a<sup>T</sup>b</span><span class="en">Notation: the dot product as a matrix product</span></h2>
+  <div class="two tcols">
+    <div class="grow">
+      <div class="bi sm" data-step="1"><span class="zh">在數學和程式裡，向量預設是<b>一欄</b>（column）：</span><span class="en">By convention, a vector is a column.</span></div>
+      <div class="eq tbig" data-step="1">\(\mathbf a=\begin{pmatrix}3\\2\\0.5\end{pmatrix}\quad \mathbf b=\begin{pmatrix}-1\\3.5\\2\end{pmatrix}\)</div>
+      <div class="bi sm" data-step="2"><span class="zh"><b>轉置</b> (transpose) <sup>T</sup>：把一欄翻成<b>一列</b>。</span><span class="en">Transpose ᵀ turns the column into a row.</span></div>
+      <div class="eq tbig" data-step="2">\(\mathbf a^{\mathsf T}=\begin{pmatrix}3 & 2 & 0.5\end{pmatrix}\)</div>
+      <div class="shapes" data-step="4"><span>(1 × 3)</span><i>·</i><span>(3 × 1)</span><i>→</i><b>(1 × 1)</b><em>一個數字 a single number</em></div>
+    </div>
+    <div class="grow">
+      <div class="bi sm" data-step="3"><span class="zh">矩陣乘法：<b>一列 × 一欄</b>，正好就是內積</span><span class="en">Matrix multiplication: row times column = multiply pairs and add.</span></div>
+      <div class="eq tbig" data-step="3">\(\mathbf a^{\mathsf T}\mathbf b=\begin{pmatrix}3 & 2 & 0.5\end{pmatrix}\begin{pmatrix}-1\\3.5\\2\end{pmatrix}\)</div>
+      <div class="eq tbig" data-step="3">\(=3(-1)+2(3.5)+0.5(2)=\mathbf{5}\)</div>
+    </div>
+  </div>
+  <div class="callout key bi" data-step="5"><span class="zh">為什麼這樣寫？因為它把內積放進<b>矩陣運算</b>：一次乘法就能算出成千上萬個內積（例如所有詞與「思」的分數）。程式裡寫作 <code>a @ b</code> 或 <code>np.dot(a, b)</code>。</span><span class="en">Why? It turns dot products into matrix algebra: one matrix product computes thousands of them at once (e.g. every word against 思). In code: a @ b, np.dot(a, b).</span></div>
+</section>
+
+<!-- 14 ─────────── Angle -->
+<section class="slide" id="s-angle" data-sec="similarity">
+  <h2 class="bi"><span class="zh">用夾角衡量相似</span><span class="en">Measuring similarity with the angle</span></h2>
+  <div class="three">
+    <figure data-step="1"><svg class="plot" id="ang-1" viewBox="0 0 320 300"></svg><figcaption><b>Similar</b><span>夾角小 · cos ≈ +1</span></figcaption></figure>
+    <figure data-step="2"><svg class="plot" id="ang-2" viewBox="0 0 320 300"></svg><figcaption><b>Unrelated</b><span>垂直 · cos = 0</span></figcaption></figure>
+    <figure data-step="3"><svg class="plot" id="ang-3" viewBox="0 0 320 300"></svg><figcaption><b>Opposite</b><span>反向 · cos = −1</span></figcaption></figure>
+  </div>
+  <div class="eq" data-step="4">\(\text{similarity}(\vec a,\vec b)=\cos\theta=\dfrac{\vec a\cdot\vec b}{\lVert\vec a\rVert\,\lVert\vec b\rVert}\)</div>
+</section>
+
+<!-- 14b ─────────── The cosine function -->
+<section class="slide" id="s-cosgraph" data-sec="similarity">
+  <h2 class="bi"><span class="zh">餘弦函數：夾角 → 相似度</span><span class="en">The cosine function: from angle to similarity</span></h2>
+  <svg class="plot wide2" id="cosgraph-plot" viewBox="0 0 1100 400"></svg>
+  <i class="stepper" data-step="3"></i>
+  <div class="callout key bi" data-step="4"><span class="zh">夾角只在 0°–180° 之間：這一段 cos 從 +1 一路降到 −1，夾角越大，越不相似。</span><span class="en">Angles lie in 0°–180°, where cos falls steadily from +1 to −1: wider angle, lower similarity.</span></div>
+</section>
+
+<!-- 15 ─────────── Cosine interactive -->
+<section class="slide" id="s-cos" data-sec="similarity">
+  <h2 class="bi"><span class="zh">餘弦相似度 (cosine similarity)</span><span class="en">Cosine similarity: drag the green tip</span></h2>
+  <div class="two">
+    <svg class="plot" id="cos-plot" viewBox="0 0 560 480" data-step="1"></svg>
+    <div class="grow cosread" data-step="1">
+      <div class="big-num"><span>cos θ</span><b id="cos-val">0.77</b></div>
+      <svg class="plot" id="cos-curve" viewBox="0 0 500 170"></svg>
+      <div class="minirow"><span>θ = <b id="cos-th">40°</b></span><span>A · B = <b id="cos-dot">—</b></span><span>‖A‖‖B‖ = <b id="cos-len">—</b></span></div>
+      <div class="swap cosnote">
+        <div class="bi sm" data-step="1" data-until="2"><span class="zh">綠色箭頭 B 與藍色 A 方向相近：橘色是 B 在 A 上的<b>投影</b>。</span><span class="en">B points roughly along A; orange is the projection of B onto A.</span></div>
+        <div class="bi sm" data-step="2" data-until="3"><span class="zh">垂直：投影是一個點，cos = 0。</span><span class="en">Perpendicular: the projection vanishes, cos = 0.</span></div>
+        <div class="bi sm" data-step="3" data-until="4"><span class="zh">反向：投影指向相反方向，cos = −1。</span><span class="en">Opposite: the projection flips, cos = −1.</span></div>
+        <div class="bi sm" data-step="4"><span class="zh">拖動綠色端點試試。改變<u>長度</u>，cos 不變；只有<u>方向</u>有影響。</span><span class="en">Drag the green tip. Length changes, cos does not; only direction matters.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 16 ─────────── Normalisation -->
+<section class="slide" id="s-norm" data-sec="similarity">
+  <h2 class="bi"><span class="zh">為什麼要除以長度？</span><span class="en">Why divide by the lengths?</span></h2>
+  <div class="two">
+    <div class="grow">
+      <div class="bi sm" data-step="1"><span class="zh">內積會被向量的<b>長度</b>左右：高頻詞的向量往往更長。</span><span class="en">The dot product is swayed by vector length; frequent words tend to have longer vectors.</span></div>
+      <div class="eq" data-step="2">\(\vec v=[6,8]\)，\(\lVert\vec v\rVert=\sqrt{36+64}=10\)</div>
+      <div class="eq" data-step="3">\(\vec u=\dfrac{\vec v}{\lVert\vec v\rVert}=[0.6,\,0.8]\)，\(\lVert\vec u\rVert=1\)</div>
+      <div class="callout key bi" data-step="4"><span class="zh">把向量縮成長度 1（正規化）之後，內積就等於 cos θ，只剩下方向。</span><span class="en">After normalising to length 1, the dot product equals cos θ: only direction remains.</span></div>
+    </div>
+    <svg class="plot" id="norm-plot" viewBox="0 0 440 420" data-step="2"></svg>
+  </div>
+</section>
+
+<!-- 17 ─────────── Dog example -->
+<section class="slide" id="s-dog" data-sec="similarity">
+  <h2 class="bi"><span class="zh">例子：狗、寵物、水</span><span class="en">Example: dog, pet, water</span></h2>
+  <div class="bi sm" data-step="1"><span class="zh">三個詞，各有一個 4 維向量（教學用的玩具數字，並非從語料訓練而來）。</span><span class="en">Three words, each a 4-dimensional vector (toy numbers for teaching, not trained from a corpus).</span></div>
+  <div class="dogs">
+    <article class="card dogcard pos" data-step="2">
+      <div class="dogimgs"><img src="assets/dog-park.jpeg" alt=""><img src="assets/dog-and-cat.jpeg" alt=""></div>
+      <div class="dogh"><b>狗 ↔ 寵物</b><em>+0.67</em></div>
+      <div class="mvs"><div class="mv"><b>狗</b><span>2</span><span>0</span><span>1</span><span>−3</span></div><div class="mv"><b>寵物</b><span>3</span><span>1</span><span>4</span><span>−1</span></div></div>
+      <div class="eq sm">\(\dfrac{2\cdot3+0\cdot1+1\cdot4+(-3)(-1)}{\sqrt{14}\sqrt{27}}=\dfrac{13}{\sqrt{14}\sqrt{27}}\)</div>
+    </article>
+    <article class="card dogcard neg" data-step="3">
+      <div class="dogimgs"><img src="assets/dog-grass.jpeg" alt=""><img src="assets/water-glass.jpeg" alt=""></div>
+      <div class="dogh"><b>狗 ↔ 水</b><em>−0.17</em></div>
+      <div class="mvs"><div class="mv"><b>狗</b><span>2</span><span>0</span><span>1</span><span>−3</span></div><div class="mv"><b>水</b><span>−2</span><span>1</span><span>4</span><span>1</span></div></div>
+      <div class="eq sm">\(\dfrac{2(-2)+0\cdot1+1\cdot4+(-3)(1)}{\sqrt{14}\sqrt{22}}=\dfrac{-3}{\sqrt{14}\sqrt{22}}\)</div>
+    </article>
+  </div>
+</section>
+
+<!-- 18 ─────────── Excerpts -->
+<section class="slide" id="s-excerpt" data-sec="counts">
+  <h2 class="bi"><span class="zh">從文本裡數出向量：共現</span><span class="en">Building vectors by counting co-occurrence</span></h2>
+  <figure class="mini-portrait" data-step="1"><figcaption>蕭紅<span>1911–1942</span><span>《生死場》1935</span></figcaption><img src="assets/xiaohong.jpeg" alt="蕭紅"></figure>
+  <div class="bi sm" data-step="1"><span class="zh">蕭紅《生死場》中，「王婆」附近出現了哪些詞？</span><span class="en">In Xiao Hong’s <i>The Field of Life and Death</i>, which words occur near 王婆?</span></div>
+  <div class="lines" id="ex-lines" data-step="1"></div>
+  <div class="bi sm" data-step="3"><span class="zh">窗口內（左右各 3 個詞）的詞：</span><span class="en">Words inside the window (3 to each side):</span></div>
+  <div class="chipset big" id="ex-counts" data-step="3"></div>
+  <div class="callout key bi" data-step="4"><span class="zh">把每個詞周圍的詞數一遍，就得到這個詞的向量：<b>每個維度 ＝ 一個語境詞</b>。</span><span class="en">Count the words around each word and you get its vector: one dimension per context word.</span></div>
+</section>
+
+<!-- 19 ─────────── Matrix + cosine answer -->
+<section class="slide" id="s-matrix" data-sec="counts">
+  <h2 class="bi"><span class="zh">共現矩陣：誰和王婆最相似？</span><span class="en">The co-occurrence matrix: who is most similar to 王婆?</span></h2>
+  <div class="two mxtop">
+    <table class="cmp mx" data-step="1">
+      <thead><tr><th></th><th class="num">痛苦</th><th class="num">革命</th><th class="num">吃飯</th><th class="num">回家</th></tr></thead>
+      <tbody>
+        <tr><th>王婆</th><td class="num">4</td><td class="num zero">0</td><td class="num">1</td><td class="num">1</td></tr>
+        <tr><th>金枝</th><td class="num">3</td><td class="num zero">0</td><td class="num">2</td><td class="num zero">0</td></tr>
+        <tr><th>趙三</th><td class="num zero">0</td><td class="num">2</td><td class="num">1</td><td class="num">1</td></tr>
+      </tbody>
+    </table>
+    <div class="grow">
+      <div class="bi sm" data-step="2"><span class="zh">每一<b>行</b> ＝ 一個詞的向量：<br><span class="nw">v(王婆) = [4, 0, 1, 1]</span><br>每一<b>列</b> ＝ 一個語境詞。<small>（示意數字）</small></span><span class="en">Each row is a word’s vector; each column is a context word. (Toy numbers.)</span></div>
+      <div class="callout key bi" data-step="3"><span class="zh">問題：王婆和金枝、趙三，誰比較相似？</span><span class="en">Is 王婆 more similar to 金枝 or to 趙三?</span></div>
+    </div>
+  </div>
+  <div class="cq" data-step="4">
+    <div class="who">王婆 ↔ 金枝</div>
+    <div class="eq sm">\(\dfrac{4\cdot3+0+1\cdot2+0}{\sqrt{18}\sqrt{13}}=\dfrac{14}{15.3}\)</div>
+    <div class="meter"><i id="m1"></i></div><b class="val ok-c">0.91</b>
+  </div>
+  <div class="cq" data-step="5">
+    <div class="who">王婆 ↔ 趙三</div>
+    <div class="eq sm">\(\dfrac{0+0+1\cdot1+1\cdot1}{\sqrt{18}\sqrt{6}}=\dfrac{2}{10.4}\)</div>
+    <div class="meter"><i id="m2" class="low"></i></div><b class="val">0.19</b>
+  </div>
+  <div class="callout key bi" data-step="6"><span class="zh">王婆和金枝的語境相近（都常和「痛苦」「吃飯」一起出現），所以向量方向相近。</span><span class="en">王婆 and 金枝 keep similar company (pain, eating), so their vectors point in similar directions.</span></div>
+</section>
+
+<!-- 21 ─────────── Sparse -->
+<section class="slide" id="s-sparse" data-sec="counts">
+  <h2 class="bi"><span class="zh">稀疏矩陣 (sparse matrix) 的局限</span><span class="en">The limits of sparse vectors</span></h2>
+  <div class="two">
+    <div class="grow">
+      <div class="bi sm" data-step="1"><span class="zh">真實語料有數萬個語境詞；<b>絕大部分元素是 0</b>。浪費空間，要用專門的存儲方法。</span><span class="en">A real corpus has tens of thousands of context words; almost every entry is 0.</span></div>
+      <table class="cmp mx" data-step="2">
+        <thead><tr><th></th><th class="num">痛苦</th><th class="num">吃苦</th><th class="num">思考</th><th class="num">思想</th></tr></thead>
+        <tbody>
+          <tr><th>王婆</th><td class="num hi">24</td><td class="num zero">0</td><td class="num zero">0</td><td class="num zero">0</td></tr>
+          <tr><th>金枝</th><td class="num zero">0</td><td class="num hi">6</td><td class="num zero">0</td><td class="num zero">0</td></tr>
+          <tr><th>柏拉圖</th><td class="num zero">0</td><td class="num zero">0</td><td class="num hi">11</td><td class="num zero">0</td></tr>
+          <tr><th>蘇格拉底</th><td class="num zero">0</td><td class="num zero">0</td><td class="num zero">0</td><td class="num hi">22</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <svg class="plot" id="sparse-plot" viewBox="0 0 280 280" data-step="1"></svg>
+  </div>
+  <div class="eq" data-step="3"><b>v</b>(王婆) · <b>v</b>(金枝) = 0 &nbsp;<span class="bad-c">← 問題！</span></div>
+  <div class="callout key bi" data-step="4"><span class="zh">「痛苦」和「吃苦」意思相近，但被當成毫不相干的兩個維度，所以兩個詞的內積是 0。</span><span class="en">痛苦 and 吃苦 are close in meaning, but they are separate dimensions, so the dot product is 0.</span></div>
+</section>
+
+<!-- 22 ─────────── Zhuangzi -->
+<section class="slide" id="s-zhuangzi" data-sec="counts">
+  <h2 class="bi"><span class="zh">得意而忘言</span><span class="en">Catch the meaning, forget the words</span></h2>
+  <div class="zzwrap">
+    <div class="zzleft">
+      <div class="zz" data-step="1">「言者所以在意，<br>得意而忘言。」</div>
+      <div class="bi sm zzsrc" data-step="1"><span class="zh">——《莊子·外物》</span><span class="en">Words exist for the sake of meaning; once you have the meaning, you can forget the words.</span></div>
+      <div class="zzflow" data-step="2">
+        <div class="zzbox"><b>言 <small>words</small></b><div class="cells sp"><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></div><span>每個詞一欄 · 稀疏</span></div>
+        <div class="zzarrow">→</div>
+        <div class="zzbox"><b>意 <small>meaning</small></b><div class="cells dn"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div><span>少數方向 · 稠密</span></div>
+      </div>
+    </div>
+    <figure class="zzfig" data-step="1"><img src="assets/zhuangzi-butterfly.jpeg" alt="莊周夢蝶"><figcaption>莊周夢蝶 <span>Zhuangzi dreaming of the butterfly</span></figcaption></figure>
+  </div>
+  <div class="callout key bi" data-step="3"><span class="zh">我們要的不是「每個詞各佔一欄」的計數，而是把相近的詞<b>壓縮</b>到同一個方向上：<b>稠密向量</b>。</span><span class="en">Not one column per word: similar words compressed into shared directions — dense vectors.</span></div>
+</section>
+
+<!-- 23 ─────────── Dense -->
+<section class="slide" id="s-dense" data-sec="embeddings">
+  <h2 class="bi"><span class="zh">稠密矩陣 (dense matrix)：每個維度都有值</span><span class="en">Dense vectors: every dimension carries a value</span></h2>
+  <table class="cmp movies" id="movie-table" data-step="1">
+    <thead><tr><th></th>
+      <th data-c="0"><img src="assets/movie-interstellar.jpeg" alt=""><span>星際效應</span></th>
+      <th data-c="1"><img src="assets/movie-conjuring.jpeg" alt=""><span>詭屋驚凶實錄</span></th>
+      <th data-c="2"><img src="assets/movie-us-again.jpeg" alt=""><span>後來的我們</span></th>
+      <th data-c="3"><img src="assets/movie-shawshank.jpeg" alt=""><span>刺激 1995</span></th></tr></thead>
+    <tbody></tbody>
+  </table>
+  <div class="moviecos" id="movie-cos"></div>
+  <div class="callout key bi" data-step="4"><span class="zh">每部電影只用 5 個數字；相近類型的電影，向量方向也相近。<small>（示意數字）</small></span><span class="en">Each film is just 5 numbers; films of similar kinds point in similar directions. (Toy numbers.)</span></div>
+</section>
+
+<!-- 24 ─────────── People -->
+<section class="slide" id="s-people" data-sec="embeddings">
+  <h2 class="bi"><span class="zh">維度就是「特徵」</span><span class="en">Dimensions are features</span></h2>
+  <table class="cmp people" data-step="1">
+    <thead><tr><th></th><th class="num"><img class="kid" src="assets/kid1.jpeg" alt=""><span>小王</span></th><th class="num"><img class="kid" src="assets/kid2.jpeg" alt=""><span>小劉</span></th><th class="num"><img class="kid" src="assets/kid3.jpeg" alt=""><span>小陳</span></th><th class="num"><img class="kid" src="assets/kid4.jpeg" alt=""><span>小馬</span></th></tr></thead>
+    <tbody>
+      <tr><th>身高</th><td class="num">160</td><td class="num">171</td><td class="num">142</td><td class="num">152</td></tr>
+      <tr><th>體重</th><td class="num">45</td><td class="num">72</td><td class="num">53</td><td class="num">85</td></tr>
+      <tr><th>運動能力</th><td class="num">0.55</td><td class="num">0.86</td><td class="num">0.31</td><td class="num">0.40</td></tr>
+      <tr><th>學術成績</th><td class="num">0.96</td><td class="num">0.23</td><td class="num">0.63</td><td class="num">0.41</td></tr>
+      <tr><th>社交活躍度</th><td class="num">0.43</td><td class="num">0.11</td><td class="num">0.53</td><td class="num">0.98</td></tr>
+    </tbody>
+  </table>
+  <div class="bi" data-step="2"><span class="zh">人可以設計特徵，給每個維度取名字。但<b>詞語</b>的「特徵」是什麼？誰來設計？</span><span class="en">People can design features and name each dimension. But what are the features of <i>words</i>, and who designs them?</span></div>
+  <div class="callout key bi" data-step="3"><span class="zh">想法：讓機器從大量文本中，自己學出這些維度。</span><span class="en">Idea: let the machine learn the dimensions from large amounts of text.</span></div>
+</section>
+
+<!-- 25 ─────────── Gender / royalty -->
+<section class="slide" id="s-gender" data-sec="embeddings">
+  <h2 class="bi"><span class="zh">詞彙：男、女、皇帝、皇后</span><span class="en">A tiny vocabulary: man, woman, emperor, empress</span></h2>
+  <div class="two">
+    <div class="grow">
+      <table class="cmp gx" id="gx-table">
+        <thead><tr><th></th><th>男</th><th>女</th><th>皇帝</th><th>皇后</th></tr></thead>
+        <tbody>
+          <tr><th>性別</th><td>−1</td><td>1</td><td>−0.97</td><td>0.99</td></tr>
+          <tr class="r2"><th>皇室</th><td>0.02</td><td>0.01</td><td>1</td><td>1</td></tr>
+        </tbody>
+      </table>
+      <div class="eq big" id="gx-eq">皇帝 = 皇后 − 女 + 男</div>
+      <div class="bi sm" id="gx-note"></div>
+    </div>
+    <svg class="plot" id="gx-plot" viewBox="0 0 520 440"></svg>
+  </div>
+</section>
+
+<!-- 26 ─────────── More dims -->
+<section class="slide" id="s-dims" data-sec="embeddings">
+  <h2 class="bi"><span class="zh">加入更多詞，就需要更多維度</span><span class="en">More words need more dimensions</span></h2>
+  <table class="cmp dx" id="dx-table" data-step="1">
+    <thead><tr><th></th><th>男</th><th>女</th><th>皇帝</th><th>皇后</th><th class="n1">啤酒</th><th class="n1">果汁</th></tr></thead>
+    <tbody>
+      <tr><th>性別</th><td>−1</td><td>1</td><td>−0.97</td><td>0.99</td><td class="n1">−0.03</td><td class="n1">0.02</td></tr>
+      <tr><th>皇室</th><td>0.02</td><td>0.01</td><td>1</td><td>1</td><td class="n1">0</td><td class="n1">0</td></tr>
+      <tr class="n2"><th>飲料</th><td>0</td><td>0</td><td>0</td><td>0</td><td class="n1">0.97</td><td class="n1">0.98</td></tr>
+    </tbody>
+  </table>
+  <div class="bubble" data-step="2"><span class="zh">你覺得我們需要多少維度，</span><span class="zh">才可以成功地編碼一個詞語的意義？</span></div>
+  <div class="bi" data-step="3"><span class="zh">實際的詞向量通常是數十到數百維；而且每一維<b>不再有人類可讀的名字</b>。</span><span class="en">Real word vectors have tens to hundreds of dimensions, and no dimension has a human-readable name.</span></div>
+</section>
+
+<!-- 27 ─────────── Space -->
+<section class="slide" id="s-space" data-sec="embeddings">
+  <h2 class="bi"><span class="zh">向量與語義：方向相近，意義相近</span><span class="en">Vectors and meaning: similar direction, similar meaning</span></h2>
+  <div class="two">
+    <svg class="plot" id="space-plot" viewBox="0 0 560 450" data-step="1"></svg>
+    <div class="grow">
+      <div class="cos-list" id="space-cos" data-step="2"></div>
+      <div class="bi sm" data-step="3"><span class="zh">語義相近的詞，向量的夾角小；無關的詞，夾角大。<small>（示意座標）</small></span><span class="en">Words with related meanings have small angles; unrelated words have large ones. (Illustrative coordinates.)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 28 ─────────── word2vec -->
+<section class="slide" id="s-w2v" data-sec="embeddings">
+  <h2 class="bi"><span class="zh">word2vec：從文本中自動學出向量</span><span class="en">word2vec: learning the vectors from text</span></h2>
+  <figure class="mini-portrait"><figcaption>Tomáš Mikolov<span>word2vec, 2013</span></figcaption><img src="assets/mikolov.jpeg" alt="Tomáš Mikolov"></figure>
+  <div class="bi sm"><span class="zh">「觀其伴，知其義。」— Firth</span><span class="en">“You shall know a word by the company it keeps.” Mikolov et al. (2013): predict a word’s neighbours.</span></div>
+  <div class="toks w2v" id="w2v-toks"></div>
+  <div class="two">
+    <div class="grow">
+      <div class="bi sm" id="w2v-note"></div>
+    </div>
+    <div class="pairlist" id="w2v-pairs"></div>
+  </div>
+  <div class="callout key bi" data-step="13"><span class="zh">不需要任何人標註意義：模型為了預測周圍的詞，自己調整每個詞的向量。</span><span class="en">No one labels any meanings: to predict neighbours well, the model adjusts every word’s vector on its own.</span></div>
+</section>
+
+<!-- 28b ─────────── word2vec: score with a dot product -->
+<section class="slide" id="s-w2v-dot" data-sec="embeddings">
+  <h2 class="bi"><span class="zh">word2vec ①：用內積打分</span><span class="en">Step 1: score a pair with the dot product</span></h2>
+  <div class="bi sm" data-step="1"><span class="zh">每個詞先有一個<b>隨機</b>向量。一對詞的內積 ＝ 分數：越高，越像鄰居。</span><span class="en">Every word starts with a random vector; the dot product of a pair is its score: higher = more neighbour-like.</span></div>
+  <div class="two cols2 quizcols">
+    <div class="grow" data-step="2"><div class="pairhead ok-c">真正的鄰居 real neighbour：思 · 學</div><div class="dotviz small" id="w2v-pos"></div></div>
+    <div class="grow" data-step="3"><div class="pairhead bad-c">隨機抽的詞 random word：思 · 香蕉</div><div class="dotviz small" id="w2v-neg"></div></div>
+  </div>
+  <div class="callout key bi" data-step="4"><span class="zh">一開始分數是錯的：隨機詞「香蕉」反而比真鄰居「學」高。訓練目標：<b>鄰居分數變高，隨機詞分數變低</b>。</span><span class="en">At first the vectors are random, so the scores are wrong: the random word outscores the true neighbour. Training goal: raise neighbour scores, lower random-word scores.</span></div>
+</section>
+
+<!-- 28c ─────────── word2vec: update rule -->
+<section class="slide" id="s-w2v-upd" data-sec="embeddings">
+  <h2 class="bi"><span class="zh">word2vec ②：更新 ＝ 向量加法</span><span class="en">Step 2: the update is just vector addition</span></h2>
+  <div class="two">
+    <div class="grow">
+      <div class="rule pos"><b>鄰居</b>：把「學」的一小部分<b>加</b>到「思」上<div class="eq sm">\(\mathbf{思}\leftarrow\mathbf{思}+\eta\,\mathbf{學}\)</div></div>
+      <div class="rule neg"><b>隨機詞</b>：把「香蕉」的一小部分<b>減</b>掉<div class="eq sm">\(\mathbf{思}\leftarrow\mathbf{思}-\eta\,\mathbf{香蕉}\)</div></div>
+      <div class="bi xs"><span class="zh">η（學習率）＝ 只加「一小部分」，例如 0.5 倍。中心詞和語境詞<b>互相</b>靠近：「學」也加上一小部分「思」（\(\mathbf{學}\leftarrow\mathbf{學}+\eta\,\mathbf{思}\)）。分數錯得越多，加得越多。</span><span class="en">η (learning rate): add only a fraction. Target and context move towards each other — 學 also gets a bit of 思. The more wrong the score, the larger the step.</span></div>
+      <div class="upd-scores" id="upd-scores"></div>
+    </div>
+    <svg class="plot" id="upd-plot" viewBox="0 0 500 470"></svg>
+  </div>
+</section>
+
+<!-- 28d ─────────── word2vec: why it works -->
+<section class="slide" id="s-w2v-why" data-sec="embeddings">
+  <h2 class="bi"><span class="zh">word2vec ③：為什麼這樣就學到了意義？</span><span class="en">Step 3: why does this capture meaning?</span></h2>
+  <div class="two">
+    <svg class="plot" id="why-plot" viewBox="0 0 520 470"></svg>
+    <div class="grow">
+      <div class="bi sm"><span class="zh">「開心」和「愉快」從不一起出現，但它們有<b>同樣的鄰居</b>（感到、非常、旅程）。</span><span class="en">開心 and 愉快 rarely co-occur, but they share neighbours.</span></div>
+      <div class="bi sm" id="why-note"></div>
+      <div class="big-num why-num"><span>cos(開心, 愉快)</span><b id="why-cos">—</b></div>
+      <div class="bi xs" data-step="5"><span class="zh">這正是 Harris 的分布假說：環境相同 → 向量相近。<small>（示意：此處語境詞固定不動）</small></span><span class="en">Harris’s distributional hypothesis, done with arithmetic. (Illustration: context vectors held fixed.)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 29 ─────────── Analogy -->
+<section class="slide" id="s-analogy" data-sec="embeddings">
+  <h2 class="bi"><span class="zh">向量的算術：king − man + woman ≈ queen</span><span class="en">Vector arithmetic captures relations</span></h2>
+  <div class="eq huge" data-step="1">\(\mathbf{king}-\mathbf{man}+\mathbf{woman}\approx\mathbf{queen}\)</div>
+  <div class="bi sm" data-step="2"><span class="zh">Mikolov 等人 (2013)：在詞向量上做加減法，結果最接近 queen 的向量。</span><span class="en">Mikolov et al. (2013): after the arithmetic, the closest word vector is queen’s.</span></div>
+  <div class="three notes3">
+    <div class="card" data-step="3"><b>關係成為方向</b><p class="en">A relation (man → woman) becomes a direction in the space.</p></div>
+    <div class="card" data-step="4"><b>不是人工設計</b><p class="en">Nobody built a “gender” dimension; it emerged from co-occurrence.</p></div>
+    <div class="card warn" data-step="5"><b>也會學到偏見</b><p class="en">Vectors inherit stereotypes of the training corpus.</p></div>
+  </div>
+</section>
+
+<!-- 30 ─────────── Polysemy -->
+<section class="slide" id="s-poly" data-sec="limits">
+  <h2 class="bi"><span class="zh">一詞多義：靜態詞向量的限制</span><span class="en">Polysemy: the limit of static vectors</span></h2>
+  <div class="card polyc" data-step="1"><div class="polys"><span>「<b>水</b>是人體最重要的組成成分」</span><span>「他的演講很<b>水</b>」</span><span>「市中<b>心</b>」</span><span>「下定決<b>心</b>」</span></div></div>
+  <div class="two cols2">
+    <figure data-step="2"><svg class="plot" id="poly-1" viewBox="0 0 380 225"></svg><figcaption><b>靜態 static</b><span>每個詞只有一個向量</span></figcaption></figure>
+    <figure data-step="3"><svg class="plot" id="poly-2" viewBox="0 0 380 225"></svg><figcaption><b>下週 next week</b><span>上下文向量：每次出現各一個</span></figcaption></figure>
+  </div>
+</section>
+
+<!-- 35 ─────────── Summary -->
+<section class="slide" id="s-summary" data-sec="summary">
+  <h2 class="bi"><span class="zh">總結：詞義可以用數字表示嗎？</span><span class="en">Summary: can word meaning be represented by numbers?</span></h2>
+  <div class="recap">
+    <div class="rrow" data-step="1"><i>1</i><div class="bi sm"><span class="zh">意義來自<b>使用</b>與<b>語境</b>（Saussure、Wittgenstein、Firth、Harris）。</span><span class="en">Meaning comes from use and context.</span></div></div>
+    <div class="rrow" data-step="2"><i>2</i><div class="bi sm"><span class="zh">把詞表示成<b>向量</b>；用<b>內積</b>與<b>餘弦相似度</b>比較。</span><span class="en">Represent words as vectors; compare with dot product and cosine similarity.</span></div></div>
+    <div class="rrow" data-step="3"><i>3</i><div class="bi sm"><span class="zh">稀疏的共現向量 → <b>稠密</b>的詞向量（word2vec）。</span><span class="en">From sparse co-occurrence vectors to dense word vectors.</span></div></div>
+    <div class="rrow" data-step="4"><i>4</i><div class="bi sm"><span class="zh">靜態詞向量：每個詞<b>一個</b>向量，無法區分一詞多義（下週：BERT）。</span><span class="en">Static vectors: one vector per word, so polysemy is blurred (next week: BERT).</span></div></div>
+  </div>
+  <div class="callout key bi" data-step="5"><span class="zh">向量是探索文本的工具，不是取代閱讀的答案機器：兩個詞的向量很接近時，仍要回到文本問「為什麼」。</span><span class="en">Vectors are a tool for exploring texts, not an answer machine: when two words are close, go back to the texts and ask why.</span></div>
+</section>
+
+<div id="side"></div>
+<div id="bar"></div>
+<div id="num"></div>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="slides.js"></script>
+<script src="deck.js"></script>
+</body>
+</html>
