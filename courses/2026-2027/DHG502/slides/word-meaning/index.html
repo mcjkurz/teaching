@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Word Vectors 詞向量 — DHG 502</title>
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+
+<!-- ─────────── Title -->
+<section class="slide full title-slide" id="s-title">
+  <div class="big-en">Word Vectors</div>
+  <div class="big-zh">詞向量</div>
+  <div class="rule"></div>
+  <svg class="plot title-plot" id="title-plot" viewBox="0 0 560 560" aria-hidden="true"></svg>
+  <div class="quote bi" data-step="1">
+    <span class="en">Can the meaning of a word be written as a list of numbers? And can we watch it change?</span>
+  </div>
+  <div class="hint">DHG 502 Digital Approaches in Historical Research &nbsp;·&nbsp; <kbd>←</kbd> <kbd>→</kbd> navigate &nbsp;·&nbsp; <kbd>1</kbd>–<kbd>9</kbd> sections &nbsp;·&nbsp; <kbd>G</kbd> go to slide &nbsp;·&nbsp; <kbd>L</kbd> laser pointer &nbsp;·&nbsp; <kbd>F</kbd> fullscreen</div>
+</section>
+
+<!-- ─────────── Three thinkers -->
+<section class="slide" id="s-three" data-sec="meaning">
+  <h2 class="bi"><span class="en">What is word meaning? Three views</span></h2>
+  <div class="thinker" data-step="1">
+    <img class="ava" src="assets/saussure.jpeg" alt="Ferdinand de Saussure"><div class="who"><b>Ferdinand de Saussure</b><span>1857–1913</span></div>
+    <div class="what bi"><span class="en">“In language there are only differences without positive terms.”</span></div>
+  </div>
+  <div class="thinker" data-step="2">
+    <img class="ava" src="assets/wittgenstein.jpeg" alt="Ludwig Wittgenstein"><div class="who"><b>Ludwig Wittgenstein</b><span>1889–1951</span></div>
+    <div class="what bi"><span class="en">“The meaning of a word is its use in the language.” <i>Philosophical Investigations</i> §43</span></div>
+  </div>
+  <div class="thinker" data-step="3">
+    <img class="ava" src="assets/firth.png" alt="J. R. Firth"><div class="who"><b>John Rupert Firth</b><span>1890–1960</span></div>
+    <div class="what bi"><span class="en">“You shall know a word by the company it keeps.” <i>A Synopsis of Linguistic Theory</i> (1957)</span></div>
+  </div>
+  <div class="callout key bi" data-step="4">
+    <span class="en">The common thread: do not ask what a word “stands for”. Look at how it is used and at the words it occurs with.</span>
+  </div>
+</section>
+
+<!-- ─────────── Saussure -->
+<section class="slide" id="s-diff" data-sec="meaning">
+  <h2 class="bi"><span class="en">Saussure: a system of differences</span></h2>
+  <figure class="mini-portrait"><figcaption>Ferdinand de Saussure<span>1857–1913</span></figcaption><img src="assets/saussure.jpeg" alt="Ferdinand de Saussure"></figure>
+  <div class="def" data-step="1">
+    <div class="bi sm"><span class="en">“In language there are only differences without positive terms.”</span></div>
+  </div>
+  <div class="grid2">
+    <div class="sent" data-step="2"><b class="tgt-c">開心</b><span>收到你的來信，我真的很<b>開心</b>！</span></div>
+    <div class="sent" data-step="3"><b class="tgt-c">愉快</b><span>這次旅行非常<b>愉快</b>，希望下次還能一起去。</span></div>
+    <div class="sent" data-step="4"><b class="tgt-c">快樂</b><span>他買了一支新手機，興奮地笑了起來，臉上充滿<b>快樂</b>。</span></div>
+    <div class="sent" data-step="5"><b class="tgt-c">幸福</b><span>雖然他收入不高，但擁有愛他的家人，他覺得自己很<b>幸福</b>。</span></div>
+  </div>
+  <div class="callout key bi" data-step="6">
+    <span class="en">Four words around “happy”, each with its own place: a word’s meaning comes from how it differs from the others.</span>
+  </div>
+</section>
+
+<!-- ─────────── Wittgenstein -->
+<section class="slide" id="s-witt" data-sec="meaning">
+  <h2 class="bi"><span class="en">Wittgenstein: meaning is use</span></h2>
+  <figure class="mini-portrait"><figcaption>Ludwig Wittgenstein<span>1889–1951</span></figcaption><img src="assets/wittgenstein.jpeg" alt="Ludwig Wittgenstein"></figure>
+  <div class="def" data-step="1">
+    <div class="bi sm"><span class="en">“For a large class of cases—though not for all—in which we employ the word ‘meaning’ it can be defined thus: the meaning of a word is its use in the language.” <i>Philosophical Investigations</i> §43</span></div>
+  </div>
+  <div class="bi sm" data-step="2"><span class="en">What does 打 mean?</span></div>
+  <div class="da-grid" data-step="2">
+    <div><i>📞</i><b>打電話</b><span>make a phone call</span></div>
+    <div><i>🏀</i><b>打球</b><span>play ball</span></div>
+    <div><i>🚕</i><b>打車</b><span>take a taxi</span></div>
+    <div><i>🧶</i><b>打毛衣</b><span>knit a sweater</span></div>
+    <div><i>🏷️</i><b>打折</b><span>give a discount</span></div>
+    <div><i>🍶</i><b>打醬油</b><span>buy soy sauce · “just passing by”</span></div>
+  </div>
+  <div class="callout key bi" data-step="3"><span class="en">No single dictionary meaning of 打 covers all of these. Its meaning is the way it is used.</span></div>
+</section>
+
+<!-- ─────────── Firth: the company of 革命 -->
+<section class="slide" id="s-xqx" data-sec="relations">
+  <h2 class="bi"><span class="en">Firth: the company a word keeps</span></h2>
+  <figure class="mini-portrait"><figcaption>John Rupert Firth<span>1890–1960</span></figcaption><img src="assets/firth.png" alt="John Rupert Firth"></figure>
+  <div class="bi sm xqx-intro"><span class="en">What company does 革命 (<i>geming</i>) keep across two thousand years of sources?</span></div>
+  <div class="conc">
+    <div class="cl" data-step="1"><i class="yr">Zhouyi 周易</i>湯武<b class="t">革命</b>，順乎<mark>天</mark>而應乎<mark>人</mark>。<span class="gl">Tang and Wu changed the Mandate, in accord with Heaven and in response to the people.</span></div>
+    <div class="cl" data-step="2"><i class="yr">1903 · Zou Rong</i><b class="t">革命</b>者，<mark>天演</mark>之<mark>公例</mark>也；<b class="t">革命</b>者，<mark>世界</mark>之<mark>公理</mark>也。<span class="gl">Revolution is the universal law of evolution; revolution is the universal principle of the world. (<i>The Revolutionary Army</i> 革命軍)</span></div>
+    <div class="cl" data-step="3"><i class="yr">1925 · Sun Yat-sen</i>余致力<mark>國民</mark><b class="t">革命</b>，凡四十年，其目的在求中國之<mark>自由平等</mark>。<span class="gl">For forty years I have devoted myself to the national revolution, seeking freedom and equality for China. (Testament 總理遺囑)</span></div>
+    <div class="cl" data-step="4"><i class="yr">1927 · Mao Zedong</i><b class="t">革命</b>是<mark>暴動</mark>，是一個<mark>階級</mark>推翻一個<mark>階級</mark>的暴烈的行動。<span class="gl">A revolution is an insurrection, an act of violence by which one class overthrows another. (Hunan Report)</span></div>
+    <div class="cl" data-step="5"><i class="yr">1966 · slogan</i>抓<b class="t">革命</b>，促<mark>生產</mark>。<span class="gl">Grasp revolution, promote production.</span></div>
+  </div>
+  <div class="callout key bi" data-step="6">
+    <span class="en">The company changes over time: Heaven, then evolution, then the nation, then class, then production. At the end of today we will measure such a change.</span>
+  </div>
+</section>
+
+<!-- ─────────── Hebb and Firth: the same idea -->
+<section class="slide" id="s-hebb" data-sec="relations">
+  <h2 class="bi"><span class="en">The same idea, the same era: what occurs together becomes connected</span></h2>
+  <div class="hebb">
+    <div class="hebb-col" data-step="1">
+      <div class="hebb-imgs"><img src="assets/neurons-fire1.jpeg" alt="Neurons that fire together wire together"><img src="assets/neurons-fire2.jpeg" alt="Neurons that fire together wire together"></div>
+      <div class="hebb-card neuro"><b>Neuroscience · Hebb (1949)</b><span class="en">“Neurons that fire together, wire together.”</span></div>
+    </div>
+    <div class="hebb-eq" data-step="2">≈</div>
+    <div class="hebb-col ling" data-step="2">
+      <div class="hebb-words"><span>民主</span><i>⇄</i><span>科學</span><span>自由</span><span>共和</span></div>
+      <div class="hebb-card lang"><b>Linguistics · Harris (1954) · Firth (1957)</b><span class="en">“You shall know a word by the company it keeps.”</span></div>
+    </div>
+  </div>
+  <div class="callout key bi" data-step="3"><span class="en">Co-occurrence creates connection. word2vec learns the same way: when two words occur together, their vectors are pulled a little closer.</span></div>
+</section>
+
+<!-- ─────────── Harris -->
+<section class="slide" id="s-harris" data-sec="relations">
+  <h2 class="bi"><span class="en">Zellig Harris: meaning as distribution</span></h2>
+  <figure class="portrait" id="harris-fig" data-step="1"><img src="assets/harris-portrait.jpeg" alt="Zellig S. Harris"><figcaption>Zellig S. Harris<br><span>1909–1992</span></figcaption></figure>
+  <div class="harris-body">
+    <div class="def" data-step="1">
+      <div class="bi sm"><span class="en">“If A and B have almost identical environments … we say they are synonyms … If A and B have some environments in common and some not … we say that they have different meanings, the amount of meaning difference corresponding roughly to the amount of difference in their environments.” <i>Distributional Structure</i> (1954)</span></div>
+    </div>
+    <table class="frames" data-step="2">
+      <thead><tr><th></th><th>我感到＿＿</th><th>＿＿的一天</th><th>＿＿地笑</th><th>＿＿的眼淚</th></tr></thead>
+      <tbody>
+        <tr><th>開心</th><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td>—</td></tr>
+        <tr><th>愉快</th><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td>—</td></tr>
+        <tr><th>悲傷</th><td class="y">✓</td><td class="y">✓</td><td>—</td><td class="y">✓</td></tr>
+      </tbody>
+    </table>
+    <div class="bi sm" data-step="3"><span class="en">開心 ≈ 愉快 (near-identical environments); 悲傷 overlaps only partly. <small>(Illustrative data.)</small></span></div>
+  </div>
+</section>
+
+<!-- ─────────── Goal -->
+<section class="slide" id="s-goal" data-sec="relations">
+  <h2 class="bi"><span class="en">Goal: let a machine compute how similar two words are</span></h2>
+  <div class="scores" data-step="1">
+    <div><span>similarity(“幸福”, “快樂”)</span><b class="good">= 0.9</b></div>
+    <div><span>similarity(“幸福”, “牙刷”)</span><b>= 0.1</b></div>
+    <div><span>similarity(“香蕉”, “網絡”)</span><b class="neg">= −0.3</b></div>
+  </div>
+  <div class="eq big" data-step="2">distance(x, y) = 1 − similarity(x, y)</div>
+  <div class="callout key bi" data-step="3">
+    <span class="en">For this, every word must become numbers that can be compared and computed with: a <b>vector</b>.</span>
+  </div>
+</section>
+
+<!-- ─────────── Recap: documents were vectors -->
+<section class="slide" id="s-recap" data-sec="vectors">
+  <h2 class="bi"><span class="en">Recap: in topic modeling, <b>documents</b> were already vectors</span></h2>
+  <div class="two recap2">
+    <div class="grow" data-step="1">
+      <div class="rc-h">Week 7 · topic modeling <span>bag of words</span></div>
+      <table class="cmp mx rc"><thead><tr><th></th><th class="num">茶</th><th class="num">銀</th><th class="num">鴉片</th><th class="num">船</th></tr></thead>
+        <tbody><tr><th>letter A</th><td class="num">2</td><td class="num">1</td><td class="num">3</td><td class="num">2</td></tr>
+        <tr><th>letter B</th><td class="num">3</td><td class="num">2</td><td class="num">4</td><td class="num">3</td></tr>
+        <tr><th>letter C</th><td class="num">6</td><td class="num">1</td><td class="num zero">0</td><td class="num">2</td></tr></tbody></table>
+      <div class="rc-n">each row = the vector of a <b>document</b> · columns = words</div>
+    </div>
+    <div class="rc-arrow" data-step="2">→</div>
+    <div class="grow" data-step="2">
+      <div class="rc-h now">Today · word vectors <span>co-occurrence</span></div>
+      <table class="cmp mx rc"><thead><tr><th></th><th class="num">反對</th><th class="num">坐</th><th class="num">的</th><th class="num">中國</th></tr></thead>
+        <tbody><tr><th>孔教</th><td class="num">4</td><td class="num zero">0</td><td class="num">1</td><td class="num">1</td></tr>
+        <tr><th>禮教</th><td class="num">3</td><td class="num zero">0</td><td class="num">2</td><td class="num zero">0</td></tr>
+        <tr><th>火車</th><td class="num zero">0</td><td class="num">2</td><td class="num">1</td><td class="num">1</td></tr></tbody></table>
+      <div class="rc-n">each row = the vector of a <b>word</b> · columns = context words</div>
+    </div>
+  </div>
+  <div class="callout key bi" data-step="3"><span class="en">Then the rows were documents; now they are words. To compare two rows we need a few tools: vectors, distances, and angles.</span></div>
+</section>
+
+<!-- ─────────── Vector 2D -->
+<section class="slide" id="s-vec2d" data-sec="vectors">
+  <h2 class="bi"><span class="en">Vectors</span></h2>
+  <div class="two">
+    <div class="grow">
+      <div class="def" data-step="1">
+        <div class="bi sm"><span class="en">A vector has a <b>magnitude</b> and a <b>direction</b>. Draw it as an arrow.</span></div>
+      </div>
+      <div class="vecs" data-step="1"><div><b class="tgt-c">a</b> = [3, 2]</div><div><b class="ok-c">b</b> = [−2, 3]</div></div>
+      <div class="bi sm" data-step="2"><span class="en">[3, 2]: three steps right, two steps up.</span></div>
+      <div class="bi sm scalar-note" data-step="3"><span class="en">A scalar has only magnitude, like 3. A vector also has a direction.</span></div>
+    </div>
+    <svg class="plot" id="vec2d-plot" viewBox="0 0 500 500" data-step="2"></svg>
+  </div>
+</section>
+
+<!-- ─────────── Vector 3D / n-D -->
+<section class="slide" id="s-vec3d" data-sec="vectors">
+  <h2 class="bi"><span class="en">Vectors can have many dimensions</span></h2>
+  <div class="two">
+    <svg class="plot" id="vec3d-plot" viewBox="0 0 500 460" data-step="1"></svg>
+    <div class="grow">
+      <div class="vecs" data-step="1"><div><b class="tgt-c">a</b> = [3, 2, 1]</div><div><b class="ok-c">b</b> = [−4, 2, 2]</div></div>
+      <div class="bi sm" data-step="2"><span class="en">Three dimensions can still be drawn. What about ten?</span></div>
+      <div class="mv10s" data-step="2"><div class="mv10"><b class="tgt-c">a</b><span>1</span><span>5.2</span><span>4</span><span>2.4</span><span>−5.1</span><span>7</span><span>1.5</span><span>2.4</span><span>−4</span><span>2.1</span></div><div class="mv10"><b class="ok-c">b</b><span>−4</span><span>2</span><span>2</span><span>3</span><span>−2.4</span><span>5.4</span><span>3</span><span>−4.1</span><span>2.5</span><span>0.1</span></div></div>
+      <div class="callout key bi" data-step="3"><span class="en">We cannot draw it, but the arithmetic is the same. Word vectors typically have tens to hundreds of dimensions.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Three distances (interactive, after the CHI3242 stylometry slide) -->
+<section class="slide" id="s-dist" data-sec="vectors">
+  <h2 class="bi"><span class="en">How far apart are two vectors? Three distances</span></h2>
+  <div class="two dist-two">
+    <div class="dist-left">
+      <svg id="dist-svg" class="plot" viewBox="0 0 500 470"></svg>
+      <div class="taxi-pop" data-step="1" data-until="2"><span class="cab">🚕</span><div><b>A taxi cannot drive through walls.</b><br>It follows the street grid, as in Manhattan.</div></div>
+    </div>
+    <div class="grow">
+      <div class="dp man" data-step="1">
+        <div class="dph"><b>Manhattan distance</b><span>taxi route: add up the gaps</span><em id="d-man">–</em></div>
+        <div class="dpeq"><span class="tex">\(|a_1-b_1|+|a_2-b_2|\)</span><i>n dims</i><span class="tex">\(\sum_{i=1}^{n}|a_i-b_i|\)</span></div>
+      </div>
+      <div class="dp euc" data-step="3">
+        <div class="dph"><b>Euclidean distance</b><span>straight line (Pythagoras)</span><em id="d-euc">–</em></div>
+        <div class="dpeq"><span class="tex">\(\sqrt{(a_1-b_1)^2+(a_2-b_2)^2}\)</span><i>n dims</i><span class="tex">\(\sqrt{\sum_{i=1}^{n}(a_i-b_i)^2}\)</span></div>
+      </div>
+      <div class="dp cos" data-step="4">
+        <div class="dph"><b>Cosine distance</b><span>only the angle θ</span><em id="d-cos">–</em></div>
+        <div class="dpeq"><span class="tex">\(1-\cos\theta\)</span><i>n dims</i><span class="tex">\(1-\dfrac{\mathbf a\cdot\mathbf b}{\lVert\mathbf a\rVert\,\lVert\mathbf b\rVert}\)</span></div>
+      </div>
+      <div class="keys"><kbd>↑</kbd> <kbd>↓</kbd> stretch or shrink B · <kbd>P</kbd> move B to another position</div>
+      <div class="callout key bi" data-step="5"><span class="en">Stretch B (a more frequent word with the same company): Manhattan and Euclidean change, <b>cosine does not</b>.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Why the angle -->
+<section class="slide" id="s-howsim" data-sec="vectors">
+  <h2 class="bi"><span class="en">For words, we compare directions: cosine similarity</span></h2>
+  <div class="bi" data-step="1"><span class="en">A frequent word gets a <b>long</b> vector simply because it is counted more often. What matters is the <b>pattern</b> of its company, so we measure the <b>angle</b> between two vectors and ignore their length.</span></div>
+  <div class="roadmap" data-step="2">
+    <div class="eq big">\(\cos\theta=\dfrac{\textcolor{#1f5fd6}{\mathbf a\cdot\mathbf b}}{\textcolor{#e0570f}{\lVert\mathbf a\rVert\,\lVert\mathbf b\rVert}}\)</div>
+    <div class="rm-steps"><span class="rm1">① dot product</span><span class="rm3">② angle</span><span class="rm2">③ length and normalization</span></div>
+  </div>
+  <div class="callout key bi" data-step="3"><span class="en">cos θ = 1: same direction · 0: unrelated · −1: opposite. The next slides build this formula piece by piece.</span></div>
+</section>
+
+<!-- ─────────── Dot product -->
+<section class="slide" id="s-dot" data-sec="vectors">
+  <h2 class="bi"><span class="en">Ingredient 1: the dot product</span></h2>
+  <div class="eq dot-main" data-step="1">\(\displaystyle \vec a\cdot\vec b=\sum_{i=1}^{n} a_i b_i = a_1b_1+a_2b_2+\cdots+a_nb_n\)</div>
+  <div class="bi sm" data-step="1"><span class="en">Multiply position by position, then add everything up. The result is a single number.</span></div>
+  <div class="dotviz" id="dot-a" data-vals='{"a":[3,2,0.5],"b":[-1,3.5,2]}'></div>
+  <div class="callout key bi" data-step="4"><span class="en">Matching signs add, opposite signs subtract. The larger the dot product, the more the two vectors agree.</span></div>
+</section>
+
+<!-- ─────────── Dot quiz -->
+<section class="slide" id="s-dotquiz" data-sec="vectors">
+  <h2 class="bi"><span class="en">Guess first: which dot product is larger? (Don’t calculate!)</span></h2>
+  <div class="two cols2 quizcols">
+    <div class="grow"><div class="dotviz small" id="dot-q1"></div></div>
+    <div class="grow"><div class="dotviz small" id="dot-q2"></div></div>
+  </div>
+  <div class="bi" data-step="1"><span class="en">Hint: look only at whether the signs match.</span></div>
+  <div class="callout key bi" data-step="4"><span class="en">a · b = 41 ＞ c · d = −48. a and b agree in every position; c and d disagree in every position.</span></div>
+</section>
+
+<!-- ─────────── Notation a·b = aᵀb -->
+<section class="slide" id="s-dotT" data-sec="vectors">
+  <h2 class="bi"><span class="en">Notation: the dot product as a matrix product, a<sup>T</sup>b</span></h2>
+  <div class="two tcols">
+    <div class="grow">
+      <div class="bi sm" data-step="1"><span class="en">By convention, a vector is written as a <b>column</b>:</span></div>
+      <div class="eq tbig" data-step="1">\(\mathbf a=\begin{pmatrix}3\\2\\0.5\end{pmatrix}\quad \mathbf b=\begin{pmatrix}-1\\3.5\\2\end{pmatrix}\)</div>
+      <div class="bi sm" data-step="2"><span class="en">The <b>transpose</b> ᵀ turns the column into a <b>row</b>:</span></div>
+      <div class="eq tbig" data-step="2">\(\mathbf a^{\mathsf T}=\begin{pmatrix}3 & 2 & 0.5\end{pmatrix}\)</div>
+      <div class="shapes" data-step="4"><span>(1 × 3)</span><i>·</i><span>(3 × 1)</span><i>→</i><b>(1 × 1)</b><em>a single number</em></div>
+    </div>
+    <div class="grow">
+      <div class="bi sm" data-step="3"><span class="en">Matrix multiplication, <b>row times column</b>: multiply the pairs and add.</span></div>
+      <div class="eq tbig" data-step="3">\(\mathbf a^{\mathsf T}\mathbf b=\begin{pmatrix}3 & 2 & 0.5\end{pmatrix}\begin{pmatrix}-1\\3.5\\2\end{pmatrix}\)</div>
+      <div class="eq tbig" data-step="3">\(=3(-1)+2(3.5)+0.5(2)=\mathbf{5}\)</div>
+    </div>
+  </div>
+  <div class="callout key bi" data-step="5"><span class="en">Why write it this way? Matrix algebra computes thousands of dot products in one step, for example every word in the vocabulary against one target word. In code: <code>a @ b</code> or <code>np.dot(a, b)</code>.</span></div>
+</section>
+
+<!-- ─────────── Angle -->
+<section class="slide" id="s-angle" data-sec="vectors">
+  <h2 class="bi"><span class="en">Ingredient 2: the angle</span></h2>
+  <div class="eq angle-eq" data-step="4">\(\cos\theta=\dfrac{\vec a\cdot\vec b}{\lVert\vec a\rVert\,\lVert\vec b\rVert}\)</div>
+  <svg class="plot" id="angle-plot" viewBox="0 0 1108 492"></svg>
+  <i class="stepper" data-step="5"></i>
+</section>
+
+<!-- ─────────── Cosine interactive -->
+<section class="slide" id="s-cos" data-sec="vectors">
+  <h2 class="bi"><span class="en">Cosine similarity: drag the purple tip</span></h2>
+  <div class="two">
+    <svg class="plot" id="cos-plot" viewBox="0 0 560 480" data-step="1"></svg>
+    <div class="grow cosread" data-step="1">
+      <div class="big-num"><span>cos θ</span><b id="cos-val">0.77</b></div>
+      <svg class="plot" id="cos-curve" viewBox="0 0 500 170"></svg>
+      <div class="minirow"><span>θ = <b id="cos-th">40°</b></span><span>A · B = <b id="cos-dot">—</b></span><span>\(\lVert A\rVert\,\lVert B\rVert\) = <b id="cos-len">—</b></span></div>
+      <div class="swap cosnote">
+        <div class="bi sm" data-step="1" data-until="2"><span class="en">B points roughly along A. Orange is the <b>projection</b> of B onto A.</span></div>
+        <div class="bi sm" data-step="2" data-until="3"><span class="en">Perpendicular: the projection shrinks to a point, and cos = 0.</span></div>
+        <div class="bi sm" data-step="3" data-until="4"><span class="en">Opposite: the projection flips, and cos = −1.</span></div>
+        <div class="bi sm" data-step="4"><span class="en">Drag the purple tip. Changing the <u>length</u> leaves cos unchanged; only the <u>direction</u> matters.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Normalization picture -->
+<section class="slide" id="s-normviz" data-sec="vectors">
+  <h2 class="bi"><span class="en">Ingredient 3: normalization puts every vector on the unit circle</span></h2>
+  <div class="two">
+    <svg class="plot" id="normviz-plot" viewBox="0 0 560 490"></svg>
+    <div class="grow">
+      <div class="bi sm"><span class="en">Many vectors, with different directions and different lengths (frequent words get long vectors).</span></div>
+      <div class="bi sm" data-step="1"><span class="en"><b>Normalize</b>: divide each vector by its own length. All of them land on the <b>unit circle</b> (radius 1).</span></div>
+      <div class="callout key bi" data-step="2"><span class="en">Directions stay, lengths go. After normalizing, the dot product equals cos θ.</span></div>
+      <div class="bi sm" data-step="3"><span class="en">But how do we compute a vector’s length? With Pythagoras.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Magnitude -->
+<section class="slide" id="s-mag" data-sec="vectors">
+  <h2 class="bi"><span class="en">How long is a vector? Pythagoras gives \(\lVert\mathbf a\rVert\)</span></h2>
+  <div class="two">
+    <div class="grow">
+      <div class="bi sm" data-step="1"><span class="en">\(\lVert\mathbf a\rVert\) is the length (norm) of a: how long is the arrow from the origin to the tip?</span></div>
+      <div class="bi sm" data-step="2"><span class="en">3 right and 4 up: the two legs of a <b>right triangle</b>.</span></div>
+      <div class="eq tbig mag-eq" data-step="3">\(\lVert\mathbf a\rVert=\sqrt{3^2+4^2}=\sqrt{9+16}=\sqrt{25}=\mathbf{5}\)</div>
+      <div class="bi sm" data-step="4"><span class="en">It is the Euclidean distance from the origin, and it works in any number of dimensions:</span></div>
+      <div class="eq tbig mag-eq" data-step="4">\(\lVert\mathbf a\rVert=\sqrt{a_1^2+a_2^2+\cdots+a_n^2}=\sqrt{\mathbf a\cdot\mathbf a}\)</div>
+      <div class="eq tbig mag-eq" data-step="5">e.g. \(\lVert[2,3,6]\rVert=\sqrt{4+9+36}=\sqrt{49}=\mathbf{7}\)</div>
+    </div>
+    <svg class="plot" id="mag-plot" viewBox="0 0 480 480"></svg>
+  </div>
+</section>
+
+<!-- ─────────── Normalisation worked out -->
+<section class="slide" id="s-norm" data-sec="vectors">
+  <h2 class="bi"><span class="en">Normalizing, worked out: [3, 4] → [3/5, 4/5]</span></h2>
+  <div class="two">
+    <div class="grow">
+      <div class="bi sm" data-step="1"><span class="en">The dot product is swayed by <b>length</b>, and frequent words have longer vectors.</span></div>
+      <div class="eq" data-step="2">\(\mathbf a=[3,4]\qquad\lVert\mathbf a\rVert=5\)</div>
+      <div class="eq" data-step="3">\(\hat{\mathbf a}=\dfrac{\mathbf a}{\lVert\mathbf a\rVert}=\Big[\dfrac35,\dfrac45\Big]\qquad\lVert\hat{\mathbf a}\rVert=1\)</div>
+      <div class="callout key bi" data-step="4"><span class="en">After normalizing to length 1, the dot product equals cos θ: only direction remains.</span></div>
+    </div>
+    <svg class="plot" id="norm-plot" viewBox="0 0 480 480"></svg>
+  </div>
+</section>
+
+<!-- ─────────── cos θ = projection -->
+<section class="slide" id="s-cosproj" data-sec="vectors">
+  <h2 class="bi"><span class="en">Why, after normalizing, cos θ is just the projection</span></h2>
+  <div class="two">
+    <div class="grow">
+      <div class="bi sm" data-step="1"><span class="en">In a right triangle: cos θ = <b>adjacent ÷ hypotenuse</b>.</span></div>
+      <div class="eq cp-eq" data-step="1">\(\cos\theta=\dfrac{b}{c}=\dfrac{3}{5}\)</div>
+      <div class="bi sm" data-step="2"><span class="en">After normalizing (zoomed in), the hypotenuse c is 1:</span></div>
+      <div class="eq cp-eq" data-step="2">\(\cos\theta=\dfrac{b}{1}=b=\dfrac35\)</div>
+      <div class="callout key bi" data-step="3"><span class="en">cos θ = the <b>projection</b> of the unit vector = the <b>dot product</b> of two unit vectors: [1, 0] · [3/5, 4/5] = 3/5</span></div>
+    </div>
+    <svg class="plot" id="cosproj-plot" viewBox="0 0 480 480"></svg>
+  </div>
+</section>
+
+<!-- ─────────── Dog example -->
+<section class="slide" id="s-dog" data-sec="vectors">
+  <h2 class="bi"><span class="en">Example: dog, pet, water</span></h2>
+  <div class="bi sm" data-step="1"><span class="en">Three words, each a 4-dimensional vector (toy numbers for teaching, not trained from a corpus).</span></div>
+  <div class="dogs">
+    <article class="card dogcard pos" data-step="2">
+      <div class="dogimgs"><img src="assets/dog-park.jpeg" alt=""><img src="assets/dog-and-cat.jpeg" alt=""></div>
+      <div class="dogh"><b>dog ↔ pet</b></div>
+      <div class="mvs"><div class="mv"><b>dog</b><span>2</span><span>0</span><span>1</span><span>−3</span></div><div class="mv"><b>pet</b><span>3</span><span>1</span><span>4</span><span>−1</span></div></div>
+      <div class="eq sm">\(\dfrac{2\cdot3+0\cdot1+1\cdot4+(-3)(-1)}{\sqrt{14}\sqrt{27}}=\dfrac{13}{\sqrt{14}\sqrt{27}}\)</div>
+      <div class="dogres pos" data-step="3">cos = <em>+0.67</em></div>
+    </article>
+    <article class="card dogcard neg" data-step="4">
+      <div class="dogimgs"><img src="assets/dog-grass.jpeg" alt=""><img src="assets/water-glass.jpeg" alt=""></div>
+      <div class="dogh"><b>dog ↔ water</b></div>
+      <div class="mvs"><div class="mv"><b>dog</b><span>2</span><span>0</span><span>1</span><span>−3</span></div><div class="mv"><b>water</b><span>−2</span><span>1</span><span>4</span><span>1</span></div></div>
+      <div class="eq sm">\(\dfrac{2(-2)+0\cdot1+1\cdot4+(-3)(1)}{\sqrt{14}\sqrt{22}}=\dfrac{-3}{\sqrt{14}\sqrt{22}}\)</div>
+      <div class="dogres neg" data-step="5">cos = <em>−0.17</em></div>
+    </article>
+  </div>
+</section>
+
+<!-- ─────────── Excerpts: 反對 in Chen Duxiu, 1919 -->
+<section class="slide" id="s-excerpt" data-sec="counts">
+  <h2 class="bi"><span class="en">Counting co-occurrences</span></h2>
+  <figure class="mini-portrait"><figcaption>《新青年》<span>La Jeunesse, 1915–1926</span></figcaption><img src="assets/new-youth.jpg" alt="Cover of New Youth (La Jeunesse)"></figure>
+  <div class="srcbadge" data-step="1"><b>Chen Duxiu</b> 陳獨秀, 〈本志罪案之答辯書〉 <span>《新青年》 6.1, January 1919</span></div>
+  <div class="bi sm" data-step="1"><span class="en">Which words occur near 反對 (“oppose”)?</span></div>
+  <div class="lines" id="ex-lines" data-step="1"></div>
+  <div class="bi sm" data-step="3"><span class="en">Words inside the window (3 to each side, as in the collocations week):</span></div>
+  <div class="exc-wrap" data-step="3"><table class="exc" id="ex-counts"></table></div>
+  <div class="callout key bi" data-step="4"><span class="en">Count the words around each word and you get its vector: <b>one dimension per context word</b>.</span></div>
+</section>
+
+<!-- ─────────── Matrix + cosine answer -->
+<section class="slide" id="s-matrix" data-sec="counts">
+  <h2 class="bi"><span class="en">Co-occurrence matrix: what is closest to 孔教?</span></h2>
+  <div class="two mxtop">
+    <table class="cmp mx mxell" data-step="1">
+      <thead><tr><th></th><th class="ell">…</th><th class="num">反對</th><th class="num">坐</th><th class="num">的</th><th class="num">中國</th><th class="ell">…</th></tr></thead>
+      <tbody>
+        <tr class="ellrow"><th>⋮</th><td class="ell"></td><td class="num">⋮</td><td class="num">⋮</td><td class="num">⋮</td><td class="num">⋮</td><td class="ell"></td></tr>
+        <tr><th>孔教</th><td class="ell">…</td><td class="num">4</td><td class="num zero">0</td><td class="num">1</td><td class="num">1</td><td class="ell">…</td></tr>
+        <tr><th>禮教</th><td class="ell">…</td><td class="num">3</td><td class="num zero">0</td><td class="num">2</td><td class="num zero">0</td><td class="ell">…</td></tr>
+        <tr><th>火車</th><td class="ell">…</td><td class="num zero">0</td><td class="num">2</td><td class="num">1</td><td class="num">1</td><td class="ell">…</td></tr>
+        <tr class="ellrow"><th>⋮</th><td class="ell"></td><td class="num">⋮</td><td class="num">⋮</td><td class="num">⋮</td><td class="num">⋮</td><td class="ell"></td></tr>
+      </tbody>
+    </table>
+    <div class="grow">
+      <div class="bi sm" data-step="2"><span class="en">Only a few rows and columns: a real matrix has one row and one column for every word in the vocabulary.<br>Each <b>row</b> is a word’s vector:<br><span class="nw">v(孔教) = [4, 0, 1, 1]</span><br>Each <b>column</b> is a context word. <small>(Toy numbers.)</small></span></div>
+      <div class="callout key bi" data-step="3"><span class="en">Is 孔教 more similar to 禮教 or to 火車?</span></div>
+    </div>
+  </div>
+  <div class="cq" data-step="4">
+    <div class="who">孔教 ↔ 禮教</div>
+    <div class="eq sm">\(\dfrac{4\cdot3+0+1\cdot2+0}{\sqrt{18}\sqrt{13}}=\dfrac{14}{15.3}\)</div>
+    <div class="meter"><i id="m1"></i></div><b class="val ok-c">0.91</b>
+  </div>
+  <div class="cq" data-step="5">
+    <div class="who">孔教 ↔ 火車</div>
+    <div class="eq sm">\(\dfrac{0+0+1\cdot1+1\cdot1}{\sqrt{18}\sqrt{6}}=\dfrac{2}{10.4}\)</div>
+    <div class="meter"><i id="m2" class="low"></i></div><b class="val">0.19</b>
+  </div>
+  <div class="callout key bi" data-step="6"><span class="en">孔教 and 禮教 keep similar company (反對, 的), so their vectors point in similar directions. 火車 keeps different company (坐).</span></div>
+</section>
+
+<!-- ─────────── Sparse -->
+<section class="slide" id="s-sparse" data-sec="counts">
+  <h2 class="bi"><span class="en">The limits of sparse vectors</span></h2>
+  <div class="two">
+    <div class="grow">
+      <div class="bi sm" data-step="1"><span class="en">A real corpus has tens of thousands of context words, so <b>almost every entry is 0</b>. Storing them wastes space.</span></div>
+      <table class="cmp mx" data-step="2">
+        <thead><tr><th></th><th class="num">孔教</th><th class="num">禮教</th><th class="num">思考</th><th class="num">思想</th></tr></thead>
+        <tbody>
+          <tr><th>反對</th><td class="num hi">24</td><td class="num zero">0</td><td class="num zero">0</td><td class="num zero">0</td></tr>
+          <tr><th>打倒</th><td class="num zero">0</td><td class="num hi">6</td><td class="num zero">0</td><td class="num zero">0</td></tr>
+          <tr><th>孔子</th><td class="num zero">0</td><td class="num zero">0</td><td class="num hi">11</td><td class="num zero">0</td></tr>
+          <tr><th>孟子</th><td class="num zero">0</td><td class="num zero">0</td><td class="num zero">0</td><td class="num hi">22</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <svg class="plot" id="sparse-plot" viewBox="0 0 280 280" data-step="1"></svg>
+  </div>
+  <div class="eq" data-step="3"><b>v</b>(反對) · <b>v</b>(打倒) = 0 &nbsp;<span class="bad-c">← a problem!</span></div>
+  <div class="callout key bi" data-step="4"><span class="en">孔教 and 禮教 are close in meaning, but they are separate dimensions, so the dot product is 0.</span></div>
+</section>
+
+<!-- ─────────── Zhuangzi -->
+<section class="slide" id="s-zhuangzi" data-sec="counts">
+  <h2 class="bi"><span class="en">Catch the meaning, forget the words</span></h2>
+  <div class="zzwrap">
+    <div class="zzleft">
+      <div class="zz" data-step="1">「言者所以在意，<br>得意而忘言。」</div>
+      <div class="bi sm zzsrc" data-step="1"><span class="en">“Words exist for the sake of meaning; once you have the meaning, you can forget the words.” <i>Zhuangzi</i>, “External Things” 外物</span></div>
+      <div class="zzflow" data-step="2">
+        <div class="zzbox"><b>言 <small>words</small></b><div class="cells spc"><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></div><span>one column per word · sparse</span></div>
+        <div class="zzarrow">→</div>
+        <div class="zzbox"><b>意 <small>meaning</small></b><div class="cells dn"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div><span>a few directions · dense</span></div>
+      </div>
+    </div>
+    <figure class="zzfig" data-step="1"><img src="assets/zhuangzi-butterfly.jpeg" alt="Zhuangzi dreaming of the butterfly"><figcaption>Zhuangzi dreaming of the butterfly <span>莊周夢蝶</span></figcaption></figure>
+  </div>
+  <div class="callout key bi" data-step="3"><span class="en">Instead of one column per word, we want similar words compressed into shared directions: <b>dense vectors</b>.</span></div>
+</section>
+
+<!-- ─────────── Dense -->
+<section class="slide" id="s-dense" data-sec="embeddings">
+  <h2 class="bi"><span class="en">Dense vectors: every dimension carries a value</span></h2>
+  <table class="cmp movies" id="movie-table" data-step="1">
+    <thead><tr><th></th>
+      <th data-c="0"><img src="assets/movie-interstellar.jpeg" alt=""><span>星際效應</span></th>
+      <th data-c="1"><img src="assets/movie-conjuring.jpeg" alt=""><span>詭屋驚凶實錄</span></th>
+      <th data-c="2"><img src="assets/movie-us-again.jpeg" alt=""><span>後來的我們</span></th>
+      <th data-c="3"><img src="assets/movie-shawshank.jpeg" alt=""><span>刺激 1995</span></th></tr></thead>
+    <tbody></tbody>
+  </table>
+  <div class="moviecos" id="movie-cos"></div>
+  <div class="callout key bi" data-step="4"><span class="en">Each film is just 5 numbers, and films of similar kinds point in similar directions. <small>(Toy numbers.)</small></span></div>
+</section>
+
+<!-- ─────────── Gender / royalty -->
+<section class="slide" id="s-gender" data-sec="embeddings">
+  <h2 class="bi"><span class="en">A tiny vocabulary: 男, 女, 皇帝, 皇后</span></h2>
+  <div class="two">
+    <div class="grow">
+      <table class="cmp gx" id="gx-table">
+        <thead><tr><th></th><th>男</th><th>女</th><th class="c3">皇帝</th><th class="c3">皇后</th></tr></thead>
+        <tbody>
+          <tr><th>gender</th><td>−1</td><td>1</td><td class="c3">−0.97</td><td class="c3">0.99</td></tr>
+          <tr class="r2"><th>royalty</th><td>0.02</td><td>0.01</td><td class="c3">1</td><td class="c3">1</td></tr>
+        </tbody>
+      </table>
+      <div class="eq big" id="gx-eq">皇帝 = 皇后 <span class="red-c">− 女 + 男</span></div>
+      <div class="bi sm" id="gx-note"></div>
+    </div>
+    <svg class="plot" id="gx-plot" viewBox="0 0 520 440"></svg>
+  </div>
+</section>
+
+<!-- ─────────── More dims -->
+<section class="slide" id="s-dims" data-sec="embeddings">
+  <h2 class="bi"><span class="en">More words need more dimensions</span></h2>
+  <table class="cmp dx" id="dx-table" data-step="1">
+    <thead><tr><th></th><th>男</th><th>女</th><th>皇帝</th><th>皇后</th><th class="n1">啤酒</th><th class="n1">果汁</th></tr></thead>
+    <tbody>
+      <tr><th>gender</th><td>−1</td><td>1</td><td>−0.97</td><td>0.99</td><td class="n1">−0.03</td><td class="n1">0.02</td></tr>
+      <tr><th>royalty</th><td>0.02</td><td>0.01</td><td>1</td><td>1</td><td class="n1">0</td><td class="n1">0</td></tr>
+      <tr class="n2"><th>drink</th><td>0</td><td>0</td><td>0</td><td>0</td><td class="n1">0.97</td><td class="n1">0.98</td></tr>
+    </tbody>
+  </table>
+  <div class="bubble" data-step="2"><span class="en">How many dimensions do you think we need</span><span class="en">to encode the meaning of a word?</span></div>
+  <div class="bi" data-step="3"><span class="en">Real word vectors have tens to hundreds of dimensions, and no dimension has a human-readable name.</span></div>
+</section>
+
+<!-- ─────────── Space -->
+<section class="slide" id="s-space" data-sec="embeddings">
+  <h2 class="bi"><span class="en">Vectors and meaning: similar direction, similar meaning</span></h2>
+  <div class="two">
+    <svg class="plot" id="space-plot" viewBox="0 0 560 450" data-step="1"></svg>
+    <div class="grow">
+      <div class="cos-list" id="space-cos" data-step="2"></div>
+      <div class="bi sm" data-step="3"><span class="en">Words with related meanings have small angles; unrelated words have large ones. <small>(Illustrative coordinates.)</small></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── The word2vec paper -->
+<section class="slide" id="s-mikolov" data-sec="embeddings">
+  <h2 class="bi"><span class="en">Mikolov et al. (2013): word2vec</span></h2>
+  <div class="paper">
+    <figure class="paper-page"><img src="assets/mikolov-2013-p1.jpeg" alt="First page of Mikolov et al. 2013, Efficient Estimation of Word Representations in Vector Space"></figure>
+    <div class="paper-facts">
+      <div class="pf-title">Efficient Estimation of Word Representations in Vector Space</div>
+      <div class="pf-auth"><img src="assets/mikolov.jpeg" alt="Tomáš Mikolov"><span>Tomáš Mikolov, Kai Chen, Greg Corrado, Jeffrey Dean<br><small>Google · arXiv:1301.3781 · 2013</small></span></div>
+      <div class="pf-item" data-step="1"><b>Two architectures</b><span>CBOW predicts the centre word from its context.<br>Skip-gram predicts the context from the centre word.</span></div>
+      <div class="pf-item" data-step="2"><b>Fast and large</b><span>High-quality vectors from 1.6 billion words in under a day</span><small>“less than a day to learn high quality word vectors from a 1.6 billion words data set”</small></div>
+      <div class="pf-item" data-step="3"><b>Vector arithmetic</b><span>king − man + woman ≈ queen</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── word2vec -->
+<section class="slide" id="s-w2v" data-sec="embeddings">
+  <h2 class="bi"><span class="en">word2vec: learning the vectors from text</span></h2>
+  <div class="bi sm"><span class="en">Predict a word’s neighbours. Example: <i>Analects</i> 2.15, “Learning without thinking is futile; thinking without learning is perilous.”</span></div>
+  <div class="toks w2v" id="w2v-toks"></div>
+  <div class="two">
+    <div class="grow">
+      <div class="bi sm" id="w2v-note"></div>
+    </div>
+    <div class="pairlist" id="w2v-pairs"></div>
+  </div>
+  <div class="callout key bi" data-step="13"><span class="en">No one labels any meanings. To predict neighbours well, the model adjusts every word’s vector on its own.</span></div>
+</section>
+
+<!-- ─────────── word2vec: score with a dot product -->
+<section class="slide" id="s-w2v-dot" data-sec="embeddings">
+  <h2 class="bi"><span class="en">Step 1: score a pair with the dot product</span></h2>
+  <div class="bi sm" data-step="1"><span class="en">Every word starts with a <b>random</b> vector. The dot product of a pair is its score: the higher, the more neighbour-like.</span></div>
+  <div class="two cols2 quizcols">
+    <div class="grow" data-step="2"><div class="pairhead ok-c">real neighbour: 思 think · 學 learn</div><div class="dotviz small" id="w2v-pos"></div></div>
+    <div class="grow" data-step="3"><div class="pairhead bad-c">random word: 思 think · 香蕉 banana</div><div class="dotviz small" id="w2v-neg"></div></div>
+  </div>
+  <div class="callout key bi" data-step="4"><span class="en">At first the scores are wrong: the random word outscores the true neighbour. Training goal: <b>raise neighbour scores, lower random-word scores</b>.</span></div>
+</section>
+
+<!-- ─────────── word2vec: update rule -->
+<section class="slide" id="s-w2v-upd" data-sec="embeddings">
+  <h2 class="bi"><span class="en">Step 2: the update is just vector addition</span></h2>
+  <div class="two">
+    <div class="grow">
+      <div class="rule pos"><b>Neighbour</b>: <b>add</b> a small part of 學 to 思<div class="eq sm">\(\mathbf{思}\leftarrow\mathbf{思}+\eta\,\mathbf{學}\)</div></div>
+      <div class="rule neg"><b>Random word</b>: <b>subtract</b> a small part of 香蕉<div class="eq sm">\(\mathbf{思}\leftarrow\mathbf{思}-\eta\,\mathbf{香蕉}\)</div></div>
+      <div class="bi xs"><span class="en">η (the learning rate) means adding only a fraction, e.g. 0.5. Target and context move towards <b>each other</b>: 學 also gets a bit of 思. The more wrong the score, the larger the step.</span></div>
+      <div class="upd-scores" id="upd-scores"></div>
+    </div>
+    <svg class="plot" id="upd-plot" viewBox="0 0 500 470"></svg>
+  </div>
+</section>
+
+<!-- ─────────── word2vec: why it works -->
+<section class="slide" id="s-w2v-why" data-sec="embeddings">
+  <h2 class="bi"><span class="en">Step 3: why does this capture meaning?</span></h2>
+  <div class="two">
+    <svg class="plot" id="why-plot" viewBox="0 0 520 470"></svg>
+    <div class="grow">
+      <div class="bi sm"><span class="en">開心 and 愉快 rarely occur together, but they share <b>the same neighbours</b> (感到, 非常, 旅程).</span></div>
+      <div class="bi sm" id="why-note"></div>
+      <div class="big-num why-num"><span>cos(開心, 愉快)</span><b id="why-cos">—</b></div>
+      <div class="bi xs" data-step="5"><span class="en">This is Harris’s distributional hypothesis done with arithmetic: same environments, nearby vectors. <small>(Illustration: context vectors held fixed.)</small></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Training word2vec with qhchina -->
+<section class="slide" id="s-gensim" data-sec="embeddings">
+  <h2 class="bi"><span class="en">Train your own: <code>Word2Vec</code> in qhchina</span></h2>
+  <div class="annot">
+    <div class="cl"><code>from&nbsp;qhchina.analytics&nbsp;import&nbsp;Word2Vec</code></div>
+    <div class="cl"><code>model&nbsp;=&nbsp;Word2Vec(</code></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;sentences,</code><span class="ann" data-step="1"><i class="arr"></i><span><b>tokenized</b> sentences</span></span></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;vector_size=100,</code><span class="ann" data-step="2"><i class="arr"></i><span><b>dimensions</b> per word</span></span></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;window=5,</code><span class="ann" data-step="3"><i class="arr"></i><span><b>window</b> on each side</span></span></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;min_word_count=5,</code><span class="ann" data-step="4"><i class="arr"></i><span><b>ignore</b> rare words (&lt; 5)</span></span></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;sg=1,</code><span class="ann" data-step="5"><i class="arr"></i><span>1 = <b>Skip-gram</b>, 0 = CBOW</span></span></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;negative=5,</code><span class="ann" data-step="6"><i class="arr"></i><span><b>random words</b> per real pair</span></span></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;epochs=5,</code><span class="ann" data-step="7"><i class="arr"></i><span>passes over the <b>corpus</b></span></span></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;workers=4)</code><span class="ann" data-step="8"><i class="arr"></i><span>CPU cores (speed)</span></span></div>
+    <div class="cl"><code>model.train()</code><span class="ann" data-step="9"><i class="arr"></i><span>start <b>training</b></span></span></div>
+  </div>
+  <pre class="code use" data-step="10"><span class="cm"># using the trained model</span>
+model.get_vector("幸福")              <span class="cm"># the vector of 幸福 (100 numbers)</span>
+model.most_similar("幸福", topn=5)    <span class="cm"># the 5 words with the highest cosine</span>
+model.similarity("幸福", "快樂")       <span class="cm"># cosine similarity of two words</span></pre>
+</section>
+
+<!-- ─────────── Analogy -->
+<section class="slide" id="s-analogy" data-sec="embeddings">
+  <h2 class="bi"><span class="en">Vector arithmetic captures relations</span></h2>
+  <div class="eq huge" data-step="1">\(\mathbf{king}-\mathbf{man}+\mathbf{woman}\approx\mathbf{queen}\)</div>
+  <div class="bi sm" data-step="2"><span class="en">Mikolov et al. (2013): after the arithmetic, the closest word vector is the one for <i>queen</i>.</span></div>
+  <div class="three notes3">
+    <div class="card" data-step="3"><b>Relations become directions</b><p class="en">A relation (man → woman) becomes a direction in the space.</p></div>
+    <div class="card" data-step="4"><b>Not designed by hand</b><p class="en">Nobody built a “gender” dimension; it emerged from co-occurrence.</p></div>
+    <div class="card warn" data-step="5"><b>Bias is learned too</b><p class="en">Vectors inherit the stereotypes of the training corpus.</p></div>
+  </div>
+</section>
+
+<!-- ─────────── Meaning change -->
+<section class="slide" id="s-change" data-sec="change">
+  <h2 class="bi"><span class="en">Words also change their meaning over time</span></h2>
+  <table class="cmp chg" data-step="1">
+    <thead><tr><th>word</th><th>earlier sense</th><th>later sense</th><th>shift</th></tr></thead>
+    <tbody>
+      <tr data-step="1"><th>computer</th><td><img class="chgimg" src="assets/human-computers.jpg" alt="Human computers at NACA, 1949">a person who calculates</td><td><img class="chgimg" src="assets/eniac.jpg" alt="ENIAC">an electronic machine</td><td>1940s</td></tr>
+      <tr data-step="2"><th>經濟</th><td>經世濟民: ordering the world, relieving the people</td><td>economy (via Japanese <i>keizai</i>)</td><td>c. 1900</td></tr>
+      <tr data-step="3"><th>民主</th><td>“lord of the people” 天惟時求民主 (<i>Shangshu</i>)</td><td>democracy</td><td>late Qing</td></tr>
+      <tr data-step="4"><th>革命</th><td>change of Heaven’s Mandate</td><td>revolution; class struggle</td><td>1900s–1920s</td></tr>
+    </tbody>
+  </table>
+  <div class="callout key bi" data-step="5"><span class="en">Conceptual history (<i>Begriffsgeschichte</i>, Reinhart Koselleck) asks when and how such shifts happened. Vectors offer one measure: <b>does a word keep the same company in two periods?</b></span></div>
+</section>
+
+<!-- ─────────── Hamilton et al. 2016: words moving through time (conceptual, after their Figure 1) -->
+<section class="slide" id="s-hamilton" data-sec="change">
+  <h2 class="bi"><span class="en">Watching words move (Hamilton et al. 2016)</span></h2>
+  <svg class="plot" id="ham-plot" viewBox="0 0 1108 430"></svg>
+  <div class="callout key bi" data-step="4"><span class="en">Each arrow is a change of company: a new sense (<i>gay</i>), a new technology (<i>broadcast</i>), a turn for the worse (<i>awful</i>). <small>After Hamilton et al. 2016, Fig. 1; positions illustrative.</small></span></div>
+</section>
+
+<!-- ─────────── Separate models + alignment -->
+<section class="slide" id="s-align" data-sec="change">
+  <h2 class="bi"><span class="en">First idea: train one model per period, then compare</span></h2>
+  <svg class="plot" id="align-plot" viewBox="0 0 1108 400"></svg>
+  <div class="swap alnote">
+    <div class="bi sm" data-step="0" data-until="1"><span class="en">Two corpora, two models: the 1920s and the 1950s. Each model starts from its own random vectors.</span></div>
+    <div class="bi sm" data-step="1" data-until="2"><span class="en"><i>Ship</i> did not change its meaning, yet it points in different directions in the two spaces. The axes of the two spaces are <b>arbitrary</b>, so cos(ship<sub>1920s</sub>, ship<sub>1950s</sub>) means nothing.</span></div>
+    <div class="bi sm" data-step="2" data-until="3"><span class="en"><b>Alignment</b> (Hamilton et al. 2016): rotate the 1950s space to fit the 1920s space as closely as possible (orthogonal Procrustes, \(W^*=\arg\min_W\lVert BW-A\rVert^2\)).</span></div>
+    <div class="bi sm" data-step="3"><span class="en">Now <i>ship</i> roughly overlaps, while <i>computer</i> has moved from clerks to machines. But stable words never overlap exactly: the alignment itself adds <b>noise</b>.</span></div>
+  </div>
+</section>
+
+<!-- ─────────── Temporal referencing paper -->
+<section class="slide" id="s-trpaper" data-sec="change">
+  <h2 class="bi"><span class="en">Dubossarsky et al. (2019): temporal referencing</span></h2>
+  <div class="paper">
+    <figure class="paper-page"><img src="assets/dubossarsky-2019-p1.jpeg" alt="First page of Dubossarsky, Hengchen, Tahmasebi and Schlechtweg 2019, Time-Out: Temporal Referencing for Robust Modeling of Lexical Semantic Change"></figure>
+    <div class="paper-facts">
+      <div class="pf-title">Time-Out: Temporal Referencing for Robust Modeling of Lexical Semantic Change</div>
+      <div class="pf-auth noimg"><span>Haim Dubossarsky, Simon Hengchen, Nina Tahmasebi, Dominik Schlechtweg<br><small>ACL 2019 · Florence · pages 457–470</small></span></div>
+      <div class="pf-item" data-step="1"><b>One corpus, one model</b><span>Train on all periods together. No separate spaces, so no alignment.</span></div>
+      <div class="pf-item" data-step="2"><b>Rename the target words</b><span>computer → computer_1920s in the 1920s texts, computer_1950s in the 1950s texts</span></div>
+      <div class="pf-item" data-step="3"><b>Less noise</b><span>Tested on COHA (1920s–1960s) and on artificially injected change, it beats alignment.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── TR: tagging -->
+<section class="slide" id="s-trtag" data-sec="change">
+  <h2 class="bi"><span class="en">How it works: rename the word in each period</span></h2>
+  <div class="trrows">
+    <div class="trrow"><span class="trlab">1920s</span><div class="toks trtoks" id="tr-a"></div></div>
+    <div class="trrow"><span class="trlab">1950s</span><div class="toks trtoks" id="tr-b"></div></div>
+  </div>
+  <div class="bi sm" id="tr-note"></div>
+  <div class="callout key bi" data-step="3"><span class="en">Then train <b>one</b> word2vec model on the whole corpus. Each target word gets <b>as many vectors as there are periods</b>, all in the same space, so computer_1920s and computer_1950s can be compared directly with cosine.</span></div>
+</section>
+
+<!-- ─────────── TR: one shared space -->
+<section class="slide" id="s-trwhy" data-sec="change">
+  <h2 class="bi"><span class="en">One shared space for all periods</span></h2>
+  <div class="two">
+    <svg class="plot" id="tr-plot" viewBox="0 0 540 470"></svg>
+    <div class="grow">
+      <div class="bi sm" id="trw-note"></div>
+      <div class="trscores" id="tr-scores"></div>
+      <div class="eq trq" data-step="4">change(w) = 1 − cos(w<sub>1920s</sub>, w<sub>1950s</sub>)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── TR: validation -->
+<section class="slide" id="s-trval" data-sec="change">
+  <h2 class="bi"><span class="en">How do we know that a change is real? Controls</span></h2>
+  <div class="three ctl3">
+    <div class="card" data-step="1"><b>🔀 Shuffled corpus</b><p class="en">Mix the sentences of all periods at random. Nothing has really changed, so whatever “change” the model finds is <b>noise</b>.</p></div>
+    <div class="card" data-step="2"><b>💉 Injected change</b><p class="en">Change a word on purpose: give it more and more of another word’s contexts in each period. Then we know what changed and when.</p></div>
+    <div class="card" data-step="3"><b>📋 Known cases</b><p class="en">Words whose shift is documented (<i>computer</i>, <i>tape</i>) should score higher than stable ones (<i>ship</i>, <i>horse</i>).</p></div>
+  </div>
+  <div class="trres" data-step="4">
+    <div class="trres-h">Known cases: average change (1 − cos) of words that changed and words that stayed stable (Dubossarsky et al. 2019)</div>
+    <div class="trbars" id="tr-bars"></div>
+  </div>
+  <div class="callout key bi" data-step="5"><span class="en">For historians this is source criticism by other means: a measured shift counts as evidence only after it is compared with what noise alone would produce.</span></div>
+</section>
+
+<!-- ─────────── TR: neighbours of computer / tape -->
+<section class="slide" id="s-trnn" data-sec="change">
+  <h2 class="bi"><span class="en">Reading the result: nearest neighbours in each period</span></h2>
+  <div class="two cols2 nncols">
+    <article class="card nn" data-step="1">
+      <div class="nnh"><b>computer</b><span>changed</span></div>
+      <div class="nnimgs"><img src="assets/human-computers.jpg" alt="Human computers"><i>→</i><img src="assets/eniac.jpg" alt="ENIAC"></div>
+      <div class="nnrow"><i>1920s–1940s</i><span>only distant, loosely related neighbours (little data); the sense is still “a person who computes”</span></div>
+      <div class="nnrow"><i>1950s–1960s</i><span>its closest neighbours are the other computer vectors of the 1940s–1960s</span></div>
+      <div class="nnbreak">a clear break between the 1940s and the 1950s</div>
+    </article>
+    <article class="card nn" data-step="2">
+      <div class="nnh"><b>tape</b><span>new dominant sense</span><img class="nnside" src="assets/reel-tape.jpg" alt="Reel-to-reel tape recorder"></div>
+      <div class="nnrow"><i>1920s–1940s</i><span>ribbon · paper · adhesive</span></div>
+      <div class="nnrow"><i>1950s–1960s</i><span>recorder · recording · stereo</span></div>
+      <div class="nnh stable" data-step="3"><b>ship</b><span>stable</span></div>
+      <div class="nnrow" data-step="3"><i>every decade</i><span>closest to ship of the decade before and after; boat, later also spaceship</span></div>
+    </article>
+  </div>
+  <div class="callout key bi" data-step="4"><span class="en">The cosine says <b>that</b> a word moved. The neighbours, and then the passages themselves, say <b>where</b> it moved and why.</span></div>
+</section>
+
+<!-- ─────────── TR in qhchina -->
+<section class="slide" id="s-trcode" data-sec="change">
+  <h2 class="bi"><span class="en">Temporal referencing in qhchina: <code>TempRefWord2Vec</code></span></h2>
+  <div class="annot">
+    <div class="cl"><code>from&nbsp;qhchina.analytics&nbsp;import&nbsp;TempRefWord2Vec</code></div>
+    <div class="cl"><code>from&nbsp;qhchina.analytics&nbsp;import&nbsp;LineSentenceFile</code></div>
+    <div class="cl"><code>corpora&nbsp;=&nbsp;{"宋":&nbsp;LineSentenceFile("songshi.txt"),</code></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"明":&nbsp;LineSentenceFile("mingshi.txt")}</code></div>
+    <div class="cl"><code>model&nbsp;=&nbsp;TempRefWord2Vec(</code></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;sentences=corpora,</code><span class="ann" data-step="1"><i class="arr"></i><span>one corpus per <b>period</b></span></span></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;targets=["民",&nbsp;"太祖"],</code><span class="ann" data-step="2"><i class="arr"></i><span>民 → 民_宋, 民_明</span></span></div>
+    <div class="cl"><code>&nbsp;&nbsp;&nbsp;&nbsp;vector_size=100,&nbsp;sg=1)</code><span class="ann" data-step="3"><i class="arr"></i><span>periods sampled in <b>balance</b></span></span></div>
+    <div class="cl"><code>model.train(epochs=5)</code></div>
+  </div>
+  <pre class="code use" data-step="4"><span class="cm"># docs: qhchina.org/docs/word_embeddings/temprefword2vec</span>
+<span class="cm"># neighbours of the time-tagged tokens</span>
+model.most_similar("民_宋")
+model.most_similar("民_明")
+<span class="cm"># which words did 民 move towards, and away from?</span>
+changes = model.calculate_semantic_change("民")
+changes["宋_to_明"][:5]     <span class="cm"># moved towards</span>
+changes["宋_to_明"][-5:]    <span class="cm"># moved away from</span></pre>
+</section>
+
+<!-- ─────────── TR caveats -->
+<section class="slide" id="s-trcav" data-sec="change">
+  <h2 class="bi"><span class="en">Before you trust a curve of meaning change</span></h2>
+  <div class="recap cav">
+    <div class="rrow" data-step="1"><i>1</i><div class="bi sm"><span class="en"><b>The context words are assumed stable.</b> If 階級 or 人民 also changed, the common ground shifts underneath the target.</span></div></div>
+    <div class="rrow" data-step="2"><i>2</i><div class="bi sm"><span class="en"><b>Each period is a different archive.</b> Genre, OCR quality, censorship, and who could publish all change with time.</span></div></div>
+    <div class="rrow" data-step="3"><i>3</i><div class="bi sm"><span class="en"><b>Frequency matters.</b> Rare words get noisy vectors; a word that becomes frequent can look as if it “changed”.</span></div></div>
+    <div class="rrow" data-step="4"><i>4</i><div class="bi sm"><span class="en"><b>One vector per period.</b> We see an average over all senses, not which sense rose or fell.</span></div></div>
+  </div>
+  <div class="callout key bi" data-step="5"><span class="en">Use the measure to <b>find</b> candidates for change, then read the passages behind 民_宋 and 民_明 yourself.</span></div>
+</section>
+
+<!-- ─────────── Directions: subtract opposites -->
+<section class="slide" id="s-dir1" data-sec="directions">
+  <h2 class="bi"><span class="en">Subtract opposite words to find a direction</span></h2>
+  <div class="bi sm" data-step="1"><span class="en">Toy example: 女 and 男 agree on every dimension except one, where the signs are opposite.</span></div>
+  <table class="dirt" id="dir1-table" data-step="1">
+    <thead><tr><th></th><th>d₁</th><th>d₂</th><th class="hot">d₃</th><th>d₄</th><th>d₅</th><th>d₆</th></tr></thead>
+    <tbody>
+      <tr><th>女</th><td>0.4</td><td>−0.6</td><td class="hot">0.9</td><td>0.2</td><td>−0.3</td><td>0.5</td></tr>
+      <tr><th>男</th><td>0.4</td><td>−0.6</td><td class="hot">−0.9</td><td>0.2</td><td>−0.3</td><td>0.5</td></tr>
+      <tr class="diff" data-step="3"><th>女 − 男</th><td class="z">0</td><td class="z">0</td><td class="hot big">1.8</td><td class="z">0</td><td class="z">0</td><td class="z">0</td></tr>
+    </tbody>
+  </table>
+  <div class="bi sm" data-step="2"><span class="en">Only d₃ differs: 女 = +0.9, 男 = −0.9.</span></div>
+  <div class="callout key bi" data-step="4"><span class="en">What the two words share <b>cancels</b> to 0; what is opposite <b>doubles</b> (0.9 − (−0.9) = 1.8). What remains is the <b>direction</b> 女 − 男.</span></div>
+</section>
+
+<!-- ─────────── Directions: average many pairs -->
+<section class="slide" id="s-dir2" data-sec="directions">
+  <h2 class="bi"><span class="en">Real vectors are noisy: average over many pairs</span></h2>
+  <table class="dirt" id="dir2-table">
+    <thead><tr><th></th><th>d₁</th><th>d₂</th><th class="hot">d₃</th><th>d₄</th><th>d₅</th><th>d₆</th></tr></thead>
+    <tbody></tbody>
+  </table>
+  <div class="bi sm" data-step="4"><span class="en">Each pair has some noise (the small grey numbers), but the noise points in different directions and cancels out. The <b>shared d₃</b> survives.</span></div>
+  <div class="callout key bi" data-step="5"><span class="en">Hence many pairs, not one. This week’s reading (Kozlowski, Taddy &amp; Evans 2019) finds class and gender dimensions in a century of books this way.</span></div>
+</section>
+
+<!-- ─────────── Directions: project words onto the direction -->
+<section class="slide" id="s-dir3" data-sec="directions">
+  <h2 class="bi"><span class="en">Project every word onto the direction: a “femininity” score</span></h2>
+  <div class="two">
+    <svg class="plot" id="dir3-plot" viewBox="0 0 540 470"></svg>
+    <div class="grow">
+      <div class="eq dir-eq" data-step="3">\(\text{score}(w)=\mathbf w\cdot\hat{\mathbf g},\quad \hat{\mathbf g}=\dfrac{\mathbf{女}-\mathbf{男}}{\lVert\mathbf{女}-\mathbf{男}\rVert}\)</div>
+      <div class="bars" id="dir3-bars" data-step="4"></div>
+      <div class="callout key bi" data-step="5"><span class="en">The score reflects usage in the <b>corpus</b>, stereotypes included (Bolukbasi et al. 2016). For historians that is the point: a corpus records the stereotypes of its time.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Directions: adjectives vs nouns -->
+<section class="slide" id="s-adjnoun" data-sec="directions">
+  <h2 class="bi"><span class="en">Another direction: “adjectiveness”</span></h2>
+  <div class="two adjn">
+    <div class="grow">
+      <div class="bi sm" data-step="1"><span class="en">Pairs with the same meaning but a different part of speech:</span></div>
+      <div class="cp-legend" data-step="1"><span class="adj">adjective</span><span class="noun">noun</span></div>
+      <div class="cpairs en4" data-step="1"><span><em class="adj">happy</em><em class="noun">happiness</em></span><span><em class="adj">dark</em><em class="noun">darkness</em></span><span><em class="adj">strong</em><em class="noun">strength</em></span><span><em class="adj">beautiful</em><em class="noun">beauty</em></span><span><em class="adj">angry</em><em class="noun">anger</em></span><span><em class="adj">wise</em><em class="noun">wisdom</em></span><span><em class="adj">true</em><em class="noun">truth</em></span><span><em class="adj">deep</em><em class="noun">depth</em></span></div>
+      <div class="eq adj-eq" data-step="2">\(\hat{\mathbf d} = \operatorname{average}\big(\mathbf{happy}-\mathbf{happiness},\ \dots\big)\)</div>
+    </div>
+    <div class="grow">
+      <div class="bi sm" data-step="3"><span class="en">Project other words onto it (illustrative):</span></div>
+      <div class="bars" id="adj-bars" data-step="3"></div>
+    </div>
+  </div>
+  <div class="callout key bi" data-step="4"><span class="en">Vectors hold grammar as well as meaning: part of speech is a direction too. Mikolov et al. (2013) also tested such syntactic analogies (big : bigger).</span></div>
+</section>
+
+<!-- ─────────── Directions: loudness -->
+<section class="slide" id="s-loud" data-sec="directions">
+  <h2 class="bi"><span class="en">One more direction: loudness</span></h2>
+  <div class="loud-top" data-step="1">
+    <div class="cp-legend"><span class="loud">響 loud</span><span class="quiet">靜 quiet</span></div>
+    <div class="cpairs loud5"><span><em class="loud">吼叫</em><em class="quiet">低語</em></span><span><em class="loud">尖叫</em><em class="quiet">耳語</em></span><span><em class="loud">喧鬧</em><em class="quiet">安靜</em></span><span><em class="loud">轟隆</em><em class="quiet">沙沙</em></span><span><em class="loud">大喊</em><em class="quiet">呢喃</em></span></div>
+    <div class="eq loud-eq">\(\hat{\mathbf v}=\operatorname{average}(\mathbf{吼叫}-\mathbf{低語},\ \dots)\)</div>
+  </div>
+  <svg class="plot" id="loud-plot" viewBox="0 0 1108 300"></svg>
+  <div class="callout key bi" data-step="4"><span class="en">Even a sensory property like loudness hides in co-occurrence patterns. <small>(Illustrative scores.)</small></span></div>
+</section>
+
+<!-- ─────────── Directions: discussion -->
+<section class="slide" id="s-discuss" data-sec="directions">
+  <h2 class="bi"><span class="en">Discussion: which direction would you look for?</span></h2>
+  <div class="dq">
+    <div data-step="1"><i>1</i><span>Which <b>word pairs</b> would define it?</span></div>
+    <div data-step="2"><i>2</i><span>Which words do you expect at the two ends?</span></div>
+    <div data-step="3"><i>3</i><span>What could go wrong?<small class="dq-sub">word frequency, unbalanced corpora, polysemy, change over time …</small></span></div>
+  </div>
+</section>
+
+<!-- ─────────── Polysemy -->
+<section class="slide" id="s-poly" data-sec="context">
+  <h2 class="bi"><span class="en">Polysemy: the limit of static vectors</span></h2>
+  <div class="card polyc" data-step="1"><div class="polys"><span>「<b>水</b>是人體最重要的組成成分」</span><span>「他的演講很<b>水</b>」</span><span>「市中<b>心</b>」</span><span>「下定決<b>心</b>」</span></div></div>
+  <div class="two cols2">
+    <figure data-step="2"><svg class="plot" id="poly-1" viewBox="0 0 380 225"></svg><figcaption><b>static</b><span>one vector per word (or per word and period)</span></figcaption></figure>
+    <figure data-step="3"><svg class="plot" id="poly-2" viewBox="0 0 380 225"></svg><figcaption><b>contextual</b><span>one vector per occurrence</span></figcaption></figure>
+  </div>
+  <div class="callout key bi" data-step="4"><span class="en">The solution: <b>contextual</b> vectors. BERT (Devlin et al. 2018) reads the whole sentence and gives each occurrence its own vector.</span></div>
+</section>
+
+<!-- ─────────── Summary -->
+<section class="slide" id="s-summary" data-sec="summary">
+  <h2 class="bi"><span class="en">Summary: can word meaning be represented by numbers?</span></h2>
+  <div class="recap">
+    <div class="rrow" data-step="1"><i>1</i><div class="bi sm"><span class="en">Meaning comes from <b>use</b> and <b>context</b> (Saussure, Wittgenstein, Firth, Harris).</span></div></div>
+    <div class="rrow" data-step="2"><i>2</i><div class="bi sm"><span class="en">Represent words as <b>vectors</b>; compare them with the dot product and <b>cosine similarity</b>.</span></div></div>
+    <div class="rrow" data-step="3"><i>3</i><div class="bi sm"><span class="en">From sparse co-occurrence counts to <b>dense</b> word vectors (word2vec).</span></div></div>
+    <div class="rrow" data-step="4"><i>4</i><div class="bi sm"><span class="en"><b>Temporal referencing</b>: one model, time-tagged targets, shared context words; change = 1 − cosine.</span></div></div>
+    <div class="rrow" data-step="5"><i>5</i><div class="bi sm"><span class="en"><b>Directions</b>: subtract opposite words, average many pairs, project every word onto the result to measure an association such as gender.</span></div></div>
+    <div class="rrow" data-step="6"><i>6</i><div class="bi sm"><span class="en">Static vectors blur <b>polysemy</b>; contextual models (BERT) give one vector per occurrence. Next week: GPT.</span></div></div>
+  </div>
+  <div class="callout key bi" data-step="7"><span class="en">Vectors are a tool for exploring sources, not an answer machine. When two words are close, go back to the texts and ask why.</span></div>
+</section>
+<!-- ─────────── In class: two exercises -->
+<section class="slide" id="s-inclass" data-sec="summary">
+  <h2 class="bi"><span class="en">In class: two exercises with static word vectors</span></h2>
+  <div class="two cols2 excols">
+    <article class="card ex" data-step="1">
+      <div class="exh">① Gender associations</div>
+      <p>One Word2Vec model per period: late Qing and Republican fiction. Build a 女 − 男 direction from about 11 word pairs and score 做官, 针线, 恋爱, 国家 …</p>
+      <p class="exq">Which words move between the periods? Which scores change with the random seed?</p>
+    </article>
+    <article class="card ex" data-step="2">
+      <div class="exh">② Meaning change + noise check</div>
+      <p>One <code>TempRefWord2Vec</code> model for both periods. Measure 1 − cos for 经济, 革命, 同志 … Then train again on <b>shuffled</b> periods: that “change” is pure noise.</p>
+      <p class="exq">Which words stay above the noise in both seeds? What about the control words 山 and 马?</p>
+    </article>
+  </div>
+  <div class="callout key bi" data-step="3"><span class="en">Data: qhchina-data, <code>epochs_normalized/late_qing</code> and <code>republican</code>. Prompts: course website, Week 9 notes.</span></div>
+</section>
+<!-- ─────────── Homework: final project proposal -->
+<section class="slide" id="s-proposal" data-sec="summary">
+  <h2 class="bi"><span class="en">Final project proposal: due Friday 20 Nov, 9:00 am</span></h2>
+  <div class="fmt" data-step="1"><span>📄 one full page</span><span>.docx</span><span>Times New Roman 12</span><span>single-spaced</span><span>individually or in a group of up to 3</span></div>
+  <div class="propgrid">
+    <div class="prop" data-step="2"><b>Author(s)</b><p>Your name, or the names of all group members (max. 3)</p></div>
+    <div class="prop" data-step="2"><b>Tentative title</b><p>A working title; it may change later</p></div>
+    <div class="prop wide" data-step="3"><b>Research questions</b><p>Three questions or hypotheses you would like to explore</p></div>
+    <div class="prop wide" data-step="4"><b>Data</b><p>Which sources? Where from, and how much? How much work is needed to digitize them? Is it enough data for the method you chose?</p></div>
+    <div class="prop wide" data-step="5"><b>Methods</b><p>Any method from the course, or a combination: collocations · topic modeling · network analysis · bias analysis · OCR · word2vec · agentic AI</p></div>
+  </div>
+</section>
+<!-- ─────────── Homework: Assignment 2, RAG -->
+<section class="slide" id="s-hw2" data-sec="summary">
+  <h2 class="bi"><span class="en">Next homework: chatting with a historical figure’s texts</span></h2>
+  <div class="hwtop" data-step="1">
+    <div class="bi sm"><span class="en">In groups, choose a <b>historical figure</b> and collect digitized texts in <b>.txt</b> format: the figure’s own works (novels, articles, letters …) or historical documents about them. I will turn your texts into a searchable database for a RAG chat application (retrieval-augmented generation).</span></div>
+    <div class="figs">
+      <figure><img src="assets/qinshihuang.jpg" alt="Qin Shi Huang"><figcaption>秦始皇</figcaption></figure>
+      <figure><img src="assets/zengguofan.jpg" alt="Zeng Guofan"><figcaption>曾國藩</figcaption></figure>
+      <figure><img src="assets/liangqichao.jpg" alt="Liang Qichao"><figcaption>梁啟超</figcaption></figure>
+      <figure><img src="assets/qiujin.jpg" alt="Qiu Jin"><figcaption>秋瑾</figcaption></figure>
+      <figure><img src="assets/luxun.jpg" alt="Lu Xun"><figcaption>魯迅</figcaption></figure>
+    </div>
+  </div>
+  <div class="tline">
+    <div class="tl" data-step="2"><i>Sun 15 Nov · 6:00 pm</i><b>Submit your .txt files</b><p>one set per group, at least <b>1 million characters</b> (about <b>250,000 words</b>)</p></div>
+    <div class="tl" data-step="3"><i>Mon 16 Nov · in class</i><b>Chat with your sources</b><p>ask questions, check the answers against the texts</p></div>
+    <div class="tl" data-step="4"><i>Tue 24 Nov · 9:00 am</i><b>Group reflection essay</b><p>Assignment 2: what did the application get right and wrong, and why?</p></div>
+  </div>
+  <div class="callout key bi" data-step="5"><span class="en">Many sources come as <b>PDFs</b>: convert them to <b>.txt</b> first (extract the text layer, or run OCR as in Week 6 for scans) and check the result. Plain text only (UTF-8), plus a short list of where each file comes from.</span></div>
+</section>
+
+<div id="side"></div>
+<div id="bar"></div>
+<div id="num"></div>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="slides.js"></script>
+<script src="deck.js"></script>
+</body>
+</html>

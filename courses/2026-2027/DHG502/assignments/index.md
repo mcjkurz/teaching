@@ -3,12 +3,12 @@ layout: default
 title: DHG502 Assignments
 ---
 
-<p class="updated">Last updated: Oct 6, 2026</p>
+<p class="updated">Last updated: Nov 9, 2026</p>
 <h1>DHG 502 Assignments</h1>
 
 <h2>Submission Rules</h2>
 <ul>
-<li>Assignments are individual work. The in-class presentation is done in a group of up to three students, as are the project proposal and final project (which may also be completed individually). You may discuss methods and help classmates troubleshoot, but acknowledge any substantial help.</li>
+<li>Assignments 0 and 1 are individual work; Assignment 2 is group work. The in-class presentation is done in a group of up to three students, as are the project proposal and final project (which may also be completed individually). You may discuss methods and help classmates troubleshoot, but acknowledge any substantial help.</li>
 <li>Submit the requested files and repository URL through Moodle. The Moodle timestamp determines whether work is on time.</li>
 <li>A repository may be public or private. For a private repository, grant the instructor access before the deadline. Do not put your student ID in a public repository.</li>
 <li>Only redistribute sources and data that are public domain, openly licensed, or shared with permission. If material is restricted, provide metadata, stable links, and acquisition instructions instead of uploading the files.</li>
@@ -25,34 +25,15 @@ title: DHG502 Assignments
 <p><strong>Due:</strong> 13 Oct, 9:00 am</p>
 <p>Use collocation analysis to examine how an official history represents one person, group, institution, or concept. Choose the settings that fit your source, compare a significance measure with a strength measure, read the passages behind the numbers, and submit a reproducible repository with a 1,000–1,500-word report. Do not put your name or student ID in the repository. Full instructions are on the <a href="assignment-1/">Assignment 1 page</a>.</p>
 
-<h2>Assignment 2: From Historical Sources to Structured Data (15%)</h2>
-<p><strong>Due:</strong> 9 Nov, 9:00 am</p>
-<p>Create a small structured dataset from historical page images. Choose one of the following tracks:</p>
+<h2 id="assignment-2">Assignment 2: Chatting with a Historical Figure’s Texts (15%)</h2>
+<p><strong>Part 1 due:</strong> 15 Nov, 6:00 pm (texts)<br>
+<strong>In class:</strong> 16 Nov (RAG exercise)<br>
+<strong>Part 2 due:</strong> 24 Nov, 9:00 am (reflection essay)</p>
+<p>This assignment is done in groups. Each group chooses a historical figure and collects digitized texts in <code>.txt</code> format (UTF-8): the figure’s own works (novels, articles, letters, and so on) or historical documents about the figure. Choose texts you know well enough to judge whether an answer about them is right. If your sources are PDFs, convert them to <code>.txt</code> first: extract the text layer, or run OCR on scanned pages as in Week 6, and check the result for errors.</p>
 <ul>
-<li><strong>Track A—OCR/HTR:</strong> transcribe 3–5 printed or handwritten pages, then represent each page as a structured record with stable identifiers, source metadata, transcription text, method, and validation status.</li>
-<li><strong>Track B—Image annotation:</strong> use IMMARKUS to create at least 20 meaningful region-level annotations across one or more historical images, using a small schema designed around a historical question.</li>
-</ul>
-<p>The instructor will provide suitable source sets and starter files. Students may propose their own public-domain or openly licensed material.</p>
-
-<h3>Required repository contents</h3>
-<ul>
-<li><code>README.md</code> with your name, chosen track, research question, source citation and rights, data model, and instructions</li>
-<li><code>sources.md</code> listing every source image, holding institution, stable URL, licence or access condition, and access date</li>
-<li><code>schema.json</code> defining each field or annotation class in plain language, including its data type and one example</li>
-<li><code>data/raw/</code> containing permitted source files or a text file of acquisition links; Track A also includes raw machine transcriptions, and Track B preserves the original IMMARKUS JSON-LD export</li>
-<li><code>output/records.json</code> and <code>output/records.csv</code>, containing equivalent structured data in valid JSON and CSV</li>
-<li><code>validation.md</code> documenting a manual check of at least 20% of the output (or one complete page, whichever is larger), an error table, corrections made, and errors that remain</li>
-<li><code>report.md</code> (600–900 words in English) explaining how the schema represents the source, what the structured data reveals, two or more close-read examples, and the method’s limitations</li>
-<li><code>AI-USE.md</code> and, when code is used, the code plus <code>requirements.txt</code></li>
-</ul>
-
-<h3>Marking criteria</h3>
-<ul>
-<li><strong>Sources and data model (20%):</strong> appropriate source selection, complete provenance/rights, stable identifiers, and a coherent schema</li>
-<li><strong>Transcription or annotation (25%):</strong> careful, consistent work tied accurately to the source images</li>
-<li><strong>Structured outputs (20%):</strong> valid, equivalent, and well-organized JSON/CSV, with the original evidence preserved</li>
-<li><strong>Validation (20%):</strong> meaningful human checking, explicit error categories, corrections, and honest reporting of residual uncertainty</li>
-<li><strong>Interpretation, documentation, and AI disclosure (15%):</strong> historically useful interpretation, clear repository guidance, and complete <code>AI-USE.md</code></li>
+<li><strong>Part 1 (15 Nov, 6:00 pm):</strong> submit the <code>.txt</code> files through Moodle, one set per group, totalling at least 1 million characters (about 250,000 words), together with a short list of where each file comes from. The instructor will use the texts to build the database for a RAG (retrieval-augmented generation) chat application.</li>
+<li><strong>In class (16 Nov):</strong> each group questions the chat application about its figure and checks the answers against the sources.</li>
+<li><strong>Part 2 (24 Nov, 9:00 am):</strong> submit a group reflection essay on the exercise through Moodle, with <code>AI-USE.md</code>. Instructions for the essay will be given in class on 16 Nov.</li>
 </ul>
 
 <h2>In-class Presentation (15%)</h2>
@@ -67,29 +48,16 @@ title: DHG502 Assignments
 <li><strong>Discussion questions and facilitation (10%)</strong></li>
 </ul>
 
-<h2>Final Project Proposal</h2>
+<h2 id="final-project-proposal">Final Project Proposal</h2>
 <p><strong>Weight:</strong> 10%<br>
 <strong>Due:</strong> 20 Nov, 9:00 am</p>
-<p>The proposal may be completed individually or in a group of up to three students. Groups submit one shared proposal and identify every member. Submit a 600–800-word proposal and <code>AI-USE.md</code> in English through Moodle. The proposal must include:</p>
+<p>The proposal may be completed individually or in a group of up to three students; groups submit one shared proposal. Submit it through Moodle as <strong>one full page</strong> in <strong>.docx</strong> format, <strong>Times New Roman 12</strong>, <strong>single-spaced</strong>, in English. The proposal contains:</p>
 <ul>
-<li>a focused historical research question and its significance</li>
-<li>brief engagement with at least three relevant scholarly works</li>
-<li>the primary sources and proposed dataset, including provenance, access, rights, sampling, and a small inspected sample</li>
-<li>the planned data structure or schema</li>
-<li>the proposed method and why it fits the question</li>
-<li>a validation plan explaining what will be checked manually and how errors or uncertainty will be recorded</li>
-<li>the expected outputs or visualizations</li>
-<li>a realistic work plan from proposal to submission, plus risks and a fallback plan</li>
-</ul>
-
-<h3>Marking criteria</h3>
-<ul>
-<li><strong>Question, significance, and scholarship (25%)</strong></li>
-<li><strong>Sources, feasibility, provenance, and rights (20%)</strong></li>
-<li><strong>Data model and methodological fit (20%)</strong></li>
-<li><strong>Validation and treatment of uncertainty (15%)</strong></li>
-<li><strong>Outputs, schedule, risks, and fallback plan (10%)</strong></li>
-<li><strong>Clarity, citations, and AI disclosure (10%)</strong></li>
+<li><strong>Author(s):</strong> your name, or the names of all group members (maximum three)</li>
+<li><strong>Tentative title</strong></li>
+<li><strong>Research questions:</strong> three questions or hypotheses you are interested in exploring</li>
+<li><strong>Data:</strong> which sources, where they come from, and how much; how much work is needed to digitize them, if needed; and whether this is enough data for the chosen method</li>
+<li><strong>Methods:</strong> the methods you plan to use; any method from the course so far, or a combination (collocations, topic modeling, network analysis, bias analysis, OCR, word2vec, agentic AI)</li>
 </ul>
 
 <h2>Final Project (30%)</h2>

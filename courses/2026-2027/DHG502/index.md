@@ -348,13 +348,6 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
       <td class="notes"></td>
     </tr>
   </tbody>
-  <tbody class="due">
-    <tr>
-      <td></td>
-      <td class="date">9 Nov</td>
-      <td colspan="3"><a href="assignments/">Assignment 2 due, 9:00 am</a></td>
-    </tr>
-  </tbody>
   <tbody class="block-a">
     <tr>
       <td class="week">9</td>
@@ -377,7 +370,14 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           </ul>
         </div>
       </td>
-      <td class="notes"></td>
+      <td class="notes"><a href="notes/week-09/">Notes</a></td>
+    </tr>
+  </tbody>
+  <tbody class="due">
+    <tr>
+      <td></td>
+      <td class="date">15 Nov</td>
+      <td colspan="3"><a href="assignments/#assignment-2">Assignment 2, part 1: group texts (.txt) about a historical figure due, 6:00 pm</a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -392,6 +392,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
             <li>From BERT to GPT; next-token probability, context, tokens, and APIs</li>
             <li>JSON-schema structured outputs; information and entity extraction; source-linked semantic search and retrieval-augmented generation (RAG)</li>
             <li>Hands-on: extract a small batch, check it against human-coded examples, and record errors</li>
+            <li>In-class: chat with a RAG application built on your group’s texts about a historical figure (Assignment 2)</li>
           </ul>
         </div>
         <div class="schedule-section reading">
@@ -411,7 +412,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
     <tr>
       <td></td>
       <td class="date">20 Nov</td>
-      <td colspan="3"><a href="assignments/">Final Project Proposal due, 9:00 am</a></td>
+      <td colspan="3"><a href="assignments/#final-project-proposal">Final Project Proposal (one page, .docx) due, 9:00 am</a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
@@ -441,6 +442,13 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
       <td class="topic">Presentation</td>
       <td>One paper chosen by your group on historical databases, data modeling, or research built on structured historical datasets</td>
       <td class="notes"></td>
+    </tr>
+  </tbody>
+  <tbody class="due">
+    <tr>
+      <td></td>
+      <td class="date">24 Nov</td>
+      <td colspan="3"><a href="assignments/#assignment-2">Assignment 2, part 2: group reflection essay on the RAG exercise due, 9:00 am</a></td>
     </tr>
   </tbody>
   <tbody class="block-a">
