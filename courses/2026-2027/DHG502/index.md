@@ -3,7 +3,7 @@ layout: default
 title: DHG502
 ---
 
-<p class="updated">Last updated: Nov 2, 2026</p>
+<p class="updated">Last updated: Nov 9, 2026</p>
 <div class="course-header">
 <div class="course-header-info">
 <h1>DHG 502 Course Syllabus</h1>
@@ -83,7 +83,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
 </ul>
 </div>
 <p><strong>2. Assignments.</strong> Assignment 0 is ungraded. Two graded assignments, a project proposal, and the final project are submitted through Moodle. Instructions are linked in the schedule.</p>
-<p><strong>3. In-class presentation.</strong> Students work in groups of up to three. Each group presents one academic paper during one of five presentation sessions (Weeks 4, 6, 8, 10, and 12) and leads the discussion. Every group member must speak, and the group receives a shared mark. The paper may be in English or Chinese, but the presentation and discussion must be in English.</p>
+<p><strong>3. In-class presentation.</strong> Students work in groups of up to three. Each group presents one academic paper during one of five presentation sessions (Weeks 4, 6, 8, 11, and 12) and leads the discussion. Every group member must speak, and the group receives a shared mark. The paper may be in English or Chinese, but the presentation and discussion must be in English.</p>
 <p><strong>4. Final project.</strong> Students work individually or in groups of up to three, apply one or more course methods to a historical question, and submit a reproducible GitHub repository and an English report. Full requirements and marking criteria are on the <a href="assignments/">assignments page</a>.</p>
 
 <h2>Class Schedule</h2>
@@ -382,8 +382,42 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
   </tbody>
   <tbody class="block-a">
     <tr>
-      <td class="week" rowspan="2">10</td>
-      <td class="date" rowspan="2">16 Nov</td>
+      <td class="week">10</td>
+      <td class="date">16 Nov</td>
+      <td class="topic">LLM Workflows for Historical Sources</td>
+      <td>
+        <div class="schedule-section">
+          <strong class="schedule-label">Class content</strong>
+          <ul class="readings">
+            <li>From BERT to GPT; next-token probability, context, tokens, and APIs</li>
+            <li>JSON-schema structured outputs; information and entity extraction; source-linked semantic search and retrieval-augmented generation (RAG)</li>
+            <li>Hands-on: extract a small batch, check it against human-coded examples, and record errors</li>
+          </ul>
+        </div>
+        <div class="schedule-section reading">
+          <strong class="schedule-label">Readings</strong>
+          <ul class="readings">
+            <li>Ted Underwood, Laura K. Nelson, and Matthew Wilkens, “Can Language Models Represent the Past without Anachronism?”</li>
+            <li>Thierry Poibeau, “What Do Historical Language Models Model?”</li>
+            <li>(optional) Maximilian Hindermann et al., <a href="https://openhumanitiesdata.metajnl.com/articles/10.5334/johd.481">“The RISE Humanities Data Benchmark: A Framework for Evaluating Large Language Models for Humanities Tasks”</a> (2026), Introduction</li>
+            <li>(optional) A recent piece treating generative AI as an object of historical source criticism, including documented failure modes such as models “over-historicizing” transcriptions with anachronistic archaic characters (to be selected from current literature)</li>
+          </ul>
+        </div>
+      </td>
+      <td class="notes"></td>
+    </tr>
+  </tbody>
+  <tbody class="due">
+    <tr>
+      <td></td>
+      <td class="date">20 Nov</td>
+      <td colspan="3"><a href="assignments/">Final Project Proposal due, 9:00 am</a></td>
+    </tr>
+  </tbody>
+  <tbody class="block-a">
+    <tr>
+      <td class="week" rowspan="2">11</td>
+      <td class="date" rowspan="2">23 Nov</td>
       <td class="topic">Databases and Structured Historical Data</td>
       <td>
         <div class="schedule-section">
@@ -406,40 +440,6 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
     <tr class="presentation">
       <td class="topic">Presentation</td>
       <td>One paper chosen by your group on historical databases, data modeling, or research built on structured historical datasets</td>
-      <td class="notes"></td>
-    </tr>
-  </tbody>
-  <tbody class="due">
-    <tr>
-      <td></td>
-      <td class="date">20 Nov</td>
-      <td colspan="3"><a href="assignments/">Final Project Proposal due, 9:00 am</a></td>
-    </tr>
-  </tbody>
-  <tbody class="block-a">
-    <tr>
-      <td class="week">11</td>
-      <td class="date">23 Nov</td>
-      <td class="topic">LLM Workflows for Historical Sources</td>
-      <td>
-        <div class="schedule-section">
-          <strong class="schedule-label">Class content</strong>
-          <ul class="readings">
-            <li>From BERT to GPT; next-token probability, context, tokens, and APIs</li>
-            <li>JSON-schema structured outputs; information and entity extraction; source-linked semantic search and retrieval-augmented generation (RAG)</li>
-            <li>Hands-on: extract a small batch, check it against human-coded examples, and record errors</li>
-          </ul>
-        </div>
-        <div class="schedule-section reading">
-          <strong class="schedule-label">Readings</strong>
-          <ul class="readings">
-            <li>Ted Underwood, Laura K. Nelson, and Matthew Wilkens, “Can Language Models Represent the Past without Anachronism?”</li>
-            <li>Thierry Poibeau, “What Do Historical Language Models Model?”</li>
-            <li>(optional) Maximilian Hindermann et al., <a href="https://openhumanitiesdata.metajnl.com/articles/10.5334/johd.481">“The RISE Humanities Data Benchmark: A Framework for Evaluating Large Language Models for Humanities Tasks”</a> (2026), Introduction</li>
-            <li>(optional) A recent piece treating generative AI as an object of historical source criticism, including documented failure modes such as models “over-historicizing” transcriptions with anachronistic archaic characters (to be selected from current literature)</li>
-          </ul>
-        </div>
-      </td>
       <td class="notes"></td>
     </tr>
   </tbody>
