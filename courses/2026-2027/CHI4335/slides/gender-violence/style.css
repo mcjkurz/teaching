@@ -531,3 +531,12 @@ ol.story li { font-family: var(--serif); font-size: 21px; margin-bottom: 9px; }
 .title-slide .tmatisse img { box-shadow: 0 8px 30px rgba(0,0,0,.3); }
 .title-slide .tmatisse figcaption { text-align: left; margin: 0 0 6px; }
 .title-slide .tmatisse { top: 22px; }
+
+/* title slide, final layout: three plates (happiness, the sublime, violence) with slight overlaps */
+.title-slide .tmatisse { display: none; }
+.title-slide .tcover { position: absolute; right: 530px; top: 40px; width: 230px; z-index: 1; }
+.title-slide .tcover img { box-shadow: 0 8px 30px rgba(0,0,0,.3); }
+.title-slide .tcover figcaption { text-align: left; }
+.title-slide .tposter { right: 100px; top: 40px; width: 320px; z-index: 2; }
+.title-slide .tposter img { max-height: 270px; }
+.title-slide .tstill { right: 270px; top: 250px; width: 330px; z-index: 3; }
