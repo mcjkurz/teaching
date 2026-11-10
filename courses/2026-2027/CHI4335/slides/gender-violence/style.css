@@ -540,3 +540,7 @@ ol.story li { font-family: var(--serif); font-size: 21px; margin-bottom: 9px; }
 .title-slide .tposter { right: 100px; top: 40px; width: 320px; z-index: 2; }
 .title-slide .tposter img { max-height: 270px; }
 .title-slide .tstill { right: 270px; top: 250px; width: 330px; z-index: 3; }
+
+/* one Chinese typeface throughout the slides: the serif (English quotations and subtitles keep their Latin face) */
+.slide, .slide *:not(.en):not(h2 small):not(kbd):not(.hint) { font-family: var(--serif); }
+.slide .pq .en, .slide .pq .en *, .slide h2 small { font-family: var(--latin); }
