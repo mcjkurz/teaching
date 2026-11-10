@@ -544,3 +544,4 @@ ol.story li { font-family: var(--serif); font-size: 21px; margin-bottom: 9px; }
 /* one Chinese typeface throughout the slides: the serif (English quotations and subtitles keep their Latin face) */
 .slide, .slide *:not(.en):not(h2 small):not(kbd):not(.hint) { font-family: var(--serif); }
 .slide .pq .en, .slide .pq .en *, .slide h2 small { font-family: var(--latin); }
+.gene .st p small.gloss { display: block; font-size: 16px; color: var(--mute); margin-top: 4px; line-height: 1.4; }
