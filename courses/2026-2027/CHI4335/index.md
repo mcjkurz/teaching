@@ -416,7 +416,7 @@ title: CHI4335
           <li>申丹：〈敘事形式與性別政治：女性主義敘事學評析〉，《北京大學學報（哲學社會科學版）》2004年第1期，頁136–146</li>
         </ul>
       </td>
-      <td class="notes"></td>
+      <td class="notes"><a href="slides/gender-violence/">Slides</a></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
