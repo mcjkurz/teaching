@@ -545,3 +545,9 @@ ol.story li { font-family: var(--serif); font-size: 21px; margin-bottom: 9px; }
 .slide, .slide *:not(.en):not(h2 small):not(kbd):not(.hint) { font-family: var(--serif); }
 .slide .pq .en, .slide .pq .en *, .slide h2 small { font-family: var(--latin); }
 .gene .st p small.gloss { display: block; font-size: 16px; color: var(--mute); margin-top: 4px; line-height: 1.4; }
+
+/* slide 2: two news photos, slightly overlapping, on a dark ground */
+.slide.bleed .duo { position: absolute; inset: 0; }
+.slide.bleed .duo img { position: absolute; display: block; object-fit: cover; box-shadow: 0 10px 34px rgba(0,0,0,.55); }
+.slide.bleed .duo .a { left: 40px; top: 40px; width: 720px; height: 405px; z-index: 1; }
+.slide.bleed .duo .b { right: 40px; bottom: 40px; width: 680px; height: 382px; z-index: 2; }
