@@ -415,14 +415,7 @@ title: CHI3242
           <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> <a href="https://www.youtube.com/watch?v=qx7hirqgfuU">Welch Labs</a>, “Why Deep Learning Works Unreasonably Well” <span class="lang-en">(video)</span><span class="lang-zh" lang="zh-Hant">（影片）</span></li>
         </ul>
       </td>
-      <td class="notes"><a href="https://mcjkurz.github.io/teaching/visualizations/xor-problem.html">XOR problem</a><br><a href="https://mcjkurz.github.io/teaching/visualizations/neural-network-mnist.html">Digit network</a><br><a href="https://mcjkurz.github.io/teaching/visualizations/attention-keys-queries.html">Attention</a><br><a href="https://colab.research.google.com/drive/18X8K_XXXghnzjoaeMExL3I9EVwF_8BRA?usp=sharing">Colab demo</a></td>
-    </tr>
-  </tbody>
-  <tbody class="due">
-    <tr>
-      <td></td>
-      <td class="date"><span class="lang-en">18 Nov</span><span class="lang-zh" lang="zh-Hant">11月18日</span></td>
-      <td colspan="3"><a href="assignments/proposal/"><span class="lang-en">Final Project Proposal due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">期末專題計劃書截止，上午9:00</span></a></td>
+      <td class="notes"><a href="slides/bert/">Slides</a><br><a href="https://mcjkurz.github.io/teaching/visualizations/xor-problem.html">XOR problem</a><br><a href="https://mcjkurz.github.io/teaching/visualizations/neural-network-mnist.html">Digit network</a><br><a href="https://mcjkurz.github.io/teaching/visualizations/attention-keys-queries.html">Attention</a><br><a href="https://colab.research.google.com/drive/18X8K_XXXghnzjoaeMExL3I9EVwF_8BRA?usp=sharing">Colab demo</a></td>
     </tr>
   </tbody>
   <tbody class="block-b">
@@ -432,6 +425,7 @@ title: CHI3242
       <td class="topic"><span class="lang-en">Decoders and LLMs</span><span class="lang-zh" lang="zh-Hant">解碼器與大型語言模型</span></td>
       <td>
         <ul class="readings">
+          <li><strong><span class="lang-en">Guest: Du Chunmei, Department of History</span><span class="lang-zh" lang="zh-Hant">客席講者：杜春媚（歷史系）</span></strong></li>
           <li><span class="lang-en">From BERT to GPT; generative models; what is “context”?; next-token probability</span><span class="lang-zh" lang="zh-Hant">從 BERT 到 GPT；生成模型；什麼是「上下文」？；下一詞元機率</span></li>
           <li><span class="lang-en">LLMs for data extraction; Python API (OpenRouter)</span><span class="lang-zh" lang="zh-Hant">以大型語言模型抽取資料；Python API（OpenRouter）</span></li>
           <li>Jay Alammar, <a href="https://jalammar.github.io/illustrated-gpt2/">“The Illustrated GPT-2”</a></li>
@@ -440,6 +434,13 @@ title: CHI3242
         </ul>
       </td>
       <td class="notes"></td>
+    </tr>
+  </tbody>
+  <tbody class="due">
+    <tr>
+      <td></td>
+      <td class="date"><span class="lang-en">20 Nov</span><span class="lang-zh" lang="zh-Hant">11月20日</span></td>
+      <td colspan="3"><a href="assignments/proposal/"><span class="lang-en">Final Project Proposal due, 9:00 am</span><span class="lang-zh" lang="zh-Hant">期末專題計劃書截止，上午9:00</span></a></td>
     </tr>
   </tbody>
   <tbody class="block-a">

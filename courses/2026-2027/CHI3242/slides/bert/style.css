@@ -611,3 +611,27 @@ table.gtab td .mk.no { color: var(--bad); }
 .gpu-photo { position: absolute; right: 100px; top: 22px; width: 250px; margin: 0; }
 .gpu-photo img { width: 100%; display: block; border-radius: 10px; }
 .gpu-photo figcaption { font-size: 12px; color: var(--mute); text-align: center; margin-top: 3px; }
+/* last slide: the RAG text-collection task */
+#s-hw .hwtop { display: flex; gap: 22px; align-items: flex-start; }
+#s-hw .hwtop > .bi { flex: 1; }
+#s-hw .figs { display: flex; gap: 8px; flex: none; }
+#s-hw .figs figure { margin: 0; width: 92px; text-align: center; }
+#s-hw .figs img { width: 92px; height: 124px; object-fit: cover; object-position: 50% 20%; border-radius: 6px; border: 1px solid var(--line); display: block; }
+#s-hw .figs figcaption { font-size: 17px; margin-top: 4px; font-family: var(--cjk); }
+#s-hw .tline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin: 22px 0 10px; position: relative; }
+#s-hw .tline::before { content: ""; position: absolute; left: 10px; right: 10px; top: 14px; height: 3px; background: var(--line); }
+#s-hw .tl { position: relative; padding-top: 34px; }
+#s-hw .tl::before { content: ""; position: absolute; left: 0; top: 6px; width: 18px; height: 18px; border-radius: 50%; background: var(--tgt); border: 3px solid #fff; }
+#s-hw .tl i { display: block; font-style: normal; color: var(--tgt); font-size: 18px; font-weight: 600; font-family: var(--cjk), var(--latin); }
+#s-hw .tl b { display: block; font-size: 25px; margin: 2px 0; font-family: var(--cjk); }
+#s-hw .tl p { margin: 0; font-size: 18px; line-height: 1.4; font-family: var(--cjk), var(--latin); }
+#s-hw .tl p b { display: inline; font-size: inherit; margin: 0; color: var(--tgt); }
+/* final project proposal */
+#s-proposal .fmt { display: flex; flex-wrap: wrap; gap: 10px; margin: 2px 0 16px; }
+#s-proposal .fmt span { font-size: 19px; padding: 4px 14px; border: 1.5px solid var(--tgt); color: var(--tgt); border-radius: 999px; background: var(--tgt-bg); font-family: var(--cjk), var(--latin); }
+#s-proposal .propgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; }
+#s-proposal .prop { background: var(--panel); border-left: 5px solid var(--tgt); border-radius: 8px; padding: 8px 18px; }
+#s-proposal .prop.wide { grid-column: 1 / -1; }
+#s-proposal .prop > b { font-size: 23px; font-family: var(--cjk); }
+#s-proposal .prop p { margin: 2px 0 0; font-size: 19px; line-height: 1.4; font-family: var(--cjk), var(--latin); }
+#s-proposal .prop p .hl { color: var(--tgt); }
