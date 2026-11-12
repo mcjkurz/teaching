@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Network Playground</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/neural-network-mnist.css">
+</head>
+<body>
+    <div class="container wide">
+        <header>
+            <h1>Neural Network Playground: Handwritten Digits</h1>
+            <p>Build a small neural network, train it on MNIST digits in your browser, and test it on your own drawings</p>
+        </header>
+
+        <main>
+            <div class="nn-fit"><div class="nn-stage">
+  <div class="play">
+
+    <!-- left: input -->
+    <div class="pcol left">
+      <div class="lbl bi xs"><span class="zh">① 輸入：畫一個數字</span><span class="en">Input: draw a digit (0–9)</span></div>
+      <canvas id="pad" width="448" height="448" title="Draw a digit here"></canvas>
+      <div class="btnrow">
+        <button type="button" id="b-clear" title="C">清除 <span>Clear</span></button>
+        <button type="button" id="b-test" title="N">測試圖 <span>Test digit</span></button>
+      </div>
+      <div class="truth" id="truth"></div>
+      <div class="stats">
+        <div><b id="st-seen">0</b><span>已學樣本<i>examples seen</i></span></div>
+        <div><b id="st-epoch">0.00</b><span>輪次<i>epochs</i></span></div>
+        <div><b id="st-loss">–</b><span>損失<i>loss</i></span></div>
+        <div><b id="st-acc">–</b><span>測試準確率<i>test accuracy</i></span></div>
+      </div>
+    </div>
+
+    <!-- centre: the network -->
+    <div class="pcol mid">
+      <div class="topbar">
+        <div class="ctl"><span class="k">隱藏層 <i>hidden layers</i></span>
+          <button type="button" id="b-lminus" aria-label="Remove a layer">−</button><b id="nlayers">2</b><button type="button" id="b-lplus" aria-label="Add a layer">+</button></div>
+        <div class="acthint">點擊每層的標籤切換激活函數 <i>click a layer's label to change its activation</i></div>
+      </div>
+      <div class="netwrap" id="netwrap">
+        <svg id="net" viewBox="0 0 612 420" width="612" height="420"></svg>
+        <div id="actpills"></div>
+        <div id="steppers"></div>
+        <div id="wtip">
+          <div class="wpart"><canvas class="wmap" width="140" height="140"></canvas><div class="cap"></div></div>
+          <div class="tpart"><canvas class="tops" width="300" height="300"></canvas><div class="cap">最能激活它的 9 張測試圖<br>top-activating test images<br>(角標 = 正確答案 true label)</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- right: output + training -->
+    <div class="pcol right">
+      <div class="pred">
+        <div class="lbl bi xs"><span class="zh">② 輸出：網絡的判斷</span><span class="en">Output: the network's guess</span></div>
+        <div class="predrow"><div class="digit" id="pdigit">?</div><div class="conf"><b id="pconf">0%</b><span>信心 confidence</span></div></div>
+      </div>
+      <div class="btnrow">
+        <button type="button" id="b-train" class="primary" title="T">▶ 訓練 <span>Train</span></button>
+        <button type="button" id="b-speed" class="stack" title="Slow motion">慢速<span>slow</span></button>
+        <button type="button" id="b-reset" class="big" title="Reset (R)">↺</button>
+      </div>
+      <label class="ctl lr"><span class="k">學習率 <i>learning rate</i></span>
+        <select id="lr"><option>0.0001</option><option>0.01</option><option>0.03</option><option selected>0.1</option><option>0.3</option><option>1</option></select></label>
+      <canvas id="chart" width="440" height="500"></canvas>
+    </div>
+  </div>
+            </div></div>
+
+            <section class="guide">
+                <h2>How to use it</h2>
+                <ul>
+                    <li>Press <b>訓練 Train</b> to start learning. The network sees 8,000 handwritten digits (14×14 pixels, from MNIST) and is checked on 1,000 digits it never trains on.</li>
+                    <li>Draw a digit on the pad, or press <b>測試圖 Test digit</b> to load a random test image. Your drawing is cropped, rescaled and centred the same way MNIST digits were prepared.</li>
+                    <li>Use <b>−</b> and <b>+</b> to change the number of hidden layers (0 to 4) and the neurons in each layer. Click a layer's label to switch its activation between ReLU, Sigmoid and 線性 none (linear).</li>
+                    <li>Hover over a neuron to see the nine test images that activate it most. First-layer neurons also show their weights as a 14×14 picture. Click a neuron to keep only its own connections visible.</li>
+                    <li>Keyboard: <kbd>T</kbd> train or pause, <kbd>R</kbd> reset, <kbd>C</kbd> clear the pad, <kbd>N</kbd> new test digit.</li>
+                </ul>
+                <h2>Things to try</h2>
+                <ul>
+                    <li>Remove every hidden layer. The model is then a logistic regression on raw pixels, and it still reaches about 90% accuracy.</li>
+                    <li>Set four wide layers to 線性 none. Accuracy stays near the logistic-regression level, because stacked linear layers collapse into a single linear layer.</li>
+                    <li>Compare a learning rate of 0.0001 with a rate of 1. The first barely moves, and the second can make training diverge.</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+    <script src="data/mnist-14x14.js"></script>
+    <script src="scripts/neural-network-mnist.js"></script>
+</body>
+</html>

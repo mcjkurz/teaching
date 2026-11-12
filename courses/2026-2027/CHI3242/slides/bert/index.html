@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>上下文編碼器 Contextual Encoders · CHI3242</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+
+<!-- 1 ─────────── Title -->
+<section class="slide full title-slide" id="s-title">
+  <div class="week bi sm"><span class="zh">第十一週 · 神經網絡</span><span class="en">Week 11 · Neural Networks</span></div>
+  <div class="big-zh">上下文編碼器</div>
+  <div class="big-en">Contextual Encoders</div>
+  <div class="rule"></div>
+  <svg class="title-net" id="title-net" viewBox="0 0 440 440" aria-hidden="true"></svg>
+  <div class="quote bi" data-step="1">
+    <span class="zh">「行」在「銀行」和「行走」裡，應該是同一個向量嗎？</span>
+    <span class="en">Should 行 in 銀行 (bank) and 行走 (to walk) receive the same vector?</span>
+  </div>
+  <div class="hint">CHI3242 文本挖掘 Text Mining for Chinese Humanities &nbsp;·&nbsp; <kbd>←</kbd> <kbd>→</kbd> navigate &nbsp;·&nbsp; <kbd>G</kbd> go to slide &nbsp;·&nbsp; <kbd>L</kbd> laser pointer &nbsp;·&nbsp; <kbd>F</kbd> fullscreen</div>
+</section>
+
+<!-- 2 ─────────── Neural network playground -->
+<section class="slide" id="s-play" data-sec="nn">
+  <h2 class="bi compact"><span class="zh">動手訓練一個神經網絡：辨認手寫數字</span><span class="en">Train a neural network yourself: recognizing handwritten digits</span></h2>
+  <div class="play">
+
+    <!-- left: input -->
+    <div class="pcol left">
+      <div class="lbl bi xs"><span class="zh">① 輸入：畫一個數字</span><span class="en">Input: draw a digit (0–9)</span></div>
+      <canvas id="pad" width="448" height="448" title="Draw a digit here"></canvas>
+      <div class="btnrow">
+        <button type="button" id="b-clear" title="C">清除 <span>Clear</span></button>
+        <button type="button" id="b-test" title="N">測試圖 <span>Test digit</span></button>
+      </div>
+      <div class="truth" id="truth"></div>
+      <div class="stats">
+        <div><b id="st-seen">0</b><span>已學樣本<i>examples seen</i></span></div>
+        <div><b id="st-epoch">0.00</b><span>輪次<i>epochs</i></span></div>
+        <div><b id="st-loss">–</b><span>損失<i>loss</i></span></div>
+        <div><b id="st-acc">–</b><span>測試準確率<i>test accuracy</i></span></div>
+      </div>
+    </div>
+
+    <!-- centre: the network -->
+    <div class="pcol mid">
+      <div class="topbar">
+        <div class="ctl"><span class="k">隱藏層 <i>hidden layers</i></span>
+          <button type="button" id="b-lminus" aria-label="Remove a layer">−</button><b id="nlayers">2</b><button type="button" id="b-lplus" aria-label="Add a layer">+</button></div>
+        <div class="acthint">點擊每層的標籤切換激活函數 <i>click a layer's label to change its activation</i></div>
+      </div>
+      <div class="netwrap" id="netwrap">
+        <svg id="net" viewBox="0 0 612 420" width="612" height="420"></svg>
+        <div id="actpills"></div>
+        <div id="steppers"></div>
+        <div id="wtip">
+          <div class="wpart"><canvas class="wmap" width="140" height="140"></canvas><div class="cap"></div></div>
+          <div class="tpart"><canvas class="tops" width="300" height="300"></canvas><div class="cap">最能激活它的 9 張測試圖<br>top-activating test images<br>(角標 = 正確答案 true label)</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- right: output + training -->
+    <div class="pcol right">
+      <div class="pred">
+        <div class="lbl bi xs"><span class="zh">② 輸出：網絡的判斷</span><span class="en">Output: the network's guess</span></div>
+        <div class="predrow"><div class="digit" id="pdigit">?</div><div class="conf"><b id="pconf">0%</b><span>信心 confidence</span></div></div>
+      </div>
+      <div class="btnrow">
+        <button type="button" id="b-train" class="primary" title="T">▶ 訓練 <span>Train</span></button>
+        <button type="button" id="b-speed" class="stack" title="Slow motion">慢速<span>slow</span></button>
+        <button type="button" id="b-reset" class="big" title="Reset (R)">↺</button>
+      </div>
+      <label class="ctl lr"><span class="k">學習率 <i>learning rate</i></span>
+        <select id="lr"><option>0.0001</option><option>0.01</option><option>0.03</option><option selected>0.1</option><option>0.3</option><option>1</option></select></label>
+      <canvas id="chart" width="440" height="500"></canvas>
+    </div>
+  </div>
+</section>
+
+<div id="side"></div>
+<div id="bar"></div>
+<div id="num"></div>
+</div>
+<script src="digits.js"></script>
+<script src="slides.js"></script>
+<script src="deck.js"></script>
+</body>
+</html>
