@@ -679,6 +679,42 @@ print(cos(a, c, dim=<span class="n">0</span>), cos(a, b, dim=<span class="n">0</
 </section>
 
 
+<section class="slide" id="s-workflow" data-sec="summary">
+  <h2 class="bi"><span class="zh">實作流程：從預訓練模型到自己的分類器</span><span class="en">The usual workflow: from a pre-trained model to your own classifier</span></h2>
+  <div class="wf">
+    <div class="wf-step"><i>1</i><b>選預訓練模型</b><span>bert-base-chinese、SikuBERT、GujiBERT……</span><em>choose a pre-trained model</em></div>
+    <div class="wf-arr">→</div>
+    <div class="wf-step" data-step="1"><i>2</i><b>準備有標籤的資料</b><span>例：1,000 條評論，正面／負面；分成訓練集與測試集</span><em>label data, split it</em></div>
+    <div class="wf-arr" data-step="1">→</div>
+    <div class="wf-step" data-step="2"><i>3</i><b>加分類器</b><span>接在 [CLS] 上：一個新的小層，權重隨機開始</span><em>add a classifier head</em></div>
+    <div class="wf-arr" data-step="2">→</div>
+    <div class="wf-step" data-step="3"><i>4</i><b>微調</b><span>訓練幾輪，學習率很小（如 2e-5）；整個網絡一起微調</span><em>fine-tune</em></div>
+    <div class="wf-arr" data-step="3">→</div>
+    <div class="wf-step" data-step="4"><i>5</i><b>評估與分享</b><span>在測試集上算準確率、F1；上載到 Hugging Face</span><em>evaluate, share</em></div>
+  </div>
+  <div class="wf-bottom" data-step="5">
+<pre class="code"><span class="kw">from</span> transformers <span class="kw">import</span> (AutoTokenizer,
+    AutoModelForSequenceClassification, Trainer, TrainingArguments)
+
+name = <span class="s">"bert-base-chinese"</span>  <span class="c"># ① 預訓練模型</span>
+tok = AutoTokenizer.from_pretrained(name)
+model = AutoModelForSequenceClassification.from_pretrained(
+    name, num_labels=<span class="n">2</span>)  <span class="c"># ③ [CLS] 上的分類器</span>
+
+args = TrainingArguments(<span class="s">"out"</span>, num_train_epochs=<span class="n">3</span>,
+                         learning_rate=<span class="n">2e-5</span>)
+trainer = Trainer(model=model, args=args,
+                  train_dataset=train, eval_dataset=test)  <span class="c"># ② 你的資料</span>
+trainer.train()  <span class="c"># ④ 微調</span>
+trainer.evaluate()  <span class="c"># ⑤ 評估</span>
+model.push_to_hub(<span class="s">"my-sentiment-bert"</span>)  <span class="c"># ⑤ 分享</span></pre>
+    <div>
+      <div class="callout key bi xs"><span class="zh"><b>預訓練</b>學「語言」：別人已經做好。<br><b>微調</b>學「任務」：用少量資料，你來做。</span><span class="en">Pre-training learns the language and is already done for you; fine-tuning learns your task from a small labelled dataset.</span></div>
+      <div class="note bi xs"><span class="zh">本週實作：訓練一個情感分類器，並上載到 Hugging Face。（程式碼為示意，資料準備的步驟從略。）</span><span class="en">This week's lab: train a sentiment classifier and upload it to Hugging Face. The code is a sketch; data preparation is omitted.</span></div>
+    </div>
+  </div>
+</section>
+
 <section class="slide" id="s-summary" data-sec="summary">
   <h2 class="bi"><span class="zh">總結</span><span class="en">Summary</span></h2>
   <div class="sum">
