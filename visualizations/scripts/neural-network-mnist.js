@@ -24,7 +24,7 @@ function el(tag, attrs, parent, text) {
   const SIZES = [1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 24, 32, 48, 64, 96, 128];
   const MAX_LAYERS = 4, MAX_SHOW = 16, BATCH = 16;
   const st = {
-    hidden: [16, 16], acts: ['relu', 'relu'], lr: 0.1, slow: false, running: false,
+    hidden: [8, 8], acts: ['relu', 'relu'], lr: 0.1, slow: false, running: false,
     seen: 0, loss: null, hist: [], nextEval: 0, diverged: false,
     input: new Float32Array(N), mode: 'test', testIdx: 0, dirty: true, inputDirty: false, hover: null, pin: null
   };
@@ -426,7 +426,7 @@ function el(tag, attrs, parent, text) {
   btn('#b-clear', clearPad);
   btn('#b-test', showTest);
   btn('#b-lminus', () => { if (st.hidden.length) { st.hidden.pop(); st.acts.pop(); rebuild(); } });
-  btn('#b-lplus', () => { if (st.hidden.length < MAX_LAYERS) { st.hidden.push(16); st.acts.push(st.acts[st.acts.length - 1] || 'relu'); rebuild(); } });
+  btn('#b-lplus', () => { if (st.hidden.length < MAX_LAYERS) { st.hidden.push(8); st.acts.push(st.acts[st.acts.length - 1] || 'relu'); rebuild(); } });
   const lrSel = $('#lr');
   lrSel.addEventListener('keydown', e => e.stopPropagation());   // keep the arrow keys inside the dropdown
   lrSel.addEventListener('change', () => { st.lr = Number(lrSel.value); lrSel.blur(); if (st.diverged) rebuild(); });
@@ -459,6 +459,12 @@ function el(tag, attrs, parent, text) {
   rebuild();
   showTest();
   requestAnimationFrame(loop);
+})();
+
+/* ---------- optional lock: no text selection while drawing or dragging ---------- */
+(function () {
+  const box = document.getElementById('nn-lock'), stage = document.querySelector('.nn-stage');
+  box.addEventListener('change', () => { stage.classList.toggle('locked', box.checked); box.blur(); });
 })();
 
 /* ---------- the playground is laid out at a fixed 1108 x 520 px and scaled to the page width ---------- */

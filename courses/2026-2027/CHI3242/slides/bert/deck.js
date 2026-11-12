@@ -17,9 +17,9 @@
   const side = document.getElementById('side');
   const hooks = window.HOOKS || {};
   const sections = window.SECTIONS || [];
-  let cur = 0, step = 0;
+  let cur = 0, step = 0, prevSlide = null;
 
-  const maxStep = s => { let m = 0; s.querySelectorAll('[data-step]').forEach(e => { m = Math.max(m, +e.dataset.step); }); return m; };
+  const maxStep = s => { let m = +(s.dataset.steps || 0); s.querySelectorAll('[data-step]').forEach(e => { m = Math.max(m, +e.dataset.step); }); return m; };
   const firstOf = id => slides.findIndex(s => s.dataset.sec === id);
 
   // sidebar + kicker
@@ -56,6 +56,11 @@
 
   function apply() {
     const s = slides[cur];
+    if (prevSlide !== s) {   // enter / leave hooks for slides with their own animation loops
+      if (prevSlide) { const ph = hooks[prevSlide.id]; if (ph && ph.leave) ph.leave(prevSlide); }
+      const eh = hooks[s.id]; if (eh && eh.enter) eh.enter(s);
+      prevSlide = s;
+    }
     slides.forEach((x, i) => x.classList.toggle('active', i === cur));
     s.querySelectorAll('[data-step]').forEach(e => {
       const from = +e.dataset.step;

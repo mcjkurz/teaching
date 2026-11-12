@@ -414,7 +414,7 @@ title: CHI3242
           <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> 3Blue1Brown, <a href="https://www.3blue1brown.com/topics/neural-networks">neural-network series</a> <span class="lang-en">(video)</span><span class="lang-zh" lang="zh-Hant">（影片）</span></li>
         </ul>
       </td>
-      <td class="notes"></td>
+      <td class="notes"><a href="https://mcjkurz.github.io/teaching/visualizations/xor-problem.html">XOR problem</a><br><a href="https://mcjkurz.github.io/teaching/visualizations/neural-network-mnist.html">Digit network</a><br><a href="https://mcjkurz.github.io/teaching/visualizations/attention-keys-queries.html">Attention</a></td>
     </tr>
   </tbody>
   <tbody class="due">

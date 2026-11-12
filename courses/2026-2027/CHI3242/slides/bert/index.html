@@ -4,7 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>上下文編碼器 Contextual Encoders · CHI3242</title>
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="vp.css">
 </head>
 <body>
 <div id="stage">
@@ -20,11 +22,151 @@
     <span class="zh">「行」在「銀行」和「行走」裡，應該是同一個向量嗎？</span>
     <span class="en">Should 行 in 銀行 (bank) and 行走 (to walk) receive the same vector?</span>
   </div>
-  <div class="hint">CHI3242 文本挖掘 Text Mining for Chinese Humanities &nbsp;·&nbsp; <kbd>←</kbd> <kbd>→</kbd> navigate &nbsp;·&nbsp; <kbd>G</kbd> go to slide &nbsp;·&nbsp; <kbd>L</kbd> laser pointer &nbsp;·&nbsp; <kbd>F</kbd> fullscreen</div>
+  <div class="hint">CHI3242 文本挖掘 Text Mining for Chinese Humanities &nbsp;·&nbsp; <kbd>←</kbd> <kbd>→</kbd> navigate &nbsp;·&nbsp; <kbd>1</kbd>–<kbd>6</kbd> sections &nbsp;·&nbsp; <kbd>L</kbd> laser pointer &nbsp;·&nbsp; <kbd>F</kbd> fullscreen</div>
 </section>
 
-<!-- 2 ─────────── Neural network playground -->
-<section class="slide" id="s-play" data-sec="nn">
+<!-- ═════════════ 1 · from logistic regression to neural networks -->
+
+<section class="slide" id="s-lr" data-sec="nn">
+  <h2 class="bi"><span class="zh">回顧：邏輯迴歸就是一個「神經元」</span><span class="en">Recap: logistic regression is a single neuron</span></h2>
+  <svg class="diag" id="lr-svg" viewBox="0 0 1108 360" aria-label="Logistic regression: five word features, weights, weighted sum, sigmoid, probability"></svg>
+  <div class="row2">
+    <div class="eqline bi sm"><span class="zh">加權總和 → 激活函數 → 機率：\(p=\sigma(\mathbf w\cdot\mathbf x+b)\)</span><span class="en">weighted sum, then an activation function, then a probability</span></div>
+    <div class="callout key bi sm" data-step="2"><span class="zh">邏輯迴歸 ＝ 只有一個神經元的網絡</span><span class="en">Logistic regression is a network with exactly one neuron.</span></div>
+  </div>
+</section>
+
+<section class="slide" id="s-bio" data-sec="nn">
+  <h2 class="bi"><span class="zh">為什麼叫「神經」網絡？</span><span class="en">Why is it called a neural network?</span></h2>
+  <img class="neuron-img" src="img/neuron.jpeg" alt="A biological neuron (left) and its mathematical model (right)">
+  <div class="biomap">
+    <div data-step="1"><b>樹突</b><span>dendrites</span><i>→</i><b>輸入 \(x_i\)</b><span>inputs</span></div>
+    <div data-step="1"><b>突觸強弱</b><span>synapses</span><i>→</i><b>權重 \(w_i\)</b><span>weights</span></div>
+    <div data-step="2"><b>細胞體</b><span>cell body</span><i>→</i><b>加權總和 \(\sum w_ix_i+b\)</b><span>weighted sum</span></div>
+    <div data-step="2"><b>放電</b><span>firing</span><i>→</i><b>激活函數 \(f\)</b><span>activation</span></div>
+    <div data-step="3"><b>軸突</b><span>axon</span><i>→</i><b>輸出，傳給下一個神經元</b><span>output to the next neuron</span></div>
+  </div>
+  <div class="callout bi xs" data-step="4"><span class="zh">只是比喻：人工神經網絡是一個由矩陣與函數組成的數學模型。上週的 Hebb：「一起放電的神經元，彼此的連結會變強」。</span><span class="en">The analogy is loose: an artificial network is a mathematical function built from matrices, inspired by neurons that strengthen their connections.</span></div>
+</section>
+
+<section class="slide" id="s-layer" data-sec="nn">
+  <h2 class="bi"><span class="zh">回顧：Softmax ＝ 一排神經元</span><span class="en">Recap: softmax puts several neurons side by side</span></h2>
+  <svg class="diag" id="layer-svg" viewBox="0 0 1108 360" aria-label="Three neurons share the same inputs and feed a softmax"></svg>
+  <div class="row2">
+    <div class="bi sm" data-step="1"><span class="zh">同一組輸入，三個神經元，各有<b>自己的權重</b>：這就是一<b>層</b>（layer）</span><span class="en">Same inputs, three neurons, each with its own weights: together they form a layer.</span></div>
+    <div class="callout key bi sm" data-step="2"><span class="zh">15 個權重排成矩陣 \(W\)：\(\mathbf z = W\mathbf x + \mathbf b\)</span><span class="en">Fifteen weights fit in one matrix, so a whole layer is a single matrix product.</span></div>
+  </div>
+</section>
+
+<section class="slide" id="s-next" data-sec="nn">
+  <h2 class="bi"><span class="zh">先別急著輸出：<em>再加一層</em></span><span class="en">Don't rush to the output: add another layer</span></h2>
+  <svg class="diag" id="next-svg" viewBox="0 0 1108 380" aria-label="An output layer keeps its activations and passes them to a new layer, becoming a hidden layer"></svg>
+  <div class="steps-row four">
+    <div class="st bi xs"><i>①</i><span class="zh">Softmax：輸入直接連到輸出，馬上給出機率</span><span class="en">Softmax goes straight from the inputs to probabilities.</span></div>
+    <div class="st bi xs" data-step="1"><i>②</i><span class="zh">先<b>不</b>輸出機率：保留每個神經元的激活值 \(\mathbf h\)</span><span class="en">Keep the activations instead of turning them into probabilities.</span></div>
+    <div class="st bi xs" data-step="2"><i>③</i><span class="zh">把 \(\mathbf h\) 交給<b>新的一層</b>：原本的輸出層變成<b>隱藏層</b></span><span class="en">Pass them to a new layer; the old output layer is now a hidden layer.</span></div>
+    <div class="st bi xs" data-step="3"><i>④</i><span class="zh">\(\mathbf h=\sigma(W^{(1)}\mathbf x+\mathbf b^{(1)})\)<br>\(\mathbf p=\operatorname{softmax}(W^{(2)}\mathbf h+\mathbf b^{(2)})\)<br>疊很多層 ＝ <b>深度學習</b></span><span class="en">Stack many layers and you have deep learning.</span></div>
+  </div>
+</section>
+
+<section class="slide" id="s-gates" data-sec="nn">
+  <h2 class="bi"><span class="zh">一條直線分得開嗎？</span><span class="en">Can a single straight line separate the two classes?</span></h2>
+  <div class="two gates">
+    <div>
+      <div class="gate-btns" id="gate-btns">
+        <button type="button" data-g="or" class="on">或 OR</button><button type="button" data-g="and">且 AND</button><button type="button" data-g="nand">非且 NAND</button><button type="button" data-g="xor">異或 XOR</button>
+      </div>
+      <div class="gate-eq" id="gate-eq">
+        <span class="op it">z</span><span class="op">=</span>
+        <label class="wv"><select data-k="w1" aria-label="w1"></select><small>w₁ 權重</small></label>
+        <span class="op it">x<sub>1</sub></span><span class="op">+</span>
+        <label class="wv"><select data-k="w2" aria-label="w2"></select><small>w₂ 權重</small></label>
+        <span class="op it">x<sub>2</sub></span><span class="op">+</span>
+        <label class="wv"><select data-k="b" aria-label="b"></select><small>b 偏置</small></label>
+      </div>
+      <div class="gate-rule"><svg class="mini-step" viewBox="0 0 70 38" aria-hidden="true"><line x1="4" y1="31" x2="66" y2="31" stroke="#c3c8d2"/><line x1="35" y1="4" x2="35" y2="34" stroke="#c3c8d2"/><path d="M4 31 H35 M35 8 H66" stroke="#1b2333" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="35" cy="31" r="3" fill="#1b2333"/><circle cx="35" cy="8" r="3" fill="#fff" stroke="#1b2333" stroke-width="2"/></svg><div>輸出 ＝ step(\(z\))：\(z > 0\) → 1，否則 0<span class="ge">a step activation: output 1 if z &gt; 0, otherwise 0</span></div></div>
+      <table class="gtab" id="gate-tab"></table>
+      <div class="callout key bi xs" data-step="1"><span class="zh">一個神經元 ＝ 一條直線 \(z = 0\)。<br>XOR：怎麼選 \(w_1, w_2, b\)，都至少錯一個。</span><span class="en">One neuron is one line; for XOR, every choice misses at least one point.</span></div>
+    </div>
+    <div>
+      <svg class="plot" id="gate-svg" viewBox="0 0 470 430" aria-label="Four points and the line z = 0"></svg>
+      <div class="gate-score" id="gate-score"></div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="slide" id="s-xorhid" data-sec="nn">
+  <h2 class="bi"><span class="zh">隱藏層怎麼解決 XOR？先搬動點，再畫直線</span><span class="en">How a hidden layer solves XOR: move the points, then draw a line</span></h2>
+  <div class="xh">
+    <figure><svg class="plot" id="xh-in" viewBox="0 0 400 380"></svg><figcaption>輸入空間 \((x_1, x_2)\)<span class="fe">input space</span></figcaption></figure>
+    <figure class="xh-mid"><svg class="diag" id="xh-net" viewBox="0 0 312 380" aria-label="Network: x1 and x2 feed h1 (OR) and h2 (NAND), which feed the output y (AND)"></svg><figcaption>網絡<span class="fe">step activation: 1 if Σ &gt; 0</span></figcaption></figure>
+    <figure data-step="3"><svg class="plot" id="xh-hid" viewBox="0 0 400 380"></svg><figcaption>隱藏空間 \((h_1, h_2)\)<span class="fe">hidden space</span></figcaption></figure>
+  </div>
+  <div class="xh-legend">
+    <div class="bi xs" data-step="1"><span class="zh"><b class="c1">\(h_1\)</b> ＝ 或 OR：「至少一個是 1」</span><span class="en">at least one input is on</span></div>
+    <div class="bi xs" data-step="2"><span class="zh"><b class="c2">\(h_2\)</b> ＝ 非且 NAND：「不是兩個都是 1」</span><span class="en">not both inputs are on</span></div>
+    <div class="bi xs" data-step="4"><span class="zh">輸出 ＝ \(h_1\) 且 \(h_2\)：新空間裡，<b>一條直線</b>就夠了</span><span class="en">In the new space, one line separates the classes.</span></div>
+  </div>
+</section>
+
+<section class="slide" id="s-act" data-sec="nn">
+  <h2 class="bi"><span class="zh">激活函數：神經元的「開關」</span><span class="en">Activation functions: what a neuron does with its sum z</span></h2>
+  <div class="acts">
+    <div class="act-card"><div class="act-name"><b>階躍</b> step</div><svg class="act-plot" id="act-step" viewBox="0 0 250 170"></svg>
+      <div class="act-f">\(z>0 \;\Rightarrow\; 1\)，否則 \(0\)</div><div class="act-d">只有開或關<span>on or off; used in the XOR network</span></div></div>
+    <div class="act-card"><div class="act-name"><b>S 形</b> sigmoid</div><svg class="act-plot" id="act-sig" viewBox="0 0 250 170"></svg>
+      <div class="act-f">\(\sigma(z)=\dfrac{1}{1+e^{-z}}\)</div><div class="act-d">平滑地介於 0 與 1<span>smooth, from 0 to 1; as in logistic regression</span></div></div>
+    <div class="act-card"><div class="act-name"><b>雙曲正切</b> tanh</div><svg class="act-plot" id="act-tanh" viewBox="0 0 250 170"></svg>
+      <div class="act-f">\(\tanh(z)=\dfrac{e^{z}-e^{-z}}{e^{z}+e^{-z}}\)</div><div class="act-d">介於 −1 與 1，以 0 為中心<span>like sigmoid, but centred on 0</span></div></div>
+    <div class="act-card"><div class="act-name"><b>線性整流</b> ReLU</div><svg class="act-plot" id="act-relu" viewBox="0 0 250 170"></svg>
+      <div class="act-f">\(\mathrm{ReLU}(z)=\max(0,\,z)\)</div><div class="act-d">負的變 0，正的保留<span>negatives become 0; today's most common choice</span></div></div>
+  </div>
+  <div class="callout key bi sm" data-step="1"><span class="zh">沒有激活函數，疊再多層也只是<b>一條直線</b>：線性的組合仍然是線性的。</span><span class="en">Without an activation, any stack of layers still draws a single straight line.</span></div>
+</section>
+
+<section class="slide" id="s-fold" data-sec="nn">
+  <h2 class="bi"><span class="zh">激活函數在做什麼？</span><span class="en">What does an activation function do?</span></h2>
+  <div class="two fold">
+    <svg class="plot" id="fold-svg" viewBox="0 0 520 470" aria-label="ReLU folds the plane along the diagonal until (1,0) lies on (0,1)"></svg>
+    <div>
+      <div class="bi sm"><span class="zh">它讓神經元能把空間<b>彎折</b>。例如 ReLU：沿對角線把平面<b>對摺</b>。</span><span class="en">It lets a neuron bend the space. ReLU, for example, folds the plane along the diagonal.</span></div>
+      <div class="fold-ctl">
+        <button type="button" id="fold-play">▶ 摺 <span>fold</span></button>
+        <button type="button" id="fold-reset" class="ghost" title="Unfold">↺ <span>reset</span></button>
+      </div>
+      <div class="eq fold-eq">\(|x_1-x_2| = \mathrm{ReLU}(x_1-x_2)+\mathrm{ReLU}(x_2-x_1)\)</div>
+      <div class="bi sm" data-step="1"><span class="zh">\((1,0)\) 疊到 \((0,1)\) 上：兩個綠點疊在一起。</span><span class="en">(1,0) lands on (0,1): the two green points meet.</span></div>
+      <div class="callout key bi sm" data-step="2"><span class="zh">摺好之後，<b>一條直線</b>就分得開。</span><span class="en">After the fold, one straight line separates the classes.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-grad" data-sec="nn">
+  <h2 class="bi"><span class="zh">網絡怎麼學？誤差<em>往回傳</em></span><span class="en">How does a network learn? The error travels backwards</span></h2>
+  <div class="two bp2">
+    <svg class="diag" id="bp-svg" viewBox="0 0 680 420" aria-label="Forward pass, the error at the output, and the error passed back through the layers"></svg>
+    <div class="bp-right">
+      <div class="who">
+        <!-- Photo: Geoffrey E. Hinton, 2024 Nobel Prize Laureate in Physics (cropped), by Arthur Petron, Wikimedia Commons, CC BY-SA 4.0 -->
+        <img src="img/hinton.jpg" alt="Geoffrey Hinton">
+        <div class="bi xs"><span class="zh"><b>反向傳播</b>（backpropagation）<br>Rumelhart、Hinton、Williams（1986）</span><span class="en">Geoffrey Hinton, Nobel Prize in Physics 2024</span></div>
+      </div>
+      <div class="st bi xs"><i>①</i><span class="zh">前向：「這部電影很精彩」→ <b>0.73</b>，正確答案是 1</span><span class="en">Forward pass: the network says 0.73; the answer is 1.</span></div>
+      <div class="st bi xs" data-step="1"><i>②</i><span class="zh">誤差 0.73 − 1 ＝ <b class="bad-c">−0.27</b>：太低了</span><span class="en">The error: the output is too low.</span></div>
+      <div class="st bi xs" data-step="2"><i>③</i><span class="zh">誤差<b>往回</b>傳：輸出太低。權重為正的神經元，值 h <b class="ok-c">要變大 ↑</b>；權重為負的，h <b class="bad-c">要變小 ↓</b>：兩者都讓輸出升高</span><span class="en">The output is too low: a neuron with a positive weight should grow, one with a negative weight should shrink; both raise the output.</span></div>
+      <div class="st bi xs" data-step="3"><i>④</i><span class="zh">再往回傳：每條連線的權重都朝讓輸出升高的方向<b>微調</b>一點；沒出現的詞（x ＝ 0）不變</span><span class="en">Every weight is nudged a little; words that did not occur stay unchanged.</span></div>
+      <div class="callout key bi xs" data-step="4"><span class="zh">重複成千上萬個例子：這就是「學習」。</span><span class="en">Repeat this for thousands of examples: that is learning.</span></div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- ─────────── Neural network playground -->
+<section class="slide" id="s-play" data-lock data-sec="nn">
   <h2 class="bi compact"><span class="zh">動手訓練一個神經網絡：辨認手寫數字</span><span class="en">Train a neural network yourself: recognizing handwritten digits</span></h2>
   <div class="play">
 
@@ -81,11 +223,460 @@
   </div>
 </section>
 
+<!-- ═════════════ 2 · polysemy -->
+
+<section class="slide" id="s-poly" data-sec="poly">
+  <h2 class="bi"><span class="zh">回到上週的問題：一個詞，一個向量？</span><span class="en">Back to last week's problem: one word, one vector?</span></h2>
+  <div class="polys"><span>「<b>水</b>是人體最重要的組成成分」</span><span>「他的演講很<b>水</b>」</span><span>「市中<b>心</b>」</span><span>「下定決<b>心</b>」</span></div>
+  <div class="two pfig">
+    <figure data-step="1"><svg class="plot" id="poly-1" viewBox="0 0 500 270"></svg><figcaption><b>靜態 static</b><span>每個詞一個向量（word2vec）</span></figcaption></figure>
+    <figure data-step="2"><svg class="plot" id="poly-2" viewBox="0 0 500 270"></svg><figcaption><b>上下文 contextual</b><span>每次出現一個向量</span></figcaption></figure>
+  </div>
+  <div class="callout key bi sm" data-step="3"><span class="zh">目標：每一次出現的「水」，都依它的<b>上下文</b>得到自己的向量。</span><span class="en">Goal: every occurrence of 水 gets its own vector, decided by its context.</span></div>
+</section>
+
+<section class="slide" id="s-poly2" data-sec="poly">
+  <h2 class="bi"><span class="zh">一詞多義無處不在</span><span class="en">Polysemy is everywhere</span></h2>
+  <div class="cards three">
+    <div class="card" data-step="1"><div class="big">行</div>
+      <div class="ex">銀<b>行</b> <i>háng · bank</i></div><div class="ex"><b>行</b>走 <i>xíng · to walk</i></div><div class="ex">你真<b>行</b>！ <i>capable</i></div><div class="ex"><b>行</b>不<b>行</b>？ <i>OK?</i></div></div>
+    <div class="card" data-step="2"><div class="big">打</div>
+      <div class="ex"><b>打</b>電話 <i>to make a call</i></div><div class="ex"><b>打</b>籃球 <i>to play</i></div><div class="ex"><b>打</b>醬油 <i>to buy; to be a bystander</i></div><div class="ex"><b>打</b>車 <i>to take a taxi</i></div></div>
+    <div class="card" data-step="3"><div class="big">意思</div>
+      <div class="ex">「你這是什麼<b>意思</b>？」 <i>meaning</i></div><div class="ex">「沒什麼<b>意思</b>，」 <i>intention</i></div><div class="ex">「<b>意思意思</b>而已。」 <i>a small gift</i></div><div class="ex">「真不好<b>意思</b>。」 <i>embarrassed</i></div></div>
+  </div>
+  <div class="callout key bi sm" data-step="4"><span class="zh">要分辨「行」的意思，就得<b>讀完整句</b>，把周圍的詞<b>組合</b>起來：這是神經網絡擅長的事。</span><span class="en">To choose a sense, a model has to read the whole sentence and combine the surrounding words, which is what neural networks are good at.</span></div>
+</section>
+
+<!-- ═════════════ 3 · BERT -->
+
+<section class="slide" id="s-bert" data-sec="bert">
+  <h2 class="bi"><span class="zh">BERT：基於變換器的雙向編碼器表示技術</span><span class="en">BERT: Bidirectional Encoder Representations from Transformers</span></h2>
+  <div class="src-line">Devlin, Chang, Lee &amp; Toutanova (Google), 2018 · 中文版 bert-base-chinese，古文版 SikuBERT、GujiBERT 等</div>
+  <div class="letters">
+    <div class="lt" data-step="1"><b>B</b><div><span class="w">Bidirectional · 雙向</span><span class="d">同時讀<b>左邊</b>和<b>右邊</b>的上下文：「這篇文章很<u>水</u>」的「水」能看到前面的「文章」。</span><span class="de">Every token sees the words on both sides.</span></div></div>
+    <div class="lt" data-step="2"><b>E</b><div><span class="w">Encoder · 編碼器</span><span class="d">把一段文字<b>編碼</b>成一串向量，每個詞元（token）一個。</span><span class="de">It turns a text into vectors, one per token.</span></div></div>
+    <div class="lt" data-step="3"><b>R</b><div><span class="w">Representations · 表示</span><span class="d">這些向量就是文本的「表示」：可以拿去分類、比較、搜尋。</span><span class="de">The vectors represent the text for later tasks.</span></div></div>
+    <div class="lt" data-step="4"><b>T</b><div><span class="w">Transformers · 變換器</span><span class="d">一種神經網絡架構，核心是<b>自注意力</b>：每個詞都去「看」其他所有詞。</span><span class="de">The architecture whose core is self-attention.</span></div></div>
+  </div>
+</section>
+
+<section class="slide" id="s-stack" data-sec="bert">
+  <h2 class="bi"><span class="zh">BERT 的結構：從詞元到上下文向量</span><span class="en">Inside BERT: from tokens to contextual vectors</span></h2>
+  <div class="two stack">
+    <svg class="diag" id="stack-svg" viewBox="0 0 700 470" aria-label="BERT: tokens, embeddings, twelve layers of attention, contextual vectors"></svg>
+    <div class="stack-text">
+      <div class="st bi xs"><i>①</i><span class="zh">中文 BERT 以<b>字</b>為詞元，句首加 [CLS]，句尾加 [SEP]</span><span class="en">Chinese BERT splits text into characters and adds [CLS] at the start and [SEP] at the end.</span></div>
+      <div class="st bi xs" data-step="1"><i>②</i><span class="zh">每個字查表得到一個<b>靜態</b>向量，就像 word2vec</span><span class="en">Each character first gets a static vector from a lookup table, much like word2vec.</span></div>
+      <div class="st bi xs" data-step="2"><i>③</i><span class="zh">每一層，每個字都看<b>所有</b>其他字，更新自己的向量</span><span class="en">In every layer, every character looks at all the others and updates its own vector.</span></div>
+      <div class="st bi xs" data-step="3"><i>④</i><span class="zh">重複 12 層，向量愈來愈「懂」上下文</span><span class="en">After twelve layers, each vector carries more and more of its context.</span></div>
+      <div class="st bi xs hot" data-step="4"><i>⑤</i><span class="zh">最後一層的「水」已經讀過「文章」和「很」：這是<b>上下文向量</b>（768 維）</span><span class="en">The final 水 vector has read 文章 and 很. It is a contextual vector with 768 dimensions.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ 4 · self-attention -->
+
+<section class="slide" id="s-attn" data-sec="attn">
+  <h2 class="bi"><span class="zh">自注意力：每個字都在問「誰對我有用？」</span><span class="en">Self-attention: every token asks which other tokens are useful</span></h2>
+  <div class="quote-line">「如果你含有對我有用的資訊，那麼我就應該關注你。」<span>“If you have something useful for me, I should attend to you.”</span></div>
+  <div class="attn-tabs" id="attn-tabs">
+    <button type="button" data-k="0" class="on">水是人體最重要的組成成分</button>
+    <button type="button" data-k="1">這篇文章很水</button>
+  </div>
+  <div class="two attn">
+    <svg class="diag" id="attn-svg" viewBox="0 0 640 300" aria-label="Attention from 水 to every token"></svg>
+    <svg class="plot" id="attn-plot" viewBox="0 0 420 330" aria-label="The new 水 vector is a weighted mix of the other tokens"></svg>
+  </div>
+  <div class="bi xs attn-cap"><span class="zh">線愈粗，「水」對那個詞的注意力愈大；新的「水」向量 ＝ 各詞向量依注意力加權平均（數字為示意）。</span><span class="en">Thicker lines mean more attention from 水. The new 水 vector is the attention-weighted average of the token vectors (toy numbers).</span></div>
+</section>
+
+<section class="slide" id="s-qkv" data-sec="attn">
+  <h2 class="bi"><span class="zh">查詢、鍵、值：Query, Key, Value</span><span class="en">Queries, keys and values</span></h2>
+  <div class="two qkv">
+    <svg class="diag" id="qkv-svg" viewBox="0 0 520 420" aria-label="An embedding multiplied by three learned matrices gives a query, a key and a value"></svg>
+    <div>
+      <div class="qrow" data-step="1"><b class="cq">查詢 Query \(\mathbf q=W_Q\mathbf x\)</b><span class="zh">「我在找什麼？」像一個問題、一個搜尋請求。</span><span class="en">What this token is looking for.</span></div>
+      <div class="qrow" data-step="2"><b class="ck">鍵 Key \(\mathbf k=W_K\mathbf x\)</b><span class="zh">「我能提供什麼？」標示自己和別人的問題有多相關。</span><span class="en">What this token can offer.</span></div>
+      <div class="qrow" data-step="3"><b class="cv">值 Value \(\mathbf v=W_V\mathbf x\)</b><span class="zh">「我的實際內容」：按查詢與鍵的匹配度被取出來。</span><span class="en">The content that is actually passed on.</span></div>
+      <div class="callout bi xs" data-step="4"><span class="zh">圖書館比喻：查詢 ＝ 你的問題；鍵 ＝ 書脊上的標籤；值 ＝ 書的內容。三個矩陣 \(W_Q, W_K, W_V\) 都是<b>學</b>出來的。</span><span class="en">In a library, the query is your question, keys are the spine labels and values are the books. All three matrices are learned.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-kq" data-lock data-sec="attn">
+  <h2 class="bi"><span class="zh">算注意力：內積，再 Softmax</span><span class="en">Computing attention: a dot product, then a softmax</span></h2>
+  <div class="two kq">
+    <svg class="plot" id="kq-svg" viewBox="0 0 440 440" aria-label="Drag the query and the keys"></svg>
+    <div class="kq-right">
+      <div class="bi xs"><span class="zh">拖動紅色查詢 <b class="cq">Q</b>，或黑色的鍵 <b>K</b>：</span><span class="en">Drag the red query or any black key.</span></div>
+      <div id="kq-bars"></div>
+      <div class="eq kq-eq">\(\text{Attention}(Q,K,V)=\operatorname{softmax}\!\Big(\dfrac{QK^{\top}}{\sqrt{d_k}}\Big)V\)</div>
+      <div class="kq-steps">
+        <div><i>①</i><span><b>內積</b> \(\mathbf q^{\top}\mathbf k\)（即上週的 \(\mathbf w^{\top}\mathbf x\)）：方向愈一致，分數愈高</span></div>
+        <div><i>②</i><span><b>Softmax</b>：分數變成總和為 1 的權重（邏輯迴歸）</span></div>
+        <div><i>③</i><span>新向量 ＝ \(\sum_j \alpha_j\mathbf v_j\)：值向量的加權平均</span></div>
+      </div>
+      <div class="note">矩陣寫法：所有詞元的 \(\mathbf q\)、\(\mathbf k\) 各疊成 \(Q\)、\(K\) 的一列，\(QK^{\top}\) 一次算出所有的 \(\mathbf q^{\top}\mathbf k\)。<br>此二維示意省略 \(\sqrt{d_k}\)（\(d_k=2\)）。BERT 的 \(d_k=64\)。 <a href="../../../../../visualizations/attention-keys-queries.html" target="_blank">完整互動版 full version</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-heads" data-sec="attn">
+  <h2 class="bi"><span class="zh">多頭、多層：144 種注意力</span><span class="en">Many heads, many layers: 144 attention patterns</span></h2>
+  <div class="two heads">
+    <img src="img/attention-heads.jpeg" alt="Attention patterns of BERT's 12 layers × 12 heads">
+    <div>
+      <div class="num-grid">
+        <div><b>12</b><span>層 layers</span></div><div><b>12</b><span>頭 heads / 層</span></div>
+        <div><b>768</b><span>維 dimensions</span></div><div><b>1.1 億</b><span>參數 parameters</span></div>
+      </div>
+      <div class="bi xs" data-step="1" style="margin-top:18px"><span class="zh">每一層有 12 個<b>頭</b>（head），各有自己的 \(W_Q, W_K, W_V\)，各自學一種關係：相鄰的字、句法、指代……</span><span class="en">Each layer has twelve heads with their own matrices, and each head learns its own kind of relation.</span></div>
+      <div class="callout key bi xs" data-step="2"><span class="zh">左圖：每一格是一個頭，線條連接互相注意的詞元。沒有人規定每個頭要學什麼，這些模式都是從文本中自己學出來的。</span><span class="en">Each cell is one head, with lines joining tokens that attend to each other. Nobody tells a head what to learn.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ 5 · using an encoder -->
+
+<section class="slide" id="s-pretrain" data-sec="use">
+  <h2 class="bi"><span class="zh">BERT 怎麼學？先預訓練，再微調</span><span class="en">How does BERT learn? Pre-training, then fine-tuning</span></h2>
+  <div class="cards two-c">
+    <div class="card" data-step="1"><h3 class="bi sm"><span class="zh">任務一：遮蔽詞語推斷</span><span class="en">Masked language modelling</span></h3>
+      <div class="mlm">今天天氣很 <span class="mask">[MASK]</span>。</div>
+      <div class="mlm-out"><span>好 <i>0.41</i></span><span>熱 <i>0.22</i></span><span>冷 <i>0.17</i></span><span class="no">貴 <i>0.002</i></span><span class="no">書 <i>0.0004</i></span><span class="tiny">（示意 toy）</span></div>
+      <div class="bi xs"><span class="zh">隨機遮住 15% 的字，讓模型用<b>左右兩邊</b>猜回來。</span><span class="en">Hide 15% of the characters and predict them from both sides.</span></div></div>
+    <div class="card" data-step="2"><h3 class="bi sm"><span class="zh">任務二：下一句預測</span><span class="en">Next sentence prediction</span></h3>
+      <div class="nsp"><div class="pair2">[CLS] 今天天氣很好。[SEP] 我們去散步吧！[SEP]</div><span class="yes">是下一句 IsNext ✓</span></div>
+      <div class="nsp"><div class="pair2">[CLS] 今天天氣很好。[SEP] 三角形有三條邊。[SEP]</div><span class="nope">不是下一句 NotNext ✗</span></div>
+      <div class="bi xs"><span class="zh">兩句是否相連？答案由 [CLS] 的向量給出。</span><span class="en">Do the two sentences belong together? The [CLS] vector answers.</span></div></div>
+  </div>
+  <div class="callout key bi xs" data-step="3"><span class="zh"><b>不需要人工標註</b>：答案就在文本裡（和 word2vec 一樣）。預訓練用大量文本，<b>微調</b>只需少量有標籤的資料。</span><span class="en">No human labels are needed for pre-training. Fine-tuning then adapts the model to a task with a small labelled dataset.</span></div>
+  <div class="models" data-step="4"><b>中文模型</b><span>bert-base-chinese<i>現代漢語</i></span><span>SikuBERT<i>《四庫全書》</i></span><span>GujiBERT<i>古籍</i></span><span>BERT-CCPoem<i>古典詩歌</i></span></div>
+</section>
+
+<section class="slide" id="s-uses" data-sec="use">
+  <h2 class="bi"><span class="zh">怎麼用編碼器？三種方式</span><span class="en">Three ways to use an encoder</span></h2>
+  <div class="two uses">
+    <svg class="diag" id="uses-svg" viewBox="0 0 760 470" aria-label="Encoder with a sentence classifier, a token classifier, or vectors for similarity"></svg>
+    <div class="uses-text">
+      <div class="st bi xs" data-step="1"><i>①</i><span class="zh"><b>句子分類</b>：只讀 [CLS] 向量<br>→ 是否對仗？情感？</span><span class="en">Sentence classification: a classifier reads only the [CLS] vector.</span></div>
+      <div class="st bi xs" data-step="2"><i>②</i><span class="zh"><b>詞元分類</b>：每個字各一個分類器<br>→ 詞性、人名、地名</span><span class="en">Token classification: a classifier on every token, for parts of speech or named entities.</span></div>
+      <div class="st bi xs" data-step="3"><i>③</i><span class="zh"><b>嵌入</b>：直接拿向量，<br>用餘弦相似度找相似句子</span><span class="en">Embedding: take the vectors themselves and compare them with cosine similarity.</span></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="slide" id="s-embed" data-sec="use">
+  <h2 class="bi"><span class="zh">例一：嵌入 ── 找意思相近的詩句</span><span class="en">Example 1: embeddings. Find lines with a similar meaning</span></h2>
+  <div class="two embed">
+    <div>
+      <div class="query-line">一行白鷺上青天</div>
+      <div class="bi xs"><span class="zh">BERT-CCPoem（清華大學）把每句詩變成一個向量，再與其他詩句比較<b>餘弦相似度</b>。</span><span class="en">BERT-CCPoem turns each line into a vector and ranks other lines by cosine similarity.</span></div>
+      <div class="callout key bi xs" data-step="2"><span class="zh">字面不同、意象相近的句子也能找到：「白鷺」「青天」「一行」換了位置，向量依然接近。</span><span class="en">Lines that reorder or vary the imagery still end up close together in the vector space.</span></div>
+    </div>
+    <table class="rank" data-step="1">
+      <tr><th>#</th><th>詩句 line</th><th>cos</th></tr>
+      <tr><td>1</td><td>白鷺一行登碧霄</td><td>0.933</td></tr>
+      <tr><td>2</td><td>一片青天白鷺前</td><td>0.919</td></tr>
+      <tr><td>3</td><td>飛卻青天白鷺鷥</td><td>0.916</td></tr>
+      <tr><td>4</td><td>一雙白鷺上雲飛</td><td>0.912</td></tr>
+      <tr><td>5</td><td>白鷺一行飛綠野</td><td>0.907</td></tr>
+      <tr><td>6</td><td>一行白鳥掠清波</td><td>0.902</td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="slide" id="s-hlm" data-sec="use">
+  <h2 class="bi"><span class="zh">例二：嵌入 ──《紅樓夢》的情感弧線</span><span class="en">Example 2: embeddings. The emotional arc of Dream of the Red Chamber</span></h2>
+  <div class="hlm">
+    <div class="hlm-left">
+      <div class="st bi xs"><i>①</i><span class="zh">9,019 個段落，各變成一個<b>向量</b>（128 維）</span><span class="en">Every passage becomes one vector.</span></div>
+      <div class="st bi xs"><i>②</i><span class="zh"><b>方向</b> ＝ 一端例句的平均 − 另一端例句的平均（上週的方向法）</span><span class="en">A direction from contrasting example sentences, as with 女 − 男 last week.</span></div>
+      <label class="hlm-sel">情感軸 <select id="hlm-axis"></select></label>
+      <div class="hlm-ex" id="hlm-ex"></div>
+      <div class="st bi xs"><i>③</i><span class="zh">每段<b>投影</b>到方向上，每回取平均 → 弧線</span><span class="en">Project each passage onto the direction and average by chapter.</span></div>
+    </div>
+    <div class="hlm-right">
+      <svg class="plot" id="hlm-svg" viewBox="0 0 700 300" aria-label="Chapter-by-chapter emotion scores for 120 chapters"></svg>
+      <div class="hlm-tip" id="hlm-tip"></div>
+      <div class="hlm-q" id="hlm-q"></div>
+      <div class="callout key bi xs hlm-ask"><span class="zh">討論：從第 81 回起，「悲 ↔ 喜」的弧線明顯轉向悲。這來自情節的走向，還是續書的文風？要怎麼回到文本去檢驗？</span><span class="en">From chapter 81 the arc turns sad: is that the plot, or the style of the continuation? How would you check in the text?</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-code" data-sec="use">
+  <h2 class="bi"><span class="zh">實作：兩個「水」有多像？</span><span class="en">In practice: how similar are the two 水?</span></h2>
+  <div class="two code2">
+<pre class="code"><span class="kw">from</span> transformers <span class="kw">import</span> AutoTokenizer, AutoModel
+<span class="kw">import</span> torch
+
+name = <span class="s">"bert-base-chinese"</span>
+tok = AutoTokenizer.from_pretrained(name)
+model = AutoModel.from_pretrained(name)
+
+<span class="kw">def</span> <span class="fn">char_vector</span>(sentence, char):
+    enc = tok(sentence, return_tensors=<span class="s">"pt"</span>)
+    <span class="kw">with</span> torch.no_grad():
+        out = model(**enc).last_hidden_state[<span class="n">0</span>]
+    <span class="c"># 每個字一個 768 維向量；找出 char 的位置</span>
+    ids = enc.input_ids[<span class="n">0</span>].tolist()
+    <span class="kw">return</span> out[ids.index(tok.convert_tokens_to_ids(char))]
+
+a = char_vector(<span class="s">"水是人體最重要的組成成分"</span>, <span class="s">"水"</span>)
+b = char_vector(<span class="s">"這篇文章很水"</span>, <span class="s">"水"</span>)
+c = char_vector(<span class="s">"請給我一杯水"</span>, <span class="s">"水"</span>)
+
+cos = torch.nn.functional.cosine_similarity
+print(cos(a, c, dim=<span class="n">0</span>), cos(a, b, dim=<span class="n">0</span>))</pre>
+    <div>
+      <div class="bi sm"><span class="zh">先猜：哪一對比較相似？</span><span class="en">Guess first: which pair is more similar?</span></div>
+      <div class="guess"><span>a ↔ c</span><small>人體的水 · 一杯水</small></div>
+      <div class="guess"><span>a ↔ b</span><small>人體的水 · 文章很水</small></div>
+      <div class="callout key bi xs" data-step="1"><span class="zh">同一個字、三個向量：word2vec 給「水」一個向量，BERT 給每一次出現一個向量。</span><span class="en">The same character gets three vectors: one per occurrence, where word2vec had a single vector for every use.</span></div>
+      <div class="note bi xs" data-step="2"><span class="zh">課堂練習：換成「行」（銀行、行走），或古文的「之」。</span><span class="en">Exercise: try 行 in 銀行 and 行走, or 之 in classical texts.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ 6 · case study: parallel couplets (from the Beijing Forum 2026 talk, vector poetics) -->
+<section class="slide vp" id="s-reg" data-sec="vp" data-steps="2">
+  <div class="row" style="gap:70px">
+    <div style="width:520px;flex:none;padding-top:20px">
+      <div class="small" style="margin-bottom:6px">王維（699–761）《山居秋暝》</div>
+      <div class="poem" id="reg-poem">
+        <div class="ln"><span class="cp-name"><span class="zh">首聯</span></span>空山新雨後，天氣晚來秋。<em class="tr">新雨過後，空山清朗；傍晚的天氣已帶著秋意。</em></div><div class="ln"><span class="cp-name"><span class="zh">頷聯</span></span>明月松間照，清泉石上流。<em class="tr">明月照松間，清泉流石上。</em></div><div class="ln"><span class="cp-name"><span class="zh">頸聯</span></span>竹喧歸浣女，蓮動下漁舟。<em class="tr">竹林喧響，浣衣女子歸來；蓮葉搖動，漁舟順流而下。</em></div><div class="ln"><span class="cp-name"><span class="zh">尾聯</span></span>隨意春芳歇，王孫自可留。<em class="tr">任憑春芳消歇，王孫仍可自在留居。</em></div>
+      </div>
+    </div>
+    <div class="grow" style="padding-top:30px">
+      <h2 style="font-size:58px;margin-bottom:4px">律詩</h2>
+      <div class="vp-en" data-keep-en="">Regulated verse · 定型於初唐</div><p class="body" style="font-size:25px">八句四聯，格律嚴謹。</p>
+      <div class="ev" style="margin-top:10px">
+        <div data-step="1" style="font-size:23px;padding:18px 0"><b style="color:var(--green)">中間兩聯必須對仗。</b>這是此詩體的形式要求：上下句相對，字字相應。<span class="zh" style="white-space:nowrap;color:var(--mute)">頷聯 · 頸聯</span></div><div data-step="2" style="font-size:23px;padding:18px 0"><b style="color:var(--mute)">首聯與尾聯不受此限。</b>它們可以對仗，但並非必須。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide vp" id="s-poem" data-sec="vp" data-steps="6">
+  <h2 style="font-size:44px;margin-bottom:6px">這一聯是否<em>對仗</em>？</h2><p class="small" style="margin-bottom:6px;max-width:900px">在律詩中，上下兩句逐字相對便構成“對仗”。分類器讀取一聯，並輸出其為對仗的概率。</p><div class="small" style="margin-bottom:4px">王維（699–761）《山居秋暝》</div>
+  <div class="clf-grid" id="clf-grid">
+      <div class="ln" id="clf-l0"><span class="zh">空山新雨後，天氣晚來秋。</span><em class="tr">新雨過後，空山清朗；傍晚的天氣已帶著秋意。</em></div>
+      <div class="clf-r"></div>
+      <div class="ln" id="clf-l1"><span class="zh">明月松間照，清泉石上流。</span><em class="tr">明月照松間，清泉流石上。</em></div>
+      <div class="clf-r" id="clf-r1"><span class="pa" data-step="1">→</span><span class="box" data-step="2">分類器</span><span class="pa" data-step="3">→</span><span class="score c-green" data-step="3">0.97</span></div>
+      <div class="ln" id="clf-l2"><span class="zh">竹喧歸浣女，蓮動下漁舟。</span><em class="tr">竹林喧響，浣衣女子歸來；蓮葉搖動，漁舟順流而下。</em></div>
+      <div class="clf-r"></div>
+      <div class="ln" id="clf-l3"><span class="zh">隨意春芳歇，王孫自可留。</span><em class="tr">任憑春芳消歇，王孫仍可自在留居。</em></div>
+      <div class="clf-r" id="clf-r3"><span class="pa" data-step="4">→</span><span class="box" data-step="5">分類器</span><span class="pa" data-step="6">→</span><span class="score c-mute" data-step="6">0.02</span></div>
+  </div>
+</section>
+
+<section class="slide vp" id="s-v-io" data-sec="vp" data-steps="3">
+  <h2>訓練數據：以格律為<em>標籤</em></h2>
+  <div class="row" style="gap:56px;align-items:flex-start;margin-top:14px">
+    <div class="vp-io" style="width:520px;flex:none">
+      <div class="small" style="margin-bottom:10px">王維（699–761）《山居秋暝》</div>
+      <div class="r"><span class="cp">首聯</span><span class="zh">空山新雨後，天氣晚來秋。</span><span class="lab l0">0</span></div>
+      <div class="r in"><span class="cp">頷聯</span><span class="zh">明月松間照，清泉石上流。</span><span class="lab l1">1</span></div>
+      <div class="r in"><span class="cp">頸聯</span><span class="zh">竹喧歸浣女，蓮動下漁舟。</span><span class="lab l1">1</span></div>
+      <div class="r"><span class="cp">尾聯</span><span class="zh">隨意春芳歇，王孫自可留。</span><span class="lab l0">0</span></div>
+      <div class="vp-io-n">× 142,235 首五言律詩（唐至清）</div>
+    </div>
+    <div class="grow ev" style="font-size:20px">
+      <div data-step="1"><b>現成的標籤。</b>律詩的頷聯、頸聯必須對仗：標為 <b class="c-green">1</b>；首聯、尾聯不必對仗：標為 <b class="c-mute">0</b>。不需人工標註，就有數十萬組訓練樣本，用以微調 <b>SikuBERT</b>（以《四庫全書》預訓練的 BERT 模型）。</div>
+      <div data-step="2"><b>但標籤含噪聲。</b>並非所有頷聯、頸聯都對仗，也有不少首聯、尾聯其實對仗：有些詩人通篇對仗，有些刻意避開。</div>
+      <div data-step="3"><b>數據太多，無法人工逐一檢查。</b>以此訓練的 SikuBERT 只達 F1 0.71；必須先自動<b class="c-coral">清理</b>數據。</div>
+    </div>
+  </div>
+  <div class="src">Kurzynski, Xu, and Feng, “The Game of Keys and Queries,” <i>IJHAC</i> 19.2 (2025), 148; Cai, Kurzynski, and Xu, <i>JCLC</i> 12.2 (2025).</div>
+</section>
+
+<section class="slide vp" id="s-v-net" data-sec="vp" data-steps="2">
+  <h2>對仗字詞網絡 <em>SymNet</em></h2>
+  <div class="row" style="gap:40px;align-items:flex-start">
+    <div class="vp-left" style="min-height:380px">
+      <div data-step="0" data-until="2">
+        <p class="small" style="margin:0 0 10px">每一聯中，<b>相同位置</b>上的兩個字之間連一條邊。</p>
+        <div class="row" style="gap:18px;align-items:center">
+          <div class="vp-toy"><div class="vp-cpl" data-pos="0"><div><b>深</b>紅敷蜀錦，</div><div><b>淺</b>碧翳宮紗。</div></div><div class="vp-cpl" data-pos="4"><div>密樹稍迎<b>夏</b>，</div><div>晚花猶及<b>春</b>。</div></div><div class="vp-cpl" data-pos="2"><div>精神<b>夏</b>瀟灑，</div><div>庭院<b>夜</b>深沉。</div></div><div class="vp-cpl" data-pos="1"><div>高<b>深</b>驚險易，</div><div>冬<b>夏</b>返溫涼。</div></div><div class="vp-cpl" data-pos="0"><div><b>深</b>雪聞遙磬，</div><div><b>春</b>風護短籬。</div></div><div class="vp-cpl" data-pos="1"><div>山<b>深</b>雲作伴，</div><div>庵<b>迥</b>石為朋。</div></div></div>
+          <svg class="vp-mini" viewBox="0 0 290 230" aria-label="由六組對聯得到的小網絡：深、夏、春、夜、迥、淺"><line x1="190" y1="110" x2="260" y2="200"></line><line x1="70" y1="110" x2="40" y2="200"></line><line x1="70" y1="110" x2="30" y2="25"></line><line x1="190" y1="110" x2="70" y2="110"></line><line x1="190" y1="110" x2="40" y2="200"></line><line x1="190" y1="110" x2="250" y2="30"></line><circle cx="190" cy="110" r="17"></circle><text x="190" y="117">深</text><circle cx="70" cy="110" r="17"></circle><text x="70" y="117">夏</text><circle cx="40" cy="200" r="17"></circle><text x="40" y="207">春</text><circle cx="30" cy="25" r="17"></circle><text x="30" y="32">夜</text><circle cx="250" cy="30" r="17"></circle><text x="250" y="37">迥</text><circle cx="260" cy="200" r="17"></circle><text x="260" y="207">淺</text></svg>
+        </div>
+        <p class="small" data-step="1" style="margin-top:14px">對所有頷聯、頸聯重複此步驟：常見的配對，就是詩人實踐中的對仗。7,822 字，去除只有一個鄰居的節點後剩 6,716 字；以 Louvain 算法檢測社區（100 次運行，ARI 平均 0.81）。</p>
+      </div>
+      <div class="ev vp-rules" data-step="2">
+        <div><b>以社區篩選訓練數據。</b>兩字屬同一社區，視為“相對”。</div>
+        <div><b>頷聯、頸聯：</b>若<b>大多數</b>對應字不屬同一社區 → 很可能不對仗，移除（30,611 聯）。</div>
+        <div><b>首聯、尾聯：</b>若<b>大多數</b>對應字屬同一社區 → 很可能其實對仗，移除（50,012 聯）。</div>
+        <div><b>共移除 80,623 聯</b>，再以清理後的數據微調 SikuBERT（I/O + SymNet）。</div>
+      </div>
+    </div>
+    <figure class="vp-net" data-step="1">
+      <div class="vp-zoom" id="net-zoom" title="滾輪縮放 · 拖曳移動 · 雙擊重設">
+        <img src="img/symnet-network.jpg" draggable="false" alt="對仗字詞網絡：按社區著色的漢字節點，包括動詞、方位、數量、形容詞、名詞、人事感官、虛詞、歷史地理">
+      </div>
+      <div class="vp-zctl"><button type="button" data-z="in" aria-label="放大">＋</button><button type="button" data-z="out" aria-label="縮小">－</button><button type="button" data-z="reset" aria-label="重設">⟲</button><button type="button" data-z="big" aria-label="放大至全頁">⤢</button></div>
+      <div class="vp-leg"><span><i style="background:#66c2a5"></i>動詞</span><span><i style="background:#a6d854"></i>方位</span><span><i style="background:#e78ac3"></i>數量</span><span><i style="background:#e5c494"></i>形容詞</span><span><i style="background:#8da0cb"></i>名詞</span><span><i style="background:#ffd92f"></i>人事・感官</span><span><i style="background:#b3b3b3"></i>虛詞</span><span><i style="background:#fc8d62"></i>歷史・地理</span></div>
+    </figure>
+  </div>
+  <div class="src">Cai, Kurzynski, and Xu, “Good Things Come in Pairs,” <i>JCLC</i> 12.2 (2025), Fig. 1; Kurzynski, Xu, and Feng, <i>IJHAC</i> 19.2 (2025), 148–50.</div>
+</section>
+
+<section class="slide vp" id="s-clf-res" data-sec="vp" data-steps="1">
+  <h2>效果有多<em>好</em>？</h2><p class="small" style="max-width:900px;margin:0 0 10px">測試集：六朝（222–589）的 6,153 組五言詩聯，均由人工標註；其中 2,072 組為對仗，4,081 組不是。</p>
+  <table class="res">
+    <tbody><tr><th>方法</th><th>準確率</th><th>精確率</th><th>召回率</th><th>F1</th></tr>
+    <tr class="grp"><td colspan="5">既有方法</td></tr><tr><td>VM</td><td>76.5</td><td>72.3</td><td>55.0</td><td>62.5</td></tr><tr><td>ISSA</td><td>72.5</td><td>68.2</td><td>48.0</td><td>56.3</td></tr><tr><td>ED</td><td>75.9</td><td>72.0</td><td>53.6</td><td>61.4</td></tr><tr class="grp"><td colspan="5">微調後的 SikuBERT</td></tr><tr><td>I/O<i>（以詩聯位置作為標籤）</i></td><td>79.1</td><td>69.9</td><td>72.7</td><td>71.3</td></tr><tr class="hl"><td>I/O + SymNet<i>（篩選後的標籤）</i></td><td>84.0</td><td>74.1</td><td>82.2</td><td>77.9</td></tr><tr class="grp"><td colspan="5">生成式模型</td></tr><tr><td>GPT-4o</td><td>79.6</td><td>73.7</td><td>64.4</td><td>68.8</td></tr><tr><td>Moonshot AI（v1-8k）</td><td>79.1</td><td>71.2</td><td>65.7</td><td>68.3</td></tr><tr><td>DeepSeek R1</td><td>84.8</td><td>82.9</td><td>70.0</td><td>75.9</td></tr>
+  </tbody></table>
+  <div class="callout" data-step="1" style="font-size:23px;margin-top:10px;padding:10px 22px">小型微調編碼器<b>表現媲美大型生成式模型</b>，並能找出最多對仗詩聯（召回率 82.2%）。</div>
+  <div class="src">Cai, Kurzynski, and Xu, “Good Things Come in Pairs: A Computational Study of Poetic Parallelism in the Six Dynasties,” <i>Journal of Chinese Literature and Culture</i> 12.2 (2025), Appendix 2.</div>
+</section>
+
+<section class="slide vp" id="s-v-hist" data-sec="vp" data-steps="2">
+  <h2>對仗的<em>興起</em>：六朝（220–589）</h2>
+  <p class="vp-lead" style="margin-top:-8px">以分類器標註逯欽立《先秦漢魏晉南北朝詩》全部 25,158 聯五言詩，其中 6,360 聯經人工核對：對仗詩聯所佔比例（%）。</p>
+  <div class="row" style="gap:30px;align-items:flex-start">
+    <figure class="vp-chart" style="width:430px"><figcaption>按朝代</figcaption><svg viewBox="0 0 430 330" class="vp-bars" aria-label="六朝各代對仗詩聯比例：漢 17.6%、魏 18.3%、晉 29.4%、劉宋 49.5%、齊 55.4%、梁 57.8%、陳 63.5%、隋 62.0%"><line x1="40" x2="426" y1="284.0" y2="284.0" class="g"></line><text x="32" y="288.0" class="ax" text-anchor="end">0%</text><line x1="40" x2="426" y1="210.3" y2="210.3" class="g"></line><text x="32" y="214.3" class="ax" text-anchor="end">20%</text><line x1="40" x2="426" y1="136.6" y2="136.6" class="g"></line><text x="32" y="140.6" class="ax" text-anchor="end">40%</text><line x1="40" x2="426" y1="62.9" y2="62.9" class="g"></line><text x="32" y="66.9" class="ax" text-anchor="end">60%</text><rect x="48.7" y="219.2" width="30.9" height="64.8" rx="2" fill="var(--coral)" opacity=".85"></rect><text x="64.1" y="213.2" class="v" text-anchor="middle">17.6</text><text x="64.1" y="304" class="nm" text-anchor="middle">漢</text><text x="64.1" y="320" class="yr" text-anchor="middle">前202–220</text><rect x="96.9" y="216.6" width="30.9" height="67.4" rx="2" fill="var(--coral)" opacity=".85"></rect><text x="112.4" y="210.6" class="v" text-anchor="middle">18.3</text><text x="112.4" y="304" class="nm" text-anchor="middle">魏</text><text x="112.4" y="320" class="yr" text-anchor="middle">220–266</text><rect x="145.2" y="175.8" width="30.9" height="108.2" rx="2" fill="var(--coral)" opacity=".85"></rect><text x="160.6" y="169.8" class="v" text-anchor="middle">29.4</text><text x="160.6" y="304" class="nm" text-anchor="middle">晉</text><text x="160.6" y="320" class="yr" text-anchor="middle">266–420</text><rect x="193.4" y="101.5" width="30.9" height="182.5" rx="2" fill="var(--coral)" opacity=".85"></rect><text x="208.9" y="95.5" class="v" text-anchor="middle">49.5</text><text x="208.9" y="304" class="nm" text-anchor="middle">劉宋</text><text x="208.9" y="320" class="yr" text-anchor="middle">420–479</text><rect x="241.7" y="80.0" width="30.9" height="204.0" rx="2" fill="var(--coral)" opacity=".85"></rect><text x="257.1" y="74.0" class="v" text-anchor="middle">55.4</text><text x="257.1" y="304" class="nm" text-anchor="middle">齊</text><text x="257.1" y="320" class="yr" text-anchor="middle">479–502</text><rect x="289.9" y="71.1" width="30.9" height="212.9" rx="2" fill="var(--coral)" opacity=".85"></rect><text x="305.4" y="65.1" class="v" text-anchor="middle">57.8</text><text x="305.4" y="304" class="nm" text-anchor="middle">梁</text><text x="305.4" y="320" class="yr" text-anchor="middle">502–557</text><rect x="338.2" y="49.8" width="30.9" height="234.2" rx="2" fill="var(--coral)" opacity=".85"></rect><text x="353.6" y="43.8" class="v" text-anchor="middle">63.5</text><text x="353.6" y="304" class="nm" text-anchor="middle">陳</text><text x="353.6" y="320" class="yr" text-anchor="middle">557–589</text><rect x="386.4" y="55.4" width="30.9" height="228.6" rx="2" fill="var(--coral)" opacity=".85"></rect><text x="401.9" y="49.4" class="v" text-anchor="middle">62.0</text><text x="401.9" y="304" class="nm" text-anchor="middle">隋</text><text x="401.9" y="320" class="yr" text-anchor="middle">581–618</text></svg></figure>
+    <figure class="vp-chart" data-step="1" style="width:640px"><figcaption>按詩人（依時期著色）</figcaption><svg viewBox="0 0 640 330" class="vp-bars" aria-label="代表詩人的對仗比例，按時期著色；陶淵明僅 10.3%，鮑照 52.6%、謝朓 52.2% 最高"><line x1="40" x2="636" y1="272.0" y2="272.0" class="g"></line><text x="32" y="276.0" class="ax" text-anchor="end">0%</text><line x1="40" x2="636" y1="201.7" y2="201.7" class="g"></line><text x="32" y="205.7" class="ax" text-anchor="end">20%</text><line x1="40" x2="636" y1="131.4" y2="131.4" class="g"></line><text x="32" y="135.4" class="ax" text-anchor="end">40%</text><line x1="40" x2="636" y1="61.1" y2="61.1" class="g"></line><text x="32" y="65.1" class="ax" text-anchor="end">60%</text><rect x="45.3" y="230.5" width="24.5" height="41.5" rx="2" fill="var(--faint)" opacity=".85"></rect><text x="57.5" y="224.5" class="v sm" text-anchor="middle">12</text><line x1="57.5" x2="57.5" y1="274" y2="280" class="lead"></line><text x="57.5" y="295" class="nm sm" text-anchor="middle">古詩</text><rect x="80.3" y="241.6" width="24.5" height="30.4" rx="2" fill="var(--amber)" opacity=".85"></rect><text x="92.6" y="235.6" class="v sm" text-anchor="middle">9</text><line x1="92.6" x2="92.6" y1="274" y2="302" class="lead"></line><text x="92.6" y="317" class="nm sm" text-anchor="middle">劉楨</text><rect x="115.4" y="209.2" width="24.5" height="62.8" rx="2" fill="var(--amber)" opacity=".85"></rect><text x="127.6" y="203.2" class="v sm" text-anchor="middle">18</text><line x1="127.6" x2="127.6" y1="274" y2="280" class="lead"></line><text x="127.6" y="295" class="nm sm" text-anchor="middle">王粲</text><rect x="150.4" y="190.6" width="24.5" height="81.4" rx="2" fill="var(--amber)" opacity=".85"></rect><text x="162.7" y="184.6" class="v sm" text-anchor="middle">23</text><line x1="162.7" x2="162.7" y1="274" y2="302" class="lead"></line><text x="162.7" y="317" class="nm sm" text-anchor="middle">曹丕</text><rect x="185.5" y="212.9" width="24.5" height="59.1" rx="2" fill="var(--amber)" opacity=".85"></rect><text x="197.8" y="206.9" class="v sm" text-anchor="middle">17</text><line x1="197.8" x2="197.8" y1="274" y2="280" class="lead"></line><text x="197.8" y="295" class="nm sm" text-anchor="middle">曹植</text><rect x="220.6" y="212.5" width="24.5" height="59.5" rx="2" fill="var(--cyan)" opacity=".85"></rect><text x="232.8" y="206.5" class="v sm" text-anchor="middle">17</text><line x1="232.8" x2="232.8" y1="274" y2="302" class="lead"></line><text x="232.8" y="317" class="nm sm" text-anchor="middle">嵇康</text><rect x="255.6" y="209.9" width="24.5" height="62.1" rx="2" fill="var(--cyan)" opacity=".85"></rect><text x="267.9" y="203.9" class="v sm" text-anchor="middle">18</text><line x1="267.9" x2="267.9" y1="274" y2="280" class="lead"></line><text x="267.9" y="295" class="nm sm" text-anchor="middle">阮籍</text><rect x="290.7" y="128.0" width="24.5" height="144.0" rx="2" fill="var(--green)" opacity=".85"></rect><text x="302.9" y="122.0" class="v sm" text-anchor="middle">41</text><line x1="302.9" x2="302.9" y1="274" y2="302" class="lead"></line><text x="302.9" y="317" class="nm sm" text-anchor="middle">張華</text><rect x="325.7" y="160.5" width="24.5" height="111.5" rx="2" fill="var(--green)" opacity=".85"></rect><text x="338.0" y="154.5" class="v sm" text-anchor="middle">32</text><line x1="338.0" x2="338.0" y1="274" y2="280" class="lead"></line><text x="338.0" y="295" class="nm sm" text-anchor="middle">潘岳</text><rect x="360.8" y="145.4" width="24.5" height="126.6" rx="2" fill="var(--green)" opacity=".85"></rect><text x="373.1" y="139.4" class="v sm" text-anchor="middle">36</text><line x1="373.1" x2="373.1" y1="274" y2="302" class="lead"></line><text x="373.1" y="317" class="nm sm" text-anchor="middle">陸機</text><rect x="395.8" y="235.9" width="24.5" height="36.1" rx="2" fill="var(--mute)" opacity=".85"></rect><text x="408.1" y="229.9" class="v sm" text-anchor="middle">10</text><line x1="408.1" x2="408.1" y1="274" y2="280" class="lead"></line><text x="408.1" y="295" class="nm sm" text-anchor="middle">陶淵明</text><rect x="430.9" y="114.6" width="24.5" height="157.4" rx="2" fill="var(--violet)" opacity=".85"></rect><text x="443.2" y="108.6" class="v sm" text-anchor="middle">45</text><line x1="443.2" x2="443.2" y1="274" y2="302" class="lead"></line><text x="443.2" y="317" class="nm sm" text-anchor="middle">謝靈運</text><rect x="466.0" y="131.1" width="24.5" height="140.9" rx="2" fill="var(--violet)" opacity=".85"></rect><text x="478.2" y="125.1" class="v sm" text-anchor="middle">40</text><line x1="478.2" x2="478.2" y1="274" y2="280" class="lead"></line><text x="478.2" y="295" class="nm sm" text-anchor="middle">顏延之</text><rect x="501.0" y="87.1" width="24.5" height="184.9" rx="2" fill="var(--violet)" opacity=".85"></rect><text x="513.3" y="81.1" class="v sm" text-anchor="middle">53</text><line x1="513.3" x2="513.3" y1="274" y2="302" class="lead"></line><text x="513.3" y="317" class="nm sm" text-anchor="middle">鮑照</text><rect x="536.1" y="107.1" width="24.5" height="164.9" rx="2" fill="var(--coral)" opacity=".85"></rect><text x="548.4" y="101.1" class="v sm" text-anchor="middle">47</text><line x1="548.4" x2="548.4" y1="274" y2="280" class="lead"></line><text x="548.4" y="295" class="nm sm" text-anchor="middle">王融</text><rect x="571.1" y="88.7" width="24.5" height="183.3" rx="2" fill="var(--coral)" opacity=".85"></rect><text x="583.4" y="82.7" class="v sm" text-anchor="middle">52</text><line x1="583.4" x2="583.4" y1="274" y2="302" class="lead"></line><text x="583.4" y="317" class="nm sm" text-anchor="middle">謝朓</text><rect x="606.2" y="108.5" width="24.5" height="163.5" rx="2" fill="var(--coral)" opacity=".85"></rect><text x="618.5" y="102.5" class="v sm" text-anchor="middle">47</text><line x1="618.5" x2="618.5" y1="274" y2="280" class="lead"></line><text x="618.5" y="295" class="nm sm" text-anchor="middle">沈約</text></svg><div class="vp-leg vp-leg2"><span><i style="background:var(--faint)"></i>古詩</span><span><i style="background:var(--amber)"></i>建安</span><span><i style="background:var(--cyan)"></i>正始</span><span><i style="background:var(--green)"></i>太康</span><span><i style="background:var(--violet)"></i>元嘉</span><span><i style="background:var(--coral)"></i>永明</span><span><i style="background:var(--mute)"></i>東晉</span></div></figure>
+  </div>
+  <div class="callout" data-step="2" style="font-size:20px;margin-top:4px;padding:10px 20px;max-width:1104px">從漢到陳，對仗比例由 <b>18%</b> 升至 <b>64%</b>，對仗的複雜度也隨之提高：詩人在創作中開拓出<b>越來越多的比較維度</b>。陶淵明（10%）是明顯的例外。</div>
+  <div class="src">Cai, Kurzynski, and Xu, “Good Things Come in Pairs: A Computational Study of Poetic Parallelism in the Six Dynasties,” <i>JCLC</i> 12.2 (2025), Figs. 2–3.</div>
+</section>
+
+<section class="slide vp" id="s-cls" data-sec="vp">
+  <h2>鍵與查詢<em>的互動</em></h2>
+  <div class="row" style="gap:40px;align-items:flex-start">
+    <svg id="kq" viewBox="0 0 440 440" style="width:440px;height:440px;flex:none;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none" aria-label="[CLS] 的查詢：可旋轉一整圈"></svg>
+    <div class="grow">
+      <div class="kq-tabs"><button type="button" class="on" data-set="par"><span class="zh">明月松間照，清泉石上流</span><span class="en">明月照松間，清泉流石上。</span><i>對仗</i></button><button type="button" data-set="non"><span class="zh">空山新雨後，天氣晚來秋</span><span class="en">空山新雨後，天氣晚來秋。</span><i>不對仗</i></button></div><div class="mono c-mute" style="font-size:13px;letter-spacing:.12em;margin:14px 0 8px">每個字的鍵（小箭頭）· [CLS] 的注意力</div>
+      <div class="kq-grid">
+        <div class="kq-lab c-blue">上句</div><div class="kq-row" id="kq-r1"></div>
+        <div></div><div class="kq-row kq-links" id="kq-links"></div>
+        <div class="kq-lab" style="color:#12b5cb">下句</div><div class="kq-row" id="kq-r2"></div>
+      </div>
+      <div class="kq-bar"><span>0</span><i></i><span>0.5</span></div>
+      <p class="body" id="kq-text" style="font-size:19.5px;margin-top:12px"></p>
+    </div>
+  </div>
+  <div class="src">Adapted from Kurzynski, Xu, and Feng, “The Game of Keys and Queries,” <i>IJHAC</i> 19.2 (2025), Fig. 1.</div>
+</section>
+
+<section class="slide vp" id="s-attn-couplet" data-sec="vp">
+  <h2><em class="cls">[CLS]</em> 關注<em>什麼</em>？</h2>
+  <div class="row" style="gap:28px;align-items:flex-end;margin-top:-6px">
+    <div style="flex:none;width:900px;margin:0 auto">
+      <div class="ac-heads"><span style="color:var(--green)">對仗：明月松間照，清泉石上流</span><span style="color:var(--coral)">不對仗：空山新雨後，天氣晚來秋</span></div>
+      <img src="img/kq-attn-couplets-fig2-2200.jpg" alt="[CLS] 在對仗與不對仗詩聯中對每個字的注意力，按注意力頭分行" style="width:900px;display:block">
+    </div>
+  </div>
+  <div class="ac-note">圖注：first line／second line＝上句／下句；Head 1–12＝十二個注意力頭；顏色為 [CLS] 給予該字的注意力（0–0.5）。原圖字形為繁體：間＝間，後＝後，氣＝氣，來＝來。</div><p class="body" data-step="1" style="font-size:19px;margin-top:8px;max-width:1080px"><b>左，對仗：</b>上下兩句的圖案互相映照。頭 4、6、12 同時關注名詞“月 松”與“泉 石”，頭 8 同時關注“明”與“清”。<b>右，不對仗：</b>亮點上下錯開。頭 12 關注上句第 5 字“後”和下句第 4 字“來”。</p>
+  <div class="src">Kurzynski, Xu, and Feng, “The Game of Keys and Queries,” <i>IJHAC</i> 19.2 (2025), Fig. 2.</div>
+</section>
+
+<section class="slide vp" id="s-attn-corr" data-sec="vp">
+  <h2>對應字詞<em>回應相似</em></h2>
+  <img class="fig-wide" src="img/kq-attn-corr.png" alt="按注意力頭比較上下句字詞的注意力相關性：對仗與非對仗詩聯">
+  <div class="row" style="gap:40px;margin-top:14px;max-width:1040px">
+    <p class="body" data-step="1" style="font-size:21.5px;flex:1"><b>檢驗方式：</b>在每個注意力頭中，上下句是否以相同模式獲得注意力？每個點代表一組詩聯；1.0 表示模式完全相同。</p><p class="body" data-step="2" style="font-size:21.5px;flex:1"><b>結果：</b>在 5,178 組測試詩聯中，<span class="c-green">對仗詩聯</span>的分數在每個注意力頭都高於<span class="c-blue">非對仗詩聯</span>：對應字詞提供相似的鍵，以回應 [CLS] 的查詢。</p>
+  </div>
+  <div class="src">Kurzynski, Xu, and Feng, “The Game of Keys and Queries,” <i>IJHAC</i> 19.2 (2025), Fig. 3.</div>
+</section>
+
+<section class="slide vp" id="s-align-ex" data-sec="vp">
+  <h2>“<em>對齊</em>”看起來是什麼樣子？</h2><p class="lead" style="font-size:25px;max-width:1000px;margin-bottom:6px">將每句詩視為穿越三維語義空間的一條路徑，逐字前進。每一步都問：兩條路徑是否朝同一方向移動？</p>
+  <div class="row" style="gap:24px;margin-top:6px">
+    <div data-step="1"><canvas id="ax-mis" style="width:520px;height:320px"></canvas><div class="axlab" style="color:var(--mute)">未對齊</div></div><div data-step="2"><canvas id="ax-ali" style="width:520px;height:320px"></canvas><div class="axlab" style="color:var(--green)">已對齊</div></div>
+  </div>
+  <div class="swap" style="max-width:1000px;min-height:56px;margin-top:2px">
+    <p class="body" data-step="1" data-until="2" style="font-size:23px"><b>未對齊。</b>兩句各行其是：兩條路徑的步向各異，甚至常常相反。</p><p class="body" data-step="2" data-until="3" style="font-size:23px"><b>已對齊。</b>對應步向一致：兩句詩平行移動，這正是對仗在幾何上的意義。</p><p class="body" data-step="3" style="font-size:23px"><b>如何測量？</b>以<b>餘弦相似度</b>比較兩句對應的步向量：方向相同為 1，互相垂直為 0，方向相反為 −1。取平均，即為“轉換對齊度”。</p>
+  </div>
+</section>
+
+<section class="slide vp" id="s-3d" data-sec="vp" data-steps="4">
+  <div class="cpl-wrap"><canvas id="cpl"></canvas></div>
+  <div class="cpl-title">
+    <div class="kicker" style="width:1104px"><span class="n">02</span><span>向量詩學</span></div><div class="zh"><span class="c-blue">明月松間照</span>，<span style="color:#12b5cb">清泉石上流</span></div><div class="small" style="margin-top:6px;font-family:var(--serif);font-style:italic;font-size:21.5px"><span class="c-blue">明月照松間</span>；<span style="color:#12b5cb">清泉流石上</span>。</div>
+    <div class="small" style="margin-top:2px">GujiBERT · <span id="cpl-layer">頂層（第 12 層）</span>・10 個字 → 主成分分析（PCA）→ 3 個維度</div>
+  </div>
+  <div class="cpl-align" id="cpl-align">
+    <div class="mono cpl-al-h">轉換對齊度 · <span id="cpl-al-layer">第 12 層（頂層）</span></div><div class="cpl-al-row"><span class="lab">分開編碼</span><span class="trk"><i id="cpl-bar1" style="background:var(--blue)"></i></span><b id="cpl-v1">0.30</b></div>
+    <div class="cpl-al-row" id="cpl-row2"><span class="lab">共同編碼</span><span class="trk"><i id="cpl-bar2" style="background:var(--green)"></i></span><b id="cpl-v2">0.65</b></div>
+    <p class="cpl-al-note">兩句詩之間的平均餘弦相似度；比較其<b>步進向量</b>（從一字到下一字），並以模型完整的 <b>768 個維度</b>計算。三維圖僅為主成分分析（PCA）的投影。</p>
+  </div>
+  <div class="cpl-side">
+    <div class="swap">
+      <p class="body" data-step="0" data-until="1" style="font-size:24px"><b>只看上句。</b>將“明月松間照”單獨輸入 BERT：五個字在三維空間中形成一條路徑。</p><p class="body" data-step="1" data-until="2" style="font-size:24px"><b>只看下句。</b>“清泉石上流”分開編碼後，形成另一條路徑。</p><p class="body" data-step="2" data-until="3" style="font-size:24px"><b>同處一個空間、位置不變。</b>分開閱讀時，兩條路徑各自遊移：明與清、月與泉之間並無聯繫。</p><p class="body" data-step="3" data-until="4" style="font-size:24px"><b>現在將詩聯一起閱讀。</b>十個字仍然相同，但上下句可以彼此參照：點位移動、路徑對齊，字詞配對（明–清、月–泉、松–石、間–上、照–流）也彼此靠攏。</p><p class="body" data-step="4" style="font-size:24px"><b>對仗並非存在於單字之中。</b>只有當上下句彼此參照時，對仗才浮現，並在較高層逐漸形成。</p>
+    </div>
+  </div>
+  <div class="cpl-keys cite">拖曳旋轉・捲動縮放・ <kbd>[</kbd> <kbd>]</kbd> 圖層 · <kbd>R</kbd> 自動旋轉・ <kbd>0</kbd> 重設</div>
+</section>
+
+<section class="slide vp" id="s-v-h3d" data-sec="vp" data-steps="2">
+  <h2>七言律詩：<em>平行的軌跡</em></h2>
+  <p class="vp-lead">杜甫兩聯，各以 GujiBERT 整聯編碼；每個字是一個點，每句詩是一條路徑。左為對仗的頷聯，右為不對仗的首聯。</p>
+  <div class="h3d-row">
+    <div class="h3d-panel">
+      <div class="h3d-ctl" data-p="a"><button type="button" data-a="all" class="on">全部</button><button type="button" data-a="clear">清空</button><button type="button" data-a="step">下一步 ›</button><span class="cnt"></span></div>
+      <canvas id="h3d-a" width="540" height="340"></canvas>
+      <div class="h3d-cap"><span class="zh"><span class="c1">萬里悲秋常作客</span>，<span class="c2">百年多病獨登臺</span></span><span class="t">〈登高〉頷聯 · 對仗</span></div>
+      <div class="h3d-al"><span class="lab">轉換對齊度</span><span class="trk"><i id="h3d-bar-a"></i></span><b id="h3d-v-a"></b></div>
+    </div>
+    <div class="h3d-panel" data-step="1">
+      <div class="h3d-ctl" data-p="b"><button type="button" data-a="all" class="on">全部</button><button type="button" data-a="clear">清空</button><button type="button" data-a="step">下一步 ›</button><span class="cnt"></span></div>
+      <canvas id="h3d-b" width="540" height="340"></canvas>
+      <div class="h3d-cap"><span class="zh"><span class="c1">劍外忽傳收薊北</span>，<span class="c2">初聞涕淚滿衣裳</span></span><span class="t">〈聞官軍收河南河北〉首聯 · 不對仗</span></div>
+      <div class="h3d-al"><span class="lab">轉換對齊度</span><span class="trk"><i id="h3d-bar-b"></i></span><b id="h3d-v-b"></b></div>
+    </div>
+  </div>
+  <div class="h3d-foot">
+    <span class="cite" data-step="2" style="color:var(--ink2)">對齊度：兩句對應“步向量”（字→下一字）的平均餘弦，於完整 768 維空間計算，減去隨機配對基線。三維圖僅為主成分投影。</span>
+    
+  </div>
+</section>
+
+<section class="slide vp" id="s-v-hlayers" data-sec="vp" data-steps="1">
+  <h2>四聯的<em>逐層對齊度</em></h2>
+  <div class="row" style="gap:34px;align-items:flex-start">
+    <div style="flex:none">
+      <div class="kq-tabs hl-tabs" style="width:600px;margin-bottom:8px">
+        <button type="button" data-m="penta" class="on"><i>PENTASYLLABIC</i><span class="zh">五言律詩</span></button>
+        <button type="button" data-m="hepta"><i>HEPTASYLLABIC</i><span class="zh">七言律詩</span></button>
+      </div>
+      <svg id="hl-chart" viewBox="0 0 600 400" style="width:600px;height:400px;display:block" aria-label="GujiBERT 各層的轉換對齊度：頷聯與頸聯遠高於首聯與尾聯"></svg>
+    </div>
+    <div class="grow ev" style="padding-top:6px">
+      <div style="font-size:27px;line-height:1.55;padding:20px 0">每一層、每一聯：兩句步向量的平均餘弦，減去隨機配對基線。<b>0</b> 即與無關兩句相同。</div>
+      <div data-step="1" style="font-size:27px;line-height:1.55;padding:20px 0"><b class="c-coral">七言亦然。</b>頷聯與頸聯（實線）在<b>每一層</b>都遠高於首聯與尾聯（虛線）；首尾兩聯直到高層才略高於基線。</div>
+      <div class="cite" id="hl-n" style="margin-top:18px;font-size:18px;line-height:1.5"></div>
+    </div>
+  </div>
+  <div class="src">按 <kbd>N</kbd> 切換五言／七言。Kurzynski, Xu, and Feng, “Like Threaded Pearls: Repetition between Redundancy and Meaning in Chinese Regulated Verse and Patterned Prose” (manuscript), §4, Fig. 4a.</div>
+</section>
+
+
+<section class="slide" id="s-summary" data-sec="summary">
+  <h2 class="bi"><span class="zh">總結</span><span class="en">Summary</span></h2>
+  <div class="sum">
+    <div><i>1</i><span class="zh">邏輯迴歸 ＝ 一個神經元；把激活值交給<b>下一層</b>，就成了神經網絡。</span><span class="en">Logistic regression is one neuron; passing activations to the next layer gives a neural network.</span></div>
+    <div><i>2</i><span class="zh">隱藏層把空間<b>摺疊</b>：一條直線分不開的問題（XOR），摺過之後就分得開。</span><span class="en">Hidden layers fold the space, so a problem like XOR becomes separable by a line.</span></div>
+    <div><i>3</i><span class="zh">靜態詞向量無法區分一詞多義；BERT 為<b>每一次出現</b>計算一個上下文向量。</span><span class="en">Static vectors merge the senses of a word; BERT computes a contextual vector for every occurrence.</span></div>
+    <div><i>4</i><span class="zh"><b>自注意力</b>：查詢 · 鍵 → softmax → 值的加權平均；12 層 × 12 頭。</span><span class="en">Self-attention compares queries with keys, applies a softmax and averages the values, in 12 layers of 12 heads.</span></div>
+    <div><i>5</i><span class="zh">用法：[CLS] 分類、逐字分類、或直接當<b>嵌入</b>比較相似度。</span><span class="en">Uses: classify with [CLS], label every token, or compare the vectors as embeddings.</span></div>
+    <div><i>6</i><span class="zh">案例：[CLS] 分類器辨認對仗；對仗的兩句在向量空間裡走出<b>平行</b>的路徑。</span><span class="en">Case study: a [CLS] classifier finds parallel couplets, whose two lines trace parallel paths in vector space.</span></div>
+  </div>
+</section>
+
 <div id="side"></div>
 <div id="bar"></div>
 <div id="num"></div>
 </div>
+<script src="vendor/katex/katex.min.js"></script>
 <script src="digits.js"></script>
+<script src="hlm-data.js"></script>
+<script src="vp-data.js"></script>
+<script src="vp.js"></script>
 <script src="slides.js"></script>
 <script src="deck.js"></script>
 </body>
