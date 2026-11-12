@@ -1162,48 +1162,107 @@ function meaningAxes(svg, X, Y, x0, x1, y0, y1, small) {
   plot('act-relu', z => Math.max(0, z), -1, 4.2, [0, 2, 4], GRN);
 })();
 
-/* ---------- 《紅樓夢》 emotion arcs: chapter means of passage vectors projected onto an emotion direction (window.HLM) ---------- */
+/* ---------- 《紅樓夢》 emotional space in 3D: 9,019 passages (UMAP 3D), coloured by an emotion axis; drag to turn, click a passage to see its nearest neighbours (window.HLM) ---------- */
 (function () {
-  const H = window.HLM, svg = $('#hlm-svg'), sel = $('#hlm-axis'), tip = $('#hlm-tip');
-  const W = 700, L = 46, R = 690, T = 26, B = 262, n = H.chapters.length;
-  const X = c => L + (c - .5) / n * (R - L);
-  const POS = '#1f9d55', NEG = ORG;
-  sel.innerHTML = H.axes.map((a, i) => `<option value="${i}">${a.name}</option>`).join('');
-  sel.addEventListener('keydown', e => e.stopPropagation());
-  sel.addEventListener('change', () => { sel.blur(); draw(+sel.value); });
-  const cut = (s, k) => s.length > k ? s.slice(0, k) + '……' : s;
-  function draw(ai) {
-    const a = H.axes[ai], v = a.chap, m = Math.max(...v.map(Math.abs)) * 1.12;
-    const Y = y => (T + B) / 2 - y / m * (B - T) / 2;
-    while (svg.firstChild) svg.firstChild.remove();
-    // frame, zero line, ends of the axis
-    el('rect', { x: L, y: T, width: R - L, height: B - T, fill: '#fafbfd', stroke: LINE }, svg);
-    el('line', { x1: L, y1: Y(0), x2: R, y2: Y(0), stroke: '#9aa3b5', 'stroke-width': 1.5 }, svg);
-    txt(svg, L - 8, T + 14, a.pos, { 'font-size': 15, fill: POS, 'text-anchor': 'end', 'font-weight': 700 });
-    txt(svg, L - 8, B - 4, a.neg, { 'font-size': 15, fill: NEG, 'text-anchor': 'end', 'font-weight': 700 });
-    txt(svg, L - 8, Y(0) + 5, '平均', { 'font-size': 12, fill: MUTE, 'text-anchor': 'end' });
-    [1, 20, 40, 60, 80, 100, 120].forEach(c => txt(svg, X(c), B + 18, c, { 'font-size': 13, fill: MUTE }));
-    txt(svg, R, B + 34, '回 chapter', { 'font-size': 12, fill: MUTE, 'text-anchor': 'end' });
-    // chapters 1–80 vs. 81–120
-    el('line', { x1: (X(80) + X(81)) / 2, y1: T - 18, x2: (X(80) + X(81)) / 2, y2: B, stroke: INK, 'stroke-width': 1.5, 'stroke-dasharray': '5 5' }, svg);
-    txt(svg, (X(80) + X(81)) / 2 - 8, T - 6, '前八十回 ←', { 'font-size': 13, fill: INK, 'text-anchor': 'end' });
-    txt(svg, (X(80) + X(81)) / 2 + 8, T - 6, '→ 後四十回', { 'font-size': 13, fill: INK, 'text-anchor': 'start' });
-    // one bar per chapter
-    const bw = (R - L) / n * .72;
-    v.forEach((y, k) => {
-      const r = el('rect', { x: X(k + 1) - bw / 2, y: Math.min(Y(y), Y(0)), width: bw, height: Math.abs(Y(y) - Y(0)), fill: y >= 0 ? POS : NEG, opacity: .45 }, svg);
-      r.addEventListener('mouseenter', () => { r.setAttribute('opacity', .95); const c = H.chapters[k]; tip.innerHTML = `<b>第 ${c.n} 回</b> ${c.t} <span>${y >= 0 ? a.pos : a.neg} ${(y >= 0 ? '+' : '−') + Math.abs(y).toFixed(2)}</span>`; tip.style.opacity = 1; });
-      r.addEventListener('mouseleave', () => { r.setAttribute('opacity', .45); tip.style.opacity = 0; });
-    });
-    // seven-chapter moving average
-    const sm = v.map((_, k) => { const w = v.slice(Math.max(0, k - 3), k + 4); return w.reduce((s, x) => s + x, 0) / w.length; });
-    el('path', { d: sm.map((y, k) => (k ? 'L' : 'M') + X(k + 1).toFixed(1) + ',' + Y(y).toFixed(1)).join(''), fill: 'none', stroke: INK, 'stroke-width': 3, 'stroke-linejoin': 'round', 'pointer-events': 'none' }, svg);
-    // the axis' example sentences and the most extreme passages
-    $('#hlm-ex').innerHTML = `<div class="p"><b>${a.pos}</b>${a.posEx.slice(0, 1).map(s => `<span>「${cut(s, 26)}」</span>`).join('')}</div><div class="n"><b>${a.neg}</b>${a.negEx.slice(0, 1).map(s => `<span>「${cut(s, 26)}」</span>`).join('')}</div>`;
-    const q = (p, cls, lab) => `<div class="${cls}"><b>最「${lab}」的段落 · 第 ${p.c} 回</b>${cut(p.t, 58)}</div>`;
-    $('#hlm-q').innerHTML = q(a.top[0], 'p', a.pos) + q(a.bottom[0], 'n', a.neg);
+  const H = window.HLM, N = H.x.length, cv = $('#hlm-cv'), g = cv.getContext('2d'), sel = $('#hlm-axis'), tip = $('#hlm-tip'), slide = $('#s-hlm');
+  const W = 620, Hh = 440, R = 2;
+  g.setTransform(R, 0, 0, R, 0, 0);
+  // centre and scale the cloud into the unit sphere
+  const mean = a => a.reduce((s, v) => s + v, 0) / a.length, mx = mean(H.x), my = mean(H.y), mz = mean(H.z);
+  // scale to the bulk of the cloud (98th percentile), so a few outliers do not shrink it
+  const dist = Array.from({ length: N }, (_, i) => Math.hypot(H.x[i] - mx, H.y[i] - my, H.z[i] - mz)).sort((u, v) => u - v);
+  const rad = dist[Math.floor(N * .98)];
+  const P3 = new Float32Array(N * 3);
+  for (let i = 0; i < N; i++) { P3[3 * i] = (H.x[i] - mx) / rad; P3[3 * i + 1] = (H.y[i] - my) / rad; P3[3 * i + 2] = (H.z[i] - mz) / rad; }
+  const SX = new Float32Array(N), SY = new Float32Array(N), SD = new Float32Array(N);
+  let yaw = .6, pitch = .35, auto = true, drag = null, raf = null;
+  const mix = (a, b, t) => a.map((v, j) => Math.round(v + (b[j] - v) * t));
+  const SAD = [224, 87, 15], MID = [205, 210, 220], HAP = [31, 157, 85];
+  let mode = 0, pick = 2197, hover = -1, cols = [];
+  const colour = i => {
+    if (mode === H.axes.length) { const t = (H.c[i] - 1) / 119; return `rgb(${mix([190, 205, 240], [20, 50, 140], t)})`; }   // by chapter
+    const z = Math.max(-2.5, Math.min(2.5, H.s[mode][i])) / 2.5;
+    return `rgb(${z < 0 ? mix(MID, SAD, -z) : mix(MID, HAP, z)})`;
+  };
+  const recolour = () => { cols = Array.from({ length: N }, (_, i) => colour(i)); };
+  function project() {
+    const cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch), S = 270;
+    for (let i = 0; i < N; i++) {
+      const x = P3[3 * i], y = P3[3 * i + 1], z = P3[3 * i + 2];
+      const x1 = x * cy - y * sy, y1 = x * sy + y * cy, d = y1 * cp + z * sp, up = z * cp - y1 * sp, k = 1 / (1 - d * .25);
+      SX[i] = W / 2 + x1 * S * k; SY[i] = Hh / 2 - up * S * k; SD[i] = d;
+    }
   }
-  draw(0);
+  const order = [...Array(N).keys()];
+  function draw() {
+    project();
+    g.clearRect(0, 0, W, Hh);
+    g.fillStyle = '#fafbfd'; g.fillRect(0, 0, W, Hh);
+    order.sort((a, b) => SD[a] - SD[b]);                       // far points first
+    for (const i of order) { const k = .75 + .35 * (SD[i] + 1) / 2; g.fillStyle = cols[i]; g.globalAlpha = .55 + .35 * (SD[i] + 1) / 2; g.fillRect(SX[i] - 1.5 * k, SY[i] - 1.5 * k, 3 * k, 3 * k); }
+    g.globalAlpha = 1;
+    if (pick >= 0) {
+      H.nn[pick].forEach(j => {
+        g.strokeStyle = 'rgba(27,35,51,.6)'; g.lineWidth = 1.4; g.beginPath(); g.moveTo(SX[pick], SY[pick]); g.lineTo(SX[j], SY[j]); g.stroke();
+        g.beginPath(); g.arc(SX[j], SY[j], 5, 0, 7); g.fillStyle = '#fff'; g.fill(); g.lineWidth = 2.2; g.strokeStyle = INK; g.stroke();
+      });
+      g.beginPath(); g.arc(SX[pick], SY[pick], 7.5, 0, 7); g.fillStyle = INK; g.fill(); g.lineWidth = 2.5; g.strokeStyle = '#fff'; g.stroke();
+    }
+    if (hover >= 0) { g.beginPath(); g.arc(SX[hover], SY[hover], 6, 0, 7); g.lineWidth = 2.5; g.strokeStyle = BLUE; g.stroke(); }
+  }
+  function nearest(x, y) {   // closest point on screen, preferring the front
+    let best = -1, bd = 64;
+    for (let i = 0; i < N; i++) { const d = (SX[i] - x) ** 2 + (SY[i] - y) ** 2 - SD[i] * 6; if (d < bd) { bd = d; best = i; } }
+    return best;
+  }
+  const score = i => {
+    if (mode === H.axes.length) return `第 ${H.c[i]} 回`;
+    const a = H.axes[mode], z = H.s[mode][i];
+    return `${z >= 0 ? a.pos : a.neg} ${(z >= 0 ? '+' : '−') + Math.abs(z).toFixed(1)}`;
+  };
+  function panel() {
+    const i = pick;
+    $('#hlm-pick').innerHTML = `<b>第 ${H.c[i]} 回 · ${H.titles[H.c[i] - 1]}</b>${H.t[i]}…… <span class="sc">${score(i)}</span>`;
+    $('#hlm-nn').innerHTML = H.nn[i].slice(0, 4).map((j, r) => `<div data-i="${j}"><b>${H.ns[i][r].toFixed(2)}</b><span>第 ${H.c[j]} 回</span>${H.t[j].slice(0, 34)}……</div>`).join('');
+    $$('#hlm-nn > div').forEach(d => d.addEventListener('click', e => { e.stopPropagation(); pick = +d.dataset.i; panel(); }));
+  }
+  function legend() {
+    const L = $('#hlm-leg');
+    if (mode === H.axes.length) L.innerHTML = '<span>第 1 回</span><i class="ch"></i><span>第 120 回</span>';
+    else L.innerHTML = `<span class="n">${H.axes[mode].neg}</span><i></i><span class="p">${H.axes[mode].pos}</span>`;
+  }
+  const pos = e => { const r = cv.getBoundingClientRect(); return [(e.clientX - r.left) / r.width * W, (e.clientY - r.top) / r.height * Hh]; };
+  cv.addEventListener('pointerdown', e => { e.stopPropagation(); drag = { x: e.clientX, y: e.clientY, yaw, pitch, moved: false }; cv.setPointerCapture(e.pointerId); });
+  cv.addEventListener('pointermove', e => {
+    if (drag) {
+      if (!drag.moved && Math.hypot(e.clientX - drag.x, e.clientY - drag.y) < 4) return;
+      drag.moved = true; auto = false; tip.style.opacity = 0;
+      yaw = drag.yaw + (e.clientX - drag.x) * .008; pitch = Math.max(-1.4, Math.min(1.4, drag.pitch + (e.clientY - drag.y) * .008));
+      return;
+    }
+    const [x, y] = pos(e), i = nearest(x, y);
+    hover = i;
+    if (i < 0) { tip.style.opacity = 0; return; }
+    tip.innerHTML = `<b>第 ${H.c[i]} 回</b> ${H.t[i]}…… <span>${score(i)}</span>`;
+    tip.style.left = Math.min(x + 14, W - 300) + 'px'; tip.style.top = Math.max(0, y - 54) + 'px'; tip.style.opacity = 1;
+  });
+  cv.addEventListener('pointerup', e => {
+    if (drag && !drag.moved) { const [x, y] = pos(e), i = nearest(x, y); if (i >= 0) { pick = i; panel(); } }
+    drag = null;
+  });
+  cv.addEventListener('pointerleave', () => { hover = -1; tip.style.opacity = 0; });
+  sel.innerHTML = H.axes.map((a, i) => `<option value="${i}">${a.name}</option>`).join('') + `<option value="${H.axes.length}">回目 chapter</option>`;
+  sel.addEventListener('keydown', e => e.stopPropagation());
+  sel.addEventListener('change', () => { sel.blur(); mode = +sel.value; recolour(); legend(); panel(); });
+  // animation loop while the slide is visible: slow automatic rotation until the viewer drags
+  let last = 0;
+  function frame(now) {
+    if (!slide.classList.contains('active')) { raf = null; return; }
+    if (auto) yaw += (now - (last || now)) / 1000 * .18;
+    last = now; draw(); raf = requestAnimationFrame(frame);
+  }
+  window.HOOKS['s-hlm'] = { enter() { last = 0; if (!raf) raf = requestAnimationFrame(frame); } };
+  recolour(); legend(); panel(); draw();
 })();
 
 /* ---------- how a network learns: forward pass, error at the output, error pulses travelling back (no maths) ---------- */
@@ -1287,6 +1346,66 @@ function meaningAxes(svg, X, Y, x0, x1, y0, y1, small) {
       last = step;
     }
   };
+})();
+
+/* ---------- recap: a 2×2 matrix W transforms the plane; x = (1, 2) becomes Wx ---------- */
+(function () {
+  const svg = $('#la-svg'), X0 = [1, 2], slide = $('#s-linalg');
+  const S = 46, CX = 235, CY = 225, X = x => CX + x * S, Y = y => CY - y * S;
+  let M = { a: 1, b: 0, c: 0, d: 1 }, shown = { ...M }, raf = null;
+  const apply = (m, [x, y]) => [m.a * x + m.b * y, m.c * x + m.d * y];
+  const num = v => (v < 0 ? '−' : '') + (Math.abs(v) % 1 ? Math.abs(v).toFixed(1) : Math.abs(v));
+  function draw() {
+    while (svg.firstChild) svg.firstChild.remove();
+    const cp = el('clipPath', { id: 'la-clip' }, svg); el('rect', { x: 10, y: 10, width: 450, height: 430, rx: 10 }, cp);
+    el('rect', { x: 10, y: 10, width: 450, height: 430, rx: 10, fill: '#fafbfd', stroke: LINE }, svg);
+    const g = el('g', { 'clip-path': 'url(#la-clip)' }, svg);
+    // the original grid, faint
+    for (let v = -6; v <= 6; v++) {
+      el('line', { x1: X(v), y1: Y(-6), x2: X(v), y2: Y(6), stroke: v ? '#eceef3' : '#c3c8d2', 'stroke-width': v ? 1 : 1.5 }, g);
+      el('line', { x1: X(-6), y1: Y(v), x2: X(6), y2: Y(v), stroke: v ? '#eceef3' : '#c3c8d2', 'stroke-width': v ? 1 : 1.5 }, g);
+    }
+    // the transformed grid
+    for (let v = -8; v <= 8; v++) {
+      const [a1, b1] = apply(shown, [v, -8]), [a2, b2] = apply(shown, [v, 8]), [c1, d1] = apply(shown, [-8, v]), [c2, d2] = apply(shown, [8, v]);
+      el('line', { x1: X(a1), y1: Y(b1), x2: X(a2), y2: Y(b2), stroke: BLUE, 'stroke-width': v ? 1 : 2.2, opacity: v ? .28 : .7 }, g);
+      el('line', { x1: X(c1), y1: Y(d1), x2: X(c2), y2: Y(d2), stroke: BLUE, 'stroke-width': v ? 1 : 2.2, opacity: v ? .28 : .7 }, g);
+    }
+    // x and Wx
+    arrow(g, X(0), Y(0), X(X0[0]), Y(X0[1]), { color: '#8e98ab', w: 3.5, head: 14 });
+    txt(g, X(X0[0]) + 10, Y(X0[1]) - 6, 'x', { 'font-size': 24, fill: '#6a7386', 'font-weight': 700, 'font-style': 'italic', 'text-anchor': 'start', stroke: '#fff', 'stroke-width': 5, 'paint-order': 'stroke' });
+    const [wx, wy] = apply(shown, X0);
+    arrow(g, X(0), Y(0), X(wx), Y(wy), { color: QRED, w: 4, head: 16 });
+    txt(g, X(wx) + (wx >= 0 ? 10 : -10), Y(wy) + (wy >= 0 ? -8 : 22), 'y = Wx', { 'font-size': 24, fill: QRED, 'font-weight': 700, 'font-style': 'italic', 'text-anchor': wx >= 0 ? 'start' : 'end', stroke: '#fff', 'stroke-width': 5, 'paint-order': 'stroke' });
+  }
+  function readout() {
+    const [rx, ry] = apply(M, X0), r = $$('#la-res span');
+    r[0].textContent = num(rx); r[1].textContent = num(ry);
+    $('#la-calc').innerHTML = `<div><b>第一列 row 1</b> ${num(M.a)}·1 + ${num(M.b)}·2 ＝ <b class="r">${num(rx)}</b></div><div><b>第二列 row 2</b> ${num(M.c)}·1 + ${num(M.d)}·2 ＝ <b class="r">${num(ry)}</b></div>`;
+    $$('#la-mat select').forEach(s => { s.value = String(M[s.dataset.k]); });
+    $$('#la-presets button').forEach(b => b.classList.toggle('on', b.dataset.m === [M.a, M.b, M.c, M.d].join(',')));
+  }
+  function animateTo() {   // the grid slides from its current shape to the new one
+    cancelAnimationFrame(raf);
+    const from = { ...shown }, t0 = performance.now();
+    (function f(now) {
+      const t = Math.min(1, (now - t0) / 700), e = t * t * (3 - 2 * t);
+      for (const k in M) shown[k] = from[k] + (M[k] - from[k]) * e;
+      draw();
+      if (t < 1 && slide.classList.contains('active')) raf = requestAnimationFrame(f); else { shown = { ...M }; draw(); }
+    })(t0);
+  }
+  const VALS = []; for (let v = -2; v <= 2.001; v += .5) VALS.push(+v.toFixed(1));
+  $$('#la-mat select').forEach(s => {
+    s.innerHTML = VALS.map(v => `<option value="${v}">${num(v)}</option>`).join('');
+    s.addEventListener('keydown', e => e.stopPropagation());
+    s.addEventListener('change', () => { M[s.dataset.k] = +s.value; s.blur(); readout(); animateTo(); });
+  });
+  $$('#la-presets button').forEach(b => b.addEventListener('click', e => {
+    e.stopPropagation(); b.blur();
+    const [a, bb, c, d] = b.dataset.m.split(',').map(Number); M = { a, b: bb, c, d }; readout(); animateTo();
+  }));
+  readout(); draw();
 })();
 
 /* ---------- laser pointer: press L to swap the cursor for a red dot; L again to turn it off ---------- */

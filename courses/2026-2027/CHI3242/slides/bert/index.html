@@ -291,6 +291,29 @@
   <div class="bi xs attn-cap"><span class="zh">線愈粗，「水」對那個詞的注意力愈大；新的「水」向量 ＝ 各詞向量依注意力加權平均（數字為示意）。</span><span class="en">Thicker lines mean more attention from 水. The new 水 vector is the attention-weighted average of the token vectors (toy numbers).</span></div>
 </section>
 
+<section class="slide" id="s-linalg" data-sec="attn">
+  <h2 class="bi"><span class="zh">複習：矩陣把空間變形</span><span class="en">Recap: a matrix transforms space</span></h2>
+  <div class="two linalg">
+    <svg class="plot" id="la-svg" viewBox="0 0 470 450" aria-label="A 2D grid transformed by a 2×2 matrix W, with the vector x and Wx"></svg>
+    <div>
+      <div class="la-top">\(\mathbf y = W\mathbf x\)<span class="d">矩陣 \(W\) 把向量 \(\mathbf x\) 變成新的向量 \(\mathbf y\)</span></div>
+      <div class="la-presets" id="la-presets">
+        <button type="button" data-m="1,0,0,1" class="on">恆等 identity</button><button type="button" data-m="2,0,0,0.5">拉伸 stretch</button><button type="button" data-m="0,-1,1,0">旋轉 rotate</button><button type="button" data-m="1,1,0,1">剪切 shear</button>
+      </div>
+      <div class="la-eq">
+        <div class="la-col"><div class="la-mat" id="la-mat"><select data-k="a"></select><select data-k="b"></select><select data-k="c"></select><select data-k="d"></select></div><i>W</i></div>
+        <div class="la-col"><div class="la-vec"><span>1</span><span>2</span></div><i>x</i></div>
+        <span class="la-lab">＝</span>
+        <div class="la-col"><div class="la-vec res" id="la-res"><span></span><span></span></div><i class="r">y</i></div>
+      </div>
+      <div class="la-calc" id="la-calc"></div>
+      <div class="st bi xs" data-step="1"><i>①</i><span class="zh">\(W\) 的每一<b>列</b>（row）和 \(\mathbf x\) 做一次<b>內積</b>：就是一個神經元的 \(\mathbf w^{\top}\mathbf x\)</span><span class="en">Each row of W takes one dot product with x, just like one neuron.</span></div>
+      <div class="st bi xs" data-step="2"><i>②</i><span class="zh">整個平面跟著<b>變形</b>：格線依然平行、等距</span><span class="en">The whole plane moves; grid lines stay parallel and evenly spaced.</span></div>
+      <div class="callout key bi xs" data-step="3"><span class="zh">下一頁：\(W_Q, W_K, W_V\) 是三個這樣的矩陣，把同一個 \(\mathbf x\) 變成三個不同的向量。</span><span class="en">Next: three such matrices turn the same x into three different vectors.</span></div>
+    </div>
+  </div>
+</section>
+
 <section class="slide" id="s-qkv" data-sec="attn">
   <h2 class="bi"><span class="zh">查詢、鍵、值：Query, Key, Value</span><span class="en">Queries, keys and values</span></h2>
   <div class="two qkv">
@@ -317,7 +340,7 @@
         <div><i>②</i><span><b>Softmax</b>：分數變成總和為 1 的權重（邏輯迴歸）</span></div>
         <div><i>③</i><span>新向量 ＝ \(\sum_j \alpha_j\mathbf v_j\)：值向量的加權平均</span></div>
       </div>
-      <div class="note">矩陣寫法：所有詞元的 \(\mathbf q\)、\(\mathbf k\) 各疊成 \(Q\)、\(K\) 的一列，\(QK^{\top}\) 一次算出所有的 \(\mathbf q^{\top}\mathbf k\)。<br>此二維示意省略 \(\sqrt{d_k}\)（\(d_k=2\)）。BERT 的 \(d_k=64\)。 <a href="../../../../../visualizations/attention-keys-queries.html" target="_blank">完整互動版 full version</a></div>
+      <div class="note">矩陣寫法：所有詞元的 \(\mathbf q\)、\(\mathbf k\) 各疊成 \(Q\)、\(K\) 的一列（row），\(QK^{\top}\) 一次算出所有的 \(\mathbf q^{\top}\mathbf k\)。<br>此二維示意省略 \(\sqrt{d_k}\)（\(d_k=2\)）。BERT 的 \(d_k=64\)。 <a href="../../../../../visualizations/attention-keys-queries.html" target="_blank">完整互動版 full version</a></div>
     </div>
   </div>
 </section>
@@ -388,21 +411,21 @@
   </div>
 </section>
 
-<section class="slide" id="s-hlm" data-sec="use">
-  <h2 class="bi"><span class="zh">例二：嵌入 ──《紅樓夢》的情感弧線</span><span class="en">Example 2: embeddings. The emotional arc of Dream of the Red Chamber</span></h2>
-  <div class="hlm">
-    <div class="hlm-left">
-      <div class="st bi xs"><i>①</i><span class="zh">9,019 個段落，各變成一個<b>向量</b>（128 維）</span><span class="en">Every passage becomes one vector.</span></div>
-      <div class="st bi xs"><i>②</i><span class="zh"><b>方向</b> ＝ 一端例句的平均 − 另一端例句的平均（上週的方向法）</span><span class="en">A direction from contrasting example sentences, as with 女 − 男 last week.</span></div>
-      <label class="hlm-sel">情感軸 <select id="hlm-axis"></select></label>
-      <div class="hlm-ex" id="hlm-ex"></div>
-      <div class="st bi xs"><i>③</i><span class="zh">每段<b>投影</b>到方向上，每回取平均 → 弧線</span><span class="en">Project each passage onto the direction and average by chapter.</span></div>
-    </div>
-    <div class="hlm-right">
-      <svg class="plot" id="hlm-svg" viewBox="0 0 700 300" aria-label="Chapter-by-chapter emotion scores for 120 chapters"></svg>
+<section class="slide" id="s-hlm" data-sec="use" data-lock>
+  <h2 class="bi"><span class="zh">例二：嵌入 ──《紅樓夢》的情感空間</span><span class="en">Example 2: embeddings. The emotional space of Dream of the Red Chamber</span></h2>
+  <div class="hlm2">
+    <div class="hlm2-plot">
+      <canvas id="hlm-cv" width="1240" height="880"></canvas>
       <div class="hlm-tip" id="hlm-tip"></div>
-      <div class="hlm-q" id="hlm-q"></div>
-      <div class="callout key bi xs hlm-ask"><span class="zh">討論：從第 81 回起，「悲 ↔ 喜」的弧線明顯轉向悲。這來自情節的走向，還是續書的文風？要怎麼回到文本去檢驗？</span><span class="en">From chapter 81 the arc turns sad: is that the plot, or the style of the continuation? How would you check in the text?</span></div>
+      <div class="hlm2-leg" id="hlm-leg"></div>
+    </div>
+    <div class="hlm2-side">
+      <div class="bi xs"><span class="zh">9,019 個段落，每段一個向量；意思（情感）相近的段落，點也靠在一起。</span><span class="en">Each dot is one passage; passages with similar vectors sit close together.</span></div>
+      <label class="hlm-sel">顏色 <select id="hlm-axis"></select></label>
+      <div class="hlm2-sel" id="hlm-pick"></div>
+      <div class="hlm2-nn-h">最相似的段落 <span>nearest passages (cosine)</span></div>
+      <div class="hlm2-nn" id="hlm-nn"></div>
+      <div class="note">拖曳可旋轉；滑鼠移到點上看段落，點一下選中它。 <span>Drag to turn the cloud; hover to read a passage, click to select it.</span></div>
     </div>
   </div>
 </section>

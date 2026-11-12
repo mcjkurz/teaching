@@ -506,3 +506,51 @@ table.gtab td .mk.no { color: var(--bad); }
 .steps-row.four { grid-template-columns: .85fr .8fr 1.1fr 1.3fr; }
 .steps-row.four .st:last-child .katex { font-size: .95em; white-space: nowrap; }
 .uses-text .bi.xs > .zh { font-size: 20px !important; }
+
+/* 紅樓夢 emotional space */
+.hlm2 { display: grid; grid-template-columns: 620px 1fr; gap: 24px; }
+.hlm2-plot { position: relative; }
+#hlm-cv { width: 620px; height: 440px; display: block; border: 1px solid var(--line); border-radius: 12px; cursor: crosshair; }
+.hlm2-plot .hlm-tip { left: 20px; top: 20px; max-width: 300px; font-size: 14px; line-height: 1.45; }
+.hlm2-leg { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 6px; font-size: 15px; font-family: var(--cjk), var(--latin); }
+.hlm2-leg i { width: 220px; height: 12px; border-radius: 6px; background: linear-gradient(90deg, rgb(224,87,15), rgb(205,210,220), rgb(31,157,85)); }
+.hlm2-leg i.ch { background: linear-gradient(90deg, rgb(190,205,240), rgb(20,50,140)); }
+.hlm2-leg .n { color: var(--col); font-weight: 700; } .hlm2-leg .p { color: #1f9d55; font-weight: 700; }
+.hlm2-side .bi.xs > .zh { font-size: 19px; }
+.hlm2-side .hlm-sel { margin: 10px 0 10px; }
+.hlm2-sel { background: var(--panel); border-left: 5px solid var(--ink); border-radius: 10px; padding: 8px 12px; font-size: 16px; line-height: 1.5; font-family: var(--cjk), var(--latin); }
+.hlm2-sel b { display: block; font-size: 14px; color: var(--mute); }
+.hlm2-sel .sc { color: var(--tgt); font-weight: 700; font-size: 14px; white-space: nowrap; }
+.hlm2-nn-h { font-size: 17px; font-weight: 600; margin: 12px 0 4px; font-family: var(--cjk), var(--latin); }
+.hlm2-nn-h span { font-size: 13px; color: var(--mute); font-weight: 400; margin-left: 6px; }
+.hlm2-nn > div { font-size: 15px; line-height: 1.45; font-family: var(--cjk), var(--latin); padding: 4px 8px; border-radius: 8px; cursor: pointer; display: grid; grid-template-columns: 44px 66px 1fr; }
+.hlm2-nn > div:hover { background: var(--tgt-bg); }
+.hlm2-nn b { color: var(--tgt); }
+.hlm2-nn span { color: var(--mute); font-size: 13px; }
+.hlm2-side .note span { display: block; font-size: 12px; }
+
+/* linear-algebra recap */
+.linalg { grid-template-columns: 470px 1fr; gap: 30px; }
+.la-presets { display: flex; gap: 8px; margin-bottom: 14px; }
+.la-presets button { font-size: 17px; padding: 6px 12px; border-radius: 10px; border: 1.5px solid var(--line); background: #fff; color: var(--ink); font-family: var(--cjk), var(--latin); }
+.la-presets button.on { background: var(--ink); border-color: var(--ink); color: #fff; }
+.la-eq { display: flex; align-items: center; gap: 12px; background: var(--panel); border-radius: 14px; padding: 12px 18px; width: fit-content; }
+.la-lab { font-size: 26px; }
+.la-mat, .la-vec { display: grid; gap: 6px 8px; padding: 4px 10px; border-left: 2.5px solid var(--ink); border-right: 2.5px solid var(--ink); border-radius: 8px; }
+.la-mat { grid-template-columns: auto auto; }
+.la-mat select { -webkit-appearance: none; appearance: none; width: 64px; height: 38px; text-align: center; text-align-last: center; font: 700 20px var(--latin); color: var(--tgt); background: #fff; border: 2px solid var(--tgt); border-radius: 8px; cursor: pointer; }
+.la-vec span { display: block; width: 46px; height: 38px; line-height: 38px; text-align: center; font: 600 20px var(--latin); }
+.la-vec.res span { color: #d0392b; font-weight: 700; }
+.la-calc { font-size: 17px; margin: 10px 0 14px; font-family: var(--cjk), var(--latin); line-height: 1.6; }
+.la-calc b { font-weight: 600; } .la-calc b.r { color: #d0392b; }
+.linalg .bi.xs > .zh { font-size: 20px; }
+
+.la-top { font-size: 34px; margin-bottom: 12px; display: flex; align-items: baseline; gap: 16px; }
+.la-top .d { font-size: 17px; color: var(--mute); font-family: var(--cjk), var(--latin); }
+.la-top .katex { font-size: 1.15em; }
+
+.la-col { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.la-col > i { font: italic 600 20px "Times New Roman", serif; color: var(--ink); }
+.la-col > i.r { color: #d0392b; }
+.la-eq { align-items: flex-start; }
+.la-eq > .la-lab { align-self: center; margin-top: -24px; }
