@@ -101,7 +101,7 @@
 .slide.vp .ev .cite { display: block; margin-top: 5px; }
 .slide.vp .src { position: absolute; left: 88px; right: 88px; bottom: 42px; font-family: var(--sans); font-size: 14.5px; line-height: 1.3; color: var(--mute); z-index: 3; }
 .slide.vp .src::before { content: none; }
-.slide.vp .poem .tr { display: block; font-family: var(--serif); font-style: italic; font-size: 17.5px; letter-spacing: 0; line-height: 1.25; margin-top: 1px; white-space: nowrap; color: var(--mute); }
+.slide.vp .poem .tr { display: block; font-family: var(--serif); font-style: normal; font-size: 17.5px; letter-spacing: 0; line-height: 1.25; margin-top: 1px; white-space: nowrap; color: var(--mute); }
 .slide.vp .ch { display: inline-block; line-height: 1.1; letter-spacing: 0; margin-right: .1em; border-radius: 5px; transition: background .35s, color .35s; }
 .slide.vp .fig-wide { display: block; width: 760px; border: 1px solid var(--faint); border-radius: 4px; margin-top: 6px; }
 .slide.vp .axlab { text-align: center; font-weight: 600; font-size: 17px; margin-top: 2px; }
@@ -126,7 +126,7 @@
 .slide.vp #reg-poem .ln.par .cp-name, .slide.vp #reg-poem .ln.par .cp-name .zh { color: var(--green); }
 .slide.vp .clf-grid { display: grid; grid-template-columns: 560px 1fr; column-gap: 24px; align-items: center; }
 .slide.vp .clf-grid .ln { font-family: var(--cjk); font-size: 30px; letter-spacing: .1em; color: var(--mute); white-space: nowrap; padding: 3px 10px; margin: 3px 0; border: 2px solid transparent; border-radius: 8px; transition: color .4s, border-color .4s, background .4s; }
-.slide.vp .clf-grid .ln .tr { display: block; font-family: var(--serif); font-style: italic; font-size: 17px; letter-spacing: 0; line-height: 1.25; margin-top: 1px; white-space: nowrap; color: var(--mute); }
+.slide.vp .clf-grid .ln .tr { display: block; font-family: var(--serif); font-style: normal; font-size: 17px; letter-spacing: 0; line-height: 1.25; margin-top: 1px; white-space: nowrap; color: var(--mute); }
 .slide.vp .clf-grid .ln.on { color: var(--ink); border-color: var(--green); background: var(--green-bg); }
 .slide.vp .clf-grid .ln.on.no { border-color: var(--faint); background: var(--panel); }
 .slide.vp .clf-r { display: grid; grid-template-columns: 50px 130px 50px 90px; gap: 6px; align-items: center; }
@@ -221,7 +221,7 @@
 .slide.vp #s-v-thanks > h2::before { display: none; }
 .slide.vp .vp-io .r { display: flex; align-items: center; gap: 16px; padding: 11px 14px; border-top: 1px solid var(--line); }
 .slide.vp .vp-io .r.in { background: var(--green-bg); }
-.slide.vp .vp-io .cp { font-family: var(--cjk); font-size: 15px; color: var(--mute); width: 40px; flex: none; }
+.slide.vp .vp-io .cp { font-family: var(--cjk); font-size: 15px; color: var(--mute); width: auto; flex: none; white-space: nowrap; padding: 4px 8px; }
 .slide.vp .vp-io .zh { font-family: var(--cjk); font-size: 27px; letter-spacing: .06em; color: var(--ink); flex: 1; }
 .slide.vp .vp-io .lab { font-family: var(--mono); font-size: 26px; width: 30px; text-align: right; }
 .slide.vp .vp-io .l1 { color: var(--green); font-weight: 700; }

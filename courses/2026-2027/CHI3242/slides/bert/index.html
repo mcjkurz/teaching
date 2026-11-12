@@ -54,14 +54,24 @@
   <div class="acts">
     <div class="act-card"><div class="act-name"><b>階躍</b> step</div><svg class="act-plot" id="act-step" viewBox="0 0 250 170"></svg>
       <div class="act-f">\(z>0 \;\Rightarrow\; 1\)，否則 \(0\)</div><div class="act-d">只有開或關<span>on or off; the earliest perceptrons</span></div></div>
-    <div class="act-card"><div class="act-name"><b>S 形</b> sigmoid</div><svg class="act-plot" id="act-sig" viewBox="0 0 250 170"></svg>
-      <div class="act-f">\(\sigma(z)=\dfrac{1}{1+e^{-z}}\)</div><div class="act-d">平滑地介於 0 與 1<span>smooth, from 0 to 1; as in logistic regression</span></div></div>
-    <div class="act-card"><div class="act-name"><b>雙曲正切</b> tanh</div><svg class="act-plot" id="act-tanh" viewBox="0 0 250 170"></svg>
+    <div class="act-card" data-step="1"><div class="act-name"><b>S 形</b> sigmoid</div><svg class="act-plot" id="act-sig" viewBox="0 0 250 170"></svg>
+      <div class="act-f">\(\sigma(z)=\dfrac{1}{1+e^{-z}}\)</div><div class="act-d">平滑地介於 0 與 1<span>smooth, 0 to 1; as in logistic regression</span></div></div>
+    <div class="act-card" data-step="2"><div class="act-name"><b>雙曲正切</b> tanh</div><svg class="act-plot" id="act-tanh" viewBox="0 0 250 170"></svg>
       <div class="act-f">\(\tanh(z)=\dfrac{e^{z}-e^{-z}}{e^{z}+e^{-z}}\)</div><div class="act-d">介於 −1 與 1，以 0 為中心<span>like sigmoid, but centred on 0</span></div></div>
-    <div class="act-card"><div class="act-name"><b>線性整流</b> ReLU</div><svg class="act-plot" id="act-relu" viewBox="0 0 250 170"></svg>
-      <div class="act-f">\(\mathrm{ReLU}(z)=\max(0,\,z)\)</div><div class="act-d">負的變 0，正的保留<span>negatives become 0; today's most common choice</span></div></div>
+    <div class="act-card" data-step="3"><div class="act-name"><b>線性整流</b> ReLU</div><svg class="act-plot" id="act-relu" viewBox="0 0 250 170"></svg>
+      <div class="act-f">\(\mathrm{ReLU}(z)=\max(0,\,z)\)</div><div class="act-d">負的變 0，正的保留<span>negatives become 0; most common today</span></div></div>
   </div>
-  <div class="callout key bi sm" data-step="1"><span class="zh">每個神經元都是兩步：先算加權總和 \(z=\mathbf w\cdot\mathbf x+b\)，再用激活函數決定輸出。</span><span class="en">Every neuron works in two steps: a weighted sum, then an activation function.</span></div>
+  <div class="acts more">
+    <div class="act-card" data-step="4"><div class="act-name"><b>帶洩漏</b> Leaky ReLU</div><svg class="act-plot" id="act-leaky" viewBox="0 0 250 170"></svg>
+      <div class="act-f">\(\max(0.1z,\,z)\)</div><div class="act-d">負的保留一點點斜率<span>negatives keep a small slope</span></div></div>
+    <div class="act-card" data-step="5"><div class="act-name"><b>指數線性</b> ELU</div><svg class="act-plot" id="act-elu" viewBox="0 0 250 170"></svg>
+      <div class="act-f">\(z\)，或 \(e^{z}-1\)（\(z<0\)）</div><div class="act-d">負的平滑地趨近 −1<span>negatives curve smoothly towards −1</span></div></div>
+    <div class="act-card" data-step="6"><div class="act-name"><b>高斯誤差</b> GELU</div><svg class="act-plot" id="act-gelu" viewBox="0 0 250 170"></svg>
+      <div class="act-f">\(z\cdot\Phi(z)\)</div><div class="act-d"><b>BERT</b> 用的就是它<span>the one BERT uses</span></div></div>
+    <div class="act-card" data-step="7"><div class="act-name"><b>自門控</b> SiLU / Swish</div><svg class="act-plot" id="act-silu" viewBox="0 0 250 170"></svg>
+      <div class="act-f">\(z\cdot\sigma(z)\)</div><div class="act-d">平滑版的 ReLU<span>a smooth ReLU</span></div></div>
+  </div>
+  <div class="callout key bi sm" data-step="8"><span class="zh">每個神經元都是兩步：先算加權總和 \(z=\mathbf w\cdot\mathbf x+b\)，再用激活函數決定輸出。</span><span class="en">Every neuron works in two steps: a weighted sum, then an activation function.</span></div>
 </section>
 
 <section class="slide" id="s-layer" data-sec="nn">
@@ -139,6 +149,7 @@
       </div>
       <div class="bi sm" data-step="1"><span class="zh">像摺紙一樣沿對角線對摺：\((1,0)\) 疊到 \((0,1)\) 上，兩個綠點疊在一起。</span><span class="en">Fold the paper along the diagonal: the two green points meet.</span></div>
       <div class="callout key bi sm" data-step="2"><span class="zh">摺好之後，<b>一條直線</b>就分得開。能摺，是因為有激活函數；只有加權總和，疊再多層也摺不了。</span><span class="en">After the fold, one line separates the classes. The activation function makes folding possible; weighted sums alone never fold.</span></div>
+      <div class="note fold-vid" data-step="2">延伸觀看：<a href="https://www.youtube.com/watch?v=qx7hirqgfuU" target="_blank">Welch Labs</a>，〈Why Deep Learning Works Unreasonably Well〉 <span>Further viewing: a video on how networks fold space.</span></div>
     </div>
   </div>
 </section>
@@ -361,26 +372,6 @@
   </div>
 </section>
 
-<section class="slide" id="s-gpu" data-sec="attn" data-lock>
-  <h2 class="bi"><span class="zh">為什麼要用 GPU？很多計算可以<em>同時做</em></span><span class="en">Why a GPU? Much of the computation can happen at the same time</span></h2>
-  <div class="two gpu">
-    <div>
-      <svg class="diag" id="gpu-svg" viewBox="0 0 600 430" aria-label="A CPU with 8 large cores and a GPU with many small cores each fill a 10 by 10 grid of attention scores; the CPU needs 13 steps, the GPU one"></svg>
-      <div class="fold-ctl gpu-ctl">
-        <button type="button" id="gpu-play">▶ 計算 <span>compute</span></button>
-        <button type="button" id="gpu-reset" class="ghost">↺ <span>reset</span></button>
-      </div>
-    </div>
-    <div>
-      <div class="st bi xs"><i>①</i><span class="zh"><b>CPU</b>：少數幾個強大的核心（如 8 個），擅長一步接一步的複雜工作</span><span class="en">A CPU has a few powerful cores, good at complex step-by-step work.</span></div>
-      <div class="st bi xs" data-step="1"><i>②</i><span class="zh"><b>GPU</b>：成千上萬個簡單的核心（T4 有 2,560 個），原為遊戲畫面設計：每個像素各算各的</span><span class="en">A GPU has thousands of simple cores, first built to compute every pixel of a game at once.</span></div>
-      <div class="st bi xs" data-step="2"><i>③</i><span class="zh">神經網絡幾乎都是<b>矩陣乘法</b>：每個內積彼此獨立。注意力的 \(QK^{\top}\) 裡，每一對字的分數都可以<b>同時</b>算</span><span class="en">Networks are mostly matrix products made of independent dot products; every pair of tokens in attention can be scored at once.</span></div>
-      <div class="callout key bi xs" data-step="3"><span class="zh">早期的模型（RNN）要一個字一個字地讀；Transformer 一次看整句，正好適合 GPU。所以本週實作要在 Colab 選 <b>T4 GPU</b>。</span><span class="en">Older models (RNNs) read one token at a time; a Transformer reads the whole sentence at once, which suits a GPU.</span></div>
-    </div>
-  </div>
-</section>
-
-
 <!-- ═════════════ 5 · using an encoder -->
 
 <section class="slide" id="s-pretrain" data-sec="use">
@@ -469,13 +460,13 @@
       <div class="hlm2-sel" id="hlmc-pick"></div>
       <div class="hlm2-nn-h">最相似的回 <span>nearest chapters (cosine)</span></div>
       <div class="hlm2-nn" id="hlmc-nn"></div>
-      <div class="note">點越大，該回段落越多。拖曳可旋轉；滑鼠移到點上看回目，點一下選中它。 <span>Drag to turn the cloud; hover to read a chapter title, click to select it.</span></div>
+      <div class="note">點越大，該回段落越多。拖曳旋轉；移到點上看回目，點一下選中。 <span>Drag to turn the cloud; hover to read a chapter title, click to select it.</span></div>
     </div>
   </div>
 </section>
 
-<!-- ═════════════ 6 · case study: parallel couplets (from the Beijing Forum 2026 talk, vector poetics) -->
-<section class="slide vp" id="s-reg" data-sec="vp" data-steps="2">
+<!-- ═════════════ 5 (cont.) · example 4: parallel couplets (from the Beijing Forum 2026 talk, vector poetics) -->
+<section class="slide vp" id="s-reg" data-sec="use" data-steps="2">
   <div class="row" style="gap:70px">
     <div style="width:520px;flex:none;padding-top:20px">
       <div class="small" style="margin-bottom:6px">王維（699–761）《山居秋暝》</div>
@@ -484,6 +475,7 @@
       </div>
     </div>
     <div class="grow" style="padding-top:30px">
+      <div class="ex-tag">例四：律詩的對仗 <span>Example 4: parallel couplets</span></div>
       <h2 style="font-size:58px;margin-bottom:4px">律詩</h2>
       <div class="vp-en" data-keep-en="">Regulated verse · 定型於初唐</div><p class="body" style="font-size:25px">八句四聯，格律嚴謹。</p>
       <div class="ev" style="margin-top:10px">
@@ -493,7 +485,7 @@
   </div>
 </section>
 
-<section class="slide vp" id="s-poem" data-sec="vp" data-steps="6">
+<section class="slide vp" id="s-poem" data-sec="use" data-steps="6">
   <h2 style="font-size:44px;margin-bottom:6px">這一聯是否<em>對仗</em>？</h2><p class="small" style="margin-bottom:6px;max-width:900px">在律詩中，上下兩句逐字相對便構成“對仗”。分類器讀取一聯，並輸出其為對仗的概率。</p><div class="small" style="margin-bottom:4px">王維（699–761）《山居秋暝》</div>
   <div class="clf-grid" id="clf-grid">
       <div class="ln" id="clf-l0"><span class="zh">空山新雨後，天氣晚來秋。</span><em class="tr">新雨過後，空山清朗；傍晚的天氣已帶著秋意。</em></div>
@@ -507,7 +499,7 @@
   </div>
 </section>
 
-<section class="slide vp" id="s-v-io" data-sec="vp" data-steps="3">
+<section class="slide vp" id="s-v-io" data-sec="use" data-steps="3">
   <h2>訓練數據：以格律為<em>標籤</em></h2>
   <div class="row" style="gap:56px;align-items:flex-start;margin-top:14px">
     <div class="vp-io" style="width:520px;flex:none">
@@ -527,7 +519,7 @@
   <div class="src">Kurzynski, Xu, and Feng, “The Game of Keys and Queries,” <i>IJHAC</i> 19.2 (2025), 148; Cai, Kurzynski, and Xu, <i>JCLC</i> 12.2 (2025).</div>
 </section>
 
-<section class="slide vp" id="s-v-net" data-sec="vp" data-steps="2">
+<section class="slide vp" id="s-v-net" data-sec="use" data-steps="2">
   <h2>對仗字詞網絡 <em>SymNet</em></h2>
   <div class="row" style="gap:40px;align-items:flex-start">
     <div class="vp-left" style="min-height:380px">
@@ -557,7 +549,7 @@
   <div class="src">Cai, Kurzynski, and Xu, “Good Things Come in Pairs,” <i>JCLC</i> 12.2 (2025), Fig. 1; Kurzynski, Xu, and Feng, <i>IJHAC</i> 19.2 (2025), 148–50.</div>
 </section>
 
-<section class="slide vp" id="s-clf-res" data-sec="vp" data-steps="1">
+<section class="slide vp" id="s-clf-res" data-sec="use" data-steps="1">
   <h2>效果有多<em>好</em>？</h2><p class="small" style="max-width:900px;margin:0 0 10px">測試集：六朝（222–589）的 6,153 組五言詩聯，均由人工標註；其中 2,072 組為對仗，4,081 組不是。</p>
   <table class="res">
     <tbody><tr><th>方法</th><th>準確率</th><th>精確率</th><th>召回率</th><th>F1</th></tr>
@@ -567,7 +559,7 @@
   <div class="src">Cai, Kurzynski, and Xu, “Good Things Come in Pairs: A Computational Study of Poetic Parallelism in the Six Dynasties,” <i>Journal of Chinese Literature and Culture</i> 12.2 (2025), Appendix 2.</div>
 </section>
 
-<section class="slide vp" id="s-v-hist" data-sec="vp" data-steps="2">
+<section class="slide vp" id="s-v-hist" data-sec="use" data-steps="2">
   <h2>對仗的<em>興起</em>：六朝（220–589）</h2>
   <p class="vp-lead" style="margin-top:-8px">以分類器標註逯欽立《先秦漢魏晉南北朝詩》全部 25,158 聯五言詩，其中 6,360 聯經人工核對：對仗詩聯所佔比例（%）。</p>
   <div class="row" style="gap:30px;align-items:flex-start">
@@ -578,7 +570,7 @@
   <div class="src">Cai, Kurzynski, and Xu, “Good Things Come in Pairs: A Computational Study of Poetic Parallelism in the Six Dynasties,” <i>JCLC</i> 12.2 (2025), Figs. 2–3.</div>
 </section>
 
-<section class="slide vp" id="s-cls" data-sec="vp">
+<section class="slide vp" id="s-cls" data-sec="use">
   <h2>鍵與查詢<em>的互動</em></h2>
   <div class="row" style="gap:40px;align-items:flex-start">
     <svg id="kq" viewBox="0 0 440 440" style="width:440px;height:440px;flex:none;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none" aria-label="[CLS] 的查詢：可旋轉一整圈"></svg>
@@ -596,7 +588,7 @@
   <div class="src">Adapted from Kurzynski, Xu, and Feng, “The Game of Keys and Queries,” <i>IJHAC</i> 19.2 (2025), Fig. 1.</div>
 </section>
 
-<section class="slide vp" id="s-attn-couplet" data-sec="vp">
+<section class="slide vp" id="s-attn-couplet" data-sec="use">
   <h2><em class="cls">[CLS]</em> 關注<em>什麼</em>？</h2>
   <div class="row" style="gap:28px;align-items:flex-end;margin-top:-6px">
     <div style="flex:none;width:900px;margin:0 auto">
@@ -608,7 +600,7 @@
   <div class="src">Kurzynski, Xu, and Feng, “The Game of Keys and Queries,” <i>IJHAC</i> 19.2 (2025), Fig. 2.</div>
 </section>
 
-<section class="slide vp" id="s-attn-corr" data-sec="vp">
+<section class="slide vp" id="s-attn-corr" data-sec="use">
   <h2>對應字詞<em>回應相似</em></h2>
   <img class="fig-wide" src="img/kq-attn-corr.png" alt="按注意力頭比較上下句字詞的注意力相關性：對仗與非對仗詩聯">
   <div class="row" style="gap:40px;margin-top:14px;max-width:1040px">
@@ -617,7 +609,7 @@
   <div class="src">Kurzynski, Xu, and Feng, “The Game of Keys and Queries,” <i>IJHAC</i> 19.2 (2025), Fig. 3.</div>
 </section>
 
-<section class="slide vp" id="s-align-ex" data-sec="vp">
+<section class="slide vp" id="s-align-ex" data-sec="use">
   <h2>“<em>對齊</em>”看起來是什麼樣子？</h2><p class="lead" style="font-size:25px;max-width:1000px;margin-bottom:6px">將每句詩視為穿越三維語義空間的一條路徑，逐字前進。每一步都問：兩條路徑是否朝同一方向移動？</p>
   <div class="row" style="gap:24px;margin-top:6px">
     <div data-step="1"><canvas id="ax-mis" style="width:520px;height:320px"></canvas><div class="axlab" style="color:var(--mute)">未對齊</div></div><div data-step="2"><canvas id="ax-ali" style="width:520px;height:320px"></canvas><div class="axlab" style="color:var(--green)">已對齊</div></div>
@@ -627,10 +619,10 @@
   </div>
 </section>
 
-<section class="slide vp" id="s-3d" data-sec="vp" data-steps="4">
+<section class="slide vp" id="s-3d" data-sec="use" data-steps="4">
   <div class="cpl-wrap"><canvas id="cpl"></canvas></div>
   <div class="cpl-title">
-    <div class="kicker" style="width:1104px"><span class="n">02</span><span>向量詩學</span></div><div class="zh"><span class="c-blue">明月松間照</span>，<span style="color:#12b5cb">清泉石上流</span></div><div class="small" style="margin-top:6px;font-family:var(--serif);font-style:italic;font-size:21.5px"><span class="c-blue">明月照松間</span>；<span style="color:#12b5cb">清泉流石上</span>。</div>
+    <div class="kicker" style="width:1104px"><span>例四 · 律詩的對仗</span></div><div class="zh"><span class="c-blue">明月松間照</span>，<span style="color:#12b5cb">清泉石上流</span></div>
     <div class="small" style="margin-top:2px">GujiBERT · <span id="cpl-layer">頂層（第 12 層）</span>・10 個字 → 主成分分析（PCA）→ 3 個維度</div>
   </div>
   <div class="cpl-align" id="cpl-align">
@@ -646,7 +638,7 @@
   <div class="cpl-keys cite">拖曳旋轉・捲動縮放・ <kbd>[</kbd> <kbd>]</kbd> 圖層 · <kbd>R</kbd> 自動旋轉・ <kbd>0</kbd> 重設</div>
 </section>
 
-<section class="slide vp" id="s-v-h3d" data-sec="vp" data-steps="2">
+<section class="slide vp" id="s-v-h3d" data-sec="use" data-steps="2">
   <h2>七言律詩：<em>平行的軌跡</em></h2>
   <p class="vp-lead">杜甫兩聯，各以 GujiBERT 整聯編碼；每個字是一個點，每句詩是一條路徑。左為對仗的頷聯，右為不對仗的首聯。</p>
   <div class="h3d-row">
@@ -669,7 +661,7 @@
   </div>
 </section>
 
-<section class="slide vp" id="s-v-hlayers" data-sec="vp" data-steps="1">
+<section class="slide vp" id="s-v-hlayers" data-sec="use" data-steps="1">
   <h2>四聯的<em>逐層對齊度</em></h2>
   <div class="row" style="gap:34px;align-items:flex-start">
     <div style="flex:none">
@@ -688,7 +680,7 @@
   <div class="src">按 <kbd>N</kbd> 切換五言／七言。Kurzynski, Xu, and Feng, “Like Threaded Pearls: Repetition between Redundancy and Meaning in Chinese Regulated Verse and Patterned Prose” (manuscript), §4, Fig. 4a.</div>
 </section>
 
-<section class="slide vp" id="s-v-concl" data-sec="vp" data-steps="1">
+<section class="slide vp" id="s-v-concl" data-sec="use" data-steps="1">
   <h2>對仗的<em>三種解讀</em></h2>
   <p class="vp-lead" style="font-size:26px;line-height:1.5;margin:0 0 6px">本研究把對仗重新理解為一場主動「尋求對齊」的遊戲：從靜態的特徵清單，轉向以過程為本的理解，強調讀者在建構意義時的能動角色。</p>
   <div class="concl-cols">
@@ -730,6 +722,35 @@
   </div>
 </section>
 
+<section class="slide" id="s-gpu" data-sec="summary" data-lock>
+  <h2 class="bi"><span class="zh">為什麼要用 GPU？很多計算可以<em>同時做</em></span><span class="en">Why a GPU? Much of the computation can happen at the same time</span></h2>
+  <div class="two gpu">
+    <div>
+      <svg class="diag" id="gpu-svg" viewBox="0 0 600 430" aria-label="A CPU with 8 large cores and a GPU with many small cores each fill a 10 by 10 grid of attention scores; the CPU needs 13 steps, the GPU one"></svg>
+      <div class="fold-ctl gpu-ctl">
+        <button type="button" id="gpu-play">▶ 計算 <span>compute</span></button>
+        <button type="button" id="gpu-reset" class="ghost">↺ <span>reset</span></button>
+      </div>
+    </div>
+    <div>
+      <div class="st bi xs"><i>①</i><span class="zh"><b>CPU</b>：少數幾個強大的核心（如 8 個），擅長一步接一步的複雜工作</span><span class="en">A CPU has a few powerful cores, good at complex step-by-step work.</span></div>
+      <div class="st bi xs" data-step="1"><i>②</i><span class="zh"><b>GPU</b>：成千上萬個簡單的核心（T4 有 2,560 個），原為遊戲畫面設計：每個像素各算各的</span><span class="en">A GPU has thousands of simple cores, first built to compute every pixel of a game at once.</span></div>
+      <div class="st bi xs" data-step="2"><i>③</i><span class="zh">神經網絡幾乎都是<b>矩陣乘法</b>：每個內積彼此獨立。注意力的 \(QK^{\top}\) 裡，每一對字的分數都可以<b>同時</b>算</span><span class="en">Networks are mostly matrix products made of independent dot products; every pair of tokens in attention can be scored at once.</span></div>
+      <div class="callout key bi xs" data-step="3"><span class="zh">早期的模型（RNN）要一個字一個字地讀；Transformer 一次看整句，正好適合 GPU。所以本週實作要在 Colab 選 <b>T4 GPU</b>。</span><span class="en">Older models (RNNs) read one token at a time; a Transformer reads the whole sentence at once, which suits a GPU.</span></div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="slide" id="s-gpucost" data-sec="summary">
+  <h2 class="bi"><span class="zh">GPU 有多貴？</span><span class="en">How expensive are GPUs?</span></h2>
+  <figure class="gpu-photo"><img src="img/rtx-pro-6000.jpg" alt="NVIDIA RTX PRO 6000 Blackwell graphics card"><figcaption>NVIDIA RTX PRO 6000 Blackwell</figcaption></figure>
+  <svg class="diag" id="cost-svg" viewBox="0 0 1108 370" aria-label="Log-scale bars: from a free Colab T4 to the cost of training GPT-4"></svg>
+  <div class="callout key bi xs" data-step="6"><span class="zh">所以我們<b>租用</b>雲端 GPU：Colab 免費的 T4 足夠微調 BERT；從頭訓練一個大模型，只有少數公司負擔得起。</span><span class="en">So we rent cloud GPUs: a free T4 is enough to fine-tune BERT, while training a large model from scratch is affordable for only a few companies.</span></div>
+  <div class="src-line cost-src">價格為約數（2026 年，1 美元 ≈ 7.8 港元）。RTX 5090：NVIDIA 建議售價；RTX PRO 6000：香港零售網店，2026 年 11 月；H100、B200 伺服器：IntuitionLabs, “NVIDIA AI GPU Pricing Guide” (2026)；GPT-4：Sam Altman 稱「超過一億美元」，Stanford AI Index 2025 估計 7,800 萬至 1 億美元。</div>
+</section>
+
 <section class="slide" id="s-summary" data-sec="summary">
   <h2 class="bi"><span class="zh">總結</span><span class="en">Summary</span></h2>
   <div class="sum">
@@ -738,7 +759,7 @@
     <div><i>3</i><span class="zh">靜態詞向量無法區分一詞多義；BERT 為<b>每一次出現</b>計算一個上下文向量。</span><span class="en">Static vectors merge the senses of a word; BERT computes a contextual vector for every occurrence.</span></div>
     <div><i>4</i><span class="zh"><b>自注意力</b>：查詢 · 鍵 → softmax → 值的加權平均；12 層 × 12 頭。</span><span class="en">Self-attention compares queries with keys, applies a softmax and averages the values, in 12 layers of 12 heads.</span></div>
     <div><i>5</i><span class="zh">用法：[CLS] 分類、逐字分類、或直接當<b>嵌入</b>比較相似度。</span><span class="en">Uses: classify with [CLS], label every token, or compare the vectors as embeddings.</span></div>
-    <div><i>6</i><span class="zh">案例：[CLS] 分類器辨認對仗；對仗的兩句在向量空間裡走出<b>平行</b>的路徑。</span><span class="en">Case study: a [CLS] classifier finds parallel couplets, whose two lines trace parallel paths in vector space.</span></div>
+    <div><i>6</i><span class="zh">律詩對仗：[CLS] 分類器辨認對仗；對仗的兩句在向量空間裡走出<b>平行</b>的路徑。</span><span class="en">Parallel couplets: a [CLS] classifier finds parallel couplets, whose two lines trace parallel paths in vector space.</span></div>
   </div>
 </section>
 

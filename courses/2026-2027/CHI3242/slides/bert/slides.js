@@ -3,14 +3,21 @@ window.HOOKS = window.HOOKS || {};
 window.SECTIONS = [
   { id: 'nn',      zh: '神經網絡',   en: 'Neural networks' },
   { id: 'poly',    zh: '一詞多義',   en: 'Polysemy' },
-  { id: 'bert',    zh: 'BERT',       en: 'BERT' },
+  { id: 'bert',    zh: 'BERT',       en: 'BERT',
+    // the Transformer (Vaswani et al. 2017, Fig. 1); BERT keeps only the encoder, the left half
+    fig: `<figure class="sec-paper"><img src="img/attention-paper.png" alt="First page of Vaswani et al., Attention Is All You Need (2017)"><figcaption>Vaswani et al. (2017)</figcaption></figure>
+      <figure class="sec-fig"><div class="tf-wrap"><img src="img/transformer.png" alt="The Transformer architecture: an encoder on the left and a decoder on the right">
+      <div class="tf-enc" data-step="1"></div><div class="tf-lab" data-step="1">編碼器 encoder<br><b>＝ BERT</b></div></div>
+      <figcaption>Transformer：Vaswani et al., “Attention Is All You Need” (2017), Fig. 1</figcaption></figure>` },
   { id: 'attn',    zh: '自注意力',   en: 'Self-attention' },
   { id: 'use',     zh: '使用編碼器', en: 'Using an encoder' },
-  { id: 'vp',      zh: '案例：律詩對仗', en: 'Case study: parallel couplets' },
   { id: 'summary', zh: '總結',       en: 'Summary' }
 ];
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
+/* ---------- never italicize Chinese: <em>/<i> containing CJK characters stay upright (English titles keep their italics) ---------- */
+document.querySelectorAll('em, i').forEach(e => { if (/[\u3400-\u9fff\uf900-\ufaff]/.test(e.textContent)) e.style.fontStyle = 'normal'; });
 
 /* ---------- an opening slide for every chapter (except the summary), inserted before its first slide ---------- */
 window.SECTIONS.forEach((sec, i) => {
@@ -19,7 +26,7 @@ window.SECTIONS.forEach((sec, i) => {
   if (!first) return;
   const s = document.createElement('section');
   s.className = 'slide full title-slide sec-open'; s.id = 's-open-' + sec.id; s.dataset.sec = sec.id;
-  s.innerHTML = `<div class="sec-num">${String(i + 1).padStart(2, '0')}</div><div class="big-zh">${sec.zh}</div><div class="big-en">${sec.en}</div><div class="rule"></div>`;
+  s.innerHTML = `<div class="sec-num">${String(i + 1).padStart(2, '0')}</div><div class="big-zh">${sec.zh}</div><div class="big-en">${sec.en}</div><div class="rule"></div>${sec.fig || ''}`;
   first.parentNode.insertBefore(s, first);
 });
 const BLUE = '#1f5fd6', ORG = '#e0570f', INK = '#1b2333', MUTE = '#6a7386', LINE = '#dde1e8';
@@ -894,7 +901,7 @@ function meaningAxes(svg, X, Y, x0, x1, y0, y1, small) {
   txt(g1, X(0) - 50, 82, '對仗：0.97', { 'font-size': 26, 'font-weight': 700, 'text-anchor': 'start' });
   txt(g1, X(0) + 58, 168, '只讀 [CLS] 的向量', { 'font-size': 16, fill: QRED, 'text-anchor': 'start' });
   // ② token classifier
-  const POS = { 明: ['形', '#7c3aed'], 月: ['名', BLUE], 松: ['名', BLUE], 間: ['方', AMB], 照: ['動', GRN], 清: ['形', '#7c3aed'], 泉: ['名', BLUE], 石: ['名', BLUE], 上: ['方', AMB], 流: ['動', GRN] };
+  const POS = { 明: ['形', PUR], 月: ['名', PUR], 松: ['名', PUR], 間: ['方', PUR], 照: ['動', PUR], 清: ['形', PUR], 泉: ['名', PUR], 石: ['名', PUR], 上: ['方', PUR], 流: ['動', PUR] };   // one colour: the labels carry the meaning
   const g2 = el('g', { 'data-step': 2, 'data-until': 3 }, svg);
   el('rect', { x: X(1) - 26, y: 168, width: X(11) - X(1) + 52, height: 40, rx: 10, fill: '#efe9fb', stroke: PUR, 'stroke-width': 2 }, g2);
   txt(g2, (X(1) + X(11)) / 2, 194, '分類器（每個字）token classifier', { 'font-size': 17, fill: PUR, 'font-weight': 600 });
@@ -1142,7 +1149,7 @@ function meaningAxes(svg, X, Y, x0, x1, y0, y1, small) {
   apply();
 })();
 
-/* ---------- activation functions: step, sigmoid, tanh, ReLU ---------- */
+/* ---------- activation functions: step, sigmoid, tanh, ReLU; then Leaky ReLU, ELU, GELU, SiLU ---------- */
 (function () {
   const plot = (id, f, ymin, ymax, yt, color, opt = {}) => {
     const svg = $('#' + id), L = 34, R = 228, T = 12, B = 146, zmin = -4, zmax = 4;
@@ -1172,6 +1179,12 @@ function meaningAxes(svg, X, Y, x0, x1, y0, y1, small) {
   plot('act-sig', sigm, -.25, 1.25, [0, 1], BLUE);
   plot('act-tanh', Math.tanh, -1.25, 1.25, [-1, 0, 1], PUR);
   plot('act-relu', z => Math.max(0, z), -1, 4.2, [0, 2, 4], GRN);
+  // more, for curiosity
+  const gelu = z => .5 * z * (1 + Math.tanh(Math.sqrt(2 / Math.PI) * (z + .044715 * z ** 3)));   // tanh approximation of z·Φ(z)
+  plot('act-leaky', z => Math.max(.1 * z, z), -1, 4.2, [0, 2, 4], TEAL);
+  plot('act-elu', z => z > 0 ? z : Math.exp(z) - 1, -1.4, 4.2, [-1, 0, 2, 4], AMB);
+  plot('act-gelu', gelu, -1, 4.2, [0, 2, 4], QRED);
+  plot('act-silu', z => z * sigm(z), -1, 4.2, [0, 2, 4], '#c2185b');
 })();
 
 /* ---------- 《紅樓夢》 emotional space in 3D: a point cloud coloured by an emotion axis; drag to turn, click a point to see its nearest neighbours (window.HLM).
@@ -1193,7 +1206,7 @@ function hlmCloud(o) {
   const SAD = [224, 87, 15], MID = [205, 210, 220], HAP = [31, 157, 85];
   let mode = 0, pick = o.start, hover = -1, cols = [];
   const colour = i => {
-    if (mode === H.axes.length) { const t = (o.chap(i) - 1) / 119; return `rgb(${mix([190, 205, 240], [20, 50, 140], t)})`; }   // by chapter
+    if (mode === H.axes.length) return o.chap(i) <= 80 ? 'rgb(31,95,214)' : 'rgb(194,24,91)';   // chapters 1–80 or 81–120
     const z = Math.max(-2.5, Math.min(2.5, o.s[mode][i])) / 2.5;
     return `rgb(${z < 0 ? mix(MID, SAD, -z) : mix(MID, HAP, z)})`;
   };
@@ -1215,7 +1228,12 @@ function hlmCloud(o) {
     for (const i of order) {
       const k = .75 + .35 * (SD[i] + 1) / 2, r = o.dot(i) * k;
       g.fillStyle = cols[i]; g.globalAlpha = o.alpha + .35 * (SD[i] + 1) / 2;
-      if (o.round) { g.beginPath(); g.arc(SX[i], SY[i], r, 0, 7); g.fill(); g.globalAlpha = 1; g.lineWidth = 1; g.strokeStyle = '#fff'; g.stroke(); }
+      if (o.round) {   // chapters: circles for 1–80, triangles for 81–120, as in the dashboard
+        g.beginPath();
+        if (o.chap(i) > 80) { const t = r * 1.3; g.moveTo(SX[i], SY[i] - t); g.lineTo(SX[i] + t * .87, SY[i] + t * .5); g.lineTo(SX[i] - t * .87, SY[i] + t * .5); g.closePath(); }
+        else g.arc(SX[i], SY[i], r, 0, 7);
+        g.fill(); g.globalAlpha = 1; g.lineWidth = 1; g.strokeStyle = '#fff'; g.stroke();
+      }
       else g.fillRect(SX[i] - r, SY[i] - r, 2 * r, 2 * r);
     }
     g.globalAlpha = 1;
@@ -1245,8 +1263,9 @@ function hlmCloud(o) {
   }
   function legend() {
     const L = $(o.leg);
-    if (mode === H.axes.length) L.innerHTML = '<span>第 1 回</span><i class="ch"></i><span>第 120 回</span>';
-    else L.innerHTML = `<span class="n">${H.axes[mode].neg}</span><i></i><span class="p">${H.axes[mode].pos}</span>`;
+    const m = o.round ? ['●', '▲'] : ['■', '■'];
+    if (mode === H.axes.length) L.innerHTML = `<span class="c80">${m[0]} 第 1–80 回</span><span class="c40">${m[1]} 第 81–120 回</span>`;
+    else L.innerHTML = `<span class="n">${H.axes[mode].neg}</span><i></i><span class="p">${H.axes[mode].pos}</span>` + (o.round ? '<span class="shp">● 1–80 回　▲ 81–120 回</span>' : '');
   }
   const pos = e => { const r = cv.getBoundingClientRect(); return [(e.clientX - r.left) / r.width * W, (e.clientY - r.top) / r.height * Hh]; };
   cv.addEventListener('pointerdown', e => { e.stopPropagation(); drag = { x: e.clientX, y: e.clientY, yaw, pitch, moved: false }; cv.setPointerCapture(e.pointerId); });
@@ -1268,7 +1287,7 @@ function hlmCloud(o) {
     drag = null;
   });
   cv.addEventListener('pointerleave', () => { hover = -1; tip.style.opacity = 0; });
-  sel.innerHTML = H.axes.map((a, i) => `<option value="${i}">${a.name}</option>`).join('') + `<option value="${H.axes.length}">回目 chapter</option>`;
+  sel.innerHTML = H.axes.map((a, i) => `<option value="${i}">${a.name}</option>`).join('') + `<option value="${H.axes.length}">前八十回／後四十回</option>`;
   sel.addEventListener('keydown', e => e.stopPropagation());
   sel.addEventListener('change', () => { sel.blur(); mode = +sel.value; recolour(); legend(); panel(); });
   // animation loop while the slide is visible: slow automatic rotation until the viewer drags
@@ -1370,6 +1389,38 @@ function hlmCloud(o) {
   $('#gpu-play').addEventListener('click', e => { e.stopPropagation(); e.currentTarget.blur(); cancelAnimationFrame(raf); t0 = performance.now(); raf = requestAnimationFrame(frame); });
   $('#gpu-reset').addEventListener('click', e => { e.stopPropagation(); e.currentTarget.blur(); cancelAnimationFrame(raf); raf = null; show(0); });
   show(0);
+})();
+
+/* ---------- how expensive GPUs are: log-scale bars from a free Colab T4 to training GPT-4 (HK$) ---------- */
+(function () {
+  const svg = $('#cost-svg');
+  const ROWS = [   // [label, sub, low, high] in HK$
+    ['Colab T4', '本週實作 this week’s lab', 0, 0],
+    ['RTX 5090', '遊戲顯卡 gaming card', 15600, 15600],
+    ['RTX PRO 6000', '工作站 workstation, 96 GB', 174960, 174960],
+    ['H100', '資料中心 data centre, 一張 one card', 195000, 312000],
+    ['8 × B200', '伺服器 one server', 2340000, 3900000],
+    ['訓練 GPT-4', '約 25,000 張 A100 GPUs (估計)', 780000000, 780000000]
+  ];
+  const L = 300, R = 1000, lo = 4, hi = 9;                 // log10 axis from HK$10,000 to HK$1,000,000,000
+  const X = v => L + (Math.log10(v) - lo) / (hi - lo) * (R - L), Y = i => 40 + i * 53;
+  const fmt = v => v >= 1e8 ? (v / 1e8).toFixed(1).replace(/\.0$/, '') + ' 億' : v >= 1e4 ? Math.round(v / 1e4).toLocaleString() + ' 萬' : v.toLocaleString();
+  [4, 5, 6, 7, 8, 9].forEach(e => {
+    el('line', { x1: X(10 ** e), y1: 12, x2: X(10 ** e), y2: Y(ROWS.length - 1) + 26, stroke: '#eceef2' }, svg);
+    txt(svg, X(10 ** e), Y(ROWS.length - 1) + 48, 'HK$ ' + fmt(10 ** e), { 'font-size': 14, fill: MUTE });
+  });
+  ROWS.forEach(([name, sub, a, b], i) => {
+    const g = el('g', i ? { 'data-step': i } : {}, svg), y = Y(i), col = i === 5 ? QRED : i === 0 ? GRN : BLUE;
+    txt(g, L - 16, y + 2, name, { 'font-size': 21, 'font-weight': 700, 'text-anchor': 'end' });
+    txt(g, L - 16, y + 22, sub, { 'font-size': 13.5, fill: MUTE, 'text-anchor': 'end' });
+    if (!a) { txt(g, L + 10, y + 13, '免費 free', { 'font-size': 22, 'font-weight': 700, fill: GRN, 'text-anchor': 'start' }); return; }
+    el('rect', { x: L, y: y - 8, width: X(a) - L, height: 30, rx: 6, fill: col, opacity: .85 }, g);
+    if (b > a) el('rect', { x: X(a), y: y - 8, width: X(b) - X(a), height: 30, rx: 6, fill: col, opacity: .35 }, g);
+    const label = 'HK$ ' + (b > a ? fmt(a) + '–' + fmt(b) : fmt(a)) + (i === 5 ? ' 以上' : '');
+    if (i === 5) txt(g, X(b) - 12, y + 14, label, { 'font-size': 19, 'font-weight': 700, fill: '#fff', 'text-anchor': 'end' });   // the longest bar: label inside
+    else txt(g, X(b) + 10, y + 14, label, { 'font-size': 19, 'font-weight': 700, fill: col, 'text-anchor': 'start' });
+  });
+  txt(svg, L + 8, 16, '對數刻度：每一格 ×10  log scale', { 'font-size': 13, fill: MUTE, 'text-anchor': 'start' });
 })();
 
 /* ---------- how a network learns: forward pass, error at the output, error pulses travelling back (no maths) ---------- */

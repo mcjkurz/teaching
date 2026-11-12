@@ -412,9 +412,10 @@ title: CHI3242
           <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Katherine Elkins, <em>The Shapes of Stories: Sentiment Analysis for Narrative</em></li>
           <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Andrew Reagan et al., <a href="https://epjdatascience.springeropen.com/articles/10.1140/epjds/s13688-016-0093-1">“The Emotional Arcs of Stories Are Dominated by Six Basic Shapes”</a>, <em>EPJ Data Science</em> (2016)</li>
           <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> 3Blue1Brown, <a href="https://www.3blue1brown.com/topics/neural-networks">neural-network series</a> <span class="lang-en">(video)</span><span class="lang-zh" lang="zh-Hant">（影片）</span></li>
+          <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> <a href="https://www.youtube.com/watch?v=qx7hirqgfuU">Welch Labs</a>, “Why Deep Learning Works Unreasonably Well” <span class="lang-en">(video)</span><span class="lang-zh" lang="zh-Hant">（影片）</span></li>
         </ul>
       </td>
-      <td class="notes"><a href="https://mcjkurz.github.io/teaching/visualizations/xor-problem.html">XOR problem</a><br><a href="https://mcjkurz.github.io/teaching/visualizations/neural-network-mnist.html">Digit network</a><br><a href="https://mcjkurz.github.io/teaching/visualizations/attention-keys-queries.html">Attention</a></td>
+      <td class="notes"><a href="https://mcjkurz.github.io/teaching/visualizations/xor-problem.html">XOR problem</a><br><a href="https://mcjkurz.github.io/teaching/visualizations/neural-network-mnist.html">Digit network</a><br><a href="https://mcjkurz.github.io/teaching/visualizations/attention-keys-queries.html">Attention</a><br><a href="https://colab.research.google.com/drive/18X8K_XXXghnzjoaeMExL3I9EVwF_8BRA?usp=sharing">Colab demo</a></td>
     </tr>
   </tbody>
   <tbody class="due">
