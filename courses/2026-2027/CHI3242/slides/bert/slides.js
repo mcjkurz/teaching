@@ -651,7 +651,7 @@ function mathLab(svg, x, y, s, col, op, bold) {
 /* ---------- add a layer at the end: the old output layer becomes the hidden layer ---------- */
 (function () {
   const svg = $('#next-svg');
-  const iy = i => 58 + i * 66, ly = k => 92 + k * 114, L1 = 400, L2 = 720, SUB = ['₁', '₂', '₃'];
+  const iy = i => 78 + i * 66, ly = k => 210 + (k - 1) * 112, L1 = 400, L2 = 720, SUB = ['₁', '₂', '₃'];
   const lab = (...args) => mathLab(svg, ...args);
   const W0 = [[.25, .02, .22, -.3, -.21], [.05, .1, 0, .05, 0], [-.3, 0, -.2, .35, .3]];   // weights into layer 1 (positive, neutral, negative)
   const H = [.88, .31, .12];                     // layer-1 activations once they are kept as features
@@ -667,7 +667,7 @@ function mathLab(svg, x, y, s, col, op, bold) {
       el('rect', { x: x + 154, y: ly(k) - 12, width: 150 * P[k], height: 24, rx: 12, fill: c }, g);
       txt(g, x + 312, ly(k) + 7, Math.round(P[k] * 100) + '%', { 'font-size': 18, 'text-anchor': 'start', 'font-weight': 600 });
     });
-    txt(el('g', { opacity: op }, svg), x + 200, 34, 'softmax', { 'font-size': 16, fill: BLUE, 'font-weight': 700 });
+    txt(el('g', { opacity: op }, svg), x + 200, 40, 'softmax', { 'font-size': 16, fill: BLUE, 'font-weight': 700 });
   }
   function draw() {
     while (svg.firstChild) svg.firstChild.remove();
@@ -675,7 +675,7 @@ function mathLab(svg, x, y, s, col, op, bold) {
     INPUTS.forEach((_, i) => [0, 1, 2].forEach(k => el('line', { x1: 143, y1: iy(i), x2: L1 - 33, y2: ly(k), stroke: W0[k][i] >= 0 ? GRN : RED, 'stroke-width': 1 + Math.abs(W0[k][i]) * 8, opacity: .55 }, svg)));
     if (a > 0) H.forEach((h, j) => [0, 1, 2].forEach(k => el('line', { x1: L1 + 33, y1: ly(j), x2: x2 - 33, y2: ly(k), stroke: BLUE, 'stroke-width': 1 + h * 4, opacity: a * .55 }, svg)));
     INPUTS.forEach(([w], i) => { el('circle', { cx: 120, cy: iy(i), r: 23, fill: '#fff', stroke: INK, 'stroke-width': 2 }, svg); txt(svg, 120, iy(i) + 6, w, { 'font-size': 16 }); });
-    txt(svg, 120, 372, '輸入層 input', { 'font-size': 16, fill: MUTE });
+    txt(svg, 120, 394, '輸入層 input', { 'font-size': 16, fill: MUTE });
     // layer 1: an output layer at first, a hidden layer at the end
     const keep = 1 - s;
     H.forEach((h, k) => {
@@ -688,13 +688,13 @@ function mathLab(svg, x, y, s, col, op, bold) {
       lab(L1, ly(k) - 42, `h_{${n}} = σ(z_{${n}}${up})`, BLUE, keep, true);
     });
     bars(L1, P1, s);
-    txt(svg, L1, 372, '輸出層 output', { 'font-size': 16, fill: MUTE, opacity: 1 - a });
+    txt(svg, L1, 394, '輸出層 output', { 'font-size': 16, fill: MUTE, opacity: 1 - a });
     if (a > 0) {
-      el('rect', { x: L1 - 100, y: 2, width: 200, height: 352, rx: 18, fill: 'none', stroke: BLUE, 'stroke-width': 2.5, 'stroke-dasharray': '9 7', opacity: a }, svg);
-      txt(svg, L1, 374, '隱藏層 hidden layer', { 'font-size': 17, fill: BLUE, 'font-weight': 700, opacity: a });
+      el('rect', { x: L1 - 110, y: 6, width: 220, height: 362, rx: 18, fill: 'none', stroke: BLUE, 'stroke-width': 2.5, 'stroke-dasharray': '9 7', opacity: a }, svg);
+      txt(svg, L1, 394, '隱藏層 hidden layer', { 'font-size': 17, fill: BLUE, 'font-weight': 700, opacity: a });
       CLS.forEach((_, k) => { el('circle', { cx: x2, cy: ly(k), r: 32, fill: '#fff', stroke: INK, 'stroke-width': 2.5, opacity: a }, svg); txt(svg, x2, ly(k) + 6, 'Σ', { 'font-size': 20, opacity: a }); lab(x2, ly(k) - 42, `z_{${k + 1}}^{(2)} = w_{${k + 1}}^{(2)}·h + b_{${k + 1}}^{(2)}`, INK, a); });
       bars(x2, P2, a);
-      txt(svg, x2, 372, '新的輸出層 new output', { 'font-size': 16, fill: MUTE, opacity: a });
+      txt(svg, x2, 394, '新的輸出層 new output', { 'font-size': 16, fill: MUTE, opacity: a });
     }
     if (keep > 0 && a < 1) txt(svg, L1 + 180, ly(1) + 8, 'h ＝ 新的特徵', { 'font-size': 22, fill: BLUE, 'font-weight': 700, opacity: keep * (1 - a) });
   }
@@ -1426,7 +1426,7 @@ function hlmCloud(o) {
 /* ---------- how a network learns: forward pass, error at the output, error pulses travelling back (no maths) ---------- */
 (function () {
   const svg = $('#bp-svg'), slide = $('#s-grad');
-  const IX = 70, HX = 340, OX = 590, iy = i => 50 + i * 76, hy = j => 100 + j * 110, OY = 210;
+  const IX = 70, HX = 340, OX = 590, iy = i => 50 + i * 76, hy = j => 202 + (j - 1) * 110, OY = 202;
   const HV = [.88, .31, .12], V = [1.2, .3, -.8];         // hidden activations and their weights to the output
   const V2 = V.map((v, j) => v + .2 * .27 * HV[j]);        // after one update (learning rate 0.2): every weight rises, in proportion to h
   const ON = INPUTS.map(([, x]) => x > 0);                  // only 精彩 and 電影 occur in this review
