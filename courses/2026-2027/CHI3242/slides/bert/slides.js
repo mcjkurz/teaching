@@ -594,6 +594,17 @@ const fmtW = w => (w >= 0 ? '+' : '−') + Math.abs(w).toFixed(2);
   txt(g, (sx - 88 + bx + bw + 16) / 2, 76, '一個神經元 a neuron', { 'font-size': 20, fill: BLUE, 'font-weight': 700 });
 })();
 
+/* ---------- a formula label above a neuron (s uses _{…} for subscripts and ^{…} for superscripts), with a white halo over the connection lines ---------- */
+function mathLab(svg, x, y, s, col, op, bold) {
+  const t = txt(svg, x, y, null, { 'font-size': 19, fill: col, opacity: op, 'font-weight': bold ? 700 : 400, stroke: '#fff', 'stroke-width': 3.5, 'paint-order': 'stroke', style: `font-family: KaTeX_Main, "Times New Roman", serif; font-style: italic; font-size: 21px` });
+  s.split(/(_\{[^}]*\}|\^\{[^}]*\})/).filter(Boolean).forEach(p => {
+    const sub = p.startsWith('_{'), sup = p.startsWith('^{');
+    const ts = el('tspan', sub || sup ? { 'baseline-shift': sub ? '-28%' : '42%', 'font-size': '68%', 'font-style': 'normal' } : {}, t);
+    ts.textContent = sub || sup ? p.slice(2, -1) : p;
+  });
+  return t;
+}
+
 /* ---------- several neurons side by side = a layer, then softmax ---------- */
 (function () {
   const svg = $('#layer-svg');
@@ -615,8 +626,8 @@ const fmtW = w => (w >= 0 ? '+' : '−') + Math.abs(w).toFixed(2);
   cls.forEach(([name, z, ez, p, col], k) => {
     const y = ny(k);
     el('circle', { cx: nx, cy: y, r: 38, fill: '#fff', stroke: INK, 'stroke-width': 2.5 }, svg);
-    txt(svg, nx, y - 4, 'Σ σ', { 'font-size': 14, fill: MUTE });
-    txt(svg, nx, y + 16, 'z = ' + (z >= 0 ? '+' : '−') + Math.abs(z).toFixed(1), { 'font-size': 16, 'font-weight': 700 });
+    txt(svg, nx, y + 7, (z >= 0 ? '+' : '−') + Math.abs(z).toFixed(1), { 'font-size': 20, 'font-weight': 700 });
+    mathLab(svg, nx, y - 46, `z_{${k + 1}} = w_{${k + 1}}·x + b_{${k + 1}}`, INK, 1);   // each neuron is a linear function
     arrow(svg, nx + 42, y, 654, y, { w: 2.5 });
     txt(svg, 730, y + 7, 'eᶻ = ' + ez, { 'font-size': 19, fill: k === 2 ? '#f6d365' : '#aab3c4' });
     arrow(svg, 808, y, 850, y, { w: 2.5 });
@@ -626,7 +637,7 @@ const fmtW = w => (w >= 0 ? '+' : '−') + Math.abs(w).toFixed(2);
     txt(svg, 1072, y + 7, Math.round(p * 100) + '%', { 'font-size': 18, 'text-anchor': 'start', 'font-weight': 600 });
   });
   const g = el('g', { 'data-step': 1 }, svg);
-  el('rect', { x: nx - 56, y: 28, width: 112, height: 304, rx: 18, fill: 'none', stroke: BLUE, 'stroke-width': 2.5, 'stroke-dasharray': '9 7' }, g);
+  el('rect', { x: nx - 92, y: 6, width: 184, height: 326, rx: 18, fill: 'none', stroke: BLUE, 'stroke-width': 2.5, 'stroke-dasharray': '9 7' }, g);
   txt(g, nx, 352, '一層 a layer', { 'font-size': 19, fill: BLUE, 'font-weight': 700 });
 })();
 
@@ -634,17 +645,7 @@ const fmtW = w => (w >= 0 ? '+' : '−') + Math.abs(w).toFixed(2);
 (function () {
   const svg = $('#next-svg');
   const iy = i => 58 + i * 66, ly = k => 92 + k * 114, L1 = 400, L2 = 720, SUB = ['₁', '₂', '₃'];
-  // a formula label above a neuron, with a white halo so it stays readable over the connection lines
-  const lab = (x, y, s, col, op, bold) => {   // s uses _{…} for subscripts and ^{…} for superscripts
-    const t = txt(svg, x, y, null, { 'font-size': 19, fill: col, opacity: op, 'font-weight': bold ? 700 : 500, 'font-style': 'italic', stroke: '#fff', 'stroke-width': 5, 'paint-order': 'stroke', 'font-family': '"Times New Roman", serif' });
-    s.split(/(_\{[^}]*\}|\^\{[^}]*\})/).filter(Boolean).forEach(p => {
-      const sub = p.startsWith('_{'), sup = p.startsWith('^{');
-      const ts = el('tspan', sub || sup ? { 'baseline-shift': sub ? '-28%' : '42%', 'font-size': '68%', 'font-style': 'normal' } : {}, t);
-      ts.textContent = sub || sup ? p.slice(2, -1) : p;
-      if (sub || sup) el('tspan', { 'font-size': '19', dx: 0 }, t).textContent = '\u200a';
-    });
-    return t;
-  };
+  const lab = (...args) => mathLab(svg, ...args);
   const W0 = [[.25, .02, .22, -.3, -.21], [.05, .1, 0, .05, 0], [-.3, 0, -.2, .35, .3]];   // weights into layer 1 (positive, neutral, negative)
   const H = [.88, .31, .12];                     // layer-1 activations once they are kept as features
   const CLS = [['正面', GRN], ['中性', '#b9c0cc'], ['負面', '#e8a5a5']];
@@ -769,17 +770,18 @@ function meaningAxes(svg, X, Y, x0, x1, y0, y1, small) {
       if (i === s.q) return;
       const d = Math.abs(cx[i] - cx[s.q]), h = 26 + d * .3;
       el('path', { d: `M${cx[s.q]},${ty - 26} Q${(cx[i] + cx[s.q]) / 2},${ty - 26 - h * 2} ${cx[i]},${ty - 26}`, fill: 'none', stroke: s.col, 'stroke-width': 1 + s.a[i] * 34, opacity: .3 + s.a[i] * 1.4, 'stroke-linecap': 'round' }, svg);
-      const away = i < s.q ? -1 : 1;   // the arc arrives from 水's side, so the number sits on the other side
-      txt(svg, cx[i] + away * 8, ty - 32, Math.round(s.a[i] * 100) + '%', { 'font-size': 16, fill: s.col, 'font-weight': 700, stroke: '#fff', 'stroke-width': 5, 'paint-order': 'stroke', 'text-anchor': away < 0 ? 'end' : 'start' });
     });
     // self loop
-    el('path', { d: `M${cx[s.q] - 10},${ty - 26} C${cx[s.q] - 32},${ty - 72} ${cx[s.q] + 32},${ty - 72} ${cx[s.q] + 10},${ty - 26}`, fill: 'none', stroke: s.col, 'stroke-width': 1 + s.a[s.q] * 34, opacity: .55 }, svg);
-    const out = s.q === 0 ? -1 : 1;   // 水's own share: outside the loop, away from the other tokens
-    txt(svg, s.q === 0 ? cx[s.q] : cx[s.q] + 34, s.q === 0 ? ty - 80 : ty - 52, Math.round(s.a[s.q] * 100) + '%', { 'font-size': 16, fill: s.col, 'font-weight': 700, 'text-anchor': s.q === 0 ? 'middle' : 'start', stroke: '#fff', 'stroke-width': 5, 'paint-order': 'stroke' });
+    el('path', { d: `M${cx[s.q] - 12},${ty - 26} C${cx[s.q] - 46},${ty - 96} ${cx[s.q] + 46},${ty - 96} ${cx[s.q] + 12},${ty - 26}`, fill: 'none', stroke: s.col, 'stroke-width': 1 + s.a[s.q] * 34, opacity: .55 }, svg);
     s.toks.forEach((t, i) => {
       const q = i === s.q;
       el('rect', { x: cx[i] - wd[i] / 2, y: ty - 24, width: wd[i], height: 48, rx: 10, fill: q ? s.col : '#fff', stroke: q ? s.col : LINE, 'stroke-width': 2 }, svg);
       txt(svg, cx[i], ty + 10, t, { 'font-size': 26, fill: q ? '#fff' : INK });
+    });
+    // each token's share of attention, centred above it on a white label so the arcs do not cover it
+    s.toks.forEach((t, i) => {
+      el('rect', { x: cx[i] - 27, y: ty - 54, width: 54, height: 25, rx: 12.5, fill: '#fff', stroke: s.col, 'stroke-width': 1.5 }, svg);
+      txt(svg, cx[i], ty - 35.5, Math.round(s.a[i] * 100) + '%', { 'font-size': 16, fill: s.col, 'font-weight': 700 });
     });
     // plot: the new 水 is the attention-weighted mix of the token vectors
     const X = x => 46 + x * 360, Y = y => 290 - y * 270;
@@ -905,13 +907,23 @@ function meaningAxes(svg, X, Y, x0, x1, y0, y1, small) {
   });
   txt(g2, (X(1) + X(11)) / 2, 74, '詞性：形 名 名 方 動 ／ 形 名 名 方 動', { 'font-size': 18, fill: INK, 'font-weight': 600 });
   // ③ embeddings
-  const g3 = el('g', { 'data-step': 3 }, svg);
+  const g3 = el('g', { 'data-step': 3, 'data-until': 4 }, svg);
   el('path', { d: `M${X(0) - 20},224 L${X(0) - 20},212 L${X(12) + 20},212 L${X(12) + 20},224 M${(X(0) + X(12)) / 2},212 L${(X(0) + X(12)) / 2},190`, fill: 'none', stroke: TEAL, 'stroke-width': 2.5 }, g3);
   [0, 1, 2, 3, 4].forEach(k => el('rect', { x: (X(0) + X(12)) / 2 - 58 + k * 24, y: 160, width: 20, height: 26, rx: 4, fill: TEAL, opacity: [.4, .9, .6, .75, .3][k] }, g3));
   txt(g3, (X(0) + X(12)) / 2, 146, '句向量 sentence vector', { 'font-size': 17, fill: TEAL, 'font-weight': 600 });
   arrow(g3, (X(0) + X(12)) / 2 + 74, 172, (X(0) + X(12)) / 2 + 150, 172, { color: TEAL, w: 2.5 });
   txt(g3, (X(0) + X(12)) / 2 + 160, 166, 'cos(·, 其他詩句)', { 'font-size': 18, 'text-anchor': 'start', 'font-weight': 600 });
   txt(g3, (X(0) + X(12)) / 2 + 160, 190, '→ 相似詩句', { 'font-size': 17, 'text-anchor': 'start', fill: MUTE });
+  txt(g3, (X(0) + X(12)) / 2, 110, '所有字的向量取平均 mean pooling', { 'font-size': 17, fill: TEAL });
+  // ④ the sentence vector taken from [CLS] alone
+  const g4 = el('g', { 'data-step': 4 }, svg);
+  arrow(g4, X(0), 230, X(0), 192, { color: TEAL, w: 3 });
+  [0, 1, 2, 3, 4].forEach(k => el('rect', { x: X(0) - 58 + k * 24, y: 160, width: 20, height: 26, rx: 4, fill: TEAL, opacity: [.4, .9, .6, .75, .3][k] }, g4));
+  txt(g4, X(0) - 58, 146, '句向量 ＝ [CLS] 的向量', { 'font-size': 17, fill: TEAL, 'font-weight': 600, 'text-anchor': 'start' });
+  arrow(g4, X(0) + 74, 172, X(0) + 130, 172, { color: TEAL, w: 2.5 });
+  txt(g4, X(0) + 140, 179, 'cos(·, 其他詩句)', { 'font-size': 18, 'text-anchor': 'start', 'font-weight': 600 });
+  el('rect', { x: X(0) - 58, y: 72, width: 470, height: 40, rx: 10, fill: '#fff4e5', stroke: AMB, 'stroke-width': 2 }, g4);
+  txt(g4, X(0) - 44, 99, '⚠ 未微調時，通常比取平均差', { 'font-size': 19, fill: '#9a5b00', 'font-weight': 700, 'text-anchor': 'start' });
 })();
 
 /* ---------- one neuron = one straight line: z = w1·x1 + w2·x2 + b, output 1 where z > 0 (OR and AND work, XOR does not) ---------- */
@@ -1077,11 +1089,11 @@ function meaningAxes(svg, X, Y, x0, x1, y0, y1, small) {
     grid(t, true);
     // the fold line
     el('line', { x1: X(lo), y1: Y(lo), x2: X(hi), y2: Y(hi), stroke: INK, 'stroke-width': 2.5, 'stroke-dasharray': '3 5' }, svg);
-    txt(svg, X(1.12), Y(1.2) - 2, '摺線 x₁ = x₂', { 'font-size': 15, fill: INK, 'text-anchor': 'end', 'font-weight': 600 });
+    txt(svg, X(1.12), Y(1.2) - 2, '摺線 fold line', { 'font-size': 15, fill: INK, 'text-anchor': 'end', 'font-weight': 600 });
     // after the fold: the separating line x2 − x1 = 0.5, i.e. |x1 − x2| = 0.5
     if (t > .97) {
       el('line', { x1: X(lo), y1: Y(lo + .5), x2: X(hi - .5), y2: Y(hi), stroke: GRN, 'stroke-width': 4, 'stroke-dasharray': '10 6' }, svg);
-      txt(svg, X(.12), Y(1.12), '|x₁ − x₂| = 0.5', { 'font-size': 17, fill: GRN, 'font-weight': 700, 'text-anchor': 'end' });
+      txt(svg, X(.36), Y(.7), '一條直線 one line', { 'font-size': 17, fill: GRN, 'font-weight': 700, transform: `rotate(-45 ${X(.36)} ${Y(.7)})` });
     }
     PTS.forEach(([a, b, v]) => {
       const q = fold([a, b], t), moving = a === 1 && b === 0;
@@ -1162,31 +1174,32 @@ function meaningAxes(svg, X, Y, x0, x1, y0, y1, small) {
   plot('act-relu', z => Math.max(0, z), -1, 4.2, [0, 2, 4], GRN);
 })();
 
-/* ---------- 《紅樓夢》 emotional space in 3D: 9,019 passages (UMAP 3D), coloured by an emotion axis; drag to turn, click a passage to see its nearest neighbours (window.HLM) ---------- */
-(function () {
-  const H = window.HLM, N = H.x.length, cv = $('#hlm-cv'), g = cv.getContext('2d'), sel = $('#hlm-axis'), tip = $('#hlm-tip'), slide = $('#s-hlm');
+/* ---------- 《紅樓夢》 emotional space in 3D: a point cloud coloured by an emotion axis; drag to turn, click a point to see its nearest neighbours (window.HLM).
+   Used twice: 9,019 passages (UMAP 3D) and 120 chapters (PCA 3D of the mean passage vectors). ---------- */
+function hlmCloud(o) {
+  const H = window.HLM, N = o.n, cv = $(o.cv), g = cv.getContext('2d'), sel = $(o.sel), tip = $(o.tip), slide = $(o.slide);
   const W = 620, Hh = 440, R = 2;
   g.setTransform(R, 0, 0, R, 0, 0);
-  // centre and scale the cloud into the unit sphere
-  const mean = a => a.reduce((s, v) => s + v, 0) / a.length, mx = mean(H.x), my = mean(H.y), mz = mean(H.z);
-  // scale to the bulk of the cloud (98th percentile), so a few outliers do not shrink it
-  const dist = Array.from({ length: N }, (_, i) => Math.hypot(H.x[i] - mx, H.y[i] - my, H.z[i] - mz)).sort((u, v) => u - v);
-  const rad = dist[Math.floor(N * .98)];
+  // centre the cloud and scale it to its bulk (98th percentile), so a few outliers do not shrink it
+  const xyz = Array.from({ length: N }, (_, i) => o.xyz(i));
+  const m = [0, 1, 2].map(d => xyz.reduce((s, p) => s + p[d], 0) / N);
+  const dist = xyz.map(p => Math.hypot(p[0] - m[0], p[1] - m[1], p[2] - m[2])).sort((u, v) => u - v);
+  const rad = dist[Math.floor((N - 1) * .98)];
   const P3 = new Float32Array(N * 3);
-  for (let i = 0; i < N; i++) { P3[3 * i] = (H.x[i] - mx) / rad; P3[3 * i + 1] = (H.y[i] - my) / rad; P3[3 * i + 2] = (H.z[i] - mz) / rad; }
+  xyz.forEach((p, i) => { for (let d = 0; d < 3; d++) P3[3 * i + d] = (p[d] - m[d]) / rad; });
   const SX = new Float32Array(N), SY = new Float32Array(N), SD = new Float32Array(N);
   let yaw = .6, pitch = .35, auto = true, drag = null, raf = null;
   const mix = (a, b, t) => a.map((v, j) => Math.round(v + (b[j] - v) * t));
   const SAD = [224, 87, 15], MID = [205, 210, 220], HAP = [31, 157, 85];
-  let mode = 0, pick = 2197, hover = -1, cols = [];
+  let mode = 0, pick = o.start, hover = -1, cols = [];
   const colour = i => {
-    if (mode === H.axes.length) { const t = (H.c[i] - 1) / 119; return `rgb(${mix([190, 205, 240], [20, 50, 140], t)})`; }   // by chapter
-    const z = Math.max(-2.5, Math.min(2.5, H.s[mode][i])) / 2.5;
+    if (mode === H.axes.length) { const t = (o.chap(i) - 1) / 119; return `rgb(${mix([190, 205, 240], [20, 50, 140], t)})`; }   // by chapter
+    const z = Math.max(-2.5, Math.min(2.5, o.s[mode][i])) / 2.5;
     return `rgb(${z < 0 ? mix(MID, SAD, -z) : mix(MID, HAP, z)})`;
   };
   const recolour = () => { cols = Array.from({ length: N }, (_, i) => colour(i)); };
   function project() {
-    const cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch), S = 270;
+    const cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch), S = o.scale;
     for (let i = 0; i < N; i++) {
       const x = P3[3 * i], y = P3[3 * i + 1], z = P3[3 * i + 2];
       const x1 = x * cy - y * sy, y1 = x * sy + y * cy, d = y1 * cp + z * sp, up = z * cp - y1 * sp, k = 1 / (1 - d * .25);
@@ -1199,10 +1212,15 @@ function meaningAxes(svg, X, Y, x0, x1, y0, y1, small) {
     g.clearRect(0, 0, W, Hh);
     g.fillStyle = '#fafbfd'; g.fillRect(0, 0, W, Hh);
     order.sort((a, b) => SD[a] - SD[b]);                       // far points first
-    for (const i of order) { const k = .75 + .35 * (SD[i] + 1) / 2; g.fillStyle = cols[i]; g.globalAlpha = .55 + .35 * (SD[i] + 1) / 2; g.fillRect(SX[i] - 1.5 * k, SY[i] - 1.5 * k, 3 * k, 3 * k); }
+    for (const i of order) {
+      const k = .75 + .35 * (SD[i] + 1) / 2, r = o.dot(i) * k;
+      g.fillStyle = cols[i]; g.globalAlpha = o.alpha + .35 * (SD[i] + 1) / 2;
+      if (o.round) { g.beginPath(); g.arc(SX[i], SY[i], r, 0, 7); g.fill(); g.globalAlpha = 1; g.lineWidth = 1; g.strokeStyle = '#fff'; g.stroke(); }
+      else g.fillRect(SX[i] - r, SY[i] - r, 2 * r, 2 * r);
+    }
     g.globalAlpha = 1;
     if (pick >= 0) {
-      H.nn[pick].forEach(j => {
+      o.nn(pick).forEach(j => {
         g.strokeStyle = 'rgba(27,35,51,.6)'; g.lineWidth = 1.4; g.beginPath(); g.moveTo(SX[pick], SY[pick]); g.lineTo(SX[j], SY[j]); g.stroke();
         g.beginPath(); g.arc(SX[j], SY[j], 5, 0, 7); g.fillStyle = '#fff'; g.fill(); g.lineWidth = 2.2; g.strokeStyle = INK; g.stroke();
       });
@@ -1211,23 +1229,22 @@ function meaningAxes(svg, X, Y, x0, x1, y0, y1, small) {
     if (hover >= 0) { g.beginPath(); g.arc(SX[hover], SY[hover], 6, 0, 7); g.lineWidth = 2.5; g.strokeStyle = BLUE; g.stroke(); }
   }
   function nearest(x, y) {   // closest point on screen, preferring the front
-    let best = -1, bd = 64;
+    let best = -1, bd = o.hit;
     for (let i = 0; i < N; i++) { const d = (SX[i] - x) ** 2 + (SY[i] - y) ** 2 - SD[i] * 6; if (d < bd) { bd = d; best = i; } }
     return best;
   }
   const score = i => {
-    if (mode === H.axes.length) return `第 ${H.c[i]} 回`;
-    const a = H.axes[mode], z = H.s[mode][i];
+    if (mode === H.axes.length) return `第 ${o.chap(i)} 回`;
+    const a = H.axes[mode], z = o.s[mode][i];
     return `${z >= 0 ? a.pos : a.neg} ${(z >= 0 ? '+' : '−') + Math.abs(z).toFixed(1)}`;
   };
   function panel() {
-    const i = pick;
-    $('#hlm-pick').innerHTML = `<b>第 ${H.c[i]} 回 · ${H.titles[H.c[i] - 1]}</b>${H.t[i]}…… <span class="sc">${score(i)}</span>`;
-    $('#hlm-nn').innerHTML = H.nn[i].slice(0, 4).map((j, r) => `<div data-i="${j}"><b>${H.ns[i][r].toFixed(2)}</b><span>第 ${H.c[j]} 回</span>${H.t[j].slice(0, 34)}……</div>`).join('');
-    $$('#hlm-nn > div').forEach(d => d.addEventListener('click', e => { e.stopPropagation(); pick = +d.dataset.i; panel(); }));
+    $(o.pickBox).innerHTML = o.pickHTML(pick, score(pick));
+    $(o.nnBox).innerHTML = o.nn(pick).slice(0, 4).map((j, r) => `<div data-i="${j}">${o.nnHTML(pick, r, j)}</div>`).join('');
+    $$(o.nnBox + ' > div').forEach(d => d.addEventListener('click', e => { e.stopPropagation(); pick = +d.dataset.i; panel(); }));
   }
   function legend() {
-    const L = $('#hlm-leg');
+    const L = $(o.leg);
     if (mode === H.axes.length) L.innerHTML = '<span>第 1 回</span><i class="ch"></i><span>第 120 回</span>';
     else L.innerHTML = `<span class="n">${H.axes[mode].neg}</span><i></i><span class="p">${H.axes[mode].pos}</span>`;
   }
@@ -1243,7 +1260,7 @@ function meaningAxes(svg, X, Y, x0, x1, y0, y1, small) {
     const [x, y] = pos(e), i = nearest(x, y);
     hover = i;
     if (i < 0) { tip.style.opacity = 0; return; }
-    tip.innerHTML = `<b>第 ${H.c[i]} 回</b> ${H.t[i]}…… <span>${score(i)}</span>`;
+    tip.innerHTML = o.tipHTML(i, score(i));
     tip.style.left = Math.min(x + 14, W - 300) + 'px'; tip.style.top = Math.max(0, y - 54) + 'px'; tip.style.opacity = 1;
   });
   cv.addEventListener('pointerup', e => {
@@ -1261,8 +1278,98 @@ function meaningAxes(svg, X, Y, x0, x1, y0, y1, small) {
     if (auto) yaw += (now - (last || now)) / 1000 * .18;
     last = now; draw(); raf = requestAnimationFrame(frame);
   }
-  window.HOOKS['s-hlm'] = { enter() { last = 0; if (!raf) raf = requestAnimationFrame(frame); } };
+  window.HOOKS[o.slide.slice(1)] = { enter() { last = 0; if (!raf) raf = requestAnimationFrame(frame); } };
   recolour(); legend(); panel(); draw();
+}
+(function () {
+  const H = window.HLM, C = H.ch;
+  // passages
+  hlmCloud({
+    slide: '#s-hlm', cv: '#hlm-cv', sel: '#hlm-axis', tip: '#hlm-tip', leg: '#hlm-leg', pickBox: '#hlm-pick', nnBox: '#hlm-nn',
+    n: H.x.length, xyz: i => [H.x[i], H.y[i], H.z[i]], s: H.s, chap: i => H.c[i], nn: i => H.nn[i],
+    start: 2197, scale: 270, dot: () => 1.5, alpha: .55, round: false, hit: 64,
+    tipHTML: (i, sc) => `<b>第 ${H.c[i]} 回</b> ${H.t[i]}…… <span>${sc}</span>`,
+    pickHTML: (i, sc) => `<b>第 ${H.c[i]} 回 · ${H.titles[H.c[i] - 1]}</b>${H.t[i]}…… <span class="sc">${sc}</span>`,
+    nnHTML: (i, r, j) => `<b>${H.ns[i][r].toFixed(2)}</b><span>第 ${H.c[j]} 回</span>${H.t[j].slice(0, 34)}……`
+  });
+  // chapters: one vector per chapter, the mean of its passages
+  hlmCloud({
+    slide: '#s-hlmc', cv: '#hlmc-cv', sel: '#hlmc-axis', tip: '#hlmc-tip', leg: '#hlmc-leg', pickBox: '#hlmc-pick', nnBox: '#hlmc-nn',
+    n: C.xyz.length, xyz: i => C.xyz[i], s: C.s, chap: i => i + 1, nn: i => C.nn[i],
+    start: 96, scale: 230, dot: i => 3 + Math.sqrt(C.n[i]) * .38, alpha: .7, round: true, hit: 160,
+    tipHTML: (i, sc) => `<b>第 ${i + 1} 回</b> ${H.titles[i]} <span>${sc}</span>`,
+    pickHTML: (i, sc) => `<b>第 ${i + 1} 回 · ${C.n[i]} 段</b>${H.titles[i]} <span class="sc">${sc}</span>`,
+    nnHTML: (i, r, j) => `<b>${C.ns[i][r].toFixed(2)}</b><span>第 ${j + 1} 回</span>${H.titles[j]}`
+  });
+})();
+
+/* ---------- the usual workflow: a large pre-trained encoder gives contextual vectors, a small new classifier on top reads them ---------- */
+(function () {
+  const svg = $('#wf-svg'), T = ['[CLS]', '這', '部', '電', '影', '很', '精', '彩', '[SEP]'];
+  const X = i => 40 + i * 62, sp = i => i === 0 || i === T.length - 1;
+  T.forEach((t, i) => {
+    el('rect', { x: X(i) - 25, y: 262, width: 50, height: 34, rx: 7, fill: sp(i) ? '#f1ebfd' : '#e4edff', stroke: sp(i) ? PUR : BLUE, 'stroke-width': 1.5 }, svg);
+    txt(svg, X(i), sp(i) ? 283 : 286, t, { 'font-size': sp(i) ? 12 : 20, fill: sp(i) ? PUR : INK });
+    arrow(svg, X(i), 260, X(i), 236, { color: '#9aa3b5', w: 1.5, head: 7 });
+    arrow(svg, X(i), 148, X(i), 126, { color: '#9aa3b5', w: 1.5, head: 7 });
+    [0, 1, 2].forEach(k => el('rect', { x: X(i) - 19 + k * 13, y: 100, width: 11, height: 20, rx: 3, fill: i ? TEAL : QRED, opacity: [.45, .9, .65][(k + i) % 3] }, svg));
+  });
+  // the large pre-trained model
+  el('rect', { x: X(0) - 32, y: 150, width: X(8) - X(0) + 64, height: 84, rx: 14, fill: '#f5f7fa', stroke: '#9aa3b5', 'stroke-width': 2 }, svg);
+  txt(svg, (X(0) + X(8)) / 2, 185, '預訓練模型（BERT）pre-trained model', { 'font-size': 21, 'font-weight': 700 });
+  txt(svg, (X(0) + X(8)) / 2, 214, '把每個字變成上下文向量 contextual representations', { 'font-size': 16, fill: MUTE });
+  // the small classifier, straight above [CLS]
+  arrow(svg, X(0), 98, X(0), 74, { color: QRED, w: 2.5, head: 8 });
+  el('rect', { x: X(0) - 32, y: 38, width: 64, height: 34, rx: 8, fill: '#fde9e7', stroke: QRED, 'stroke-width': 2 }, svg);
+  txt(svg, X(0), 61, '分類器', { 'font-size': 16, fill: QRED, 'font-weight': 700 });
+  arrow(svg, X(0) + 34, 55, X(0) + 70, 55, { color: QRED, w: 2.5, head: 8 });
+  txt(svg, X(0) + 78, 62, '正面 92%', { 'font-size': 20, fill: GRN, 'font-weight': 700, 'text-anchor': 'start' });
+  txt(svg, X(0) + 190, 48, '小分類器：下游任務 downstream task', { 'font-size': 16, fill: QRED, 'font-weight': 600, 'text-anchor': 'start' });
+  txt(svg, X(0) + 190, 70, '新加的，你來訓練；讀 [CLS] 的豐富表示', { 'font-size': 16, fill: MUTE, 'text-anchor': 'start' });
+})();
+
+/* ---------- CPU vs GPU: filling a 10×10 grid of attention scores, 8 at a time or all at once ---------- */
+(function () {
+  const svg = $('#gpu-svg'), slide = $('#s-gpu'), N = 10, CPU_CORES = 8;
+  const steps = { cpu: Math.ceil(N * N / CPU_CORES), gpu: 1 };
+  const panels = [
+    { key: 'cpu', x: 20, name: 'CPU', sub: '8 個大核心', col: ORG },
+    { key: 'gpu', x: 320, name: 'GPU', sub: '數千個小核心', col: GRN }
+  ];
+  const cells = { cpu: [], gpu: [] }, counters = {};
+  panels.forEach(p => {
+    // the chip: a few large cores, or many small ones
+    el('rect', { x: p.x, y: 10, width: 260, height: 112, rx: 12, fill: '#f5f7fa', stroke: '#9aa3b5', 'stroke-width': 2 }, svg);
+    txt(svg, p.x + 16, 40, p.name, { 'font-size': 24, 'font-weight': 700, 'text-anchor': 'start', fill: p.col });
+    txt(svg, p.x + 16, 62, p.sub, { 'font-size': 15, fill: MUTE, 'text-anchor': 'start' });
+    if (p.key === 'cpu') for (let k = 0; k < CPU_CORES; k++) el('rect', { x: p.x + 108 + (k % 4) * 37, y: 22 + Math.floor(k / 4) * 46, width: 31, height: 40, rx: 5, fill: p.col, opacity: .8 }, svg);
+    else for (let r = 0; r < 12; r++) for (let c = 0; c < 26; c++) el('rect', { x: p.x + 16 + c * 9, y: 72 + r * 3.9, width: 7, height: 2.8, fill: p.col, opacity: .75 }, svg);
+    // the grid of attention scores: one cell per pair of tokens
+    txt(svg, p.x + 130, 152, 'QKᵀ：10 × 10 ＝ 100 個內積', { 'font-size': 15, fill: MUTE });
+    const S = 22;
+    for (let i = 0; i < N * N; i++) {
+      const r = Math.floor(i / N), c = i % N;
+      cells[p.key].push(el('rect', { x: p.x + 20 + c * S, y: 166 + r * S, width: S - 3, height: S - 3, rx: 3, fill: '#eceef2' }, svg));
+    }
+    counters[p.key] = txt(svg, p.x + 130, 410, '', { 'font-size': 22, 'font-weight': 700, fill: p.col });
+  });
+  let raf = null, t0 = 0;
+  const TICK = 260;   // ms per step
+  function show(step) {   // step = how many rounds each chip has completed
+    panels.forEach(p => {
+      const done = Math.min(N * N, step * (p.key === 'cpu' ? CPU_CORES : N * N)), s = Math.min(step, steps[p.key]);
+      cells[p.key].forEach((r, i) => r.setAttribute('fill', i < done ? p.col : '#eceef2'));
+      counters[p.key].textContent = step === 0 ? '' : `${s} 步${s === steps[p.key] ? ' ✓' : ''}  ${s} step${s > 1 ? 's' : ''}`;
+    });
+  }
+  function frame(now) {
+    const step = Math.floor((now - t0) / TICK) + 1;
+    show(step);
+    if (step < steps.cpu && slide.classList.contains('active')) raf = requestAnimationFrame(frame); else raf = null;
+  }
+  $('#gpu-play').addEventListener('click', e => { e.stopPropagation(); e.currentTarget.blur(); cancelAnimationFrame(raf); t0 = performance.now(); raf = requestAnimationFrame(frame); });
+  $('#gpu-reset').addEventListener('click', e => { e.stopPropagation(); e.currentTarget.blur(); cancelAnimationFrame(raf); raf = null; show(0); });
+  show(0);
 })();
 
 /* ---------- how a network learns: forward pass, error at the output, error pulses travelling back (no maths) ---------- */
@@ -1270,6 +1377,7 @@ function meaningAxes(svg, X, Y, x0, x1, y0, y1, small) {
   const svg = $('#bp-svg'), slide = $('#s-grad');
   const IX = 70, HX = 340, OX = 590, iy = i => 50 + i * 76, hy = j => 100 + j * 110, OY = 210;
   const HV = [.88, .31, .12], V = [1.2, .3, -.8];         // hidden activations and their weights to the output
+  const V2 = V.map((v, j) => v + .2 * .27 * HV[j]);        // after one update (learning rate 0.2): every weight rises, in proportion to h
   const ON = INPUTS.map(([, x]) => x > 0);                  // only 精彩 and 電影 occur in this review
   const gE = el('g', {}, svg), gN = el('g', {}, svg), gP = el('g', {}, svg), gS = el('g', {}, svg);
   const e1 = [], e2 = [];
@@ -1291,7 +1399,7 @@ function meaningAxes(svg, X, Y, x0, x1, y0, y1, small) {
   const err = el('g', { 'data-step': 1 }, gS);
   el('rect', { x: OX - 58, y: OY - 116, width: 116, height: 38, rx: 10, fill: '#fde9e7', stroke: RED, 'stroke-width': 2 }, err);
   txt(err, OX, OY - 90, '誤差 −0.27', { 'font-size': 19, fill: RED, 'font-weight': 700 });
-  const dir = el('g', { 'data-step': 2 }, gS);
+  const dir = el('g', { 'data-step': 3 }, gS);
   HV.forEach((_, j) => {
     const up = V[j] > 0, c = up ? GRN : RED;
     // a labelled pill: should this neuron's value go up or down to raise the (too low) output?
@@ -1299,11 +1407,17 @@ function meaningAxes(svg, X, Y, x0, x1, y0, y1, small) {
     txt(dir, HX, hy(j) - 53, up ? 'h 要變大 ↑' : 'h 要變小 ↓', { 'font-size': 17, fill: c, 'font-weight': 700 });
   });
   // the weights to the output explain the direction: positive weight → up, negative weight → down
-  HV.forEach((_, j) => {
+  const sgn = v => (v >= 0 ? '+' : '−') + Math.abs(v).toFixed(2).replace(/0$/, '');
+  const wl = HV.map((_, j) => {
     const mx = HX + 32 + (OX - 36 - HX - 32) * .5, my = hy(j) + (OY - hy(j)) * .5;
-    txt(gS, mx, my + (j === 0 ? -12 : j === 2 ? 24 : -10), (V[j] > 0 ? '+' : '−') + Math.abs(V[j]).toFixed(1), { 'font-size': 16, fill: V[j] > 0 ? BLUE : ORG, 'font-weight': 700, stroke: '#fff', 'stroke-width': 5, 'paint-order': 'stroke' });
+    return txt(gS, mx, my + (j === 0 ? -12 : j === 2 ? 24 : -10), sgn(V[j]), { 'font-size': 17, fill: V[j] > 0 ? BLUE : ORG, 'font-weight': 700, stroke: '#fff', 'stroke-width': 5, 'paint-order': 'stroke' });
   });
-  const zero = el('g', { 'data-step': 3 }, gS);
+  // show the last layer's weights before or after the update
+  const setW = after => wl.forEach((t, j) => {
+    t.textContent = after ? `${sgn(V[j])} → ${sgn(V2[j])}` : sgn(V[j]);
+    t.setAttribute('fill', after ? GRN : V[j] > 0 ? BLUE : ORG);
+  });
+  const zero = el('g', { 'data-step': 4 }, gS);
   INPUTS.forEach(([, x], i) => { if (!ON[i]) txt(zero, IX - 34, iy(i) + 5, '不變', { 'font-size': 13, fill: MUTE, 'text-anchor': 'end' }); });
 
   // pulses: small dots that run along edges
@@ -1326,8 +1440,13 @@ function meaningAxes(svg, X, Y, x0, x1, y0, y1, small) {
     e2.forEach(e => add(HX + 32, hy(e.j), OX - 36, OY, BLUE, 750, 700));
     run(); later(1500, () => { ov.textContent = '0.73'; ans.setAttribute('opacity', 1); });
   }
-  function backHidden() {
-    e2.forEach(e => add(OX - 36, OY, HX + 32, hy(e.j), RED, 0, 800));
+  function backOutput() {   // the error reaches the last layer's weights, which change at once
+    e2.forEach(e => add(OX - 36, OY, (OX - 36 + HX + 32) / 2, (OY + hy(e.j)) / 2, RED, 0, 500));
+    run();
+    later(500, () => { setW(true); e2.forEach(e => { e.l.setAttribute('stroke', GRN); later(600, () => e.l.setAttribute('stroke', BLUE)); }); });
+  }
+  function backHidden() {   // only a message travels on to the hidden neurons
+    e2.forEach(e => add((OX - 36 + HX + 32) / 2, (OY + hy(e.j)) / 2, HX + 32, hy(e.j), RED, 0, 600));
     run();
   }
   function backInputs() {
@@ -1342,7 +1461,8 @@ function meaningAxes(svg, X, Y, x0, x1, y0, y1, small) {
       const fresh = last === -1;
       if (fresh && step === 0) forward();
       else { ov.textContent = '0.73'; ans.setAttribute('opacity', 1); }
-      if (!fresh && step === last + 1) { if (step === 2) backHidden(); if (step === 3) backInputs(); }
+      setW(step >= 2 && !(!fresh && step === 2 && last === 1));
+      if (!fresh && step === last + 1) { if (step === 2) backOutput(); if (step === 3) backHidden(); if (step === 4) backInputs(); }
       last = step;
     }
   };

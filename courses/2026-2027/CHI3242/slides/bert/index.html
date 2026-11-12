@@ -19,8 +19,8 @@
   <div class="rule"></div>
   <svg class="title-net" id="title-net" viewBox="0 0 440 440" aria-hidden="true"></svg>
   <div class="quote bi" data-step="1">
-    <span class="zh">「行」在「銀行」和「行走」裡，應該是同一個向量嗎？</span>
-    <span class="en">Should 行 in 銀行 (bank) and 行走 (to walk) receive the same vector?</span>
+    <span class="zh">「花」在「一朵花」和「花錢」裡，應該是同一個向量嗎？</span>
+    <span class="en">Should 花 in 一朵花 (a flower) and 花錢 (to spend money) receive the same vector?</span>
   </div>
   <div class="hint">CHI3242 文本挖掘 Text Mining for Chinese Humanities &nbsp;·&nbsp; <kbd>←</kbd> <kbd>→</kbd> navigate &nbsp;·&nbsp; <kbd>1</kbd>–<kbd>6</kbd> sections &nbsp;·&nbsp; <kbd>L</kbd> laser pointer &nbsp;·&nbsp; <kbd>F</kbd> fullscreen</div>
 </section>
@@ -47,6 +47,21 @@
     <div data-step="3"><b>軸突</b><span>axon</span><i>→</i><b>輸出，傳給下一個神經元</b><span>output to the next neuron</span></div>
   </div>
   <div class="callout bi xs" data-step="4"><span class="zh">只是比喻：人工神經網絡是一個由矩陣與函數組成的數學模型。上週的 Hebb：「一起放電的神經元，彼此的連結會變強」。</span><span class="en">The analogy is loose: an artificial network is a mathematical function built from matrices, inspired by neurons that strengthen their connections.</span></div>
+</section>
+
+<section class="slide" id="s-act" data-sec="nn">
+  <h2 class="bi"><span class="zh">激活函數：神經元的「開關」</span><span class="en">Activation functions: what a neuron does with its sum z</span></h2>
+  <div class="acts">
+    <div class="act-card"><div class="act-name"><b>階躍</b> step</div><svg class="act-plot" id="act-step" viewBox="0 0 250 170"></svg>
+      <div class="act-f">\(z>0 \;\Rightarrow\; 1\)，否則 \(0\)</div><div class="act-d">只有開或關<span>on or off; the earliest perceptrons</span></div></div>
+    <div class="act-card"><div class="act-name"><b>S 形</b> sigmoid</div><svg class="act-plot" id="act-sig" viewBox="0 0 250 170"></svg>
+      <div class="act-f">\(\sigma(z)=\dfrac{1}{1+e^{-z}}\)</div><div class="act-d">平滑地介於 0 與 1<span>smooth, from 0 to 1; as in logistic regression</span></div></div>
+    <div class="act-card"><div class="act-name"><b>雙曲正切</b> tanh</div><svg class="act-plot" id="act-tanh" viewBox="0 0 250 170"></svg>
+      <div class="act-f">\(\tanh(z)=\dfrac{e^{z}-e^{-z}}{e^{z}+e^{-z}}\)</div><div class="act-d">介於 −1 與 1，以 0 為中心<span>like sigmoid, but centred on 0</span></div></div>
+    <div class="act-card"><div class="act-name"><b>線性整流</b> ReLU</div><svg class="act-plot" id="act-relu" viewBox="0 0 250 170"></svg>
+      <div class="act-f">\(\mathrm{ReLU}(z)=\max(0,\,z)\)</div><div class="act-d">負的變 0，正的保留<span>negatives become 0; today's most common choice</span></div></div>
+  </div>
+  <div class="callout key bi sm" data-step="1"><span class="zh">每個神經元都是兩步：先算加權總和 \(z=\mathbf w\cdot\mathbf x+b\)，再用激活函數決定輸出。</span><span class="en">Every neuron works in two steps: a weighted sum, then an activation function.</span></div>
 </section>
 
 <section class="slide" id="s-layer" data-sec="nn">
@@ -93,6 +108,7 @@
       <div class="gate-score" id="gate-score"></div>
     </div>
   </div>
+  <div class="gate-cite" data-step="1">單層學不了 XOR：Minsky &amp; Papert, <i>Perceptrons</i> (1969)　·　加隱藏層就能學：Rumelhart, Hinton &amp; Williams, <i>Nature</i> (1986)</div>
 </section>
 
 
@@ -111,34 +127,18 @@
   </div>
 </section>
 
-<section class="slide" id="s-act" data-sec="nn">
-  <h2 class="bi"><span class="zh">激活函數：神經元的「開關」</span><span class="en">Activation functions: what a neuron does with its sum z</span></h2>
-  <div class="acts">
-    <div class="act-card"><div class="act-name"><b>階躍</b> step</div><svg class="act-plot" id="act-step" viewBox="0 0 250 170"></svg>
-      <div class="act-f">\(z>0 \;\Rightarrow\; 1\)，否則 \(0\)</div><div class="act-d">只有開或關<span>on or off; used in the XOR network</span></div></div>
-    <div class="act-card"><div class="act-name"><b>S 形</b> sigmoid</div><svg class="act-plot" id="act-sig" viewBox="0 0 250 170"></svg>
-      <div class="act-f">\(\sigma(z)=\dfrac{1}{1+e^{-z}}\)</div><div class="act-d">平滑地介於 0 與 1<span>smooth, from 0 to 1; as in logistic regression</span></div></div>
-    <div class="act-card"><div class="act-name"><b>雙曲正切</b> tanh</div><svg class="act-plot" id="act-tanh" viewBox="0 0 250 170"></svg>
-      <div class="act-f">\(\tanh(z)=\dfrac{e^{z}-e^{-z}}{e^{z}+e^{-z}}\)</div><div class="act-d">介於 −1 與 1，以 0 為中心<span>like sigmoid, but centred on 0</span></div></div>
-    <div class="act-card"><div class="act-name"><b>線性整流</b> ReLU</div><svg class="act-plot" id="act-relu" viewBox="0 0 250 170"></svg>
-      <div class="act-f">\(\mathrm{ReLU}(z)=\max(0,\,z)\)</div><div class="act-d">負的變 0，正的保留<span>negatives become 0; today's most common choice</span></div></div>
-  </div>
-  <div class="callout key bi sm" data-step="1"><span class="zh">沒有激活函數，疊再多層也只是<b>一條直線</b>：線性的組合仍然是線性的。</span><span class="en">Without an activation, any stack of layers still draws a single straight line.</span></div>
-</section>
-
 <section class="slide" id="s-fold" data-sec="nn">
-  <h2 class="bi"><span class="zh">激活函數在做什麼？</span><span class="en">What does an activation function do?</span></h2>
+  <h2 class="bi"><span class="zh">隱藏層的直覺：把空間<em>摺起來</em></span><span class="en">The intuition behind a hidden layer: fold the space</span></h2>
   <div class="two fold">
-    <svg class="plot" id="fold-svg" viewBox="0 0 520 470" aria-label="ReLU folds the plane along the diagonal until (1,0) lies on (0,1)"></svg>
+    <svg class="plot" id="fold-svg" viewBox="0 0 520 470" aria-label="The plane is folded along the diagonal until (1,0) lies on (0,1)"></svg>
     <div>
-      <div class="bi sm"><span class="zh">它讓神經元能把空間<b>彎折</b>。例如 ReLU：沿對角線把平面<b>對摺</b>。</span><span class="en">It lets a neuron bend the space. ReLU, for example, folds the plane along the diagonal.</span></div>
+      <div class="bi sm"><span class="zh">隱藏層把資料搬到<b>新的空間</b>，讓問題變簡單。</span><span class="en">A hidden layer moves the data into a new space where the problem becomes easy.</span></div>
       <div class="fold-ctl">
         <button type="button" id="fold-play">▶ 摺 <span>fold</span></button>
         <button type="button" id="fold-reset" class="ghost" title="Unfold">↺ <span>reset</span></button>
       </div>
-      <div class="eq fold-eq">\(|x_1-x_2| = \mathrm{ReLU}(x_1-x_2)+\mathrm{ReLU}(x_2-x_1)\)</div>
-      <div class="bi sm" data-step="1"><span class="zh">\((1,0)\) 疊到 \((0,1)\) 上：兩個綠點疊在一起。</span><span class="en">(1,0) lands on (0,1): the two green points meet.</span></div>
-      <div class="callout key bi sm" data-step="2"><span class="zh">摺好之後，<b>一條直線</b>就分得開。</span><span class="en">After the fold, one straight line separates the classes.</span></div>
+      <div class="bi sm" data-step="1"><span class="zh">像摺紙一樣沿對角線對摺：\((1,0)\) 疊到 \((0,1)\) 上，兩個綠點疊在一起。</span><span class="en">Fold the paper along the diagonal: the two green points meet.</span></div>
+      <div class="callout key bi sm" data-step="2"><span class="zh">摺好之後，<b>一條直線</b>就分得開。能摺，是因為有激活函數；只有加權總和，疊再多層也摺不了。</span><span class="en">After the fold, one line separates the classes. The activation function makes folding possible; weighted sums alone never fold.</span></div>
     </div>
   </div>
 </section>
@@ -153,11 +153,12 @@
         <img src="img/hinton.jpg" alt="Geoffrey Hinton">
         <div class="bi xs"><span class="zh"><b>反向傳播</b>（backpropagation）<br>Rumelhart、Hinton、Williams（1986）</span><span class="en">Geoffrey Hinton, Nobel Prize in Physics 2024</span></div>
       </div>
-      <div class="st bi xs"><i>①</i><span class="zh">前向：「這部電影很精彩」→ <b>0.73</b>，正確答案是 1</span><span class="en">Forward pass: the network says 0.73; the answer is 1.</span></div>
-      <div class="st bi xs" data-step="1"><i>②</i><span class="zh">誤差 0.73 − 1 ＝ <b class="bad-c">−0.27</b>：太低了</span><span class="en">The error: the output is too low.</span></div>
-      <div class="st bi xs" data-step="2"><i>③</i><span class="zh">誤差<b>往回</b>傳：輸出太低。權重為正的神經元，值 h <b class="ok-c">要變大 ↑</b>；權重為負的，h <b class="bad-c">要變小 ↓</b>：兩者都讓輸出升高</span><span class="en">The output is too low: a neuron with a positive weight should grow, one with a negative weight should shrink; both raise the output.</span></div>
-      <div class="st bi xs" data-step="3"><i>④</i><span class="zh">再往回傳：每條連線的權重都朝讓輸出升高的方向<b>微調</b>一點；沒出現的詞（x ＝ 0）不變</span><span class="en">Every weight is nudged a little; words that did not occur stay unchanged.</span></div>
-      <div class="callout key bi xs" data-step="4"><span class="zh">重複成千上萬個例子：這就是「學習」。</span><span class="en">Repeat this for thousands of examples: that is learning.</span></div>
+      <div class="st bi xs"><i>①</i><span class="zh">前向：輸出 <b>0.73</b>，正確答案是 1</span><span class="en">The network says 0.73; the answer is 1.</span></div>
+      <div class="st bi xs" data-step="1"><i>②</i><span class="zh">誤差 <b class="bad-c">−0.27</b>：輸出太低了</span><span class="en">The error: the output is too low.</span></div>
+      <div class="st bi xs" data-step="2"><i>③</i><span class="zh">調<b>最後一層的權重</b>：都往上推，\(h\) 越大推越多</span><span class="en">Nudge the last weights up, most where h is large.</span></div>
+      <div class="st bi xs" data-step="3"><i>④</i><span class="zh">\(h\) 本身改不了，只收到<b>訊息</b>：<b class="ok-c">要變大</b>或<b class="bad-c">要變小</b></span><span class="en">h itself only gets a message: grow or shrink.</span></div>
+      <div class="st bi xs" data-step="4"><i>⑤</i><span class="zh">再調<b>前一層的權重</b>，規則相同；沒出現的詞不變</span><span class="en">Same rule one layer back; absent words stay.</span></div>
+      <div class="callout key bi xs" data-step="5"><span class="zh">重複成千上萬個例子：這就是「學習」。</span><span class="en">Repeat this for thousands of examples: that is learning.</span></div>
     </div>
   </div>
 </section>
@@ -291,6 +292,19 @@
   <div class="bi xs attn-cap"><span class="zh">線愈粗，「水」對那個詞的注意力愈大；新的「水」向量 ＝ 各詞向量依注意力加權平均（數字為示意）。</span><span class="en">Thicker lines mean more attention from 水. The new 水 vector is the attention-weighted average of the token vectors (toy numbers).</span></div>
 </section>
 
+<section class="slide" id="s-qkv" data-sec="attn">
+  <h2 class="bi"><span class="zh">查詢、鍵、值：Query, Key, Value</span><span class="en">Queries, keys and values</span></h2>
+  <div class="two qkv">
+    <svg class="diag" id="qkv-svg" viewBox="0 0 520 420" aria-label="An embedding multiplied by three learned matrices gives a query, a key and a value"></svg>
+    <div>
+      <div class="qrow" data-step="1"><b class="cq">查詢 Query \(\mathbf q=W_Q\mathbf x\)</b><span class="zh">「我在找什麼？」像一個問題、一個搜尋請求。</span><span class="en">What this token is looking for.</span></div>
+      <div class="qrow" data-step="2"><b class="ck">鍵 Key \(\mathbf k=W_K\mathbf x\)</b><span class="zh">「我能提供什麼？」標示自己和別人的問題有多相關。</span><span class="en">What this token can offer.</span></div>
+      <div class="qrow" data-step="3"><b class="cv">值 Value \(\mathbf v=W_V\mathbf x\)</b><span class="zh">「我的實際內容」：按查詢與鍵的匹配度被取出來。</span><span class="en">The content that is actually passed on.</span></div>
+      <div class="callout bi xs" data-step="4"><span class="zh">圖書館比喻：查詢 ＝ 你的問題；鍵 ＝ 書脊上的標籤；值 ＝ 書的內容。三個矩陣 \(W_Q, W_K, W_V\) 都是<b>學</b>出來的。</span><span class="en">In a library, the query is your question, keys are the spine labels and values are the books. All three matrices are learned.</span></div>
+    </div>
+  </div>
+</section>
+
 <section class="slide" id="s-linalg" data-sec="attn">
   <h2 class="bi"><span class="zh">複習：矩陣把空間變形</span><span class="en">Recap: a matrix transforms space</span></h2>
   <div class="two linalg">
@@ -309,20 +323,7 @@
       <div class="la-calc" id="la-calc"></div>
       <div class="st bi xs" data-step="1"><i>①</i><span class="zh">\(W\) 的每一<b>列</b>（row）和 \(\mathbf x\) 做一次<b>內積</b>：就是一個神經元的 \(\mathbf w^{\top}\mathbf x\)</span><span class="en">Each row of W takes one dot product with x, just like one neuron.</span></div>
       <div class="st bi xs" data-step="2"><i>②</i><span class="zh">整個平面跟著<b>變形</b>：格線依然平行、等距</span><span class="en">The whole plane moves; grid lines stay parallel and evenly spaced.</span></div>
-      <div class="callout key bi xs" data-step="3"><span class="zh">下一頁：\(W_Q, W_K, W_V\) 是三個這樣的矩陣，把同一個 \(\mathbf x\) 變成三個不同的向量。</span><span class="en">Next: three such matrices turn the same x into three different vectors.</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="slide" id="s-qkv" data-sec="attn">
-  <h2 class="bi"><span class="zh">查詢、鍵、值：Query, Key, Value</span><span class="en">Queries, keys and values</span></h2>
-  <div class="two qkv">
-    <svg class="diag" id="qkv-svg" viewBox="0 0 520 420" aria-label="An embedding multiplied by three learned matrices gives a query, a key and a value"></svg>
-    <div>
-      <div class="qrow" data-step="1"><b class="cq">查詢 Query \(\mathbf q=W_Q\mathbf x\)</b><span class="zh">「我在找什麼？」像一個問題、一個搜尋請求。</span><span class="en">What this token is looking for.</span></div>
-      <div class="qrow" data-step="2"><b class="ck">鍵 Key \(\mathbf k=W_K\mathbf x\)</b><span class="zh">「我能提供什麼？」標示自己和別人的問題有多相關。</span><span class="en">What this token can offer.</span></div>
-      <div class="qrow" data-step="3"><b class="cv">值 Value \(\mathbf v=W_V\mathbf x\)</b><span class="zh">「我的實際內容」：按查詢與鍵的匹配度被取出來。</span><span class="en">The content that is actually passed on.</span></div>
-      <div class="callout bi xs" data-step="4"><span class="zh">圖書館比喻：查詢 ＝ 你的問題；鍵 ＝ 書脊上的標籤；值 ＝ 書的內容。三個矩陣 \(W_Q, W_K, W_V\) 都是<b>學</b>出來的。</span><span class="en">In a library, the query is your question, keys are the spine labels and values are the books. All three matrices are learned.</span></div>
+      <div class="callout key bi xs" data-step="3"><span class="zh">所以 \(\mathbf q=W_Q\mathbf x\)、\(\mathbf k=W_K\mathbf x\)、\(\mathbf v=W_V\mathbf x\) 就是三次這樣的變形。</span><span class="en">So q, k and v are three such transformations of the same x.</span></div>
     </div>
   </div>
 </section>
@@ -360,6 +361,26 @@
   </div>
 </section>
 
+<section class="slide" id="s-gpu" data-sec="attn" data-lock>
+  <h2 class="bi"><span class="zh">為什麼要用 GPU？很多計算可以<em>同時做</em></span><span class="en">Why a GPU? Much of the computation can happen at the same time</span></h2>
+  <div class="two gpu">
+    <div>
+      <svg class="diag" id="gpu-svg" viewBox="0 0 600 430" aria-label="A CPU with 8 large cores and a GPU with many small cores each fill a 10 by 10 grid of attention scores; the CPU needs 13 steps, the GPU one"></svg>
+      <div class="fold-ctl gpu-ctl">
+        <button type="button" id="gpu-play">▶ 計算 <span>compute</span></button>
+        <button type="button" id="gpu-reset" class="ghost">↺ <span>reset</span></button>
+      </div>
+    </div>
+    <div>
+      <div class="st bi xs"><i>①</i><span class="zh"><b>CPU</b>：少數幾個強大的核心（如 8 個），擅長一步接一步的複雜工作</span><span class="en">A CPU has a few powerful cores, good at complex step-by-step work.</span></div>
+      <div class="st bi xs" data-step="1"><i>②</i><span class="zh"><b>GPU</b>：成千上萬個簡單的核心（T4 有 2,560 個），原為遊戲畫面設計：每個像素各算各的</span><span class="en">A GPU has thousands of simple cores, first built to compute every pixel of a game at once.</span></div>
+      <div class="st bi xs" data-step="2"><i>③</i><span class="zh">神經網絡幾乎都是<b>矩陣乘法</b>：每個內積彼此獨立。注意力的 \(QK^{\top}\) 裡，每一對字的分數都可以<b>同時</b>算</span><span class="en">Networks are mostly matrix products made of independent dot products; every pair of tokens in attention can be scored at once.</span></div>
+      <div class="callout key bi xs" data-step="3"><span class="zh">早期的模型（RNN）要一個字一個字地讀；Transformer 一次看整句，正好適合 GPU。所以本週實作要在 Colab 選 <b>T4 GPU</b>。</span><span class="en">Older models (RNNs) read one token at a time; a Transformer reads the whole sentence at once, which suits a GPU.</span></div>
+    </div>
+  </div>
+</section>
+
+
 <!-- ═════════════ 5 · using an encoder -->
 
 <section class="slide" id="s-pretrain" data-sec="use">
@@ -374,7 +395,7 @@
       <div class="nsp"><div class="pair2">[CLS] 今天天氣很好。[SEP] 三角形有三條邊。[SEP]</div><span class="nope">不是下一句 NotNext ✗</span></div>
       <div class="bi xs"><span class="zh">兩句是否相連？答案由 [CLS] 的向量給出。</span><span class="en">Do the two sentences belong together? The [CLS] vector answers.</span></div></div>
   </div>
-  <div class="callout key bi xs" data-step="3"><span class="zh"><b>不需要人工標註</b>：答案就在文本裡（和 word2vec 一樣）。預訓練用大量文本，<b>微調</b>只需少量有標籤的資料。</span><span class="en">No human labels are needed for pre-training. Fine-tuning then adapts the model to a task with a small labelled dataset.</span></div>
+  <div class="callout key bi xs" data-step="3"><span class="zh"><b>不需要人工標註</b>：答案就在文本裡（和 word2vec 一樣）。預訓練用大量文本；<b>微調</b>再用少量有標籤的資料，學一個<span style="white-space:nowrap"><b>下游任務</b>（downstream task）</span>，如情感分類。</span><span class="en">No human labels are needed for pre-training. Fine-tuning then adapts the model to a downstream task, such as sentiment classification, with a small labelled dataset.</span></div>
   <div class="models" data-step="4"><b>中文模型</b><span>bert-base-chinese<i>現代漢語</i></span><span>SikuBERT<i>《四庫全書》</i></span><span>GujiBERT<i>古籍</i></span><span>BERT-CCPoem<i>古典詩歌</i></span></div>
 </section>
 
@@ -385,7 +406,8 @@
     <div class="uses-text">
       <div class="st bi xs" data-step="1"><i>①</i><span class="zh"><b>句子分類</b>：只讀 [CLS] 向量<br>→ 是否對仗？情感？</span><span class="en">Sentence classification: a classifier reads only the [CLS] vector.</span></div>
       <div class="st bi xs" data-step="2"><i>②</i><span class="zh"><b>詞元分類</b>：每個字各一個分類器<br>→ 詞性、人名、地名</span><span class="en">Token classification: a classifier on every token, for parts of speech or named entities.</span></div>
-      <div class="st bi xs" data-step="3"><i>③</i><span class="zh"><b>嵌入</b>：直接拿向量，<br>用餘弦相似度找相似句子</span><span class="en">Embedding: take the vectors themselves and compare them with cosine similarity.</span></div>
+      <div class="st bi xs" data-step="3"><i>③</i><span class="zh"><b>嵌入</b>：所有字的向量取平均，<br>用餘弦相似度找相似句子</span><span class="en">Embedding: average the token vectors and compare them with cosine similarity.</span></div>
+      <div class="st bi xs" data-step="4"><i>　</i><span class="zh">或只拿 <b>[CLS]</b> 的向量：<br>較簡單，但通常較差</span><span class="en">Or take only the [CLS] vector: simpler, but usually worse without fine-tuning.</span></div>
     </div>
   </div>
 </section>
@@ -397,9 +419,10 @@
     <div>
       <div class="query-line">一行白鷺上青天</div>
       <div class="bi xs"><span class="zh">BERT-CCPoem（清華大學）把每句詩變成一個向量，再與其他詩句比較<b>餘弦相似度</b>。</span><span class="en">BERT-CCPoem turns each line into a vector and ranks other lines by cosine similarity.</span></div>
-      <div class="callout key bi xs" data-step="2"><span class="zh">字面不同、意象相近的句子也能找到：「白鷺」「青天」「一行」換了位置，向量依然接近。</span><span class="en">Lines that reorder or vary the imagery still end up close together in the vector space.</span></div>
+      <figure class="gh-shot"><img src="img/ccpoem-github.png" alt="The BERT-CCPoem README on GitHub, with the ten most similar lines to 一行白鷺上青天"><figcaption>github.com/THUNLP-AIPoet/BERT-CCPoem</figcaption></figure>
     </div>
-    <table class="rank" data-step="1">
+    <div>
+      <table class="rank" data-step="1">
       <tr><th>#</th><th>詩句 line</th><th>cos</th></tr>
       <tr><td>1</td><td>白鷺一行登碧霄</td><td>0.933</td></tr>
       <tr><td>2</td><td>一片青天白鷺前</td><td>0.919</td></tr>
@@ -408,6 +431,8 @@
       <tr><td>5</td><td>白鷺一行飛綠野</td><td>0.907</td></tr>
       <tr><td>6</td><td>一行白鳥掠清波</td><td>0.902</td></tr>
     </table>
+      <div class="callout key bi xs" data-step="2"><span class="zh">字面不同、意象相近的句子也能找到：「白鷺」「青天」「一行」換了位置，向量依然接近。</span><span class="en">Lines that reorder or vary the imagery still end up close together in the vector space.</span></div>
+    </div>
   </div>
 </section>
 
@@ -430,36 +455,21 @@
   </div>
 </section>
 
-<section class="slide" id="s-code" data-sec="use">
-  <h2 class="bi"><span class="zh">實作：兩個「水」有多像？</span><span class="en">In practice: how similar are the two 水?</span></h2>
-  <div class="two code2">
-<pre class="code"><span class="kw">from</span> transformers <span class="kw">import</span> AutoTokenizer, AutoModel
-<span class="kw">import</span> torch
-
-name = <span class="s">"bert-base-chinese"</span>
-tok = AutoTokenizer.from_pretrained(name)
-model = AutoModel.from_pretrained(name)
-
-<span class="kw">def</span> <span class="fn">char_vector</span>(sentence, char):
-    enc = tok(sentence, return_tensors=<span class="s">"pt"</span>)
-    <span class="kw">with</span> torch.no_grad():
-        out = model(**enc).last_hidden_state[<span class="n">0</span>]
-    <span class="c"># 每個字一個 768 維向量；找出 char 的位置</span>
-    ids = enc.input_ids[<span class="n">0</span>].tolist()
-    <span class="kw">return</span> out[ids.index(tok.convert_tokens_to_ids(char))]
-
-a = char_vector(<span class="s">"水是人體最重要的組成成分"</span>, <span class="s">"水"</span>)
-b = char_vector(<span class="s">"這篇文章很水"</span>, <span class="s">"水"</span>)
-c = char_vector(<span class="s">"請給我一杯水"</span>, <span class="s">"水"</span>)
-
-cos = torch.nn.functional.cosine_similarity
-print(cos(a, c, dim=<span class="n">0</span>), cos(a, b, dim=<span class="n">0</span>))</pre>
-    <div>
-      <div class="bi sm"><span class="zh">先猜：哪一對比較相似？</span><span class="en">Guess first: which pair is more similar?</span></div>
-      <div class="guess"><span>a ↔ c</span><small>人體的水 · 一杯水</small></div>
-      <div class="guess"><span>a ↔ b</span><small>人體的水 · 文章很水</small></div>
-      <div class="callout key bi xs" data-step="1"><span class="zh">同一個字、三個向量：word2vec 給「水」一個向量，BERT 給每一次出現一個向量。</span><span class="en">The same character gets three vectors: one per occurrence, where word2vec had a single vector for every use.</span></div>
-      <div class="note bi xs" data-step="2"><span class="zh">課堂練習：換成「行」（銀行、行走），或古文的「之」。</span><span class="en">Exercise: try 行 in 銀行 and 行走, or 之 in classical texts.</span></div>
+<section class="slide" id="s-hlmc" data-sec="use" data-lock>
+  <h2 class="bi"><span class="zh">例三：嵌入 ──《紅樓夢》的 120 回</span><span class="en">Example 3: embeddings. The 120 chapters of Dream of the Red Chamber</span></h2>
+  <div class="hlm2">
+    <div class="hlm2-plot">
+      <canvas id="hlmc-cv" width="1240" height="880"></canvas>
+      <div class="hlm-tip" id="hlmc-tip"></div>
+      <div class="hlm2-leg" id="hlmc-leg"></div>
+    </div>
+    <div class="hlm2-side">
+      <div class="bi xs"><span class="zh">每回一個向量：該回所有段落向量的平均。</span><span class="en">Each dot is one chapter: the average of its passage vectors; larger dots have more passages.</span></div>
+      <label class="hlm-sel">顏色 <select id="hlmc-axis"></select></label>
+      <div class="hlm2-sel" id="hlmc-pick"></div>
+      <div class="hlm2-nn-h">最相似的回 <span>nearest chapters (cosine)</span></div>
+      <div class="hlm2-nn" id="hlmc-nn"></div>
+      <div class="note">點越大，該回段落越多。拖曳可旋轉；滑鼠移到點上看回目，點一下選中它。 <span>Drag to turn the cloud; hover to read a chapter title, click to select it.</span></div>
     </div>
   </div>
 </section>
@@ -678,6 +688,25 @@ print(cos(a, c, dim=<span class="n">0</span>), cos(a, b, dim=<span class="n">0</
   <div class="src">按 <kbd>N</kbd> 切換五言／七言。Kurzynski, Xu, and Feng, “Like Threaded Pearls: Repetition between Redundancy and Meaning in Chinese Regulated Verse and Patterned Prose” (manuscript), §4, Fig. 4a.</div>
 </section>
 
+<section class="slide vp" id="s-v-concl" data-sec="vp" data-steps="1">
+  <h2>對仗的<em>三種解讀</em></h2>
+  <p class="vp-lead" style="font-size:26px;line-height:1.5;margin:0 0 6px">本研究把對仗重新理解為一場主動「尋求對齊」的遊戲：從靜態的特徵清單，轉向以過程為本的理解，強調讀者在建構意義時的能動角色。</p>
+  <div class="concl-cols">
+    <div class="claims concl-left">
+      <div class="claim"><div class="h vp-ch">幾何詮釋作為詩學理論</div><div class="b">閱讀對仗，即在高維語義空間中識別<b>概念與幾何的契合</b>。詩的結構因此有可量化的幾何對應，描述其凝聚。</div></div>
+      <div class="claim"><div class="h vp-ch">結構和諧中的認知滿足</div><div class="b">對仗的力量在於揭示語言表面之下<b>隱藏而可理解的秩序</b>，指向一個未分化的統一：相異的觀念在此暫時相聚。</div></div>
+    </div>
+    <div data-step="1" class="vp-defs">
+      <div class="row3">
+        <div><b><span class="n">一、</span>《易經》與劉勰</b><span>宇宙論：「支體必雙，事不孤立」，「自然成對」</span></div>
+        <div><b><span class="n">二、</span>王力的語言學</b><span>詞類相當，句法相同</span></div>
+        <div class="on"><b><span class="n">三、</span>向量詩學</b><span>空間中的編碼：兩句在語義空間中走出平行的路徑</span></div>
+      </div>
+      <div class="sum">繼《易經》與劉勰的宇宙論、王力的語言學之後，或可提供<b>對仗的第三種解讀</b>：空間中的編碼。</div>
+    </div>
+  </div>
+</section>
+
 
 <section class="slide" id="s-workflow" data-sec="summary">
   <h2 class="bi"><span class="zh">實作流程：從預訓練模型到自己的分類器</span><span class="en">The usual workflow: from a pre-trained model to your own classifier</span></h2>
@@ -693,24 +722,10 @@ print(cos(a, c, dim=<span class="n">0</span>), cos(a, b, dim=<span class="n">0</
     <div class="wf-step" data-step="4"><i>5</i><b>評估與分享</b><span>在測試集上算準確率、F1；上載到 Hugging Face</span><em>evaluate, share</em></div>
   </div>
   <div class="wf-bottom" data-step="5">
-<pre class="code"><span class="kw">from</span> transformers <span class="kw">import</span> (AutoTokenizer,
-    AutoModelForSequenceClassification, Trainer, TrainingArguments)
-
-name = <span class="s">"bert-base-chinese"</span>  <span class="c"># ① 預訓練模型</span>
-tok = AutoTokenizer.from_pretrained(name)
-model = AutoModelForSequenceClassification.from_pretrained(
-    name, num_labels=<span class="n">2</span>)  <span class="c"># ③ [CLS] 上的分類器</span>
-
-args = TrainingArguments(<span class="s">"out"</span>, num_train_epochs=<span class="n">3</span>,
-                         learning_rate=<span class="n">2e-5</span>)
-trainer = Trainer(model=model, args=args,
-                  train_dataset=train, eval_dataset=test)  <span class="c"># ② 你的資料</span>
-trainer.train()  <span class="c"># ④ 微調</span>
-trainer.evaluate()  <span class="c"># ⑤ 評估</span>
-model.push_to_hub(<span class="s">"my-sentiment-bert"</span>)  <span class="c"># ⑤ 分享</span></pre>
+<svg class="diag" id="wf-svg" viewBox="0 0 650 300" aria-label="A large pre-trained model turns the tokens into contextual vectors; a small classifier on top reads the [CLS] vector and outputs a label"></svg>
     <div>
       <div class="callout key bi xs"><span class="zh"><b>預訓練</b>學「語言」：別人已經做好。<br><b>微調</b>學「任務」：用少量資料，你來做。</span><span class="en">Pre-training learns the language and is already done for you; fine-tuning learns your task from a small labelled dataset.</span></div>
-      <div class="note bi xs"><span class="zh">本週實作：訓練一個情感分類器，並上載到 Hugging Face。（程式碼為示意，資料準備的步驟從略。）</span><span class="en">This week's lab: train a sentiment classifier and upload it to Hugging Face. The code is a sketch; data preparation is omitted.</span></div>
+      <div class="note bi xs"><span class="zh">本週實作：照這五步訓練情感分類器，上載到 Hugging Face。</span><span class="en">This week's lab: follow these five steps to train a sentiment classifier and upload it to Hugging Face.</span></div>
     </div>
   </div>
 </section>

@@ -303,7 +303,8 @@ table.res tr:nth-child(2) td { background: var(--tgt-bg); }
 /* embeddings */
 .embed { grid-template-columns: 1fr 520px; }
 .query-line { font-size: 52px; font-family: var(--cjk); font-weight: 600; color: var(--tgt); margin-bottom: 14px; }
-table.rank td { font-size: 30px; font-family: var(--cjk); padding: 8px 10px; }
+table.rank td { font-size: 28px; font-family: var(--cjk); padding: 4px 10px; }
+#s-embed .callout { margin-top: 16px; }
 table.rank td:first-child { color: var(--mute); font-size: 20px; font-family: var(--latin); }
 table.rank td:last-child { font-family: var(--latin); font-size: 22px; text-align: right; }
 
@@ -465,7 +466,7 @@ table.gtab td .mk.ok { color: var(--ok); }
 table.gtab td .mk.no { color: var(--bad); }
 
 /* how a network learns */
-.bp2 { grid-template-columns: 680px 1fr; gap: 24px; }
+.bp2 { grid-template-columns: 620px 1fr; gap: 24px; }
 .bp-right .who { display: flex; gap: 14px; align-items: center; margin-bottom: 14px; }
 .bp-right .who img { width: 104px; height: 104px; object-fit: cover; border-radius: 50%; flex: none; }
 .bp-right .who .zh { font-size: 17px !important; line-height: 1.45; }
@@ -483,7 +484,7 @@ table.gtab td .mk.no { color: var(--bad); }
 .bp-right .bi.xs > .en { font-size: 13px; }
 .bp-right .st { margin-bottom: 6px; }
 .bp-right .who { margin-bottom: 10px; }
-.bp-right .who img { width: 92px; height: 92px; }
+.bp-right .who img { width: 80px; height: 80px; }
 .bp-right .callout { margin-top: 8px; padding: 8px 16px; }
 
 /* masked-word guesses that do not fit */
@@ -510,7 +511,7 @@ table.gtab td .mk.no { color: var(--bad); }
 /* 紅樓夢 emotional space */
 .hlm2 { display: grid; grid-template-columns: 620px 1fr; gap: 24px; }
 .hlm2-plot { position: relative; }
-#hlm-cv { width: 620px; height: 440px; display: block; border: 1px solid var(--line); border-radius: 12px; cursor: crosshair; }
+.hlm2-plot canvas { width: 620px; height: 440px; display: block; border: 1px solid var(--line); border-radius: 12px; cursor: crosshair; }
 .hlm2-plot .hlm-tip { left: 20px; top: 20px; max-width: 300px; font-size: 14px; line-height: 1.45; }
 .hlm2-leg { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 6px; font-size: 15px; font-family: var(--cjk), var(--latin); }
 .hlm2-leg i { width: 220px; height: 12px; border-radius: 6px; background: linear-gradient(90deg, rgb(224,87,15), rgb(205,210,220), rgb(31,157,85)); }
@@ -563,8 +564,16 @@ table.gtab td .mk.no { color: var(--bad); }
 .wf-step span { font-size: 14.5px; line-height: 1.45; font-family: var(--cjk), var(--latin); }
 .wf-step em { font-style: normal; font-size: 12.5px; color: var(--mute); margin-top: auto; }
 .wf-arr { align-self: center; font-size: 26px; color: var(--mute); }
-.wf-bottom { display: grid; grid-template-columns: 650px 1fr; gap: 22px; margin-top: 16px; }
-.wf-bottom pre.code { font-size: 13.5px; padding: 12px 16px; }
+.wf-bottom { display: grid; grid-template-columns: 620px 1fr; gap: 30px; margin-top: 14px; align-items: start; }
+#wf-svg { width: 620px; display: block; }
 .wf-bottom .callout { margin-top: 0; }
 .wf-bottom .note .zh { font-size: 16px !important; }
 .sum > div { margin-bottom: 14px; }
+.gate-cite { position: absolute; left: 200px; right: 90px; bottom: 21px; font-size: 15px; color: var(--mute); text-align: right; }
+.gh-shot { margin: 8px 0 10px; }
+.gh-shot img { width: 440px; display: block; border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,.08); }
+.gh-shot figcaption { font-size: 12.5px; color: var(--mute); margin-top: 4px; }
+.gpu { grid-template-columns: 600px 1fr; gap: 30px; }
+#gpu-svg { width: 600px; display: block; }
+.gpu .gpu-ctl { margin-top: 6px; justify-content: center; }
+.gpu .gpu-ctl button { font-size: 18px; padding: 0 14px; height: 42px; }
