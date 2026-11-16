@@ -437,7 +437,7 @@ title: CHI4335
           <li>(optional) Frantz Fanon, “The Lived Experience of the Black Man,” in <em>Black Skin, White Masks</em></li>
         </ul>
       </td>
-      <td class="notes"></td>
+      <td class="notes"><a href="slides/racial-violence/">Slides</a></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Generation and Retrieval — DHG 502</title>
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+
+<!-- ─────────── Title -->
+<section class="slide full title-slide" id="s-title">
+  <div class="big-en">Generation and Retrieval</div>
+  <div class="big-zh">生成與檢索</div>
+  <div class="rule"></div>
+  <div class="quote bi" data-step="1">
+    <span class="en">Can a language model speak with the words of a historical figure? And how would a historian check what such a model says?</span>
+  </div>
+  <figure class="title-pic"><img src="assets/liangqichao.jpg" alt="Liang Qichao"><figcaption>Liang Qichao 梁啟超<span>1873–1929</span></figcaption></figure>
+  <div class="hint">DHG 502 Digital Approaches in Historical Research &nbsp;·&nbsp; <kbd>←</kbd> <kbd>→</kbd> navigate &nbsp;·&nbsp; <kbd>1</kbd>–<kbd>7</kbd> sections &nbsp;·&nbsp; <kbd>G</kbd> go to slide &nbsp;·&nbsp; <kbd>L</kbd> laser pointer &nbsp;·&nbsp; <kbd>F</kbd> fullscreen</div>
+</section>
+
+<!-- ═══════════ 1. Language models -->
+<!-- ─────────── BERT vs GPT -->
+<section class="slide" id="s-bertgpt" data-sec="lm">
+  <h2 class="bi"><span class="en">From BERT to GPT: filling a gap versus continuing a text</span></h2>
+  <div class="two cols2 bg2">
+    <article class="card bgc" data-step="1">
+      <div class="bgh">BERT <span>encoder · end of Week 9</span></div>
+      <div class="bgtoks"><span>辛亥</span><span>革命</span><span>推翻</span><span>了</span><span class="mask">[MASK]</span></div>
+      <div class="bgarrows">⟶ reads in both directions ⟵</div>
+      <p>BERT came up at the end of last week, as the answer to polysemy. It guesses a hidden word from the words on <b>both sides</b> and gives every occurrence its own vector.</p>
+    </article>
+    <article class="card bgc gpt" data-step="2">
+      <div class="bgh">GPT <span>decoder · today</span></div>
+      <div class="bgtoks"><span>辛亥</span><span>革命</span><span>推翻</span><span>了</span><span class="next">清朝</span><i class="nextq">?</i></div>
+      <div class="bgarrows">reads only to the left ⟶ adds one token at a time</div>
+      <p>The model guesses the <b>next</b> token from everything before it, and then repeats the step with its own output. Repeating this step is what we call generation.</p>
+    </article>
+  </div>
+  <div class="callout key bi" data-step="3"><span class="en">GPT stands for Generative Pre-trained Transformer. ChatGPT, DeepSeek, Qwen, Claude and GLM are all large language models (LLMs) of this kind.</span></div>
+</section>
+
+<!-- ─────────── Next token, step by step (interactive) -->
+<section class="slide" id="s-next" data-sec="lm">
+  <h2 class="bi"><span class="en">Predicting the next token, again and again</span></h2>
+  <div class="nt-sent" id="nt-sent"></div>
+  <div class="nt-cands" id="nt-cands"></div>
+  <div class="nt-note" id="nt-note"></div>
+  <div class="nt-steps"><i data-step="1"></i><i data-step="2"></i><i data-step="3"></i><i data-step="4"></i><i data-step="5"></i><i data-step="6"></i></div>
+  <div class="callout key bi" data-step="7"><span class="en">Every step assigns a probability to every token in the vocabulary, picks one, appends it, and starts again. At no point does the model look anything up in a source. <small>(Illustrative probabilities.)</small></span></div>
+</section>
+
+<!-- ─────────── From predictor to chat assistant -->
+<section class="slide" id="s-chat" data-sec="lm">
+  <h2 class="bi"><span class="en">How a next-token predictor becomes a chat assistant</span></h2>
+  <div class="trs">
+    <div class="tr" id="tr1" data-step="1">
+      <div class="trh"><i>1</i><b>Pre-training</b></div>
+      <div class="trsub">guess the next word in trillions of words of web pages, books and code</div>
+      <div class="trbox" id="tr1-box"></div>
+    </div>
+    <div class="tr" id="tr2" data-step="2">
+      <div class="trh"><i>2</i><b>Instruction tuning</b></div>
+      <div class="trsub">learn from questions and good answers written by people</div>
+      <div class="trbox" id="tr2-box"></div>
+    </div>
+    <div class="tr" id="tr3" data-step="3">
+      <div class="trh"><i>3</i><b>Preference tuning</b></div>
+      <div class="trsub">people pick the better of two answers (recall the <em>TIME</em> reading, Week 2)</div>
+      <div class="trbox" id="tr3-box"></div>
+    </div>
+  </div>
+  <div class="chatdoc" data-step="4">
+    <div><span class="role sys">system</span>You are a helpful assistant.</div>
+    <div><span class="role usr">user</span>When did the Qing dynasty end?</div>
+    <div><span class="role ast">assistant</span><span class="caret">▍</span></div>
+  </div>
+  <div class="callout key bi" data-step="4"><span class="en">A chat is still one long document that the model continues word by word.</span></div>
+</section>
+
+<!-- ═══════════ 2. Sampling -->
+<!-- ─────────── Temperature (interactive) -->
+<section class="slide" id="s-temp" data-sec="lm">
+  <h2 class="bi"><span class="en">Temperature: throwing darts at the probabilities</span></h2>
+  <div class="two tptwo">
+    <div class="tp-left">
+      <div class="tp-top">
+        <div class="eq tpeq">\(P(i)=\dfrac{e^{z_i/T}}{\sum_j e^{z_j/T}}\)</div>
+        <div class="tp-T">T = <b id="tp-T">1.0</b><div class="tp-track"><div id="tp-knob"></div></div></div>
+      </div>
+      <svg id="tp-map" class="plot" viewBox="0 0 640 330"></svg>
+      <div class="keys"><kbd>↑</kbd> <kbd>↓</kbd> temperature · <kbd>S</kbd> throw one dart · <kbd>R</kbd> throw 20 darts · <kbd>C</kbd> clear</div>
+    </div>
+    <div class="tp-right">
+      <div class="tp-ctx">The Wuchang Uprising of 1911 overthrew the <b>＿＿</b></div>
+      <div id="tp-out" class="tp-out"></div>
+      <div id="tp-count" class="tp-count"></div>
+    </div>
+  </div>
+  <div class="callout key bi" data-step="1"><span class="en">Each area is a probability, and a dart lands anywhere in the rectangle. Low T gives “Qing” almost all the area. High T shares it out, so false answers such as “Ming” or “Tang” get hit more often.</span></div>
+</section>
+
+<!-- ═══════════ 3. Limits -->
+<!-- ─────────── Fluent is not true -->
+<section class="slide" id="s-fluent" data-sec="limits">
+  <h2 class="bi"><span class="en">A fluent answer is not necessarily a true answer</span></h2>
+  <div class="flu">
+    <div class="flu-q" data-step="1">
+      <figure class="flu-pic"><img src="assets/qiujin.jpg" alt="Qiu Jin"><figcaption>Qiu Jin 秋瑾<span>1875–1907</span></figcaption></figure>
+      <div>
+        <div class="flu-ask"><span class="flu-lab">user</span>What did Qiu Jin say about the Wuchang Uprising?</div>
+        <div class="flu-ask bot"><span class="flu-lab">chatbot</span>Qiu Jin hailed the uprising as “the dawn of a free China” and urged the women of Shaoxing to join the revolutionary army.</div>
+        <div class="flu-ans">Qiu Jin was executed in 1907, four years before the uprising, and the quotation exists in no source. (Constructed example of a typical failure.)</div>
+      </div>
+    </div>
+    <div class="flu-cards">
+      <div class="card fc" data-step="2"><b>No sources</b><p>The model produces the most plausible continuation. It cannot tell you where a sentence came from.</p></div>
+      <div class="card fc" data-step="3"><b>Invented details</b><p>Dates, titles and quotations that sound right are generated in the same way as true ones (“hallucination”).</p></div>
+      <div class="card fc" data-step="4"><b>A modern memory</b><p>Most training text is recent, English and online, so the past is seen through the present.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Underwood et al. 1: prompting fails -->
+<section class="slide" id="s-uw1" data-sec="limits">
+  <h2 class="bi"><span class="en">Underwood et al. (2025): can a model write like 1913?</span></h2>
+  <div class="src2" data-step="1">Ted Underwood, Laura K. Nelson and Matthew Wilkens, “Can Language Models Represent the Past without Anachronism?”</div>
+  <div class="bi sm uw-intro" data-step="1"><span class="en">They gave models the opening of a passage from a book published in 1913 and asked for a continuation “in the same style”.</span></div>
+  <div class="two cols2 uwcols">
+    <article class="card qx" data-step="2">
+      <div class="qxh">GPT-4o <span>a current model, prompted with the date</span></div>
+      <blockquote>“The use of cold light in instantaneous photography has revolutionized the approach to capturing images under varying light conditions. Traditionally, photographers struggled with the harshness and variability of natural light …”</blockquote>
+    </article>
+    <article class="card qx" data-step="3">
+      <div class="qxh">GPT-1914 <span>a small model trained only on books from 1880–1914</span></div>
+      <blockquote>“The principle of its action has been already explained (p. 4). We shall here only mention that it can be applied with advantage when we wish to obtain very rapid photographs on paper coated with collodion …”</blockquote>
+    </article>
+  </div>
+  <div class="callout key bi" data-step="4"><span class="en">A date-guessing model placed GPT-4o’s continuations in the twenty-first century, “where most of its training data came from”. Adding 20 examples to the prompt did not help: “Telling the model to emulate examples of an earlier period’s style is clearly not effective.”</span></div>
+</section>
+
+<!-- ─────────── Underwood et al. 2: humans still spot it -->
+<section class="slide" id="s-uw2" data-sec="limits">
+  <h2 class="bi"><span class="en">Fine-tuning helps, but readers can still tell the difference</span></h2>
+  <div class="two uw2">
+    <div class="grow">
+      <div class="bi sm" data-step="1"><span class="en">Expert readers saw four answers to the same question, three from models and one from a real book of 1905–1914. Which one is the original?</span></div>
+      <div class="intr" data-step="2">
+        <div class="ir"><b>GPT-4o-mini</b><span style="width:24px"></span><em>4%</em></div>
+        <div class="ir"><b>GPT-4o</b><span style="width:61px"></span><em>10%</em></div>
+        <div class="ir"><b>GPT-4o-mini, fine-tuned</b><span style="width:182px"></span><em>30%</em></div>
+        <div class="ir real"><b>real prose, 1905–1914</b><span style="width:340px"></span><em>56%</em></div>
+      </div>
+      <div class="irsrc">how often each source was picked as the original (Table 2)</div>
+    </div>
+    <div class="uwq">
+      <blockquote data-step="3">Up to 20% of answers gave themselves away with disclaimers such as “in 1914, it is not yet known that x”.</blockquote>
+      <blockquote data-step="4">“There are, after all, no ‘authentic’ examples of a conversation between a twenty-first-century questioner and a respondent from 1914.”</blockquote>
+    </div>
+  </div>
+  <div class="callout key bi" data-step="5"><span class="en">Our chatbot is the cheapest option they tested: a current model, prompted to play a figure. Expect it to sound modern, and read every answer with that in mind.</span></div>
+</section>
+
+<!-- ─────────── Poibeau 1: a model of the archive -->
+<section class="slide" id="s-pb1" data-sec="limits">
+  <h2 class="bi"><span class="en">Poibeau (2026): a model of the archive</span></h2>
+  <div class="src2" data-step="1">Thierry Poibeau, “What Do Historical Language Models Model?”</div>
+  <blockquote class="bigq" data-step="1">“Historical language models do not simulate past minds or populations, but instead model the structure of surviving textual archives.”</blockquote>
+  <div class="two cols2 pbcols">
+    <article class="card gr gen" data-step="2">
+      <div class="grh">Generation</div>
+      <blockquote>“The fluency of the output can make this substitution invisible.”</blockquote>
+      <p class="grp">A plausible reconstruction takes the place of the historical record.</p>
+    </article>
+    <article class="card gr" data-step="3">
+      <div class="grh">Retrieval</div>
+      <blockquote>“Retrieval-augmented generation … preserve[s] provenance, enable[s] citation, and keep[s] the underlying evidence visible.”</blockquote>
+    </article>
+  </div>
+  <div class="callout key bi" data-step="4"><span class="en">His advice: historical research “should default to retrieval for evidential claims”. That is what we try next: retrieval-augmented generation (RAG).</span></div>
+</section>
+
+<!-- ═══════════ 4. RAG -->
+<!-- ─────────── Pipeline (diagram) -->
+<section class="slide" id="s-pipe" data-sec="rag">
+  <h2 class="bi"><span class="en">The RAG pipeline, step by step</span></h2>
+  <div class="pv">
+    <svg class="pv-arrows" viewBox="0 0 1108 470">
+      <defs><marker id="pvh" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b03a2e"/></marker></defs>
+      <path data-step="2" d="M232,95 L282,95" />
+      <path data-step="3" d="M506,95 L556,95" />
+      <path data-step="4" d="M846,95 L896,95" />
+      <path data-step="5" d="M1000,186 C1000,222 330,206 160,232" />
+      <path data-step="6" d="M322,322 L372,322" />
+      <path data-step="6" d="M532,322 L582,322" />
+      <path data-step="7" d="M906,322 L944,322" />
+    </svg>
+    <div class="pvb pv-q" data-step="1"><i>1</i><span class="pvl">question</span><div class="pvbub">What did you think of Yuan Shikai?</div></div>
+    <div class="pvb pv-e" data-step="2"><i>2</i><span class="pvl">embed: the question becomes a vector</span><div class="vbars" id="pv-bars"></div><div class="vnums">[0.12, −0.40, 0.33, … ] 2,560 numbers</div></div>
+    <div class="pvb pv-db" data-step="3"><i>3</i><span class="pvl">search 2,158 passage vectors</span><div class="dbgrid" id="pv-db"></div></div>
+    <div class="pvb pv-top" data-step="4"><i>4</i><span class="pvl">top 5 passages</span><div id="pv-top"></div></div>
+    <div class="pvb pv-p" data-step="5"><i>5</i><span class="pvl">build the prompt</span>
+      <div class="doc"><div class="dl ins">instructions</div><div class="dl per">persona</div><div class="dl psg">[1] [2] [3] [4] [5] passages</div><div class="dl qq">question</div></div></div>
+    <div class="pvb pv-llm" data-step="6"><i>6</i><span class="pvl">generate</span><div class="llm" id="pv-llm">LLM</div></div>
+    <div class="pvb pv-ans" data-step="6"><span class="pvl">answer with footnotes</span><div class="pvans" id="pv-ans"></div></div>
+    <div class="pvb pv-chk" data-step="7"><i>7</i><span class="pvl">you check</span><div class="chkc"><span class="mag">🔍</span><b>[3]</b><p>“In 1915 Yuan Shikai declared himself emperor …”</p><em>✓ supported</em></div></div>
+  </div>
+  <div class="callout key bi" data-step="8"><span class="en">Steps 2 to 4 are last week’s vectors and cosine similarity. Step 7 is our job as historians.</span></div>
+</section>
+
+<!-- ─────────── The actual prompt -->
+<section class="slide" id="s-prompt" data-sec="rag">
+  <h2 class="bi"><span class="en">What the model actually reads</span></h2>
+  <div class="prm">
+    <div class="pblk sys" data-step="1"><span class="ptag">system prompt</span><span class="pers">Tone and Voice: Speak as an earnest, optimistic revolutionary and nation-builder …</span><br>You are Sun Yat-sen. Answer as Sun Yat-sen would: in their voice, with their opinions and knowledge, drawing on the passages from their writings when they are relevant. … If the passages do not cover the question, answer in character from general knowledge of Sun Yat-sen’s life and views, <b>without inventing quotations</b>.</div>
+    <div class="pblk psg" data-step="2"><span class="ptag">user message</span>Passages from your writings that may be relevant:<br><span class="pz">[1] (孙中山全集.txt, part 1187) …“现在革命尚未成功，凡我同志，务须依照余所著建国方略、建国大纲、三民主义……继续努力，以求贯彻。”</span><br><span class="pz dim">[2] (Bergère, Sun Yat-sen.txt, part 212) … &nbsp; [3] … &nbsp; [4] … &nbsp; [5] …</span><br>When a sentence or paragraph of your answer draws on a passage, put its number in square brackets right after it, e.g. [2] or [1, 3].</div>
+    <div class="pblk qst" data-step="3"><span class="ptag">question</span>Why did the revolution of 1911 not succeed?</div>
+  </div>
+  <div class="callout key bi" data-step="4"><span class="en">The real HistFig template, with an illustrative example. The persona is an <b>interpretation</b> written by a person, and the model follows it as closely as the sources.</span></div>
+</section>
+
+<!-- ═══════════ 5. Retrieval -->
+<!-- ─────────── Your files -->
+<section class="slide" id="s-files" data-sec="retrieval">
+  <h2 class="bi"><span class="en">What happened to the .txt files you submitted</span></h2>
+  <div class="two flcols">
+    <div class="mockdocs" data-step="1">
+      <div class="mdh">Documents <span>Sun Yat-sen · illustrative</span></div>
+      <div class="md"><b>孙中山全集.txt</b><span>1,412 passages · 1,205,330 characters · $0.020</span></div>
+      <div class="md"><b>三民主义.txt</b><span>186 passages · 162,904 characters · $0.003</span></div>
+      <div class="md"><b>建国方略.txt</b><span>152 passages · 131,560 characters · $0.002</span></div>
+      <div class="md"><b>Bergère, Sun Yat-sen.txt</b><span>342 passages · 1,012,400 characters · $0.006</span></div>
+      <div class="md"><b>Kidnapped in London.txt</b><span>52 passages · 142,800 characters · $0.001</span></div>
+      <div class="md"><b>Wikipedia: Sun Yat-sen.txt</b><span>14 passages · 39,900 characters · $0.0002</span></div>
+      <div class="mdf">Vectors: qwen3-embedding-4b (2,560 dimensions) · total $0.03</div>
+    </div>
+    <div class="grow flsteps">
+      <div class="fs" data-step="1"><i>1</i><div><b>Split into passages</b><p>about 1,000 Chinese characters each, with a small overlap so that no idea is cut in half</p></div></div>
+      <div class="fs" data-step="2"><i>2</i><div><b>Turn each passage into a vector</b><p>2,560 numbers per passage, made by an embedding model</p></div></div>
+      <div class="fs" data-step="3"><i>3</i><div><b>Index the words</b><p>for exact keyword search</p></div></div></div>
+  </div>
+  <div class="callout key bi" data-step="4"><span class="en">Passage length and the embedding model decide what the chatbot can find later. OCR errors in your files travel along into the database.</span></div>
+</section>
+
+<!-- ─────────── Cosine similarity (interactive, from Week 9) -->
+<section class="slide" id="s-cos" data-sec="retrieval">
+  <h2 class="bi"><span class="en">Recall Week 9: cosine similarity (drag the purple tip)</span></h2>
+  <div class="two">
+    <svg class="plot" id="cos-plot" viewBox="0 0 560 480" data-step="1"></svg>
+    <div class="grow cosread" data-step="1">
+      <div class="big-num"><span>cos θ</span><b id="cos-val">0.77</b></div>
+      <svg class="plot" id="cos-curve" viewBox="0 0 500 170"></svg>
+      <div class="minirow"><span>θ = <b id="cos-th">40°</b></span><span>A · B = <b id="cos-dot">—</b></span><span>\(\lVert A\rVert\,\lVert B\rVert\) = <b id="cos-len">—</b></span></div>
+      <div class="swap cosnote">
+        <div class="bi sm" data-step="1" data-until="2"><span class="en">B points roughly along A. Orange is the <b>projection</b> of B onto A.</span></div>
+        <div class="bi sm" data-step="2" data-until="3"><span class="en">Perpendicular: the projection shrinks to a point, and cos = 0.</span></div>
+        <div class="bi sm" data-step="3" data-until="4"><span class="en">Opposite: the projection flips, and cos = −1.</span></div>
+        <div class="bi sm" data-step="4"><span class="en">Drag the purple tip. Changing the <u>length</u> leaves cos unchanged; only the <u>direction</u> matters.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Map (interactive) -->
+<section class="slide" id="s-map" data-sec="retrieval">
+  <h2 class="bi"><span class="en">Each passage is a point, and so is the question</span></h2>
+  <div class="two maptwo">
+    <svg class="plot" id="map-plot" viewBox="0 0 560 470"></svg>
+    <div class="grow mapright">
+      <div class="mapq" id="map-q"></div>
+      <div id="map-hits" class="maphits"></div>
+      <div class="keys"><kbd>Q</kbd> next question · <kbd>A</kbd> previous question</div>
+    </div>
+  </div>
+  <div class="callout key bi" data-step="1"><span class="en">Each dot is one passage, coloured by its file. The question becomes a vector too (★), and the five nearest passages (1–5) are sent to the model. Illustrative data.</span></div>
+</section>
+
+<!-- ─────────── Keywords vs meaning -->
+<section class="slide" id="s-kw" data-sec="retrieval">
+  <h2 class="bi"><span class="en">Searching by keywords: count the shared words</span></h2>
+  <div class="kwq" data-step="1"><span class="kwlab">query</span><span class="kwt" style="--w:.93">Chen <small>3.9</small></span><span class="kwt" style="--w:1">Jiongming <small>4.2</small></span><span class="kwt" style="--w:.5">revolt <small>2.1</small></span><span class="kwt" style="--w:.45">1922 <small>1.9</small></span><span class="kwnote">rare words weigh more</span></div>
+  <div class="kwps" id="kw-ps"></div>
+  <div class="kwfail" data-step="4">
+    <span class="kwlab">query</span><span class="cc">一</span><span class="cc bad">盤</span><span class="cc">散</span><span class="cc">沙</span>
+    <span class="kwvs">≠</span>
+    <span class="kwlab">corpus</span><span class="cc">一</span><span class="cc bad">盘</span><span class="cc">散</span><span class="cc">沙</span>
+    <span class="kwfx">Traditional and simplified forms are different strings, so the exact search finds nothing. The vector search still finds the lecture on nationalism.</span>
+  </div>
+  <div class="callout key bi" data-step="5"><span class="en">Keyword search (BM25) is exact: it finds names that vectors blur, and misses variants that vectors catch.</span></div>
+</section>
+
+<!-- ─────────── Reciprocal rank fusion -->
+<section class="slide" id="s-rrf" data-sec="retrieval">
+  <h2 class="bi"><span class="en">Two rankings, one list: reciprocal rank fusion</span></h2>
+  <div class="rrfv">
+    <svg class="rrf-lines" id="rrf-lines" viewBox="0 0 1108 380"></svg>
+    <div class="rcol" id="rrf-v"><div class="rh">by meaning (vectors)</div></div>
+    <div class="rcol merged" id="rrf-m"><div class="rh">merged</div></div>
+    <div class="rcol" id="rrf-b"><div class="rh">by keywords (BM25)</div></div>
+  </div>
+  <div class="two rrftwo">
+    <div class="eq rrf" data-step="3">\(\text{score}(p)=\dfrac{1}{60+\text{rank}_{\text{vector}}(p)}+\dfrac{1}{60+\text{rank}_{\text{BM25}}(p)}\)</div>
+    <div class="grow"><div class="bi sm" data-step="3"><span class="en">A passage found by both searches collects two shares and rises; one found by a single search keeps only one.</span></div></div>
+  </div>
+</section>
+
+<!-- ═══════════ 6. HistFig and the pilot -->
+<!-- ─────────── HistFig screenshot -->
+<section class="slide" id="s-histfig" data-sec="pilot">
+  <h2 class="bi"><span class="en">HistFig: the application we use today</span></h2>
+  <div class="two hfcols">
+    <div class="mockchat" data-step="1">
+      <div class="mch"><b>HistFig</b><span>Sun Yat-sen · 1866–1925</span><em>Export ▾</em><em>⚙ Options</em></div>
+      <div class="mcq">你如何看待袁世凱？</div>
+      <div class="mca">袁世凱？民國元年，我辭去臨時大總統，讓位於他，是為了南北統一，免得生靈塗炭<sup>1</sup>。他也曾通電贊成共和。誰知不過兩年，宋教仁遇刺，國會被解散<sup>4</sup>，他竟要做皇帝<sup>3</sup>。所以我說，革命尚未成功<sup>2</sup>。中國的病，不只在一個袁世凱，而在國人如一盤散沙，民族主義尚未喚起<sup>5</sup>。</div>
+      <div class="mcs">5 sources</div>
+    </div>
+    <div class="grow hfnotes">
+      <div class="hf" data-step="2"><i>2</i><span>Numbers in the answer point to passages; click one to read it.</span></div>
+      <div class="hf" data-step="3"><i>⚙</i><span><b>Options</b>: temperature, number of passages, documents on or off.</span></div>
+      <div class="hf" data-step="4"><i>⇩</i><span><b>Export</b> saves the conversation with all passages.</span></div>
+      <div class="hf q" data-step="5"><span>The sentence about Yuan supporting the republic has no footnote. Does any passage say it?</span></div></div>
+  </div>
+</section>
+
+<!-- ─────────── Pilot: what went wrong -->
+<section class="slide" id="s-pilot2" data-sec="pilot">
+  <h2 class="bi"><span class="en">Last year’s pilot: what went wrong</span></h2>
+  <div class="two pil2">
+    <figure class="doshot" data-step="1"><img src="assets/digital-orientalist.jpg" alt="The Digital Orientalist: Voices from the Past, Retrieval-Augmented Dialogues with Chinese Historical Figures"><figcaption>Kurzynski and Du, “Voices from the Past”, <i>The Digital Orientalist</i>, 26 December 2025</figcaption></figure>
+    <div class="grow pilg">
+      <div class="plc bad" data-step="2"><b>Stereotypes</b><p>A “perpetually cynical” Lu Xun; a Mao who was too consistent.</p></div>
+      <div class="plc bad" data-step="2"><b>Anachronism</b><p>Qiu Jin talking about “gender equality laws”.</p></div>
+      <div class="plc bad" data-step="3"><b>Leading questions</b><p>“Capitalist roaders” (<span class="zhs">走資派</span>) pushed Mao to an extreme line.</p></div>
+      <div class="plc bad" data-step="3"><b>Corpus gaps</b><p>Without the letters, Gu Hongming could only guess at his friendship with Cai Yuanpei.</p></div>
+    </div>
+  </div>
+  <div class="callout key bi" data-step="4"><span class="en">The bias was also on our side: students believed answers that matched their expectations.</span></div>
+</section>
+
+<!-- ─────────── Who owns the prompt -->
+<section class="slide" id="s-owner" data-sec="pilot">
+  <h2 class="bi"><span class="en">Who speaks when a chatbot speaks as Sun Yat-sen?</span></h2>
+  <div class="persona" data-step="1"><span class="ptag">a persona prompt (illustrative)</span>“Speak as an earnest, optimistic revolutionary and nation-builder. Be visionary and patient, and return often to the Three Principles of the People and to the unfinished revolution.”</div>
+  <div class="dq own">
+    <div data-step="2"><i>1</i><span>Whose Sun Yat-sen is this? Taipei honours him as Father of the Nation (國父), Beijing as Forerunner of the Revolution (革命先行者). Which one does this prompt produce?</span></div>
+    <div data-step="3"><i>2</i><span>Is a chat with a figure a good way to read sources, or does “talking to your sources” serve researchers better than persona play?</span></div>
+  </div>
+</section>
+
+<!-- ═══════════ 7. In class -->
+<!-- ─────────── Task -->
+<section class="slide" id="s-task" data-sec="inclass">
+  <h2 class="bi"><span class="en">In class: question your figure, then check the answers</span></h2>
+  <div class="tkgrid">
+    <div class="tq" data-step="1"><b>A · Facts you can verify</b><p>a date, an event or a person that you know is in your texts</p></div>
+    <div class="tq" data-step="2"><b>B · Interpretation</b><p>the figure’s view of an event your sources discuss</p></div>
+    <div class="tq" data-step="3"><b>C · Outside the corpus</b><p>events after the figure’s death: does it admit what it cannot know?</p></div>
+    <div class="tq" data-step="4"><b>D · Leading questions</b><p>a false premise or loaded words: does it go along?</p></div>
+  </div>
+  <div class="tkrules" data-step="5"><span>a few questions of <b>each kind</b></span><span>try one with <b>documents off</b></span><span><b>Export</b> every conversation</span></div>
+  <div class="callout key bi" data-step="6"><span class="en">Open HistFig at <b>histfig.qhchina.org</b> and choose your group’s figure.</span></div>
+</section>
+
+<!-- ─────────── How to check -->
+<section class="slide" id="s-check" data-sec="inclass">
+  <h2 class="bi"><span class="en">How to check an answer</span></h2>
+  <div class="chk">
+    <span data-step="1">pick one claim</span><i data-step="2">→</i><span data-step="2">open its footnote</span><i data-step="3">→</i><span data-step="3">does the passage say it?</span><i data-step="4">→</i><span data-step="4">no footnote? verify with the sources</span>
+  </div>
+  <div class="verdicts" data-step="5"><span class="ok">supported</span><span class="part">partly supported</span><span class="un">not in the passage</span><span class="bad">contradicted</span><span class="bad">invented</span></div>
+  <div class="bi sm chkwhere" data-step="6"><span class="en">When something is wrong, ask where it went wrong: in your <b>sources</b> (missing text, OCR errors), in the <b>retrieval</b> (the right passage was not found), or in the <b>generation</b> (the model invented or twisted it).</span></div>
+  <div class="callout key bi" data-step="7"><span class="en">Keep a simple log of questions, claims and verdicts. It is the evidence for your essay.</span></div>
+</section>
+
+<!-- ═══════════ 8. Essay and summary -->
+<!-- ─────────── Essay -->
+<section class="slide" id="s-essay" data-sec="essay">
+  <h2 class="bi"><span class="en">Assignment 2, part 2: group reflection essay</span></h2>
+  <div class="fmt" data-step="1"><span>📅 due Tue 24 Nov, 9:00 am</span><span>Moodle</span><span>one essay per group</span><span>1,500–2,000 words</span><span>English</span></div>
+  <div class="propgrid">
+    <div class="prop" data-step="2"><b>1 · Figure and corpus</b><p>What is in your files, what is missing, and how clean is the text?</p></div>
+    <div class="prop" data-step="2"><b>2 · Method</b><p>Which questions did you ask, and which settings did you change?</p></div>
+    <div class="prop wide" data-step="3"><b>3 · Evidence</b><p>At least five exchanges, each quoted with the passages behind it and your verdict. Include one success and one clear failure.</p></div>
+    <div class="prop wide" data-step="4"><b>4 · Analysis</b><p>Where did the errors arise: sources, retrieval or generation? What can RAG do for historical research? Engage Underwood et al. or Poibeau.</p></div>
+  </div>
+  <div class="fmt attach" data-step="5"><span>+ exported conversations (.md)</span><span>+ error log (.csv or .xlsx)</span><span>+ AI-USE.md</span></div>
+</section>
+
+<!-- ─────────── Summary -->
+<section class="slide" id="s-sum" data-sec="essay">
+  <h2 class="bi"><span class="en">Summary</span></h2>
+  <div class="recap">
+    <div class="rrow" data-step="1"><i>1</i><div class="bi sm"><span class="en">A language model predicts the <b>next token</b>; temperature decides how adventurous each choice is.</span></div></div>
+    <div class="rrow" data-step="2"><i>2</i><div class="bi sm"><span class="en">Its answers are fluent, modern, and come <b>without sources</b>.</span></div></div>
+    <div class="rrow" data-step="3"><i>3</i><div class="bi sm"><span class="en"><b>RAG</b> retrieves passages from our own texts and puts them in front of the model.</span></div></div>
+    <div class="rrow" data-step="4"><i>4</i><div class="bi sm"><span class="en">The footnotes make answers <b>checkable</b>, and checking them is our job.</span></div></div>
+  </div>
+  <div class="callout key bi" data-step="5"><span class="en">Next week: databases and structured historical data. Final project proposal due Friday 20 Nov, 9:00 am.</span></div>
+</section>
+
+<div id="side"></div>
+<div id="bar"></div>
+<div id="num"></div>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="rag-data.js"></script>
+<script src="slides.js"></script>
+<script src="deck.js"></script>
+</body>
+</html>
