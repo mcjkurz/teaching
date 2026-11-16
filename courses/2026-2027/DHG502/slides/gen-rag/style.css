@@ -1846,3 +1846,48 @@ blockquote { margin: 0; font-family: var(--serif), var(--cjk-serif); }
 .pil2 .pilg { grid-template-columns: 1fr 1fr; gap: 14px; }
 .pil2 .plc { padding: 12px 18px; } .pil2 .plc b { font-size: 27px; } .pil2 .plc p { font-size: 21px; }
 #s-pilot2 .callout { margin-top: 16px; }
+
+/* ---- HistFig setup slides ---- */
+.hfrepo { display: inline-block; font-family: "SF Mono", Menlo, monospace; font-size: 22px; background: #2b2620; color: #efe7da; border-radius: 6px; padding: 6px 14px; margin: 2px 0 14px; }
+.hfrun { gap: 22px; }
+.card.run { padding: 14px 22px; }
+.runh { font-family: var(--serif); font-size: 29px; font-weight: 600; }
+.runp { font-size: 20px; margin: 6px 0; }
+pre.term { margin: 8px 0; background: #2b2620; color: #efe7da; border-radius: 6px; padding: 10px 14px; font-family: "SF Mono", Menlo, monospace; font-size: 18px; line-height: 1.5; white-space: pre; }
+pre.term .c { color: #9c907c; }
+.runl { margin: 6px 0 0; padding-left: 26px; font-size: 21px; line-height: 1.45; }
+.runl li { margin-bottom: 8px; }
+.runl code, .callout code { font-family: "SF Mono", Menlo, monospace; font-size: .9em; background: #f0e9dc; border-radius: 4px; padding: 1px 6px; }
+#s-hf1 .callout { margin-top: 14px; }
+.hfset { gap: 30px; align-items: flex-start; margin-top: 4px; }
+.mockset { width: 540px; flex: none; background: #fff; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; box-shadow: 0 4px 18px rgba(40,30,20,.12); }
+.msh { display: flex; gap: 18px; align-items: baseline; padding: 10px 18px; border-bottom: 1px solid var(--line); }
+.msh b { font-family: var(--serif); font-size: 24px; } .msh span { font-size: 16px; color: var(--mute); } .msh span.on { color: var(--ink); border-bottom: 2px solid #8a5a2b; }
+.msb { background: #f7f3ec; padding: 12px 16px; }
+.msg { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 8px 14px; margin-bottom: 10px; }
+.msg > b { font-family: var(--serif); font-size: 20px; display: block; margin-bottom: 4px; }
+.msr { display: flex; align-items: center; gap: 12px; margin: 5px 0; font-size: 16px; }
+.msr span { width: 80px; color: var(--mute); }
+.msr i { flex: 1; font-style: normal; border: 1px solid #ddd3c2; border-radius: 6px; padding: 4px 10px; font-family: "SF Mono", Menlo, monospace; font-size: 15px; }
+.msbtn { display: flex; gap: 10px; }
+.msbtn em { font-style: normal; background: #8a5a2b; color: #fff; border-radius: 6px; padding: 6px 14px; font-size: 16px; }
+.msbtn em.sec { background: #fff; color: #8a5a2b; border: 1px solid #8a5a2b; }
+#s-hf2 .fs b { font-size: 27px; } #s-hf2 .fs p { font-size: 22px; }
+.hfflow { display: flex; align-items: stretch; gap: 10px; margin-top: 18px; }
+.hfs { flex: 1; position: relative; background: #fffdf8; border: 1px solid var(--line); border-top: 4px solid var(--seal); border-radius: 8px; padding: 18px 16px 14px; }
+.hfs > i { position: absolute; top: -16px; left: 12px; width: 30px; height: 30px; border-radius: 50%; background: var(--seal); color: #fff; font-style: normal; font-weight: 600; display: grid; place-items: center; font-size: 16px; }
+.hfs > b { display: block; font-family: var(--serif); font-size: 25px; margin-bottom: 8px; }
+.hfs p { font-size: 19px; line-height: 1.38; margin: 6px 0 0; }
+.hfs .opt { display: block; font-size: 15px; color: var(--mute); margin-top: 8px; }
+.drop { border: 2px dashed #cdbfa8; border-radius: 8px; padding: 14px 8px; text-align: center; font-size: 16px; color: var(--mute); }
+.rdy { display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; font-size: 16px; }
+.rdy em { font-style: normal; font-size: 13px; color: #3f8a55; background: #e3f1e6; border-radius: 999px; padding: 1px 9px; }
+.hfa { display: flex; align-items: center; font-size: 30px; color: var(--seal); }
+#s-hf3 .callout { margin-top: 30px; }
+pre.term { font-size: 16px; }
+#s-hf2 .fs p b { font-family: inherit; font-size: inherit; color: var(--ink); font-weight: 600; }
+#s-hf3 .hfflow { margin-top: 34px; } #s-hf3 .hfs { min-height: 300px; padding: 26px 18px 18px; }
+#s-hf3 .hfs > b { font-size: 29px; margin-bottom: 14px; } #s-hf3 .hfs p { font-size: 23px; } #s-hf3 .hfs .opt { font-size: 18px; }
+#s-hf3 .drop { font-size: 19px; padding: 22px 8px; } #s-hf3 .rdy { font-size: 19px; padding: 10px 12px; } #s-hf3 .rdy em { font-size: 15px; }
+#s-hf3 .callout { margin-top: 34px; } #s-hf3 .callout .en { font-size: 24px; }
+#s-hf1 .runl { font-size: 22px; } #s-hf1 .runp { font-size: 21px; } #s-hf1 pre.term { font-size: 17px; }

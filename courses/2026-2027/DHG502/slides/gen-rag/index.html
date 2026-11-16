@@ -352,6 +352,77 @@
 </section>
 
 <!-- ═══════════ 7. In class -->
+<!-- ─────────── HistFig setup 1: start it -->
+<section class="slide" id="s-hf1" data-sec="inclass">
+  <h2 class="bi"><span class="en">Start HistFig: on your laptop or in a codespace</span></h2>
+  <div class="hfrepo" data-step="1">github.com/mcjkurz/histfig</div>
+  <div class="two cols2 hfrun">
+    <article class="card run" data-step="2">
+      <div class="runh">💻 On your laptop</div>
+      <p class="runp">Python 3.11+ and <b>uv</b> (see the README). In a terminal:</p>
+      <pre class="term"><span class="c"># once</span>
+git clone https://github.com/mcjkurz/histfig.git
+cd histfig
+uv sync
+<span class="c"># every time</span>
+uv run histfig</pre>
+      <p class="runp">The browser opens by itself.</p>
+    </article>
+    <article class="card run" data-step="3">
+      <div class="runh">☁️ In GitHub Codespaces</div>
+      <p class="runp">Nothing to install; it runs in your browser.</p>
+      <ol class="runl">
+        <li>On the repository page: <b>Code</b> → <b>Codespaces</b> → <b>Create codespace on main</b></li>
+        <li>Wait until the setup in the terminal has finished</li>
+        <li>Type <code>uv run histfig</code></li>
+        <li>Click <b>Open in Browser</b> (or the <b>Ports</b> tab → port 8000)</li>
+      </ol>
+    </article>
+  </div>
+  <div class="callout key bi" data-step="4"><span class="en">Stop it with <b>Ctrl+C</b> in the terminal, and start it again with <code>uv run histfig</code>. Your figures and chats are kept.</span></div>
+</section>
+
+<!-- ─────────── HistFig setup 2: models -->
+<section class="slide" id="s-hf2" data-sec="inclass">
+  <h2 class="bi"><span class="en">First run: choose the models on the Settings page</span></h2>
+  <div class="two hfset">
+    <div class="mockset" data-step="1">
+      <div class="msh"><b>HistFig</b><span>Figures</span><span class="on">Settings</span></div>
+      <div class="msb">
+        <div class="msg"><b>Chat model</b>
+          <div class="msr"><span>Service</span><i>OpenRouter</i></div>
+          <div class="msr"><span>API key</span><i>••••••••••••••••</i></div>
+          <div class="msr"><span>Model</span><i>Browse models…</i></div></div>
+        <div class="msg"><b>Embedding model</b>
+          <div class="msr"><span>Service</span><i>OpenRouter</i></div>
+          <div class="msr"><span>Model</span><i>qwen/qwen3-embedding-4b</i></div></div>
+        <div class="msbtn"><em>Save changes</em><em class="sec">Test connections</em></div>
+      </div>
+    </div>
+    <div class="grow hfsteps">
+      <div class="fs" data-step="1"><i>1</i><div><b>Chat model</b><p>the LLM that writes the answers: paste your API key, then pick a model with <b>Browse models…</b></p></div></div>
+      <div class="fs" data-step="2"><i>2</i><div><b>Embedding model</b><p>turns passages and questions into vectors</p></div></div>
+      <div class="fs" data-step="3"><i>3</i><div><b>Save changes</b>, then <b>Test connections</b><p>both should report success</p></div></div>
+    </div>
+  </div>
+  <div class="callout key bi" data-step="4"><span class="en">Keep your API key private: never put it in a repository, a screenshot, or a message to others.</span></div>
+</section>
+
+<!-- ─────────── HistFig setup 3: figure and texts -->
+<section class="slide" id="s-hf3" data-sec="inclass">
+  <h2 class="bi"><span class="en">Create your figure from your group’s texts</span></h2>
+  <div class="hfflow">
+    <div class="hfs" data-step="1"><i>1</i><b>+ New figure</b><p>name, years, a portrait, a short description</p><span class="opt">persona instructions are optional</span></div>
+    <div class="hfa" data-step="2">→</div>
+    <div class="hfs" data-step="2"><i>2</i><b>Upload your texts</b><div class="drop">Drop files here or click to choose<br><small>txt · md · pdf · docx</small></div></div>
+    <div class="hfa" data-step="3">→</div>
+    <div class="hfs" data-step="3"><i>3</i><b>Wait for “ready”</b><div class="rdy"><span>texts.txt</span><em>ready</em></div><p>passages are cut and embedded</p></div>
+    <div class="hfa" data-step="4">→</div>
+    <div class="hfs" data-step="4"><i>4</i><b>Chat</b><p><b>+ New conversation</b>, and ask away. <b>⚙ Options</b> and <b>Export ▾</b> sit above the chat.</p></div>
+  </div>
+  <div class="callout key bi" data-step="5"><span class="en">In a codespace, use <b>Settings → Download backup</b> before you leave. GitHub deletes codespaces that stay unused for about 30 days.</span></div>
+</section>
+
 <!-- ─────────── Task -->
 <section class="slide" id="s-task" data-sec="inclass">
   <h2 class="bi"><span class="en">In class: question your figure, then check the answers</span></h2>
@@ -362,7 +433,7 @@
     <div class="tq" data-step="4"><b>D · Leading questions</b><p>a false premise or loaded words: does it go along?</p></div>
   </div>
   <div class="tkrules" data-step="5"><span>a few questions of <b>each kind</b></span><span>try one with <b>documents off</b></span><span><b>Export</b> every conversation</span></div>
-  <div class="callout key bi" data-step="6"><span class="en">Open HistFig at <b>histfig.qhchina.org</b> and choose your group’s figure.</span></div>
+  <div class="callout key bi" data-step="6"><span class="en">Use the figure you built from your group’s texts, and start a new conversation for each kind of question.</span></div>
 </section>
 
 <!-- ─────────── How to check -->
