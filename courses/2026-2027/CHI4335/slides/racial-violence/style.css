@@ -645,3 +645,47 @@ ul.l.birth li { font-size: 20px; line-height: 1.55; margin-bottom: 12px; padding
 ul.l.pts li { font-size: 25px; line-height: 1.6; margin-bottom: 14px; }
 .histimg { width: 430px; }
 .histimg .pair img { max-height: 130px; }
+
+/* revised deck (Nov 17): slave trade, writers gallery, Second World War, Hughes poem */
+.tradeimg { flex: none; width: 500px; }
+.tradeimg .fig img { max-height: 330px; }
+.tradeimg figcaption { text-align: left; }
+.gal5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 22px; margin-top: -6px; }
+.gal5 .it { text-align: center; }
+.gal5 .it img { height: 270px; width: 100%; object-fit: cover; object-position: top; display: block; margin: 0 auto 10px; box-shadow: 0 3px 12px rgba(0,0,0,.22); }
+.gal5 .it b { display: block; font-size: 20px; line-height: 1.3; }
+.gal5 .it span { display: block; font-size: 16px; color: var(--mute); line-height: 1.45; margin-top: 4px; }
+.ww2img { flex: none; width: 400px; display: flex; gap: 12px; align-items: flex-start; }
+.ww2img .fig:first-child { width: 250px; }
+.ww2img .fig:last-child { width: 138px; }
+.ww2img .fig img { max-height: 320px; width: 100%; }
+.ww2img figcaption { text-align: left; font-size: 13px; }
+#s-hughes .poem { font-size: 23px; line-height: 1.55; }
+#s-hughes .poem mark { font-weight: 600; }
+.ww2img { width: 470px; }
+.ww2img .fig:first-child { width: 300px; }
+.ww2img .fig:last-child { width: 158px; }
+.ww2img .fig img { max-height: 380px; }
+.gal5 .it img { height: 310px; }
+#s-hughes .poem { font-size: 22px; line-height: 1.5; }
+/* lynching script as a numbered flow */
+ol.lscript { list-style: none; counter-reset: f; margin: 0; padding: 0; }
+ol.lscript li { counter-increment: f; position: relative; font-size: 24px; line-height: 1.45; padding: 7px 0 7px 52px; border-bottom: 1px solid var(--line); }
+ol.lscript li::before { content: counter(f); position: absolute; left: 0; top: 7px; width: 34px; height: 34px; border-radius: 50%; background: var(--ink); color: #fff; font-size: 18px; line-height: 34px; text-align: center; }
+ol.lscript li.k { color: var(--acc); font-weight: 600; }
+ol.lscript li.k::before { background: var(--acc); }
+ol.lscript li { display: block; width: auto; writing-mode: horizontal-tb; }
+#s-trade ul.pts li { margin-bottom: 8px; }
+
+/* WW2 slide: the Woodard portrait overlaps the Tuskegee photo, leaving more room for the bullets */
+.ww2img { width: 400px; position: relative; display: block; height: 480px; }
+.ww2img .fig:first-child { width: 290px; }
+.ww2img .fig:first-child figcaption { width: 200px; font-size: 14px; }
+.ww2img .fig.wd { position: absolute; left: 215px; top: 150px; width: 180px; }
+.ww2img .fig.wd img { border: 4px solid #fff; box-shadow: 0 4px 18px rgba(0,0,0,.28); }
+.ww2img .fig.wd figcaption { font-size: 14px; }
+/* larger bullet text throughout */
+ul.l.pts li { font-size: 27px; }
+ul.l.small li { font-size: 26px; }
+#s-tutorial ul.l.small li { font-size: 23px; }
+ul.l.birth li { font-size: 22px; }

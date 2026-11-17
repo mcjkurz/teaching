@@ -1,10 +1,10 @@
 /* Slide-specific logic (loaded before deck.js). */
 window.HOOKS = {};
 window.SECTIONS = [
-  { id: 'hist', zh: '歷史背景', en: 'From emancipation to Jim Crow' },
+  { id: 'hist', zh: '歷史背景', en: 'From the slave trade to the Second World War' },
   { id: 'hale', zh: '私刑作為景觀', en: 'Lynching as spectacle (Hale)' },
-  { id: 'view', zh: '觀看與看客', en: 'Looking and onlookers' },
-  { id: 'fanon', zh: 'Fanon：被看見的身體', en: 'Fanon: the body that is seen' },
+  { id: 'view', zh: '觀看與看客', en: 'Regarding the pain of others (Sontag)' },
+  { id: 'fanon', zh: 'Fanon：黑皮膚，白面具', en: 'Fanon: Black Skin, White Masks' },
   { id: 'wrap', zh: '導修', en: 'Tutorial' }
 ];
 
