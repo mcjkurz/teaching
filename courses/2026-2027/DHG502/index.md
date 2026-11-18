@@ -340,7 +340,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           </ul>
         </div>
       </td>
-      <td class="notes"></td>
+      <td class="notes"><a href="slides/heritage/">Slides</a></td>
     </tr>
     <tr class="presentation">
       <td class="topic">Presentation</td>
@@ -370,7 +370,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           </ul>
         </div>
       </td>
-      <td class="notes"><a href="notes/week-09/">Notes</a></td>
+      <td class="notes"><a href="notes/week-09/">Notes</a><br><a href="slides/word-meaning/">Slides</a></td>
     </tr>
   </tbody>
   <tbody class="due">
