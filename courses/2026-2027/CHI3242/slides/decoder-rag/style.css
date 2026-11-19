@@ -2380,3 +2380,8 @@ pre.term { font-size: 15px !important; }
 #s-sim .simc { font-size: 16px; }
 .simx { top: 344px; }
 .simx span { font-size: 17px; }
+#s-title .title-pic { right: 90px; top: 70px; }
+#s-title .title-pic img { width: 380px; height: 480px; }
+#s-title .big-en { font-size: 56px; }
+#s-title .title-pic { right: 80px; top: 80px; }
+#s-title .title-pic img { width: 350px; height: 460px; }
