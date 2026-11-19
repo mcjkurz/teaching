@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>解碼器與檢索增強生成 Decoders and RAG · CHI3242</title>
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+
+<!-- ─────────── Title -->
+<section class="slide full title-slide" id="s-title">
+  <div class="week bi sm"><span class="zh">第十二週 · 解碼器與大型語言模型</span><span class="en">Week 12 · Decoders and large language models</span></div>
+  <div class="big-zh">解碼器與檢索</div>
+  <div class="big-en">Decoders and Retrieval</div>
+  <div class="rule"></div>
+  <div class="quote bi" data-step="1">
+    <span class="zh">語言模型能用林黛玉或魯迅的口吻說話嗎？我們又怎樣檢查它說的話？</span>
+    <span class="en">Can a language model speak in the voice of Lin Daiyu or Lu Xun? And how would a reader check what it says?</span>
+  </div>
+  <figure class="title-pic"><img src="assets/fig-daiyu.jpg" alt="Lin Daiyu, from Honglou meng tuyong"><figcaption>林黛玉<span>《紅樓夢圖詠》</span></figcaption></figure>
+  <div class="hint">CHI3242 文本挖掘 Text Mining for Chinese Humanities &nbsp;·&nbsp; <kbd>←</kbd> <kbd>→</kbd> navigate &nbsp;·&nbsp; <kbd>1</kbd>–<kbd>8</kbd> sections &nbsp;·&nbsp; <kbd>G</kbd> go to slide &nbsp;·&nbsp; <kbd>L</kbd> laser pointer &nbsp;·&nbsp; <kbd>F</kbd> fullscreen</div>
+</section>
+
+<!-- ═══════════ 1. Decoders -->
+<!-- ─────────── BERT vs GPT -->
+<section class="slide" id="s-bertgpt" data-sec="lm">
+  <h2 class="bi"><span class="zh">從 BERT 到 GPT：填空與續寫</span><span class="en">From BERT to GPT: filling a gap versus continuing a text</span></h2>
+  <div class="two cols2 bg2">
+    <article class="card bgc" data-step="1">
+      <div class="bgh">BERT <span>編碼器 encoder · 第 11 週</span></div>
+      <div class="bgtoks"><span>寒</span><span>塘</span><span>渡</span><span class="mask">[MASK]</span><span>影</span></div>
+      <div class="bgarrows">⟶ 左右兩邊都看 ⟵</div>
+      <p>BERT 從<b>兩邊</b>的字猜出被遮住的字，並給每一次出現一個上下文向量。</p>
+    </article>
+    <article class="card bgc gpt" data-step="2">
+      <div class="bgh">GPT <span>解碼器 decoder · 今天</span></div>
+      <div class="bgtoks"><span>寒</span><span>塘</span><span>渡</span><span>鶴</span><span>影</span><span class="next">，</span><i class="nextq">?</i></div>
+      <div class="bgarrows">只看左邊 ⟶ 一次加一個詞元</div>
+      <p>模型從前面所有的字猜<b>下一個</b>詞元，再把自己的輸出接上去，重複這一步。重複的過程就叫「生成」。</p>
+    </article>
+  </div>
+  <div class="callout key bi" data-step="3"><span class="zh">GPT ＝ Generative Pre-trained Transformer（生成式預訓練變換器）。ChatGPT、DeepSeek、通義千問（Qwen）、Claude、GLM 都屬於這一類大型語言模型（LLM，large language model）。</span><span class="en">ChatGPT, DeepSeek, Qwen, Claude and GLM are all large language models of this kind.</span></div>
+</section>
+
+<!-- ─────────── The Transformer: encoder and decoder -->
+<section class="slide" id="s-tf" data-sec="lm">
+  <h2 class="bi"><span class="zh">變換器的兩半：編碼器與解碼器</span><span class="en">The two halves of the Transformer: encoder and decoder</span></h2>
+  <div class="tfl">
+    <div class="tfn tf-e" data-step="1"><i>左</i><div><b>編碼器 encoder ＝ BERT</b><p>第 11 週：每個字看左右兩邊，輸出上下文向量。</p></div></div>
+    <div class="tfn tf-d" data-step="2"><i>右</i><div><b>解碼器 decoder ＝ GPT</b><p>今天：一次生成一個詞元。GPT 只用右半，所以也沒有中間那個「看編碼器」的注意力層。</p></div></div>
+    <div class="tfn" data-step="3"><i>①</i><div><b>Masked Multi-Head Attention</b><p>遮罩注意力：只能往左看（下一張）。</p></div></div>
+    <div class="tfn" data-step="4"><i>②</i><div><b>Linear ＋ Softmax</b><p>Linear 就是反嵌入矩陣 \(W_U\)；softmax 把分數變成機率。</p></div></div>
+  </div>
+  <figure class="tf-fig">
+    <div class="tf-wrap"><img src="assets/transformer.png" alt="The Transformer architecture: an encoder on the left and a decoder on the right">
+      <div class="tf-box tf-e" data-step="1"></div><div class="tf-tag tf-e" data-step="1">編碼器<br><b>BERT</b></div>
+      <div class="tf-box tf-d" data-step="2"></div><div class="tf-tag tf-d" data-step="2">解碼器<br><b>GPT</b></div>
+      <div class="tf-hi mask" data-step="3"><i>①</i></div>
+      <div class="tf-hi head" data-step="4"><i>②</i></div>
+    </div>
+    <figcaption>Vaswani et al., “Attention Is All You Need” (2017), Fig. 1</figcaption>
+  </figure>
+</section>
+
+<!-- ─────────── Causal mask -->
+<section class="slide" id="s-mask" data-sec="lm">
+  <h2 class="bi"><span class="zh">解碼器的注意力：只能往左看</span><span class="en">Attention in a decoder: every token looks only to its left</span></h2>
+  <div class="mk">
+    <div class="mkg" data-step="1"><div class="mkh">BERT：每個字看所有的字</div><div class="mkgrid" id="mk-bert"></div></div>
+    <div class="mkg" data-step="2"><div class="mkh">GPT：看不見右邊（未來）</div><div class="mkgrid" id="mk-gpt"></div></div>
+    <div class="mkr">
+      <div class="bi xs" data-step="2"><span class="zh">每一行是一個字在「看」：深色 ＝ 可以注意，灰色 ＝ 被遮住。</span><span class="en">Each row is one token looking at the others; grey cells are masked.</span></div>
+      <div class="mktrain" data-step="3">
+        <div class="mkth">訓練時，一句話就是四道練習題：</div>
+        <div><span>冷</span><i>→</i><b>月</b></div>
+        <div><span>冷月</span><i>→</i><b>葬</b></div>
+        <div><span>冷月葬</span><i>→</i><b>花</b></div>
+        <div><span>冷月葬花</span><i>→</i><b>魂</b></div>
+      </div>
+    </div>
+  </div>
+  <div class="callout key bi xs" data-step="4"><span class="zh">遮罩（causal mask）的做法：把 \(QK^{\top}\) 右上角的分數設為 \(-\infty\)。因為 \(e^{-\infty}=0\)，softmax 之後這些權重都是 0，模型就不會「偷看答案」。</span><span class="en">The mask sets the upper-right scores of QKᵀ to minus infinity, so their softmax weights are zero and the model cannot peek at the answer.</span></div>
+</section>
+
+<!-- ─────────── Next token, step by step (interactive) -->
+<section class="slide" id="s-next" data-sec="lm">
+  <h2 class="bi"><span class="zh">預測下一個詞元：上文決定機率</span><span class="en">Predicting the next token: the context decides the probabilities</span></h2>
+  <div class="nt-sent" id="nt-sent"></div>
+  <div class="nt-cands" id="nt-cands"></div>
+  <div class="nt-note" id="nt-note"></div>
+  <div class="nt-steps"><i data-step="6"></i></div>
+  <div class="callout key bi xs" data-step="7"><span class="zh">同一句話，只因左邊的<b>上文</b>不同，下一個詞元的機率分佈就完全改變。生成時，模型把選出的詞元接到上文，再預測下一個，一再重複。（機率為示意。）</span><span class="en">The context on the left reshapes the next-token distribution. (Illustrative probabilities.)</span></div>
+</section>
+
+<!-- ═══════════ 2. From a vector to a word -->
+<!-- ─────────── Unembedding: the quiz -->
+<section class="slide" id="s-unemb" data-sec="head">
+  <h2 class="bi"><span class="zh">最後一步：反嵌入矩陣 \(W_U\)</span><span class="en">The last step: the unembedding matrix</span></h2>
+  <div class="ue-ctx">寒塘渡鶴影，冷月葬<b>＿</b></div>
+  <div class="ue-wrap">
+  <div class="ue">
+    <div class="ue-h" data-step="1">
+      <div class="ue-lab">解碼器最後一個位置的輸出</div>
+      <div class="ue-hcol"><div class="ue-vec"><span>2</span><span>1</span><span>0</span><span>−1</span></div><div class="ue-name">\(\mathbf h\)</div></div>
+      <div class="ue-tr" data-step="2">↓ 轉置：一行（column）變成一列（row）</div>
+      <div class="ue-hrow" data-step="2"><div class="ue-vec row"><span>2</span><span>1</span><span>0</span><span>−1</span></div><div class="ue-name">\(\mathbf h^{\top}\)</div></div>
+    </div>
+    <div class="ue-dot" data-step="3">×</div>
+    <div class="ue-m" data-step="3">
+      <div class="ue-lab">每個詞元佔一行（column）</div>
+      <div class="ue-mat" id="ue-mat"></div>
+      <div class="ue-name">\(W_U\)</div>
+    </div>
+  </div>
+  <div class="ue-side">
+    <div class="ue-q" data-step="4"><b>問題：</b>哪一行得分最高？<br>分數 ＝ \(\mathbf h^{\top}\) 這一列乘以那一行：<br>\(z_j=\mathbf h^{\top}\mathbf w_j\)，五個一起算：\(\mathbf z=\mathbf h^{\top}W_U\)</div>
+    <div class="ue-calc" id="ue-calc" data-step="5"></div>
+  </div>
+  </div>
+  <div class="nt-steps"><i data-step="14"></i></div>
+  <div class="callout key bi xs" data-step="15"><span class="zh">「嵌入」在開頭把詞元變成向量；「反嵌入」在結尾把向量變回詞表裡每個詞元的分數（logits）。</span><span class="en">Embedding turns tokens into vectors at the start; unembedding turns the last vector back into one score per token.</span></div>
+</section>
+
+<!-- ─────────── Unembedding: drag h (interactive) -->
+<section class="slide" id="s-unemb2" data-lock data-sec="head">
+  <h2 class="bi"><span class="zh">為什麼是內積？每一行都是一個詞向量</span><span class="en">Why a dot product? Every column is a word vector (drag h)</span></h2>
+  <div class="two u2">
+    <svg class="plot" id="u2-plot" viewBox="0 0 500 470"></svg>
+    <div class="grow u2r">
+      <div class="u2ctx">寒塘渡鶴影，冷月葬<b>＿</b></div>
+      <div id="u2-bars"></div>
+      <div class="u2n" data-step="1"><i>①</i><span>\(z_j=\mathbf h^{\top}\mathbf w_j=\lVert\mathbf h\rVert\,\lVert\mathbf w_j\rVert\cos\theta\)：詞向量的方向愈接近 \(\mathbf h\)，分數愈高（第 10 週的餘弦）。</span></div>
+      <div class="u2n" data-step="2"><i>②</i><span>內積不除以長度：把 \(\mathbf h\) 拉長，分數的差距變大，機率就更集中在一個詞上。</span></div>
+      <div class="u2n" data-step="3"><i>③</i><span>GPT-2：\(\mathbf h\) 有 768 個數，\(W_U\) 有 50,257 行（column），約 3,860 萬個參數。GPT-2 的 \(W_U\) 就是輸入嵌入矩陣的轉置（權重共享，weight tying）。</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Softmax -->
+<section class="slide" id="s-softmax" data-sec="head">
+  <h2 class="bi"><span class="zh">從分數到機率：Softmax（第 9 週）</span><span class="en">From scores to probabilities: the softmax from Week 9</span></h2>
+  <div class="two smtwo">
+    <table class="smtab" id="sm-tab">
+      <thead><tr><th>詞元</th><th class="num">分數 \(z\)</th><th class="num" data-step="1">\(e^{z}\)</th><th class="num" data-step="3">機率 \(P\)</th><th data-step="3"></th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <div class="grow smright">
+      <div class="eq">\(P(j)=\dfrac{e^{z_j}}{\sum_k e^{z_k}}\)</div>
+      <div class="bi sm" data-step="1"><span class="zh">① 取指數：負數也變成正數，大的分數變得更大。</span><span class="en">Exponentiate: every score becomes positive, and big ones grow fastest.</span></div>
+      <div class="bi sm" data-step="2"><span class="zh">② 全部加起來：148.4 ＋ 54.6 ＋ 7.4 ＋ 2.7 ＋ 0.1 ＝ 213.3</span><span class="en">Add them up.</span></div>
+      <div class="bi sm" data-step="3"><span class="zh">③ 每一個除以總和，機率加起來等於 1。</span><span class="en">Divide each by the total, so the probabilities sum to one.</span></div>
+    </div>
+  </div>
+  <div class="callout key bi xs" data-step="4"><span class="zh">真實的模型每一步都要對整個詞表做這件事：GPT-2 有 50,257 個分數，新近的模型往往超過 10 萬個。</span><span class="en">A real model does this for the whole vocabulary at every step: 50,257 scores in GPT-2, often more than 100,000 in recent models.</span></div>
+</section>
+
+<!-- ─────────── Inside the decoder: twelve masked layers -->
+<section class="slide" id="s-dstack" data-sec="head">
+  <h2 class="bi"><span class="zh">解碼器的結構：12 層之後，最後一個字預測下一個字</span><span class="en">Inside the decoder: after twelve layers, the last position predicts the next token</span></h2>
+  <div class="two dstack">
+    <svg class="diag" id="dstack-svg" viewBox="0 0 700 500" aria-label="A decoder: tokens, embeddings, twelve masked layers, and the last vector h that predicts the next token"></svg>
+    <div class="dst-text">
+      <div class="dst"><i>①</i><span>上文切成<b>詞元</b>：這裡一個字一個詞元。</span></div>
+      <div class="dst" data-step="1"><i>②</i><span>每個詞元查表得到一個<b>靜態</b>向量（嵌入），和 BERT 一樣。</span></div>
+      <div class="dst" data-step="2"><i>③</i><span>每一層，每個字只看<b>自己和左邊</b>的字（遮罩），更新自己的向量。</span></div>
+      <div class="dst" data-step="3"><i>④</i><span>重複 12 層（GPT-2；大模型有數十層）。</span></div>
+      <div class="dst hot" data-step="4"><i>⑤</i><span>只有<b>最後一個位置</b>「葬」的向量 \(\mathbf h\) 讀過整個上文，用它來預測下一個詞元。</span></div>
+      <div class="dst hot" data-step="5"><i>⑥</i><span>\(\mathbf h\) 乘以反嵌入矩陣 \(W_U\)，再做 softmax，就得到「花」：正是前面算過的那一步。</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Temperature (interactive): slide T first, ask what is going on -->
+<section class="slide" id="s-temp" data-lock data-sec="head">
+  <h2 class="bi"><span class="zh">溫度：向機率擲飛鏢</span><span class="en">Temperature: throwing darts at the probabilities</span></h2>
+  <div class="two tptwo">
+    <div class="tp-left">
+      <div class="tp-top">
+        <div class="eq tpeq">\(P(j)=\dfrac{e^{z_j/T}}{\sum_k e^{z_k/T}}\)</div>
+        <div class="tp-T">T = <b id="tp-T">1.0</b><div class="tp-track"><div id="tp-knob"></div></div></div>
+      </div>
+      <svg id="tp-map" class="plot" viewBox="0 0 640 330"></svg>
+      <div class="keys"><kbd>↑</kbd> <kbd>↓</kbd> 溫度 temperature · <kbd>S</kbd> 擲一支飛鏢 · <kbd>R</kbd> 擲 20 支 · <kbd>C</kbd> 清除</div>
+    </div>
+    <div class="tp-right">
+      <div class="tp-ctx">寒塘渡鶴影，冷月葬<b>＿</b>魂</div>
+      <div class="tp-var">《紅樓夢》各版本此句也不一：有作「花魂」，也有作「詩魂」。</div>
+      <div id="tp-out" class="tp-out"></div>
+      <div id="tp-count" class="tp-count"></div>
+    </div>
+  </div>
+  <div class="callout key bi xs" data-step="1"><span class="zh"><b>問題：</b>把 T 調低、調高，長方形怎麼變？「孤」「劍」什麼時候才會被射中？為什麼要叫「溫度」？</span><span class="en">Slide T down and up: how do the areas change, and why is it called temperature?</span></div>
+</section>
+
+<!-- ─────────── Why "temperature"? Ice and boiling water -->
+<section class="slide" id="s-phys" data-sec="head">
+  <h2 class="bi"><span class="zh">為什麼叫「溫度」？借自物理學</span><span class="en">Why “temperature”? A word borrowed from physics</span></h2>
+  <div class="ph2">
+    <div class="phc ice" data-step="1">
+      <svg class="phm" id="ph-ice" viewBox="0 0 170 170"></svg>
+      <div class="phr">
+        <div class="phh">❄️ 冰：低溫 <span>T ＝ 0.5</span></div>
+        <p>分子被鎖在能量最低的位置。模型幾乎每次都選「花」；T 趨近 0 就是貪婪解碼（greedy decoding）。</p>
+        <div class="phb" id="ph-bars-ice"></div>
+      </div>
+    </div>
+    <div class="phc hot" data-step="2">
+      <svg class="phm" id="ph-hot" viewBox="0 0 170 170"></svg>
+      <div class="phr">
+        <div class="phh">🔥 沸水：高溫 <span>T ＝ 2</span></div>
+        <p>分子到處亂跑，各種狀態都有可能。「孤」「劍」也會被選中：回答更多樣，也更容易出錯。</p>
+        <div class="phb" id="ph-bars-hot"></div>
+      </div>
+    </div>
+  </div>
+  <div class="phbz" data-step="3">
+    <div class="eq">物理（Boltzmann 分佈）：\(P(i)\propto e^{-E_i/kT}\)</div>
+    <span class="phx">⟷</span>
+    <div class="eq">語言模型：\(P(j)\propto e^{z_j/T}\)</div>
+    <p>分數 z 就像「負的能量」：分數愈高，愈「穩定」，愈常出現。</p>
+  </div>
+  <div class="callout key bi xs" data-step="4"><span class="zh">熵（entropy）\(H=-\sum_j P(j)\log_2 P(j)\) 量度機率有多分散：T ＝ 0.5 時 0.55 位元，T ＝ 2 時 1.73 位元。此詞來自熱力學（Clausius，1865），Shannon（1948）借來量度資訊。</span><span class="en">Entropy measures how spread out the probabilities are.</span></div>
+</section>
+
+<!-- ─────────── The loop -->
+<section class="slide" id="s-loop" data-sec="head">
+  <h2 class="bi"><span class="zh">生成一個詞元的全過程</span><span class="en">One full step of generation</span></h2>
+  <div class="lp">
+    <div class="lpb" data-step="1"><i>1</i><b>上文</b><span class="zhs">寒塘渡鶴影，<br>冷月葬</span></div>
+    <div class="lpa" data-step="2">→</div>
+    <div class="lpb" data-step="2"><i>2</i><b>解碼器</b><span>遮罩注意力<br>× 12 層</span></div>
+    <div class="lpa" data-step="3">→</div>
+    <div class="lpb" data-step="3"><i>3</i><b>向量 \(\mathbf h\)</b><span>[2, 1, 0, −1]</span></div>
+    <div class="lpa" data-step="4">→</div>
+    <div class="lpb" data-step="4"><i>4</i><b>\(\mathbf h^{\top}W_U\)</b><span>分數 z<br>5, 4, 2, 1, −2</span></div>
+    <div class="lpa" data-step="5">→</div>
+    <div class="lpb" data-step="5"><i>5</i><b>÷ T，softmax</b><span>機率<br>70%, 26%, 3% …</span></div>
+    <div class="lpa" data-step="6">→</div>
+    <div class="lpb hot" data-step="6"><i>6</i><b>擲飛鏢</b><span class="zhs big">花</span></div>
+  </div>
+  <svg class="lp-back" viewBox="0 0 1108 90" data-step="7"><defs><marker id="lph" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b03a2e"/></marker></defs><path d="M1040,4 C1040,70 70,70 70,8" marker-end="url(#lph)"/></svg>
+  <div class="lp-backlab" data-step="7">把「花」接到上文，再跑一圈：寒塘渡鶴影，冷月葬花 → 魂</div>
+  <div class="callout key bi xs" data-step="8"><span class="zh">每生成一個詞元，這一圈就要跑一次；一千字的回答，就要跑上千次。</span><span class="en">The whole loop runs once per token; a thousand-character answer takes about a thousand loops.</span></div>
+</section>
+
+<!-- ─────────── From predictor to chat assistant -->
+<section class="slide" id="s-chat" data-sec="head">
+  <h2 class="bi"><span class="zh">下一詞預測器怎樣變成聊天助手</span><span class="en">How a next-token predictor becomes a chat assistant</span></h2>
+  <div class="trs">
+    <div class="tr" id="tr1" data-step="1">
+      <div class="trh"><i>1</i><b>預訓練</b></div>
+      <div class="trsub">在數萬億詞的網頁、書籍和代碼上猜下一個詞</div>
+      <div class="trbox" id="tr1-box"></div>
+    </div>
+    <div class="tr" id="tr2" data-step="2">
+      <div class="trh"><i>2</i><b>指令微調</b></div>
+      <div class="trsub">學習人寫的問題與好答案</div>
+      <div class="trbox" id="tr2-box"></div>
+    </div>
+    <div class="tr" id="tr3" data-step="3">
+      <div class="trh"><i>3</i><b>偏好微調</b></div>
+      <div class="trsub">人從兩個答案中選出較好的一個</div>
+      <div class="trbox" id="tr3-box"></div>
+    </div>
+  </div>
+  <div class="chatdoc" data-step="4">
+    <div><span class="role sys">system</span>你是一個樂於助人的助手。</div>
+    <div><span class="role usr">user</span>《紅樓夢》的作者是誰？</div>
+    <div><span class="role ast">assistant</span><span class="caret">▍</span></div>
+  </div>
+  <div class="callout key bi xs" data-step="4"><span class="zh">對話仍然是一份長文件，模型一個詞元一個詞元地續寫。模型一次能讀的長度有上限，叫作「上下文窗口」（context window）。</span><span class="en">A chat is still one long document that the model continues token by token, up to the limit of its context window.</span></div>
+</section>
+
+<!-- ═══════════ 3. Limits -->
+<!-- ─────────── Fluent is not true -->
+<section class="slide" id="s-fluent" data-sec="limits">
+  <h2 class="bi"><span class="zh">流暢的答案不一定是真實的答案</span><span class="en">A fluent answer is not necessarily a true answer</span></h2>
+  <div class="flu">
+    <div class="flu-q" data-step="1">
+      <figure class="flu-pic"><img src="assets/fig-luxun.jpg" alt="Lu Xun"><figcaption>魯迅<span>1881–1936</span></figcaption></figure>
+      <div>
+        <div class="flu-ask"><span class="flu-lab">用戶</span>魯迅怎樣評價錢鍾書的《圍城》？</div>
+        <div class="flu-ask bot" data-step="2"><span class="flu-lab">聊天機器人</span>魯迅稱《圍城》「寫盡了知識分子的虛偽與困局」，還在致許廣平的信中推薦她一讀。</div>
+        <div class="flu-ans" data-step="3">《圍城》1947 年才出版，魯迅已於 1936 年去世，這句引文在任何文獻裡都找不到。（為說明典型錯誤而虛構的例子。）</div>
+      </div>
+    </div>
+    <div class="flu-cards">
+      <div class="card fc" data-step="4"><b>沒有出處</b><p>模型生成的是最「像」的續寫，它說不出一句話是從哪裡來的。</p></div>
+      <div class="card fc" data-step="5"><b>虛構細節</b><p>聽起來對的年份、篇名與引文，和真的一樣是生成出來的（所謂「幻覺」，hallucination）。</p></div>
+      <div class="card fc" data-step="6"><b>現代的記憶</b><p>訓練文本大多是近年的、英文的、網上的，所以模型是透過現在去看過去。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Poibeau -->
+<section class="slide" id="s-pb1" data-sec="limits">
+  <h2 class="bi"><span class="zh">Poibeau（2026）：模擬的是檔案</span><span class="en">Poibeau (2026): a model of the archive</span></h2>
+  <div class="src2" data-step="1">Thierry Poibeau, “What Do Historical Language Models Model?”</div>
+  <blockquote class="bigq" data-step="1">「歷史語言模型模擬的不是過去的心靈或人群，而是倖存下來的文本檔案的結構。」<small>“Historical language models do not simulate past minds or populations, but instead model the structure of surviving textual archives.”</small></blockquote>
+  <div class="two cols2 pbcols">
+    <article class="card gr gen" data-step="2">
+      <div class="grh">生成</div>
+      <blockquote>「輸出的流暢，會讓這種替換變得看不見。」<small>“The fluency of the output can make this substitution invisible.”</small></blockquote>
+    </article>
+    <article class="card gr" data-step="3">
+      <div class="grh">檢索</div>
+      <blockquote>「檢索增強生成……保留出處，可以引用，並讓背後的證據保持可見。」<small>“Retrieval-augmented generation … preserve[s] provenance, enable[s] citation, and keep[s] the underlying evidence visible.”</small></blockquote>
+    </article>
+  </div>
+  <div class="callout key bi xs" data-step="4"><span class="zh">文學人物也一樣：「林黛玉」聊天機器人模擬的，是現存的《紅樓夢》文本，以及我們選用的那個版本。下一步：檢索增強生成（RAG，retrieval-augmented generation）。</span><span class="en">A Lin Daiyu chatbot models the surviving text of the novel, in the edition we chose. Next: retrieval-augmented generation (RAG).</span></div>
+</section>
+
+<!-- ═══════════ 4. RAG -->
+<!-- ─────────── RAG overview -->
+<section class="slide" id="s-rov" data-sec="rag">
+  <h2 class="bi"><span class="zh">什麼是 RAG（檢索增強生成）？</span><span class="en">What is RAG (retrieval-augmented generation)?</span></h2>
+  <svg class="rov" viewBox="0 0 1108 470" aria-label="Without RAG: a question goes to the LLM, which answers. With RAG: the question first retrieves passages from a text database, and the passages go to the LLM with the question.">
+    <defs><marker id="rovh" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1d5f86"/></marker></defs>
+    <!-- reader -->
+    <g class="rv-fig">
+      <circle cx="120" cy="58" r="30"/><line x1="120" y1="88" x2="120" y2="160"/><line x1="120" y1="110" x2="88" y2="140"/><line x1="120" y1="110" x2="152" y2="135"/><line x1="120" y1="160" x2="96" y2="210"/><line x1="120" y1="160" x2="144" y2="210"/>
+      <text x="74" y="30" class="rv-q">?</text>
+      <text x="120" y="238" class="rv-lab">讀者的問題</text>
+    </g>
+    <line class="rv-ar" x1="190" y1="110" x2="300" y2="110"/>
+    <rect class="rv-llm" x="320" y="50" width="330" height="120" rx="18"/>
+    <text x="485" y="104" class="rv-llmt">大型語言模型（LLM）</text>
+    <text x="485" y="138" class="rv-llms">ChatGPT、DeepSeek、Qwen……</text>
+    <line class="rv-ar" x1="670" y1="110" x2="780" y2="110"/>
+    <g class="rv-ans">
+      <rect x="800" y="58" width="170" height="104" rx="16"/><path d="M830,162 L824,192 L860,162 Z"/>
+      <text x="885" y="120" class="rv-anst">回答</text>
+    </g>
+    <g data-step="5"><rect x="912" y="40" width="96" height="36" rx="18" class="rv-badge"/><text x="960" y="65" class="rv-badget">附出處</text></g>
+    <!-- RAG -->
+    <g data-step="2">
+      <rect class="rv-frame" x="36" y="262" width="680" height="190" rx="10"/>
+      <text x="700" y="304" class="rv-rag" text-anchor="end">RAG</text>
+      <line class="rv-ar" x1="120" y1="250" x2="120" y2="318"/>
+      <rect class="rv-db" x="56" y="330" width="210" height="96" rx="14"/>
+      <text x="161" y="372" class="rv-dbt">文本資料庫</text>
+      <text x="161" y="404" class="rv-dbs">呐喊、彷徨、魯迅全集……</text>
+    </g>
+    <g data-step="3">
+      <text x="400" y="352" class="rv-lab">檢索相關段落</text>
+      <line class="rv-ar" x1="290" y1="378" x2="470" y2="378"/>
+      <g class="rv-docs"><rect x="500" y="318" width="96" height="116" rx="8"/><rect x="488" y="330" width="96" height="116" rx="8"/><line x1="504" y1="356" x2="566" y2="356"/><line x1="504" y1="378" x2="566" y2="378"/><line x1="504" y1="400" x2="566" y2="400"/><line x1="504" y1="422" x2="548" y2="422"/></g>
+    </g>
+    <g data-step="4">
+      <line class="rv-ar" x1="560" y1="306" x2="560" y2="190"/>
+      <text x="580" y="250" class="rv-lab rv-left">段落 ＋ 問題</text>
+    </g>
+  </svg>
+  <div class="callout bi xs" data-step="1"><span class="zh">沒有 RAG：模型只憑訓練時記住的東西回答，說不出出處。</span><span class="en">Without RAG, the model answers from what it memorised in training.</span></div>
+  <div class="callout key bi xs" data-step="5"><span class="zh">有 RAG：先從<b>我們自己的文本</b>找出相關段落，再把段落和問題一起交給模型。回答可以附上出處。</span><span class="en">With RAG, passages from our own texts are retrieved first and sent to the model with the question.</span></div>
+</section>
+
+<!-- ─────────── Sentence vectors: similarity matrix -->
+<section class="slide" id="s-sim" data-sec="rag">
+  <h2 class="bi"><span class="zh">整句話也能變成一個向量</span><span class="en">A whole sentence can become one vector</span></h2>
+  <div class="two simtwo">
+    <div class="simg" id="sim-grid"></div>
+    <div class="grow simr">
+      <div class="bi sm" data-step="1"><span class="zh">嵌入模型把<b>一整句</b>（或一整段）變成一個向量，再兩兩算餘弦相似度。</span><span class="en">An embedding model turns each sentence into one vector; every pair gets a cosine similarity.</span></div>
+      <div class="bi sm" data-step="2"><span class="zh">「手機」和「電話」沒有一個字相同，兩句的相似度卻最高之一。</span><span class="en">The two phone sentences share no characters but are among the closest pairs.</span></div>
+      <div class="bi sm" data-step="3"><span class="zh">「蘋果」和「草莓」：都在說吃得健康。</span><span class="en">Apples and strawberries: both are about healthy eating.</span></div>
+      <div class="callout key bi xs" data-step="4"><span class="zh">向量比較的是<b>意思</b>，不只是字面。數字為示意。</span><span class="en">Vectors compare meaning, not only wording. Illustrative numbers.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Sentence vectors: nearest lines of poetry, and across languages -->
+<section class="slide" id="s-poemvec" data-sec="rag">
+  <h2 class="bi"><span class="zh">意思相近，向量就相近</span><span class="en">Similar meaning, nearby vectors</span></h2>
+  <div class="two pvtwo">
+    <div class="pvl-col">
+      <div class="pvq" data-step="1"><span>查詢</span>一行白鷺上青天</div>
+      <table class="pvtab" data-step="2">
+        <thead><tr><th>排名</th><th>最相近的詩句</th><th class="num">餘弦</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>白鹭一行登碧霄</td><td class="num">0.933</td></tr>
+          <tr><td>2</td><td>一片青天白鹭前</td><td class="num">0.919</td></tr>
+          <tr><td>3</td><td>飞却青天白鹭鸶</td><td class="num">0.916</td></tr>
+          <tr><td>4</td><td>一双白鹭上云飞</td><td class="num">0.912</td></tr>
+          <tr><td>5</td><td>白鹭一行飞绿野</td><td class="num">0.907</td></tr>
+          <tr><td>6</td><td>一行白鸟掠清波</td><td class="num">0.902</td></tr>
+        </tbody>
+      </table>
+      <div class="pvsrc" data-step="2">BERT-CCPoem（清華大學自然語言處理與社會人文計算研究中心）</div>
+    </div>
+    <div class="grow pvr" data-step="3">
+      <svg class="plot" id="ml-plot" viewBox="0 0 470 330" aria-label="Three questions about check-out time in Chinese, English and Japanese lie close together; a question about the pool lies far away"></svg>
+      <div class="bi xs"><span class="zh">多語言的嵌入模型裡，三種語言的「退房時間」問題落在一起；「泳池開到幾點」在別處。</span><span class="en">In a multilingual model, the same question in three languages lands in one place.</span></div>
+    </div>
+  </div>
+  <div class="callout key bi xs" data-step="4"><span class="zh">RAG 的檢索就是這樣：把問題變成向量，找出向量最近的段落。</span><span class="en">Retrieval in RAG works the same way: the nearest passage vectors to the question vector.</span></div>
+</section>
+
+<!-- ─────────── Pipeline (diagram) -->
+<section class="slide" id="s-pipe" data-sec="rag">
+  <h2 class="bi"><span class="zh">RAG 流程，一步一步來</span><span class="en">The RAG pipeline, step by step</span></h2>
+  <div class="pv">
+    <svg class="pv-arrows" viewBox="0 0 1108 470">
+      <defs><marker id="pvh" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b03a2e"/></marker></defs>
+      <path data-step="2" d="M232,95 L282,95" />
+      <path data-step="3" d="M506,95 L556,95" />
+      <path data-step="4" d="M846,95 L896,95" />
+      <path data-step="5" d="M1000,186 C1000,222 330,206 160,232" />
+      <path data-step="6" d="M322,322 L372,322" />
+      <path data-step="6" d="M532,322 L582,322" />
+      <path data-step="7" d="M906,322 L944,322" />
+    </svg>
+    <div class="pvb pv-q" data-step="1"><i>1</i><span class="pvl">問題</span><div class="pvbub">你怎樣看阿Q？</div></div>
+    <div class="pvb pv-e" data-step="2"><i>2</i><span class="pvl">嵌入：問題變成向量</span><div class="vbars" id="pv-bars"></div><div class="vnums">[0.12, −0.40, 0.33, … ] 共 2,560 個數</div></div>
+    <div class="pvb pv-db" data-step="3"><i>3</i><span class="pvl">在 2,039 個段落向量中搜尋</span><div class="dbgrid" id="pv-db"></div></div>
+    <div class="pvb pv-top" data-step="4"><i>4</i><span class="pvl">最相近的 5 段</span><div id="pv-top"></div></div>
+    <div class="pvb pv-p" data-step="5"><i>5</i><span class="pvl">組成提示</span>
+      <div class="doc"><div class="dl ins">指示</div><div class="dl per">人物設定</div><div class="dl psg">[1] [2] [3] [4] [5] 段落</div><div class="dl qq">問題</div></div></div>
+    <div class="pvb pv-llm" data-step="6"><i>6</i><span class="pvl">生成</span><div class="llm" id="pv-llm">LLM</div></div>
+    <div class="pvb pv-ans" data-step="6"><span class="pvl">附註腳的回答</span><div class="pvans" id="pv-ans"></div></div>
+    <div class="pvb pv-chk" data-step="7"><i>7</i><span class="pvl">你來檢查</span><div class="chkc"><span class="mag">🔍</span><b>[1]</b><p>「我是否真能够写出一个现代的我们国人的魂灵来」</p><em>✓ 有根據</em></div></div>
+  </div>
+  <div class="callout key bi xs" data-step="8"><span class="zh">第 2 至 4 步是第 10 週的向量與餘弦相似度；第 6 步就是今天前半段的解碼器；第 7 步是我們讀者的工作。</span><span class="en">Steps 2 to 4 are Week 10’s vectors and cosine similarity; step 6 is today’s decoder; step 7 is our job as readers.</span></div>
+</section>
+
+<!-- ─────────── The actual prompt -->
+<section class="slide" id="s-prompt" data-sec="rag">
+  <h2 class="bi"><span class="zh">模型實際讀到的是什麼</span><span class="en">What the model actually reads</span></h2>
+  <div class="prm">
+    <div class="pblk sys" data-step="1"><span class="ptag">系統提示 system prompt</span><span class="pers">Tone and Voice: Speak as a sharp, ironic essayist who cares about the national character and still hopes in the young …</span><br>You are Lu Xun. Answer as Lu Xun would: in their voice, with their opinions and knowledge, drawing on the passages from their writings when they are relevant. … If the passages do not cover the question, answer in character from general knowledge of Lu Xun’s life and views, <b>without inventing quotations</b>.</div>
+    <div class="pblk psg" data-step="2"><span class="ptag">用戶訊息 user message</span>Passages from your writings that may be relevant:<br><span class="pz">[1] (呐喊.txt, part 3) …“假如一间铁屋子，是绝无窗户而万难破毁的，里面有许多熟睡的人们，不久都要闷死了……”</span><br><span class="pz dim">[2] (鲁迅全集.txt, part 912) … &nbsp; [3] … &nbsp; [4] … &nbsp; [5] …</span><br>When a sentence or paragraph of your answer draws on a passage, put its number in square brackets right after it, e.g. [2] or [1, 3].</div>
+    <div class="pblk qst" data-step="3"><span class="ptag">問題 question</span>你為什麼要寫小說？</div>
+  </div>
+  <div class="callout key bi xs" data-step="4"><span class="zh">這是 HistFig 的真實模板，例子為示意。人物設定（persona）是人寫的一種<b>詮釋</b>，模型照著它說話，就像照著原文一樣認真。</span><span class="en">The real HistFig template with an illustrative example. The persona is an interpretation written by a person, and the model follows it as closely as the sources.</span></div>
+</section>
+
+<!-- ═══════════ 5. Retrieval -->
+<!-- ─────────── What happens to uploaded files -->
+<section class="slide" id="s-files" data-sec="retrieval">
+  <h2 class="bi"><span class="zh">上載 .txt 檔之後，HistFig 會做什麼？</span><span class="en">What HistFig does with the .txt files you upload</span></h2>
+  <div class="two flcols">
+    <div class="mockdocs" data-step="1">
+      <div class="mdh">文件 Documents <span>魯迅 · 示意</span></div>
+      <div class="md"><b>呐喊.txt</b><span>150 段 · 135,200 字 · $0.002</span></div>
+      <div class="md"><b>彷徨.txt</b><span>133 段 · 119,700 字 · $0.002</span></div>
+      <div class="md"><b>野草.txt</b><span>28 段 · 24,900 字 · $0.0004</span></div>
+      <div class="md"><b>朝花夕拾.txt</b><span>56 段 · 50,300 字 · $0.0008</span></div>
+      <div class="md"><b>鲁迅全集：杂文与书信.txt</b><span>1,650 段 · 1,483,600 字 · $0.025</span></div>
+      <div class="md"><b>Wikipedia: Lu Xun.txt</b><span>22 段 · 61,800 字符 · $0.0003</span></div>
+      <div class="mdf">向量：qwen3-embedding-4b（2,560 維）· 合計 $0.03</div>
+    </div>
+    <div class="grow flsteps">
+      <div class="fs" data-step="1"><i>1</i><div><b>切成段落</b><p>每段約 1,000 個漢字，前後稍有重疊，免得一個意思被切成兩半</p></div></div>
+      <div class="fs" data-step="2"><i>2</i><div><b>每段變成一個向量</b><p>每段 2,560 個數，由一個嵌入模型算出</p></div></div>
+      <div class="fs" data-step="3"><i>3</i><div><b>為詞建立索引</b><p>供精確的關鍵詞搜尋</p></div></div></div>
+  </div>
+  <div class="callout key bi xs" data-step="4"><span class="zh">180 多萬字，每次提問都全部放進提示，又慢又貴；所以只挑最相關的 5 段。段落長度和嵌入模型決定聊天機器人之後找得到什麼；檔案裡的 OCR 錯誤也會一起進入資料庫。</span><span class="en">Sending 1.8 million characters with every question would be slow and expensive, so only the five most relevant passages go to the model.</span></div>
+</section>
+
+<!-- ─────────── Cosine similarity (interactive, from Week 10) -->
+<section class="slide" id="s-cos" data-lock data-sec="retrieval">
+  <h2 class="bi"><span class="zh">回顧第 10 週：餘弦相似度（拖動紫色箭頭）</span><span class="en">Recall Week 10: cosine similarity with unit vectors (drag the purple tip)</span></h2>
+  <div class="two">
+    <svg class="plot" id="cos-plot" viewBox="0 0 560 480" data-step="1"></svg>
+    <div class="grow cosread" data-step="1">
+      <div class="big-num"><span>cos θ</span><b id="cos-val">0.77</b></div>
+      <svg class="plot" id="cos-curve" viewBox="0 0 500 170"></svg>
+      <div class="minirow"><span>θ = <b id="cos-th">40°</b></span><span>A · B = <b id="cos-dot">—</b></span><span>\(\lVert A\rVert\,\lVert B\rVert\) = <b id="cos-len">—</b></span></div>
+      <div class="swap cosnote">
+        <div class="bi sm" data-step="1" data-until="2"><span class="zh">B 大致和 A 同方向。橙色是 B 在 A 上的<b>投影</b>。</span><span class="en">B points roughly along A; orange is its projection onto A.</span></div>
+        <div class="bi sm" data-step="2" data-until="3"><span class="zh">互相垂直：投影縮成一點，cos ＝ 0。</span><span class="en">Perpendicular: the projection shrinks to a point.</span></div>
+        <div class="bi sm" data-step="3" data-until="4"><span class="zh">方向相反：投影翻到另一邊，cos ＝ −1。</span><span class="en">Opposite: the projection flips.</span></div>
+        <div class="bi sm" data-step="4"><span class="zh">兩個向量都<b>正規化</b>成長度 1，所以 A · B 就等於 cos θ：只看方向。檢索段落用的就是它；反嵌入的內積則不正規化。</span><span class="en">Both vectors have length 1, so A · B equals cos θ. Retrieval uses this; the unembedding dot product is not normalized.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── Map (interactive) -->
+<section class="slide" id="s-map" data-lock data-sec="retrieval">
+  <h2 class="bi"><span class="zh">每一段是一個點，問題也是</span><span class="en">Each passage is a point, and so is the question</span></h2>
+  <div class="two maptwo">
+    <svg class="plot" id="map-plot" viewBox="0 0 560 470"></svg>
+    <div class="grow mapright">
+      <div class="mapq" id="map-q"></div>
+      <div id="map-hits" class="maphits"></div>
+      <div class="keys"><kbd>Q</kbd> 下一個問題 · <kbd>A</kbd> 上一個問題</div>
+    </div>
+  </div>
+  <div class="callout key bi xs" data-step="1"><span class="zh"><b>離問題（★）最近</b>的五段（1–5）送進模型。距離其實在 2,560 維裡計算，圖為示意。</span><span class="en">The five dots nearest to the question (★) go to the model; real distances are computed in 2,560 dimensions.</span></div>
+</section>
+
+<!-- ─────────── Keywords -->
+<section class="slide" id="s-kw" data-sec="retrieval">
+  <h2 class="bi"><span class="zh">按關鍵詞搜尋：數共同的詞</span><span class="en">Searching by keywords: count the shared words</span></h2>
+  <div class="kwq" data-step="1"><span class="kwlab">查詢</span><span class="kwt" style="--w:1">猹 <small>4.6</small></span><span class="kwt" style="--w:.52">西瓜 <small>2.4</small></span><span class="kwt" style="--w:.4">少年 <small>1.8</small></span><span class="kwt" style="--w:.3">月 <small>1.3</small></span><span class="kwnote">愈少見的詞，權重愈高</span></div>
+  <div class="kwps" id="kw-ps"></div>
+  <div class="kwfail" data-step="4">
+    <span class="kwlab">查詢</span><span class="cc bad">閏</span><span class="cc">土</span>
+    <span class="kwvs">≠</span>
+    <span class="kwlab">語料</span><span class="cc bad">闰</span><span class="cc">土</span>
+    <span class="kwfx">繁體和簡體是不同的字串，精確搜尋一段也找不到；向量搜尋仍然找到《故鄉》。</span>
+  </div>
+  <div class="callout key bi xs" data-step="5"><span class="zh">關鍵詞搜尋（BM25）是精確的：它找得到向量容易模糊掉的名字，也會漏掉向量抓得住的異體字與同義說法。</span><span class="en">Keyword search (BM25) is exact: it finds names that vectors blur, and misses variants that vectors catch.</span></div>
+</section>
+
+<!-- ─────────── Reciprocal rank fusion -->
+<section class="slide" id="s-rrf" data-sec="retrieval">
+  <h2 class="bi"><span class="zh">兩份排名合成一份：倒數排名融合</span><span class="en">Two rankings, one list: reciprocal rank fusion</span></h2>
+  <div class="rrfv">
+    <svg class="rrf-lines" id="rrf-lines" viewBox="0 0 1108 380"></svg>
+    <div class="rcol" id="rrf-v"><div class="rh">按語義（向量）</div></div>
+    <div class="rcol merged" id="rrf-m"><div class="rh">合併</div></div>
+    <div class="rcol" id="rrf-b"><div class="rh">按關鍵詞（BM25）</div></div>
+  </div>
+  <div class="two rrftwo">
+    <div class="eq rrf" data-step="3">\(\text{score}(p)=\dfrac{1}{60+\text{rank}_{\text{vector}}(p)}+\dfrac{1}{60+\text{rank}_{\text{BM25}}(p)}\)</div>
+    <div class="grow"><div class="bi sm" data-step="3"><span class="zh">兩種搜尋都找到的段落，拿到兩份分數，排名上升；只被一種找到的，只有一份。</span><span class="en">A passage found by both searches collects two shares and rises.</span></div></div>
+  </div>
+</section>
+
+<!-- ═══════════ 6. HistFig and the pilot -->
+<!-- ─────────── HistFig screenshot -->
+<section class="slide" id="s-histfig" data-sec="pilot">
+  <h2 class="bi"><span class="zh">HistFig：今天使用的應用程式</span><span class="en">HistFig: the application we use today</span></h2>
+  <div class="two hfcols">
+    <div class="mockchat" data-step="1">
+      <div class="mch"><b>HistFig</b><span>魯迅 · 1881–1936</span><em>Export ▾</em><em>⚙ Options</em></div>
+      <div class="mcq">你為什麼棄醫從文？</div>
+      <div class="mca">在仙台學醫的時候，我在幻燈片上看見同胞圍著看殺頭，便覺得醫學並非一件緊要事<sup>1</sup>。愚弱的國民，體格再健全，也只能做示眾的材料和看客<sup>1</sup>。藤野先生待我很好，我至今記得他<sup>2</sup>。回國以後，我先在北京大學教了幾年書。我那時以為，要改變他們的精神，當然要推文藝<sup>4</sup>。</div>
+      <div class="mcs">5 個出處</div>
+    </div>
+    <div class="grow hfnotes">
+      <div class="hf" data-step="2"><i>2</i><span>回答裡的數字指向段落，點一下就能讀原文。</span></div>
+      <div class="hf" data-step="3"><i>⚙</i><span><b>Options</b>：溫度、段落數目、開關個別文件。</span></div>
+      <div class="hf" data-step="4"><i>⇩</i><span><b>Export</b>：連同所有段落儲存整段對話。</span></div>
+      <div class="hf q" data-step="5"><span>「回國以後，我先在北京大學教了幾年書」這句沒有註腳。有哪一段原文這樣說嗎？</span></div></div>
+  </div>
+</section>
+
+<!-- ─────────── Pilot: what went wrong -->
+<section class="slide" id="s-pilot2" data-sec="pilot">
+  <h2 class="bi"><span class="zh">去年的試行：哪裡出了問題</span><span class="en">Last year’s pilot: what went wrong</span></h2>
+  <div class="two pil2">
+    <figure class="doshot" data-step="1"><img src="assets/digital-orientalist.jpg" alt="The Digital Orientalist: Voices from the Past, Retrieval-Augmented Dialogues with Chinese Historical Figures"><figcaption>Kurzynski and Du, “Voices from the Past”, The Digital Orientalist, 26 December 2025</figcaption></figure>
+    <div class="grow pilg">
+      <div class="plc bad" data-step="2"><b>刻板印象</b><p>一個「永遠憤世嫉俗」的魯迅；一個前後過分一致的毛澤東。</p></div>
+      <div class="plc bad" data-step="2"><b>時代錯置</b><p>秋瑾談論「性別平等法」。</p></div>
+      <div class="plc bad" data-step="3"><b>誘導性提問</b><p>「走資派」這類字眼，把毛澤東推向極端的路線。</p></div>
+      <div class="plc bad" data-step="3"><b>語料缺口</b><p>沒有書信，辜鴻銘只能猜測自己和蔡元培的交情。</p></div>
+    </div>
+  </div>
+  <div class="callout key bi xs" data-step="4"><span class="zh">偏見也在我們這一邊：學生更容易相信符合自己預期的答案。</span><span class="en">The bias was also on our side: students believed answers that matched their expectations.</span></div>
+</section>
+
+<!-- ─────────── Who owns the prompt -->
+<section class="slide" id="s-owner" data-sec="pilot">
+  <h2 class="bi"><span class="zh">聊天機器人以魯迅的身分說話時，說話的是誰？</span><span class="en">Who speaks when a chatbot speaks as Lu Xun?</span></h2>
+  <div class="persona" data-step="1"><span class="ptag">人物設定（示意）</span>「語氣冷峻、諷刺，常用反語；關心國民性，批判『吃人』的禮教，對青年仍抱希望。」</div>
+  <div class="dq own">
+    <div data-step="2"><i>1</i><span>這是誰的魯迅？1936 年他的靈柩上覆蓋著寫有「民族魂」的旗；1940 年毛澤東稱他為「中國文化革命的主將」。還有寫《野草》的那個孤獨的魯迅。這段提示製造出的是哪一個？</span></div>
+    <div data-step="3"><i>2</i><span>虛構人物（林黛玉、孫悟空）的設定又是誰寫的：作者、評點家、續書的人，還是我們自己？</span></div>
+  </div>
+</section>
+
+<!-- ═══════════ 7. In class -->
+<!-- ─────────── HistFig setup 1: start it -->
+<section class="slide" id="s-hf1" data-sec="inclass">
+  <h2 class="bi"><span class="zh">啟動 HistFig：在自己的電腦上，或在 Codespace 裡</span><span class="en">Start HistFig on your laptop or in a codespace</span></h2>
+  <div class="hfrepo" data-step="1">github.com/mcjkurz/histfig</div>
+  <div class="two cols2 hfrun">
+    <article class="card run" data-step="2">
+      <div class="runh">💻 在自己的電腦上</div>
+      <p class="runp">需要 Python 3.11+ 和 <b>uv</b>（見 README）。在終端機輸入：</p>
+      <pre class="term"><span class="c"># 只需一次</span>
+git clone https://github.com/mcjkurz/histfig.git
+cd histfig
+uv sync
+<span class="c"># 每次啟動</span>
+uv run histfig</pre>
+      <p class="runp">瀏覽器會自動打開。</p>
+    </article>
+    <article class="card run" data-step="3">
+      <div class="runh">☁️ 在 GitHub Codespaces</div>
+      <p class="runp">什麼都不用安裝，直接在瀏覽器裡執行。</p>
+      <ol class="runl">
+        <li>在倉庫頁面：<b>Code</b> → <b>Codespaces</b> → <b>Create codespace on main</b></li>
+        <li>等終端機裡的安裝完成</li>
+        <li>輸入 <code>uv run histfig</code></li>
+        <li>點 <b>Open in Browser</b>（或 <b>Ports</b> 分頁 → port 8000）</li>
+      </ol>
+    </article>
+  </div>
+  <div class="callout key bi xs" data-step="4"><span class="zh">在終端機按 <b>Ctrl+C</b> 停止（Mac 上也是 <b>Control+C</b>，不是 ⌘C），再輸入 <code>uv run histfig</code> 重新啟動。你的人物和對話都會保留。</span><span class="en">Stop with Ctrl+C and restart with uv run histfig; your figures and chats are kept.</span></div>
+</section>
+
+<!-- ─────────── HistFig setup 2: models -->
+<section class="slide" id="s-hf2" data-sec="inclass">
+  <h2 class="bi"><span class="zh">第一次使用：在 Settings 頁面選模型</span><span class="en">First run: choose the models on the Settings page</span></h2>
+  <div class="two hfset">
+    <div class="mockset" data-step="1">
+      <div class="msh"><b>HistFig</b><span>Figures</span><span class="on">Settings</span></div>
+      <div class="msb">
+        <div class="msg"><b>Chat model</b>
+          <div class="msr"><span>Service</span><i>OpenRouter</i></div>
+          <div class="msr"><span>API key</span><i>••••••••••••••••</i></div>
+          <div class="msr"><span>Model</span><i>Browse models…</i></div></div>
+        <div class="msg"><b>Embedding model</b>
+          <div class="msr"><span>Service</span><i>OpenRouter</i></div>
+          <div class="msr"><span>Model</span><i>qwen/qwen3-embedding-4b</i></div></div>
+        <div class="msbtn"><em>Save changes</em><em class="sec">Test connections</em></div>
+      </div>
+    </div>
+    <div class="grow hfsteps">
+      <div class="fs" data-step="1"><i>1</i><div><b>聊天模型 Chat model</b><p>負責寫回答的 LLM：貼上你的 API 金鑰，再用 <b>Browse models…</b> 選一個模型</p></div></div>
+      <div class="fs" data-step="2"><i>2</i><div><b>嵌入模型 Embedding model</b><p>把段落和問題變成向量</p></div></div>
+      <div class="fs" data-step="3"><i>3</i><div><b>Save changes</b>，再按 <b>Test connections</b><p>兩項都應該顯示成功</p></div></div>
+    </div>
+  </div>
+  <div class="callout key bi xs" data-step="4"><span class="zh">API 金鑰要保密：不要放進倉庫、截圖，也不要發給別人。</span><span class="en">Keep your API key private: never put it in a repository, a screenshot or a message.</span></div>
+</section>
+
+<!-- ─────────── HistFig setup 3: figure and texts -->
+<section class="slide" id="s-hf3" data-sec="inclass">
+  <h2 class="bi"><span class="zh">用你們組的文本建立人物</span><span class="en">Create your figure from your group’s texts</span></h2>
+  <div class="hfflow">
+    <div class="hfs" data-step="1"><i>1</i><b>+ New figure</b><p>名字、年代、一張畫像、一段簡介</p><span class="opt">人物設定可以不填</span></div>
+    <div class="hfa" data-step="2">→</div>
+    <div class="hfs" data-step="2"><i>2</i><b>上載文本</b><div class="drop">把檔案拖到這裡，或點擊選擇<br><small>txt · md · pdf · docx</small></div></div>
+    <div class="hfa" data-step="3">→</div>
+    <div class="hfs" data-step="3"><i>3</i><b>等待 “ready”</b><div class="rdy"><span>texts.txt</span><em>ready</em></div><p>切段、算向量</p></div>
+    <div class="hfa" data-step="4">→</div>
+    <div class="hfs" data-step="4"><i>4</i><b>對話</b><p>按 <b>+ New conversation</b> 開始提問。<b>⚙ Options</b> 和 <b>Export ▾</b> 在對話上方。</p></div>
+  </div>
+  <div class="callout key bi xs" data-step="5"><span class="zh">在 Codespace 裡，離開前記得按 <b>Settings → Download backup</b>。GitHub 會刪除大約 30 天沒有使用的 Codespace。</span><span class="en">In a codespace, download a backup before you leave; unused codespaces are deleted after about 30 days.</span></div>
+</section>
+
+<!-- ─────────── Task -->
+<section class="slide" id="s-task" data-sec="inclass">
+  <h2 class="bi"><span class="zh">課堂練習：提問，再檢查</span><span class="en">In class: question your figure, then check the answers</span></h2>
+  <div class="tq-figs">
+    <figure><img src="assets/fig-libai.jpg" alt="Li Bai"><figcaption>李白</figcaption></figure>
+    <figure><img src="assets/fig-sushi.jpg" alt="Su Shi"><figcaption>蘇軾</figcaption></figure>
+    <figure><img src="assets/fig-daiyu.jpg" alt="Lin Daiyu"><figcaption>林黛玉</figcaption></figure>
+    <figure><img src="assets/fig-wukong.jpg" alt="Sun Wukong"><figcaption>孫悟空</figcaption></figure>
+    <figure><img src="assets/fig-luxun.jpg" alt="Lu Xun"><figcaption>魯迅</figcaption></figure>
+  </div>
+  <div class="tkgrid">
+    <div class="tq" data-step="1"><b>A · 可以查證的事實</b><p>你知道文本裡有的一首詩、一件事、一個人物</p></div>
+    <div class="tq" data-step="2"><b>B · 詮釋</b><p>人物對文本中某件事、某個人的看法</p></div>
+    <div class="tq" data-step="3"><b>C · 語料之外</b><p>作家死後的事，或原著沒寫到的事：它承認自己不知道嗎？</p></div>
+    <div class="tq" data-step="4"><b>D · 誘導性提問</b><p>錯誤的前提或帶立場的字眼：它會順著說嗎？</p></div>
+  </div>
+  <div class="tkrules" data-step="5"><span>每一類問<b>幾個</b>問題</span><span>試一次<b>關掉文件</b></span><span>每段對話都 <b>Export</b></span></div>
+</section>
+
+<!-- ─────────── How to check -->
+<section class="slide" id="s-check" data-sec="inclass">
+  <h2 class="bi"><span class="zh">怎樣檢查一個答案</span><span class="en">How to check an answer</span></h2>
+  <div class="chk">
+    <span data-step="1">挑一個說法</span><i data-step="2">→</i><span data-step="2">打開它的註腳</span><i data-step="3">→</i><span data-step="3">段落真的這樣說嗎？</span><i data-step="4">→</i><span data-step="4">沒有註腳？回到原文查證</span>
+  </div>
+  <div class="verdicts" data-step="5"><span class="ok">有根據</span><span class="part">部分有根據</span><span class="un">段落裡沒有</span><span class="bad">與原文矛盾</span><span class="bad">憑空捏造</span></div>
+  <div class="bi sm chkwhere" data-step="6"><span class="zh">出錯時，問一問錯在哪一環：<b>語料</b>（缺了文本、OCR 錯誤）、<b>檢索</b>（沒找到對的段落），還是<b>生成</b>（模型編造或扭曲了原文）？</span><span class="en">When something is wrong, ask whether it went wrong in the sources, the retrieval or the generation.</span></div>
+  <div class="callout key bi xs" data-step="7"><span class="zh">把問題、說法和判定記成一張簡單的表。如果你的期末專題用到這些文本，這張表就是現成的證據。</span><span class="en">Keep a simple log of questions, claims and verdicts; it can serve as evidence in your final project.</span></div>
+</section>
+
+<!-- ═══════════ 8. Summary -->
+<section class="slide" id="s-sum" data-sec="summary">
+  <h2 class="bi"><span class="zh">總結</span><span class="en">Summary</span></h2>
+  <div class="recap">
+    <div class="rrow" data-step="1"><i>1</i><div class="bi sm"><span class="zh">解碼器只往左看，預測<b>下一個詞元</b>，再把它接上去，一再重複。</span><span class="en">A decoder looks only to the left and predicts the next token, again and again.</span></div></div>
+    <div class="rrow" data-step="2"><i>2</i><div class="bi sm"><span class="zh">最後的向量 \(\mathbf h\) 和<b>反嵌入矩陣</b>的每一行做內積（\(\mathbf h^{\top}W_U\)），得出每個詞元的分數。</span><span class="en">The last vector takes a dot product with every column of the unembedding matrix.</span></div></div>
+    <div class="rrow" data-step="3"><i>3</i><div class="bi sm"><span class="zh"><b>Softmax</b> 把分數變成機率；<b>溫度</b>決定飛鏢射得多分散。</span><span class="en">The softmax turns scores into probabilities; temperature decides how widely the darts scatter.</span></div></div>
+    <div class="rrow" data-step="4"><i>4</i><div class="bi sm"><span class="zh">回答流暢、現代，但<b>沒有出處</b>。<b>RAG</b> 從我們自己的文本中找出段落，放到模型面前。</span><span class="en">Answers are fluent and modern but unsourced; RAG puts passages from our own texts in front of the model.</span></div></div>
+    <div class="rrow" data-step="5"><i>5</i><div class="bi sm"><span class="zh">註腳讓答案<b>可以查證</b>，而查證是我們讀者的工作。</span><span class="en">Footnotes make answers checkable, and checking them is our job.</span></div></div>
+  </div>
+  <div class="callout key bi xs" data-step="6"><span class="zh">期末專題計劃書明天（11月20日）上午 9:00 截止；下週（11月26日）課程總結。</span><span class="en">Proposal due tomorrow, 9:00 am; next week: review.</span></div>
+</section>
+
+<div id="side"></div>
+<div id="bar"></div>
+<div id="num"></div>
+</div>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="rag-data.js"></script>
+<script src="slides.js"></script>
+<script src="deck.js"></script>
+</body>
+</html>
