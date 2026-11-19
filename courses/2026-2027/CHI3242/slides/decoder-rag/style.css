@@ -2410,3 +2410,5 @@ pre.term { font-size: 15px !important; }
 #s-task .tk6 .tq p { font-size: 23px; margin-top: 4px; }
 #s-task .tkrules { margin-top: 18px; }
 #s-task .tkrules span { font-size: 22px; padding: 6px 16px; }
+/* model names on the Settings slide */
+code.mdl { display: block; width: fit-content; font-family: "SF Mono", Menlo, monospace; font-size: 18px; background: #2b2620; color: #efe7da; border-radius: 5px; padding: 3px 10px; margin: 5px 0 0; }
