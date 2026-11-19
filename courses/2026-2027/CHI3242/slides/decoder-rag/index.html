@@ -97,6 +97,22 @@
 </section>
 
 <!-- ═══════════ 2. From a vector to a word -->
+<!-- ─────────── Inside the decoder, short version: stops at h -->
+<section class="slide" id="s-dstack0" data-sec="head">
+  <h2 class="bi"><span class="zh">解碼器的結構：12 層之後，最後一個字預測下一個字</span><span class="en">Inside the decoder: after twelve layers, the last position predicts the next token</span></h2>
+  <div class="two dstack">
+    <svg class="diag" id="dstack0-svg" viewBox="0 0 700 500" aria-label="A decoder: tokens, embeddings, twelve masked layers, and the last vector h that predicts the next token"></svg>
+    <div class="dst-text">
+      <div class="dst"><i>①</i><span>上文切成<b>詞元</b>：這裡一個字一個詞元。</span></div>
+      <div class="dst" data-step="1"><i>②</i><span>每個詞元查表得到一個<b>靜態</b>向量（嵌入），和 BERT 一樣。</span></div>
+      <div class="dst" data-step="2"><i>③</i><span>每一層，每個字只看<b>自己和左邊</b>的字（遮罩），更新自己的向量。</span></div>
+      <div class="dst" data-step="3"><i>④</i><span>重複 12 層（GPT-2；大模型有數十層）。</span></div>
+      <div class="dst hot" data-step="4"><i>⑤</i><span>只有<b>最後一個位置</b>「葬」的向量 \(\mathbf h\) 讀過整個上文，用它來預測下一個詞元。</span></div>
+      <div class="dst hot" data-step="5"><i>⑥</i><span>這個 \(\mathbf h\) 怎樣變成詞表裡每個詞元的分數？</span></div>
+    </div>
+  </div>
+</section>
+
 <!-- ─────────── Unembedding: the quiz -->
 <section class="slide" id="s-unemb" data-sec="head">
   <h2 class="bi"><span class="zh">最後一步：反嵌入矩陣 \(W_U\)</span><span class="en">The last step: the unembedding matrix</span></h2>
@@ -362,10 +378,37 @@
   <div class="callout key bi xs" data-step="5"><span class="zh">有 RAG：先從<b>我們自己的文本</b>找出相關段落，再把段落和問題一起交給模型。回答可以附上出處。</span><span class="en">With RAG, passages from our own texts are retrieved first and sent to the model with the question.</span></div>
 </section>
 
+<!-- ─────────── Pipeline (diagram) -->
+<section class="slide" id="s-pipe" data-sec="rag">
+  <h2 class="bi"><span class="zh">RAG 流程，一步一步來</span><span class="en">The RAG pipeline, step by step</span></h2>
+  <div class="pv">
+    <svg class="pv-arrows" viewBox="0 0 1108 470">
+      <defs><marker id="pvh" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b03a2e"/></marker></defs>
+      <path data-step="2" d="M232,95 L282,95" />
+      <path data-step="3" d="M506,95 L556,95" />
+      <path data-step="4" d="M846,95 L896,95" />
+      <path data-step="5" d="M1000,186 C1000,222 330,206 160,232" />
+      <path data-step="6" d="M322,322 L372,322" />
+      <path data-step="6" d="M532,322 L582,322" />
+      <path data-step="7" d="M906,322 L944,322" />
+    </svg>
+    <div class="pvb pv-q" data-step="1"><i>1</i><span class="pvl">問題</span><div class="pvbub">你怎樣看阿Q？</div></div>
+    <div class="pvb pv-e" data-step="2"><i>2</i><span class="pvl">嵌入：問題變成向量</span><div class="vbars" id="pv-bars"></div><div class="vnums">[0.12, −0.40, 0.33, … ] 共 2,560 個數</div></div>
+    <div class="pvb pv-db" data-step="3"><i>3</i><span class="pvl">在 2,039 個段落向量中搜尋</span><div class="dbgrid" id="pv-db"></div></div>
+    <div class="pvb pv-top" data-step="4"><i>4</i><span class="pvl">最相近的 5 段</span><div id="pv-top"></div></div>
+    <div class="pvb pv-p" data-step="5"><i>5</i><span class="pvl">組成提示</span>
+      <div class="doc"><div class="dl ins">指示</div><div class="dl per">人物設定</div><div class="dl psg">[1] [2] [3] [4] [5] 段落</div><div class="dl qq">問題</div></div></div>
+    <div class="pvb pv-llm" data-step="6"><i>6</i><span class="pvl">生成</span><div class="llm" id="pv-llm">LLM</div></div>
+    <div class="pvb pv-ans" data-step="6"><span class="pvl">附註腳的回答</span><div class="pvans" id="pv-ans"></div></div>
+    <div class="pvb pv-chk" data-step="7"><i>7</i><span class="pvl">你來檢查</span><div class="chkc"><span class="mag">🔍</span><b>[1]</b><p>「我是否真能够写出一个现代的我们国人的魂灵来」</p><em>✓ 有根據</em></div></div>
+  </div>
+  <div class="callout key bi xs" data-step="8"><span class="zh">第 2 至 4 步是第 10 週的向量與餘弦相似度；第 6 步就是今天前半段的解碼器；第 7 步是我們讀者的工作。</span><span class="en">Steps 2 to 4 are Week 10’s vectors and cosine similarity; step 6 is today’s decoder; step 7 is our job as readers.</span></div>
+</section>
+
 <!-- ─────────── Sentence vectors: similarity matrix -->
 <section class="slide" id="s-sim" data-sec="rag">
   <h2 class="bi"><span class="zh">整句話也能變成一個向量</span><span class="en">A whole sentence can become one vector: cosine similarity between sentence vectors</span></h2>
-  <div class="simwrap"><div class="simg" id="sim-grid"></div><div class="simx" id="sim-x"></div></div>
+  <div class="simwrap"><div class="simx" id="sim-x"></div><div class="simg" id="sim-grid"></div></div>
   <div class="simnote">數字為示意</div>
   <div class="nt-steps"><i data-step="1"></i><i data-step="2"></i></div>
 </section>
@@ -395,33 +438,6 @@
     </div>
   </div>
   <div class="callout key bi xs" data-step="4"><span class="zh">RAG 的檢索就是這樣：把問題變成向量，找出向量最近的段落。</span><span class="en">Retrieval in RAG works the same way: the nearest passage vectors to the question vector.</span></div>
-</section>
-
-<!-- ─────────── Pipeline (diagram) -->
-<section class="slide" id="s-pipe" data-sec="rag">
-  <h2 class="bi"><span class="zh">RAG 流程，一步一步來</span><span class="en">The RAG pipeline, step by step</span></h2>
-  <div class="pv">
-    <svg class="pv-arrows" viewBox="0 0 1108 470">
-      <defs><marker id="pvh" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b03a2e"/></marker></defs>
-      <path data-step="2" d="M232,95 L282,95" />
-      <path data-step="3" d="M506,95 L556,95" />
-      <path data-step="4" d="M846,95 L896,95" />
-      <path data-step="5" d="M1000,186 C1000,222 330,206 160,232" />
-      <path data-step="6" d="M322,322 L372,322" />
-      <path data-step="6" d="M532,322 L582,322" />
-      <path data-step="7" d="M906,322 L944,322" />
-    </svg>
-    <div class="pvb pv-q" data-step="1"><i>1</i><span class="pvl">問題</span><div class="pvbub">你怎樣看阿Q？</div></div>
-    <div class="pvb pv-e" data-step="2"><i>2</i><span class="pvl">嵌入：問題變成向量</span><div class="vbars" id="pv-bars"></div><div class="vnums">[0.12, −0.40, 0.33, … ] 共 2,560 個數</div></div>
-    <div class="pvb pv-db" data-step="3"><i>3</i><span class="pvl">在 2,039 個段落向量中搜尋</span><div class="dbgrid" id="pv-db"></div></div>
-    <div class="pvb pv-top" data-step="4"><i>4</i><span class="pvl">最相近的 5 段</span><div id="pv-top"></div></div>
-    <div class="pvb pv-p" data-step="5"><i>5</i><span class="pvl">組成提示</span>
-      <div class="doc"><div class="dl ins">指示</div><div class="dl per">人物設定</div><div class="dl psg">[1] [2] [3] [4] [5] 段落</div><div class="dl qq">問題</div></div></div>
-    <div class="pvb pv-llm" data-step="6"><i>6</i><span class="pvl">生成</span><div class="llm" id="pv-llm">LLM</div></div>
-    <div class="pvb pv-ans" data-step="6"><span class="pvl">附註腳的回答</span><div class="pvans" id="pv-ans"></div></div>
-    <div class="pvb pv-chk" data-step="7"><i>7</i><span class="pvl">你來檢查</span><div class="chkc"><span class="mag">🔍</span><b>[1]</b><p>「我是否真能够写出一个现代的我们国人的魂灵来」</p><em>✓ 有根據</em></div></div>
-  </div>
-  <div class="callout key bi xs" data-step="8"><span class="zh">第 2 至 4 步是第 10 週的向量與餘弦相似度；第 6 步就是今天前半段的解碼器；第 7 步是我們讀者的工作。</span><span class="en">Steps 2 to 4 are Week 10’s vectors and cosine similarity; step 6 is today’s decoder; step 7 is our job as readers.</span></div>
 </section>
 
 <!-- ─────────── The actual prompt -->
@@ -481,7 +497,7 @@
 <section class="slide" id="s-map" data-lock data-sec="retrieval">
   <h2 class="bi"><span class="zh">每一段是一個點，問題也是</span><span class="en">Each passage is a point, and so is the question</span></h2>
   <div class="two maptwo">
-    <svg class="plot" id="map-plot" viewBox="0 0 560 470"></svg>
+    <svg class="plot" id="map-plot" viewBox="0 0 760 470"></svg>
     <div class="grow mapright">
       <div class="mapq" id="map-q"></div>
       <div id="map-hits" class="maphits"></div>
@@ -638,7 +654,7 @@ uv run histfig</pre>
 
 <!-- ─────────── Task -->
 <section class="slide" id="s-task" data-sec="inclass">
-  <h2 class="bi"><span class="zh">課堂練習：提問，再檢查</span><span class="en">In class: question your figure, then check the answers</span></h2>
+  <h2 class="bi"><span class="zh">對話時留意這六件事</span><span class="en">Six things to look out for while you chat</span></h2>
   <div class="tq-figs">
     <figure><img src="assets/fig-libai.jpg" alt="Li Bai"><figcaption>李白</figcaption></figure>
     <figure><img src="assets/fig-sushi.jpg" alt="Su Shi"><figcaption>蘇軾</figcaption></figure>
@@ -646,13 +662,15 @@ uv run histfig</pre>
     <figure><img src="assets/fig-wukong.jpg" alt="Sun Wukong"><figcaption>孫悟空</figcaption></figure>
     <figure><img src="assets/fig-luxun.jpg" alt="Lu Xun"><figcaption>魯迅</figcaption></figure>
   </div>
-  <div class="tkgrid">
-    <div class="tq" data-step="1"><b>A · 可以查證的事實</b><p>你知道文本裡有的一首詩、一件事、一個人物</p></div>
-    <div class="tq" data-step="2"><b>B · 詮釋</b><p>人物對文本中某件事、某個人的看法</p></div>
-    <div class="tq" data-step="3"><b>C · 語料之外</b><p>作家死後的事，或原著沒寫到的事：它承認自己不知道嗎？</p></div>
-    <div class="tq" data-step="4"><b>D · 誘導性提問</b><p>錯誤的前提或帶立場的字眼：它會順著說嗎？</p></div>
+  <div class="tkgrid tk6">
+    <div class="tq" data-step="1"><b>① 最成功的一次</b><p>記下問題，和回答裡最好的一兩句</p></div>
+    <div class="tq" data-step="1"><b>② 抓一個錯誤</b><p>錯在哪一環：語料、檢索，還是生成？</p></div>
+    <div class="tq" data-step="2"><b>③ 打開註腳</b><p>回答有沒有超出段落所說的？哪句沒有註腳？</p></div>
+    <div class="tq" data-step="2"><b>④ 像不像？</b><p>語氣、用詞、立場、時代感：哪裡像，哪裡不像</p></div>
+    <div class="tq" data-step="3"><b>⑤ 開關文件</b><p>關掉文件，再問一次同樣的問題，比較兩個回答</p></div>
+    <div class="tq" data-step="3"><b>⑥ 用今天的概念解釋</b><p>下一個詞元、溫度、softmax、向量檢索……</p></div>
   </div>
-  <div class="tkrules" data-step="5"><span>每一類問<b>幾個</b>問題</span><span>試一次<b>關掉文件</b></span><span>每段對話都 <b>Export</b></span></div>
+  <div class="tkrules" data-step="4"><span>每段對話都 <b>Export</b>，問卷可上載 1–5 份</span><span>課後填寫<b>反思問卷</b>（課程網頁），不計分</span></div>
 </section>
 
 <!-- ─────────── How to check -->

@@ -94,8 +94,10 @@ const softmax = (zs, T = 1) => { const m = Math.max(...zs), e = zs.map(z => Math
 })();
 
 /* ---------- inside the decoder: tokens → embeddings → 12 masked layers → the last vector h → W_U ---------- */
-(function () {
-  const svg = $('#dstack-svg'), T = ['寒', '塘', '渡', '鶴', '影', '，', '冷', '月', '葬'];
+// drawn twice: a short version that stops at h (before the unembedding slides) and the full one (after softmax)
+['#dstack0-svg', '#dstack-svg'].forEach(function (sel, version) {
+  const full = version === 1;
+  const svg = $(sel), T = ['寒', '塘', '渡', '鶴', '影', '，', '冷', '月', '葬'];
   const BLUE = '#2f6db5', LAST = T.length - 1;
   const X = i => 120 + i * 62;
   const rowY = { tok: 470, emb: 422, l1: 362, l2: 304, l12: 210, out: 150 };
@@ -135,6 +137,13 @@ const softmax = (zs, T = 1) => { const m = Math.max(...zs), e = zs.map(z => Math
   });
   el('rect', { x: X(LAST) - 30, y: rowY.out - 20, width: 60, height: 40, rx: 9, fill: 'none', stroke: SEAL, 'stroke-width': 2.5 }, go);
   txt(go, X(LAST) + 46, rowY.out + 9, 'h', { 'font-size': 28, 'font-style': 'italic', 'font-weight': 700, fill: '#7c3aed', 'font-family': 'Georgia, serif' });
+  if (!full) {   // the short version ends with a question mark above h
+    const gq = el('g', { 'data-step': 5 }, svg);
+    el('line', { x1: X(LAST), y1: rowY.out - 22, x2: X(LAST), y2: 62, stroke: SEAL, 'stroke-width': 3, 'stroke-dasharray': '6 5' }, gq);
+    txt(gq, X(LAST), 48, '？', { 'font-size': 36, fill: SEAL, 'font-weight': 700 });
+    txt(gq, X(LAST) - 30, 40, '下一個詞元', { 'font-size': 17, fill: SEAL, 'text-anchor': 'end' });
+    return;
+  }
   // h × W_U → softmax → 花
   const gw = el('g', { 'data-step': 5 }, svg);
   el('line', { x1: X(LAST), y1: rowY.out - 22, x2: X(LAST), y2: 62, stroke: SEAL, 'stroke-width': 3 }, gw);
@@ -145,7 +154,7 @@ const softmax = (zs, T = 1) => { const m = Math.max(...zs), e = zs.map(z => Math
   el('rect', { x: X(LAST) - 30, y: 4, width: 60, height: 46, rx: 9, fill: SEAL }, gw);
   txt(gw, X(LAST), 38, '花', { 'font-size': 30, fill: '#fff', 'font-family': 'Songti TC, Noto Serif TC, serif', 'font-weight': 700 });
   txt(gw, X(LAST) - 44, 34, '下一個詞元', { 'font-size': 17, fill: SEAL, 'text-anchor': 'end' });
-})();
+});
 
 /* ---------- three training stages, each with its own looping animation ---------- */
 (function () {
@@ -407,60 +416,77 @@ function cosCurve(svg, o = {}) {
 })();
 })();
 
-/* ---------- map of the Lu Xun passages (real embeddings, PCA to 2D) ---------- */
+/* ---------- map of the Lu Xun passages (illustrative), with a zoom on the question's neighbourhood ----------
+   left: the whole cloud with a small square around ★; right: that square enlarged, where the five
+   retrieved passages and a dashed circle through the fifth show that no other passage is closer */
 (function () {
   const R = window.RAG; if (!R) return;
-  const svg = $('#map-plot'), W = 560, Hh = 470, pad = 18;
+  const svg = $('#map-plot'), W = 760, Hh = 470;
   const COL = ['#8a7a63', '#2f6db5', '#2a9d8f', '#5b8c3a', '#8e5bb5', SEAL];
   const pts = []; for (let i = 0; i < R.pts.length; i += 3) pts.push([R.pts[i], R.pts[i + 1], R.pts[i + 2]]);
   const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]);
   const xmin = Math.min(...xs), xmax = Math.max(...xs), ymin = Math.min(...ys), ymax = Math.max(...ys);
-  const legH = 96;
-  const s = Math.min((W - 2 * pad) / (xmax - xmin), (Hh - 2 * pad - legH) / (ymax - ymin));
-  const X = x => pad + (x - xmin) * s + ((W - 2 * pad) - (xmax - xmin) * s) / 2;
-  const Y = y => Hh - pad - (y - ymin) * s;
+  // main map area and zoom area (svg units)
+  const M = { x: 12, y: 104, w: 400, h: 354 }, Z = { x: 446, y: 120, s: 300 }, RZ = 0.058;   // RZ: data half-width shown in the zoom
+  const s = Math.min(M.w / (xmax - xmin), M.h / (ymax - ymin));
+  const X = x => M.x + (x - xmin) * s + (M.w - (xmax - xmin) * s) / 2;
+  const Y = y => M.y + M.h - (y - ymin) * s - (M.h - (ymax - ymin) * s) / 2;
   el('rect', { x: 0.75, y: 0.75, width: W - 1.5, height: Hh - 1.5, rx: 12, fill: '#fffdf8', stroke: LINE, 'stroke-width': 1.5 }, svg);
   const gPts = el('g', {}, svg);
-  pts.forEach(([x, y, d]) => el('circle', { cx: X(x), cy: Y(y), r: 2.6, fill: COL[d], 'fill-opacity': 0.42 }, gPts));
+  pts.forEach(([x, y, d]) => el('circle', { cx: X(x), cy: Y(y), r: 2.2, fill: COL[d], 'fill-opacity': 0.42 }, gPts));
   // legend
   const gL = el('g', {}, svg);
   R.docs.forEach((d, i) => {
-    const lx = 16 + (i % 2) * 272, ly = 18 + Math.floor(i / 2) * 20;
+    const lx = 16 + (i % 3) * 248, ly = 22 + Math.floor(i / 3) * 21;
     el('circle', { cx: lx + 5, cy: ly - 5, r: 5, fill: COL[i] }, gL);
     el('text', { x: lx + 15, y: ly, 'font-size': 14, fill: INK }, gL, d);
   });
   const gK = el('g', {}, svg);
-  el('path', { d: star(24, 92, 9, 4), fill: '#f2b705', stroke: INK, 'stroke-width': 1.2 }, gK);
-  el('text', { x: 38, y: 97, 'font-size': 14, 'font-weight': 600, fill: INK }, gK, '問題');
-  el('circle', { cx: 160, cy: 92, r: 8, fill: '#8a7a63', stroke: '#fff', 'stroke-width': 1.5 }, gK);
-  el('text', { x: 160, y: 96, 'text-anchor': 'middle', 'font-size': 10, 'font-weight': 700, fill: '#fff' }, gK, '1');
-  el('text', { x: 174, y: 97, 'font-size': 14, 'font-weight': 600, fill: INK }, gK, '檢索到的段落');
-  el('circle', { cx: 316, cy: 92, r: 3, fill: '#8a7a63', 'fill-opacity': 0.6 }, gK);
-  el('text', { x: 326, y: 97, 'font-size': 14, fill: INK }, gK, '其他段落');
+  el('path', { d: star(24, 76, 9, 4), fill: '#f2b705', stroke: INK, 'stroke-width': 1.2 }, gK);
+  el('text', { x: 38, y: 81, 'font-size': 14, 'font-weight': 600, fill: INK }, gK, '問題');
+  el('circle', { cx: 100, cy: 76, r: 8, fill: '#8a7a63', stroke: '#fff', 'stroke-width': 1.5 }, gK);
+  el('text', { x: 100, y: 80, 'text-anchor': 'middle', 'font-size': 10, 'font-weight': 700, fill: '#fff' }, gK, '1');
+  el('text', { x: 114, y: 81, 'font-size': 14, 'font-weight': 600, fill: INK }, gK, '檢索到的段落');
+  el('circle', { cx: 230, cy: 76, r: 3, fill: '#8a7a63', 'fill-opacity': 0.6 }, gK);
+  el('text', { x: 240, y: 81, 'font-size': 14, fill: INK }, gK, '其他段落');
   const dyn = el('g', {}, svg);
   let qi = 0;
   const draw = () => {
     while (dyn.firstChild) dyn.removeChild(dyn.firstChild);
-    const q = R.queries[qi], qx = X(q.xy[0]), qy = Y(q.xy[1]);
-    // screen positions of the hits; push any hit hidden under the star outwards (illustrative data)
-    const HP = q.hits.map((h, k) => {
-      const p = pts[h.i]; let x = X(p[0]), y = Y(p[1]);
-      const dx = x - qx, dy = y - qy, d = Math.hypot(dx, dy);
-      if (d < 20) { const a = d > 1 ? Math.atan2(dy, dx) : (k * 2.4); x = qx + 20 * Math.cos(a); y = qy + 20 * Math.sin(a); }
-      return [x, y, p[2]];
+    const q = R.queries[qi], [qx0, qy0] = q.xy, qx = X(qx0), qy = Y(qy0);
+    // main map: ★ and the square that the zoom shows
+    const half = RZ * s;
+    el('rect', { x: qx - half, y: qy - half, width: 2 * half, height: 2 * half, fill: 'none', stroke: INK, 'stroke-width': 1.6 }, dyn);
+    el('path', { d: star(qx, qy, 10, 4.5), fill: '#f2b705', stroke: INK, 'stroke-width': 1.2 }, dyn);
+    // connectors from the square to the zoom
+    el('line', { x1: qx + half, y1: qy - half, x2: Z.x, y2: Z.y, stroke: '#b9ae9c', 'stroke-width': 1.2 }, dyn);
+    el('line', { x1: qx + half, y1: qy + half, x2: Z.x, y2: Z.y + Z.s, stroke: '#b9ae9c', 'stroke-width': 1.2 }, dyn);
+    // zoom panel
+    const k = Z.s / (2 * RZ), cx = Z.x + Z.s / 2, cy = Z.y + Z.s / 2;
+    const ZX = x => cx + (x - qx0) * k, ZY = y => cy - (y - qy0) * k;
+    const clipId = 'mapclip';
+    const defs = el('defs', {}, dyn), cp = el('clipPath', { id: clipId }, defs);
+    el('rect', { x: Z.x, y: Z.y, width: Z.s, height: Z.s }, cp);
+    el('rect', { x: Z.x, y: Z.y, width: Z.s, height: Z.s, fill: '#fff', stroke: INK, 'stroke-width': 1.6 }, dyn);
+    const gz = el('g', { 'clip-path': `url(#${clipId})` }, dyn);
+    const hitSet = new Set(q.hits.map(h => h.i));
+    pts.forEach(([x, y, d], i) => {
+      if (hitSet.has(i) || Math.abs(x - qx0) > RZ * 1.05 || Math.abs(y - qy0) > RZ * 1.05) return;
+      el('circle', { cx: ZX(x), cy: ZY(y), r: 4, fill: COL[d], 'fill-opacity': 0.5 }, gz);
     });
-    HP.forEach(([x, y]) => el('line', { x1: qx, y1: qy, x2: x, y2: y, stroke: INK, 'stroke-width': 1.6, 'stroke-opacity': 0.55 }, dyn));
-    el('path', { d: star(qx, qy, 15, 6.5), fill: '#f2b705', stroke: INK, 'stroke-width': 1.6 }, dyn);
-    HP.forEach(([x, y, d], k) => {
-      el('circle', { cx: x, cy: y, r: 10, fill: COL[d], stroke: '#fff', 'stroke-width': 2 }, dyn);
-      el('text', { x, y: y + 4.5, 'text-anchor': 'middle', 'font-size': 12, 'font-weight': 700, fill: '#fff' }, dyn, k + 1);
+    // dashed circle through the fifth hit: nothing else lies inside it
+    const p5 = pts[q.hits[q.hits.length - 1].i], r5 = Math.hypot(p5[0] - qx0, p5[1] - qy0) * k;
+    el('circle', { cx, cy, r: r5 + 9, fill: 'rgba(242, 183, 5, .07)', stroke: '#b58500', 'stroke-width': 1.6, 'stroke-dasharray': '6 5' }, gz);
+    q.hits.forEach(h => { const p = pts[h.i]; el('line', { x1: cx, y1: cy, x2: ZX(p[0]), y2: ZY(p[1]), stroke: INK, 'stroke-width': 1.4, 'stroke-opacity': 0.5 }, gz); });
+    el('path', { d: star(cx, cy, 16, 7), fill: '#f2b705', stroke: INK, 'stroke-width': 1.6 }, gz);
+    q.hits.forEach((h, n) => {
+      const p = pts[h.i], x = ZX(p[0]), y = ZY(p[1]);
+      el('circle', { cx: x, cy: y, r: 11, fill: COL[p[2]], stroke: '#fff', 'stroke-width': 2 }, gz);
+      el('text', { x, y: y + 4.5, 'text-anchor': 'middle', 'font-size': 13, 'font-weight': 700, fill: '#fff' }, gz, n + 1);
     });
-    // label the star
-    const ly = qy + 62, lx = qx - 60;
-    el('line', { x1: qx, y1: qy + 14, x2: qx - 8, y2: ly - 16, stroke: INK, 'stroke-width': 1.5 }, dyn);
-    el('text', { x: lx, y: ly, 'font-size': 18, 'font-weight': 700, fill: INK, stroke: '#fffdf8', 'stroke-width': 5, 'paint-order': 'stroke' }, dyn, '你的問題');
+    el('text', { x: Z.x + 8, y: Z.y - 8, 'font-size': 15, 'font-weight': 600, fill: INK }, dyn, '放大：問題附近');
     $('#map-q').innerHTML = `<span>問題 ${qi + 1} / ${R.queries.length}</span><b class="zhs">${q.q}</b>`;
-    $('#map-hits').innerHTML = q.hits.map((h, k) => `<div class="mh"><i style="background:${COL[R.docs.indexOf(h.doc)]}">${k + 1}</i><div><b>${h.doc}，第 ${h.part} 段</b> <em>${h.sim.toFixed(2)}</em><p>${h.text}</p></div></div>`).join('');
+    $('#map-hits').innerHTML = q.hits.map((h, n) => `<div class="mh"><i style="background:${COL[R.docs.indexOf(h.doc)]}">${n + 1}</i><div><b>${h.doc}，第 ${h.part} 段</b> <em>${h.sim.toFixed(2)}</em><p>${h.text}</p></div></div>`).join('');
   };
   function star(cx, cy, r1, r2) {
     let d = '';

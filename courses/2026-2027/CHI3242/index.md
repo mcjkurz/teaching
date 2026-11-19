@@ -425,7 +425,6 @@ title: CHI3242
       <td class="topic"><span class="lang-en">Decoders and LLMs</span><span class="lang-zh" lang="zh-Hant">解碼器與大型語言模型</span></td>
       <td>
         <ul class="readings">
-          <li><strong><span class="lang-en">Guest: Du Chunmei, Department of History</span><span class="lang-zh" lang="zh-Hant">客席講者：杜春媚（歷史系）</span></strong></li>
           <li><span class="lang-en">From BERT to GPT; generative models; what is “context”?; next-token probability</span><span class="lang-zh" lang="zh-Hant">從 BERT 到 GPT；生成模型；什麼是「上下文」？；下一詞元機率</span></li>
           <li><span class="lang-en">LLMs for data extraction; Python API (OpenRouter)</span><span class="lang-zh" lang="zh-Hant">以大型語言模型抽取資料；Python API（OpenRouter）</span></li>
           <li>Jay Alammar, <a href="https://jalammar.github.io/illustrated-gpt2/">“The Illustrated GPT-2”</a></li>
@@ -433,7 +432,7 @@ title: CHI3242
           <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Emily M. Bender et al., “On the Dangers of Stochastic Parrots” (FAccT 2021)</li>
         </ul>
       </td>
-      <td class="notes"><a href="slides/decoder-rag/">Slides</a><br><a href="https://forms.gle/4M8VSe4nNRWinJqe8">Questionnaire</a></td>
+      <td class="notes"><a href="https://forms.gle/4M8VSe4nNRWinJqe8">Questionnaire</a></td>
     </tr>
   </tbody>
   <tbody class="due">
