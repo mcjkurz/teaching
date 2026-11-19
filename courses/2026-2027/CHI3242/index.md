@@ -432,7 +432,7 @@ title: CHI3242
           <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Emily M. Bender et al., “On the Dangers of Stochastic Parrots” (FAccT 2021)</li>
         </ul>
       </td>
-      <td class="notes"><a href="https://forms.gle/4M8VSe4nNRWinJqe8">Questionnaire</a></td>
+      <td class="notes"><a href="https://github.com/mcjkurz/histfig">HistFig</a><br><a href="https://forms.gle/4M8VSe4nNRWinJqe8">Questionnaire</a></td>
     </tr>
   </tbody>
   <tbody class="due">
