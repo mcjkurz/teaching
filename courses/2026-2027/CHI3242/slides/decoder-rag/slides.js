@@ -724,20 +724,23 @@ function cosCurve(svg, o = {}) {
   const S = ['我的手機不好用。', '你的電話看起來很棒。', '明天會下雪嗎？', '最近很多颱風吹襲香港。', '一天一蘋果，醫生遠離我。', '吃草莓有益健康。'];
   const M = [[1, .50, .14, .24, .30, .23], [.50, 1, .09, .10, .21, .15], [.14, .09, 1, .38, .16, .22],
              [.24, .10, .38, 1, .08, .16], [.30, .21, .16, .08, 1, .56], [.23, .15, .22, .16, .56, 1]];
+  const SIM_L = 283, SIM_C = 54;   // row-label column (+ gap) and cell size, as in style.css
   const col = v => { const t = Math.min(1, v / .6); return `rgba(176, 58, 46, ${(0.08 + 0.85 * t).toFixed(2)})`; };
-  let h = '<span></span>' + S.map((_, j) => `<span class="simh">${j + 1}</span>`).join('');
+  let h = '';
   S.forEach((s, i) => {
-    h += `<span class="siml"><i>${i + 1}</i>${s}</span>`;
+    h += `<span class="siml">${s}</span>`;
     M[i].forEach((v, j) => {
       const pair = (i !== j) && ((i < 2 && j < 2) ? 2 : (i > 3 && j > 3) ? 3 : 0);
       h += `<span class="simc${i === j ? ' diag' : ''}${pair ? ' p' + pair : ''}" style="background:${i === j ? '#e9e3d8' : col(v)};color:${v > .35 && i !== j ? '#fff' : 'var(--ink)'}">${v.toFixed(2)}</span>`;
     });
   });
+  // column labels: the same sentences, slanted under each column as in a matplotlib heatmap
+  $('#sim-x').innerHTML = S.map((s, j) => `<span style="left:${SIM_L + j * (SIM_C + 3) + SIM_C / 2}px">${s}</span>`).join('');
   $('#sim-grid').innerHTML = h;
   window.HOOKS['s-sim'] = {
     render(step) {
-      $$('#sim-grid .p2').forEach(e => e.classList.toggle('hl', step === 2));
-      $$('#sim-grid .p3').forEach(e => e.classList.toggle('hl', step === 3));
+      $$('#sim-grid .p2').forEach(e => e.classList.toggle('hl', step === 1));
+      $$('#sim-grid .p3').forEach(e => e.classList.toggle('hl', step === 2));
     }
   };
 })();

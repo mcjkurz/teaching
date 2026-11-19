@@ -48,6 +48,7 @@
 <!-- ─────────── The Transformer: encoder and decoder -->
 <section class="slide" id="s-tf" data-sec="lm">
   <h2 class="bi"><span class="zh">變換器的兩半：編碼器與解碼器</span><span class="en">The two halves of the Transformer: encoder and decoder</span></h2>
+  <figure class="tf-paper" data-step="0" data-until="1"><img src="assets/attention-paper.png" alt="First page of Vaswani et al., Attention Is All You Need (2017)"><figcaption>Vaswani et al., “Attention Is All You Need” (2017)：變換器（Transformer）由此而來</figcaption></figure>
   <div class="tfl">
     <div class="tfn tf-e" data-step="1"><i>左</i><div><b>編碼器 encoder ＝ BERT</b><p>第 11 週：每個字看左右兩邊，輸出上下文向量。</p></div></div>
     <div class="tfn tf-d" data-step="2"><i>右</i><div><b>解碼器 decoder ＝ GPT</b><p>今天：一次生成一個詞元。GPT 只用右半，所以也沒有中間那個「看編碼器」的注意力層。</p></div></div>
@@ -335,10 +336,13 @@
       <text x="885" y="120" class="rv-anst">回答</text>
     </g>
     <g data-step="5"><rect x="912" y="40" width="96" height="36" rx="18" class="rv-badge"/><text x="960" y="65" class="rv-badget">附出處</text></g>
-    <!-- RAG -->
+    <!-- RAG frame: the last click names the retrieval steps -->
+    <g data-step="6">
+      <rect class="rv-frame" x="30" y="244" width="690" height="220" rx="12"/>
+      <text x="704" y="290" class="rv-rag" text-anchor="end">RAG</text>
+    </g>
+    <!-- retrieval -->
     <g data-step="2">
-      <rect class="rv-frame" x="36" y="262" width="680" height="190" rx="10"/>
-      <text x="700" y="304" class="rv-rag" text-anchor="end">RAG</text>
       <line class="rv-ar" x1="120" y1="250" x2="120" y2="318"/>
       <rect class="rv-db" x="56" y="330" width="210" height="96" rx="14"/>
       <text x="161" y="372" class="rv-dbt">文本資料庫</text>
@@ -351,7 +355,7 @@
     </g>
     <g data-step="4">
       <line class="rv-ar" x1="560" y1="306" x2="560" y2="190"/>
-      <text x="580" y="250" class="rv-lab rv-left">段落 ＋ 問題</text>
+      <text x="580" y="222" class="rv-lab rv-left">段落 ＋ 問題</text>
     </g>
   </svg>
   <div class="callout bi xs" data-step="1"><span class="zh">沒有 RAG：模型只憑訓練時記住的東西回答，說不出出處。</span><span class="en">Without RAG, the model answers from what it memorised in training.</span></div>
@@ -360,16 +364,10 @@
 
 <!-- ─────────── Sentence vectors: similarity matrix -->
 <section class="slide" id="s-sim" data-sec="rag">
-  <h2 class="bi"><span class="zh">整句話也能變成一個向量</span><span class="en">A whole sentence can become one vector</span></h2>
-  <div class="two simtwo">
-    <div class="simg" id="sim-grid"></div>
-    <div class="grow simr">
-      <div class="bi sm" data-step="1"><span class="zh">嵌入模型把<b>一整句</b>（或一整段）變成一個向量，再兩兩算餘弦相似度。</span><span class="en">An embedding model turns each sentence into one vector; every pair gets a cosine similarity.</span></div>
-      <div class="bi sm" data-step="2"><span class="zh">「手機」和「電話」沒有一個字相同，兩句的相似度卻最高之一。</span><span class="en">The two phone sentences share no characters but are among the closest pairs.</span></div>
-      <div class="bi sm" data-step="3"><span class="zh">「蘋果」和「草莓」：都在說吃得健康。</span><span class="en">Apples and strawberries: both are about healthy eating.</span></div>
-      <div class="callout key bi xs" data-step="4"><span class="zh">向量比較的是<b>意思</b>，不只是字面。數字為示意。</span><span class="en">Vectors compare meaning, not only wording. Illustrative numbers.</span></div>
-    </div>
-  </div>
+  <h2 class="bi"><span class="zh">整句話也能變成一個向量</span><span class="en">A whole sentence can become one vector: cosine similarity between sentence vectors</span></h2>
+  <div class="simwrap"><div class="simg" id="sim-grid"></div><div class="simx" id="sim-x"></div></div>
+  <div class="simnote">數字為示意</div>
+  <div class="nt-steps"><i data-step="1"></i><i data-step="2"></i></div>
 </section>
 
 <!-- ─────────── Sentence vectors: nearest lines of poetry, and across languages -->
