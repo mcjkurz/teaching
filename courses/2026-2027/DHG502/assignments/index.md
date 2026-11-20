@@ -3,7 +3,7 @@ layout: default
 title: DHG502 Assignments
 ---
 
-<p class="updated">Last updated: Nov 9, 2026</p>
+<p class="updated">Last updated: Nov 20, 2026</p>
 <h1>DHG 502 Assignments</h1>
 
 <h2>Submission Rules</h2>
@@ -62,29 +62,21 @@ title: DHG502 Assignments
 
 <h2>Final Project (30%)</h2>
 <p><strong>Due:</strong> 7 Dec, 9:00 am</p>
-<p>The final project may be completed individually or in a group of up to three students. Groups submit one shared project and identify every member. Use one or more course methods to answer a focused historical question. Submit the repository URL and a 2,000–3,000-word report in English through Moodle. The report word count excludes the abstract, bibliography, captions, and appendices.</p>
+<p>The final project may be completed individually or in a group of up to three students. Groups submit one shared project and state each member’s contribution using the Contributor Role Taxonomy (CRediT). Build a dataset of historical sources related to Global Asia and use one or more course methods to answer a focused historical question. Work with as much data as you can: computational methods reveal new patterns only when they can see many sources, so collect hundreds or thousands of documents. Submit the repository URL and the report through Moodle.</p>
 
-<h3>Required repository contents</h3>
-<ul>
-<li><code>README.md</code> with the question, a short project summary, repository map, and exact instructions for reproducing the analysis</li>
-<li><code>data/</code> with shareable data, or metadata and acquisition instructions when sources are restricted</li>
-<li><code>data-dictionary.md</code> or <code>schema.json</code> defining fields, units, categories, identifiers, and missing values</li>
-<li><code>code/</code> or <code>notebooks/</code> containing the complete analysis workflow</li>
-<li><code>output/</code> and <code>figures/</code> containing the results used in the report</li>
-<li><code>requirements.txt</code> (or an equivalent environment file) with the software dependencies</li>
-<li><code>AI-USE.md</code> following the course-wide requirements</li>
-<li>the final report in Markdown, PDF, or both</li>
-</ul>
+<h3>Repository</h3>
+<p>The repository contains your data (or instructions for obtaining restricted sources), your code, your figures, <code>AI-USE.md</code> following the course-wide requirements, and a <code>README.md</code> that explains how to reproduce your results.</p>
 
-<h3>Report structure</h3>
+<h3>Report</h3>
+<p>Write 2,000–3,000 words in English, excluding the abstract, bibliography, captions, and appendices. Submit it as a PDF in Times New Roman 12pt, double-spaced. Put all figures and graphs inside the report, and make tables selectable text instead of screenshots. The report contains the following sections:</p>
 <ul>
 <li><strong>Abstract:</strong> goals, methods, and findings (maximum 150 words)</li>
-<li><strong>Question and context:</strong> historical significance and relevant scholarship</li>
-<li><strong>Sources and dataset:</strong> provenance, rights, sampling, structure, and transformations</li>
-<li><strong>Methods:</strong> explanation and justification understandable to a historian</li>
-<li><strong>Validation:</strong> manual checks, error analysis, and consequential analytical decisions</li>
-<li><strong>Analysis:</strong> results, visualizations, close reading, and historical interpretation</li>
-<li><strong>Limitations and conclusion:</strong> uncertainty, bias, ethics, findings, and possible improvements</li>
+<li><strong>Introduction:</strong> research question and historical context</li>
+<li><strong>Dataset:</strong> sources, size, and preprocessing steps</li>
+<li><strong>Methods:</strong> techniques used and why they fit the question</li>
+<li><strong>Analysis:</strong> results and historical interpretation</li>
+<li><strong>Limitations:</strong> challenges, biases, and possible improvements</li>
+<li><strong>AI use statement:</strong> which AI tools you used and how (a short summary of <code>AI-USE.md</code>)</li>
 </ul>
 
 <h3>Marking criteria</h3>
@@ -92,7 +84,7 @@ title: DHG502 Assignments
 <li><strong>Historical question, scholarship, and argument (25%)</strong></li>
 <li><strong>Sources, data, provenance, and ethics (15%)</strong></li>
 <li><strong>Methodological implementation and fit (20%)</strong></li>
-<li><strong>Validation, error analysis, and limitations (15%)</strong></li>
+<li><strong>Limitations and critical evaluation of results (15%)</strong></li>
 <li><strong>Interpretation and visualization (15%)</strong></li>
 <li><strong>Reproducibility, documentation, citations, and AI disclosure (10%)</strong></li>
 </ul>
