@@ -288,3 +288,8 @@ pre.code, pre.term { font-family: var(--mono), var(--cjk); }
 .lane .fx.zt { font-family: var(--cjk-serif); font-size: 20px; line-height: 1.5; padding: 8px 12px; text-align: left; }
 .lane .fa { flex: none; width: 36px; text-align: center; font-size: 28px; color: var(--seal); }
 #s-api-ocr .callout { font-size: 24px; margin-top: 16px; }
+#s-prompt pre.promptbox { font-size: 15.5px; line-height: 1.42; padding: 10px 18px; }
+#s-prompt h2 { margin-bottom: 10px; }
+#s-prompt .callout { font-size: 22px; padding: 8px 22px; }
+#s-prompt pre.promptbox { column-count: 2; column-gap: 34px; column-rule: 1px solid #4a4238; font-size: 16.5px; line-height: 1.45; padding: 14px 20px; }
+#s-prompt pre.promptbox { font-size: 17px; }
