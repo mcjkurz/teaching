@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Structured Data — DHG 502</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+
+<!-- ─────────── Title -->
+<section class="slide full title-slide" id="s-title">
+  <div class="big-en">Structured Data</div>
+  <div class="big-zh">結構化數據</div>
+  <div class="rule"></div>
+  <div class="quote">How do we turn a paragraph about a person into records that a computer can sort, count and query?</div>
+  <div class="title-pics">
+    <figure><img src="assets/liangqichao.jpg" alt="Liang Qichao">Liang Qichao 梁啟超</figure>
+    <figure><img src="assets/qiujin.jpg" alt="Qiu Jin">Qiu Jin 秋瑾</figure>
+    <figure><img src="assets/luxun.jpg" alt="Lu Xun">Lu Xun 魯迅</figure>
+  </div>
+  <div class="hint">DHG 502 Digital Approaches in Historical Research · Week 11 &nbsp;·&nbsp; <kbd>←</kbd> <kbd>→</kbd> navigate &nbsp;·&nbsp; <kbd>1</kbd>–<kbd>7</kbd> sections &nbsp;·&nbsp; <kbd>G</kbd> go to slide &nbsp;·&nbsp; <kbd>F</kbd> fullscreen</div>
+</section>
+
+<!-- ═══════════ 1. From text to records -->
+<section class="slide" id="s-prose" data-sec="why">
+  <h2>A paragraph becomes a record</h2>
+  <div class="two">
+    <div>
+      <div class="source"><span class="lbl">Source text</span><span class="hl">Liang Qichao 梁啟超</span> was born in <span class="hl b">1873</span> in <span class="hl y">Xinhui, Guangdong</span>. After the Hundred Days’ Reform failed in 1898, he fled to Japan, where he founded the journal <span class="zh">新民叢報</span> in 1902. He died in Beijing in <span class="hl g">1929</span>.</div>
+    </div>
+    <div data-step="1">
+      <div class="record">
+        <div class="f"><span>name</span>Liang Qichao</div>
+        <div class="f"><span>name_zh</span>梁啟超</div>
+        <div class="f"><span>born</span>1873</div>
+        <div class="f"><span>died</span>1929</div>
+        <div class="f"><span>native_place</span>Xinhui, Guangdong</div>
+      </div>
+    </div>
+  </div>
+  <div class="terms" data-step="2">
+    <div><b>Record</b>one person, one row of a table</div>
+    <div><b>Field</b>one kind of information, for example <code>born</code></div>
+    <div><b>Value</b>what one record has in that field, for example 1873</div>
+  </div>
+</section>
+
+<section class="slide" id="s-why" data-sec="why">
+  <h2>Why put our notes into a structure?</h2>
+  <div class="cards" style="margin-top:22px">
+    <div class="card" data-step="1"><h3>Count</h3><p>How many of the people in our collection came from Guangdong?</p></div>
+    <div class="card" data-step="2"><h3>Sort and filter</h3><p>Show everyone born before 1875, from the oldest to the youngest.</p></div>
+  </div>
+  <div class="cards" style="margin-top:22px">
+    <div class="card" data-step="3"><h3>Link</h3><p>Connect people to the books they wrote and the places they lived in.</p></div>
+    <div class="card" data-step="4"><h3>Share and check</h3><p>Another historian can open the same file, repeat the count and find our mistakes.</p></div>
+  </div>
+  <div class="callout" data-step="5">The price is that every fact has to fit a field, so we decide in advance what counts as a “birthplace” or a “year”.</div>
+</section>
+
+<!-- ═══════════ 2. Tables: CSV and TSV -->
+<section class="slide" id="s-csv" data-sec="tables">
+  <h2>CSV: comma-separated values</h2>
+  <span class="fname">people.csv</span>
+<pre class="code xl">id<span class="sep">,</span>name<span class="sep">,</span>name_zh<span class="sep">,</span>born<span class="sep">,</span>died<span class="sep">,</span>native_place
+1<span class="sep">,</span>Yan Fu<span class="sep">,</span>嚴復<span class="sep">,</span>1854<span class="sep">,</span>1921<span class="sep">,</span><span class="s">"Fuzhou, Fujian"</span>
+2<span class="sep">,</span>Sun Yat-sen<span class="sep">,</span>孫中山<span class="sep">,</span>1866<span class="sep">,</span>1925<span class="sep">,</span><span class="s">"Xiangshan, Guangdong"</span>
+3<span class="sep">,</span>Liang Qichao<span class="sep">,</span>梁啟超<span class="sep">,</span>1873<span class="sep">,</span>1929<span class="sep">,</span><span class="s">"Xinhui, Guangdong"</span>
+4<span class="sep">,</span>Qiu Jin<span class="sep">,</span>秋瑾<span class="sep">,</span>1875<span class="sep">,</span>1907<span class="sep">,</span><span class="s">"Shaoxing, Zhejiang"</span>
+5<span class="sep">,</span>Lu Xun<span class="sep">,</span>魯迅<span class="sep">,</span>1881<span class="sep">,</span>1936<span class="sep">,</span><span class="s">"Shaoxing, Zhejiang"</span></pre>
+  <div class="steps" style="margin-top:22px">
+    <div class="st" data-step="1"><i>1</i><div>The first line is the <b>header</b> with the field names, and every following line is one record.</div></div>
+    <div class="st" data-step="2"><i>2</i><div>A <b>comma</b> separates the fields, so a value that contains a comma goes inside <b>quotation marks</b>.</div></div>
+  </div>
+</section>
+
+<section class="slide" id="s-tsv" data-sec="tables">
+  <h2>TSV: tab-separated values</h2>
+  <span class="fname">people.tsv</span>
+<pre class="code xl">id<span class="tab">⇥</span>name<span class="tab">⇥</span>name_zh<span class="tab">⇥</span>born<span class="tab">⇥</span>died<span class="tab">⇥</span>native_place
+1<span class="tab">⇥</span>Yan Fu<span class="tab">⇥</span>嚴復<span class="tab">⇥</span>1854<span class="tab">⇥</span>1921<span class="tab">⇥</span>Fuzhou, Fujian
+2<span class="tab">⇥</span>Sun Yat-sen<span class="tab">⇥</span>孫中山<span class="tab">⇥</span>1866<span class="tab">⇥</span>1925<span class="tab">⇥</span>Xiangshan, Guangdong
+3<span class="tab">⇥</span>Liang Qichao<span class="tab">⇥</span>梁啟超<span class="tab">⇥</span>1873<span class="tab">⇥</span>1929<span class="tab">⇥</span>Xinhui, Guangdong
+4<span class="tab">⇥</span>Qiu Jin<span class="tab">⇥</span>秋瑾<span class="tab">⇥</span>1875<span class="tab">⇥</span>1907<span class="tab">⇥</span>Shaoxing, Zhejiang
+5<span class="tab">⇥</span>Lu Xun<span class="tab">⇥</span>魯迅<span class="tab">⇥</span>1881<span class="tab">⇥</span>1936<span class="tab">⇥</span>Shaoxing, Zhejiang</pre>
+  <div class="steps" style="margin-top:22px">
+    <div class="st" data-step="1"><i>1</i><div>The same data, with an invisible <b>tab</b> character (shown here as ⇥) between the fields.</div></div>
+    <div class="st" data-step="2"><i>2</i><div>Names and sentences almost never contain tabs, so commas are ordinary text and no quotation marks are needed.</div></div>
+  </div>
+</section>
+
+<section class="slide" id="s-table" data-sec="tables">
+  <h2>Both files open as the same table</h2>
+  <table class="dt" style="font-size:31px">
+    <thead><tr><th>id</th><th>name</th><th>name_zh</th><th>born</th><th>died</th><th>native_place</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>Yan Fu</td><td class="z">嚴復</td><td class="num">1854</td><td class="num">1921</td><td>Fuzhou, Fujian</td></tr>
+      <tr><td class="num">2</td><td>Sun Yat-sen</td><td class="z">孫中山</td><td class="num">1866</td><td class="num">1925</td><td>Xiangshan, Guangdong</td></tr>
+      <tr><td class="num">3</td><td>Liang Qichao</td><td class="z">梁啟超</td><td class="num">1873</td><td class="num">1929</td><td>Xinhui, Guangdong</td></tr>
+      <tr><td class="num">4</td><td>Qiu Jin</td><td class="z">秋瑾</td><td class="num">1875</td><td class="num">1907</td><td>Shaoxing, Zhejiang</td></tr>
+      <tr><td class="num">5</td><td>Lu Xun</td><td class="z">魯迅</td><td class="num">1881</td><td class="num">1936</td><td>Shaoxing, Zhejiang</td></tr>
+    </tbody>
+  </table>
+  <div class="callout" data-step="1">CSV and TSV are plain text, readable by Excel, Python and R alike. Save them in <b>UTF-8</b> so that 嚴復 is still 嚴復 when a colleague opens the file on another computer.</div>
+</section>
+
+<section class="slide" id="s-limit" data-sec="tables">
+  <h2>One person, many works: where a table struggles</h2>
+  <div class="two">
+    <div data-step="1">
+      <div class="lbl">Option A · repeat the person</div>
+      <table class="dt">
+        <thead><tr><th>name</th><th>born</th><th>work</th></tr></thead>
+        <tbody>
+          <tr><td>Liang Qichao</td><td class="num">1873</td><td class="z">少年中國說</td></tr>
+          <tr><td>Liang Qichao</td><td class="num">1873</td><td class="z">新民說</td></tr>
+          <tr><td>Lu Xun</td><td class="num">1881</td><td class="z">狂人日記</td></tr>
+          <tr><td>Lu Xun</td><td class="num">1881</td><td class="z">阿Q正傳</td></tr>
+        </tbody>
+      </table>
+      <p class="note" style="margin-top:10px">Correct a birth year in one row and forget the other, and the file contradicts itself.</p>
+    </div>
+    <div data-step="2">
+      <div class="lbl">Option B · squeeze the works into one cell</div>
+      <table class="dt">
+        <thead><tr><th>name</th><th>born</th><th>works</th></tr></thead>
+        <tbody>
+          <tr><td>Liang Qichao</td><td class="num">1873</td><td class="z">少年中國說; 新民說</td></tr>
+          <tr><td>Lu Xun</td><td class="num">1881</td><td class="z">狂人日記; 阿Q正傳</td></tr>
+        </tbody>
+      </table>
+      <p class="note" style="margin-top:10px">The cell is now text that we have to split again before we can count or sort the works.</p>
+    </div>
+  </div>
+  <div class="callout" data-step="3">There are two common solutions: nest the list inside the person (<b>JSON</b>), or keep the works in a second table (<b>database</b>).</div>
+</section>
+
+<!-- ═══════════ 3. JSON -->
+<section class="slide" id="s-json1" data-sec="json">
+  <h2>JSON: records as objects</h2>
+  <div class="two wide-left mid">
+    <div>
+      <span class="fname">people.json</span>
+<pre class="code" data-lang="json">[
+  {
+    "name": "Liang Qichao",
+    "name_zh": "梁啟超",
+    "born": 1873,
+    "died": 1929,
+    "native_place": "Xinhui, Guangdong"
+  },
+  {
+    "name": "Qiu Jin",
+    "name_zh": "秋瑾",
+    "born": 1875,
+    "died": 1907,
+    "native_place": "Shaoxing, Zhejiang"
+  }
+]</pre>
+    </div>
+    <div class="ann">
+      <div data-step="1"><b>{ }</b> holds one object, which is one record.</div>
+      <div data-step="2">Inside it, <b>"key": value</b> pairs are separated by commas. Text goes in <b>double quotes</b>, numbers without them.</div>
+      <div data-step="3"><b>[ ]</b> holds a list, here a list of two people, and the order of its items is kept.</div>
+      <div data-step="4">JSON (JavaScript Object Notation) is the format that most web services and language-model APIs speak.</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-json2" data-sec="json">
+  <h2>The same kind of list, written compactly</h2>
+  <span class="fname">people.json</span>
+<pre class="code lg" data-lang="json">[
+  {"name": "Yan Fu",       "born": 1854, "died": 1921},
+  {"name": "Sun Yat-sen",  "born": 1866, "died": 1925},
+  {"name": "Liang Qichao", "born": 1873, "died": 1929},
+  {"name": "Qiu Jin",      "born": 1875, "died": 1907},
+  {"name": "Lu Xun",       "born": 1881, "died": 1936}
+]</pre>
+  <div class="steps" style="margin-top:22px">
+    <div class="st" data-step="1"><i>1</i><div>Line breaks and spaces do not matter to the computer, so one record can sit on one line.</div></div>
+    <div class="st" data-step="2"><i>2</i><div>Each object corresponds to one row of <code>people.csv</code>, so a flat list like this converts to CSV and back without loss.</div></div>
+  </div>
+</section>
+
+<section class="slide" id="s-json3" data-sec="json">
+  <h2>JSON: records inside records</h2>
+  <div class="two wide-left">
+    <div><span class="fname">liang.json</span>
+<pre class="code sm" data-lang="json">{
+  "name": "Liang Qichao",
+  "name_zh": "梁啟超",
+  "other_names": {"zi": "卓如", "hao": "任公"},
+  "born": 1873,
+  "died": 1929,
+  "works": [
+    {"title": "少年中國說", "year": 1900},
+    {"title": "新民說", "year": 1902},
+    {"title": "飲冰室合集", "year": null}
+  ]
+}</pre>
+    </div>
+    <div class="ann">
+      <div data-step="1">An <b>object inside an object</b>: the courtesy name 字 and the style name 號.</div>
+      <div data-step="2">A <b>list of objects</b>: one person with many works, the problem from the table slide, solved inside one record.</div>
+      <div data-step="3"><b>null</b> means “no value”, here because we have not yet looked up when <span class="zh">飲冰室合集</span> was published.</div>
+      <div data-step="4">The indentation only helps human readers, since a computer reads the brackets.</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-pyload" data-sec="json">
+  <h2>Reading a JSON file in Python</h2>
+  <div class="two" style="gap:24px">
+    <div style="flex:2"><span class="fname">read_liang.py</span>
+<pre class="code" data-lang="py">import json
+
+with open("liang.json", encoding="utf-8") as f:
+    person = json.load(f)
+
+print(person["name"], person["born"], "to", person["died"])
+print("courtesy name:", person["other_names"]["zi"])
+for work in person["works"]:
+    print(work["year"], work["title"])</pre></div>
+    <div data-step="1" style="flex:1"><div class="lbl" style="margin-top:6px">Output</div>
+<pre class="term">Liang Qichao 1873 to 1929
+courtesy name: 卓如
+1900 少年中國說
+1902 新民說
+None 飲冰室合集</pre></div>
+  </div>
+  <div class="callout" data-step="2"><b>json.load</b> turns <code>liang.json</code> from the previous slide into Python dictionaries and lists. We reach a value by its key, such as <b>["works"]</b>, and go through a list with <b>for</b>.</div>
+  <div class="callout" data-step="3" style="margin-top:12px">JSON’s <b>null</b> arrives in Python as <b>None</b>, so the last line prints None for the missing year.</div>
+</section>
+
+<section class="slide" id="s-cmp" data-sec="json">
+  <h2>CSV/TSV or JSON?</h2>
+  <table class="cmp">
+    <thead><tr><th></th><th>CSV / TSV</th><th>JSON</th></tr></thead>
+    <tbody>
+      <tr data-step="1"><td>Shape</td><td>flat rows and columns</td><td>nested objects and lists</td></tr>
+      <tr data-step="2"><td>One person, many works</td><td>repeated rows, or a second file</td><td>a list inside the record</td></tr>
+      <tr data-step="3"><td>Open in Excel</td><td>directly</td><td>after conversion</td></tr>
+      <tr data-step="4"><td>Typical uses</td><td>spreadsheets, statistics, network edge lists</td><td>web APIs, language models, IMMARKUS annotation exports</td></tr>
+    </tbody>
+  </table>
+  <div class="callout" data-step="5">Both are plain text, and the choice depends on the shape of what we want to record about each person or source.</div>
+</section>
+
+<!-- ═══════════ 4. Databases and SQL -->
+<section class="slide" id="s-db" data-sec="db">
+  <h2>A database: tables linked by identifiers</h2>
+  <div class="two" style="gap:28px">
+    <div style="flex:1.15">
+      <div class="tcap">people</div>
+      <table class="dt sm">
+        <thead><tr><th>id</th><th>name</th><th>born</th><th>native_place</th></tr></thead>
+        <tbody>
+          <tr><td class="id1">1</td><td>Yan Fu</td><td class="num">1854</td><td>Fuzhou, Fujian</td></tr>
+          <tr><td class="id2">2</td><td>Sun Yat-sen</td><td class="num">1866</td><td>Xiangshan, Guangdong</td></tr>
+          <tr><td class="id3">3</td><td>Liang Qichao</td><td class="num">1873</td><td>Xinhui, Guangdong</td></tr>
+          <tr><td class="id4">4</td><td>Qiu Jin</td><td class="num">1875</td><td>Shaoxing, Zhejiang</td></tr>
+          <tr><td class="id5">5</td><td>Lu Xun</td><td class="num">1881</td><td>Shaoxing, Zhejiang</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div data-step="1">
+      <div class="tcap">works</div>
+      <table class="dt sm">
+        <thead><tr><th>id</th><th>person_id</th><th>title</th><th>year</th></tr></thead>
+        <tbody>
+          <tr><td class="num">1</td><td class="id1">1</td><td class="z">天演論</td><td class="num">1898</td></tr>
+          <tr><td class="num">2</td><td class="id3">3</td><td class="z">少年中國說</td><td class="num">1900</td></tr>
+          <tr><td class="num">3</td><td class="id3">3</td><td class="z">新民說</td><td class="num">1902</td></tr>
+          <tr><td class="num">4</td><td class="id4">4</td><td class="z">中國女報</td><td class="num">1907</td></tr>
+          <tr><td class="num">5</td><td class="id5">5</td><td class="z">狂人日記</td><td class="num">1918</td></tr>
+          <tr><td class="num">6</td><td class="id5">5</td><td class="z">阿Q正傳</td><td class="num">1921</td></tr>
+          <tr><td class="num">7</td><td class="id2">2</td><td class="z">三民主義</td><td class="num">1924</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="callout" data-step="2">Each person is stored <b>once</b>, and <code>person_id</code> points to a row in <code>people</code>. One person can have many works, which is called a <b>one-to-many</b> relationship.</div>
+</section>
+
+<section class="slide" id="s-create" data-sec="db">
+  <h2>The schema: tables, columns, types</h2>
+  <div class="two wide-left mid">
+    <div>
+      <span class="fname">history.db</span>
+<pre class="code" data-lang="sql">CREATE TABLE people (
+  id           INTEGER PRIMARY KEY,
+  name         TEXT,
+  name_zh      TEXT,
+  born         INTEGER,
+  died         INTEGER,
+  native_place TEXT
+);
+
+CREATE TABLE works (
+  id        INTEGER PRIMARY KEY,
+  person_id INTEGER REFERENCES people(id),
+  title     TEXT,
+  year      INTEGER
+);</pre>
+    </div>
+    <div class="ann">
+      <div data-step="1">Every column has a <b>type</b>: TEXT for names, INTEGER for years.</div>
+      <div data-step="2"><b>PRIMARY KEY</b> gives each row a unique id.</div>
+      <div data-step="3"><b>REFERENCES</b> says that <code>person_id</code> must be the id of someone in <code>people</code>.</div>
+      <div data-step="4">We use <b>SQLite</b>, where the whole database is one file and needs no server.</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-sql1" data-sec="db">
+  <h2>SQL: who was born before 1875?</h2>
+  <div class="two mid">
+<pre class="code xl" data-lang="sql">SELECT name, born
+FROM people
+WHERE born &lt; 1875
+ORDER BY born;</pre>
+    <div data-step="1">
+      <div class="lbl">Result</div>
+      <table class="dt" style="font-size:31px">
+        <thead><tr><th>name</th><th>born</th></tr></thead>
+        <tbody>
+          <tr><td>Yan Fu</td><td class="num">1854</td></tr>
+          <tr><td>Sun Yat-sen</td><td class="num">1866</td></tr>
+          <tr><td>Liang Qichao</td><td class="num">1873</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="callout" data-step="2">SQL (Structured Query Language) reads almost like a sentence: <i>select</i> the name and birth year <i>from</i> the people table <i>where</i> the birth year is before 1875, <i>ordered by</i> birth year.</div>
+</section>
+
+<section class="slide" id="s-sql2" data-sec="db">
+  <h2>SQL: who wrote what? (JOIN)</h2>
+  <div class="two wide-left mid">
+<pre class="code" data-lang="sql">SELECT people.name, works.title, works.year
+FROM works
+JOIN people ON works.person_id = people.id
+ORDER BY works.year;</pre>
+    <div data-step="1">
+      <table class="dt sm">
+        <thead><tr><th>name</th><th>title</th><th>year</th></tr></thead>
+        <tbody>
+          <tr><td>Yan Fu</td><td class="z">天演論</td><td class="num">1898</td></tr>
+          <tr><td>Liang Qichao</td><td class="z">少年中國說</td><td class="num">1900</td></tr>
+          <tr><td>Liang Qichao</td><td class="z">新民說</td><td class="num">1902</td></tr>
+          <tr><td>Qiu Jin</td><td class="z">中國女報</td><td class="num">1907</td></tr>
+          <tr><td>Lu Xun</td><td class="z">狂人日記</td><td class="num">1918</td></tr>
+          <tr><td>Lu Xun</td><td class="z">阿Q正傳</td><td class="num">1921</td></tr>
+          <tr><td>Sun Yat-sen</td><td class="z">三民主義</td><td class="num">1924</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="callout" data-step="2"><b>JOIN</b> puts the two tables back together through the ids, so the name appears in every row while it is stored only once.</div>
+</section>
+
+<section class="slide" id="s-sql3" data-sec="db">
+  <h2>SQL: how many people per native place?</h2>
+  <div class="two wide-left mid">
+<pre class="code lg" data-lang="sql">SELECT native_place, COUNT(*) AS n
+FROM people
+GROUP BY native_place
+ORDER BY n DESC, native_place;</pre>
+    <div data-step="1">
+      <table class="dt" style="font-size:29px">
+        <thead><tr><th>native_place</th><th>n</th></tr></thead>
+        <tbody>
+          <tr><td>Shaoxing, Zhejiang</td><td class="num">2</td></tr>
+          <tr><td>Fuzhou, Fujian</td><td class="num">1</td></tr>
+          <tr><td>Xiangshan, Guangdong</td><td class="num">1</td></tr>
+          <tr><td>Xinhui, Guangdong</td><td class="num">1</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="callout" data-step="2"><b>GROUP BY</b> puts rows with the same value together, and <b>COUNT(*)</b> counts each group. With 5,000 people instead of 5, the query stays exactly the same.</div>
+</section>
+
+<section class="slide" id="s-notsheet" data-sec="db">
+  <h2>Why a database is more than a spreadsheet</h2>
+  <div class="cards" style="margin-top:20px">
+    <div class="card" data-step="1"><h3>Stored once</h3><p>Each fact lives in one row. Correct Liang Qichao’s birth year there, and every query sees the correction.</p></div>
+    <div class="card" data-step="2"><h3>Linked by ids</h3><p>People, works, places and sources sit in separate tables and are joined only when a question needs them.</p></div>
+    <div class="card" data-step="3"><h3>Questions as text</h3><p>A query is a line of text that we can save, run again on new data, and quote in the methods section of a paper.</p></div>
+  </div>
+  <div class="callout" data-step="4">Large historical databases work this way, for example the China Biographical Database (CBDB), with hundreds of thousands of people linked to offices, places, kin and texts.</div>
+</section>
+
+<!-- ═══════════ 5. Extraction with a language model -->
+<section class="slide" id="s-llm" data-sec="llm">
+  <h2>From a paragraph to JSON with a language model</h2>
+  <div class="pipe">
+    <div class="ins">
+      <div class="box" data-step="1"><h3>Instructions</h3><p>Extract the person. Use only facts stated in the text, and write null when the text is silent.</p></div>
+      <div class="box" data-step="2"><h3>Schema</h3><p>The fields we want and their types.</p></div>
+      <div class="box" data-step="3"><h3>One example</h3><p>A paragraph about Liang Qichao with its finished JSON.</p></div>
+    </div>
+    <div class="arr" data-step="4">→</div>
+    <div class="box model" data-step="4"><h3>Model</h3><p>through the API, with the new paragraph about Qiu Jin</p></div>
+    <div class="arr" data-step="5">→</div>
+    <div class="box" data-step="5" style="display:flex;flex-direction:column;justify-content:center"><h3>JSON record</h3><p>ready to be saved, converted to CSV, or inserted into the database</p></div>
+  </div>
+  <div class="callout" data-step="6">Last week the model wrote prose for a chatbot. This week we ask it to fill in a form, which makes its answers much easier to check one value at a time.</div>
+</section>
+
+<section class="slide" id="s-schema" data-sec="llm">
+  <h2>The schema: what the record must look like</h2>
+  <div class="two wide-left mid">
+<pre class="code lg" data-lang="json">{
+  "name":       "string",
+  "name_zh":    "string or null",
+  "birth_year": "integer or null",
+  "death_year": "integer or null",
+  "events": [
+    {"year":  "integer or null",
+     "place": "string or null",
+     "event": "string"}
+  ]
+}</pre>
+    <div class="ann">
+      <div data-step="1">Fixed <b>field names</b>, so that every answer can go into the same table.</div>
+      <div data-step="2">Fixed <b>types</b>, so that years are numbers we can sort.</div>
+      <div data-step="3"><b>null</b> is allowed, which gives the model a way to say that the text does not tell us.</div>
+      <div data-step="4">The real file uses the JSON Schema vocabulary (<code>type</code>, <code>properties</code>, <code>required</code>); see <code>schema.json</code> in the notes.</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-oneshot" data-sec="llm">
+  <h2>One-shot: show the model one solved example</h2>
+  <div class="source" style="font-size:23px;padding:12px 22px"><span class="lbl">Example paragraph</span>Liang Qichao 梁啟超 was born in 1873 in Xinhui, Guangdong. After the Hundred Days’ Reform failed in 1898, he fled to Japan, where he founded the journal <span class="zh">新民叢報</span> in 1902. He died in Beijing in 1929.</div>
+  <div data-step="1" style="margin-top:14px">
+<pre class="code sm" data-lang="json">{"name": "Liang Qichao", "name_zh": "梁啟超", "birth_year": 1873, "death_year": 1929,
+ "events": [
+   {"year": 1873, "place": "Xinhui", "event": "born"},
+   {"year": 1898, "place": "Japan", "event": "fled to Japan after the failed reform"},
+   {"year": 1902, "place": "Japan", "event": "founded the journal Xinmin congbao"},
+   {"year": 1929, "place": "Beijing", "event": "died"}]}</pre>
+  </div>
+  <div class="callout" data-step="2">With <b>no example</b> we speak of zero-shot, with one of one-shot, and with several of few-shot prompting. The example shows the level of detail we expect, for instance short event descriptions.</div>
+</section>
+
+<section class="slide" id="s-newdata" data-sec="llm">
+  <h2>New data: the paragraph we want the model to analyze</h2>
+  <div class="two mid" style="gap:36px;margin-top:10px">
+    <div class="source" style="font-size:29px;line-height:1.55;flex:1"><span class="lbl">New data · paragraph.txt</span>Qiu Jin 秋瑾 was born in 1875 into a family from Shaoxing, Zhejiang. In 1904 she left her husband and children and sailed to Japan to study, and in 1905 she joined the Tongmenghui there. Back in China, she founded the Chinese Women’s Journal (<span class="zh">中國女報</span>) in Shanghai in 1907. In the same year she was arrested and executed in Shaoxing.</div>
+    <figure class="pic" style="flex:none;width:260px"><img src="assets/qiujin.jpg" alt="Qiu Jin" style="height:345px"><figcaption>Qiu Jin 秋瑾 (1875–1907)</figcaption></figure>
+  </div>
+  <div class="callout" data-step="1">For this paragraph there is no answer yet. The model gets the instructions, the schema and the Liang Qichao example, and has to produce the same kind of record for Qiu Jin.</div>
+</section>
+
+<section class="slide" id="s-messages" data-sec="llm">
+  <h2>How the example is sent: a short conversation</h2>
+  <div class="steps" style="gap:14px">
+    <div class="st" data-step="1"><i>1</i><div><code>system</code> &nbsp;the instructions: extract the person, use only the text, write null when unsure</div></div>
+    <div class="st" data-step="2"><i>2</i><div><code>user</code> &nbsp;the Liang Qichao paragraph</div></div>
+    <div class="st" data-step="3"><i>3</i><div><code>assistant</code> &nbsp;the Liang Qichao JSON, written by us as if the model had answered</div></div>
+    <div class="st" data-step="4"><i>4</i><div><code>user</code> &nbsp;the new data: the Qiu Jin paragraph</div></div>
+    <div class="st" data-step="5"><i>5</i><div>The model continues the conversation with a JSON record for Qiu Jin, and the <code>response_format</code> setting holds it to our schema.</div></div>
+  </div>
+  <div class="callout" data-step="6">As we saw last week, a chat is one long document. The fake answer in step 3 is simply part of that document, and the model imitates it.</div>
+</section>
+
+<section class="slide" id="s-code" data-sec="llm">
+  <h2>The API call in Python (1): the openai library</h2>
+  <div class="two" style="gap:26px">
+<pre class="code xs" data-lang="py" style="flex:2.3">import json, os
+from openai import OpenAI
+
+client = OpenAI(base_url="https://openrouter.ai/api/v1",
+                api_key=os.environ["OPENAI_API_KEY"])
+
+response = client.chat.completions.create(
+    model="qwen/qwen3.5-9b",
+    messages=[
+        {"role": "system", "content": INSTRUCTIONS},
+        {"role": "user", "content": EXAMPLE_TEXT},
+        {"role": "assistant", "content": EXAMPLE_JSON},
+        {"role": "user", "content": paragraph},
+    ],
+    response_format={"type": "json_schema", "json_schema":
+        {"name": "person", "strict": True, "schema": SCHEMA}},
+    extra_body={"reasoning": {"enabled": False}},
+)
+record = json.loads(response.choices[0].message.content)</pre>
+    <div class="ann" style="flex:1">
+      <div data-step="1">Install it once with <b>pip install openai</b>.</div>
+      <div data-step="2"><b>base_url</b> sends the request to OpenRouter, which accepts the same format as OpenAI.</div>
+      <div data-step="3"><b>extra_body</b> carries options that only OpenRouter knows, such as switching reasoning off.</div>
+      <div data-step="4">The answer is a JSON string, and <b>json.loads</b> turns it into a dictionary.</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-code2" data-sec="llm">
+  <h2>The API call in Python (2): plain HTTP with requests</h2>
+  <div class="two" style="gap:26px">
+<pre class="code xs" data-lang="py" style="flex:2.3">import json, os, requests
+
+payload = {
+    "model": "qwen/qwen3.5-9b",
+    "messages": [
+        {"role": "system", "content": INSTRUCTIONS},
+        {"role": "user", "content": EXAMPLE_TEXT},
+        {"role": "assistant", "content": EXAMPLE_JSON},
+        {"role": "user", "content": paragraph},
+    ],
+    "response_format": {"type": "json_schema", "json_schema":
+        {"name": "person", "strict": True, "schema": SCHEMA}},
+    "reasoning": {"enabled": False},
+}
+response = requests.post(
+    "https://openrouter.ai/api/v1/chat/completions",
+    headers={"Authorization": "Bearer " + os.environ["OPENAI_API_KEY"]},
+    json=payload, timeout=120)
+reply = response.json()
+record = json.loads(reply["choices"][0]["message"]["content"])</pre>
+    <div class="ann" style="flex:1">
+      <div data-step="1">The same request without the helper library, as the library sends it over the web.</div>
+      <div data-step="2">The key travels in the <b>Authorization</b> header.</div>
+      <div data-step="3"><b>json=payload</b> turns our dictionary into JSON before sending it.</div>
+      <div data-step="4">The reply is JSON as well, so we walk down to <b>choices → 0 → message → content</b>.</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-result" data-sec="llm">
+  <h2>A good answer for Qiu Jin</h2>
+  <div class="two" style="gap:24px">
+    <div class="source" style="font-size:22px;padding:12px 20px;flex:3"><span class="lbl">New data</span>Qiu Jin 秋瑾 was born in 1875 into a family from <span class="hl">Shaoxing, Zhejiang</span>. In 1904 she left her husband and children and sailed to Japan to study, and in 1905 she joined the Tongmenghui there. Back in China, she founded the Chinese Women’s Journal (<span class="zh">中國女報</span>) in Shanghai in 1907. <span class="hl b">In the same year</span> she was arrested and executed in Shaoxing.</div>
+    <figure class="pic" style="flex:none;width:150px"><img src="assets/qiujin.jpg" alt="Qiu Jin" style="height:196px"><figcaption>Qiu Jin 秋瑾</figcaption></figure>
+  </div>
+  <div data-step="1" style="margin-top:12px">
+<pre class="code xs" data-lang="json">{"name": "Qiu Jin", "name_zh": "秋瑾", "birth_year": 1875, "death_year": 1907,
+ "events": [
+   {"year": 1875, "place": null, "event": "born"},
+   {"year": 1904, "place": "Japan", "event": "sailed to Japan to study"},
+   {"year": 1905, "place": "Japan", "event": "joined the Tongmenghui"},
+   {"year": 1907, "place": "Shanghai", "event": "founded the Chinese Women's Journal"},
+   {"year": 1907, "place": "Shaoxing", "event": "arrested and executed"}]}</pre>
+  </div>
+  <div class="callout" data-step="2" style="font-size:21px;margin-top:12px">Look at two values: the birthplace stays <b>null</b> because a family’s native place (籍貫) is a different thing, and <b>1907</b> as the year of death has to be inferred from “in the same year”.</div>
+</section>
+
+<!-- ═══════════ 6. In class -->
+<section class="slide" id="s-task" data-sec="inclass">
+  <h2>Exercise, part 1: set up</h2>
+  <div class="steps">
+    <div class="st" data-step="1"><i>1</i><div>Make a new folder called <code>week11</code> and open it in VS Code: <b>File → Open Folder…</b></div></div>
+    <div class="st" data-step="2"><i>2</i><div>Open a terminal: <b>Terminal → New Terminal</b>.</div></div>
+    <div class="st" data-step="3"><i>3</i><div>Give the terminal your API key from keyreg.qhchina.org:</div></div>
+  </div>
+  <pre class="term" data-step="3" style="margin:12px 0 0 56px;font-size:24px">export OPENAI_API_KEY="your-key"</pre>
+  <p class="note" data-step="3" style="margin:8px 0 0 56px">On Windows (PowerShell): <code>$env:OPENAI_API_KEY="your-key"</code></p>
+  <div class="callout" data-step="4">The key stays in this terminal only. If you open a new terminal, type the line again, and never paste the key into your code.</div>
+</section>
+
+<section class="slide" id="s-task2" data-sec="inclass">
+  <h2>Exercise, part 2: run</h2>
+  <div class="steps">
+    <div class="st" data-step="1"><i>4</i><div>Save the Qiu Jin paragraph from the notes page as <code>paragraph.txt</code> in the <code>week11</code> folder.</div></div>
+    <div class="st" data-step="2"><i>5</i><div>Paste the prompt from the notes page into your coding assistant. It writes <code>extract.py</code>.</div></div>
+    <div class="st" data-step="3"><i>6</i><div>In the same terminal, install the library once and run the script:</div></div>
+  </div>
+  <pre class="term" data-step="3" style="margin:12px 0 0 56px;font-size:24px">pip install openai
+python extract.py      <span class="c"># prints the JSON and saves record.json</span></pre>
+  <div class="callout" data-step="4">An error that mentions <code>OPENAI_API_KEY</code> means step 3 was skipped or done in another terminal.</div>
+</section>
+
+<section class="slide" id="s-prompt" data-sec="inclass">
+  <h2>The prompt for your coding assistant</h2>
+<pre class="term" style="font-size:18.5px;line-height:1.45">Write a Python script extract.py that turns a paragraph about a historical person into a JSON record, using the OpenRouter API.
+- Endpoint: https://openrouter.ai/api/v1/chat/completions, model qwen/qwen3.5-9b, with reasoning disabled (extra_body={"reasoning": {"enabled": False}}).
+- Use the openai Python library (pip install openai) with base_url https://openrouter.ai/api/v1. Read the API key from the environment variable OPENAI_API_KEY and set a timeout.
+- Fields: name, name_zh, birth_year, death_year, and events (a list of objects with year, place, event). Allow null for everything except name and event. Send this as a strict JSON schema in response_format, and also save it as schema.json.
+- Instructions for the model: extract information about the person, use only facts stated in the paragraph, and write null when the paragraph does not say.
+- One-shot: before the real paragraph, send the Liang Qichao paragraph from the notes as a user message and its JSON as an assistant message.
+- Read the paragraph from paragraph.txt, print the JSON nicely indented (keep Chinese characters readable), and save it as record.json.</pre>
+  <div class="callout" style="margin-top:14px">The same prompt is on the notes page, so you can copy it from there.</div>
+</section>
+
+<section class="slide" id="s-check" data-sec="inclass">
+  <h2>Check the record, then change one thing</h2>
+  <div class="steps">
+    <div class="st" data-step="1"><i>1</i><div><b>Check</b> every value against the paragraph and note in <code>errors.csv</code> whether it is correct, wrong, or invented.</div></div>
+    <div class="st" data-step="2"><i>2</i><div><b>Repeat</b> the same paragraph three times. Does the JSON stay the same from run to run?</div></div>
+    <div class="st" data-step="3"><i>3</i><div><b>Remove the example</b> (zero-shot) and compare. Are the events longer, shorter, or split differently?</div></div>
+    <div class="st" data-step="4"><i>4</i><div><b>Use your own text</b>: a paragraph from your Assignment 2 files about your historical figure, in English or in Chinese.</div></div>
+  </div>
+  <div class="callout" data-step="5">Watch the null fields in particular. A model that knows Qiu Jin was born in Xiamen may write it down, although our paragraph never says so.</div>
+</section>
+
+<!-- ═══════════ 7. Summary -->
+<section class="slide" id="s-sum" data-sec="sum">
+  <h2>Summary</h2>
+  <div class="steps" style="gap:22px;margin-top:16px">
+    <div class="st" data-step="1"><i>1</i><div><b>CSV and TSV</b> store flat tables as plain text, one record per line.</div></div>
+    <div class="st" data-step="2"><i>2</i><div><b>JSON</b> stores objects and lists, so one record can hold many works or events.</div></div>
+    <div class="st" data-step="3"><i>3</i><div>A <b>database</b> keeps each fact once, links tables through ids, and answers questions written in <b>SQL</b>.</div></div>
+    <div class="st" data-step="4"><i>4</i><div>A <b>language model</b> can fill in a schema from a paragraph, and a historian checks every value it returns.</div></div>
+  </div>
+</section>
+
+<div id="side"></div>
+<div id="bar"></div>
+<div id="num"></div>
+</div>
+<script src="slides.js"></script>
+<script src="deck.js"></script>
+</body>
+</html>

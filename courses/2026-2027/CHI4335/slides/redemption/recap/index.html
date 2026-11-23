@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>我們的星座 · CHI 4335</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&display=swap">
+<style>
+  :root {
+    --bg: #0b0d14; --ink: #efe7da; --mute: #8f8a82; --gold: #f2c46b; --acc: #e8664f; --line: rgba(239,231,218,.14);
+    --serif: "Noto Serif TC", "Songti TC", "STSong", "PMingLiU", Georgia, serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); font-family: var(--serif); overflow: hidden; -webkit-font-smoothing: antialiased; }
+  canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: grab; }
+  canvas.drag { cursor: grabbing; }
+  canvas.hover { cursor: pointer; }
+  #head { position: absolute; left: 44px; top: 30px; pointer-events: none; transition: opacity .4s; }
+  body.sel #head, body.sel #mode { opacity: .25; }
+  #head h1 { margin: 0; font-size: 34px; font-weight: 600; letter-spacing: .08em; }
+  #head p { margin: 6px 0 0; font-size: 17px; color: var(--mute); letter-spacing: .04em; }
+  #head p b { color: var(--gold); font-weight: 600; }
+  #mode { position: absolute; left: 44px; top: 112px; font-size: 19px; color: var(--ink); max-width: 520px; line-height: 1.6; pointer-events: none; transition: opacity .6s; }
+  #mode small { display: block; font-size: 15px; color: var(--mute); }
+  #ctl { position: absolute; left: 44px; bottom: 26px; display: flex; gap: 10px; align-items: center; }
+  #ctl button { font-family: var(--serif); font-size: 17px; padding: 8px 18px; min-width: 46px; border: 1px solid rgba(242,196,107,.55); background: rgba(11,13,20,.6); color: var(--gold); border-radius: 2px; cursor: pointer; }
+  #ctl button:hover, #ctl button.on { background: var(--gold); color: var(--bg); }
+  #ctl span { font-size: 14px; color: var(--mute); margin-left: 8px; }
+  #cap { position: absolute; left: 50%; bottom: 96px; transform: translateX(-50%); width: min(960px, 76vw); padding: 14px 28px; background: radial-gradient(ellipse at center, rgba(11,13,20,.92) 40%, rgba(11,13,20,0) 75%); text-align: center; pointer-events: none; opacity: 0; transition: opacity .9s; }
+  #cap.on { opacity: 1; }
+  #cap q { display: block; font-size: 27px; line-height: 1.6; quotes: "「" "」"; text-shadow: 0 2px 18px #000, 0 0 4px #000; }
+  #cap .meta { display: block; margin-top: 8px; font-size: 16px; color: var(--gold); letter-spacing: .06em; text-shadow: 0 0 6px #000; }
+  #panel { position: absolute; right: 22px; top: 22px; bottom: 22px; width: 380px; background: rgba(14,17,27,.88); border: 1px solid var(--line); border-radius: 3px; padding: 22px 24px; overflow-y: auto; transform: translateX(430px); transition: transform .45s ease; backdrop-filter: blur(4px); }
+  #panel.on { transform: none; }
+  #panel h2 { margin: 0; font-size: 28px; font-weight: 600; color: var(--gold); letter-spacing: .04em; }
+  #panel .sub { font-size: 15px; color: var(--mute); margin: 4px 0 14px; }
+  #panel .x { position: absolute; right: 14px; top: 10px; background: none; border: none; color: var(--mute); font-size: 24px; cursor: pointer; font-family: var(--serif); }
+  #panel .thesis { font-size: 17px; line-height: 1.65; margin: 0 0 14px; }
+  #panel blockquote { margin: 0 0 12px; padding: 2px 0 2px 14px; border-left: 2px solid var(--acc); font-size: 18px; line-height: 1.65; }
+  #panel .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px; }
+  #panel .chip { font-size: 14px; padding: 3px 10px; border: 1px solid var(--line); border-radius: 12px; cursor: pointer; color: var(--ink); background: none; font-family: var(--serif); }
+  #panel .chip.t { border-color: rgba(242,196,107,.5); color: var(--gold); }
+  #panel .chip:hover { background: rgba(239,231,218,.12); }
+  #panel .ess { padding: 10px 0; border-top: 1px solid var(--line); cursor: pointer; }
+  #panel .ess:hover { background: rgba(239,231,218,.05); }
+  #panel .ess b { display: block; font-size: 16px; font-weight: 600; line-height: 1.45; }
+  #panel .ess span { display: block; font-size: 13px; color: var(--mute); margin-top: 2px; }
+  #panel .ess q { display: block; font-size: 15px; line-height: 1.55; margin-top: 4px; color: #d8cfc2; quotes: "「" "」"; }
+  #panel h3 { font-size: 14px; font-weight: 400; color: var(--mute); letter-spacing: .12em; margin: 18px 0 6px; }
+  #tip { position: absolute; pointer-events: none; font-size: 15px; padding: 4px 10px; background: rgba(14,17,27,.92); border: 1px solid var(--line); border-radius: 2px; opacity: 0; transition: opacity .15s; white-space: nowrap; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="head">
+  <h1>我們的星座</h1>
+  <p><b id="nE"></b> 篇比較短文 · <b id="nT"></b> 部作品 · <b id="nQ"></b> 句同學的話</p>
+</div>
+<div id="mode"></div>
+<div id="cap"><q></q><span class="meta"></span></div>
+<div id="panel"><button class="x" aria-label="關閉">×</button><div class="body"></div></div>
+<div id="tip"></div>
+<div id="ctl">
+  <button id="bRosary" type="button">念珠</button>
+  <button id="bStar" type="button">星座</button>
+  <button id="bTour" type="button">導覽</button>
+  <button id="bPrev" type="button" aria-label="上一句">‹</button>
+  <button id="bPause" type="button" aria-label="暫停／播放">❚❚</button>
+  <button id="bNext" type="button" aria-label="下一句">›</button>
+  <span>拖動旋轉 · 點選作品、概念或短文 · ↑ ↓ 切換引文 · P 暫停</span>
+</div>
+<script src="data.js"></script>
+<script>
+(function () {
+  const D = window.RECAP;
+  const cv = document.getElementById('c'), ctx = cv.getContext('2d');
+  const $ = s => document.querySelector(s);
+  const essays = D.essays;
+
+  /* ---------- nodes ---------- */
+  const T = D.texts.map((t, i) => ({ kind: 'text', id: t.id, week: t.week, author: t.author, i, n: 0 }));
+  const tIdx = Object.fromEntries(T.map(t => [t.id, t]));
+  essays.forEach((e, k) => { e.k = k; e.T = e.texts.map(id => tIdx[id]).filter(Boolean); e.T.forEach(t => t.n++); });
+  const cCount = {};
+  essays.forEach(e => e.concepts.forEach(c => cCount[c] = (cCount[c] || 0) + 1));
+  const C = Object.entries(cCount).filter(([, n]) => n >= 3).sort((a, b) => b[1] - a[1])
+    .map(([id, n], i) => ({ kind: 'concept', id, n, i }));
+  const cIdx = Object.fromEntries(C.map(c => [c.id, c]));
+  const nodes = T.concat(C);
+  $('#nE').textContent = essays.length; $('#nT').textContent = T.length;
+  $('#nQ').textContent = essays.reduce((s, e) => s + e.quotes.length, 0);
+
+  /* week colour: pale gold (early) to ember red (late) */
+  const wcol = w => { const u = (w - 2) / 11; return [Math.round(246 - 20 * u), Math.round(214 - 120 * u), Math.round(140 - 70 * u)]; };
+  T.forEach(t => t.rgb = wcol(t.week));
+  C.forEach(c => c.rgb = [190, 210, 240]);
+
+  /* ---------- layout 1: rosary (syllabus order on a hanging string) ---------- */
+  T.forEach((t, i) => {
+    const u = i / (T.length - 1) * 2 - 1;
+    t.R = [u * 540, 40 - 80 * u * u, 0];
+  });
+  C.forEach((c, i) => { c.R = [(i / (C.length - 1) * 2 - 1) * 480, 420, 0]; });
+
+  /* ---------- layout 2: constellation (3D force layout, seeded) ---------- */
+  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const links = [];
+  const key = {};
+  const addLink = (a, b, w, L) => { const k = a.kind + a.i + '|' + b.kind + b.i; if (key[k]) key[k].w += w; else links.push(key[k] = { a, b, w, L }); };
+  essays.forEach(e => {
+    for (let x = 0; x < e.T.length; x++) for (let y = x + 1; y < e.T.length; y++) addLink(e.T[x], e.T[y], 1, 150);
+    e.concepts.forEach(c => { if (cIdx[c]) e.T.forEach(t => addLink(cIdx[c], t, 1, 120)); });
+  });
+  nodes.forEach(n => { n.S = [(rnd() - .5) * 400, (rnd() - .5) * 400, (rnd() - .5) * 400]; n.v = [0, 0, 0]; });
+  for (let it = 0; it < 900; it++) {
+    const cool = 1 - it / 900;
+    for (let a = 0; a < nodes.length; a++) for (let b = a + 1; b < nodes.length; b++) {
+      const A = nodes[a].S, B = nodes[b].S; let dx = A[0] - B[0], dy = A[1] - B[1], dz = A[2] - B[2];
+      const d2 = dx * dx + dy * dy + dz * dz + 1, f = 9000 / d2, d = Math.sqrt(d2);
+      dx *= f / d; dy *= f / d; dz *= f / d;
+      nodes[a].v[0] += dx; nodes[a].v[1] += dy; nodes[a].v[2] += dz; nodes[b].v[0] -= dx; nodes[b].v[1] -= dy; nodes[b].v[2] -= dz;
+    }
+    links.forEach(l => {
+      const A = l.a.S, B = l.b.S; const dx = B[0] - A[0], dy = B[1] - A[1], dz = B[2] - A[2];
+      const d = Math.sqrt(dx * dx + dy * dy + dz * dz) + .01, f = .02 * Math.sqrt(l.w) * (d - l.L) / d;
+      l.a.v[0] += dx * f; l.a.v[1] += dy * f; l.a.v[2] += dz * f; l.b.v[0] -= dx * f; l.b.v[1] -= dy * f; l.b.v[2] -= dz * f;
+    });
+    nodes.forEach(n => { for (let j = 0; j < 3; j++) { n.v[j] -= n.S[j] * .004; const s = Math.max(-8, Math.min(8, n.v[j])) * cool; n.S[j] += s; n.v[j] *= .5; } });
+  }
+  const cen = [0, 1, 2].map(j => nodes.reduce((s, n) => s + n.S[j], 0) / nodes.length);
+  const rad = Math.max(...nodes.map(n => Math.hypot(n.S[0] - cen[0], n.S[1] - cen[1], n.S[2] - cen[2])));
+  // spread the dense centre: radius r -> R * (r / rmax)^0.55
+  nodes.forEach(n => { const v = n.S.map((x, j) => x - cen[j]); const r = Math.hypot(...v) || 1; const k = 335 * Math.pow(r / rad, .55) / r; n.S = v.map(x => x * k); });
+
+  /* parallel strands: several essays on the same pair of texts fan out */
+  const pairN = {};
+  essays.forEach(e => { e.segs = []; for (let x = 0; x < e.T.length; x++) for (let y = x + 1; y < e.T.length; y++) {
+    const a = e.T[x], b = e.T[y], k = Math.min(a.i, b.i) + '-' + Math.max(a.i, b.i); pairN[k] = (pairN[k] || 0) + 1;
+    e.segs.push({ a, b, slot: pairN[k] - 1 }); } });
+
+  /* background stars */
+  const bg = Array.from({ length: 260 }, () => [rnd(), rnd(), rnd() * .8 + .2]);
+
+  /* ---------- state ---------- */
+  let W, H, DPR, t = 0, target = 0, yaw = 0, pitch = -.18, spin = 0, drag = null, moved = false;
+  let sel = null;            // {kind:'text'|'concept'|'essay', ...}
+  let tour = { on: false, k: -1, last: 0, paused: false };
+  let idleSince = performance.now();
+  let hover = null;
+
+  function resize() {
+    DPR = devicePixelRatio || 1; W = innerWidth; H = innerHeight;
+    cv.width = W * DPR; cv.height = H * DPR; ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+  addEventListener('resize', () => { resize(); dirty = true; }); resize();
+
+  const ease = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+  function project(p) {
+    const e = ease(t), cy = Math.cos(yaw * e + spin * e), sy = Math.sin(yaw * e + spin * e), cp = Math.cos(pitch * e), sp = Math.sin(pitch * e);
+    let x = p[0] * cy - p[2] * sy, z = p[0] * sy + p[2] * cy, y = p[1];
+    const y2 = y * cp - z * sp; z = y * sp + z * cp; y = y2;
+    const s = Math.min(W / 1280, H / 720), f = 1100 / (1100 + z);
+    const ox = sel ? -150 * Math.min(1, W / 1280) : 0;
+    return [W / 2 + ox + x * f * s, H / 2 + (20 - 25 * e) * s + y * f * s * (1 - .12 * e), z, f * s];
+  }
+  const pos = n => { const e = ease(t); return [0, 1, 2].map(j => n.R[j] * (1 - e) + n.S[j] * e); };
+
+  /* ---------- highlight state: recomputed only when the selection or the tour changes ---------- */
+  let litE = essays.map(() => 0), litN = new Map(nodes.map(n => [n, 0])), dirty = true;
+  function relight() {
+    const tk = tour.on && tour.k >= 0 ? essays[tour.k] : null;
+    litE = essays.map(e => {
+      if (!sel) return tk === e ? 2 : 0;
+      if (sel.kind === 'essay') return sel.e === e ? 2 : -1;
+      if (sel.kind === 'text') return e.T.includes(sel.n) ? 1 : -1;
+      return e.concepts.includes(sel.id) ? 1 : -1;
+    });
+    const hit = essays.filter((e, k) => litE[k] >= 1);
+    nodes.forEach(n => {
+      let v = 0;
+      if (!sel) v = tk && (tk.T.includes(n) || (n.kind === 'concept' && tk.concepts.includes(n.id))) ? 1 : 0;
+      else if (sel.kind === 'text' && n === sel.n) v = 2;
+      else if (sel.kind === 'concept' && n.kind === 'concept' && n.id === sel.id) v = 2;
+      else v = hit.some(e => n.kind === 'text' ? e.T.includes(n) : e.concepts.includes(n.id)) ? 1 : -1;
+      litN.set(n, v);
+    });
+    dirty = true;
+  }
+
+  /* ---------- sprites: glows, labels and the starry background are drawn once and reused ---------- */
+  const glowCache = new Map();
+  function glow(rgb) {
+    const k = rgb.join();
+    if (!glowCache.has(k)) {
+      const c = document.createElement('canvas'); c.width = c.height = 128; const g = c.getContext('2d');
+      const gr = g.createRadialGradient(64, 64, 0, 64, 64, 64);
+      gr.addColorStop(0, `rgba(${k},.95)`); gr.addColorStop(.3, `rgba(${k},.35)`); gr.addColorStop(1, `rgba(${k},0)`);
+      g.fillStyle = gr; g.fillRect(0, 0, 128, 128);
+      g.fillStyle = 'rgba(255,250,240,1)'; g.beginPath(); g.arc(64, 64, 11, 0, Math.PI * 2); g.fill();
+      glowCache.set(k, c);
+    }
+    return glowCache.get(k);
+  }
+  const labelCache = new Map(), LS = 1.3;   // labels are rendered 1.3× larger, then scaled down
+  function labelSprite(text, size, weight, color, vertical) {
+    const k = [text, size, weight, color, vertical, DPR].join('|');
+    if (labelCache.has(k)) return labelCache.get(k);
+    const fs = size * LS * DPR, font = `${weight} ${fs}px "Noto Serif TC", "Songti TC", serif`;
+    const c = document.createElement('canvas'), g = c.getContext('2d'); g.font = font;
+    const chars = [...text], pad = 4 * LS * DPR, lh = fs * 1.12;
+    const w = vertical ? fs : g.measureText(text).width, h = vertical ? lh * chars.length : fs * 1.3;
+    c.width = Math.ceil(w + 2 * pad); c.height = Math.ceil(h + 2 * pad);
+    g.font = font; g.textAlign = 'center'; g.textBaseline = 'middle'; g.lineJoin = 'round';
+    g.lineWidth = 4 * LS * DPR; g.strokeStyle = 'rgba(11,13,20,.85)'; g.fillStyle = color;
+    const put = (s, x, y) => { g.strokeText(s, x, y); g.fillText(s, x, y); };
+    if (vertical) chars.forEach((ch, j) => put(ch, c.width / 2, pad + lh * (j + .5)));
+    else put(text, c.width / 2, c.height / 2);
+    const sp = { c, w: c.width / (LS * DPR), h: c.height / (LS * DPR) };
+    labelCache.set(k, sp); return sp;
+  }
+  let bgCanvas = null;
+  function drawBg() {
+    bgCanvas = document.createElement('canvas'); bgCanvas.width = W * DPR; bgCanvas.height = H * DPR;
+    const g = bgCanvas.getContext('2d'); g.scale(DPR, DPR);
+    bg.forEach(([x, y, b]) => { g.fillStyle = `rgba(239,231,218,${.4 * b})`; g.fillRect(x * W, y * H, 1.3, 1.3); });
+  }
+  addEventListener('resize', () => { drawBg(); labelCache.clear(); dirty = true; });
+  drawBg();
+  document.fonts && document.fonts.ready.then(() => { labelCache.clear(); dirty = true; });
+
+  /* ---------- drawing ---------- */
+  const STYLE = { 2: ['rgba(232,102,79,.95)', 2.6], 1: ['rgba(242,196,107,.75)', 1.6], '-1': ['rgba(239,231,218,.05)', 1] };
+  let lastNow = performance.now();
+  function frame(now) {
+    const dt = Math.min(50, now - lastNow); lastNow = now;
+    if (t !== target) { t += (target - t) * (1 - Math.pow(.965, dt / 16.7)); if (Math.abs(target - t) < .001) t = target; dirty = true; }
+    if (!drag && t > .5) { spin += dt * .00007; dirty = true; }
+    if (tour.on && !tour.paused && !sel && now - tour.last > TOUR_MS) nextTour(now, 1);
+    if (!tour.on && !sel && t === 1 && now - idleSince > 15000) startTour();
+    if (dirty) { draw(); dirty = false; }
+    requestAnimationFrame(frame);
+  }
+
+  function draw() {
+    const e1 = ease(t);
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalAlpha = .2 + .8 * e1; ctx.drawImage(bgCanvas, 0, 0, W, H); ctx.globalAlpha = 1;
+    nodes.forEach(n => n._p = project(pos(n)));
+
+    // the rosary string
+    if (e1 < .99) {
+      ctx.strokeStyle = `rgba(239,231,218,${.25 * (1 - e1)})`; ctx.lineWidth = 1; ctx.beginPath();
+      T.forEach((n, i) => { const p = n._p; i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]); }); ctx.stroke();
+    }
+    // concept-to-text threads (constellation only), two batched strokes
+    if (e1 > .01) {
+      const on = new Path2D(), off = new Path2D();
+      links.forEach(l => {
+        if (l.a.kind !== 'concept') return;
+        const lit = sel && litN.get(l.a) >= 1 && litN.get(l.b) >= 1 && (sel.kind !== 'text' || l.b === sel.n);
+        const P = lit ? on : off; P.moveTo(l.a._p[0], l.a._p[1]); P.lineTo(l.b._p[0], l.b._p[1]);
+      });
+      ctx.lineWidth = .7; ctx.strokeStyle = `rgba(190,210,240,${(sel ? .02 : .07) * e1})`; ctx.stroke(off);
+      ctx.lineWidth = 1.2; ctx.strokeStyle = `rgba(190,210,240,${.35 * e1})`; ctx.stroke(on);
+    }
+    // essays: arcs between texts (rosary) that straighten into constellation lines; one stroke per style
+    const paths = { 0: new Path2D(), 1: new Path2D(), 2: new Path2D(), '-1': new Path2D() };
+    essays.forEach((e, k) => {
+      const P = paths[litE[k]];
+      e.segs.forEach(sg => {
+        const p = sg.a._p, q = sg.b._p;
+        const dx = q[0] - p[0], dy = q[1] - p[1], d = Math.hypot(dx, dy) || 1;
+        const h = (1 - e1) * (30 + d * .3) * (1 + sg.slot * .16) + e1 * (sg.slot - 1) * 7;
+        const sgn = dx >= 0 ? 1 : -1, cx = (p[0] + q[0]) / 2 + dy / d * h * sgn, cy = (p[1] + q[1]) / 2 - dx / d * h * sgn;
+        P.moveTo(p[0], p[1]); P.quadraticCurveTo(cx, cy, q[0], q[1]);
+        e._mid = [(p[0] + 2 * cx + q[0]) / 4, (p[1] + 2 * cy + q[1]) / 4];
+      });
+      if (e.T.length === 1) {  // an essay on a single text: a ring around it
+        const p = e.T[0]._p, r = 19 + Math.sqrt(e.T[0].n) * 4 * p[3];
+        P.moveTo(p[0] + r, p[1]); P.arc(p[0], p[1], r, 0, Math.PI * 2); e._mid = [p[0], p[1] - r];
+      }
+    });
+    ctx.strokeStyle = STYLE['-1'][0]; ctx.lineWidth = 1; ctx.stroke(paths['-1']);
+    ctx.strokeStyle = `rgba(242,196,107,${.22 + .1 * e1})`; ctx.lineWidth = 1.1; ctx.stroke(paths[0]);
+    ctx.strokeStyle = STYLE[1][0]; ctx.lineWidth = STYLE[1][1]; ctx.stroke(paths[1]);
+    ctx.strokeStyle = STYLE[2][0]; ctx.lineWidth = STYLE[2][1]; ctx.stroke(paths[2]);
+
+    // nodes, far to near
+    const order = nodes.slice().sort((a, b) => b._p[2] - a._p[2]);
+    order.forEach(n => {
+      const p = n._p, L = litN.get(n), isC = n.kind === 'concept';
+      const alpha = isC ? e1 : 1;
+      if (alpha < .02) { n._r = 0; return; }
+      const depth = Math.max(.35, Math.min(1, p[3] * 1.15)), dim = L === -1 ? .22 : 1;
+      const r = (isC ? 3 + Math.sqrt(n.n) * 1.5 : 6 + Math.sqrt(n.n) * 3.6) * p[3] * (L === 2 ? 1.3 : 1);
+      ctx.globalAlpha = alpha * dim; ctx.drawImage(glow(n.rgb), p[0] - r * 3.2, p[1] - r * 3.2, r * 6.4, r * 6.4);
+      // label (cached sprite; text titles in 《》, vertical ︽︾ on the rosary)
+      const sc = Math.max(.8, Math.min(1.2, p[3]));
+      const base = isC ? Math.round(14 + Math.min(6, n.n / 3)) : (t < .5 ? 18 : 17);
+      const color = isC ? 'rgb(200,215,240)' : (L >= 1 ? 'rgb(255,226,160)' : 'rgb(239,231,218)');
+      ctx.globalAlpha = isC ? alpha * dim * depth * (L >= 1 ? 1 : .8) : dim * depth;
+      if (!isC && t < .5) {
+        const sp = labelSprite('︽' + n.id + '︾', base, 600, color, true);
+        ctx.drawImage(sp.c, p[0] - sp.w / 2, p[1] + r + 8, sp.w, sp.h);
+        const wk = labelSprite(String(n.week), 13, 400, 'rgb(143,138,130)', false);
+        ctx.globalAlpha = dim * Math.max(0, 1 - e1 * 2); ctx.drawImage(wk.c, p[0] - wk.w / 2, p[1] - r - 6 - wk.h, wk.w, wk.h);
+      } else {
+        const sp = labelSprite(isC ? n.id : '《' + n.id + '》', base, isC ? 400 : 600, color, false);
+        const w = sp.w * sc, h = sp.h * sc; ctx.drawImage(sp.c, p[0] - w / 2, p[1] - r - 4 - h, w, h);
+      }
+      ctx.globalAlpha = 1;
+      n._r = Math.max(r * 1.6, 12);
+    });
+  }
+
+  /* ---------- tour caption: a quote every TOUR_MS; ↑ ↓ (or the ‹ › buttons) step back and forth ---------- */
+  const TOUR_MS = 13000;
+  const cap = $('#cap');
+  const order = essays.map((e, k) => k).sort(() => rnd() - .5);
+  let oi = -1;
+  function nextTour(now, dir) {
+    tour.last = now; oi = (oi + dir + order.length) % order.length; tour.k = order[oi]; relight();
+    const e = essays[tour.k];
+    if (dir > 0) e._qi = e._qi == null ? 0 : e._qi + 1;
+    cap.classList.remove('on');
+    setTimeout(() => {
+      if (!tour.on || sel) return;
+      cap.querySelector('q').textContent = e.quotes[(e._qi || 0) % (e.quotes.length || 1)] || e.thesis;
+      cap.querySelector('.meta').textContent = `${e.T.map(x => '《' + x.id + '》').join(' × ')} · ${e.round}`;
+      cap.classList.add('on');
+    }, 450);
+  }
+  function step(dir) { if (sel) show(null); if (!tour.on) { tour.on = true; $('#bTour').classList.add('on'); if (target === 0) setMode(1); } nextTour(performance.now(), dir); }
+  function startTour() { tour.on = true; tour.last = -1e9; tour.paused = false; $('#bPause').textContent = '❚❚'; $('#bPause').classList.remove('on'); $('#bTour').classList.add('on'); }
+  function stopTour() { tour.on = false; tour.k = -1; cap.classList.remove('on'); $('#bTour').classList.remove('on'); relight(); }
+
+  /* ---------- side panel ---------- */
+  const panel = $('#panel'), body = panel.querySelector('.body');
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const essayRow = e => `<div class="ess" data-k="${e.k}"><b>${esc(e.title)}</b><span>${e.T.map(x => '《' + esc(x.id) + '》').join(' × ')} · ${esc(e.round)}</span>${e.quotes[0] ? `<q>${esc(e.quotes[0])}</q>` : ''}</div>`;
+  function show(s) {
+    sel = s; stopTour(); idleSince = performance.now(); document.body.classList.toggle('sel', !!s); relight();
+    if (!s) { panel.classList.remove('on'); return; }
+    let h = '';
+    if (s.kind === 'text') {
+      const es = essays.filter(e => e.T.includes(s.n));
+      const cc = {}; es.forEach(e => e.concepts.forEach(c => cc[c] = (cc[c] || 0) + 1));
+      const top = Object.entries(cc).sort((a, b) => b[1] - a[1]).slice(0, 8);
+      h = `<h2>《${esc(s.n.id)}》</h2><div class="sub">${esc(s.n.author)}${s.n.author ? ' · ' : ''}第 ${s.n.week} 週 · ${es.length} 篇短文</div>
+        <h3>同學最常用的概念</h3><div class="chips">${top.map(([c, n]) => `<button class="chip" data-c="${esc(c)}">${esc(c)} ${n}</button>`).join('')}</div>
+        <h3>短文</h3>${es.map(essayRow).join('')}`;
+    } else if (s.kind === 'concept') {
+      const es = essays.filter(e => e.concepts.includes(s.id));
+      h = `<h2>${esc(s.id)}</h2><div class="sub">${es.length} 篇短文用到這個概念</div><h3>短文</h3>${es.map(essayRow).join('')}`;
+    } else {
+      const e = s.e;
+      h = `<h2 style="font-size:23px;line-height:1.4">${esc(e.title)}</h2><div class="sub">${esc(e.round)}</div>
+        <div class="chips">${e.T.map(x => `<button class="chip t" data-t="${esc(x.id)}">《${esc(x.id)}》</button>`).join('')}</div>
+        <p class="thesis">${esc(e.thesis)}</p>
+        ${e.quotes.map(q => `<blockquote>${esc(q)}</blockquote>`).join('')}
+        <div class="chips">${e.concepts.map(c => `<button class="chip" data-c="${esc(c)}">${esc(c)}</button>`).join('')}</div>`;
+    }
+    body.innerHTML = h; panel.scrollTop = 0; panel.classList.add('on');
+  }
+  panel.querySelector('.x').addEventListener('click', () => show(null));
+  body.addEventListener('click', ev => {
+    const r = ev.target.closest('[data-k],[data-c],[data-t]'); if (!r) return;
+    if (r.dataset.k) show({ kind: 'essay', e: essays[+r.dataset.k] });
+    else if (r.dataset.c) show({ kind: 'concept', id: r.dataset.c });
+    else if (r.dataset.t) show({ kind: 'text', n: tIdx[r.dataset.t] });
+  });
+
+  /* ---------- picking ---------- */
+  function pick(x, y) {
+    let best = null, bd = 1e9;
+    nodes.forEach(n => { if (!n._p || !n._r || (n.kind === 'concept' && t < .5)) return; const d = Math.hypot(n._p[0] - x, n._p[1] - y); if (d < n._r && d < bd) { bd = d; best = n; } });
+    if (best) return { node: best };
+    let be = null; bd = 14;
+    essays.forEach(e => { if (!e._mid) return; const d = Math.hypot(e._mid[0] - x, e._mid[1] - y); if (d < bd) { bd = d; be = e; } });
+    return be ? { essay: be } : null;
+  }
+  const tip = $('#tip');
+  cv.addEventListener('pointerdown', ev => { drag = { x: ev.clientX, y: ev.clientY }; moved = false; cv.setPointerCapture(ev.pointerId); });
+  cv.addEventListener('pointermove', ev => {
+    idleSince = performance.now();
+    if (drag) {
+      const dx = ev.clientX - drag.x, dy = ev.clientY - drag.y;
+      if (Math.abs(dx) + Math.abs(dy) > 3) { moved = true; cv.classList.add('drag'); }
+      dirty = true; yaw += dx * .006; pitch = Math.max(-1.2, Math.min(1.2, pitch + dy * .006)); drag = { x: ev.clientX, y: ev.clientY }; return;
+    }
+    const h = pick(ev.clientX, ev.clientY); hover = h;
+    cv.classList.toggle('hover', !!h);
+    if (h) {
+      tip.textContent = h.node ? (h.node.kind === 'text' ? `《${h.node.id}》 · ${h.node.n} 篇短文` : `${h.node.id} · ${h.node.n} 篇短文`) : h.essay.title;
+      tip.style.left = ev.clientX + 14 + 'px'; tip.style.top = ev.clientY + 12 + 'px'; tip.style.opacity = 1;
+    } else tip.style.opacity = 0;
+  });
+  cv.addEventListener('pointerup', ev => {
+    cv.classList.remove('drag'); const wasDrag = moved; drag = null;
+    if (wasDrag) return;
+    const h = pick(ev.clientX, ev.clientY);
+    if (!h) return show(null);
+    if (h.essay) return show({ kind: 'essay', e: h.essay });
+    show(h.node.kind === 'text' ? { kind: 'text', n: h.node } : { kind: 'concept', id: h.node.id });
+  });
+
+  /* ---------- modes ---------- */
+  const modeBox = $('#mode');
+  function setMode(m) {
+    target = m; dirty = true; $('#bRosary').classList.toggle('on', m === 0); $('#bStar').classList.toggle('on', m === 1);
+    modeBox.innerHTML = m === 0
+      ? '念珠：按課程順序排好的作品<small>每一條弧線是一篇比較短文，把兩部作品連在一起。</small>'
+      : '星座：此刻與過去連成的圖形<small>藍色的星是短文裏的概念，出現在三篇以上短文中。</small>';
+  }
+  $('#bRosary').addEventListener('click', () => { setMode(0); stopTour(); });
+  $('#bStar').addEventListener('click', () => setMode(1));
+  $('#bPrev').addEventListener('click', () => step(-1));
+  $('#bNext').addEventListener('click', () => step(1));
+  function setPaused(v) { tour.paused = v; const b = $('#bPause'); b.textContent = v ? '▶' : '❚❚'; b.classList.toggle('on', v); if (!v) tour.last = performance.now(); }
+  $('#bPause').addEventListener('click', () => { if (!tour.on) { step(1); setPaused(false); } else setPaused(!tour.paused); });
+  $('#bTour').addEventListener('click', () => { if (tour.on) stopTour(); else { show(null); if (target === 0) setMode(1); startTour(); } });
+  setMode(/star/.test(location.hash) ? 1 : 0);
+  if (/tour/.test(location.hash)) startTour();
+  if (/instant/.test(location.hash)) t = target;
+  { const m = decodeURIComponent(location.hash).match(/pick=([^&]+)/); if (m && tIdx[m[1]]) setTimeout(() => show({ kind: 'text', n: tIdx[m[1]] }), 50); }
+
+  /* keys: c = constellation/rosary, t = tour, Esc = close; slide keys go to the deck when embedded */
+  addEventListener('keydown', ev => {
+    if (ev.key === 'c' || ev.key === 'C') { setMode(target ? 0 : 1); return; }
+    if (ev.key === 't' || ev.key === 'T') { $('#bTour').click(); return; }
+    if (ev.key === 'Escape') { show(null); return; }
+    if (ev.key === 'p' || ev.key === 'P') { $('#bPause').click(); return; }
+    if (ev.key === 'ArrowUp') { step(-1); ev.preventDefault(); return; }
+    if (ev.key === 'ArrowDown') { step(1); ev.preventDefault(); return; }
+    if (window.parent !== window && /^(ArrowLeft|ArrowRight|PageUp|PageDown|Home|End| |Enter|Backspace|f|F|g|G|l|L|[1-9])$/.test(ev.key)) {
+      window.parent.postMessage({ deckKey: ev.key }, '*'); ev.preventDefault();
+    }
+  });
+
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
