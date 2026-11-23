@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>我們的星座 · CHI 4335</title>
+<title>我們的星座</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&display=swap">
 <style>
@@ -326,7 +326,7 @@
     cap.classList.remove('on');
     setTimeout(() => {
       if (!tour.on || sel) return;
-      cap.querySelector('q').textContent = e.quotes[(e._qi || 0) % (e.quotes.length || 1)] || e.thesis;
+      cap.querySelector('q').textContent = e.quotes[(e._qi || 0) % (e.quotes.length || 1)] || '';
       cap.querySelector('.meta').textContent = `${e.T.map(x => '《' + x.id + '》').join(' × ')} · ${e.round}`;
       cap.classList.add('on');
     }, 450);
@@ -338,7 +338,7 @@
   /* ---------- side panel ---------- */
   const panel = $('#panel'), body = panel.querySelector('.body');
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  const essayRow = e => `<div class="ess" data-k="${e.k}"><b>${esc(e.title)}</b><span>${e.T.map(x => '《' + esc(x.id) + '》').join(' × ')} · ${esc(e.round)}</span>${e.quotes[0] ? `<q>${esc(e.quotes[0])}</q>` : ''}</div>`;
+  const essayRow = e => `<div class="ess" data-k="${e.k}"><b>${e.T.map(x => '《' + esc(x.id) + '》').join(' × ')}</b><span>${esc(e.round)}</span>${e.quotes[0] ? `<q>${esc(e.quotes[0])}</q>` : ''}</div>`;
   function show(s) {
     sel = s; stopTour(); idleSince = performance.now(); document.body.classList.toggle('sel', !!s); relight();
     if (!s) { panel.classList.remove('on'); return; }
@@ -355,9 +355,8 @@
       h = `<h2>${esc(s.id)}</h2><div class="sub">${es.length} 篇短文用到這個概念</div><h3>短文</h3>${es.map(essayRow).join('')}`;
     } else {
       const e = s.e;
-      h = `<h2 style="font-size:23px;line-height:1.4">${esc(e.title)}</h2><div class="sub">${esc(e.round)}</div>
+      h = `<h2 style="font-size:23px;line-height:1.4">一篇比較短文</h2><div class="sub">${esc(e.round)}</div>
         <div class="chips">${e.T.map(x => `<button class="chip t" data-t="${esc(x.id)}">《${esc(x.id)}》</button>`).join('')}</div>
-        <p class="thesis">${esc(e.thesis)}</p>
         ${e.quotes.map(q => `<blockquote>${esc(q)}</blockquote>`).join('')}
         <div class="chips">${e.concepts.map(c => `<button class="chip" data-c="${esc(c)}">${esc(c)}</button>`).join('')}</div>`;
     }
@@ -392,7 +391,7 @@
     const h = pick(ev.clientX, ev.clientY); hover = h;
     cv.classList.toggle('hover', !!h);
     if (h) {
-      tip.textContent = h.node ? (h.node.kind === 'text' ? `《${h.node.id}》 · ${h.node.n} 篇短文` : `${h.node.id} · ${h.node.n} 篇短文`) : h.essay.title;
+      tip.textContent = h.node ? (h.node.kind === 'text' ? `《${h.node.id}》 · ${h.node.n} 篇短文` : `${h.node.id} · ${h.node.n} 篇短文`) : h.essay.T.map(x => '《' + x.id + '》').join(' × ');
       tip.style.left = ev.clientX + 14 + 'px'; tip.style.top = ev.clientY + 12 + 'px'; tip.style.opacity = 1;
     } else tip.style.opacity = 0;
   });

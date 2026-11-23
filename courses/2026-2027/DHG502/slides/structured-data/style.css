@@ -203,3 +203,8 @@ table.cmp td:first-child { color: var(--mute); width: 300px; }
 #s-task .st { font-size: 31px; } #s-task .steps { gap: 22px; margin-top: 14px; }
 #s-task pre.term { font-size: 28px !important; margin-top: 18px !important; }
 #s-task .note { font-size: 26px; } #s-task .callout { font-size: 28px; margin-top: 26px; }
+/* Chinese source text and values */
+.source.zhsrc { font-family: var(--cjk-serif), var(--serif); font-size: 30px; line-height: 1.75; letter-spacing: .02em; }
+.record .zv, table.dt td.z { font-family: var(--cjk-serif), var(--serif); }
+pre.code, pre.term { font-family: var(--mono), var(--cjk); }
+.record .f span.zv { width: auto; font-family: var(--cjk-serif), var(--serif); font-size: 30px; color: var(--ink); }

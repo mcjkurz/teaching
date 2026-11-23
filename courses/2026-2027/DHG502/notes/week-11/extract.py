@@ -14,14 +14,13 @@ MODEL = "qwen/qwen3.5-9b"
 INSTRUCTIONS = (
     "Extract information about the person described in the paragraph. "
     "Return JSON that follows the schema. Use only facts stated in the paragraph. "
-    "Write null when the paragraph does not say."
+    "Write null when the paragraph does not say. Keep the values in the language of the paragraph."
 )
 
 SCHEMA = {
     "type": "object",
     "properties": {
         "name": {"type": "string"},
-        "name_zh": {"type": ["string", "null"]},
         "birth_year": {"type": ["integer", "null"]},
         "death_year": {"type": ["integer", "null"]},
         "events": {
@@ -38,26 +37,21 @@ SCHEMA = {
             },
         },
     },
-    "required": ["name", "name_zh", "birth_year", "death_year", "events"],
+    "required": ["name", "birth_year", "death_year", "events"],
     "additionalProperties": False,
 }
 
 # One-shot example: a paragraph and the record we would like for it
-EXAMPLE_TEXT = (
-    "Liang Qichao 梁啟超 was born in 1873 in Xinhui, Guangdong. After the Hundred Days' "
-    "Reform failed in 1898, he fled to Japan, where he founded the journal 新民叢報 in 1902. "
-    "He died in Beijing in 1929."
-)
+EXAMPLE_TEXT = "梁啟超，1873年生於廣東新會。1898年戊戌變法失敗後，他流亡日本，1902年在日本創辦《新民叢報》。1929年在北京逝世。"
 EXAMPLE_RECORD = {
-    "name": "Liang Qichao",
-    "name_zh": "梁啟超",
+    "name": "梁啟超",
     "birth_year": 1873,
     "death_year": 1929,
     "events": [
-        {"year": 1873, "place": "Xinhui", "event": "born"},
-        {"year": 1898, "place": "Japan", "event": "fled to Japan after the failed reform"},
-        {"year": 1902, "place": "Japan", "event": "founded the journal Xinmin congbao"},
-        {"year": 1929, "place": "Beijing", "event": "died"},
+        {"year": 1873, "place": "廣東新會", "event": "出生"},
+        {"year": 1898, "place": "日本", "event": "戊戌變法失敗後流亡日本"},
+        {"year": 1902, "place": "日本", "event": "創辦《新民叢報》"},
+        {"year": 1929, "place": "北京", "event": "逝世"},
     ],
 }
 

@@ -28,15 +28,14 @@
   <h2>A paragraph becomes a record</h2>
   <div class="two">
     <div>
-      <div class="source"><span class="lbl">Source text</span><span class="hl">Liang Qichao 梁啟超</span> was born in <span class="hl b">1873</span> in <span class="hl y">Xinhui, Guangdong</span>. After the Hundred Days’ Reform failed in 1898, he fled to Japan, where he founded the journal <span class="zh">新民叢報</span> in 1902. He died in Beijing in <span class="hl g">1929</span>.</div>
+      <div class="source zhsrc"><span class="lbl">Source text</span><span class="hl">梁啟超</span>，<span class="hl b">1873</span>年生於<span class="hl y">廣東新會</span>。1898年戊戌變法失敗後，他流亡日本，1902年在日本創辦《新民叢報》。<span class="hl g">1929</span>年在北京逝世。</div>
     </div>
     <div data-step="1">
       <div class="record">
-        <div class="f"><span>name</span>Liang Qichao</div>
-        <div class="f"><span>name_zh</span>梁啟超</div>
+        <div class="f"><span>name</span><span class="zv">梁啟超</span></div>
         <div class="f"><span>born</span>1873</div>
         <div class="f"><span>died</span>1929</div>
-        <div class="f"><span>native_place</span>Xinhui, Guangdong</div>
+        <div class="f"><span>native_place</span><span class="zv">廣東新會</span></div>
       </div>
     </div>
   </div>
@@ -64,27 +63,27 @@
 <section class="slide" id="s-csv" data-sec="tables">
   <h2>CSV: comma-separated values</h2>
   <span class="fname">people.csv</span>
-<pre class="code xl">id<span class="sep">,</span>name<span class="sep">,</span>name_zh<span class="sep">,</span>born<span class="sep">,</span>died<span class="sep">,</span>native_place
-1<span class="sep">,</span>Yan Fu<span class="sep">,</span>嚴復<span class="sep">,</span>1854<span class="sep">,</span>1921<span class="sep">,</span><span class="s">"Fuzhou, Fujian"</span>
-2<span class="sep">,</span>Sun Yat-sen<span class="sep">,</span>孫中山<span class="sep">,</span>1866<span class="sep">,</span>1925<span class="sep">,</span><span class="s">"Xiangshan, Guangdong"</span>
-3<span class="sep">,</span>Liang Qichao<span class="sep">,</span>梁啟超<span class="sep">,</span>1873<span class="sep">,</span>1929<span class="sep">,</span><span class="s">"Xinhui, Guangdong"</span>
-4<span class="sep">,</span>Qiu Jin<span class="sep">,</span>秋瑾<span class="sep">,</span>1875<span class="sep">,</span>1907<span class="sep">,</span><span class="s">"Shaoxing, Zhejiang"</span>
-5<span class="sep">,</span>Lu Xun<span class="sep">,</span>魯迅<span class="sep">,</span>1881<span class="sep">,</span>1936<span class="sep">,</span><span class="s">"Shaoxing, Zhejiang"</span></pre>
+<pre class="code xl">id<span class="sep">,</span>name<span class="sep">,</span>pinyin<span class="sep">,</span>born<span class="sep">,</span>died<span class="sep">,</span>native_place
+1<span class="sep">,</span>嚴復<span class="sep">,</span>Yan Fu<span class="sep">,</span>1854<span class="sep">,</span>1921<span class="sep">,</span>福建侯官
+2<span class="sep">,</span>孫中山<span class="sep">,</span>Sun Yat-sen<span class="sep">,</span>1866<span class="sep">,</span>1925<span class="sep">,</span>廣東香山
+3<span class="sep">,</span>梁啟超<span class="sep">,</span>Liang Qichao<span class="sep">,</span>1873<span class="sep">,</span>1929<span class="sep">,</span>廣東新會
+4<span class="sep">,</span>秋瑾<span class="sep">,</span>Qiu Jin<span class="sep">,</span>1875<span class="sep">,</span>1907<span class="sep">,</span>浙江紹興
+5<span class="sep">,</span>魯迅<span class="sep">,</span>Lu Xun<span class="sep">,</span>1881<span class="sep">,</span>1936<span class="sep">,</span>浙江紹興</pre>
   <div class="steps" style="margin-top:22px">
     <div class="st" data-step="1"><i>1</i><div>The first line is the <b>header</b> with the field names, and every following line is one record.</div></div>
-    <div class="st" data-step="2"><i>2</i><div>A <b>comma</b> separates the fields, so a value that contains a comma goes inside <b>quotation marks</b>.</div></div>
+    <div class="st" data-step="2"><i>2</i><div>A <b>comma</b> separates the fields. A value that itself contains a comma must go inside <b>quotation marks</b>, while the Chinese comma ，is a different character and causes no trouble.</div></div>
   </div>
 </section>
 
 <section class="slide" id="s-tsv" data-sec="tables">
   <h2>TSV: tab-separated values</h2>
   <span class="fname">people.tsv</span>
-<pre class="code xl">id<span class="tab">⇥</span>name<span class="tab">⇥</span>name_zh<span class="tab">⇥</span>born<span class="tab">⇥</span>died<span class="tab">⇥</span>native_place
-1<span class="tab">⇥</span>Yan Fu<span class="tab">⇥</span>嚴復<span class="tab">⇥</span>1854<span class="tab">⇥</span>1921<span class="tab">⇥</span>Fuzhou, Fujian
-2<span class="tab">⇥</span>Sun Yat-sen<span class="tab">⇥</span>孫中山<span class="tab">⇥</span>1866<span class="tab">⇥</span>1925<span class="tab">⇥</span>Xiangshan, Guangdong
-3<span class="tab">⇥</span>Liang Qichao<span class="tab">⇥</span>梁啟超<span class="tab">⇥</span>1873<span class="tab">⇥</span>1929<span class="tab">⇥</span>Xinhui, Guangdong
-4<span class="tab">⇥</span>Qiu Jin<span class="tab">⇥</span>秋瑾<span class="tab">⇥</span>1875<span class="tab">⇥</span>1907<span class="tab">⇥</span>Shaoxing, Zhejiang
-5<span class="tab">⇥</span>Lu Xun<span class="tab">⇥</span>魯迅<span class="tab">⇥</span>1881<span class="tab">⇥</span>1936<span class="tab">⇥</span>Shaoxing, Zhejiang</pre>
+<pre class="code xl">id<span class="tab">⇥</span>name<span class="tab">⇥</span>pinyin<span class="tab">⇥</span>born<span class="tab">⇥</span>died<span class="tab">⇥</span>native_place
+1<span class="tab">⇥</span>嚴復<span class="tab">⇥</span>Yan Fu<span class="tab">⇥</span>1854<span class="tab">⇥</span>1921<span class="tab">⇥</span>福建侯官
+2<span class="tab">⇥</span>孫中山<span class="tab">⇥</span>Sun Yat-sen<span class="tab">⇥</span>1866<span class="tab">⇥</span>1925<span class="tab">⇥</span>廣東香山
+3<span class="tab">⇥</span>梁啟超<span class="tab">⇥</span>Liang Qichao<span class="tab">⇥</span>1873<span class="tab">⇥</span>1929<span class="tab">⇥</span>廣東新會
+4<span class="tab">⇥</span>秋瑾<span class="tab">⇥</span>Qiu Jin<span class="tab">⇥</span>1875<span class="tab">⇥</span>1907<span class="tab">⇥</span>浙江紹興
+5<span class="tab">⇥</span>魯迅<span class="tab">⇥</span>Lu Xun<span class="tab">⇥</span>1881<span class="tab">⇥</span>1936<span class="tab">⇥</span>浙江紹興</pre>
   <div class="steps" style="margin-top:22px">
     <div class="st" data-step="1"><i>1</i><div>The same data, with an invisible <b>tab</b> character (shown here as ⇥) between the fields.</div></div>
     <div class="st" data-step="2"><i>2</i><div>Names and sentences almost never contain tabs, so commas are ordinary text and no quotation marks are needed.</div></div>
@@ -94,13 +93,13 @@
 <section class="slide" id="s-table" data-sec="tables">
   <h2>Both files open as the same table</h2>
   <table class="dt" style="font-size:31px">
-    <thead><tr><th>id</th><th>name</th><th>name_zh</th><th>born</th><th>died</th><th>native_place</th></tr></thead>
+    <thead><tr><th>id</th><th>name</th><th>pinyin</th><th>born</th><th>died</th><th>native_place</th></tr></thead>
     <tbody>
-      <tr><td class="num">1</td><td>Yan Fu</td><td class="z">嚴復</td><td class="num">1854</td><td class="num">1921</td><td>Fuzhou, Fujian</td></tr>
-      <tr><td class="num">2</td><td>Sun Yat-sen</td><td class="z">孫中山</td><td class="num">1866</td><td class="num">1925</td><td>Xiangshan, Guangdong</td></tr>
-      <tr><td class="num">3</td><td>Liang Qichao</td><td class="z">梁啟超</td><td class="num">1873</td><td class="num">1929</td><td>Xinhui, Guangdong</td></tr>
-      <tr><td class="num">4</td><td>Qiu Jin</td><td class="z">秋瑾</td><td class="num">1875</td><td class="num">1907</td><td>Shaoxing, Zhejiang</td></tr>
-      <tr><td class="num">5</td><td>Lu Xun</td><td class="z">魯迅</td><td class="num">1881</td><td class="num">1936</td><td>Shaoxing, Zhejiang</td></tr>
+      <tr><td class="num">1</td><td class="z">嚴復</td><td>Yan Fu</td><td class="num">1854</td><td class="num">1921</td><td class="z">福建侯官</td></tr>
+      <tr><td class="num">2</td><td class="z">孫中山</td><td>Sun Yat-sen</td><td class="num">1866</td><td class="num">1925</td><td class="z">廣東香山</td></tr>
+      <tr><td class="num">3</td><td class="z">梁啟超</td><td>Liang Qichao</td><td class="num">1873</td><td class="num">1929</td><td class="z">廣東新會</td></tr>
+      <tr><td class="num">4</td><td class="z">秋瑾</td><td>Qiu Jin</td><td class="num">1875</td><td class="num">1907</td><td class="z">浙江紹興</td></tr>
+      <tr><td class="num">5</td><td class="z">魯迅</td><td>Lu Xun</td><td class="num">1881</td><td class="num">1936</td><td class="z">浙江紹興</td></tr>
     </tbody>
   </table>
   <div class="callout" data-step="1">CSV and TSV are plain text, readable by Excel, Python and R alike. Save them in <b>UTF-8</b> so that 嚴復 is still 嚴復 when a colleague opens the file on another computer.</div>
@@ -114,10 +113,10 @@
       <table class="dt">
         <thead><tr><th>name</th><th>born</th><th>work</th></tr></thead>
         <tbody>
-          <tr><td>Liang Qichao</td><td class="num">1873</td><td class="z">少年中國說</td></tr>
-          <tr><td>Liang Qichao</td><td class="num">1873</td><td class="z">新民說</td></tr>
-          <tr><td>Lu Xun</td><td class="num">1881</td><td class="z">狂人日記</td></tr>
-          <tr><td>Lu Xun</td><td class="num">1881</td><td class="z">阿Q正傳</td></tr>
+          <tr><td class="z">梁啟超</td><td class="num">1873</td><td class="z">少年中國說</td></tr>
+          <tr><td class="z">梁啟超</td><td class="num">1873</td><td class="z">新民說</td></tr>
+          <tr><td class="z">魯迅</td><td class="num">1881</td><td class="z">狂人日記</td></tr>
+          <tr><td class="z">魯迅</td><td class="num">1881</td><td class="z">阿Q正傳</td></tr>
         </tbody>
       </table>
       <p class="note" style="margin-top:10px">Correct a birth year in one row and forget the other, and the file contradicts itself.</p>
@@ -127,8 +126,8 @@
       <table class="dt">
         <thead><tr><th>name</th><th>born</th><th>works</th></tr></thead>
         <tbody>
-          <tr><td>Liang Qichao</td><td class="num">1873</td><td class="z">少年中國說; 新民說</td></tr>
-          <tr><td>Lu Xun</td><td class="num">1881</td><td class="z">狂人日記; 阿Q正傳</td></tr>
+          <tr><td class="z">梁啟超</td><td class="num">1873</td><td class="z">少年中國說；新民說</td></tr>
+          <tr><td class="z">魯迅</td><td class="num">1881</td><td class="z">狂人日記；阿Q正傳</td></tr>
         </tbody>
       </table>
       <p class="note" style="margin-top:10px">The cell is now text that we have to split again before we can count or sort the works.</p>
@@ -145,18 +144,18 @@
       <span class="fname">people.json</span>
 <pre class="code" data-lang="json">[
   {
-    "name": "Liang Qichao",
-    "name_zh": "梁啟超",
+    "name": "梁啟超",
+    "pinyin": "Liang Qichao",
     "born": 1873,
     "died": 1929,
-    "native_place": "Xinhui, Guangdong"
+    "native_place": "廣東新會"
   },
   {
-    "name": "Qiu Jin",
-    "name_zh": "秋瑾",
+    "name": "秋瑾",
+    "pinyin": "Qiu Jin",
     "born": 1875,
     "died": 1907,
-    "native_place": "Shaoxing, Zhejiang"
+    "native_place": "浙江紹興"
   }
 ]</pre>
     </div>
@@ -164,7 +163,7 @@
       <div data-step="1"><b>{ }</b> holds one object, which is one record.</div>
       <div data-step="2">Inside it, <b>"key": value</b> pairs are separated by commas. Text goes in <b>double quotes</b>, numbers without them.</div>
       <div data-step="3"><b>[ ]</b> holds a list, here a list of two people, and the order of its items is kept.</div>
-      <div data-step="4">JSON (JavaScript Object Notation) is the format that most web services and language-model APIs speak.</div>
+      <div data-step="4">The keys stay in English so that code can use them, while the values keep the language of the sources.</div>
     </div>
   </div>
 </section>
@@ -172,12 +171,12 @@
 <section class="slide" id="s-json2" data-sec="json">
   <h2>The same kind of list, written compactly</h2>
   <span class="fname">people.json</span>
-<pre class="code lg" data-lang="json">[
-  {"name": "Yan Fu",       "born": 1854, "died": 1921},
-  {"name": "Sun Yat-sen",  "born": 1866, "died": 1925},
-  {"name": "Liang Qichao", "born": 1873, "died": 1929},
-  {"name": "Qiu Jin",      "born": 1875, "died": 1907},
-  {"name": "Lu Xun",       "born": 1881, "died": 1936}
+<pre class="code" data-lang="json" style="font-size:23px">[
+  {"name": "嚴復", "born": 1854, "died": 1921, "native_place": "福建侯官"},
+  {"name": "孫中山", "born": 1866, "died": 1925, "native_place": "廣東香山"},
+  {"name": "梁啟超", "born": 1873, "died": 1929, "native_place": "廣東新會"},
+  {"name": "秋瑾", "born": 1875, "died": 1907, "native_place": "浙江紹興"},
+  {"name": "魯迅", "born": 1881, "died": 1936, "native_place": "浙江紹興"}
 ]</pre>
   <div class="steps" style="margin-top:22px">
     <div class="st" data-step="1"><i>1</i><div>Line breaks and spaces do not matter to the computer, so one record can sit on one line.</div></div>
@@ -190,8 +189,8 @@
   <div class="two wide-left">
     <div><span class="fname">liang.json</span>
 <pre class="code sm" data-lang="json">{
-  "name": "Liang Qichao",
-  "name_zh": "梁啟超",
+  "name": "梁啟超",
+  "pinyin": "Liang Qichao",
   "other_names": {"zi": "卓如", "hao": "任公"},
   "born": 1873,
   "died": 1929,
@@ -205,7 +204,7 @@
     <div class="ann">
       <div data-step="1">An <b>object inside an object</b>: the courtesy name 字 and the style name 號.</div>
       <div data-step="2">A <b>list of objects</b>: one person with many works, the problem from the table slide, solved inside one record.</div>
-      <div data-step="3"><b>null</b> means “no value”, here because we have not yet looked up when <span class="zh">飲冰室合集</span> was published.</div>
+      <div data-step="3"><b>null</b> means “no value”, here because we have not yet looked up when 飲冰室合集 was published.</div>
       <div data-step="4">The indentation only helps human readers, since a computer reads the brackets.</div>
     </div>
   </div>
@@ -221,18 +220,18 @@ with open("liang.json", encoding="utf-8") as f:
     person = json.load(f)
 
 print(person["name"], person["born"], "to", person["died"])
-print("courtesy name:", person["other_names"]["zi"])
+print("字:", person["other_names"]["zi"])
 for work in person["works"]:
     print(work["year"], work["title"])</pre></div>
     <div data-step="1" style="flex:1"><div class="lbl" style="margin-top:6px">Output</div>
-<pre class="term">Liang Qichao 1873 to 1929
-courtesy name: 卓如
+<pre class="term">梁啟超 1873 to 1929
+字: 卓如
 1900 少年中國說
 1902 新民說
 None 飲冰室合集</pre></div>
   </div>
   <div class="callout" data-step="2"><b>json.load</b> turns <code>liang.json</code> from the previous slide into Python dictionaries and lists. We reach a value by its key, such as <b>["works"]</b>, and go through a list with <b>for</b>.</div>
-  <div class="callout" data-step="3" style="margin-top:12px">JSON’s <b>null</b> arrives in Python as <b>None</b>, so the last line prints None for the missing year.</div>
+  <div class="callout" data-step="3" style="margin-top:12px">JSON’s <b>null</b> arrives in Python as <b>None</b>, so the last line prints None for the missing year. Always open files with <b>encoding="utf-8"</b> so that the Chinese is read correctly.</div>
 </section>
 
 <section class="slide" id="s-cmp" data-sec="json">
@@ -252,21 +251,21 @@ None 飲冰室合集</pre></div>
 <!-- ═══════════ 4. Databases and SQL -->
 <section class="slide" id="s-db" data-sec="db">
   <h2>A database: tables linked by identifiers</h2>
-  <div class="two" style="gap:28px">
-    <div style="flex:1.15">
+  <div class="two" style="gap:40px">
+    <div style="flex:1">
       <div class="tcap">people</div>
-      <table class="dt sm">
+      <table class="dt">
         <thead><tr><th>id</th><th>name</th><th>born</th><th>native_place</th></tr></thead>
         <tbody>
-          <tr><td class="id1">1</td><td>Yan Fu</td><td class="num">1854</td><td>Fuzhou, Fujian</td></tr>
-          <tr><td class="id2">2</td><td>Sun Yat-sen</td><td class="num">1866</td><td>Xiangshan, Guangdong</td></tr>
-          <tr><td class="id3">3</td><td>Liang Qichao</td><td class="num">1873</td><td>Xinhui, Guangdong</td></tr>
-          <tr><td class="id4">4</td><td>Qiu Jin</td><td class="num">1875</td><td>Shaoxing, Zhejiang</td></tr>
-          <tr><td class="id5">5</td><td>Lu Xun</td><td class="num">1881</td><td>Shaoxing, Zhejiang</td></tr>
+          <tr><td class="id1">1</td><td class="z">嚴復</td><td class="num">1854</td><td class="z">福建侯官</td></tr>
+          <tr><td class="id2">2</td><td class="z">孫中山</td><td class="num">1866</td><td class="z">廣東香山</td></tr>
+          <tr><td class="id3">3</td><td class="z">梁啟超</td><td class="num">1873</td><td class="z">廣東新會</td></tr>
+          <tr><td class="id4">4</td><td class="z">秋瑾</td><td class="num">1875</td><td class="z">浙江紹興</td></tr>
+          <tr><td class="id5">5</td><td class="z">魯迅</td><td class="num">1881</td><td class="z">浙江紹興</td></tr>
         </tbody>
       </table>
     </div>
-    <div data-step="1">
+    <div data-step="1" style="flex:1">
       <div class="tcap">works</div>
       <table class="dt sm">
         <thead><tr><th>id</th><th>person_id</th><th>title</th><th>year</th></tr></thead>
@@ -293,7 +292,7 @@ None 飲冰室合集</pre></div>
 <pre class="code" data-lang="sql">CREATE TABLE people (
   id           INTEGER PRIMARY KEY,
   name         TEXT,
-  name_zh      TEXT,
+  pinyin       TEXT,
   born         INTEGER,
   died         INTEGER,
   native_place TEXT
@@ -327,9 +326,9 @@ ORDER BY born;</pre>
       <table class="dt" style="font-size:31px">
         <thead><tr><th>name</th><th>born</th></tr></thead>
         <tbody>
-          <tr><td>Yan Fu</td><td class="num">1854</td></tr>
-          <tr><td>Sun Yat-sen</td><td class="num">1866</td></tr>
-          <tr><td>Liang Qichao</td><td class="num">1873</td></tr>
+          <tr><td class="z">嚴復</td><td class="num">1854</td></tr>
+          <tr><td class="z">孫中山</td><td class="num">1866</td></tr>
+          <tr><td class="z">梁啟超</td><td class="num">1873</td></tr>
         </tbody>
       </table>
     </div>
@@ -348,13 +347,13 @@ ORDER BY works.year;</pre>
       <table class="dt sm">
         <thead><tr><th>name</th><th>title</th><th>year</th></tr></thead>
         <tbody>
-          <tr><td>Yan Fu</td><td class="z">天演論</td><td class="num">1898</td></tr>
-          <tr><td>Liang Qichao</td><td class="z">少年中國說</td><td class="num">1900</td></tr>
-          <tr><td>Liang Qichao</td><td class="z">新民說</td><td class="num">1902</td></tr>
-          <tr><td>Qiu Jin</td><td class="z">中國女報</td><td class="num">1907</td></tr>
-          <tr><td>Lu Xun</td><td class="z">狂人日記</td><td class="num">1918</td></tr>
-          <tr><td>Lu Xun</td><td class="z">阿Q正傳</td><td class="num">1921</td></tr>
-          <tr><td>Sun Yat-sen</td><td class="z">三民主義</td><td class="num">1924</td></tr>
+          <tr><td class="z">嚴復</td><td class="z">天演論</td><td class="num">1898</td></tr>
+          <tr><td class="z">梁啟超</td><td class="z">少年中國說</td><td class="num">1900</td></tr>
+          <tr><td class="z">梁啟超</td><td class="z">新民說</td><td class="num">1902</td></tr>
+          <tr><td class="z">秋瑾</td><td class="z">中國女報</td><td class="num">1907</td></tr>
+          <tr><td class="z">魯迅</td><td class="z">狂人日記</td><td class="num">1918</td></tr>
+          <tr><td class="z">魯迅</td><td class="z">阿Q正傳</td><td class="num">1921</td></tr>
+          <tr><td class="z">孫中山</td><td class="z">三民主義</td><td class="num">1924</td></tr>
         </tbody>
       </table>
     </div>
@@ -373,10 +372,10 @@ ORDER BY n DESC, native_place;</pre>
       <table class="dt" style="font-size:29px">
         <thead><tr><th>native_place</th><th>n</th></tr></thead>
         <tbody>
-          <tr><td>Shaoxing, Zhejiang</td><td class="num">2</td></tr>
-          <tr><td>Fuzhou, Fujian</td><td class="num">1</td></tr>
-          <tr><td>Xiangshan, Guangdong</td><td class="num">1</td></tr>
-          <tr><td>Xinhui, Guangdong</td><td class="num">1</td></tr>
+          <tr><td class="z">浙江紹興</td><td class="num">2</td></tr>
+          <tr><td class="z">廣東新會</td><td class="num">1</td></tr>
+          <tr><td class="z">廣東香山</td><td class="num">1</td></tr>
+          <tr><td class="z">福建侯官</td><td class="num">1</td></tr>
         </tbody>
       </table>
     </div>
@@ -416,7 +415,6 @@ ORDER BY n DESC, native_place;</pre>
   <div class="two wide-left mid">
 <pre class="code lg" data-lang="json">{
   "name":       "string",
-  "name_zh":    "string or null",
   "birth_year": "integer or null",
   "death_year": "integer or null",
   "events": [
@@ -427,7 +425,7 @@ ORDER BY n DESC, native_place;</pre>
 }</pre>
     <div class="ann">
       <div data-step="1">Fixed <b>field names</b>, so that every answer can go into the same table.</div>
-      <div data-step="2">Fixed <b>types</b>, so that years are numbers we can sort.</div>
+      <div data-step="2">Fixed <b>types</b>, so that years are numbers we can sort, even when the source writes 次年 or 同年.</div>
       <div data-step="3"><b>null</b> is allowed, which gives the model a way to say that the text does not tell us.</div>
       <div data-step="4">The real file uses the JSON Schema vocabulary (<code>type</code>, <code>properties</code>, <code>required</code>); see <code>schema.json</code> in the notes.</div>
     </div>
@@ -436,22 +434,22 @@ ORDER BY n DESC, native_place;</pre>
 
 <section class="slide" id="s-oneshot" data-sec="llm">
   <h2>One-shot: show the model one solved example</h2>
-  <div class="source" style="font-size:23px;padding:12px 22px"><span class="lbl">Example paragraph</span>Liang Qichao 梁啟超 was born in 1873 in Xinhui, Guangdong. After the Hundred Days’ Reform failed in 1898, he fled to Japan, where he founded the journal <span class="zh">新民叢報</span> in 1902. He died in Beijing in 1929.</div>
+  <div class="source zhsrc" style="font-size:27px;padding:12px 22px"><span class="lbl">Example paragraph</span>梁啟超，1873年生於廣東新會。1898年戊戌變法失敗後，他流亡日本，1902年在日本創辦《新民叢報》。1929年在北京逝世。</div>
   <div data-step="1" style="margin-top:14px">
-<pre class="code sm" data-lang="json">{"name": "Liang Qichao", "name_zh": "梁啟超", "birth_year": 1873, "death_year": 1929,
+<pre class="code" data-lang="json" style="font-size:20px">{"name": "梁啟超", "birth_year": 1873, "death_year": 1929,
  "events": [
-   {"year": 1873, "place": "Xinhui", "event": "born"},
-   {"year": 1898, "place": "Japan", "event": "fled to Japan after the failed reform"},
-   {"year": 1902, "place": "Japan", "event": "founded the journal Xinmin congbao"},
-   {"year": 1929, "place": "Beijing", "event": "died"}]}</pre>
+   {"year": 1873, "place": "廣東新會", "event": "出生"},
+   {"year": 1898, "place": "日本", "event": "戊戌變法失敗後流亡日本"},
+   {"year": 1902, "place": "日本", "event": "創辦《新民叢報》"},
+   {"year": 1929, "place": "北京", "event": "逝世"}]}</pre>
   </div>
-  <div class="callout" data-step="2">With <b>no example</b> we speak of zero-shot, with one of one-shot, and with several of few-shot prompting. The example shows the level of detail we expect, for instance short event descriptions.</div>
+  <div class="callout" data-step="2">With <b>no example</b> we speak of zero-shot, with one of one-shot, and with several of few-shot prompting. The example shows the level of detail we expect, for instance short events written in Chinese.</div>
 </section>
 
 <section class="slide" id="s-newdata" data-sec="llm">
   <h2>New data: the paragraph we want the model to analyze</h2>
   <div class="two mid" style="gap:36px;margin-top:10px">
-    <div class="source" style="font-size:29px;line-height:1.55;flex:1"><span class="lbl">New data · paragraph.txt</span>Qiu Jin 秋瑾 was born in 1875 into a family from Shaoxing, Zhejiang. In 1904 she left her husband and children and sailed to Japan to study, and in 1905 she joined the Tongmenghui there. Back in China, she founded the Chinese Women’s Journal (<span class="zh">中國女報</span>) in Shanghai in 1907. In the same year she was arrested and executed in Shaoxing.</div>
+    <div class="source zhsrc" style="font-size:31px;line-height:1.7;flex:1"><span class="lbl">New data · paragraph.txt</span>秋瑾，1875年生，祖籍浙江紹興。1904年，她離開丈夫和子女，東渡日本留學，次年在日本加入同盟會。回國後，她於1907年在上海創辦《中國女報》。同年，她在紹興被捕，隨即就義。</div>
     <figure class="pic" style="flex:none;width:260px"><img src="assets/qiujin.jpg" alt="Qiu Jin" style="height:345px"><figcaption>Qiu Jin 秋瑾 (1875–1907)</figcaption></figure>
   </div>
   <div class="callout" data-step="1">For this paragraph there is no answer yet. The model gets the instructions, the schema and the Liang Qichao example, and has to produce the same kind of record for Qiu Jin.</div>
@@ -535,19 +533,19 @@ record = json.loads(reply["choices"][0]["message"]["content"])</pre>
 <section class="slide" id="s-result" data-sec="llm">
   <h2>A good answer for Qiu Jin</h2>
   <div class="two" style="gap:24px">
-    <div class="source" style="font-size:22px;padding:12px 20px;flex:3"><span class="lbl">New data</span>Qiu Jin 秋瑾 was born in 1875 into a family from <span class="hl">Shaoxing, Zhejiang</span>. In 1904 she left her husband and children and sailed to Japan to study, and in 1905 she joined the Tongmenghui there. Back in China, she founded the Chinese Women’s Journal (<span class="zh">中國女報</span>) in Shanghai in 1907. <span class="hl b">In the same year</span> she was arrested and executed in Shaoxing.</div>
-    <figure class="pic" style="flex:none;width:150px"><img src="assets/qiujin.jpg" alt="Qiu Jin" style="height:196px"><figcaption>Qiu Jin 秋瑾</figcaption></figure>
+    <div class="source zhsrc" style="font-size:24px;padding:12px 20px;flex:3"><span class="lbl">New data</span>秋瑾，1875年生，<span class="hl">祖籍浙江紹興</span>。1904年，她離開丈夫和子女，東渡日本留學，<span class="hl b">次年</span>在日本加入同盟會。回國後，她於1907年在上海創辦《中國女報》。<span class="hl b">同年</span>，她在紹興被捕，隨即就義。</div>
+    <figure class="pic" style="flex:none;width:130px"><img src="assets/qiujin.jpg" alt="Qiu Jin" style="height:170px"><figcaption>Qiu Jin 秋瑾</figcaption></figure>
   </div>
   <div data-step="1" style="margin-top:12px">
-<pre class="code xs" data-lang="json">{"name": "Qiu Jin", "name_zh": "秋瑾", "birth_year": 1875, "death_year": 1907,
+<pre class="code sm" data-lang="json">{"name": "秋瑾", "birth_year": 1875, "death_year": 1907,
  "events": [
-   {"year": 1875, "place": null, "event": "born"},
-   {"year": 1904, "place": "Japan", "event": "sailed to Japan to study"},
-   {"year": 1905, "place": "Japan", "event": "joined the Tongmenghui"},
-   {"year": 1907, "place": "Shanghai", "event": "founded the Chinese Women's Journal"},
-   {"year": 1907, "place": "Shaoxing", "event": "arrested and executed"}]}</pre>
+   {"year": 1875, "place": null, "event": "出生"},
+   {"year": 1904, "place": "日本", "event": "東渡日本留學"},
+   {"year": 1905, "place": "日本", "event": "加入同盟會"},
+   {"year": 1907, "place": "上海", "event": "創辦《中國女報》"},
+   {"year": 1907, "place": "紹興", "event": "被捕就義"}]}</pre>
   </div>
-  <div class="callout" data-step="2" style="font-size:21px;margin-top:12px">Look at two values: the birthplace stays <b>null</b> because a family’s native place (籍貫) is a different thing, and <b>1907</b> as the year of death has to be inferred from “in the same year”.</div>
+  <div class="callout" data-step="2" style="font-size:22px;margin-top:12px">Look at three values: the birthplace stays <b>null</b> because 祖籍 (ancestral home) is a different thing, and the years <b>1905</b> and <b>1907</b> have to be worked out from 次年 and 同年.</div>
 </section>
 
 <!-- ═══════════ 6. In class -->
@@ -580,7 +578,7 @@ python extract.py      <span class="c"># prints the JSON and saves record.json</
 <pre class="term" style="font-size:18.5px;line-height:1.45">Write a Python script extract.py that turns a paragraph about a historical person into a JSON record, using the OpenRouter API.
 - Endpoint: https://openrouter.ai/api/v1/chat/completions, model qwen/qwen3.5-9b, with reasoning disabled (extra_body={"reasoning": {"enabled": False}}).
 - Use the openai Python library (pip install openai) with base_url https://openrouter.ai/api/v1. Read the API key from the environment variable OPENAI_API_KEY and set a timeout.
-- Fields: name, name_zh, birth_year, death_year, and events (a list of objects with year, place, event). Allow null for everything except name and event. Send this as a strict JSON schema in response_format, and also save it as schema.json.
+- Fields: name, birth_year, death_year, and events (a list of objects with year, place, event). Allow null for everything except name and event. Values stay in the language of the paragraph (Chinese). Send this as a strict JSON schema in response_format, and also save it as schema.json.
 - Instructions for the model: extract information about the person, use only facts stated in the paragraph, and write null when the paragraph does not say.
 - One-shot: before the real paragraph, send the Liang Qichao paragraph from the notes as a user message and its JSON as an assistant message.
 - Read the paragraph from paragraph.txt, print the JSON nicely indented (keep Chinese characters readable), and save it as record.json.</pre>
@@ -595,7 +593,7 @@ python extract.py      <span class="c"># prints the JSON and saves record.json</
     <div class="st" data-step="3"><i>3</i><div><b>Remove the example</b> (zero-shot) and compare. Are the events longer, shorter, or split differently?</div></div>
     <div class="st" data-step="4"><i>4</i><div><b>Use your own text</b>: a paragraph from your Assignment 2 files about your historical figure, in English or in Chinese.</div></div>
   </div>
-  <div class="callout" data-step="5">Watch the null fields in particular. A model that knows Qiu Jin was born in Xiamen may write it down, although our paragraph never says so.</div>
+  <div class="callout" data-step="5">Watch the null fields in particular. A model that knows Qiu Jin was born in Xiamen (廈門) may write it down, although our paragraph never says so.</div>
 </section>
 
 <!-- ═══════════ 7. Summary -->

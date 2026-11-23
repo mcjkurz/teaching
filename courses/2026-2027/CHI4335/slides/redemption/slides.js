@@ -12,7 +12,7 @@ window.SECTIONS = [
   { id: 'wrap', zh: '導修', en: 'Tutorial' }
 ];
 
-/* The constellation of student essays (recap/index.html) is loaded into its slide only while the
+/* The constellation of student essays (../../constellation/index.html) is loaded into its slide only while the
    slide is shown, so that its animation does not run in the background. */
 HOOKS['s-viz'] = {
   render(step, el) {
