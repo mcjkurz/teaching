@@ -26,6 +26,8 @@
   #ctl { position: absolute; left: 44px; bottom: 26px; display: flex; gap: 10px; align-items: center; }
   #ctl button { font-family: var(--serif); font-size: 17px; padding: 8px 18px; min-width: 46px; border: 1px solid rgba(242,196,107,.55); background: rgba(11,13,20,.6); color: var(--gold); border-radius: 2px; cursor: pointer; }
   #ctl button:hover, #ctl button.on { background: var(--gold); color: var(--bg); }
+  #ctl .tq { display: none; }
+  body.star #ctl .tq { display: inline-block; }
   #ctl span { font-size: 14px; color: var(--mute); margin-left: 8px; }
   #cap { position: absolute; left: 50%; bottom: 96px; transform: translateX(-50%); width: min(960px, 76vw); padding: 14px 28px; background: radial-gradient(ellipse at center, rgba(11,13,20,.92) 40%, rgba(11,13,20,0) 75%); text-align: center; pointer-events: none; opacity: 0; transition: opacity .9s; }
   #cap.on { opacity: 1; }
@@ -65,10 +67,10 @@
   <button id="bRosary" type="button">念珠</button>
   <button id="bStar" type="button">星座</button>
   <button id="bTour" type="button">導覽</button>
-  <button id="bPrev" type="button" aria-label="上一句">‹</button>
-  <button id="bPause" type="button" aria-label="暫停／播放">❚❚</button>
-  <button id="bNext" type="button" aria-label="下一句">›</button>
-  <span>拖動旋轉 · 點選作品、概念或短文 · ↑ ↓ 切換引文 · P 暫停</span>
+  <button id="bPrev" class="tq" type="button" aria-label="上一句">‹</button>
+  <button id="bPause" class="tq" type="button" aria-label="暫停／播放">❚❚</button>
+  <button id="bNext" class="tq" type="button" aria-label="下一句">›</button>
+  <span>拖動旋轉 · 點選作品、概念或短文</span>
 </div>
 <script src="data.js"></script>
 <script>
@@ -303,8 +305,6 @@
       if (!isC && t < .5) {
         const sp = labelSprite('︽' + n.id + '︾', base, 600, color, true);
         ctx.drawImage(sp.c, p[0] - sp.w / 2, p[1] + r + 8, sp.w, sp.h);
-        const wk = labelSprite(String(n.week), 13, 400, 'rgb(143,138,130)', false);
-        ctx.globalAlpha = dim * Math.max(0, 1 - e1 * 2); ctx.drawImage(wk.c, p[0] - wk.w / 2, p[1] - r - 6 - wk.h, wk.w, wk.h);
       } else {
         const sp = labelSprite(isC ? n.id : '《' + n.id + '》', base, isC ? 400 : 600, color, false);
         const w = sp.w * sc, h = sp.h * sc; ctx.drawImage(sp.c, p[0] - w / 2, p[1] - r - 4 - h, w, h);
@@ -408,7 +408,7 @@
   /* ---------- modes ---------- */
   const modeBox = $('#mode');
   function setMode(m) {
-    target = m; dirty = true; $('#bRosary').classList.toggle('on', m === 0); $('#bStar').classList.toggle('on', m === 1);
+    target = m; dirty = true; document.body.classList.toggle('star', m === 1); $('#bRosary').classList.toggle('on', m === 0); $('#bStar').classList.toggle('on', m === 1);
     modeBox.innerHTML = m === 0
       ? '念珠：按課程順序排好的作品<small>每一條弧線是一篇比較短文，把兩部作品連在一起。</small>'
       : '星座：此刻與過去連成的圖形<small>藍色的星是短文裏的概念，出現在三篇以上短文中。</small>';
@@ -425,14 +425,9 @@
   if (/instant/.test(location.hash)) t = target;
   { const m = decodeURIComponent(location.hash).match(/pick=([^&]+)/); if (m && tIdx[m[1]]) setTimeout(() => show({ kind: 'text', n: tIdx[m[1]] }), 50); }
 
-  /* keys: c = constellation/rosary, t = tour, Esc = close; slide keys go to the deck when embedded */
+  /* keys: Esc closes the panel; slide keys go to the deck when embedded */
   addEventListener('keydown', ev => {
-    if (ev.key === 'c' || ev.key === 'C') { setMode(target ? 0 : 1); return; }
-    if (ev.key === 't' || ev.key === 'T') { $('#bTour').click(); return; }
     if (ev.key === 'Escape') { show(null); return; }
-    if (ev.key === 'p' || ev.key === 'P') { $('#bPause').click(); return; }
-    if (ev.key === 'ArrowUp') { step(-1); ev.preventDefault(); return; }
-    if (ev.key === 'ArrowDown') { step(1); ev.preventDefault(); return; }
     if (window.parent !== window && /^(ArrowLeft|ArrowRight|PageUp|PageDown|Home|End| |Enter|Backspace|f|F|g|G|l|L|[1-9])$/.test(ev.key)) {
       window.parent.postMessage({ deckKey: ev.key }, '*'); ev.preventDefault();
     }

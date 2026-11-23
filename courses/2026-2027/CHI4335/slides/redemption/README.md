@@ -10,6 +10,6 @@ Text below each slide title is enlarged automatically to fill the slide (`slides
 
 ## The constellation of essays (`recap/`)
 
-`recap/index.html` (embedded on slide 「我們的星座」, also usable on its own) draws the 41 comparative essays of the semester. Every essay is an arc between the texts it compares. 念珠 shows the texts in syllabus order. 星座 turns them into a rotating 3D constellation, with concepts used in three or more essays shown as blue stars. 導覽 cycles through quotes from the essays; ‹ ❚❚ › (or ↑ / ↓ / P) step and pause. Click a text, concept or arc for the essays and quotes. URL hashes for testing: `#star`, `#tour`, `#instant`.
+`recap/index.html` (embedded on slide 「我們的星座」, also usable on its own) draws the 41 comparative essays of the semester. Every essay is an arc between the texts it compares. 念珠 shows the texts in syllabus order. 星座 turns them into a rotating 3D constellation, with concepts used in three or more essays shown as blue stars. 導覽 cycles through quotes from the essays; ‹ ❚❚ › (shown in the 星座 view) step and pause. Click a text, concept or arc for the essays and quotes. URL hashes for testing: `#star`, `#tour`, `#instant`.
 
 `recap/data.js` is anonymized: no names or student numbers. Quotes are verbatim from the essays, and titles and one-line theses are summaries. The submissions it was built from are in `misc/towards-redemption/submissions/` (they contain names, so do not publish that folder).
