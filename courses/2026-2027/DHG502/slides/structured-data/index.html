@@ -588,7 +588,7 @@ record = json.loads(response.choices[0].message.content)</pre>
 </section>
 
 <section class="slide" id="s-code2" data-sec="llm">
-  <h2>The API call in Python (2): plain HTTP with requests</h2>
+  <h2>The API call in Python (2): with requests</h2>
   <div class="two" style="gap:26px">
 <pre class="code xs" data-lang="py" style="flex:2.3">import json, os, requests
 
@@ -611,8 +611,8 @@ response = requests.post(
 reply = response.json()
 record = json.loads(reply["choices"][0]["message"]["content"])</pre>
     <div class="ann" style="flex:1">
-      <div data-step="1">The same request without the helper library, as the library sends it over the web.</div>
-      <div data-step="2">The key travels in the <b>Authorization</b> header.</div>
+      <div data-step="1">The same request, built by hand and sent with <b>requests</b>.</div>
+      <div data-step="2">The key goes in the <b>Authorization</b> header. Thanks to <b>https://</b> it is encrypted on the way.</div>
       <div data-step="3"><b>json=payload</b> turns our dictionary into JSON before sending it.</div>
       <div data-step="4">The reply is JSON as well, so we walk down to <b>choices → 0 → message → content</b>.</div>
     </div>
@@ -692,7 +692,7 @@ Print the JSON nicely indented, with the Chinese characters readable (not as \u 
     <div class="st" data-step="3"><i>3</i><div><b>Remove the example</b> (zero-shot) and compare. Are the events longer, shorter, or split differently?</div></div>
     <div class="st" data-step="4"><i>4</i><div><b>Use your own text</b>: a paragraph from your Assignment 2 files about your historical figure, in English or in Chinese.</div></div>
   </div>
-  <div class="callout" data-step="5">Watch the null fields in particular. A model that knows Qiu Jin was born in Xiamen (廈門) may write it down, although our paragraph never says so.</div>
+  <div class="callout" data-step="5">Watch the null fields in particular. Many biographies say Qiu Jin was born in Xiamen (廈門), although her birthplace and even her birth year are disputed. A model that has read them may write Xiamen down, although our paragraph never says so.</div>
 </section>
 
 <!-- ═══════════ 8. Summary -->

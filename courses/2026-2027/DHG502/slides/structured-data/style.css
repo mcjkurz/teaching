@@ -293,3 +293,4 @@ pre.code, pre.term { font-family: var(--mono), var(--cjk); }
 #s-prompt .callout { font-size: 22px; padding: 8px 22px; }
 #s-prompt pre.promptbox { column-count: 2; column-gap: 34px; column-rule: 1px solid #4a4238; font-size: 16.5px; line-height: 1.45; padding: 14px 20px; }
 #s-prompt pre.promptbox { font-size: 17px; }
+#s-code2 .ann > div { font-size: 21px; line-height: 1.35; } #s-code2 .ann { gap: 10px; }
