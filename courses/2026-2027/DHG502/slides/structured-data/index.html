@@ -20,7 +20,7 @@
     <figure><img src="assets/qiujin.jpg" alt="Qiu Jin">Qiu Jin 秋瑾</figure>
     <figure><img src="assets/luxun.jpg" alt="Lu Xun">Lu Xun 魯迅</figure>
   </div>
-  <div class="hint">DHG 502 Digital Approaches in Historical Research · Week 11 &nbsp;·&nbsp; <kbd>←</kbd> <kbd>→</kbd> navigate &nbsp;·&nbsp; <kbd>1</kbd>–<kbd>7</kbd> sections &nbsp;·&nbsp; <kbd>G</kbd> go to slide &nbsp;·&nbsp; <kbd>F</kbd> fullscreen</div>
+  <div class="hint">DHG 502 Digital Approaches in Historical Research · Week 11 &nbsp;·&nbsp; <kbd>←</kbd> <kbd>→</kbd> navigate &nbsp;·&nbsp; <kbd>1</kbd>–<kbd>8</kbd> sections &nbsp;·&nbsp; <kbd>G</kbd> go to slide &nbsp;·&nbsp; <kbd>F</kbd> fullscreen</div>
 </section>
 
 <!-- ═══════════ 1. From text to records -->
@@ -358,7 +358,8 @@ ORDER BY works.year;</pre>
       </table>
     </div>
   </div>
-  <div class="callout" data-step="2"><b>JOIN</b> puts the two tables back together through the ids, so the name appears in every row while it is stored only once.</div>
+  <div class="callout" data-step="2">For every row in <code>works</code>, the database finds the row in <code>people</code> whose <code>id</code> equals that work’s <code>person_id</code> (this is the condition after <b>ON</b>) and attaches the person’s name to it. The prefixes <code>people.</code> and <code>works.</code> say which table each column comes from.</div>
+  <div class="callout" data-step="3" style="margin-top:12px">In this way <b>JOIN</b> puts the two tables back together through the ids, so the name appears in every row while it is stored only once.</div>
 </section>
 
 <section class="slide" id="s-sql3" data-sec="db">
@@ -393,7 +394,50 @@ ORDER BY n DESC, native_place;</pre>
   <div class="callout" data-step="4">Large historical databases work this way, for example the China Biographical Database (CBDB), with hundreds of thousands of people linked to offices, places, kin and texts.</div>
 </section>
 
-<!-- ═══════════ 5. Extraction with a language model -->
+<!-- ═══════════ 5. Case: HistFig -->
+<section class="slide" id="s-hf-files" data-sec="histfig">
+  <h2>Last week’s HistFig: where is everything stored?</h2>
+  <div class="two" style="gap:40px">
+    <div class="tree" style="flex:1">
+      <div class="tr root"><b>data/</b></div>
+      <div class="tr" data-step="1"><b>histfig.db</b><span>one SQLite database with figures, texts, passages, vectors and chats</span></div>
+      <div class="tr" data-step="2"><b>config.toml</b><span>settings: which chat and embedding models to use</span></div>
+      <div class="tr" data-step="3"><b>uploads/</b><span>the original files you uploaded (.txt, .pdf, .docx)</span></div>
+      <div class="tr" data-step="3"><b>images/</b><span>the portraits of the figures</span></div>
+    </div>
+    <figure class="pic" style="flex:none;width:210px"><img src="assets/liangqichao.jpg" alt="Liang Qichao" style="height:260px"><figcaption>a HistFig figure: 梁啟超</figcaption></figure>
+  </div>
+  <div class="callout" data-step="4">Because the whole database is one file, <b>Settings → Download backup</b> simply packs this folder into a zip, and copying it moves all your figures and chats to another computer.</div>
+</section>
+
+<section class="slide" id="s-hf-tables" data-sec="histfig">
+  <h2>Inside histfig.db: six tables linked by ids</h2>
+  <div class="erd">
+    <div class="tb fig" data-step="1"><h4>figures</h4><p>id<br>name<br>birth_year<br>death_year<br>persona</p></div>
+    <div class="ar" data-step="2">→</div>
+    <div class="tb" data-step="2"><h4>documents</h4><p>id<br><u>figure_id</u><br>filename<br>status</p></div>
+    <div class="ar" data-step="2">→</div>
+    <div class="tb" data-step="2"><h4>chunks</h4><p>id<br><u>document_id</u><br>text<br>tokens<br>embedding</p></div>
+    <div class="ar r2" data-step="3">→</div>
+    <div class="tb r2" data-step="3"><h4>conversations</h4><p>id<br><u>figure_id</u><br>title</p></div>
+    <div class="ar r2" data-step="3">→</div>
+    <div class="tb r2" data-step="3"><h4>messages</h4><p>id<br><u>conversation_id</u><br>role<br>content<br>sources</p></div>
+  </div>
+  <div class="callout" data-step="4">Each arrow is a <b>one-to-many</b> relationship, just like people and works: one figure has many documents, one document many passages (chunks), one conversation many messages. The sixth table, <code>prompts</code>, keeps the system prompts.</div>
+</section>
+
+<section class="slide" id="s-hf-row" data-sec="histfig">
+  <h2>One passage is one row of <code>chunks</code></h2>
+  <div class="record hfrec">
+    <div class="f"><span>document_id</span>3 <i class="nt">→ the file 少年中國說.txt in documents</i></div>
+    <div class="f"><span>text</span><span class="zv">少年智則國智，少年富則國富，少年強則國強……</span></div>
+    <div class="f" data-step="1"><span>tokens</span><code class="jv">["少年", "智", "國", "少年_智", …]</code><i class="nt">JSON list for keyword search</i></div>
+    <div class="f" data-step="2"><span>embedding</span><code class="jv">2,560 numbers stored as bytes</code><i class="nt">the vector for meaning search</i></div>
+  </div>
+  <div class="callout" data-step="3">When you ask a question, HistFig reads the figure’s passages with <b>SQL</b>, compares their vectors with the question in Python, and sends the best passages to the model. The answer is saved as a new row in <code>messages</code>, with the passages it used stored as <b>JSON</b> in the column <code>sources</code>. <small>(Illustrative values.)</small></div>
+</section>
+
+<!-- ═══════════ 6. Extraction with a language model -->
 <section class="slide" id="s-llm" data-sec="llm">
   <h2>From a paragraph to JSON with a language model</h2>
   <div class="pipe">
@@ -408,6 +452,49 @@ ORDER BY n DESC, native_place;</pre>
     <div class="box" data-step="5" style="display:flex;flex-direction:column;justify-content:center"><h3>JSON record</h3><p>ready to be saved, converted to CSV, or inserted into the database</p></div>
   </div>
   <div class="callout" data-step="6">Last week the model wrote prose for a chatbot. This week we ask it to fill in a form, which makes its answers much easier to check one value at a time.</div>
+</section>
+<section class="slide" id="s-api" data-sec="llm">
+  <h2>What is an API call?</h2>
+  <div class="flow">
+    <div class="node" data-step="1"><b>Your script</b><small>extract.py, on your laptop</small></div>
+    <div class="links" data-step="2"><div class="req">request →</div><div class="res">← response</div></div>
+    <div class="node" data-step="2"><b>OpenRouter</b><small>openrouter.ai, a service that passes requests on to many models</small></div>
+    <div class="links" data-step="3"><div class="req">→</div><div class="res">←</div></div>
+    <div class="node dark" data-step="3"><b>The model</b><small>qwen/qwen3.5-9b, running on someone else’s computers</small></div>
+  </div>
+  <div class="cards apiparts" data-step="4">
+    <div class="card"><h3>Address</h3><p>where the request goes: <code>…/chat/completions</code></p></div>
+    <div class="card"><h3>Key</h3><p>who is asking (and paying): your API key</p></div>
+    <div class="card"><h3>Body</h3><p>what we ask for, written in <b>JSON</b>: model, messages, schema</p></div>
+  </div>
+  <div class="callout" data-step="5">An <b>API</b> (Application Programming Interface) is a fixed way for one program to ask another program for something over the internet. The request and the response are both JSON, so the format we learned today is what programs use to talk to each other.</div>
+</section>
+
+<section class="slide" id="s-api-ocr" data-sec="llm">
+  <h2>We have done this before: OCR in Week 6</h2>
+  <div class="cmpflow">
+    <div class="lane" data-step="1">
+      <span class="lanelbl">Week 6 · OCR</span>
+      <div class="fx thumb"><img src="assets/hlm.jpg" alt="Hongloumeng page"></div>
+      <div class="fa">→</div>
+      <div class="fx"><b>ocr.py</b><small>image + “transcribe the text”</small></div>
+      <div class="fa">→</div>
+      <div class="fx dark"><b>API</b><small>OpenRouter · Qwen</small></div>
+      <div class="fa">→</div>
+      <div class="fx"><b>hongloumeng.txt</b><small>plain text</small></div>
+    </div>
+    <div class="lane" data-step="2">
+      <span class="lanelbl">Week 11 · extraction</span>
+      <div class="fx thumb zt">秋瑾，1875年生，祖籍浙江紹興……</div>
+      <div class="fa">→</div>
+      <div class="fx"><b>extract.py</b><small>paragraph + schema + one example</small></div>
+      <div class="fa">→</div>
+      <div class="fx dark"><b>API</b><small>OpenRouter · Qwen</small></div>
+      <div class="fa">→</div>
+      <div class="fx"><b>record.json</b><small>structured data</small></div>
+    </div>
+  </div>
+  <div class="callout" data-step="3">The call is the same each time: the same address, the same key, the same kind of JSON body. Only the content changes: a picture and a request to transcribe it then, a paragraph, a schema and an example now.</div>
 </section>
 
 <section class="slide" id="s-schema" data-sec="llm">
@@ -443,7 +530,7 @@ ORDER BY n DESC, native_place;</pre>
    {"year": 1902, "place": "日本", "event": "創辦《新民叢報》"},
    {"year": 1929, "place": "北京", "event": "逝世"}]}</pre>
   </div>
-  <div class="callout" data-step="2">With <b>no example</b> we speak of zero-shot, with one of one-shot, and with several of few-shot prompting. The example shows the level of detail we expect, for instance short events written in Chinese.</div>
+  <div class="callout" data-step="2">With no example we speak of <b>zero-shot</b>, with one of <b>one-shot</b>, and with several of <b>few-shot</b> prompting. The example shows the level of detail we expect, for instance short events written in Chinese.</div>
 </section>
 
 <section class="slide" id="s-newdata" data-sec="llm">
@@ -456,15 +543,17 @@ ORDER BY n DESC, native_place;</pre>
 </section>
 
 <section class="slide" id="s-messages" data-sec="llm">
-  <h2>How the example is sent: a short conversation</h2>
-  <div class="steps" style="gap:14px">
-    <div class="st" data-step="1"><i>1</i><div><code>system</code> &nbsp;the instructions: extract the person, use only the text, write null when unsure</div></div>
-    <div class="st" data-step="2"><i>2</i><div><code>user</code> &nbsp;the Liang Qichao paragraph</div></div>
-    <div class="st" data-step="3"><i>3</i><div><code>assistant</code> &nbsp;the Liang Qichao JSON, written by us as if the model had answered</div></div>
-    <div class="st" data-step="4"><i>4</i><div><code>user</code> &nbsp;the new data: the Qiu Jin paragraph</div></div>
-    <div class="st" data-step="5"><i>5</i><div>The model continues the conversation with a JSON record for Qiu Jin, and the <code>response_format</code> setting holds it to our schema.</div></div>
+  <h2>The structure of the prompt: a short conversation</h2>
+  <div class="msgs">
+    <div class="mg sys" data-step="1"><b>system</b><div>Instructions: extract the person, use only facts stated in the text, write null when the text does not say.</div></div>
+    <div class="shotgrp" data-step="2"><span class="shotlbl">one-shot example</span>
+      <div class="mg usr"><b>user</b><div class="zt">梁啟超，1873年生於廣東新會。1898年戊戌變法失敗後，他流亡日本……</div></div>
+      <div class="mg asst"><b>assistant</b><div><code>{"name": "梁啟超", "birth_year": 1873, …}</code> <i>written by us, as if the model had answered</i></div></div>
+    </div>
+    <div class="mg usr new" data-step="3"><b>user</b><div class="zt">秋瑾，1875年生，祖籍浙江紹興。1904年，她離開丈夫和子女…… <span class="newtag">new data</span></div></div>
+    <div class="mg out" data-step="4"><b>model</b><div>continues with a JSON record for 秋瑾, held to our schema by <code>response_format</code></div></div>
   </div>
-  <div class="callout" data-step="6">As we saw last week, a chat is one long document. The fake answer in step 3 is simply part of that document, and the model imitates it.</div>
+  <div class="callout" data-step="5">As we saw last week, a chat is one long document. The green assistant box, which we wrote ourselves, is simply part of that document, and the model imitates it.</div>
 </section>
 
 <section class="slide" id="s-code" data-sec="llm">
@@ -548,7 +637,7 @@ record = json.loads(reply["choices"][0]["message"]["content"])</pre>
   <div class="callout" data-step="2" style="font-size:22px;margin-top:12px">Look at three values: the birthplace stays <b>null</b> because 祖籍 (ancestral home) is a different thing, and the years <b>1905</b> and <b>1907</b> have to be worked out from 次年 and 同年.</div>
 </section>
 
-<!-- ═══════════ 6. In class -->
+<!-- ═══════════ 7. In class -->
 <section class="slide" id="s-task" data-sec="inclass">
   <h2>Exercise, part 1: set up</h2>
   <div class="steps">
@@ -596,7 +685,7 @@ python extract.py      <span class="c"># prints the JSON and saves record.json</
   <div class="callout" data-step="5">Watch the null fields in particular. A model that knows Qiu Jin was born in Xiamen (廈門) may write it down, although our paragraph never says so.</div>
 </section>
 
-<!-- ═══════════ 7. Summary -->
+<!-- ═══════════ 8. Summary -->
 <section class="slide" id="s-sum" data-sec="sum">
   <h2>Summary</h2>
   <div class="steps" style="gap:22px;margin-top:16px">

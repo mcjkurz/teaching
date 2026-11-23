@@ -5,6 +5,7 @@ window.SECTIONS = [
   { id: 'tables',  zh: '表格',           en: 'Tables: CSV and TSV' },
   { id: 'json',    zh: 'JSON',           en: 'JSON' },
   { id: 'db',      zh: '數據庫與 SQL',   en: 'Databases and SQL' },
+  { id: 'histfig', zh: 'HistFig 的數據庫', en: 'Case: the HistFig database' },
   { id: 'llm',     zh: '用模型抽取信息', en: 'Extraction with a language model' },
   { id: 'inclass', zh: '課堂練習',       en: 'In class' },
   { id: 'sum',     zh: '總結',           en: 'Summary' }
