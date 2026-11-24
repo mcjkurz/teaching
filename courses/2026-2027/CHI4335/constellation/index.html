@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>我們的星座</title>
+<title>我們的星叢</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&display=swap">
 <style>
@@ -56,7 +56,7 @@
 <body>
 <canvas id="c"></canvas>
 <div id="head">
-  <h1>我們的星座</h1>
+  <h1>我們的星叢</h1>
   <p><b id="nE"></b> 篇比較短文 · <b id="nT"></b> 部作品 · <b id="nQ"></b> 句同學的話</p>
 </div>
 <div id="mode"></div>
@@ -65,7 +65,7 @@
 <div id="tip"></div>
 <div id="ctl">
   <button id="bRosary" type="button">念珠</button>
-  <button id="bStar" type="button">星座</button>
+  <button id="bStar" type="button">星叢</button>
   <button id="bTour" type="button">導覽</button>
   <button id="bPrev" class="tq" type="button" aria-label="上一句">‹</button>
   <button id="bPause" class="tq" type="button" aria-label="暫停／播放">❚❚</button>
@@ -410,7 +410,7 @@
     target = m; dirty = true; document.body.classList.toggle('star', m === 1); $('#bRosary').classList.toggle('on', m === 0); $('#bStar').classList.toggle('on', m === 1);
     modeBox.innerHTML = m === 0
       ? '念珠：按課程順序排好的作品<small>每一條弧線是一篇比較短文，把兩部作品連在一起。</small>'
-      : '星座：此刻與過去連成的圖形<small>藍色的星是短文裏的概念，出現在三篇以上短文中。</small>';
+      : '星叢：此刻與過去連成的圖形<small>藍色的星是短文裏的概念，出現在三篇以上短文中。</small>';
   }
   $('#bRosary').addEventListener('click', () => { setMode(0); stopTour(); });
   $('#bStar').addEventListener('click', () => setMode(1));

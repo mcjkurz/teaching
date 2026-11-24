@@ -44,7 +44,7 @@ HOOKS['s-jetzt-dia'] = { render(step, el) { el.classList.toggle('v', step >= 1);
     const st = document.getElementById('stage').getBoundingClientRect(), k = st.width / 1280;
     let b = 0, r = 0;
     s.querySelectorAll('*').forEach(el => {
-      if (el.closest('h2') || el.classList.contains('kicker')) return;
+      if (el.closest('h2, .src') || el.classList.contains('kicker')) return;
       const q = el.getBoundingClientRect(); if (!q.width && !q.height) return;
       b = Math.max(b, (q.bottom - st.top) / k); r = Math.max(r, (q.right - st.left) / k);
     });
@@ -54,11 +54,13 @@ HOOKS['s-jetzt-dia'] = { render(step, el) { el.classList.toggle('v', step >= 1);
     document.querySelectorAll('.slide').forEach(s => {
       if (s.matches('.title-slide, .full, .nofit')) return;
       s.setAttribute('data-z', '');
+      const src = s.querySelector(':scope > .src');
+      const limit = src ? src.offsetTop - 14 : BOTTOM;
       let lo = .7, hi = 1.7;
       for (let i = 0; i < 12; i++) {
         const z = (lo + hi) / 2; s.style.setProperty('--z', z);
         const [b, r] = extent(s);
-        if (b <= BOTTOM && r <= RIGHT) lo = z; else hi = z;
+        if (b <= limit && r <= RIGHT) lo = z; else hi = z;
       }
       s.style.setProperty('--z', lo.toFixed(3));
     });
