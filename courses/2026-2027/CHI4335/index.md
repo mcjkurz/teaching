@@ -461,7 +461,7 @@ title: CHI4335
       <td class="date"><span class="lang-en">24 Nov</span><span class="lang-zh" lang="zh-Hant">11月24日</span></td>
       <td class="topic" rowspan="2"><span class="lang-en">Towards Redemption</span><span class="lang-zh" lang="zh-Hant">走向救贖</span></td>
       <td><ul class="readings"><li>瓦爾特·本雅明：《歷史哲學論綱》</li></ul></td>
-      <td class="notes"></td>
+      <td class="notes"><a href="constellation/">Constellation</a></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
