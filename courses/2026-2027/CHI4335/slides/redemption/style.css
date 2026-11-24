@@ -742,3 +742,17 @@ ul.l.birth li { font-size: 22px; }
 .row.flt > .col { display: block; }
 .row.flt .quote { border-left: none; padding-left: 0; }
 .slide:has(.row.flt) { padding-right: 80px; }
+
+/* map of Benjamin's flight in 1940 */
+#s-map .map { position: relative; flex: none; width: 540px; }
+#s-map .map img { display: block; width: 100%; box-shadow: 0 1px 2px rgba(60,40,20,.12), 0 6px 18px rgba(60,40,20,.12); }
+#s-map .map svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+#s-map .map path { fill: none; stroke: var(--accent, #9b2c2c); stroke-width: 6; stroke-dasharray: 14 10; stroke-linecap: round; }
+#s-map .pin { position: absolute; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; background: #2b2522; border: 2px solid #fff; }
+#s-map .pin b { position: absolute; left: 16px; top: -9px; font-size: 19px; white-space: nowrap; background: rgba(255,255,255,.85); padding: 0 6px; border-radius: 3px; }
+#s-map .pin.hot { background: var(--accent, #9b2c2c); width: 18px; height: 18px; margin: -9px 0 0 -9px; }
+#s-map .area { position: absolute; transform: translate(-50%,-50%); font-size: 20px; letter-spacing: .3em; color: rgba(40,30,25,.55); white-space: nowrap; }
+#s-map .area.mtn { color: var(--accent, #9b2c2c); font-weight: 700; font-size: 22px; letter-spacing: .15em; background: rgba(255,255,255,.8); padding: 0 6px; border-radius: 3px; }
+#s-map .rows.t .r { grid-template-columns: 120px 1fr; }
+#s-map .rows.t .r .v { font-size: 24px; }
+#s-map .rows.t .r .k { font-size: 24px; }
