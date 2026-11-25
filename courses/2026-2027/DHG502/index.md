@@ -326,7 +326,6 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
         <div class="schedule-section">
           <strong class="schedule-label">Lab guide</strong>
           <ul class="readings">
-            <li><a href="https://ldas.jp/en/posts/immarkus-handson/">“Reading Digital Historical Sources with IIIF and Web Annotation—An IMMARKUS Hands-on”</a></li>
           </ul>
         </div>
       </td>

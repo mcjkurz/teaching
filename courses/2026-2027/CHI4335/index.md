@@ -136,12 +136,13 @@ title: CHI4335
 </ul>
 <p>The presentation should be comparative. You are expected to analyze the assigned text in relation to other primary works from the course, highlighting both significant continuities (shared themes, styles, or arguments) and departures (unique elements or innovations, cultural influences, etc.).</p>
 <p><strong>3. Comparative essays.</strong> Choose two of five topics and write comparative essays in Chinese (1,500–2,000 characters each) on the course’s primary texts. Focus on one or more key themes—the individual and society, the body, fictionality, womanhood—through close analysis, precise description, and quotations. Explain how features such as metaphor, dialogue, narrative perspective, imagery, and style shape meaning. Each essay must include <strong>at least one primary text from that block</strong>; you may also draw on texts from other weeks. Submit via Moodle. If you submit more than two essays, only the two highest scores will count.</p>
-<p><strong>4. Final project</strong> (not less than 3,000 characters). Choose one option and submit a PDF via Moodle.</p>
+<p><strong>4. Final project</strong> (3,500–4,000 characters, in Chinese). Choose one option and submit a PDF via Moodle.</p>
 <ul>
-<li><strong>Option 1.</strong> A comparative analytical paper on at least two primary texts from the course. Give it a title, quote the texts, and cite sources properly. Secondary reading is welcome but not required. You may develop the paper from your essays, but do not copy them verbatim.</li>
-<li><strong>Option 2.</strong> An interview with a protagonist from one of the texts, answered as they might have spoken in their own time. Questions should address topics covered in class.</li>
-<li><strong>Option 3.</strong> A narrative continuation of one of the stories. Imagine what happened next, keeping to the course’s central questions (see above).</li>
+<li><strong>Option 1.</strong> A comparative paper on at least two primary texts, analyzing the formal features of extreme narratives through one course theme. Do not copy your earlier essays verbatim.</li>
+<li><strong>Option 2.</strong> A translation analysis comparing one or two texts with their Chinese translations (or two translations of the same text): what is lost, gained, or transformed?</li>
+<li><strong>Option 3.</strong> A continuation of one of the stories (3,000–3,500 characters) with a critical reflection (about 500 characters) on the theoretical issues it explores.</li>
 </ul>
+<p>Papers need a title, quotations, and standard references.</p>
 </div>
 <div class="lang-zh" lang="zh-Hant">
 <p><strong>1. 講座：</strong>每週講座聚焦所選文本的歷史脈絡與理論問題。</p>
@@ -154,12 +155,13 @@ title: CHI4335
 </ul>
 <p>報告須具比較性。須將指定文本與課程中其他一手作品對讀，指出重要的延續（共享主題、風格或論點）與差異（獨特之處、創新、文化影響等）。</p>
 <p><strong>3. 比較短文：</strong>五個題目中選寫兩篇中文比較短文（每篇 1,500–2,000 字），討論課程一手文本。聚焦個人與社會、身體、虛構性、女性身分等主題之一或多項，以細讀、精確描述與引文為依據，並說明隱喻、對話、敘事視角、意象、文體等如何形塑意義。每篇須<strong>至少納入該單元中的一部一手作品</strong>，亦可連結其他週次。經 Moodle 繳交。若繳交超過兩篇，只計入得分最高的兩篇。</p>
-<p><strong>4. 期末專題：</strong>不少於 3,000 字。三選一，經 Moodle 提交 PDF。</p>
+<p><strong>4. 期末專題：</strong>以中文撰寫，3,500–4,000 字。三選一，經 Moodle 提交 PDF。</p>
 <ul>
-<li><strong>選項一：</strong>比較性分析論文，至少討論課堂上兩部不同的一手作品。須有標題、引文與規範引註。可參考二手文獻，但非必須。可由比較短文發展而成，但不得原文照搬。</li>
-<li><strong>選項二：</strong>訪問所讀文本中的一位主角，設想對方在其所處時代會如何作答。問題須關涉課堂主題。</li>
-<li><strong>選項三：</strong>為所讀故事之一撰寫敘事續篇。發揮想像，並扣緊本課程的核心問題（見上）。</li>
+<li><strong>選項一：</strong>比較性論文，討論至少兩部一手文本，從一個課程主題出發分析極端敘事的形式特徵。不得照搬比較短文。</li>
+<li><strong>選項二：</strong>翻譯分析，對比一至兩部文本的原文與中譯本（或同一文本的兩個譯本），探討翻譯中流失、增加或轉化了什麼。</li>
+<li><strong>選項三：</strong>為所讀故事之一撰寫續篇（3,000–3,500 字），並附約 500 字的評述性反思，討論續篇關涉的理論議題。</li>
 </ul>
+<p>論文須有標題、引文與規範引註。</p>
 </div>
 </div>
 
