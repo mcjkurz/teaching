@@ -74,14 +74,6 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
 
 <h2>Course Design</h2>
 <p><strong>1. Seminars.</strong> Weekly seminars combine conceptual discussion with supervised hands-on practice. The recurring workflow is source → documented data → method → validation → historical interpretation. Starter materials and a short technical glossary will be provided.</p>
-<div style="font-size: 0.9em;">
-<p><strong>Examples of in-class tasks.</strong> Starting in Week 6 (12 Oct), each seminar includes a specific hands-on task that everyone works on together. Examples of such tasks:</p>
-<ul>
-<li>Use the Multimedia Information System (offered by the Hong Kong Public Libraries) to find photos and articles about old Hong Kong. You can focus on a particularly famous place (Kai Tak Airport, Kowloon Walled City, e.g.). Choose one or two articles and summarize them, including the photographs you found. Offer your analysis of the platform: how does it facilitate digital scholarship?</li>
-<li>Go to one of the many Hong Kong museums. What are the digital tools that the museum curators used to welcome the audience? Write a 1,000-word report of your visit.</li>
-<li>Given the provided dataset, train a topic model and identify some of the most important topics. Analyze them: what are these topics about? Is your result replicable? What does the topic distribution tell you about the dataset?</li>
-</ul>
-</div>
 <p><strong>2. Assignments.</strong> Assignment 0 is ungraded. Two graded assignments, a project proposal, and the final project are submitted through Moodle. Instructions are linked in the schedule.</p>
 <p><strong>3. In-class presentation.</strong> Students work in groups of up to three. Each group presents one academic paper during one of five presentation sessions (Weeks 4, 6, 8, 11, and 12) and leads the discussion. Every group member must speak, and the group receives a shared mark. The paper may be in English or Chinese, but the presentation and discussion must be in English.</p>
 <p><strong>4. Final project.</strong> Students work individually or in groups of up to three, apply one or more course methods to a historical question, and submit a reproducible GitHub repository and an English report. Full requirements and marking criteria are on the <a href="assignments/">assignments page</a>.</p>
@@ -320,7 +312,6 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           <ul class="readings">
             <li>Interpretation, preservation, reconstruction, and authenticity in the digital representation of cultural heritage; digital museum, library, and archive platforms (Hong Kong Heritage Museum, Hong Kong Palace Museum)</li>
             <li>Computer vision and “distant viewing”: what computational image analysis can and cannot “see,” and how it relates to manual annotation; 3D and virtual reconstructions as case studies in historical accuracy (critique only)</li>
-            <li>Hands-on: use <a href="https://immarkus.xmarkus.org/">IMMARKUS</a> to annotate regions in an East Asian historical image; inspect CSV and JSON-LD exports</li>
           </ul>
         </div>
         <div class="schedule-section reading">
@@ -329,7 +320,6 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
             <li>Freeman Tilden, <em>Interpreting Our Heritage</em>, 3rd ed. (University of North Carolina Press, 1977; first published 1957), Chapter 1, “Principles of Interpretation”</li>
             <li>Taylor Arnold and Lauren Tilton, <em>Distant Viewing: Computational Exploration of Digital Images</em> (MIT Press, 2023; open access), Chapter 1, “Distant Viewing: Theory”</li>
             <li>Sarah Kenderdine, Lily Hibberd, and Jeffrey Shaw, “Radical Intangibles: Materializing the Ephemeral,” <em>Museum &amp; Society</em> 19, no. 2 (2021): 252–272, selected sections</li>
-            <li>(optional) Hilde De Weerdt et al., <a href="https://dhq.digitalhumanities.org/vol/19/4/000808/000808.html">“Contextual Semantic Text and Image Annotation in the MARKUS Environment”</a>, <em>Digital Humanities Quarterly</em> 19, no. 4 (2025), selected sections</li>
             <li>(optional) Fiona Cameron and Sarah Kenderdine, eds., <em>Theorizing Digital Cultural Heritage: A Critical Discourse</em> (MIT Press, 2007)</li>
           </ul>
         </div>
@@ -390,8 +380,6 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           <strong class="schedule-label">Class content</strong>
           <ul class="readings">
             <li>From BERT to GPT; next-token probability, context, tokens, and APIs</li>
-            <li>JSON-schema structured outputs; information and entity extraction; source-linked semantic search and retrieval-augmented generation (RAG)</li>
-            <li>Hands-on: extract a small batch, check it against human-coded examples, and record errors</li>
             <li>In-class: chat with a RAG application built on your group’s texts about a historical figure (Assignment 2)</li>
           </ul>
         </div>
@@ -401,7 +389,6 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
             <li>Ted Underwood, Laura K. Nelson, and Matthew Wilkens, “Can Language Models Represent the Past without Anachronism?”</li>
             <li>Thierry Poibeau, “What Do Historical Language Models Model?”</li>
             <li>(optional) Maximilian Hindermann et al., <a href="https://openhumanitiesdata.metajnl.com/articles/10.5334/johd.481">“The RISE Humanities Data Benchmark: A Framework for Evaluating Large Language Models for Humanities Tasks”</a> (2026), Introduction</li>
-            <li>(optional) A recent piece treating generative AI as an object of historical source criticism, including documented failure modes such as models “over-historicizing” transcriptions with anachronistic archaic characters (to be selected from current literature)</li>
           </ul>
         </div>
       </td>
@@ -426,7 +413,7 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           <ul class="readings">
             <li>Schemas, records, fields, data types, identifiers, and one-to-many relationships</li>
             <li>CSV versus JSON; SQLite and introductory SQL; why a database is not a spreadsheet</li>
-            <li>In-class: build and query a small database of historical people, sources, and events</li>
+            <li>JSON-schema structured outputs; information and entity extraction using LLMs</li>
           </ul>
         </div>
         <div class="schedule-section reading">
@@ -469,7 +456,6 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
           <ul class="readings">
             <li>Carl T. Bergstrom and Jevin D. West, <em>Calling Bullshit: The Art of Skepticism in a Data-Driven World</em>, Chapters 4 (“Causality”) and 5 (“Numbers and Nonsense”)</li>
             <li>Toby Burrows, <a href="https://doi.org/10.1007/s42803-023-00068-9">“Reproducibility, Verifiability, and Computational Historical Research”</a> (2023), selected sections</li>
-            <li>(optional) An article from the <em>Journal of Digital History</em> special issue “ReOrienting Digital History” (2024) as an Asia-specific visualization case that doubles as a reproducibility exemplar (code and data layers published with the narrative)</li>
           </ul>
         </div>
       </td>
