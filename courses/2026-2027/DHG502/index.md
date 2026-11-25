@@ -323,11 +323,6 @@ MA in Digital History in Global Asia · Core · 3 credits</p>
             <li>(optional) Fiona Cameron and Sarah Kenderdine, eds., <em>Theorizing Digital Cultural Heritage: A Critical Discourse</em> (MIT Press, 2007)</li>
           </ul>
         </div>
-        <div class="schedule-section">
-          <strong class="schedule-label">Lab guide</strong>
-          <ul class="readings">
-          </ul>
-        </div>
       </td>
       <td class="notes"><a href="slides/heritage/">Slides</a></td>
     </tr>
