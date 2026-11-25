@@ -671,3 +671,10 @@ ul.l.pts li { font-size: 25px; line-height: 1.6; margin-bottom: 14px; }
 
 /* no italics for Chinese: heading subtitles stay upright */
 h2 small { font-style: normal; }
+
+/* week 2 title slide, final layout: smaller title clear of the pictures; the reading list carries its own red rule */
+#s-title .t1 { font-size: 64px; letter-spacing: .06em; }
+#s-title .rule { display: none; }
+#s-title .t3 { left: 110px; bottom: 110px; padding-left: 28px; border-left: 3px solid var(--acc); }
+#s-title .tcov2 { right: 330px; top: 60px; width: 210px; }
+#s-title .twood { right: 90px; top: 40px; width: 220px; }
