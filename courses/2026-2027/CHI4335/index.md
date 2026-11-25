@@ -187,7 +187,7 @@ title: CHI4335
       <th><span class="lang-en">Date</span><span class="lang-zh" lang="zh-Hant">日期</span></th>
       <th><span class="lang-en">Topic</span><span class="lang-zh" lang="zh-Hant">課題</span></th>
       <th><span class="lang-en">Readings</span><span class="lang-zh" lang="zh-Hant">閱讀</span></th>
-      <th><span class="lang-en">Notes</span><span class="lang-zh" lang="zh-Hant">講義</span></th>
+      <th><span class="lang-en">Slides</span><span class="lang-zh" lang="zh-Hant">投影片</span></th>
     </tr>
   </thead>
   <tbody class="block-a">
@@ -213,7 +213,7 @@ title: CHI4335
       <td class="date"><span class="lang-en">8 Sep</span><span class="lang-zh" lang="zh-Hant">9月8日</span></td>
       <td class="topic" rowspan="2"><span class="lang-en">Regarding the Pain of Others</span><span class="lang-zh" lang="zh-Hant">旁觀他人之痛苦</span></td>
       <td><ul class="readings"><li>蘇珊·桑塔格：《旁觀他人之痛苦》第三章與第六章</li><li>魯迅：〈祝福〉</li></ul></td>
-      <td class="notes"><a href="notes/week-02/">Notes</a></td>
+      <td class="notes"><a href="slides/week-02-pain-of-others/">Slides</a></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
@@ -229,7 +229,7 @@ title: CHI4335
       <td class="date"><span class="lang-en">15 Sep</span><span class="lang-zh" lang="zh-Hant">9月15日</span></td>
       <td class="topic" rowspan="2"><span class="lang-en">Writing the Shoah</span><span class="lang-zh" lang="zh-Hant">書寫大屠殺</span></td>
       <td><ul class="readings"><li>房春光：〈寫還是不寫，這是個問題：納粹大屠殺早期見證文學的書寫語境〉，《外國文學》2020年第3期，頁154–164</li></ul></td>
-      <td class="notes"><a href="notes/week-03/">Notes</a></td>
+      <td class="notes"><a href="slides/week-03-writing-the-shoah/">Slides</a></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
@@ -245,7 +245,7 @@ title: CHI4335
       <td class="date"><span class="lang-en">22 Sep</span><span class="lang-zh" lang="zh-Hant">9月22日</span></td>
       <td class="topic" rowspan="2"><span class="lang-en">Spiritual Resistance in a Labor Camp</span><span class="lang-zh" lang="zh-Hant">勞改營中的精神抵抗</span></td>
       <td><ul class="readings"><li>Tzvetan Todorov, “The Life of the Mind,” in <em>Facing the Extreme</em>, pp. 91–118</li></ul></td>
-      <td class="notes"><a href="notes/week-04/">Notes</a></td>
+      <td class="notes"><a href="slides/week-04-life-of-the-mind/">Slides</a></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
@@ -275,7 +275,7 @@ title: CHI4335
           <li>(optional) Leona Toker, “Gulag Literature and the Literature of Nazi Camps” (Chapter 4: Forced Labor)</li>
         </ul>
       </td>
-      <td class="notes"></td>
+      <td class="notes"><a href="slides/week-05-automation-of-the-senses/">Slides</a></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
@@ -299,7 +299,7 @@ title: CHI4335
       <td class="date"><span class="lang-en">6 Oct</span><span class="lang-zh" lang="zh-Hant">10月6日</span></td>
       <td class="topic" rowspan="2"><span class="lang-en">Trauma and Narrative</span><span class="lang-zh" lang="zh-Hant">創傷與敘事</span></td>
       <td><ul class="readings"><li>Wendy O’Brien, “Telling Time: Literature, Temporality and Trauma”</li></ul></td>
-      <td class="notes"></td>
+      <td class="notes"><a href="slides/week-06-trauma-and-narrative/">Slides</a></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
@@ -321,7 +321,7 @@ title: CHI4335
           <li>(optional) 陶東風：<a href="https://www.bilibili.com/video/BV1oR4y1H7MX/">《文化創傷與見證文學》系列講座（全4講，bilibili）</a></li>
         </ul>
       </td>
-      <td class="notes"><a href="notes/week-07/">Notes</a><br><a href="slides/cultural-trauma/">Slides</a></td>
+      <td class="notes"><a href="slides/week-07-cultural-trauma/">Slides</a></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
@@ -337,7 +337,7 @@ title: CHI4335
       <td class="date"><span class="lang-en">20 Oct</span><span class="lang-zh" lang="zh-Hant">10月20日</span></td>
       <td class="topic" rowspan="2"><span class="lang-en">Trauma and War</span><span class="lang-zh" lang="zh-Hant">創傷與戰爭</span></td>
       <td><ul class="readings"><li>Patrick Colm Hogan, “On Being Moved: Cognition and Emotion in Literature and Film”</li></ul></td>
-      <td class="notes"><a href="slides/on-being-moved/">Slides</a></td>
+      <td class="notes"><a href="slides/week-08-on-being-moved/">Slides</a></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
@@ -366,7 +366,7 @@ title: CHI4335
           <li>(optional) Rithy Panh, <em>The Missing Picture</em></li>
         </ul>
       </td>
-      <td class="notes"></td>
+      <td class="notes"><a href="slides/week-09-testimony-truth/">Slides</a></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
@@ -387,7 +387,7 @@ title: CHI4335
           <li>（選讀）王斑：〈實踐的崇高主體〉，於《歷史的崇高形象：二十世紀中國的美學與政治》</li>
         </ul>
       </td>
-      <td class="notes"><a href="slides/sublime/">Slides</a></td>
+      <td class="notes"><a href="slides/week-10-sublime/">Slides</a></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
@@ -416,7 +416,7 @@ title: CHI4335
           <li>申丹：〈敘事形式與性別政治：女性主義敘事學評析〉，《北京大學學報（哲學社會科學版）》2004年第1期，頁136–146</li>
         </ul>
       </td>
-      <td class="notes"><a href="slides/gender-violence/">Slides</a></td>
+      <td class="notes"><a href="slides/week-11-gender-violence/">Slides</a></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
@@ -437,7 +437,7 @@ title: CHI4335
           <li>(optional) Frantz Fanon, “The Lived Experience of the Black Man,” in <em>Black Skin, White Masks</em></li>
         </ul>
       </td>
-      <td class="notes"><a href="slides/racial-violence/">Slides</a></td>
+      <td class="notes"><a href="slides/week-12-racial-violence/">Slides</a></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>
@@ -461,7 +461,7 @@ title: CHI4335
       <td class="date"><span class="lang-en">24 Nov</span><span class="lang-zh" lang="zh-Hant">11月24日</span></td>
       <td class="topic" rowspan="2"><span class="lang-en">Towards Redemption</span><span class="lang-zh" lang="zh-Hant">走向救贖</span></td>
       <td><ul class="readings"><li>瓦爾特·本雅明：《歷史哲學論綱》</li></ul></td>
-      <td class="notes"><a href="constellation/">Constellation</a></td>
+      <td class="notes"><a href="slides/week-13-redemption/">Slides</a><br><a href="constellation/">Constellation</a></td>
     </tr>
     <tr>
       <td><span class="lang-en">Tutorial</span><span class="lang-zh" lang="zh-Hant">導修</span></td>

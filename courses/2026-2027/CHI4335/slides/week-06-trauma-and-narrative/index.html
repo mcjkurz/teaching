@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>創傷與敘事 · CHI 4335 第6週</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+<style>
+  .bgimg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .08; z-index: 0; }
+  .slide[data-z] > .bgimg { zoom: 1; }
+  .slide:has(.bgimg) > :not(.bgimg):not(.src) { position: relative; z-index: 1; }
+  .bk { font-size: 21px; line-height: 1.75; }
+  .bk p { font-size: inherit; line-height: inherit; margin: 0 0 6px; text-indent: 2em; }
+  .covers { display: flex; flex-direction: column; gap: 14px; flex: none; }
+  .covers .fig img { max-height: 200px; }
+  .pl { font-family: Georgia, "Times New Roman", serif; font-size: 17px; line-height: 1.55; border: 1px solid var(--line); padding: 14px 18px; background: #fcfaf7; }
+  .pl p { font-size: inherit; line-height: inherit; margin: 0 0 2px; }
+  .pl .gl { margin-top: 10px; font-size: 13.5px; color: var(--mute); line-height: 1.45; }
+  .goya { position: relative; height: 560px; margin-top: -20px; }
+  .goya figure { position: absolute; margin: 0; }
+  .goya img { display: block; width: 100%; box-shadow: 0 1px 2px rgba(60,40,20,.12), 0 6px 18px rgba(60,40,20,.10); }
+  .goya figcaption { font-size: 13px; color: var(--mute); line-height: 1.35; margin-top: 4px; }
+  .goya .arr { position: absolute; left: 520px; top: 270px; width: 170px; height: 3px; background: var(--acc); }
+  .goya .arr::after { content: ''; position: absolute; right: -4px; top: -8px; border-left: 18px solid var(--acc); border-top: 9.5px solid transparent; border-bottom: 9.5px solid transparent; }
+  table.ptsd { border-collapse: collapse; width: 100%; font-size: 17px; }
+  table.ptsd th { text-align: left; padding: 6px 10px; border-bottom: 2px solid var(--acc); color: var(--acc); font-size: 19px; }
+  table.ptsd td { padding: 5px 10px; vertical-align: top; line-height: 1.35; }
+  table.ptsd tr.g td { border-top: 1px solid var(--line); }
+  .title-slide .t3 { max-width: 820px; }
+  h2 small, .quote .by, .pq .ref { font-style: normal; }
+  ul.l.three { display: block; }
+  ul.l.three li { display: block; white-space: nowrap; font-size: 34px; }
+  .three { font-size: 34px; line-height: 1.8; font-weight: 600; }
+</style>
+</head>
+<body>
+<div id="stage">
+
+<!-- Converted from "Extreme Week 6.pptx" (misc/extreme_2026-2027). Main reading: Wendy O'Brien, "Telling Time:
+     Literature, Temporality and Trauma". Passages from Leona Toker, Gulag Literature and the Literature of Nazi Camps
+     (2019), ch. 4 "Forced Labor". Screenshots of text in the old deck are retyped and converted to traditional
+     characters: 沙拉莫夫〈手推車〉 (Chinese translation), 博羅夫斯基〈女士們、先生們，請進毒氣室〉 (Chinese translation
+     and the Polish original, Proszę państwa do gazu), 陶東風's lecture slide. Names of modern scholars are given in Latin script. -->
+
+<!-- Title -->
+<section class="slide title-slide" id="s-title">
+  <figure class="fig" style="position:absolute;right:90px;top:70px;width:470px"><img src="img/title-trauma.jpg" alt="" style="max-height:none;width:100%"></figure>
+  <div class="t1">創傷與敘事</div>
+  <div class="t2">Trauma and Narrative</div>
+  <div class="rule"></div>
+  <div class="t3">「為甚麼文學更適合捕捉創傷？」<br><span class="mute small">Why is literature better suited to capturing trauma?<br>CHI 4335 · Week 6 · Trauma and Narrative<br>O’Brien, “Telling Time: Literature, Temporality and Trauma”<br>導修：張翎，《餘震》</span></div>
+  <div class="hint"><kbd>←</kbd> <kbd>→</kbd> 翻頁 · <kbd>1</kbd>–<kbd>6</kbd> 章節 · <kbd>G</kbd> 跳至頁碼 · <kbd>L</kbd> 雷射筆 · <kbd>F</kbd> 全螢幕</div>
+</section>
+
+<!-- ============ 1 勞動與重複 ============ -->
+
+<section class="slide" id="s-eventless" data-sec="labor">
+  <h2>如何描述 eventless 的現實</h2>
+  <div class="row" style="gap:34px;align-items:flex-start;margin-top:-12px">
+    <figure class="fig" style="flex:none;width:400px"><img src="img/gulag-wheelbarrow.jpg" alt="古拉格囚犯推手推車" style="max-height:290px"><figcaption>古拉格（Gulag）勞改營的囚犯推手推車，1930 年代</figcaption></figure>
+    <div class="col pq">
+      <div class="zh" style="font-size:24px;color:var(--ink)">「正如身體疼痛的體驗一樣，長時間奴隸勞動的體驗難以進行持續的文學再現；如果文學文本迎接了這一挑戰，那麼它們的表現手法就需要進行分析。這個問題涉及紀實散文藝術的難題，以及爲什麼即使是倖存者虛構的敘述也應該被視爲見證性內容來解讀。」</div>
+      <div class="en" style="font-size:18px;margin-top:14px;border-left-color:var(--line)">“Like the experience of bodily pain, the experience of long hours of slave labor defies sustained literary representation; if literary texts rise to the challenge, their techniques of doing so call for analysis. The issue entails the problem of the art of documentary prose and the reasons why even the fictionalized narratives by survivors should be read for their attesting content.”</div>
+      <span class="ref">Toker, “Forced Labor”</span>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-drudgery" data-sec="labor">
+  <img class="bgimg" src="img/camp-labor.jpg" alt="">
+  <h2>強迫勞動（Forced Labor）</h2>
+  <div class="row" style="gap:34px;align-items:flex-start;margin-top:-12px">
+    <figure class="fig" style="flex:none;width:360px"><img src="img/camp-labor.jpg" alt="集中營囚犯在圍牆內挖土" style="max-height:260px"><figcaption>集中營囚犯在圍牆內挖土</figcaption></figure>
+    <div class="col pq">
+      <div class="en" style="font-size:18px">“In the narratives of both the Nazi Lagers and the Gulag, people’s interactions are shown to be taking place mainly outside working hours, during short breathing spaces, or when the prisoners are employed at easier tasks rather than at hard physical labor… Cumulatively, this feature of camp narratives is liable to make it seem, falsely, that such moments made up the essence of Gulag experience. The picture had to be amended by capturing what constituted the dominant quality of that experience—the exhausting, monotonous coerced drudgery, which, mutatis mutandis, also characterized the labor camps run by the Nazis.”</div>
+      <div class="zh" style="font-size:21px">「在納粹集中營與古拉格的敘事中，人們的互動主要被描寫為發生在工作時間之外——短暫的喘息時刻，或是在囚犯被分配到較輕鬆的工作時，而非在艱苦的體力勞動中。從整體上看，這一特點可能會造成一種錯誤印象，使人以為這些片刻構成了古拉格經驗的本質。為了修正這種印象，必須捕捉到那種經驗中最主要的特質——令人筋疲力盡、單調乏味的強迫勞動，而這種情形，在納粹所運營的勞改營中，也同樣存在。」</div>
+      <span class="ref">Toker, “Forced Labor”</span>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-rep1" data-sec="labor">
+  <h2>重複性（Repetition）</h2>
+  <div class="row" style="gap:34px;align-items:flex-start;margin-top:-12px">
+    <figure class="fig" style="flex:none;width:300px"><img src="img/shalamov.jpg" alt="沙拉莫夫" style="max-height:330px"><figcaption>沙拉莫夫（Varlam Shalamov，1907–1982）</figcaption></figure>
+    <div class="col quote bk">如果你的工友對你仁慈，那便是萬幸——你不能指望工頭會對你仁慈，但你可以指望你兩人組或三人組中的資深前輩——畢竟，到處都有老手和新手，每個人都有機會成爲前輩，即使他們是第58條囚犯。但即使你的工友對你仁慈，讓你喘口氣，你也沒有吸菸休息的機會。在一九三八年，吸菸是一種政治犯罪，屬於破壞行爲，將根據第58條第14款進行懲罰。<br>　　不。你的工友會盯着你，確保你不欺騙國家，不在不該休息的時候休息。他們需要你賺取口糧。你的同志們並不想幫你完成勞動，也不想爲你的仇恨、憤怒、飢餓和寒冷付出代價。如果你的同志們無所謂——一九三八年的科雷馬，幾乎沒有這樣的人——那麼工頭就會替他們對你負責，如果工頭去別處取暖了，……<span class="by">沙拉莫夫，〈手推車〉</span></div>
+  </div>
+</section>
+
+<section class="slide" id="s-rep2" data-sec="labor">
+  <h2>重複性（Repetition）<small>續</small></h2>
+  <div class="row flt" style="margin-top:-12px">
+    <figure class="fig" style="width:330px"><img src="img/gulag-snow.jpg" alt="古拉格囚犯在雪地裏勞動" style="max-height:230px"><figcaption>古拉格囚犯在雪地裏鋪設枕木</figcaption></figure>
+    <div class="col quote bk" style="font-size:20px">……他會留下一名官方觀察員代替他，一個工人，也是助理工頭。前國防工業人民委員部的副部長克里維茨基博士就是這樣做的，他連續幾天都在科雷馬特區喝我的血。<br>　　如果工頭看不到你，警衛或者監工會看到你，或者施工員、工段長會看到你，或者礦長會看到你。一名武裝警衛會看到你，並用槍托教訓你不要越軌。當地黨組織安排在礦場值勤的人會看到你；地區內務人民委員部的官員和他的線人網絡會看到你。遠北建設總局在西方、北方和西南方管理處的代表或馬加丹本身的代表，或者古拉格的莫斯科代表都會看到你。每個人都在密切監視你的一舉一動——包括所有的文學作品和新聞報道——看你是否在錯誤的時間去拉屎——解開褲釦很困難，因爲你的雙手無法自由彎曲。它們只能適應鎬柄和手推車把手的彎曲。它們的肌肉都快收縮了。但是警衛喊道：“屎呢？你拉的屎在哪裏，嗯？”<br>　　他還會朝你揮舞槍托。警衛不需要知道所謂的糙皮病、壞血病或痢疾。<br>　　<mark>因此，推車工只能邊推車邊休息。</mark><span class="by">沙拉莫夫，〈手推車〉</span></div>
+  </div>
+</section>
+
+<section class="slide" id="s-rep3" data-sec="labor">
+  <h2>重複性（Repetition）<small>續</small></h2>
+  <div class="row flt" style="margin-top:-12px">
+    <figure class="fig" style="width:360px"><img src="img/gangway-wheelbarrows.jpg" alt="囚犯推着手推車走在木板棧道上" style="max-height:270px"><figcaption>囚犯推着手推車走在木板棧道上</figcaption></figure>
+    <div class="col quote bk">你必須運用技巧才能將手推車推上中央舷梯：你要把手推車從自己的支路舷梯上推出來，然後把它轉過去，不要讓車輪陷入到主車轍中，因爲主車轍已經磨損到木板中間，像絲帶或蛇一樣延伸開來——科雷馬沒有蛇——從開採面到棧道，從頭到尾，一直延伸到地堡。最重要的是，一旦你把手推車推上中央舷梯，就要轉動手推車，用你自己的肌肉保持平衡，並抓住合適的時機，飛奔進入中央舷梯，這樣你就不會被超越或落下，因爲中央舷梯沒有超車的空間，你必須推着手推車沿着中央舷梯疾馳，在中央舷梯的支撐下向上跑，堅持不懈地向上跑，以免被那些喫飽飯的人或新手擠下木板。<br>　　你不能閒逛，必須小心，以防別人把你撞下去，直到你把手推車推上三米高的棧道。然後你就不需要再繼續了，因爲地堡是木質的，內有橫樑，然後你必須把手推車傾倒在地堡裏，這樣你就完成了任務。一輛鐵製的馬車從棧道下經過，這輛馬車會被帶到洗金設備，即洗滌器旁邊，這不是你的任務。馬車沿着軌道前往洗滌器，以便清洗泥土。但這都與你無關。<br>　　你必須把手推車的把手翹起來，把裏面的東西全部倒進地堡裏——這是最輕鬆的部分！——然後抓起空的手推車，迅速挪到一邊，環顧四周，喘口氣，給那些喫得很飽的人讓路。<span class="by">沙拉莫夫，〈手推車〉</span></div>
+  </div>
+</section>
+
+<section class="slide" id="s-mech" data-sec="labor">
+  <h2>機械化（Mechanization）</h2>
+  <div class="row" style="gap:34px;align-items:flex-start;margin-top:-12px">
+    <div style="flex:none;width:330px">
+      <figure class="fig"><img src="img/gulag-wheelbarrow.jpg" alt="古拉格囚犯推手推車" style="max-height:210px"><figcaption>古拉格囚犯推手推車，1930 年代</figcaption></figure>
+      <div class="quote" style="font-size:30px;line-height:1.5;margin-top:26px;border-left-color:var(--acc)">「一旦學會了這些習慣，身體會永遠記住它們。」</div>
+    </div>
+    <div class="col quote bk" style="font-size:19px;line-height:1.65">“不”，我說。“在科雷馬，我只學會了推手推車。還有用鎬鑿石頭。”<br>　　事實上，當我從科雷馬回來時，我並沒有獲得任何知識或技能。<br>　　<mark>但我的整個身體都知道，並且仍能在身體和精神上重複推手推車的動作。</mark><br>　　當你拿起一輛手推車——無論是讓人討厭的大推車（每立方米十輛手推車）還是“備受喜愛”的小推車——推車工的首要任務是挺直身體。在抬起手推車之前，身體站直，雙手放在身後。雙手手指必須牢牢抓住裝滿貨物的手推車把手。<br>　　使其移動的第一推動力來自整個身體，包括背部、腿部和肩部的肌肉，從而使肩部區域發力。一旦推車開始移動，車輪開始轉動，你可以稍微向前移動你的手臂，稍微放鬆你的肩部肌肉。<br>　　推車工是看不見車輪的，只能感覺到它，從開始到結束，所有的轉彎都是盲目完成的。轉動手推車、將手推車推上陡峭的棧道，需要用到肩部肌肉和前臂。實際上，在手推車沿着舷梯移動時，這些肌肉並不是最重要的。<br>　　車輪和車身的統一、方向和平衡是由整個身體，包括頸部和背部以及肱二頭肌來支撐和約束的。<br>　　直到這種動作變成一種自動的條件反射動作，纔有足夠的力量推動手推車；推車工才能跟隨車輪一起前進。<span class="by">沙拉莫夫，〈手推車〉</span></div>
+  </div>
+</section>
+
+<section class="slide" id="s-chain1" data-sec="labor">
+  <h2>產業鏈：科雷馬（Kolyma）的「傳送帶」</h2>
+  <div class="row" style="gap:34px;align-items:flex-start;margin-top:-12px">
+    <figure class="fig" style="flex:none;width:420px"><img src="img/gangway-wheelbarrows.jpg" alt="囚犯推着手推車走在木板棧道上" style="max-height:320px"><figcaption>囚犯推着手推車在棧道上排成一列</figcaption></figure>
+    <div class="col quote" style="font-size:27px;line-height:1.7">當你把手推車推回到開採面後，你只需將它扔下。工作舷梯上已經爲你準備好了另一輛手推車，沒有人會在開採面上站着不動，無所事事，至少沒有第58條囚犯。在工頭、監工、警衛、獨勞點負責人以及礦長的嚴厲注視下，你抓住另一輛手推車的把手，走上中央舷梯：<mark>這就是所謂的傳送帶，輪流推手推車。</mark>這是最可怕的生產法則之一，始終受到嚴密監視。<span class="by">沙拉莫夫，〈手推車〉</span></div>
+  </div>
+</section>
+
+<section class="slide" id="s-chain2" data-sec="labor">
+  <h2>產業鏈：奧斯威辛（Auschwitz）的站台</h2>
+  <div class="row" style="gap:30px;align-items:flex-start;margin-top:-12px">
+    <figure class="fig" style="flex:none;width:340px"><img src="img/auschwitz-arrival.jpg" alt="猶太人從火車上下來，奧斯威辛－比克瑙，1944" style="max-height:250px"><figcaption>匈牙利猶太人抵達奧斯威辛－比克瑙（Auschwitz-Birkenau）的站台，1944 年 5 月</figcaption></figure>
+    <div class="col">
+      <div class="quote" style="font-size:20px;line-height:1.7">人流湧動，一波接一波，卡車跟瘋狗一般放肆地咆哮。我緊緊地閉上眼睛，但殘酷的場景一幕又一幕地浮現：從火車上拽下來的屍體、踩扁的嬰兒們和那些堆在死人堆上的殘疾人……貨運卡車開進來，衣服、手提箱和打包的行李越堆越高；人們從車裏爬出來、望兩眼烈日、呼吸幾口新鮮空氣、討口水喝、被塞進卡車、運往集中營。<mark>畫面不斷重演，卡車一波接一波，人一批接一批</mark>……這些場景在我腦海中被雜糅……</div>
+      <div class="quote" style="font-size:20px;line-height:1.7;margin-top:14px">“好吧。你就坐在這兒，千萬別出聲，別讓黨衛軍的人看到你。我去看看能不能找到你要的鞋。”<br>　　“別管我了，也別想鞋子的事兒了。”我很想睡覺。已經很晚了。<br>　　<mark>又一聲汽笛響起，又一撥犯人運來了。</mark>貨運卡車從黑暗中駛來，經過燈柱，又消失在夜幕中。站臺不大，但是路燈照耀所及的範圍更小。接下來的卸載將會有序緩慢地完成。<span class="by">博羅夫斯基（Tadeusz Borowski），〈女士們、先生們，請進毒氣室〉</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2 虛構與見證 ============ -->
+
+<section class="slide" id="s-fiction" data-sec="fiction">
+  <h2>Fiction, non-fiction, fictionality</h2>
+  <div class="row" style="gap:40px;align-items:flex-start;margin-top:-12px">
+    <ul class="l col" style="margin:0">
+      <li data-step="1">· 什麼是虛構性？（fictionality）</li>
+      <li data-step="2">· 如何區分虛構（fiction）與非虛構（non-fiction）？</li>
+      <li data-step="3">· 什麼是「虛構性的標誌」（signposts of fictionality）？</li>
+      <li data-step="4">· 假如你拿到了一段文本摘錄，你需要判斷它是否虛構，該怎麼做？</li>
+    </ul>
+    <div class="figs" style="flex:none;width:430px;flex-wrap:wrap;gap:14px">
+      <figure class="fig"><img src="img/cov_booth.jpg" alt="Booth, The Rhetoric of Fiction" style="max-height:210px"><figcaption>Wayne C. Booth</figcaption></figure>
+      <figure class="fig"><img src="img/cov_walsh.jpg" alt="Walsh, The Rhetoric of Fictionality" style="max-height:210px"><figcaption>Richard Walsh</figcaption></figure>
+      <figure class="fig"><img src="img/cov_cohn.jpg" alt="Cohn, Transparent Minds" style="max-height:210px"><figcaption>Dorrit Cohn</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-signposts1" data-sec="fiction">
+  <h2>虛構性的標誌（signposts of fictionality）</h2>
+  <div class="row" style="gap:32px;align-items:flex-start;margin-top:-12px">
+    <figure class="fig" style="flex:none;width:200px"><img src="img/cov_cohn.jpg" alt="Cohn, Transparent Minds" style="max-height:300px"><figcaption>Dorrit Cohn, <i>Transparent Minds</i>（1978）</figcaption></figure>
+    <div class="col pq">
+      <div class="en" style="font-size:19px">“In addition to the use of the first-person narrator whose name does not coincide with that of the author, these signposts include inside views of third-person characters, shifting internal focalization, sustained scenic presentation of remembered episodes of the past based on the ‘perfect-memory’ convention (in contrast to brief sound bites or flashes of scenes that one could well imagine having imprinted themselves into the narrator’s memory), sustained scenic staging of episodes that the narrator could not have witnessed, and scenic presentation of events that happened at the same time in different places.”</div>
+      <div class="zh" style="font-size:21px">除了使用名字與作者不相符的第一人稱敘事者之外，這些虛構性的標誌還包括：對第三人稱角色的內在描寫、內部焦點的轉換、對過去記憶場景的持續而具體的再現（基於「完美記憶」的慣例，而非僅僅是一些可想像地烙印在敘事者記憶中的短暫片段或閃光）；對敘事者不可能親眼目睹的情節進行完整的場景化描寫；以及對同一時間發生於不同地點的事件進行場景呈現。</div>
+      <span class="ref">Toker, “Forced Labor”</span>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-signposts2" data-sec="fiction">
+  <h2>虛構性的標誌：兩項標準</h2>
+  <div class="row" style="gap:32px;align-items:flex-start;margin-top:-12px">
+    <figure class="fig" style="flex:none;width:200px"><img src="img/cov_walsh.jpg" alt="Walsh, The Rhetoric of Fictionality" style="max-height:300px"><figcaption>Richard Walsh, <i>The Rhetoric of Fictionality</i>（2007）</figcaption></figure>
+    <div class="col pq">
+      <div class="en" style="font-size:24px">“Such signposts of fictionality produce two main criteria for the presence of the ‘as if’ convention: (1) <mark>the ascription of recognizable actions, thoughts, and features to nondocumented, nondocumentable subjects</mark>, or (2) <mark>the ascription of nondocumented or nondocumentable actions, thoughts, or features to documentable individuals</mark> (Toker 1997, 190).”</div>
+      <div class="zh" style="font-size:25px">這些虛構性的標誌產生了兩項主要判斷「彷彿」（“as if”）慣例存在的標準：（1）<mark>將可識別的行動、思想與特徵歸於未被記錄、也無法被記錄的對象</mark>；或（2）<mark>將未被記錄、無法被記錄的行動、思想或特徵歸於可被記錄的具體人物</mark>。</div>
+      <span class="ref">Toker, “Forced Labor”</span>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-between" data-sec="fiction">
+  <h2>Between fiction and non-fiction</h2>
+  <div class="row" style="gap:34px;align-items:flex-start;margin-top:-12px">
+    <div class="col pq">
+      <div class="zh" style="font-size:25px;color:var(--ink)">這種故事的並置讓我們「在自傳性契約和幻象性契約之間猶豫不決：最終，我們不得不同時接受這兩者。我們被邀請將所有故事都視爲古拉格受害者經歷的見證，但也要像對待虛構作品一樣提出問題——有關象徵的問題，關於某些細節的功能問題，關於敘事細節順序的意義問題，以及關於主題關聯的問題。」</div>
+      <div class="en" style="font-size:19px;margin-top:14px;border-left-color:var(--line)">“Such stories make us hesitate between the autobiographical and the phantasmatic pacts: ultimately, we have to endorse both at the same time. We are invited to read all the stories as testimony to the experience of Gulag victims but ask of all of them the kinds of questions that we ask of fiction—questions about symbolism, about the function of certain details of reference, about the meaning of the sequence of narrative details, and about thematic links.”</div>
+    </div>
+    <figure class="fig" style="flex:none;width:250px"><img src="img/cov_toker.jpg" alt="Toker, Gulag Literature and the Literature of Nazi Camps" style="max-height:380px"><figcaption>Leona Toker, <i>Gulag Literature and the Literature of Nazi Camps</i>（2019）</figcaption></figure>
+  </div>
+</section>
+
+<section class="slide" id="s-narr1" data-sec="fiction">
+  <h2>沙拉莫夫：「我更喜歡手推車」</h2>
+  <div class="row" style="gap:36px;align-items:flex-start;margin-top:-12px">
+    <figure class="fig" style="flex:none;width:420px"><img src="img/gulag-wheelbarrow.jpg" alt="古拉格囚犯推手推車" style="max-height:330px"><figcaption>古拉格囚犯推手推車，1930 年代</figcaption></figure>
+    <div class="col quote" style="font-size:26px;line-height:1.7">我非常想成爲一名工具搬運工，哪怕只有一天也好，但我明白，那個男孩，那個用骯髒的手套裹着凍傷的手指、眼中閃爍着飢餓光芒的小學生比我更合適擔任這個職位。<br>　　所以我只能推手推車了。我必須知道如何使用鎬和鐵鍬，以及如何用撬棍鑽孔：這些固然都很好，但在那個露天金礦層的石坑上，<mark>我更喜歡手推車</mark>。<span class="by">沙拉莫夫，〈手推車〉</span></div>
+  </div>
+</section>
+
+<section class="slide" id="s-narr2" data-sec="fiction">
+  <h2>博羅夫斯基：「我們是好人嗎？」</h2>
+  <div class="row" style="gap:36px;align-items:flex-start;margin-top:-12px">
+    <figure class="fig" style="flex:none;width:400px"><img src="img/auschwitz-arrival.jpg" alt="猶太人從火車上下來，奧斯威辛－比克瑙，1944" style="max-height:300px"><figcaption>奧斯威辛－比克瑙（Auschwitz-Birkenau）的站台，1944 年 5 月</figcaption></figure>
+    <div class="col quote" style="font-size:27px;line-height:1.7">我抬起頭，但是這張臉在我眼前飄忽不定，慢慢消融成爲巨大的、透明的景象，最後與靜止的樹木和人潮融爲了一體……我飛快地眨了眨眼：是亨利。<br>　　<mark>“嘿，亨利，我們是好人嗎？”</mark><br>　　“犯什麼傻，幹嗎問這個？”<br>　　“你看，我的朋友，我不知道爲什麼，但我很憤怒，這些人讓我發瘋——因爲這些人我必須待在這兒。我沒有心軟。也不會因爲他們即將被送進毒氣室而心生愧疚。去他媽的！我只想衝過去，只想狠狠地揍他們。這肯定是他媽的有病，只是我搞不懂……”<span class="by">博羅夫斯基，〈女士們、先生們，請進毒氣室〉</span></div>
+  </div>
+</section>
+
+<section class="slide" id="s-irony" data-sec="fiction">
+  <h2>諷刺（Irony）</h2>
+  <div class="row" style="gap:36px;align-items:flex-start;margin-top:-12px">
+    <figure class="fig" style="flex:none;width:420px"><img src="img/gulag-map.png" alt="古拉格勞改營分佈圖" style="max-height:300px"><figcaption>古拉格（Gulag）勞改營在蘇聯境內的分佈</figcaption></figure>
+    <div class="col quote" style="font-size:31px;line-height:1.7">“在科雷馬服刑”就意味着死刑，是殺戮的代名詞，或慢或快，取決於當地金礦或石礦礦長以及獨勞點負責人的意願。<br>　　這個漂亮的、薄而新的文件夾裏裝着一大堆資料：裏面塞滿了關於拒絕勞動的文件，囚犯的同志們對他控告的副本，以及來自調查機關的備忘錄，涵蓋了各種各樣的“數據”。有時，文件夾持續的時間不夠長，不足以塞滿：不少人在與<mark>“特別法庭機器”及其兩個把手和一個輪子</mark>接觸的第一個夏天就死了。<span class="by">沙拉莫夫，〈手推車〉</span></div>
+  </div>
+</section>
+
+<section class="slide" id="s-lang" data-sec="fiction">
+  <h2>統治者的語言</h2>
+  <div class="row" style="gap:34px;align-items:flex-start;margin-top:-12px">
+    <figure class="fig" style="flex:none;width:400px"><img src="img/gulag-snow.jpg" alt="古拉格囚犯在雪地裏勞動" style="max-height:290px"><figcaption>古拉格囚犯在雪地裏鋪設枕木</figcaption></figure>
+    <ul class="l col" style="margin:0">
+      <li data-step="1">· <b>Executioner’s scaffold</b>（плаха / plakha）：象徵死亡與處刑，沙拉莫夫將它比喻為勞改營的工作場所。</li>
+      <li data-step="2">· <b>Gangway</b>（通道／棧道）：礦場中的木板道，被轉化為「刑架」的隱喻。</li>
+      <li data-step="3">· <b>Assembly line</b>（конвейер / konveier）：原指工廠裝配線，也暗指 1937 年輪班式酷刑審訊。</li>
+    </ul>
+  </div>
+</section>
+
+<section class="slide" id="s-perp" data-sec="fiction">
+  <h2>施害者的語言</h2>
+  <div class="row" style="gap:30px;align-items:flex-start;margin-top:-14px">
+    <div class="pl" style="flex:none;width:600px">
+      <p>— Kanada! <mark>Antreten</mark>! Ale szybko! Transport przychodzi.</p>
+      <p>— Wielki Boże! — wrzasnął Henri, zeskakując z buksy.</p>
+      <p>Marsylczyk zadławił się pomidorem, chwycił marynarkę, wrzasnął <mark>raus</mark> do siedzących na dole i już byli we drzwiach. Zakotłowało się na innych buksach. Kanada odchodziła na rampę.</p>
+      <p>— Henri, buty! — krzyknąłem na pożegnanie.</p>
+      <p>— <mark>Keine Angst!</mark> — odkrzyknął mi już z dworu.</p>
+      <p>Opakowałem żarcie, owiązałem sznurami walizę, w której cebula i pomidory z ojcowskiego ogródka w Warszawie leżały obok portugalskich sardynek, a boczek z lubelskiego „Bacutilu” (to od brata) mieszał się z najautentyczniejszymi bakaliami z Salonik. Owiązałem, naciągnąłem spodnie, zlazłem z buksy.</p>
+      <p>— <mark>Platz!</mark> — wrzasnąłem, przeciskając się między Grekami. Odsuwali się na bok. We drzwiach natknąłem się na Henriego.</p>
+      <p>— <mark>Allez, allez, vite, vite!</mark></p>
+      <div class="gl">muzułman (z niem. Muselmann): w gwarze obozowej osoba skrajnie wycieńczona fizycznie i psychicznie głodem i chorobami · antreten (niem.): do szeregu · raus (niem.): wynocha, precz · keine Angst! (niem.): bez obaw! · Platz! (niem.): miejsce! (z drogi!) · Allez, allez, vite, vite! (fr.): naprzód, naprzód, żywo, żywo!</div>
+    </div>
+    <div class="col">
+      <div class="quote" style="font-size:25px;line-height:1.7">「雖然倖存者在書寫時沿用這些施害者的語言並不意味着對整個納粹極權體系的認同和屈服，而是迫於見證歷史的需要，但這種對施害者語言的借用卻真切映射出倖存者在見證書寫中所經受的透骨的絕望感。」<span class="by">房春光，〈寫還是不寫〉</span></div>
+      <p class="cmt" style="font-size:17px;color:var(--mute)">左：博羅夫斯基（Tadeusz Borowski）〈女士們、先生們，請進毒氣室〉的波蘭文原文（Proszę państwa do gazu），附編者的註釋。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3 創傷與時間 ============ -->
+
+<section class="slide" id="s-terr" data-sec="time">
+  <img class="bgimg" src="img/time-tangle.jpg" alt="">
+  <h2>Trauma and Time</h2>
+  <div class="row" style="gap:34px;align-items:flex-start;margin-top:-12px">
+    <figure class="fig" style="flex:none;width:300px"><img src="img/time-tangle.jpg" alt="" style="max-height:300px"></figure>
+    <div class="col pq">
+      <div class="en" style="font-size:22px">Terr (1984, 644) describes how “Following psychic trauma, disorders of time sequencing may assume various guises: (1) condensations of contiguous events into simultaneity; (2) time-skew; (3) retrospective significances (including omens); and (4) the sense of prediction. These posttraumatic distortions of ordering require sizable suspensions of reality sense” (1984, 644).</div>
+      <div class="zh" style="font-size:23px">Terr 描述道：「在心理創傷之後，時間順序的紊亂可能以多種形式出現：（1）將彼此相鄰的事件壓縮為同時發生；（2）時間偏移（time-skew）；（3）事後意義的投射（包括預兆的出現）；以及（4）一種預感的感覺。這些創傷後的時間秩序扭曲，都需要相當程度的現實感暫停（suspensions of reality sense）。」</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-time" data-sec="time">
+  <h2>Trauma and time</h2>
+  <div class="row" style="gap:30px;align-items:flex-start;margin-top:-16px">
+    <div style="flex:none;width:470px">
+      <figure class="fig"><img src="img/husserl-diagram.png" alt="Husserl 的時間圖" style="max-height:230px;box-shadow:none"><figcaption>Husserl 的時間圖（Husserl’s time diagram）</figcaption></figure>
+      <p style="font-size:24px;line-height:1.55;margin-top:18px">In trauma, the past refuses to stay past; the direction and aim of time is lost. Time loses its linearity. Rather than running from past to present through to future, time seems to randomly oscillate from past to future then back to the past, then to the present.</p>
+    </div>
+    <div class="col" style="display:flex;flex-direction:column;gap:16px">
+      <figure class="fig"><img src="img/cov_husserl.jpg" alt="Husserl, The Phenomenology of Internal Time-Consciousness" style="max-height:230px"><figcaption>Edmund Husserl, <i>The Phenomenology of Internal Time-Consciousness</i></figcaption></figure>
+      <figure class="fig"><img src="img/chopin-ballade1.jpg" alt="蕭邦《G 小調第一敘事曲》樂譜開頭" style="max-height:170px"><figcaption>蕭邦（Chopin），《G 小調第一敘事曲》，作品 23</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-freud" data-sec="time">
+  <h2>Trauma, stories, Freud</h2>
+  <div class="row" style="gap:34px;align-items:flex-start;margin-top:-12px">
+    <div style="flex:none;width:420px;position:relative">
+      <figure class="fig"><img src="img/freud-couch.jpg" alt="佛洛伊德的診療躺椅" style="max-height:280px"><figcaption>佛洛伊德（Sigmund Freud）的診療躺椅，倫敦（London）佛洛伊德博物館</figcaption></figure>
+      <figure class="fig" style="width:150px;margin:14px auto 0"><img src="img/freud.jpg" alt="佛洛伊德" style="max-height:170px"></figure>
+    </div>
+    <ul class="l col" style="margin:0">
+      <li data-step="1">· According to Joshua Pederson, the relationship between trauma and narrative has long been acknowledged as crucial for healing, dating back to Freud and Breuer’s “talking cure.”</li>
+      <li data-step="2">· Holocaust survivors, Vietnam veterans, and domestic abuse victims all used storytelling as a key part of recovery.</li>
+      <li data-step="3">· Trauma theory suggests that literature holds a unique value in expressing and understanding deep psychic wounds.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="slide" id="s-belated" data-sec="time">
+  <h2>Belatedness 延後性</h2>
+  <div class="row" style="gap:34px;align-items:flex-start;margin-top:-12px">
+    <ul class="l col" style="margin:0">
+      <li data-step="1">· 我們使用「時間流逝」、「下次」、「準時」等觀念，作為我們構建、組織、並與他人分享經驗的基本支架（粵語「夠鐘」表示時間到了等等）。</li>
+      <li data-step="2">· Cathy Caruth 指出：「創傷事件的衝擊恰恰在於它的延後性——它拒絕被簡單地定位於某一時刻。」（1995，第 9 頁）</li>
+      <li data-step="3">· 這些事件似乎被懸置於時間之中，或更準確地說，被推出了時間之外。</li>
+      <li data-step="4">· 「其病理狀態僅存在於經驗或接受的結構之中：事件在發生的當下並未被充分吸收或經歷，而是以延後的方式反覆佔據經驗者的內在世界。<mark>遭受創傷，正是被某個影像或事件所反覆附身的狀態。</mark>」（Caruth，1995，第 4–5 頁）</li>
+    </ul>
+    <figure class="fig" style="flex:none;width:240px"><img src="img/cov_caruth.jpg" alt="Caruth, Unclaimed Experience" style="max-height:370px"><figcaption>Cathy Caruth, <i>Unclaimed Experience</i>（1996）</figcaption></figure>
+  </div>
+</section>
+
+<section class="slide" id="s-emma1" data-sec="time">
+  <h2>創傷作為「延遲效應」<small>deferred action / Nachträglichkeit</small></h2>
+  <div class="row" style="gap:34px;align-items:flex-start;margin-top:-12px">
+    <figure class="fig" style="flex:none;width:220px"><img src="img/freud.jpg" alt="佛洛伊德" style="max-height:290px"><figcaption>佛洛伊德（Sigmund Freud，1856–1939）</figcaption></figure>
+    <div class="col">
+      <p style="font-size:25px;line-height:1.6">佛洛伊德在《科學心理學大綱》（Project for a Scientific Psychology）中對病人艾瑪（Emma）的分析：</p>
+      <div class="rows" style="margin-top:4px">
+        <div class="r" data-step="1" style="grid-template-columns:150px 1fr"><div class="k">第一個事件</div><div class="v">艾瑪在八歲時，在糖果店被店主隔著衣服觸摸了生殖器。在當時，由於她尚未性成熟，對此事件沒有強烈的創傷感受，這個記憶僅僅作為一個「記憶痕跡」（memory-trace）被儲存起來，但未被完全理解或整合。</div></div>
+        <div class="r" data-step="2" style="grid-template-columns:150px 1fr"><div class="k">第二個事件</div><div class="v">四年後，艾瑪十二歲時進入另一家商店，看到兩名店員在笑，她突然感到恐慌並衝了出去。她認為店員在嘲笑她的衣著，並對其中一人產生了性吸引力。</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-emma2" data-sec="time">
+  <h2>創傷作為「延遲效應」<small>創傷的構成</small></h2>
+  <div class="row" style="gap:34px;align-items:flex-start;margin-top:-12px">
+    <figure class="fig" style="flex:none;width:220px"><img src="img/freud.jpg" alt="佛洛伊德" style="max-height:290px"><figcaption>佛洛伊德（Sigmund Freud，1856–1939）</figcaption></figure>
+    <p class="col" style="font-size:27px;line-height:1.7">佛洛伊德認為，是第二個事件回溯性地觸發了第一個事件的創傷性。因為艾瑪在十二歲時已經進入青春期，對性有了新的理解，所以第一個事件的記憶被重新詮釋，並賦予了它在當時所沒有的創傷意義。因此，<mark>創傷並不住在原始事件中，而是存在於兩個事件之間的時間關係裡。</mark>這個「事後才構成」的過程，就是佛洛伊德所說的 Nachträglichkeit。</p>
+  </div>
+</section>
+
+<section class="slide" id="s-tell" data-sec="time">
+  <h2>Literature teaches us to tell time</h2>
+  <div class="row" style="gap:34px;align-items:flex-start;margin-top:-12px">
+    <div class="col">
+      <p style="font-size:25px;line-height:1.6">In trauma, one becomes lodged or stuck in the time of trauma. The moment(s) is repeated over and over again, like a record with a scratch or a CD that skips playing the same lyrics over and over again. Events become suspended in time or perhaps more accurately out of time.</p>
+      <p style="font-size:25px;line-height:1.6;border-left:3px solid var(--acc);padding-left:20px" data-step="1">According to Wendy O’Brien, reading holds open the possibility of teaching those who suffer trauma <mark>how to tell time when all other clocks have been broken</mark>. It is the restorative function（重構性／修復功能）of fiction.</p>
+    </div>
+    <figure class="fig" style="flex:none;width:330px"><img src="img/clock.jpg" alt="一隻生鏽的鬧鐘" style="max-height:260px"></figure>
+  </div>
+</section>
+
+<section class="slide nofit" id="s-images" data-sec="time">
+  <h2>受苦的圖像</h2>
+  <div class="goya">
+    <figure style="left:0;top:0;width:220px"><img src="img/laocoon.jpg" alt="拉奧孔群像"><figcaption>〈拉奧孔〉（Laocoön）群像，梵蒂岡博物館</figcaption></figure>
+    <figure style="left:245px;top:0;width:150px"><img src="img/bouts-man-of-sorrows.jpg" alt="Albrecht Bouts，憂患之子"><figcaption>Albrecht Bouts，〈憂患之子〉（Man of Sorrows）</figcaption></figure>
+    <figure style="left:0;top:240px;width:125px"><img src="img/mantegna-sebastian.jpg" alt="Mantegna，聖塞巴斯蒂安"><figcaption>Mantegna，〈聖塞巴斯蒂安〉（St Sebastian）</figcaption></figure>
+    <figure style="left:150px;top:290px;width:300px"><img src="img/caravaggio-judith.jpg" alt="Caravaggio，猶滴斬殺何樂弗尼"><figcaption>Caravaggio，〈猶滴斬殺何樂弗尼〉（Judith Beheading Holofernes），約 1599</figcaption></figure>
+    <div class="arr"></div>
+    <figure style="left:530px;top:0;width:200px"><img src="img/goya-disasters15.jpg" alt="Goya，《戰爭的災難》第 15 號"><figcaption>Goya，《戰爭的災難》第 15 號〈無可救藥〉（Y no hay remedio）</figcaption></figure>
+    <figure style="left:530px;top:300px;width:200px"><img src="img/goya-disasters3.jpg" alt="Goya，《戰爭的災難》第 3 號"><figcaption>Goya，《戰爭的災難》第 3 號〈一樣〉（Lo mismo）</figcaption></figure>
+    <figure style="left:770px;top:0;width:265px"><img src="img/goya-sleep-of-reason.jpg" alt="Goya，理性沉睡，心魔生焉"><figcaption>Goya，〈理性沉睡，心魔生焉〉（The Sleep of Reason Produces Monsters），1799</figcaption></figure>
+  </div>
+</section>
+
+<section class="slide" id="s-theodicy" data-sec="time">
+  <h2>創傷與神義論（theodicy）</h2>
+  <div class="row" style="gap:34px;align-items:flex-start;margin-top:-12px">
+    <div class="col quote" style="font-size:23px;line-height:1.6">“Modern visual art shows a sort of fascination with trauma and its aftermath because former explanations of human suffering and of death have fallen by the wayside. When transcendent justifications of death and pain were upended, the search was on to find new means to solve the problem(s) of theodicy [how is God possible given the existence of evil in the world.] Fiction provided that space for such investigations. And society has become increasingly willing to listen to such stories. Indeed, it could be argued that we became fascinated or entranced with the subject.”<span class="by">O’Brien, “Telling Time”</span></div>
+    <figure class="fig" style="flex:none;width:380px"><img src="img/blake-job.jpg" alt="Blake，約伯受朋友責備" style="max-height:300px"><figcaption>William Blake，〈約伯受朋友責備〉（Job Rebuked by His Friends），《約伯記》插圖</figcaption></figure>
+  </div>
+</section>
+
+<section class="slide" id="s-narrtime" data-sec="time">
+  <h2>Narrative and Time</h2>
+  <div class="row" style="gap:34px;align-items:flex-start;margin-top:-12px">
+    <figure class="fig" style="flex:none;width:420px"><img src="img/john.jpg" alt="《約翰福音》開頭" style="max-height:260px"><figcaption>《約翰福音》（John）第一章</figcaption></figure>
+    <ul class="l col" style="margin:0">
+      <li data-step="1">· “In the beginning was the word.” 太初有道</li>
+      <li data-step="2">· Far from time telling us the hour of the day, the time of the year, we tell time.</li>
+      <li data-step="3">· The very act of writing requires one to structure and temporalize events.<br>書寫這一行為本身就要求我們對事件（events）進行結構化和時間化的安排。</li>
+    </ul>
+  </div>
+</section>
+
+<section class="slide nofit" id="s-ballade" data-sec="time">
+  <h2>蕭邦（Chopin）：《G 小調第一敘事曲》</h2>
+  <div class="row" style="gap:34px;align-items:flex-start;margin-top:-12px;justify-content:center">
+    <div class="video" style="width:880px;height:495px"><iframe data-src="https://www.youtube.com/embed/BSFNl4roGlI" title="Chopin, Ballade No. 1 in G minor, Op. 23 (Krystian Zimerman)" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+  </div>
+  <div class="src">Krystian Zimerman 演奏蕭邦（Chopin）《G 小調第一敘事曲》，作品 23。<a href="https://www.youtube.com/watch?v=BSFNl4roGlI" target="_blank" rel="noopener" style="color:inherit">在 YouTube 開啟 ↗</a></div>
+</section>
+
+<!-- ============ 4 陌生化 ============ -->
+
+<section class="slide" id="s-defam" data-sec="defam">
+  <h2>陌生化與熟悉化<small>Shklovsky: ostranenie / остранение</small></h2>
+  <div class="row" style="gap:34px;align-items:flex-start;margin-top:-12px">
+    <figure class="fig" style="flex:none;width:380px"><img src="img/defamiliarization.jpg" alt="" style="max-height:380px"></figure>
+    <p class="col" style="font-size:26px;line-height:1.65">In giving words to traumatic events meaning is re-established – “the integration of threatening, harmful experience into one’s model of the self and the world by answering questions reconstructing the causal ‘why’” (Ferring and Filipp, 2000, 153).</p>
+  </div>
+</section>
+
+<section class="slide" id="s-shklovsky" data-sec="defam">
+  <h2>前景化與陌生化<small>Viktor Shklovsky（1893–1984）</small></h2>
+  <div class="row" style="gap:34px;align-items:flex-start;margin-top:-12px">
+    <figure class="fig" style="flex:none;width:420px"><img src="img/art-as-technique.jpg" alt="Shklovsky, Art as Technique" style="max-height:260px"><figcaption>Shklovsky，〈作為手法的藝術〉（Art as Technique，1917）</figcaption></figure>
+    <ul class="l col" style="margin:0">
+      <li data-step="1">· 維持生命的習慣化（habituation），儘管對生存至關重要，卻削弱了我們真正的反思和情感參與。</li>
+      <li data-step="2">· 偏離（deviation）之所以具有娛樂性，是因爲根深蒂固的思維、情感和行爲範疇被揭露批判，從而使我們得以探索那些之前難以想象的世界和關係。然而，偏離同時也是具有破壞性的，它挑戰了我們所知的許多事物，因此它也是一種對我們日常觀念和關切的「進攻」。</li>
+    </ul>
+  </div>
+</section>
+
+<section class="slide" id="s-kholstomer" data-sec="defam">
+  <h2>陌生化的典型故事</h2>
+  <div class="row" style="gap:34px;align-items:flex-start;margin-top:-12px">
+    <div class="col">
+      <p style="font-size:24px;line-height:1.65">《霍爾斯托梅爾》（俄語：Холстомер）是列夫·托爾斯泰（Leo Tolstoy）的作品，通常被認爲是俄國文學中最引人注目的故事之一。</p>
+      <p style="font-size:24px;line-height:1.65">該故事採用「陌生化」手法，<mark>通過一匹馬的視角來揭露人類行爲中的不合理性</mark>。故事講述了霍爾斯托梅爾這匹馬的無私生活，與他自私無用的主人形成鮮明對比。在故事結尾，霍爾斯托梅爾死去，但他的屍體爲新生命——狼崽們的誕生做出了貢獻。通過這一場景，托爾斯泰描繪了狼母將馬肉吐給幼崽的細節，象徵着生命的延續與轉化。</p>
+    </div>
+    <div style="flex:none;width:340px;display:flex;flex-direction:column;gap:12px">
+      <figure class="fig"><img src="img/tolstoy-horse.jpg" alt="托爾斯泰騎馬" style="max-height:200px"><figcaption>托爾斯泰（Leo Tolstoy）騎馬</figcaption></figure>
+      <figure class="fig"><img src="img/kholstomer.jpg" alt="〈霍爾斯托梅爾〉插圖" style="max-height:200px"><figcaption>〈霍爾斯托梅爾〉插圖</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-literary" data-sec="defam">
+  <h2>Literary vs. Non-literary language</h2>
+  <div class="row" style="gap:34px;align-items:flex-start;margin-top:-12px">
+    <ul class="l col" style="margin:0">
+      <li data-step="1">· 創傷理論家們主張，非文學的（nonliterary）、檔案式（archival）的語言，無法捕捉創傷的真正本質。</li>
+      <li data-step="2">· 歷史敘事或許能賦予人們一種駕馭了創傷事件的虛假掌控感。</li>
+      <li data-step="3">· 與此相反，詩歌與文學形式——正如菲洛米拉（Philomela）的織錦——是透過指向那些失落或無法言說之物來喚起失落與創傷；它們運用譬喻性語言，去表達那些無法被完整言說的內容，並傳達創傷經驗的「感受」。</li>
+    </ul>
+    <figure class="fig" style="flex:none;width:260px"><img src="img/philomela.jpg" alt="菲洛米拉" style="max-height:390px;box-shadow:none"><figcaption>菲洛米拉（Philomela）</figcaption></figure>
+  </div>
+</section>
+
+<!-- ============ 5 創傷理論 ============ -->
+
+<section class="slide" id="s-modes" data-sec="theory">
+  <img class="bgimg" src="img/three-modes.jpg" alt="">
+  <h2>創傷敘事的三種基本模式<small>根據 Joshua Pederson 對第一波學術研究的劃分</small></h2>
+  <div class="rows" style="margin-top:-10px">
+    <div class="r" data-step="1" style="grid-template-columns:200px 1fr"><div class="k">缺失<small>Absence</small></div><div class="v">記憶與敘事中的裂隙及沉默。在此，創傷事件未被完整記錄或無法觸及，從而在意識和再現（representation）兩個層面造成了斷裂。</div></div>
+    <div class="r" data-step="2" style="grid-template-columns:200px 1fr"><div class="k">間接性<small>Indirection</small></div><div class="v">運用隱喻或象徵結構來暗指創傷事件。正如卡繆（Albert Camus）的《瘟疫》（La Peste）一樣，該書在未曾明言的情況下，與納粹大屠殺形成了平行對照。</div></div>
+    <div class="r" data-step="3" style="grid-template-columns:200px 1fr"><div class="k">重複<small>Repetition</small></div><div class="v">在記憶和敘事中，不由自主地重溫或重述創傷經驗的強迫性衝動。正如佛洛伊德（Sigmund Freud）的「重複強迫」（repetition compulsion）概念所示。</div></div>
+  </div>
+</section>
+
+<section class="slide" id="s-wave2" data-sec="theory">
+  <h2>第二波</h2>
+  <div class="row" style="gap:34px;align-items:flex-start;margin-top:-12px">
+    <ul class="l col" style="margin:0">
+      <li data-step="1">· 第二波學者主張，先前對破碎文本的關注是「歐洲中心主義」的，它過度推崇了那些視創傷為「超越敘事表達能力」的西方心理學模型。</li>
+      <li data-step="2">· Stef Craps 挑戰了「沉默必然意味著創傷」這一觀念，他提出在某些情況下，沉默可以是一種有意識的應對機制。</li>
+      <li data-step="3">· 他同時也批判了「再現創傷必須依靠破碎敘事」的此一假設，轉而倡導那些不採用敘事斷裂、直接面對創傷的寫實主義文本，此即<mark>「創傷現實主義」（traumatic realism）</mark>。</li>
+    </ul>
+    <figure class="fig" style="flex:none;width:250px"><img src="img/cov_craps.jpg" alt="Craps, Postcolonial Witnessing" style="max-height:390px"><figcaption>Stef Craps, <i>Postcolonial Witnessing</i>（2013）</figcaption></figure>
+  </div>
+</section>
+
+<section class="slide" id="s-history" data-sec="theory">
+  <img class="bgimg" src="img/broken-heart.jpg" alt="">
+  <h2>Trauma has a history</h2>
+  <div class="row" style="gap:34px;align-items:flex-start;margin-top:-12px">
+    <figure class="fig" style="flex:none;width:380px"><img src="img/broken-heart.jpg" alt="" style="max-height:280px"></figure>
+    <p class="col" style="font-size:32px;line-height:1.6">The term trauma has been used to describe a wide variety of experiences all of which share the individual’s recognition of her/his own vulnerability resulting in “some kind of <mark>internal breach or damage to existing mental structures</mark>” (Brewin, 2003, 5).</p>
+  </div>
+</section>
+
+<section class="slide" id="s-ptsd" data-sec="theory">
+  <h2>創傷後壓力症（PTSD）的診斷標準</h2>
+  <div class="row" style="gap:28px;align-items:flex-start;margin-top:-14px">
+    <table class="ptsd col">
+      <tr><th>PTSD（DSM-5, 2013）</th><th>PTSD（ICD-11, 2018）</th></tr>
+      <tr class="g"><td>A. Exposure to actual or threatened death, serious injury, or sexual violence</td><td>• Exposure to an extremely threatening or horrific event or series of events</td></tr>
+      <tr class="g"><td>B. Intrusions</td><td>• Re-experiencing</td></tr>
+      <tr><td>C. Avoidance</td><td>• Avoidance</td></tr>
+      <tr><td>D. Changes in cognitions and mood</td><td></td></tr>
+      <tr><td>E. Arousal &amp; reactivity</td><td>• Persistent perceptions of heightened current threat</td></tr>
+      <tr class="g"><td>F. Duration more than 1 month</td><td>• Must last for at least several weeks</td></tr>
+      <tr><td>G. Clinically significant distress or impairment of function</td><td>• Significant impairment in personal, family, social, educational, occupational, or other important areas of functioning</td></tr>
+      <tr><td>H. Due to event, not due to physiological effects of a substance or medical condition</td><td></td></tr>
+    </table>
+    <div style="flex:none;width:200px;display:flex;flex-direction:column;gap:14px">
+      <figure class="fig"><img src="img/cov_dsm5.png" alt="DSM-5 封面" style="max-height:250px"><figcaption>美國精神醫學學會，DSM-5</figcaption></figure>
+      <figure class="fig"><img src="img/cov_icd11.jpg" alt="ICD-11 封面" style="max-height:140px"><figcaption>世界衛生組織，ICD-11</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6 文化創傷 ============ -->
+
+<section class="slide" id="s-tao" data-sec="culture">
+  <h2>Watch the lecture</h2>
+  <div class="row" style="gap:34px;align-items:flex-start;margin-top:-12px">
+    <figure class="fig" style="flex:none;width:400px"><a href="https://www.bilibili.com/video/BV1oR4y1H7MX/" target="_blank" rel="noopener"><img src="img/bilibili-tao.jpg" alt="陶東風《文化創傷與見證文學》講座" style="max-height:260px"></a><figcaption>陶東風，《文化創傷與見證文學》，全 4 講，首都師範大學（bilibili）</figcaption></figure>
+    <div class="col quote" style="font-size:30px;line-height:1.7">「災難見證承載的是被苦難和死亡所扭曲的人性，而“後災難”見證承載的人性則有兩種可能的發展，一是繼續被孤獨和恐懼所封閉，<mark>二是打破這種孤獨和封閉，並在與他人的聯繫過程中重新拾回共同抵抗災難邪惡的希望和信心</mark>。」<span class="by">陶東風，《文化創傷與見證文學》</span></div>
+  </div>
+  <div class="src">陶東風，《文化創傷與見證文學》系列講座：<a href="https://www.bilibili.com/video/BV1oR4y1H7MX/" target="_blank" rel="noopener" style="color:inherit">https://www.bilibili.com/video/BV1oR4y1H7MX/</a></div>
+</section>
+
+<section class="slide nofit" id="s-cultural" data-sec="culture">
+  <h2>文化創傷</h2>
+  <div class="row" style="gap:28px;align-items:flex-start;margin-top:-12px">
+    <ul class="l three" style="flex:none;width:170px;margin:30px 0 0">
+      <li data-step="1">言說者</li>
+      <li data-step="2">受眾</li>
+      <li data-step="3">環境</li>
+    </ul>
+    <div style="flex:none;width:520px;display:flex;flex-direction:column;gap:14px">
+      <figure class="fig"><img src="img/shanghen.jpg" alt="連環畫《傷痕》封面" style="max-height:190px"><figcaption>連環畫《傷痕》，改編自盧新華的同名小說（1978）</figcaption></figure>
+      <figure class="fig"><img src="img/rent-collection.jpg" alt="收租院泥塑" style="max-height:270px"><figcaption>位於大邑縣安仁鎮的劉文彩莊園，改成「收租院」</figcaption></figure>
+    </div>
+    <figure class="fig col"><img src="img/cov_alexander.jpg" alt="Alexander 等，Cultural Trauma and Collective Identity" style="max-height:420px"><figcaption>Jeffrey C. Alexander 等，<i>Cultural Trauma and Collective Identity</i>（2004）</figcaption></figure>
+  </div>
+</section>
+
+
+<div id="side"></div>
+<div id="bar"></div>
+<div id="num"></div>
+</div>
+<script src="slides.js"></script>
+<script src="deck.js"></script>
+</body>
+</html>

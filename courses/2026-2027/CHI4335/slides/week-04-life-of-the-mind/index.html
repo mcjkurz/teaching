@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>心靈生活 · CHI 4335 第4週</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+<style>
+  .grid5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; align-items: start; margin-top: 30px; }
+  .grid5 .fig img { height: 300px; width: 100%; object-fit: cover; max-height: none; }
+  .grid5 .fig figcaption { font-size: 20px; color: var(--ink); line-height: 1.35; }
+  .grid5 .fig figcaption small { display: block; font-size: 15px; color: var(--mute); }
+  #s-ordinary .rows .r { grid-template-columns: 150px 1fr; gap: 16px; }
+  #s-ordinary .rows .r .k, #s-ordinary .rows .r .v { font-size: 26px; }
+  .axis { display: flex; align-items: center; gap: 18px; font-size: 30px; font-weight: 700; margin: 18px 0 0; }
+  .axis i { flex: 1; height: 3px; background: linear-gradient(90deg, var(--ink), var(--acc)); position: relative; }
+  .axis i::before, .axis i::after { content: ''; position: absolute; top: -7px; border: 8px solid transparent; }
+  .axis i::before { left: -4px; border-right-color: var(--ink); border-left: 0; }
+  .axis i::after { right: -4px; border-left-color: var(--acc); border-right: 0; }
+  .axis .h { color: var(--acc); }
+</style>
+</head>
+<body>
+<div id="stage">
+
+<!-- Tzvetan Todorov, "The Life of the Mind," in Facing the Extreme: Moral Life in the Concentration Camps
+     (trans. Arthur Denner and Abigail Pollak, 1996), pp. 91–118; the opening question is from p. 31.
+     Converted from "Extreme Week 4.pptx". Translations marked 暫譯 are provisional.
+     Names of modern scholars are given in Latin script. -->
+
+<!-- Title -->
+<section class="slide title-slide" id="s-title">
+  <figure class="fig" style="position:absolute;right:90px;top:56px;width:560px"><img src="img/auschwitz_sunset.jpg" alt="日落時的奧斯威辛—比克瑙集中營圍欄" style="max-height:none;width:100%"></figure>
+  <div class="t1">心靈生活</div>
+  <div class="t2">The Life of the Mind</div>
+  <div class="rule"></div>
+  <div class="t3">「對囚犯來說，思想是一座孤島，雖小但安全。」<br><span class="mute small">CHI 4335 · Week 4 · Spiritual Resistance in a Labor Camp<br>Todorov, “The Life of the Mind,” pp. 91–118<br>導修：高爾泰，《尋找家園》（節選）</span></div>
+  <div class="hint"><kbd>←</kbd> <kbd>→</kbd> 翻頁 · <kbd>1</kbd>–<kbd>6</kbd> 章節 · <kbd>G</kbd> 跳至頁碼 · <kbd>L</kbd> 雷射筆 · <kbd>F</kbd> 全螢幕</div>
+</section>
+
+<!-- ============ 1 集中營裏的日落 ============ -->
+
+<section class="slide" id="s-sunset" data-sec="start">
+  <h2>「去看那美妙的日落！」</h2>
+  <div class="row" style="gap:36px;align-items:flex-start;margin-top:-12px">
+    <div style="flex:none;width:400px;display:flex;flex-direction:column;gap:12px">
+      <figure class="fig"><img src="img/auschwitz_sunset.jpg" alt="日落時的奧斯威辛—比克瑙集中營圍欄"><figcaption>日落時的奧斯威辛—比克瑙（Auschwitz-Birkenau）集中營圍欄</figcaption></figure>
+      <figure class="fig"><img src="img/frankl.jpg" alt="Viktor Frankl" style="max-height:170px"><figcaption>Viktor Frankl（1905–1997）</figcaption></figure>
+    </div>
+    <div class="pq col" style="margin:0">
+      <div class="en">“One evening, when we were already resting on the floor of our hut, dead tired, soup bowls in hand, a fellow prisoner rushed in and asked us to hurry outside to the assembly grounds and see <mark>the wonderful sunset</mark>!”</div>
+      <div class="zh">「有一天傍晚，我們已經筋疲力盡地躺在小屋的地板上休息，手裡拿著湯碗，這時一名囚犯衝進來，叫我們趕快到外面的集合場去看<mark>那美妙的日落</mark>！」</div>
+      <span class="ref">Viktor Frankl，《活出意義來》（Man’s Search for Meaning），Todorov 在〈心靈生活〉中引用</span>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-question" data-sec="start">
+  <h2>集中營揭示的「真相」？</h2>
+  <div class="row" style="gap:36px;align-items:flex-start;margin-top:-12px">
+    <figure class="fig" style="flex:none;width:300px"><img src="img/cov_face_extreme.jpg" alt="Todorov, Face à l’extrême 封面" style="max-height:400px"><figcaption>Tzvetan Todorov, <i>Face à l’extrême</i>（1991；英譯 <i>Facing the Extreme</i>，1996）</figcaption></figure>
+    <div class="pq col" style="margin:0">
+      <div class="en">“Wasn’t that question settled a long time ago? Haven’t we learned only too well the sad and simple truth the camps revealed, namely, that <mark>in extreme situations all traces of moral life evaporate as men become beasts locked in a merciless struggle for survival</mark>?”</div>
+      <div class="zh">「難道我們沒有充分領會集中營所揭示的那悲哀而簡單的真相嗎？也就是<mark>在極端情況下，所有道德生活的痕跡都會消失殆盡，人類會變成野獸，陷入毫無憐憫的生存鬥爭中</mark>？」</div>
+      <span class="ref">Todorov, <i>Facing the Extreme</i>, p. 31</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2 英雄美德與普通美德 ============ -->
+
+<section class="slide nofit" id="s-between" data-sec="virtue">
+  <h2>在英雄美德與普通美德之間<small>Between heroic and ordinary virtues</small></h2>
+  <div class="row" style="gap:40px;justify-content:center;align-items:flex-end;margin-top:10px">
+    <figure class="fig"><img src="img/hero.jpg" alt="手持長矛與盾牌的戰士" style="height:380px;max-height:none"><figcaption style="font-size:30px;color:var(--acc);font-weight:700">英雄美德</figcaption></figure>
+    <figure class="fig"><img src="img/umbrella.jpg" alt="為別人撐傘" style="height:380px;max-height:none"><figcaption style="font-size:30px;color:var(--ink);font-weight:700">普通美德</figcaption></figure>
+  </div>
+</section>
+
+<section class="slide" id="s-ordinary" data-sec="virtue">
+  <h2>普通美德<small>Ordinary Virtues</small></h2>
+  <div class="row" style="gap:36px;align-items:flex-start;margin-top:-12px">
+    <figure class="fig" style="flex:none;width:330px"><img src="img/friends.jpg" alt="互相扶持的朋友"></figure>
+    <div class="rows col" style="margin-top:0">
+      <div class="r" data-step="1"><div class="k">尊嚴<small>dignity</small></div><div class="v">「我」是對自身的「我」說話</div></div>
+      <div class="r" data-step="2"><div class="k">關懷<small>caring</small></div><div class="v">「我」是對一個或多個具體的「你」說話</div></div>
+      <div class="r" data-step="3"><div class="k">心靈生活<small>the life of the mind</small></div><div class="v">「我」是對多多少少匿名的「他們」說話</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3 心靈生活 ============ -->
+
+<section class="slide" id="s-writers" data-sec="mind">
+  <h2>見證者</h2>
+  <div class="grid5">
+    <figure class="fig"><img src="img/borowski.jpg" alt="Tadeusz Borowski"><figcaption>Tadeusz Borowski<small>1922–1951 · 奧斯威辛</small></figcaption></figure>
+    <figure class="fig"><img src="img/levi.jpg" alt="Primo Levi"><figcaption>Primo Levi<small>1919–1987 · 奧斯威辛</small></figcaption></figure>
+    <figure class="fig"><img src="img/ginzburg.jpg" alt="Yevgenia Ginzburg"><figcaption>Yevgenia Ginzburg<small>1904–1977 · 古拉格</small></figcaption></figure>
+    <figure class="fig"><img src="img/shalamov.jpg" alt="Varlam Shalamov"><figcaption>Varlam Shalamov<small>1907–1982 · 古拉格</small></figcaption></figure>
+    <figure class="fig"><img src="img/amery.jpg" alt="Jean Améry"><figcaption>Jean Améry<small>1912–1978 · 奧斯威辛</small></figcaption></figure>
+  </div>
+</section>
+
+<section class="slide" id="s-ludens" data-sec="mind">
+  <h2>知識分子：遊戲的人？<small>Intellectuals: homines ludentes?</small></h2>
+  <div class="row" style="gap:36px;align-items:flex-start;margin-top:-12px">
+    <figure class="fig" style="flex:none;width:200px"><img src="img/cov_homo_ludens.jpg" alt="Huizinga, Homo Ludens 封面" style="max-height:300px"><figcaption>Johan Huizinga，《遊戲的人》（Homo Ludens，1938）</figcaption></figure>
+    <div class="pq col" style="margin:0">
+      <div class="en" style="font-size:30px">“Intellect is a ludus [game] and that we are nothing more—or, better said, before we entered the camp we were nothing more—than <mark>homines ludentes</mark>.”</div>
+      <div class="zh" style="font-size:30px">「智識是一場遊戲（ludus），而我們不過是（或者更確切地說，在進入集中營之前我們不過是）<mark>遊戲的人</mark>（homines ludentes）。」（暫譯）</div>
+      <span class="ref">Jean Améry</span>
+    </div>
+  </div>
+  <div class="src">Jacob Howland, “Intellectuals at Auschwitz: Jean Améry and Primo Levi on the Mind and Its Limits,” <i>Holocaust and Genocide Studies</i> 29.3 (2015): 353–373.</div>
+</section>
+
+<section class="slide" id="s-borowski" data-sec="mind">
+  <h2>博羅夫斯基（Tadeusz Borowski）：通過愛</h2>
+  <div class="row" style="gap:36px;align-items:flex-start;margin-top:-12px">
+    <figure class="fig" style="flex:none;width:220px"><img src="img/borowski2.jpg" alt="Tadeusz Borowski" style="max-height:300px"><figcaption>Tadeusz Borowski（1922–1951）</figcaption></figure>
+    <div class="pq col" style="margin:0">
+      <div class="zh" style="font-size:24px;color:var(--ink)">「撰寫了關於奧斯威辛生活中最無情故事的塔德烏什·博羅夫斯基，也寫道：“<mark>我認爲人類將永遠通過愛重新發現人性。而這種愛是最重要、最持久的東西</mark>” 。此外，我們也知道，博羅夫斯基在奧斯威辛的表現與他所描寫的那些人物完全不同；他對他人的奉獻是無可估量的。」</div>
+      <div class="en" style="font-size:19px;margin-top:14px">“The same Tadeusz Borowski whose stories about life at Auschwitz are among the most pitiless has also written, ‘I think that man will never cease to rediscover man—through love. And to rediscover that love is the most important and most durable thing there is’ (This Way 135). We know, moreover, that at Auschwitz Borowski behaved totally differently from the characters he writes about; his devotion to others was beyond measure.”</div>
+      <span class="ref">Todorov, “The Life of the Mind”</span>
+    </div>
+  </div>
+</section>
+
+<section class="slide nofit" id="s-gulag" data-sec="mind">
+  <h2>古拉格（Gulag）</h2>
+  <div class="row" style="gap:30px;align-items:flex-end;margin-top:-14px">
+    <figure class="fig" style="flex:none;width:760px"><img src="img/gulag_map.jpg" alt="蘇聯古拉格勞改營分佈圖" style="max-height:520px;box-shadow:none"><figcaption>蘇聯古拉格勞改營分佈圖</figcaption></figure>
+    <figure class="fig" style="flex:none;width:220px"><img src="img/ginzburg_young.jpg" alt="Yevgenia Ginzburg" style="max-height:320px"><figcaption style="font-size:18px">Yevgenia Ginzburg（1904–1977）</figcaption></figure>
+  </div>
+</section>
+
+<section class="slide" id="s-beyond" data-sec="mind">
+  <h2>超越此時此地<small>moving beyond the here and now</small></h2>
+  <div class="row" style="gap:36px;align-items:flex-start;margin-top:-12px">
+    <figure class="fig" style="flex:none;width:340px"><img src="img/globe_book.jpg" alt="書上的地球儀"></figure>
+    <div class="col">
+      <div class="quote" style="font-size:28px;line-height:1.7">「我本能地感覺到，只要我還能被海風打動，被星星的光輝感動，被詩歌感動，<mark>我就仍然活著</mark>，儘管我的雙腿可能在顫抖，我的背可能在承受著燃燒石塊的重壓時彎曲。」</div>
+      <div class="quote" data-step="1" style="font-size:28px;line-height:1.7;margin-top:22px">「對囚犯來說，<mark>思想是一座孤島</mark>，雖小但安全，位於苦難與荒涼的海洋之中。」<span class="by">Yevgenia Ginzburg</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4 智識與道德 ============ -->
+
+<section class="slide nofit" id="s-mandl" data-sec="moral">
+  <h2>心靈生活有道德價值嗎？<small>Does intellectual life have moral value?</small></h2>
+  <div class="row" style="gap:30px;justify-content:center;align-items:flex-start">
+    <figure class="fig" style="flex:none;width:500px"><img src="img/mandl_trial.jpg" alt="Maria Mandl 受審" style="max-height:360px;width:100%"><figcaption style="font-size:18px">Maria Mandl（1912–1948），奧斯威辛—比克瑙女營的指揮官，在克拉科夫（Kraków）受審，1947</figcaption></figure>
+    <figure class="fig" style="flex:none;width:500px"><img src="img/speer_hitler.jpg" alt="Albert Speer 與希特勒" style="max-height:360px;width:100%"><figcaption style="font-size:18px">Albert Speer（左，1905–1981），希特勒的建築師與軍備部長</figcaption></figure>
+  </div>
+</section>
+
+<section class="slide" id="s-culture" data-sec="moral">
+  <h2>文化的發展與道德</h2>
+  <div class="row" style="gap:36px;align-items:flex-start;margin-top:-12px">
+    <figure class="fig" style="flex:none;width:260px"><img src="img/todorov.jpg" alt="Tzvetan Todorov" style="max-height:360px"><figcaption>Tzvetan Todorov（1939–2017）</figcaption></figure>
+    <div class="pq col" style="margin:0">
+      <div class="en">“Recent arguments in defense of culture, all of them more or less conscious avatars of Enlightenment thought, seem based on a total disregard of the caveat that <mark>cultural growth need not have a moral corollary</mark>. Intellectual pursuits may lead to material abundance, but they do not prevent our moral frailty.”</div>
+      <div class="zh">「近年來為文化辯護的論點，幾乎都是啟蒙思想的自覺或不自覺的化身，似乎完全無視了這樣一個警告：<mark>文化的發展未必伴隨著道德上的進步</mark>。智力上的追求可能帶來物質的富足，但它們並不能避免我們的道德脆弱。」</div>
+      <span class="ref">Todorov, “The Life of the Mind”</span>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-moralact" data-sec="moral">
+  <h2>道德行爲<small>Moral Act</small></h2>
+  <div class="row" style="gap:36px;align-items:flex-start;margin-top:-12px">
+    <figure class="fig" style="flex:none;width:250px"><img src="img/antislavery_medallion.jpg" alt="英國廢奴運動徽章" style="max-height:250px"><figcaption>英國廢奴運動的徽章：「難道我不是人，不是你的兄弟嗎？」（Am I Not a Man and a Brother?）</figcaption></figure>
+    <div class="pq col" style="margin:0">
+      <div class="en">“To denounce slavery constitutes a moral act only at those times when such denunciation is not simply a matter of course and thus <mark>involves some personal risk</mark>. There is nothing moral in speaking out against slavery today; all it proves is that I’m in step with my society’s ideology or else don’t want to find myself on the wrong side of the barricades. Something very similar can be said about condemnations of racism, although that would not have been the case in 1936 in Germany.”</div>
+      <div class="zh">「譴責奴隸制只有在這種譴責並非理所當然，並且<mark>伴隨着某種個人風險</mark>時，才構成一種道德行爲。如今譴責奴隸制並沒有什麼道德意義；這隻證明我順應了社會的意識形態，或者我不想站在錯誤的一邊。類似的話也可以用於對種族主義的譴責：在1936年的德國，譴責種族主義無疑是一個道德行爲，而今天則未必如此。」</div>
+      <span class="ref">Todorov, “The Life of the Mind”</span>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-desk" data-sec="moral">
+  <h2>「辦公桌殺手」<small>desk murderer (Schreibtischtäter)</small></h2>
+  <div class="row" style="gap:44px;align-items:flex-start;margin-top:-12px">
+    <ul class="l col" style="font-size:36px">
+      <li data-step="1" style="font-size:36px">· <b>平庸之惡</b></li>
+      <li data-step="2" style="font-size:36px">· 服從上級的命令</li>
+      <li data-step="3" style="font-size:36px">· 完成任務</li>
+      <li data-step="4" style="font-size:36px">· 並不是虐待狂、具有狂熱信仰、或者精神疾病的人</li>
+    </ul>
+    <figure class="fig" style="flex:none;width:360px"><img src="img/cov_eichmann.jpg" alt="Arendt, Eichmann in Jerusalem 封面" style="max-height:360px"><figcaption>Hannah Arendt，《艾希曼在耶路撒冷》（Eichmann in Jerusalem，1963）</figcaption></figure>
+  </div>
+</section>
+
+<section class="slide" id="s-milgram" data-sec="moral">
+  <h2>米爾格倫實驗<small>Milgram experiment</small></h2>
+  <div class="row" style="gap:30px;align-items:flex-start;margin-top:-12px">
+    <div class="video" style="width:480px;height:270px"><iframe data-src="https://www.youtube.com/embed/Kzd6Ew3TraA" title="米爾格倫實驗" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+    <p class="col small" style="margin:0;font-size:21px;line-height:1.6">「老師」被給予一具據稱從15伏特起跳的電擊控制器，控制器連結至一具發電機，且上面標有30個撥動開關，電壓等級從15伏開始，每隔15伏遞增一次，最高可達450伏。這個機器主要是為了可以命令一名參與者對另一個人施加電壓不斷增加的電擊。「老師」所取得的答案卷上列出了一些搭配好的單字，而「老師」的任務便是教導隔壁的「學生」。老師會逐一朗讀這些單字配對給學生聽，朗讀完畢後老師會開始考試，每個單字配對會唸出四個單字選項讓學生作答，學生會按下按鈕以指出正確答案。如果學生答對了，老師會繼續測驗其他單字。如果學生答錯了，老師會對學生施以電擊，每逢作答錯誤，電擊的伏特數也會隨之提升。</p>
+  </div>
+  <div class="src">維基百科「米爾格倫實驗」條目。<a href="https://www.youtube.com/watch?v=Kzd6Ew3TraA" target="_blank" rel="noopener" style="color:inherit">在 YouTube 開啟 ↗</a></div>
+</section>
+
+<!-- ============ 5 記憶與遺忘 ============ -->
+
+<section class="slide nofit" id="s-remember" data-sec="memory">
+  <h2>記憶與遺忘<small>Remembering and forgetting</small></h2>
+  <div class="row" style="gap:22px;align-items:flex-start;margin-top:-16px">
+    <div style="flex:none;width:560px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <figure class="fig"><img src="img/popieluszko.jpg" alt="Jerzy Popiełuszko" style="height:210px;max-height:none"><figcaption>波皮魯斯科神父（Jerzy Popiełuszko，1947–1984）</figcaption></figure>
+      <figure class="fig"><img src="img/kostka_church.jpg" alt="華沙聖斯坦尼斯瓦夫·科斯特卡教堂" style="height:210px;max-height:none"><figcaption>華沙（Warsaw）聖斯坦尼斯瓦夫·科斯特卡教堂（St. Stanislaus Kostka Church）</figcaption></figure>
+      <figure class="fig" style="grid-column:1 / 3"><img src="img/popieluszko_beatification.jpg" alt="信眾抬着波皮魯斯科神父的畫像" style="height:170px;max-height:none"><figcaption>華沙信眾抬着波皮魯斯科神父的畫像</figcaption></figure>
+    </div>
+    <div class="col" style="display:flex;flex-direction:column;gap:12px">
+      <figure class="fig"><img src="img/jewish_cemetery.jpg" alt="華沙猶太墓園" style="height:200px;max-height:none;width:100%;object-fit:cover"></figure>
+      <figure class="fig"><img src="img/jewish_cemetery2.jpg" alt="華沙猶太墓園" style="height:200px;max-height:none;width:100%;object-fit:cover"><figcaption>華沙猶太墓園（Warsaw Jewish Cemetery）</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-popieluszko" data-sec="memory">
+  <h2>捷爾吉·波皮魯斯科（Jerzy Popiełuszko）</h2>
+  <div class="row" style="gap:36px;align-items:flex-start;margin-top:-12px">
+    <figure class="fig" style="flex:none;width:230px"><img src="img/popieluszko.jpg" alt="Jerzy Popiełuszko" style="max-height:290px"><figcaption>波蘭神父波皮魯斯科（1947–1984）</figcaption></figure>
+    <div class="col">
+      <div class="quote" style="font-size:22px;line-height:1.7">「捷爾吉·波皮魯斯科（Jerzy Popieluszko，1947年9月14日－1984年10月19日），波蘭神父，生於比亞韋斯托克省奧克派村。1972年5月28日由斯特凡·韋斯金斯基紅衣主教在華沙任命為神父，後參與斯坦尼斯瓦夫·科斯特卡教區宗教儀式主持工作。<br>在波蘭戒嚴期間，波皮魯斯科每月主持『祖國彌撒』，並通過佈道公開討論自由、人的尊嚴等議題，遭到波蘭政府迫害，被官方媒體誣稱為『施妖術的人』。<mark>1984年10月19日，他在比得哥什教區主持宗教儀式返回途中，遭波蘭內務部官員綁架至托倫附近戈爾斯科，被拷打致死後拋入維斯圖拉河。</mark>遺體於同年11月3日安葬於聖斯坦尼斯瓦夫·科斯特卡教堂，引發大規模示威活動。」<span class="by">百度百科「捷爾吉·波皮魯斯科」</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide nofit" id="s-uprisings" data-sec="memory">
+  <div class="row" style="gap:14px;margin:-40px -100px 0 -80px">
+    <figure class="fig" style="flex:1.45"><img src="img/ghetto_heroes_monument.jpg" alt="華沙猶太區起義紀念碑" style="height:330px;max-height:none;width:100%;object-fit:cover"><figcaption style="font-size:17px">華沙猶太區起義（1943）紀念碑</figcaption></figure>
+    <figure class="fig" style="flex:1"><img src="img/warsaw_uprising_monument.jpg" alt="華沙起義紀念碑" style="height:330px;max-height:none;width:100%;object-fit:cover"><figcaption style="font-size:17px">華沙起義（1944）紀念碑</figcaption></figure>
+  </div>
+  <div class="row" style="gap:30px;align-items:flex-end;margin:16px 0 0 -80px">
+    <figure class="fig" style="flex:none"><img src="img/map_poland_arrows.jpg" alt="夾在德國與蘇聯之間的波蘭" style="height:150px;max-height:none"></figure>
+    <figure class="fig" style="flex:none"><img src="img/map_1939_partition.jpg" alt="1939 年德蘇瓜分波蘭" style="height:150px;max-height:none"><figcaption style="font-size:14px">1939 年德蘇瓜分波蘭</figcaption></figure>
+    <div class="col">
+      <div style="font-size:30px;font-weight:500;margin-bottom:6px">在普通與英雄之間<span class="mute" style="font-size:20px;margin-left:12px">Between the ordinary and the heroic</span></div>
+      <div class="axis"><span>普通美德</span><i></i><span class="h">英雄美德</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6 同情的道德 ============ -->
+
+<section class="slide" id="s-traumerei" data-sec="sympathy">
+  <h2>Schumann〈夢幻曲〉<small>Träumerei</small></h2>
+  <div class="row" style="gap:30px;align-items:flex-start;margin-top:-12px">
+    <div class="video" style="width:480px;height:270px"><iframe data-src="https://www.youtube.com/embed/Hc5ol6Jm15M" title="Mischa Elman 演奏〈夢幻曲〉" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+    <figure class="fig" style="flex:none;width:340px"><img src="img/camp_orchestra.jpg" alt="集中營營房裏的囚犯樂隊（素描）" style="max-height:330px"><figcaption>集中營營房裏的囚犯樂隊（囚犯所繪素描）</figcaption></figure>
+  </div>
+  <div class="src">Mischa Elman 演奏 Schumann〈夢幻曲〉（Träumerei）。<a href="https://www.youtube.com/watch?v=Hc5ol6Jm15M" target="_blank" rel="noopener" style="color:inherit">在 YouTube 開啟 ↗</a></div>
+</section>
+
+<section class="slide" id="s-sympathy" data-sec="sympathy">
+  <h2>同情的道德與原則的道德<small>sympathy vs. principles</small></h2>
+  <div class="row" style="gap:36px;align-items:flex-start;margin-top:-12px">
+    <ul class="l col">
+      <li data-step="1">· 「一種是<b>具體的</b>，面向個人的；另一種是<b>抽象的</b>，面向更廣泛的集體。」</li>
+      <li data-step="2">· “kindness” vs. “goodness”</li>
+      <li data-step="3">· 「普通美德的行為，依其定義，都是<b>針對特定個體</b>的。」</li>
+      <li data-step="4">· 魯迅對幻燈片的反應</li>
+    </ul>
+    <figure class="fig" style="flex:none;width:250px"><img src="img/cov_life_and_fate.jpg" alt="Grossman, Life and Fate 封面" style="max-height:380px"><figcaption>格羅斯曼（Vasily Grossman），《生活與命運》（Life and Fate）</figcaption></figure>
+  </div>
+</section>
+
+<section class="slide nofit" id="s-beheading" data-sec="sympathy">
+  <h2>魯迅看到的幻燈片？</h2>
+  <figure class="fig" style="margin-top:-14px"><img src="img/beheading_qing.jpg" alt="清末的斬首照片" style="max-height:470px"><figcaption style="font-size:18px">清末的斬首照片，與魯迅在日本看到的幻燈片場景相似</figcaption></figure>
+</section>
+
+<section class="slide" id="s-reproach" data-sec="sympathy">
+  <h2>責備他人，責備自己</h2>
+  <div class="row" style="gap:30px;align-items:flex-start;margin-top:-12px">
+    <figure class="fig" style="flex:none;width:200px"><img src="img/todorov.jpg" alt="Tzvetan Todorov" style="max-height:280px"><figcaption>Tzvetan Todorov</figcaption></figure>
+    <div class="pq col" style="margin:0">
+      <div class="en">“<mark>If I reproach others for failing to be heroes or martyrs, then I am speaking from the standpoint not of virtue but of justice</mark>, and justice of a highly questionable sort; if I level the reproach against myself, things are different. Take the debate about the uniqueness of the Holocaust. Whether or not it is unique, the moral position for those aligned with the victims consists in not reaping any advantage from its exceptional character; for those aligned with the executioners, the truly moral position is not to seek advantage from the possibility that there might be similarities between it and other events. As Charles Maier suggests, Jews should emphasize the ordinariness of the Holocaust, Germans its uniqueness. Essentially the same point was once made to Vasily Grossman by an Armenian. Touched to learn that a Jew had written about the Armenians, this old man from Yerevan ‘wished there had also been . . . a son of the martyred Armenian people who had written about the Jews’ (Dobro vam! 270). Grossman, moreover, was not the first Jewish writer to turn his attention to the history of the Armenian genocide; it was the subject of Franz Werfel’s extraordinary 1933 novel, The Forty Days of Musa Dagh.”</div>
+      <span class="ref">Todorov, “The Life of the Mind”</span>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-reproach-zh" data-sec="sympathy">
+  <h2>責備他人，責備自己</h2>
+  <div class="row" style="gap:30px;align-items:flex-start;margin-top:-12px">
+    <figure class="fig" style="flex:none;width:200px"><img src="img/todorov.jpg" alt="Tzvetan Todorov" style="max-height:280px"><figcaption>Tzvetan Todorov</figcaption></figure>
+    <div class="pq col" style="margin:0">
+      <div class="zh">「<mark>如果我責備他人沒有成為英雄或殉道者，那麼我是站在正義而非美德的立場上說話</mark>，而且是一種非常可疑的正義；如果我把這種責備加諸自己，情況就不同了。以關於大屠殺獨特性的爭論為例。無論它是否獨特，對於站在受害者一邊的人來說，道德的立場在於不從它的特殊性中謀取任何好處；對於站在劊子手一邊的人來說，真正道德的立場則是不從它與其他事件可能存在的相似之處謀取好處。正如 Charles Maier 所說，猶太人應該強調大屠殺的普通性，德國人則應強調它的獨特性。一位亞美尼亞人曾向格羅斯曼表達過基本相同的意思。這位來自葉里溫（Yerevan）的老人得知一個猶太人寫了關於亞美尼亞人的文字，深受感動，『希望也有……一個殉難的亞美尼亞民族的兒子寫過關於猶太人的文字』（《祝你們平安！》，270）。況且，格羅斯曼並不是第一位關注亞美尼亞種族滅絕歷史的猶太作家：Franz Werfel 1933 年非凡的小說《穆薩山的四十天》就以此為題。」（暫譯）</div>
+      <span class="ref">Todorov, “The Life of the Mind”</span>
+    </div>
+  </div>
+</section>
+
+
+<div id="side"></div>
+<div id="bar"></div>
+<div id="num"></div>
+</div>
+<script src="slides.js"></script>
+<script src="deck.js"></script>
+</body>
+</html>
