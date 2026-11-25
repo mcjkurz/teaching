@@ -756,3 +756,6 @@ ul.l.birth li { font-size: 22px; }
 #s-map .rows.t .r { grid-template-columns: 120px 1fr; }
 #s-map .rows.t .r .v { font-size: 24px; }
 #s-map .rows.t .r .k { font-size: 24px; }
+
+/* no italics for Chinese: heading subtitles stay upright */
+h2 small { font-style: normal; }

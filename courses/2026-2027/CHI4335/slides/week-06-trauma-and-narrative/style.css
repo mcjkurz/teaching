@@ -699,3 +699,29 @@ ul.l.birth li { font-size: 22px; }
 .row.flt > .col { display: block; }
 .row.flt .quote { border-left: none; padding-left: 0; }
 .slide:has(.row.flt) { padding-right: 80px; }
+
+/* no italics for Chinese: heading subtitles stay upright */
+h2 small { font-style: normal; }
+
+/* ---- week 6: rules the deck's markup relies on ---- */
+/* faint full-slide background photo behind the content (the source slides used full-bleed photos) */
+.slide > .bgimg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .10; z-index: -1; pointer-events: none; }
+.slide[data-z] > .bgimg { zoom: 1; }
+/* quotations from the Chinese translations of Shalamov and Borowski */
+.quote.bk { font-size: 22px; line-height: 1.7; }
+/* Polish original of Borowski with the editor's glossary */
+.pl { font-family: var(--serif); font-size: 15.5px; line-height: 1.55; color: var(--ink); border-left: 3px solid var(--line); padding-left: 18px; }
+.pl p { margin: 0 0 5px; }
+.pl .gl { margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--line); font-size: 12.5px; line-height: 1.5; color: var(--mute); }
+/* images of suffering: paintings on the left, an arrow, Goya on the right */
+.goya { position: relative; height: 530px; margin-top: -6px; }
+.goya figure { position: absolute; margin: 0; }
+.goya img { display: block; width: 100%; box-shadow: 0 2px 14px rgba(0,0,0,.15); }
+.goya figcaption { font-size: 12.5px; line-height: 1.35; color: var(--mute); margin-top: 5px; }
+.goya .arr { position: absolute; left: 470px; top: 250px; width: 40px; height: 3px; background: var(--acc); }
+.goya .arr::after { content: ""; position: absolute; right: -4px; top: -8px; border-left: 14px solid var(--acc); border-top: 9px solid transparent; border-bottom: 9px solid transparent; }
+/* DSM-5 / ICD-11 comparison; shaded rows are the criteria both manuals share */
+table.ptsd { border-collapse: collapse; font-family: var(--latin); font-size: 17px; line-height: 1.4; }
+table.ptsd th { text-align: left; font-size: 18px; padding: 8px 12px; border-bottom: 2px solid var(--ink); font-family: var(--latin); }
+table.ptsd td { padding: 7px 12px; border-bottom: 1px solid var(--line); vertical-align: top; font-family: var(--latin); }
+table.ptsd tr.g td { background: #f3ece2; }

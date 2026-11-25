@@ -712,3 +712,11 @@ ul.l.birth li { font-size: 22px; }
 .trio .fig img { max-height: 150px; }
 .full-img { display: flex; justify-content: center; align-items: center; height: 100%; }
 .full-img .fig img { max-height: 560px; }
+
+/* no italics for Chinese: heading subtitles stay upright */
+h2 small { font-style: normal; }
+
+/* Shalamov / Solzhenitsyn / Levi: three portraits side by side, each 160px wide */
+.trio3 { flex: none; width: 520px; display: flex; gap: 14px; align-items: flex-start; }
+.trio3 .fig { flex: 1; }
+.trio3 .fig img { width: 100%; height: 230px; max-height: none; object-fit: cover; }

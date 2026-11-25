@@ -658,3 +658,16 @@ ul.l.pts li { font-size: 25px; line-height: 1.6; margin-bottom: 14px; }
 .gal5 .r .fig img { width: 100%; max-height: 180px; object-fit: contain; }
 .gal5 .r .fig figcaption { font-size: 14px; text-align: left; margin-top: 4px; }
 #s-title .t1 { font-size: 78px; }
+
+/* week 2 title slide: Chinese cover of Sontag and the 祥林嫂 woodcut */
+.title-slide .t1 { font-size: 72px; }
+.title-slide .t3 { max-width: 600px; white-space: nowrap; }
+.title-slide .tcov2, .title-slide .twood { position: absolute; margin: 0; }
+.title-slide .tcov2 { right: 340px; top: 70px; width: 220px; z-index: 2; }
+.title-slide .twood { right: 90px; top: 40px; width: 230px; z-index: 1; }
+.title-slide .tcov2 img, .title-slide .twood img { width: 100%; max-height: none; box-shadow: 0 8px 30px rgba(0,0,0,.3); }
+.title-slide .twood figcaption { text-align: left; }
+.title-slide .t2 { letter-spacing: .14em; font-size: 24px; }
+
+/* no italics for Chinese: heading subtitles stay upright */
+h2 small { font-style: normal; }

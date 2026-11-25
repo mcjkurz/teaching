@@ -36,10 +36,12 @@ HOOKS['s-viz'] = {
 HOOKS['s-jetzt-dia'] = { render(step, el) { el.classList.toggle('v', step >= 1); } };
 
 /* Auto-fit: on every ordinary slide, enlarge everything below the title (CSS zoom, see .slide[data-z])
-   until the content reaches the bottom margin, without overflowing the slide on any side.
-   Elements revealed step by step keep their place while hidden, so the final step is what gets measured. */
+   until the content reaches the bottom margin (or the top of a .src footnote), without overflowing on any side.
+   Elements revealed step by step keep their place while hidden, so the final step is what gets measured.
+   Title, full-screen image (.bleed, .full) and hand-laid (.nofit) slides are left alone.
+   A slide is measured again each time it is shown, when its web-font glyphs have surely arrived. */
 (function () {
-  const BOTTOM = 720 - 46, RIGHT = 1280 - 70;
+  const BOTTOM = 720 - 46, RIGHT = 1280 - 70, SKIP = '.title-slide, .full, .nofit, .bleed';
   function extent(s) {
     const st = document.getElementById('stage').getBoundingClientRect(), k = st.width / 1280;
     let b = 0, r = 0;
@@ -50,22 +52,33 @@ HOOKS['s-jetzt-dia'] = { render(step, el) { el.classList.toggle('v', step >= 1);
     });
     return [b, r];
   }
-  function fitAll() {
-    document.querySelectorAll('.slide').forEach(s => {
-      if (s.matches('.title-slide, .full, .nofit')) return;
-      s.setAttribute('data-z', '');
-      const src = s.querySelector(':scope > .src');
-      const limit = src ? src.offsetTop - 14 : BOTTOM;
-      let lo = .7, hi = 1.7;
-      for (let i = 0; i < 12; i++) {
-        const z = (lo + hi) / 2; s.style.setProperty('--z', z);
-        const [b, r] = extent(s);
-        if (b <= limit && r <= RIGHT) lo = z; else hi = z;
-      }
-      s.style.setProperty('--z', lo.toFixed(3));
-    });
+  function fitOne(s) {
+    if (s.matches(SKIP)) return;
+    s.setAttribute('data-z', '');
+    const src = s.querySelector(':scope > .src');
+    const limit = src ? src.offsetTop - 14 : BOTTOM;
+    let lo = .7, hi = 1.7;
+    for (let i = 0; i < 12; i++) {
+      const z = (lo + hi) / 2; s.style.setProperty('--z', z);
+      const [b, r] = extent(s);
+      if (b <= limit && r <= RIGHT) lo = z; else hi = z;
+    }
+    // round down, with a little slack: rounding up can push the last word of a paragraph onto a new line
+    s.style.setProperty('--z', (Math.floor(lo * 1000) / 1000 - .004).toFixed(3));
   }
-  const run = () => (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => requestAnimationFrame(fitAll));
+  const fitAll = () => document.querySelectorAll('.slide').forEach(fitOne);
+  const ready = () => document.fonts ? document.fonts.ready : Promise.resolve();
+  const run = () => {
+    ready().then(() => requestAnimationFrame(fitAll));
+    // the Chinese web font arrives in pieces; measure again whenever a piece comes in
+    let t = 0;
+    if (document.fonts) document.fonts.addEventListener('loadingdone', () => { clearTimeout(t); t = setTimeout(() => requestAnimationFrame(fitAll), 150); });
+    document.querySelectorAll('.slide').forEach(s => new MutationObserver(() => {
+      if (s.classList.contains('active')) ready().then(() => requestAnimationFrame(() => fitOne(s)));
+    }).observe(s, { attributes: true, attributeFilter: ['class'] }));
+    // the slide shown on opening was already active before the observers existed
+    setTimeout(() => { const a = document.querySelector('.slide.active'); if (a) ready().then(() => fitOne(a)); }, 800);
+  };
   if (document.readyState === 'complete') run(); else addEventListener('load', run);
 })();
 
