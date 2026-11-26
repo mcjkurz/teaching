@@ -454,7 +454,7 @@ title: CHI3242
           <li><span class="lang-en">(optional)</span><span class="lang-zh" lang="zh-Hant">（選讀）</span> Nan Z. Da, “The Computational Case against Computational Literary Studies,” <em>Critical Inquiry</em> 45, no. 3 (2019)</li>
         </ul>
       </td>
-      <td class="notes"></td>
+      <td class="notes"><a href="notes/week-13/">Notes</a><br><a href="slides/encoder-decoder/">Slides</a></td>
     </tr>
   </tbody>
   <tbody class="due">
