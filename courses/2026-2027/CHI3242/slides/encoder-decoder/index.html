@@ -709,7 +709,7 @@ None</pre></div>
 from openai import OpenAI
 
 client = OpenAI(base_url="https://openrouter.ai/api/v1",
-                api_key=os.environ["OPENAI_API_KEY"])
+                api_key=os.environ["OPENROUTER_API_KEY"])
 passage = open("paragraph.txt", encoding="utf-8").read()
 
 response = client.chat.completions.create(
@@ -726,7 +726,7 @@ response = client.chat.completions.create(
 )
 result = json.loads(response.choices[0].message.content)</pre>
     <div class="ann" style="flex:1">
-      <div data-step="1">金鑰從<b>環境變數</b>讀取：<code>export OPENAI_API_KEY="…"</code>。不要寫進代碼，也不要放進倉庫。</div>
+      <div data-step="1">金鑰從<b>環境變數</b>讀取：<code>export OPENROUTER_API_KEY="…"</code>。不要寫進代碼，也不要放進倉庫。</div>
       <div data-step="2"><b>base_url</b> 把請求送到 OpenRouter。</div>
       <div data-step="3"><b>response_format</b> 要求模型按照 schema 回答。</div>
       <div data-step="4">回答是一串 JSON 文字，<b>json.loads</b> 把它變成字典。</div>

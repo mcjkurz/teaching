@@ -1,7 +1,7 @@
 """Find every line of dialogue in a passage of a novel, with its speaker (CHI3242, Week 13).
 
 Usage:  python extract_dialogue.py     (reads paragraph.txt, writes dialogue.json and dialogue.csv)
-The API key is read from the environment variable OPENAI_API_KEY.
+The API key is read from the environment variable OPENROUTER_API_KEY.
 """
 import csv
 import json
@@ -59,7 +59,7 @@ EXAMPLE_ANSWER = {
 
 
 def extract(passage):
-    client = OpenAI(base_url=BASE_URL, api_key=os.environ["OPENAI_API_KEY"], timeout=120)
+    client = OpenAI(base_url=BASE_URL, api_key=os.environ["OPENROUTER_API_KEY"], timeout=120)
     response = client.chat.completions.create(
         model=MODEL,
         messages=[

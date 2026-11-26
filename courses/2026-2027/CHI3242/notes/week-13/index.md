@@ -124,8 +124,8 @@ Run the script and show me the chart.</pre>
 <ol>
 <li>新建一個資料夾，例如 <code>week13-api</code>，在 VS Code 裡打開（<strong>File → Open Folder…</strong>），把 <code>paragraph.txt</code> 放進去。</li>
 <li>打開終端機（<strong>Terminal → New Terminal</strong>），輸入你在 <a href="https://keyreg.qhchina.org">keyreg.qhchina.org</a> 領的 API 金鑰：
-<pre>export OPENAI_API_KEY="你的金鑰"</pre>
-Windows PowerShell：<code>$env:OPENAI_API_KEY="你的金鑰"</code>。金鑰只在這個終端機裡有效；開新的終端機要再輸入一次。<strong>不要把金鑰寫進代碼，也不要放進倉庫。</strong></li>
+<pre>export OPENROUTER_API_KEY="你的金鑰"</pre>
+Windows PowerShell：<code>$env:OPENROUTER_API_KEY="你的金鑰"</code>。金鑰只在這個終端機裡有效；開新的終端機要再輸入一次。<strong>不要把金鑰寫進代碼，也不要放進倉庫。</strong></li>
 <li>把下面的提示貼給你的智能體。</li>
 </ol>
 
@@ -135,7 +135,7 @@ Windows PowerShell：<code>$env:OPENAI_API_KEY="你的金鑰"</code>。金鑰只
 
 How to call the model:
 - Use the openai Python library (install it with pip install openai if needed).
-- Connect to OpenRouter: base_url "https://openrouter.ai/api/v1", with the API key from the environment variable OPENAI_API_KEY. Never write the key into the code.
+- Connect to OpenRouter: base_url "https://openrouter.ai/api/v1", with the API key from the environment variable OPENROUTER_API_KEY. Never write the key into the code.
 - Model: qwen/qwen3.5-9b. Turn reasoning off with extra_body={"reasoning": {"enabled": False}}.
 - Send this structure as a JSON schema (response_format with type "json_schema", strict): an object with one field "utterances", a list of objects, each with three string fields: speaker, mention, text.
 
