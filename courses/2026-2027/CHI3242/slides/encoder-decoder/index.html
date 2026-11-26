@@ -131,29 +131,6 @@
 </section>
 
 <!-- ═══════════ 2. Review: counting words -->
-<section class="slide" id="s-map" data-sec="count">
-  <h2 class="bi"><span class="zh">這學期走過的路</span><span class="en">The road we took this term</span></h2>
-  <div class="cmap">
-    <div class="col" data-step="1"><h3>數詞語<small>counting</small></h3>
-      <div class="it"><b>第 1 週</b>Git、GitHub、編程助手</div>
-      <div class="it"><b>第 2 週</b>編碼、分詞、詞袋、Zipf 定律</div>
-      <div class="it"><b>第 3–4 週</b>搭配詞、人物空間</div>
-      <div class="it"><b>第 6 週</b>正則表達式</div>
-    </div>
-    <div class="col" data-step="2"><h3>建模型<small>models</small></h3>
-      <div class="it"><b>第 7 週</b>主題模型（LDA）</div>
-      <div class="it"><b>第 8 週</b>文體計量學、SVM</div>
-      <div class="it"><b>第 9 週</b>邏輯迴歸、情感分析</div>
-    </div>
-    <div class="col" data-step="3"><h3>學向量<small>vectors</small></h3>
-      <div class="it"><b>第 10 週</b>詞向量、餘弦相似度</div>
-      <div class="it"><b>第 11 週</b>神經網絡、BERT</div>
-      <div class="it"><b>第 12 週</b>解碼器、RAG</div>
-    </div>
-  </div>
-  <div class="callout bi" data-step="4"><span class="zh">一開始，要數什麼由我們自己決定（字、詞、搭配）；後來，我們讓模型從文本裡自己學出表示（主題、權重、向量）。</span><span class="en">At first we decided what to count; later we let models learn their own representations from the texts.</span></div>
-</section>
-
 <section class="slide" id="s-r-text" data-sec="count">
   <h2 class="bi"><span class="zh">文本就是數據：編碼與分詞<span class="wk">第 2 週</span></span><span class="en">Text as data: encoding and segmentation</span></h2>
   <div class="rc">
@@ -245,14 +222,15 @@
         <tr><th>張愛玲</th><td class="hl"><i>c</i>394</td><td><i>d</i>196,057</td></tr>
       </table>
       <div class="ccnote">4 部莫言小說（861,556 詞）對 5 部張愛玲作品（196,451 詞）；Fisher 精確檢定，\(p \approx 10^{-243}\)。</div>
-<pre class="code" data-lang="py" data-step="1" style="font-size:17px;margin-top:12px">results = compare_corpora(moyan, zal, filters={
+<pre class="code" data-lang="py" data-step="1" style="font-size:17px;margin-top:12px">from qhchina.analytics import compare_corpora
+results = compare_corpora(moyan, zal, filters={
     "min_count": 5, "max_p": 0.05,
     "min_word_length": 2, "stopwords": stopwords})</pre>
     </div>
     <div class="ccright" data-step="2">
-      <div class="cccol"><h4>莫言多用</h4>
+      <div class="cccol"><h4>莫言多用</h4><div class="cch"><span>word</span><span>rel_ratio</span></div>
         <div><b>老婆</b><span>12×</span></div><div><b>院子</b><span>10×</span></div><div><b>嘴巴</b><span>8×</span></div><div><b>兒子</b><span>5×</span></div><div><b>脖子</b><span>5×</span></div></div>
-      <div class="cccol z"><h4>張愛玲多用</h4>
+      <div class="cccol z"><h4>張愛玲多用</h4><div class="cch"><span>word</span><span>1 / rel_ratio</span></div>
         <div><b>太太</b><span>54×</span></div><div><b>上海</b><span>53×</span></div><div><b>外面</b><span>42×</span></div><div><b>從前</b><span>30×</span></div><div><b>看見</b><span>19×</span></div></div>
     </div>
   </div>
@@ -330,6 +308,21 @@
       <div class="pipe2"><span>次數</span><i>↓ ÷ 總詞數</i><span>相對頻率</span><i>↓ 減 μ，除以 σ</i><span>z 分數</span><i>↓ 平均絕對差</i><span>Delta 距離</span></div>
     </figure>
   </div>
+</section>
+
+<section class="slide" id="s-r-delta" data-sec="models">
+  <h2 class="bi"><span class="zh">Delta，算一次：B 和 C，哪一篇更像 A？<span class="wk">第 8 週</span></span><span class="en">Delta worked out: is text B or text C closer to text A?</span></h2>
+  <table class="dlt">
+    <thead><tr><th>功能詞的 z 分數</th><th>的</th><th>了</th><th>也</th><th></th></tr></thead>
+    <tbody>
+      <tr><th>文本 A</th><td>1.2</td><td>−0.5</td><td>0.9</td><td></td></tr>
+      <tr><th>文本 B</th><td>0.4</td><td>0.3</td><td>1.1</td><td></td></tr>
+      <tr><th>文本 C</th><td>−1.0</td><td>0.6</td><td>−0.7</td><td></td></tr>
+      <tr class="dd" data-step="1"><th>|A − B|</th><td>0.8</td><td>0.8</td><td>0.2</td><td class="res">\(\Delta = \dfrac{0.8+0.8+0.2}{3} = \mathbf{0.60}\)</td></tr>
+      <tr class="dd c" data-step="2"><th>|A − C|</th><td>2.2</td><td>1.1</td><td>1.6</td><td class="res">\(\Delta = \dfrac{2.2+1.1+1.6}{3} \approx \mathbf{1.63}\)</td></tr>
+    </tbody>
+  </table>
+  <div class="callout bi" data-step="3"><span class="zh">\(\Delta(A,B) &lt; \Delta(A,C)\)：<b>B 的風格更接近 A</b>。真實的研究用的是 100 到 500 個最常見的詞，算法完全一樣。（數字為示意。）</span><span class="en">Delta(A,B) is smaller, so B is stylistically closer to A; real studies use 100–500 most frequent words. Illustrative numbers.</span></div>
 </section>
 
 <section class="slide dense" id="s-r-hlm" data-sec="models">
@@ -483,6 +476,7 @@
     <tbody>
       <tr><td class="num">1</td><td class="z">家珍</td><td class="z">她</td><td class="z">你幹你的，過來幹什麼？</td></tr>
       <tr><td class="num">2</td><td class="z">福貴</td><td class="z">我</td><td class="z">你自己留意著身體。</td></tr>
+      <tr><td class="num">3</td><td class="z">家珍</td><td class="z">她</td><td class="z">你快走開。</td></tr>
       <tr><td class="num">…</td><td></td><td></td><td></td></tr>
     </tbody>
   </table>
@@ -550,11 +544,9 @@ for r in rows:
 <pre class="code" data-lang="json" style="font-size:23px;line-height:1.45">[
   {"speaker": "家珍",
    "mention": "她",
-   "addressee": "福貴",
    "text": "你快走開。"},
   {"speaker": "福貴",
    "mention": "我",
-   "addressee": "家珍",
    "text": "能。"}
 ]</pre></div>
     <div class="ann grow">
@@ -562,6 +554,32 @@ for r in rows:
       <div data-step="2">物件裡是 <b>"鍵": 值</b>，用逗號分開；文字放在<b>雙引號</b>裡。</div>
       <div data-step="3"><b>[ ]</b> 包著一個<b>列表</b>，列表會保留順序：對話的先後。</div>
       <div data-step="4">鍵用英文，方便代碼使用；值保留小說原文。</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-json2" data-sec="json">
+  <h2 class="bi"><span class="zh">再看兩個 JSON 檔案</span><span class="en">Two more JSON files</span></h2>
+  <div class="jx">
+    <div class="jxc">
+      <div class="jxcode"><span class="fname">names.json</span>
+<pre class="code" data-lang="json" style="font-size:22px">[
+  {"text": "家珍哭了，她說：「福貴，我還能養活自己嗎？」",
+   "names": ["家珍", "福貴"]},
+  {"text": "我搖搖頭，只好走開。",
+   "names": []}
+]</pre></div>
+      <div class="jxnotes"><div class="jxn" data-step="1">每段文字附上它提到的<b>人名列表</b>：列表可長可短。</div>
+      <div class="jxn" data-step="2"><b>[]</b> 是空列表：這段沒有人名。它和 <b>null</b>（不知道）不一樣。</div></div>
+    </div>
+    <div class="jxc">
+      <div class="jxcode"><span class="fname">topics.json</span>
+<pre class="code" data-lang="json" style="font-size:22px">{"text_id": "活著_017",
+ "topics": {"家庭": 0.62,
+            "土地": 0.27,
+            "戰爭": 0.11}}</pre></div>
+      <div class="jxnotes"><div class="jxn" data-step="3">主題模型的結果（第 7 週）：<b>物件當字典用</b>，鍵是主題，值是機率。</div>
+      <div class="jxn" data-step="4">值可以是<b>數字</b>，不用引號；三個機率加起來等於 1。（數字為示意。）</div></div>
     </div>
   </div>
 </section>
@@ -654,23 +672,75 @@ None</pre></div>
   <div class="callout bi" data-step="4"><span class="zh">一個數據集也是一個版本。</span><span class="en">A dataset is also an edition: ask who compiled it, from which source, and what was added later.</span></div>
 </section>
 
-<section class="slide" id="s-ex-llm" data-sec="examples">
-  <h2 class="bi"><span class="zh">實例二：讓語言模型找出說話的人</span><span class="en">Example 2: a language model finds the speakers (coreference)</span></h2>
-  <div class="two" style="gap:26px">
-    <div class="source" style="font-size:24px;line-height:1.7;flex:1">她急了，說：「你快走開。」我搖搖頭，只好走開。……家珍哭了，她說：「福貴，我還能養活自己嗎？」「能。」我說。<span class="rxsrc">余華《活著》</span></div>
-    <div data-step="1" style="flex:none"><span class="fname">模型的回答</span>
-<pre class="code" data-lang="json" style="font-size:20px">{"utterances": [
-  {"mention": "她", "speaker": "家珍",
-   "text": "你快走開。"},
-  {"mention": "她", "speaker": "家珍",
-   "text": "福貴，我還能養活自己嗎？"},
-  {"mention": "我", "speaker": "福貴",
-   "text": "能。"}
-]}</pre></div>
+<section class="slide" id="s-api1" data-sec="examples">
+  <h2 class="bi"><span class="zh">實例二：什麼是 API 呼叫？</span><span class="en">Example 2: what is an API call?</span></h2>
+  <div class="apiflow">
+    <div class="node" data-step="1"><b>你的程式</b><small>extract_dialogue.py，在你的電腦上</small></div>
+    <div class="links" data-step="2"><span>請求 request →</span><span>← 回答 response</span></div>
+    <div class="node" data-step="2"><b>OpenRouter</b><small>把請求轉給各種模型的服務</small></div>
+    <div class="links" data-step="3"><span>→</span><span>←</span></div>
+    <div class="node dark" data-step="3"><b>模型</b><small>qwen/qwen3.5-9b，在別人的電腦上運行</small></div>
   </div>
+  <div class="cards3" data-step="4">
+    <div class="card"><h3>地址</h3><p>請求送到哪裡：<code>…/chat/completions</code></p></div>
+    <div class="card"><h3>金鑰</h3><p>誰在問：你在 keyreg.qhchina.org 領的 API 金鑰</p></div>
+    <div class="card"><h3>內容</h3><p>問什麼：模型、訊息、結構，全部寫成 <b>JSON</b></p></div>
+  </div>
+  <div class="callout bi" data-step="5"><span class="zh"><b>API</b>（應用程式介面）是一個程式向另一個程式提出請求的固定方式。OpenCode、HistFig 背後，都是這樣的呼叫。</span><span class="en">An API is a fixed way for one program to ask another for something; OpenCode and HistFig make such calls all the time.</span></div>
+</section>
+
+<section class="slide" id="s-api2" data-sec="examples">
+  <h2 class="bi"><span class="zh">一次呼叫裡有什麼？指示、例子、新段落</span><span class="en">What goes into one call: instructions, an example, the new passage</span></h2>
+  <div class="msgs">
+    <div class="mg sys" data-step="1"><b>system</b><div>指示：列出段落裡每一句「」裡的話，依序寫出說話的人、文中怎麼稱呼他、說了什麼。「嗯了一聲」不算說話。</div></div>
+    <div class="shotgrp" data-step="2"><span class="shotlbl">一個例子 one-shot</span>
+      <div class="mg usr"><b>user</b><div class="zt">她急了，說：「你快走開。」……家珍哭了，她說：「福貴，我還能養活自己嗎？」……</div></div>
+      <div class="mg asst"><b>assistant</b><div><code>{"utterances": [{"speaker": "家珍", "mention": "她", …}]}</code> <span class="note">我們自己寫的標準答案</span></div></div>
+    </div>
+    <div class="mg usr new" data-step="3"><b>user</b><div class="zt">萬二喜穿著中山服……家珍繼續說：「好在家裡還養著一頭羊幾隻雞……」<span class="newtag">paragraph.txt</span></div></div>
+    <div class="mg out" data-step="4"><b>模型</b><div>接著寫出一個 JSON，必須符合我們給的 <b>schema</b>（欄位：speaker、mention、text）</div></div>
+  </div>
+</section>
+
+<section class="slide" id="s-api3" data-sec="examples">
+  <h2 class="bi"><span class="zh">用 Python 呼叫：openai 套件</span><span class="en">The call in Python, with the openai library</span></h2>
+  <div class="two" style="gap:26px">
+<pre class="code" data-lang="py" style="flex:2.3;font-size:17px">import json, os
+from openai import OpenAI
+
+client = OpenAI(base_url="https://openrouter.ai/api/v1",
+                api_key=os.environ["OPENAI_API_KEY"])
+passage = open("paragraph.txt", encoding="utf-8").read()
+
+response = client.chat.completions.create(
+    model="qwen/qwen3.5-9b",
+    messages=[
+        {"role": "system", "content": INSTRUCTIONS},
+        {"role": "user", "content": EXAMPLE_TEXT},
+        {"role": "assistant", "content": EXAMPLE_JSON},
+        {"role": "user", "content": passage},
+    ],
+    response_format={"type": "json_schema", "json_schema":
+        {"name": "dialogue", "strict": True, "schema": SCHEMA}},
+    extra_body={"reasoning": {"enabled": False}},
+)
+result = json.loads(response.choices[0].message.content)</pre>
+    <div class="ann" style="flex:1">
+      <div data-step="1">金鑰從<b>環境變數</b>讀取：<code>export OPENAI_API_KEY="…"</code>。不要寫進代碼，也不要放進倉庫。</div>
+      <div data-step="2"><b>base_url</b> 把請求送到 OpenRouter。</div>
+      <div data-step="3"><b>response_format</b> 要求模型按照 schema 回答。</div>
+      <div data-step="4">回答是一串 JSON 文字，<b>json.loads</b> 把它變成字典。</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s-ex-llm" data-sec="examples">
+  <h2 class="bi"><span class="zh">檢查模型的答案：三個陷阱</span><span class="en">Checking the model’s answer: three traps</span></h2>
+  <div class="source" style="font-size:24px;line-height:1.7">……萬二喜把酒和花布往桌上一放……<span class="hl y">我說</span>：「隊長，二喜，你們坐。」二喜<span class="hl">嗯了一聲</span>在凳子上坐下，隊長擺擺手說：「我就不坐了，二喜，這是鳳霞，這是她爹和娘。」……家珍笑著<span class="hl b">對他說</span>：「家裡窮了一點。」……家珍繼續說：「好在家裡還養著一頭羊幾隻雞，<span class="hl y">福貴和我</span>商量著等鳳霞出嫁時，把雞羊賣了辦嫁妝。」<span class="rxsrc">余華《活著》，paragraph.txt（節錄）</span></div>
   <div class="steps">
-    <div class="st" data-step="2"><i>1</i><div>第一個「她」是誰？要往前讀好幾段，才知道是家珍：這叫<b>共指消解</b>（coreference resolution）。</div></div>
-    <div class="st" data-step="3"><i>2</i><div>敘述者「我」叫什麼？這段裡只有家珍喊了一聲「福貴」。模型若讀過《活著》，也可能是「背」出來的：每一個名字都要回到原文查核。</div></div>
+    <div class="st" data-step="1"><i>1</i><div><b>「我」是誰？</b>敘述者的名字，只藏在家珍最後一句「福貴和我」裡：這是<b>共指消解</b>（coreference resolution）。</div></div>
+    <div class="st" data-step="2"><i>2</i><div><b>「對他說」</b>：「他」是聽話的二喜，說話的是家珍。</div></div>
+    <div class="st" data-step="3"><i>3</i><div><b>「嗯了一聲」</b>不是對話：二喜在整段裡一句話也沒說。標準答案一共 7 句。</div></div>
   </div>
 </section>
 

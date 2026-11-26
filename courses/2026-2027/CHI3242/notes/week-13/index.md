@@ -97,8 +97,91 @@ Run the script and show me the chart.</pre>
 </ul>
 <p>只要把提示 2 裡的兩個資料夾換成你自己的文本即可。記得把 <code>outputs/results.csv</code> 放進你的 GitHub 倉庫，讀者才能檢查每一個數字。</p>
 
-<h2>4. 程式碼參考</h2>
-<p>下面是完整的程式碼，和提示 1、2 做的事情一樣：</p>
+<h2>4. 用 API 讓語言模型找出所有對話</h2>
+<p>投影片「實例二」說明了 API 呼叫：我們的程式把<strong>指示</strong>、<strong>一個例子</strong>和<strong>新段落</strong>寫成 JSON，送到 OpenRouter；模型按照我們給的 <strong>schema</strong>（欄位：<code>speaker</code>、<code>mention</code>、<code>text</code>）回答一個 JSON。這一節我們自己做一次，再檢查答案。</p>
+
+<h3>新段落：paragraph.txt</h3>
+<p>余華《活著》裡，萬二喜第一次上門看鳳霞的一段。下載 <a href="paragraph.txt" download><code>paragraph.txt</code></a>，或者把下面的文字存成這個檔案：</p>
+<div class="prompt">
+<p class="prompt-label">paragraph.txt</p>
+<pre>萬二喜穿著中山服，乾乾淨淨的，若不是腦袋靠著肩膀，那模樣還真像是城裡來的幹部。他拿著一瓶酒一塊花布，由隊長陪著進來。家珍坐在床上，頭髮梳得很整齊，衣服破了一點，倒很乾淨，我還專門在床下給家珍放了一雙新布鞋。鳳霞穿著水紅衣服低著頭坐在她娘旁邊。家珍笑嘻嘻地看著她未過門的女婿，心裡高興著呢。
+萬二喜把酒和花布往桌上一放，就翹著肩膀在屋裡轉一圈，他是在看我們的屋子。我說：
+「隊長，二喜，你們坐。」
+二喜嗯了一聲在凳子上坐下，隊長擺擺手說：
+「我就不坐了，二喜，這是鳳霞，這是她爹和娘。」
+鳳霞雙手放在腿上，看到隊長指著她，就向隊長笑，隊長指著家珍，她轉過去向家珍笑。家珍說：
+「隊長，你請坐。」
+隊長說：「不啦，我還有事，你們談吧。」
+隊長轉身要走，留也留不住，我送走了隊長，回到屋中指指桌上的酒，對二喜說：
+「讓你破費了，其實我有幾十年沒喝酒了。」
+二喜聽後嗯了一聲，也不說話，翹著個肩膀在屋裡看來看去，看得我心裡七上八下。家珍笑著對他說：
+「家裡窮了一點。」
+二喜又嗯了一聲，翹著肩膀去看家珍，家珍繼續說：
+「好在家裡還養著一頭羊幾隻雞，福貴和我商量著等鳳霞出嫁時，把雞羊賣了辦嫁妝。」</pre>
+</div>
+
+<h3>步驟</h3>
+<ol>
+<li>新建一個資料夾，例如 <code>week13-api</code>，在 VS Code 裡打開（<strong>File → Open Folder…</strong>），把 <code>paragraph.txt</code> 放進去。</li>
+<li>打開終端機（<strong>Terminal → New Terminal</strong>），輸入你在 <a href="https://keyreg.qhchina.org">keyreg.qhchina.org</a> 領的 API 金鑰：
+<pre>export OPENAI_API_KEY="你的金鑰"</pre>
+Windows PowerShell：<code>$env:OPENAI_API_KEY="你的金鑰"</code>。金鑰只在這個終端機裡有效；開新的終端機要再輸入一次。<strong>不要把金鑰寫進代碼，也不要放進倉庫。</strong></li>
+<li>把下面的提示貼給你的智能體。</li>
+</ol>
+
+<div class="prompt">
+<p class="prompt-label">提示 4　找出所有對話</p>
+<pre>Write a Python script called extract_dialogue.py. It reads a passage from a Chinese novel in paragraph.txt, asks a language model to list every line of dialogue with its speaker, prints the result, and saves it as dialogue.json and dialogue.csv (columns: id, speaker, mention, text).
+
+How to call the model:
+- Use the openai Python library (install it with pip install openai if needed).
+- Connect to OpenRouter: base_url "https://openrouter.ai/api/v1", with the API key from the environment variable OPENAI_API_KEY. Never write the key into the code.
+- Model: qwen/qwen3.5-9b. Turn reasoning off with extra_body={"reasoning": {"enabled": False}}.
+- Send this structure as a JSON schema (response_format with type "json_schema", strict): an object with one field "utterances", a list of objects, each with three string fields: speaker, mention, text.
+
+What to tell the model (system message):
+"List every line of direct speech in the passage (the words inside 「」), in order. For each line give: speaker = the name of the character who says it; when the narrator speaks as 我, give the narrator's name if the passage lets you infer it; mention = the word the passage uses for the speaker just before the line (for example 我, 她, or a name); text = the words inside 「」, without the brackets. Sounds and actions such as 嗯了一聲 are not speech. Use only the passage. Keep everything in Chinese."
+
+Before the real passage, show the model one solved example (one-shot): the example passage below as a user message, and the example JSON below as an assistant message.
+
+Example passage: 她那時滿臉是汗，直起腰來還埋怨我：「你幹你的，過來幹什麼？」她是怕我這麼一過去，別人都注意她了，我說：「你自己留意著身體。」她急了，說：「你快走開。」我搖搖頭，只好走開。……家珍哭了，她說：「福貴，我還能養活自己嗎？」「能。」我說。
+Example JSON: {"utterances": [{"speaker": "家珍", "mention": "她", "text": "你幹你的，過來幹什麼？"}, {"speaker": "福貴", "mention": "我", "text": "你自己留意著身體。"}, {"speaker": "家珍", "mention": "她", "text": "你快走開。"}, {"speaker": "家珍", "mention": "她", "text": "福貴，我還能養活自己嗎？"}, {"speaker": "福貴", "mention": "我", "text": "能。"}]}
+
+Print the JSON nicely indented, with the Chinese characters readable (not as \u codes). Then run the script.</pre>
+</div>
+<p>如果智能體卡住了，可以下載寫好的版本：<a href="extract_dialogue.py" download><code>extract_dialogue.py</code></a>，在設好金鑰的終端機裡執行：</p>
+<pre>pip install openai
+python extract_dialogue.py</pre>
+
+<h3>檢查答案</h3>
+<p>標準答案一共有 <strong>7 句</strong>：</p>
+<table>
+<thead><tr><th>id</th><th>speaker</th><th>mention</th><th>text</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>福貴</td><td>我</td><td>隊長，二喜，你們坐。</td></tr>
+<tr><td>2</td><td>隊長</td><td>隊長</td><td>我就不坐了，二喜，這是鳳霞，這是她爹和娘。</td></tr>
+<tr><td>3</td><td>家珍</td><td>家珍</td><td>隊長，你請坐。</td></tr>
+<tr><td>4</td><td>隊長</td><td>隊長</td><td>不啦，我還有事，你們談吧。</td></tr>
+<tr><td>5</td><td>福貴</td><td>我</td><td>讓你破費了，其實我有幾十年沒喝酒了。</td></tr>
+<tr><td>6</td><td>家珍</td><td>家珍</td><td>家裡窮了一點。</td></tr>
+<tr><td>7</td><td>家珍</td><td>家珍</td><td>好在家裡還養著一頭羊幾隻雞，福貴和我商量著等鳳霞出嫁時，把雞羊賣了辦嫁妝。</td></tr>
+</tbody>
+</table>
+<ol>
+<li>把模型的 <code>dialogue.csv</code> 和標準答案逐行比較，在 <code>errors.csv</code> 裡記下錯誤（欄位：id、field、model、correct）。特別看三個地方：
+<ul>
+<li><strong>「我」是誰？</strong>敘述者的名字只出現在第 7 句的「福貴和我」裡。模型寫的是「福貴」、「我」，還是別的名字？</li>
+<li><strong>「家珍笑著對他說」</strong>：「他」是聽話的二喜，說話的是家珍。模型有沒有把二喜當成說話的人？</li>
+<li><strong>「嗯了一聲」</strong>不是對話。模型有沒有替二喜編出一句話？</li>
+</ul></li>
+<li><strong>再跑三次。</strong>每次的答案都一樣嗎？</li>
+<li><strong>拿掉例子</strong>（zero-shot），只送指示和段落，比較結果：<code>mention</code> 欄位還寫得對嗎？</li>
+<li><strong>和正則表達式比較：</strong>用 <code>「.*?」</code> 找出所有對話，再和模型的 <code>text</code> 欄位比較。哪一種方法比較可靠？哪一種能告訴你<strong>誰</strong>在說話？</li>
+<li><strong>用你自己的文本：</strong>從你的期末專題語料中選一段有對話的文字，放進 <code>paragraph.txt</code> 再跑一次。得到的 <code>dialogue.csv</code> 可以直接用第 2 節的方法比較兩個人物的用詞。</li>
+</ol>
+
+<h2>5. 程式碼參考</h2>
+<p>第 2 節（比較莫言與張愛玲）的完整程式碼，和提示 1、2 做的事情一樣：</p>
 <pre><code class="language-python">import os
 from qhchina import download_corpus, load_stopwords
 from qhchina.preprocessing import create_segmenter
